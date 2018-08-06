@@ -1,0 +1,1379 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835079
+src/com/levelonelabs/aimbot/modules/UserAdminModule.java 55 62
+src/com/levelonelabs/aimbot/modules/MessengerModule.java 60 66
+----------------------------------------
+    static {
+        services = new ArrayList();
+        services.add("adduser");
+        services.add("rmuser");
+        services.add("denyuser");
+        services.add("permituser");
+        services.add("permitmode");
+    }
+
+----------------------------------------
+	static {
+		services = new ArrayList();
+		services.add("tell");
+		services.add("offline");
+		services.add("clear");
+		services.add("show");
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835074
+src/com/levelonelabs/aimbot/modules/ReminderModule.java 120 129
+src/com/levelonelabs/aimbot/modules/MessengerModule.java 60 66
+----------------------------------------
+    public String help() {
+        StringBuffer sb = new StringBuffer();
+        sb.append("<B>remember <i>TEXT</i></B> (stores text in the system for retrieval later)\n");
+        sb.append("<B>forget <i>All or #</i></B> (removes all items or a specific item)\n");
+        sb.append("<B>remind</B> (lists all reminders)\n");
+        sb
+            .append("* If the preference \"reminderatsignon\" is set to true, you will automatically get a list when you login to aim.\n");
+
+        return sb.toString();
+    }
+
+----------------------------------------
+	static {
+		services = new ArrayList();
+		services.add("tell");
+		services.add("offline");
+		services.add("clear");
+		services.add("show");
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835069
+src/com/levelonelabs/aimbot/modules/UserInformationModule.java 62 67
+src/com/levelonelabs/aimbot/modules/MessengerModule.java 60 66
+----------------------------------------
+	static {
+		services = new ArrayList();
+		services.add("history");
+		services.add("users");
+		services.add("enemies");
+	}
+
+----------------------------------------
+	static {
+		services = new ArrayList();
+		services.add("tell");
+		services.add("offline");
+		services.add("clear");
+		services.add("show");
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835072
+src/com/levelonelabs/aimbot/modules/MegaHalModule.java 158 164
+src/com/levelonelabs/aimbot/modules/MessengerModule.java 60 66
+----------------------------------------
+	public String help() {
+		StringBuffer sb = new StringBuffer();
+		sb.append("<B>MEGAHAL</B> commands:\n");
+		sb.append("<b>megahaladmin save</b> (saves the megahal brain *ADMIN ONLY*)\n");
+		sb.append("<b>megahaladmin think <i>N</i></b>  (sets the think time to <N> seconds *ADMIN ONLY*)\n");
+		return sb.toString();
+	}
+
+----------------------------------------
+	static {
+		services = new ArrayList();
+		services.add("tell");
+		services.add("offline");
+		services.add("clear");
+		services.add("show");
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835077
+src/com/levelonelabs/aimbot/modules/ScheduleModule.java 156 165
+src/com/levelonelabs/aimbot/modules/MessengerModule.java 60 66
+----------------------------------------
+    public String help() {
+        StringBuffer sb = new StringBuffer();
+        sb.append("<B>schedule <i>TEXT</i></B> (stores text in the system for retrieval later)\n");
+        sb.append("<B>cancel <i>All or #</i></B> (removes all items or a specific item)\n");
+        sb.append("<B>events</B> (lists all reminders)\n");
+        sb
+            .append("* If the preference \"reminderatsignon\" is set to true, you will automatically get a list when you login to aim.\n");
+
+        return sb.toString();
+    }
+
+----------------------------------------
+	static {
+		services = new ArrayList();
+		services.add("tell");
+		services.add("offline");
+		services.add("clear");
+		services.add("show");
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835068
+src/com/levelonelabs/aimbot/modules/BabelModule.java 71 83
+src/com/levelonelabs/aimbot/modules/MessengerModule.java 60 66
+----------------------------------------
+    static {
+        //init the services
+        services=new ArrayList();
+        services.add("babel");
+
+        //init the langs
+        langs=new Vector();
+        langs.add("de");
+        langs.add("it");
+        langs.add("pt");
+        langs.add("fr");
+        langs.add("es");
+    }
+
+----------------------------------------
+	static {
+		services = new ArrayList();
+		services.add("tell");
+		services.add("offline");
+		services.add("clear");
+		services.add("show");
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835219
+src/com/levelonelabs/aimbot/modules/ScheduleModule.java 111 118
+src/com/levelonelabs/aimbot/modules/SkiReportModule.java 73 78
+----------------------------------------
+    static {
+        services = new ArrayList();
+        services.add("schedule");
+        services.add("cancel");
+        services.add("events");
+        // Create the timer to handle timed reminding events
+        timer = new Timer();
+    }
+
+----------------------------------------
+    static {
+        services = new ArrayList();
+        services.add("ski");
+        services.add("snow");
+        services.add("mountains");
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835165
+src/com/levelonelabs/aimbot/modules/SkiReportModule.java 110 118
+src/com/levelonelabs/aimbot/modules/SkiReportModule.java 73 78
+----------------------------------------
+    public String help() {
+        StringBuffer sb = new StringBuffer();
+        sb
+            .append("<B>mountains <i>STATE ABBREVIATION</i></B> (displays the resort codes for the specified state code)\n");
+        sb.append("<B>ski <i>STATE ABBREVIATION:RESORT CODE</i></B> (displays the ski reports for the given resort)\n");
+        sb
+            .append("* If the preference \"mountain\" is set, you can omit the [STATE ABBREVIATION:RESORT CODE] to use your default.");
+        return sb.toString();
+    }
+
+----------------------------------------
+    static {
+        services = new ArrayList();
+        services.add("ski");
+        services.add("snow");
+        services.add("mountains");
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835215
+src/com/levelonelabs/aimbot/modules/UserInformationModule.java 62 67
+src/com/levelonelabs/aimbot/modules/SkiReportModule.java 73 78
+----------------------------------------
+	static {
+		services = new ArrayList();
+		services.add("history");
+		services.add("users");
+		services.add("enemies");
+	}
+
+----------------------------------------
+    static {
+        services = new ArrayList();
+        services.add("ski");
+        services.add("snow");
+        services.add("mountains");
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835217
+src/com/levelonelabs/aimbot/modules/MegaHalModule.java 158 164
+src/com/levelonelabs/aimbot/modules/SkiReportModule.java 73 78
+----------------------------------------
+	public String help() {
+		StringBuffer sb = new StringBuffer();
+		sb.append("<B>MEGAHAL</B> commands:\n");
+		sb.append("<b>megahaladmin save</b> (saves the megahal brain *ADMIN ONLY*)\n");
+		sb.append("<b>megahaladmin think <i>N</i></b>  (sets the think time to <N> seconds *ADMIN ONLY*)\n");
+		return sb.toString();
+	}
+
+----------------------------------------
+    static {
+        services = new ArrayList();
+        services.add("ski");
+        services.add("snow");
+        services.add("mountains");
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835220
+src/com/levelonelabs/aimbot/modules/ReminderModule.java 68 73
+src/com/levelonelabs/aimbot/modules/SkiReportModule.java 73 78
+----------------------------------------
+    static {
+        services = new ArrayList();
+        services.add("remind");
+        services.add("remember");
+        services.add("forget");
+    }
+
+----------------------------------------
+    static {
+        services = new ArrayList();
+        services.add("ski");
+        services.add("snow");
+        services.add("mountains");
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835218
+src/com/levelonelabs/aimbot/modules/MoviesModule.java 72 77
+src/com/levelonelabs/aimbot/modules/SkiReportModule.java 73 78
+----------------------------------------
+    static {
+        services=new ArrayList();
+        services.add("movies");
+        services.add("movieslegend");
+        services.add("theaters");
+    }
+
+----------------------------------------
+    static {
+        services = new ArrayList();
+        services.add("ski");
+        services.add("snow");
+        services.add("mountains");
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835216
+src/com/levelonelabs/aimbot/modules/BuddyManagementModule.java 101 107
+src/com/levelonelabs/aimbot/modules/SkiReportModule.java 73 78
+----------------------------------------
+    public String help() {
+        StringBuffer sb = new StringBuffer();
+        sb.append("<B>makeusers</B> (converts all non-user buddies to users *ADMIN ONLY*)\n");
+        sb.append("<B>prune buddies</B> (removes all non-user buddies *ADMIN ONLY*)\n");
+        sb.append("<B>prune inactive</B> (removes \"inactive\" users *ADMIN ONLY*)\n");
+        return sb.toString();
+    }
+
+----------------------------------------
+    static {
+        services = new ArrayList();
+        services.add("ski");
+        services.add("snow");
+        services.add("mountains");
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835080
+src/com/levelonelabs/aimbot/modules/MessengerModule.java 60 66
+src/com/levelonelabs/aimbot/modules/SkiReportModule.java 73 78
+----------------------------------------
+	static {
+		services = new ArrayList();
+		services.add("tell");
+		services.add("offline");
+		services.add("clear");
+		services.add("show");
+	}
+
+----------------------------------------
+    static {
+        services = new ArrayList();
+        services.add("ski");
+        services.add("snow");
+        services.add("mountains");
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835221
+src/com/levelonelabs/aimbot/modules/UserAdminModule.java 55 62
+src/com/levelonelabs/aimbot/modules/SkiReportModule.java 73 78
+----------------------------------------
+    static {
+        services = new ArrayList();
+        services.add("adduser");
+        services.add("rmuser");
+        services.add("denyuser");
+        services.add("permituser");
+        services.add("permitmode");
+    }
+
+----------------------------------------
+    static {
+        services = new ArrayList();
+        services.add("ski");
+        services.add("snow");
+        services.add("mountains");
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+28918780
+src/com/levelonelabs/aimbot/modules/UserInformationModule.java 77 90
+src/com/levelonelabs/aimbot/modules/MessengerModule.java 74 82
+----------------------------------------
+	public UserInformationModule(AIMBot bot) {
+		super(bot);
+		//register to here about signon events
+		super.addAIMListener(new AIMAdapter() {
+			public void handleBuddySignOn(AIMBuddy buddy, String info) {
+				handleBuddyEvent(buddy, "Signed on: ");
+			}
+
+
+			public void handleBuddySignOff(AIMBuddy buddy, String info) {
+				handleBuddyEvent(buddy, "Signed off: ");
+			}
+		});
+	}
+
+----------------------------------------
+	public MessengerModule(AIMBot bot) {
+		super(bot);
+		//register to here about signon events
+		super.addAIMListener(new AIMAdapter() {
+			public void handleBuddySignOn(AIMBuddy buddy, String info) {
+				retrieveMessages(buddy);
+			}
+		});
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835081
+src/com/levelonelabs/aimbot/modules/ReminderModule.java 81 92
+src/com/levelonelabs/aimbot/modules/MessengerModule.java 74 82
+----------------------------------------
+    public ReminderModule(AIMBot bot) {
+        super(bot);
+        // register to here about signon events
+        super.addAIMListener(new AIMAdapter() {
+            public void handleBuddySignOn(AIMBuddy buddy, String info) {
+                String savePref = buddy.getPreference("reminderatsignon");
+                if ((savePref != null) && savePref.equals("true")) {
+                    retrieveReminders(buddy);
+                }
+            }
+        });
+    }
+
+----------------------------------------
+	public MessengerModule(AIMBot bot) {
+		super(bot);
+		//register to here about signon events
+		super.addAIMListener(new AIMAdapter() {
+			public void handleBuddySignOn(AIMBuddy buddy, String info) {
+				retrieveMessages(buddy);
+			}
+		});
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835082
+src/com/levelonelabs/aimbot/modules/MessengerModule.java 74 82
+src/com/levelonelabs/aim/example/EchoExample.java 57 67
+----------------------------------------
+	public MessengerModule(AIMBot bot) {
+		super(bot);
+		//register to here about signon events
+		super.addAIMListener(new AIMAdapter() {
+			public void handleBuddySignOn(AIMBuddy buddy, String info) {
+				retrieveMessages(buddy);
+			}
+		});
+	}
+
+----------------------------------------
+	public static void main(String[] args) {
+		//username, password, true indicates to add all that talk to it to the
+		// buddy list
+		final AIMSender aim = new AIMClient(args[0], args[1], "Simple Echo Bot", true);
+		aim.addAIMListener(new AIMAdapter() {
+			public void handleMessage(AIMBuddy buddy, String request) {
+				aim.sendMessage(buddy, "Echo: " + request);
+			}
+		});
+		aim.signOn();
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835176
+src/com/levelonelabs/aimbot/modules/UserAdminModule.java 100 109
+src/com/levelonelabs/aimbot/modules/MessengerModule.java 110 121
+----------------------------------------
+    public String help() {
+        StringBuffer sb = new StringBuffer();
+        sb
+            .append("<B>adduser <i>BUDDY</i> <ADMIN></B> (adds a user to the list, along with allowing for admin perms)\n");
+        sb.append("<B>rmuser <i>BUDDY</i></B> (removes a user from the list)\n");
+        sb.append("<B>denyuser <i>BUDDY</i></B> (deny a user *ADMIN ONLY*)\n");
+        sb.append("<B>permituser <i>BUDDY</i></B> (permit a user *ADMIN ONLY*)\n");
+        sb.append("<B>permitmode <i>[MODE]</i></B> (set or display the permitmode*ADMIN ONLY*)\n");
+        return sb.toString();
+    }
+
+----------------------------------------
+	public String help() {
+		StringBuffer sb = new StringBuffer();
+		sb.append("<B>tell <i>BUDDY MESSAGE</i></B> (sends a message to a person in ");
+		sb.append("the system, if they are offline they will recieve the message ");
+		sb.append("next time they log in)\n");
+		sb.append("<B>offline <i>BUDDY MESSAGE</i></B> (will notify the person the next time they log in)\n");
+		sb.append("<B>clear messages</B> (will erase messages in system for user)\n");
+		sb.append("<B>show messages</B> (will display all the messages left for a user)\n");
+		sb.append("* If the preference \"savemessages\" is set to true, need to manually \"clear messages\".\n");
+
+		return sb.toString();
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835085
+src/com/levelonelabs/aimbot/modules/MoviesModule.java 107 118
+src/com/levelonelabs/aimbot/modules/MessengerModule.java 110 121
+----------------------------------------
+    public String help() {
+        StringBuffer sb=new StringBuffer();
+        sb.append("<B>theaters <i>ZIPCODE<i></B> (displays a list of theaters in your area)\n");
+        sb.append(
+            "* If the preference \"zipcode\" is set, you can omit the zipcode to use your default.\n");
+        sb.append(
+            "<B>movies <i>ZIPCODE [Theater Number]</i></B> (displays movie times for the theater closest to your zipcode if a theater number is not provided)\n");
+        sb.append(
+            "* If the preference \"zipcode\" is set, you can omit the zipcode to use your default.\n");
+        sb.append("<B>movieslegend</B> (displays the legend for movie times)");
+        return sb.toString();
+    }
+
+----------------------------------------
+	public String help() {
+		StringBuffer sb = new StringBuffer();
+		sb.append("<B>tell <i>BUDDY MESSAGE</i></B> (sends a message to a person in ");
+		sb.append("the system, if they are offline they will recieve the message ");
+		sb.append("next time they log in)\n");
+		sb.append("<B>offline <i>BUDDY MESSAGE</i></B> (will notify the person the next time they log in)\n");
+		sb.append("<B>clear messages</B> (will erase messages in system for user)\n");
+		sb.append("<B>show messages</B> (will display all the messages left for a user)\n");
+		sb.append("* If the preference \"savemessages\" is set to true, need to manually \"clear messages\".\n");
+
+		return sb.toString();
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835177
+src/com/levelonelabs/aimbot/modules/ScheduleModule.java 156 165
+src/com/levelonelabs/aimbot/modules/MessengerModule.java 110 121
+----------------------------------------
+    public String help() {
+        StringBuffer sb = new StringBuffer();
+        sb.append("<B>schedule <i>TEXT</i></B> (stores text in the system for retrieval later)\n");
+        sb.append("<B>cancel <i>All or #</i></B> (removes all items or a specific item)\n");
+        sb.append("<B>events</B> (lists all reminders)\n");
+        sb
+            .append("* If the preference \"reminderatsignon\" is set to true, you will automatically get a list when you login to aim.\n");
+
+        return sb.toString();
+    }
+
+----------------------------------------
+	public String help() {
+		StringBuffer sb = new StringBuffer();
+		sb.append("<B>tell <i>BUDDY MESSAGE</i></B> (sends a message to a person in ");
+		sb.append("the system, if they are offline they will recieve the message ");
+		sb.append("next time they log in)\n");
+		sb.append("<B>offline <i>BUDDY MESSAGE</i></B> (will notify the person the next time they log in)\n");
+		sb.append("<B>clear messages</B> (will erase messages in system for user)\n");
+		sb.append("<B>show messages</B> (will display all the messages left for a user)\n");
+		sb.append("* If the preference \"savemessages\" is set to true, need to manually \"clear messages\".\n");
+
+		return sb.toString();
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835175
+src/com/levelonelabs/aimbot/modules/ListModule.java 108 121
+src/com/levelonelabs/aimbot/modules/MessengerModule.java 110 121
+----------------------------------------
+    public String help() {
+        StringBuffer sb = new StringBuffer();
+        sb.append("<B>lists</B> (shows all the current lists.)\n");
+        sb.append("<B>subscribe <i>LISTNAME</i> </B> (subscribe yourself to the named list.)\n");
+        sb.append("<B>unsubscribe <i>LISTNAME</i> </B> (unsubscribe yourself from the named list.)\n");
+        sb.append("<B>post <i>LISTNAME</i> <i>MESSAGE</i></B> (will post the message to everyone in the list."
+            + "  Offline members will be told when they sign on.)\n");
+        sb.append("<B>members <i>LISTNAME</i></B> (will show the members of everyone in the list. *ADMIN ONLY*)\n");
+        sb.append("<B>makelist <i>LISTNAME</i></B> (creates a new list. *ADMIN ONLY*)\n");
+        sb.append("<B>removelist <i>LISTNAME</i></B> (Removes a list *ADMIN ONLY*)\n");
+        sb.append("<B>addlistmember <i>LISTNAME BUDDYNAME</i></B> (adds a user to a list) *ADMIN ONLY*)\n");
+        sb.append("<B>rmlistmember <i>LISTNAME BUDDYNAME</i> </B> (removes a user from a list) *ADMIN ONLY*)\n");
+        return sb.toString();
+    }
+
+----------------------------------------
+	public String help() {
+		StringBuffer sb = new StringBuffer();
+		sb.append("<B>tell <i>BUDDY MESSAGE</i></B> (sends a message to a person in ");
+		sb.append("the system, if they are offline they will recieve the message ");
+		sb.append("next time they log in)\n");
+		sb.append("<B>offline <i>BUDDY MESSAGE</i></B> (will notify the person the next time they log in)\n");
+		sb.append("<B>clear messages</B> (will erase messages in system for user)\n");
+		sb.append("<B>show messages</B> (will display all the messages left for a user)\n");
+		sb.append("* If the preference \"savemessages\" is set to true, need to manually \"clear messages\".\n");
+
+		return sb.toString();
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835087
+src/com/levelonelabs/aimbot/modules/ReminderModule.java 120 129
+src/com/levelonelabs/aimbot/modules/MessengerModule.java 110 121
+----------------------------------------
+    public String help() {
+        StringBuffer sb = new StringBuffer();
+        sb.append("<B>remember <i>TEXT</i></B> (stores text in the system for retrieval later)\n");
+        sb.append("<B>forget <i>All or #</i></B> (removes all items or a specific item)\n");
+        sb.append("<B>remind</B> (lists all reminders)\n");
+        sb
+            .append("* If the preference \"reminderatsignon\" is set to true, you will automatically get a list when you login to aim.\n");
+
+        return sb.toString();
+    }
+
+----------------------------------------
+	public String help() {
+		StringBuffer sb = new StringBuffer();
+		sb.append("<B>tell <i>BUDDY MESSAGE</i></B> (sends a message to a person in ");
+		sb.append("the system, if they are offline they will recieve the message ");
+		sb.append("next time they log in)\n");
+		sb.append("<B>offline <i>BUDDY MESSAGE</i></B> (will notify the person the next time they log in)\n");
+		sb.append("<B>clear messages</B> (will erase messages in system for user)\n");
+		sb.append("<B>show messages</B> (will display all the messages left for a user)\n");
+		sb.append("* If the preference \"savemessages\" is set to true, need to manually \"clear messages\".\n");
+
+		return sb.toString();
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835084
+src/com/levelonelabs/aimbot/modules/BabelModule.java 71 83
+src/com/levelonelabs/aimbot/modules/MessengerModule.java 110 121
+----------------------------------------
+    static {
+        //init the services
+        services=new ArrayList();
+        services.add("babel");
+
+        //init the langs
+        langs=new Vector();
+        langs.add("de");
+        langs.add("it");
+        langs.add("pt");
+        langs.add("fr");
+        langs.add("es");
+    }
+
+----------------------------------------
+	public String help() {
+		StringBuffer sb = new StringBuffer();
+		sb.append("<B>tell <i>BUDDY MESSAGE</i></B> (sends a message to a person in ");
+		sb.append("the system, if they are offline they will recieve the message ");
+		sb.append("next time they log in)\n");
+		sb.append("<B>offline <i>BUDDY MESSAGE</i></B> (will notify the person the next time they log in)\n");
+		sb.append("<B>clear messages</B> (will erase messages in system for user)\n");
+		sb.append("<B>show messages</B> (will display all the messages left for a user)\n");
+		sb.append("* If the preference \"savemessages\" is set to true, need to manually \"clear messages\".\n");
+
+		return sb.toString();
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835083
+src/com/levelonelabs/aimbot/modules/ListModule.java 59 70
+src/com/levelonelabs/aimbot/modules/MessengerModule.java 110 121
+----------------------------------------
+    static {
+        services = new ArrayList();
+        services.add("subscribe");
+        services.add("unsubscribe");
+        services.add("post");
+        services.add("members");
+        services.add("makelist");
+        services.add("lists");
+        services.add("removelist");
+        services.add("addlistmember");
+        services.add("rmlistmember");
+    }
+
+----------------------------------------
+	public String help() {
+		StringBuffer sb = new StringBuffer();
+		sb.append("<B>tell <i>BUDDY MESSAGE</i></B> (sends a message to a person in ");
+		sb.append("the system, if they are offline they will recieve the message ");
+		sb.append("next time they log in)\n");
+		sb.append("<B>offline <i>BUDDY MESSAGE</i></B> (will notify the person the next time they log in)\n");
+		sb.append("<B>clear messages</B> (will erase messages in system for user)\n");
+		sb.append("<B>show messages</B> (will display all the messages left for a user)\n");
+		sb.append("* If the preference \"savemessages\" is set to true, need to manually \"clear messages\".\n");
+
+		return sb.toString();
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835086
+src/com/levelonelabs/aimbot/modules/TVListingsModule.java 116 124
+src/com/levelonelabs/aimbot/modules/MessengerModule.java 110 121
+----------------------------------------
+	public String help() {
+		StringBuffer sb = new StringBuffer();
+		sb.append("<B>tvlist <i>ZIPCODE</i></B> (displays the tv providers in the area of the zipcode)\n");
+		sb.append("* If the preference \"zipcode\" is set, you can omit the zipcode to use your default.\n");
+		sb
+			.append("<B>tv <i>SHOW<i></B> (displays the synopsis of the next upcomming episode of the specified show in your area)\n");
+		sb.append("* The preference \"tvprovider\" must be set!");
+		return sb.toString();
+	}
+
+----------------------------------------
+	public String help() {
+		StringBuffer sb = new StringBuffer();
+		sb.append("<B>tell <i>BUDDY MESSAGE</i></B> (sends a message to a person in ");
+		sb.append("the system, if they are offline they will recieve the message ");
+		sb.append("next time they log in)\n");
+		sb.append("<B>offline <i>BUDDY MESSAGE</i></B> (will notify the person the next time they log in)\n");
+		sb.append("<B>clear messages</B> (will erase messages in system for user)\n");
+		sb.append("<B>show messages</B> (will display all the messages left for a user)\n");
+		sb.append("* If the preference \"savemessages\" is set to true, need to manually \"clear messages\".\n");
+
+		return sb.toString();
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835088
+src/com/levelonelabs/aimbot/modules/MoviesModule.java 337 355
+src/com/levelonelabs/aimbot/modules/MoviesModule.java 359 377
+----------------------------------------
+                (temp.toUpperCase().indexOf("MAP IT") == -1)) {
+            if(temp.toUpperCase().indexOf("BUY TICKETS") != -1) {
+                /* Some theaters sell ticket online so each time is a link
+                 * instead of one long string. Flag is set to create the
+                 * one string.
+                 */
+                areLinkTimes=true;
+            } else {
+                if((line.length()+data.length) > 950) {
+                    result.add(line);
+                    line="<B>"+temp+"</B>";
+                } else {
+                    line=line+"<B>"+temp+"</B>";
+                }
+                if(!areLinkTimes) {
+                    line=line+"\n";
+                }
+            }
+        } else if((stage == 4) && (temp.length() > 1) &&
+
+----------------------------------------
+                (temp.toUpperCase().indexOf("MAP IT") == -1)) {
+            if(temp.toUpperCase().indexOf("BUY TICKETS") != -1) {
+                /* Some theaters sell ticket online so each time is a link
+                 * instead of one long string. Flag is set to create the
+                 * one string.
+                 */
+                areLinkTimes=true;
+            } else {
+                if((line.length()+data.length) > 950) {
+                    result.add(line);
+                    line=temp;
+                } else {
+                    line=line+temp;
+                }
+                if(!areLinkTimes) {
+                    line=line+"\n";
+                }
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835089
+src/com/levelonelabs/aimbot/modules/MoviesModule.java 338 344
+src/com/levelonelabs/aimbot/modules/MoviesModule.java 360 366
+----------------------------------------
+            if(temp.toUpperCase().indexOf("BUY TICKETS") != -1) {
+                /* Some theaters sell ticket online so each time is a link
+                 * instead of one long string. Flag is set to create the
+                 * one string.
+                 */
+                areLinkTimes=true;
+            } else {
+
+----------------------------------------
+            if(temp.toUpperCase().indexOf("BUY TICKETS") != -1) {
+                /* Some theaters sell ticket online so each time is a link
+                 * instead of one long string. Flag is set to create the
+                 * one string.
+                 */
+                areLinkTimes=true;
+            } else {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835090
+src/com/levelonelabs/aimbot/modules/MoviesModule.java 344 354
+src/com/levelonelabs/aimbot/modules/MoviesModule.java 366 376
+----------------------------------------
+            } else {
+                if((line.length()+data.length) > 950) {
+                    result.add(line);
+                    line="<B>"+temp+"</B>";
+                } else {
+                    line=line+"<B>"+temp+"</B>";
+                }
+                if(!areLinkTimes) {
+                    line=line+"\n";
+                }
+            }
+
+----------------------------------------
+            } else {
+                if((line.length()+data.length) > 950) {
+                    result.add(line);
+                    line=temp;
+                } else {
+                    line=line+temp;
+                }
+                if(!areLinkTimes) {
+                    line=line+"\n";
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835091
+src/com/levelonelabs/aim/AIMBuddy.java 306 311
+src/com/levelonelabs/aim/AIMGroup.java 165 170
+----------------------------------------
+        while (roleit.hasNext()) {
+            String role = (String) roleit.next();
+            Element roleElem = doc.createElement("role");
+            roleElem.setAttribute("name", role);
+            emptyStateElement.appendChild(roleElem);
+        }
+
+----------------------------------------
+        while(buds.hasNext()) {
+            String bud=(String) buds.next();
+            Element budElem=doc.createElement("buddy");
+            budElem.setAttribute("name", bud);
+            emptyStateElement.appendChild(budElem);
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835092
+src/com/levelonelabs/aim/AIMBuddy.java 314 320
+src/com/levelonelabs/aim/AIMGroup.java 165 170
+----------------------------------------
+        while (prefs.hasNext()) {
+            String pref = (String) prefs.next();
+            Element prefElem = doc.createElement("preference");
+            prefElem.setAttribute("name", pref);
+            prefElem.setAttribute("value", (String) preferences.get(pref));
+            emptyStateElement.appendChild(prefElem);
+        }
+
+----------------------------------------
+        while(buds.hasNext()) {
+            String bud=(String) buds.next();
+            Element budElem=doc.createElement("buddy");
+            budElem.setAttribute("name", bud);
+            emptyStateElement.appendChild(budElem);
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835093
+src/com/levelonelabs/aimbot/modules/ReminderModule.java 142 153
+src/com/levelonelabs/aim/example/AIMReceptionist.java 89 101
+----------------------------------------
+            if (br.size() > 0) {
+                String reminder = "Reminders:<BR>";
+
+                // collect the messages
+                for (int i = 0; i < br.size(); i++) {
+                    reminder += ((i + 1) + ")" + (br.get(i) + "<BR>"));
+                }
+
+                // send the list
+                super.sendMessage(buddy, reminder);
+                return true;
+            }
+
+----------------------------------------
+				if (buddy.getName().equalsIgnoreCase(newName.getName()) && buddy.hasMessages()) {
+					ArrayList messages = buddy.getMessages();
+					String message = "";
+
+					//collect the messages
+					for (int i = 0; i < messages.size(); i++) {
+						message += (messages.get(i) + "<BR>");
+					}
+
+					//send the list
+					aim.sendMessage(buddy, message);
+					buddy.clearMessages();
+				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835166
+src/com/levelonelabs/aimbot/modules/TVListingsModule.java 116 124
+src/com/levelonelabs/aimbot/modules/BabelModule.java 239 247
+----------------------------------------
+	public String help() {
+		StringBuffer sb = new StringBuffer();
+		sb.append("<B>tvlist <i>ZIPCODE</i></B> (displays the tv providers in the area of the zipcode)\n");
+		sb.append("* If the preference \"zipcode\" is set, you can omit the zipcode to use your default.\n");
+		sb
+			.append("<B>tv <i>SHOW<i></B> (displays the synopsis of the next upcomming episode of the specified show in your area)\n");
+		sb.append("* The preference \"tvprovider\" must be set!");
+		return sb.toString();
+	}
+
+----------------------------------------
+    public String help() {
+        StringBuffer sb=new StringBuffer();
+        sb.append(
+            "<B>babel [-n <i>DISTORTION</i>] <i>TEXT</i></B> (creates poetry from <TEXT>, this may take several seconds)\n");
+        sb.append("NOTE: Using -n optionally specifies amount to distort meaning (MAX:"+MAX_TRIALS+
+            ")");
+        sb.append("\n\n<b>EXAMPLE: babel Today is a great day to talk to a robot.</b>");
+        return sb.toString();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835127
+src/com/levelonelabs/aimbot/modules/WeatherModule.java 104 111
+src/com/levelonelabs/aimbot/modules/BabelModule.java 239 247
+----------------------------------------
+    public String help() {
+        StringBuffer sb=new StringBuffer();
+        sb.append(
+            "<B>weather <i>ZIPCODE</i></B> (displays the 5 day forcast for the specified zipcode)\n");
+        sb.append(
+            "* If the preference \"zipcode\" is set, you can omit the zipcode to use your default.");
+        return sb.toString();
+    }
+
+----------------------------------------
+    public String help() {
+        StringBuffer sb=new StringBuffer();
+        sb.append(
+            "<B>babel [-n <i>DISTORTION</i>] <i>TEXT</i></B> (creates poetry from <TEXT>, this may take several seconds)\n");
+        sb.append("NOTE: Using -n optionally specifies amount to distort meaning (MAX:"+MAX_TRIALS+
+            ")");
+        sb.append("\n\n<b>EXAMPLE: babel Today is a great day to talk to a robot.</b>");
+        return sb.toString();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835168
+src/com/levelonelabs/aimbot/modules/MegaHalModule.java 158 164
+src/com/levelonelabs/aimbot/modules/BabelModule.java 239 247
+----------------------------------------
+	public String help() {
+		StringBuffer sb = new StringBuffer();
+		sb.append("<B>MEGAHAL</B> commands:\n");
+		sb.append("<b>megahaladmin save</b> (saves the megahal brain *ADMIN ONLY*)\n");
+		sb.append("<b>megahaladmin think <i>N</i></b>  (sets the think time to <N> seconds *ADMIN ONLY*)\n");
+		return sb.toString();
+	}
+
+----------------------------------------
+    public String help() {
+        StringBuffer sb=new StringBuffer();
+        sb.append(
+            "<B>babel [-n <i>DISTORTION</i>] <i>TEXT</i></B> (creates poetry from <TEXT>, this may take several seconds)\n");
+        sb.append("NOTE: Using -n optionally specifies amount to distort meaning (MAX:"+MAX_TRIALS+
+            ")");
+        sb.append("\n\n<b>EXAMPLE: babel Today is a great day to talk to a robot.</b>");
+        return sb.toString();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835167
+src/com/levelonelabs/aimbot/modules/BuddyManagementModule.java 101 107
+src/com/levelonelabs/aimbot/modules/BabelModule.java 239 247
+----------------------------------------
+    public String help() {
+        StringBuffer sb = new StringBuffer();
+        sb.append("<B>makeusers</B> (converts all non-user buddies to users *ADMIN ONLY*)\n");
+        sb.append("<B>prune buddies</B> (removes all non-user buddies *ADMIN ONLY*)\n");
+        sb.append("<B>prune inactive</B> (removes \"inactive\" users *ADMIN ONLY*)\n");
+        return sb.toString();
+    }
+
+----------------------------------------
+    public String help() {
+        StringBuffer sb=new StringBuffer();
+        sb.append(
+            "<B>babel [-n <i>DISTORTION</i>] <i>TEXT</i></B> (creates poetry from <TEXT>, this may take several seconds)\n");
+        sb.append("NOTE: Using -n optionally specifies amount to distort meaning (MAX:"+MAX_TRIALS+
+            ")");
+        sb.append("\n\n<b>EXAMPLE: babel Today is a great day to talk to a robot.</b>");
+        return sb.toString();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835172
+src/com/levelonelabs/aimbot/modules/ScheduleModule.java 156 165
+src/com/levelonelabs/aimbot/modules/BabelModule.java 239 247
+----------------------------------------
+    public String help() {
+        StringBuffer sb = new StringBuffer();
+        sb.append("<B>schedule <i>TEXT</i></B> (stores text in the system for retrieval later)\n");
+        sb.append("<B>cancel <i>All or #</i></B> (removes all items or a specific item)\n");
+        sb.append("<B>events</B> (lists all reminders)\n");
+        sb
+            .append("* If the preference \"reminderatsignon\" is set to true, you will automatically get a list when you login to aim.\n");
+
+        return sb.toString();
+    }
+
+----------------------------------------
+    public String help() {
+        StringBuffer sb=new StringBuffer();
+        sb.append(
+            "<B>babel [-n <i>DISTORTION</i>] <i>TEXT</i></B> (creates poetry from <TEXT>, this may take several seconds)\n");
+        sb.append("NOTE: Using -n optionally specifies amount to distort meaning (MAX:"+MAX_TRIALS+
+            ")");
+        sb.append("\n\n<b>EXAMPLE: babel Today is a great day to talk to a robot.</b>");
+        return sb.toString();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835169
+src/com/levelonelabs/aimbot/modules/SkiReportModule.java 110 118
+src/com/levelonelabs/aimbot/modules/BabelModule.java 239 247
+----------------------------------------
+    public String help() {
+        StringBuffer sb = new StringBuffer();
+        sb
+            .append("<B>mountains <i>STATE ABBREVIATION</i></B> (displays the resort codes for the specified state code)\n");
+        sb.append("<B>ski <i>STATE ABBREVIATION:RESORT CODE</i></B> (displays the ski reports for the given resort)\n");
+        sb
+            .append("* If the preference \"mountain\" is set, you can omit the [STATE ABBREVIATION:RESORT CODE] to use your default.");
+        return sb.toString();
+    }
+
+----------------------------------------
+    public String help() {
+        StringBuffer sb=new StringBuffer();
+        sb.append(
+            "<B>babel [-n <i>DISTORTION</i>] <i>TEXT</i></B> (creates poetry from <TEXT>, this may take several seconds)\n");
+        sb.append("NOTE: Using -n optionally specifies amount to distort meaning (MAX:"+MAX_TRIALS+
+            ")");
+        sb.append("\n\n<b>EXAMPLE: babel Today is a great day to talk to a robot.</b>");
+        return sb.toString();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835170
+src/com/levelonelabs/aimbot/modules/ReminderModule.java 120 129
+src/com/levelonelabs/aimbot/modules/BabelModule.java 239 247
+----------------------------------------
+    public String help() {
+        StringBuffer sb = new StringBuffer();
+        sb.append("<B>remember <i>TEXT</i></B> (stores text in the system for retrieval later)\n");
+        sb.append("<B>forget <i>All or #</i></B> (removes all items or a specific item)\n");
+        sb.append("<B>remind</B> (lists all reminders)\n");
+        sb
+            .append("* If the preference \"reminderatsignon\" is set to true, you will automatically get a list when you login to aim.\n");
+
+        return sb.toString();
+    }
+
+----------------------------------------
+    public String help() {
+        StringBuffer sb=new StringBuffer();
+        sb.append(
+            "<B>babel [-n <i>DISTORTION</i>] <i>TEXT</i></B> (creates poetry from <TEXT>, this may take several seconds)\n");
+        sb.append("NOTE: Using -n optionally specifies amount to distort meaning (MAX:"+MAX_TRIALS+
+            ")");
+        sb.append("\n\n<b>EXAMPLE: babel Today is a great day to talk to a robot.</b>");
+        return sb.toString();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835173
+src/com/levelonelabs/aimbot/modules/DefaultModule.java 96 103
+src/com/levelonelabs/aimbot/modules/BabelModule.java 239 247
+----------------------------------------
+    public String help() {
+        StringBuffer sb=new StringBuffer();
+        sb.append("Default Module\nThis will output default text if the input \n");
+        sb.append("is not recognized\n");
+        sb.append("<B>addTerm <i>TEXT</i></B> "+
+            "(add possible lines for the module to output) *Admin only*");
+        return sb.toString();
+    }
+
+----------------------------------------
+    public String help() {
+        StringBuffer sb=new StringBuffer();
+        sb.append(
+            "<B>babel [-n <i>DISTORTION</i>] <i>TEXT</i></B> (creates poetry from <TEXT>, this may take several seconds)\n");
+        sb.append("NOTE: Using -n optionally specifies amount to distort meaning (MAX:"+MAX_TRIALS+
+            ")");
+        sb.append("\n\n<b>EXAMPLE: babel Today is a great day to talk to a robot.</b>");
+        return sb.toString();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835171
+src/com/levelonelabs/aimbot/modules/UserInformationModule.java 125 132
+src/com/levelonelabs/aimbot/modules/BabelModule.java 239 247
+----------------------------------------
+	public String help() {
+		StringBuffer sb = new StringBuffer();
+		sb.append("<B>history <i>USER</i></B> (displays user's recent sign on and off history)\n");
+		sb.append("<B>users</B> (displays status of all users)\n");
+		sb.append("A=" + AIMBot.ROLE_ADMINISTRATOR + ", M = messages pending, * = new user, E = Enemy, - = banned\n");
+		sb.append("<B>enemies</B> (displays status of all enemies)\n");
+		return sb.toString();
+	}
+
+----------------------------------------
+    public String help() {
+        StringBuffer sb=new StringBuffer();
+        sb.append(
+            "<B>babel [-n <i>DISTORTION</i>] <i>TEXT</i></B> (creates poetry from <TEXT>, this may take several seconds)\n");
+        sb.append("NOTE: Using -n optionally specifies amount to distort meaning (MAX:"+MAX_TRIALS+
+            ")");
+        sb.append("\n\n<b>EXAMPLE: babel Today is a great day to talk to a robot.</b>");
+        return sb.toString();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835128
+src/com/levelonelabs/aimbot/modules/UserAdminModule.java 100 109
+src/com/levelonelabs/aimbot/modules/PreferenceModule.java 100 106
+----------------------------------------
+    public String help() {
+        StringBuffer sb = new StringBuffer();
+        sb
+            .append("<B>adduser <i>BUDDY</i> <ADMIN></B> (adds a user to the list, along with allowing for admin perms)\n");
+        sb.append("<B>rmuser <i>BUDDY</i></B> (removes a user from the list)\n");
+        sb.append("<B>denyuser <i>BUDDY</i></B> (deny a user *ADMIN ONLY*)\n");
+        sb.append("<B>permituser <i>BUDDY</i></B> (permit a user *ADMIN ONLY*)\n");
+        sb.append("<B>permitmode <i>[MODE]</i></B> (set or display the permitmode*ADMIN ONLY*)\n");
+        return sb.toString();
+    }
+
+----------------------------------------
+    public String help() {
+        StringBuffer sb=new StringBuffer();
+        sb.append("<B>listprefs</B> (displays current preferences)\n");
+        sb.append("<B>setpref <i>PREFERENCE</i> <i>VALUE</i></B> (sets a preference for the user)\n");
+        sb.append("\n<b>EXAMPLE: setpref zipcode 12345</b>\n");
+        return sb.toString();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835103
+src/com/levelonelabs/aimbot/modules/MegaHalModule.java 158 164
+src/com/levelonelabs/aimbot/modules/PreferenceModule.java 100 106
+----------------------------------------
+	public String help() {
+		StringBuffer sb = new StringBuffer();
+		sb.append("<B>MEGAHAL</B> commands:\n");
+		sb.append("<b>megahaladmin save</b> (saves the megahal brain *ADMIN ONLY*)\n");
+		sb.append("<b>megahaladmin think <i>N</i></b>  (sets the think time to <N> seconds *ADMIN ONLY*)\n");
+		return sb.toString();
+	}
+
+----------------------------------------
+    public String help() {
+        StringBuffer sb=new StringBuffer();
+        sb.append("<B>listprefs</B> (displays current preferences)\n");
+        sb.append("<B>setpref <i>PREFERENCE</i> <i>VALUE</i></B> (sets a preference for the user)\n");
+        sb.append("\n<b>EXAMPLE: setpref zipcode 12345</b>\n");
+        return sb.toString();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835130
+src/com/levelonelabs/aimbot/modules/ScheduleModule.java 156 165
+src/com/levelonelabs/aimbot/modules/PreferenceModule.java 100 106
+----------------------------------------
+    public String help() {
+        StringBuffer sb = new StringBuffer();
+        sb.append("<B>schedule <i>TEXT</i></B> (stores text in the system for retrieval later)\n");
+        sb.append("<B>cancel <i>All or #</i></B> (removes all items or a specific item)\n");
+        sb.append("<B>events</B> (lists all reminders)\n");
+        sb
+            .append("* If the preference \"reminderatsignon\" is set to true, you will automatically get a list when you login to aim.\n");
+
+        return sb.toString();
+    }
+
+----------------------------------------
+    public String help() {
+        StringBuffer sb=new StringBuffer();
+        sb.append("<B>listprefs</B> (displays current preferences)\n");
+        sb.append("<B>setpref <i>PREFERENCE</i> <i>VALUE</i></B> (sets a preference for the user)\n");
+        sb.append("\n<b>EXAMPLE: setpref zipcode 12345</b>\n");
+        return sb.toString();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835106
+src/com/levelonelabs/aimbot/modules/MoviesModule.java 72 77
+src/com/levelonelabs/aimbot/modules/PreferenceModule.java 100 106
+----------------------------------------
+    static {
+        services=new ArrayList();
+        services.add("movies");
+        services.add("movieslegend");
+        services.add("theaters");
+    }
+
+----------------------------------------
+    public String help() {
+        StringBuffer sb=new StringBuffer();
+        sb.append("<B>listprefs</B> (displays current preferences)\n");
+        sb.append("<B>setpref <i>PREFERENCE</i> <i>VALUE</i></B> (sets a preference for the user)\n");
+        sb.append("\n<b>EXAMPLE: setpref zipcode 12345</b>\n");
+        return sb.toString();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835094
+src/com/levelonelabs/aimbot/modules/BabelModule.java 239 247
+src/com/levelonelabs/aimbot/modules/PreferenceModule.java 100 106
+----------------------------------------
+    public String help() {
+        StringBuffer sb=new StringBuffer();
+        sb.append(
+            "<B>babel [-n <i>DISTORTION</i>] <i>TEXT</i></B> (creates poetry from <TEXT>, this may take several seconds)\n");
+        sb.append("NOTE: Using -n optionally specifies amount to distort meaning (MAX:"+MAX_TRIALS+
+            ")");
+        sb.append("\n\n<b>EXAMPLE: babel Today is a great day to talk to a robot.</b>");
+        return sb.toString();
+    }
+
+----------------------------------------
+    public String help() {
+        StringBuffer sb=new StringBuffer();
+        sb.append("<B>listprefs</B> (displays current preferences)\n");
+        sb.append("<B>setpref <i>PREFERENCE</i> <i>VALUE</i></B> (sets a preference for the user)\n");
+        sb.append("\n<b>EXAMPLE: setpref zipcode 12345</b>\n");
+        return sb.toString();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835097
+src/com/levelonelabs/aimbot/modules/UserInformationModule.java 62 67
+src/com/levelonelabs/aimbot/modules/PreferenceModule.java 100 106
+----------------------------------------
+	static {
+		services = new ArrayList();
+		services.add("history");
+		services.add("users");
+		services.add("enemies");
+	}
+
+----------------------------------------
+    public String help() {
+        StringBuffer sb=new StringBuffer();
+        sb.append("<B>listprefs</B> (displays current preferences)\n");
+        sb.append("<B>setpref <i>PREFERENCE</i> <i>VALUE</i></B> (sets a preference for the user)\n");
+        sb.append("\n<b>EXAMPLE: setpref zipcode 12345</b>\n");
+        return sb.toString();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835102
+src/com/levelonelabs/aimbot/modules/BuddyManagementModule.java 101 107
+src/com/levelonelabs/aimbot/modules/PreferenceModule.java 100 106
+----------------------------------------
+    public String help() {
+        StringBuffer sb = new StringBuffer();
+        sb.append("<B>makeusers</B> (converts all non-user buddies to users *ADMIN ONLY*)\n");
+        sb.append("<B>prune buddies</B> (removes all non-user buddies *ADMIN ONLY*)\n");
+        sb.append("<B>prune inactive</B> (removes \"inactive\" users *ADMIN ONLY*)\n");
+        return sb.toString();
+    }
+
+----------------------------------------
+    public String help() {
+        StringBuffer sb=new StringBuffer();
+        sb.append("<B>listprefs</B> (displays current preferences)\n");
+        sb.append("<B>setpref <i>PREFERENCE</i> <i>VALUE</i></B> (sets a preference for the user)\n");
+        sb.append("\n<b>EXAMPLE: setpref zipcode 12345</b>\n");
+        return sb.toString();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835107
+src/com/levelonelabs/aimbot/modules/UserInformationModule.java 125 132
+src/com/levelonelabs/aimbot/modules/PreferenceModule.java 100 106
+----------------------------------------
+	public String help() {
+		StringBuffer sb = new StringBuffer();
+		sb.append("<B>history <i>USER</i></B> (displays user's recent sign on and off history)\n");
+		sb.append("<B>users</B> (displays status of all users)\n");
+		sb.append("A=" + AIMBot.ROLE_ADMINISTRATOR + ", M = messages pending, * = new user, E = Enemy, - = banned\n");
+		sb.append("<B>enemies</B> (displays status of all enemies)\n");
+		return sb.toString();
+	}
+
+----------------------------------------
+    public String help() {
+        StringBuffer sb=new StringBuffer();
+        sb.append("<B>listprefs</B> (displays current preferences)\n");
+        sb.append("<B>setpref <i>PREFERENCE</i> <i>VALUE</i></B> (sets a preference for the user)\n");
+        sb.append("\n<b>EXAMPLE: setpref zipcode 12345</b>\n");
+        return sb.toString();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835131
+src/com/levelonelabs/aimbot/modules/DefaultModule.java 96 103
+src/com/levelonelabs/aimbot/modules/PreferenceModule.java 100 106
+----------------------------------------
+    public String help() {
+        StringBuffer sb=new StringBuffer();
+        sb.append("Default Module\nThis will output default text if the input \n");
+        sb.append("is not recognized\n");
+        sb.append("<B>addTerm <i>TEXT</i></B> "+
+            "(add possible lines for the module to output) *Admin only*");
+        return sb.toString();
+    }
+
+----------------------------------------
+    public String help() {
+        StringBuffer sb=new StringBuffer();
+        sb.append("<B>listprefs</B> (displays current preferences)\n");
+        sb.append("<B>setpref <i>PREFERENCE</i> <i>VALUE</i></B> (sets a preference for the user)\n");
+        sb.append("\n<b>EXAMPLE: setpref zipcode 12345</b>\n");
+        return sb.toString();
+    }
+
+----------------------------------------

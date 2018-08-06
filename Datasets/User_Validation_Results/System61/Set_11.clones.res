@@ -1,0 +1,12 @@
+61,28730845,true,src/com/_17od/upm/util/FileMonitor.java 21 34,src/com/_17od/upm/util/FileMonitor.java 22 33
+61,28730846,true,src/com/_17od/upm/gui/MainWindow.java 459 465,src/com/_17od/upm/gui/DatabasePropertiesDialog.java 166 174
+61,28730850,true,src/com/_17od/upm/gui/MainWindow.java 1203 1209,src/com/_17od/upm/gui/DatabasePropertiesDialog.java 166 174
+61,28730849,true,src/com/_17od/upm/gui/MainWindow.java 1193 1199,src/com/_17od/upm/gui/DatabasePropertiesDialog.java 166 174
+61,28730851,true,src/com/_17od/upm/gui/MainWindow.java 1213 1219,src/com/_17od/upm/gui/DatabasePropertiesDialog.java 166 174
+61,28730847,true,src/com/_17od/upm/gui/MainWindow.java 1173 1179,src/com/_17od/upm/gui/DatabasePropertiesDialog.java 166 174
+61,28730848,true,src/com/_17od/upm/gui/MainWindow.java 1183 1189,src/com/_17od/upm/gui/DatabasePropertiesDialog.java 166 174
+61,28730852,true,src/com/_17od/upm/gui/DatabasePropertiesDialog.java 202 216,src/com/_17od/upm/gui/DatabasePropertiesDialog.java 203 213
+61,28730853,true,src/com/_17od/upm/gui/MainWindow.java 159 220,src/com/_17od/upm/gui/DatabaseActions.java 158 216
+61,28730859,true,src/com/_17od/upm/gui/MainWindow.java 1043 1083,src/com/_17od/upm/gui/MainWindow.java 1045 1080
+61,28730861,true,src/com/_17od/upm/gui/DatabaseActions.java 377 398,src/com/_17od/upm/gui/DatabaseActions.java 373 404
+61,28730862,true,src/com/_17od/upm/gui/DatabaseActions.java 377 398,src/com/_17od/upm/gui/DatabaseActions.java 1118 1133

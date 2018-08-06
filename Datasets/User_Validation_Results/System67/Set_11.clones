@@ -1,0 +1,1308 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995477
+src/de/joergjahnke/common/jme/OrientationSensitiveCanvasHelper.java 113 119
+src/de/joergjahnke/gameboy/core/CPU.java 2166 2171
+----------------------------------------
+    public void deactivateAccelerometer() {
+        try {
+            ((javax.microedition.sensor.SensorConnection) this.con).removeDataListener();
+            this.con.close();
+        } catch (Throwable t) {
+        }
+    }
+
+----------------------------------------
+            if (this.isPaused) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException ex) {
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995479
+src/de/joergjahnke/common/extendeddevices/WavePlayer.java 64 70
+src/de/joergjahnke/gameboy/core/CPU.java 2166 2171
+----------------------------------------
+                        synchronized (buffer) {
+                            buffer.reset();
+                            try {
+                                buffer.wait();
+                            } catch (InterruptedException e) {
+                            }
+                        }
+
+----------------------------------------
+            if (this.isPaused) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException ex) {
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995471
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 510 515
+src/de/joergjahnke/gameboy/core/CPU.java 2166 2171
+----------------------------------------
+        } finally {
+            try {
+                romStream.close();
+            } catch (Exception e) {
+            }
+        }
+
+----------------------------------------
+            if (this.isPaused) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException ex) {
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995495
+src/de/joergjahnke/common/bluetooth/BluetoothClient.java 174 180
+src/de/joergjahnke/gameboy/core/CPU.java 2166 2171
+----------------------------------------
+    public void servicesDiscovered(final int transID, final ServiceRecord[] servRecord) {
+        try {
+            this.serviceRecord = servRecord[0];
+        } catch (Exception e) {
+            // it may happen that no service record can be retrieved, in this case serviceRecord remains null
+        }
+    }
+
+----------------------------------------
+            if (this.isPaused) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException ex) {
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995475
+src/de/joergjahnke/common/jme/FileSystemHandler.java 189 195
+src/de/joergjahnke/gameboy/core/CPU.java 2166 2171
+----------------------------------------
+                if (prgsString.length() > 0) {
+                    try {
+                        settings.setString(SETTING_PROGRAMS, prgsString.toString());
+                    } catch (Exception e) {
+                    // we could not save the list of programs on the phone, that's OK
+                    }
+                }
+
+----------------------------------------
+            if (this.isPaused) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException ex) {
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995470
+src/de/joergjahnke/common/jme/FormattedTextForm.java 159 165
+src/de/joergjahnke/gameboy/core/CPU.java 2166 2171
+----------------------------------------
+                public void commandAction(final Command c, final Item item) {
+                    try {
+                        midlet.platformRequest(((StringItem)item).getText());
+                    } catch (Exception e) {
+                        // we could not invoke the browser, that's a pity but we can live with it
+                    }
+                }
+
+----------------------------------------
+            if (this.isPaused) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException ex) {
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995469
+src/de/joergjahnke/common/jme/Settings.java 121 127
+src/de/joergjahnke/gameboy/core/CPU.java 2166 2171
+----------------------------------------
+    public boolean getBoolean(final String key, final boolean defaultValue) {
+        try {
+            return getBoolean(key);
+        } catch (Exception e) {
+            return defaultValue;
+        }
+    }
+
+----------------------------------------
+            if (this.isPaused) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException ex) {
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995474
+src/de/joergjahnke/common/bluetooth/BluetoothDevice.java 158 164
+src/de/joergjahnke/gameboy/core/CPU.java 2166 2171
+----------------------------------------
+    public static String getRemoteDeviceName(final RemoteDevice dev) {
+        try {
+            return dev.getFriendlyName(false) == null ? dev.getBluetoothAddress() : dev.getFriendlyName(false);
+        } catch (IOException e) {
+            return "unknown";
+        }
+    }
+
+----------------------------------------
+            if (this.isPaused) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException ex) {
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995493
+src/de/joergjahnke/common/bluetooth/BluetoothClient.java 149 158
+src/de/joergjahnke/gameboy/core/CPU.java 2166 2171
+----------------------------------------
+        synchronized (this.agent) {
+            this.agent.searchServices(null, uuids, btDevice, this);
+
+            // wait until the discovery agents notifies us that he is finished or one minute has passed
+            try {
+                this.agent.wait(getTimeout(), 0);
+            } catch (InterruptedException e) {
+                // we got interrupted, no problem
+            }
+        }
+
+----------------------------------------
+            if (this.isPaused) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException ex) {
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995492
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 984 991
+src/de/joergjahnke/gameboy/core/CPU.java 2166 2171
+----------------------------------------
+                if (evt.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
+                    try {
+                        Desktop.getDesktop().browse(evt.getURL().toURI());
+                    } catch (Throwable t) {
+                        // could not display the web page, what to do now???
+                        System.err.println("Could not browse to page " + evt.getURL());
+                    }
+                }
+
+----------------------------------------
+            if (this.isPaused) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException ex) {
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995478
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 241 248
+src/de/joergjahnke/gameboy/core/CPU.java 2166 2171
+----------------------------------------
+                    public void windowClosing(final WindowEvent evt) {
+                        try {
+                            settings.storeToXML(new FileOutputStream(new File(PROPERTIES_NAME)), "Properties for JSwingBoy");
+                            stopGame();
+                        } catch (Exception e) {
+                            // we can't save the settings, that's a pity, but we'll just use defaults on next startup
+                        }
+                    }
+
+----------------------------------------
+            if (this.isPaused) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException ex) {
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995494
+src/de/joergjahnke/common/jme/Settings.java 84 90
+src/de/joergjahnke/gameboy/core/CPU.java 2166 2171
+----------------------------------------
+    public int getInteger(final String key, final int defaultValue) {
+        try {
+            return getInteger(key);
+        } catch (Exception e) {
+            return defaultValue;
+        }
+    }
+
+----------------------------------------
+            if (this.isPaused) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException ex) {
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995473
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 296 301
+src/de/joergjahnke/gameboy/core/CPU.java 2166 2171
+----------------------------------------
+        } finally {
+            try {
+                out.close();
+            } catch (Exception e) {
+            }
+        }
+
+----------------------------------------
+            if (this.isPaused) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException ex) {
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995468
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 489 494
+src/de/joergjahnke/gameboy/core/CPU.java 2166 2171
+----------------------------------------
+            } finally {
+                try {
+                    saveStream.close();
+                } catch (Exception e) {
+                }
+            }
+
+----------------------------------------
+            if (this.isPaused) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException ex) {
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995476
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 375 380
+src/de/joergjahnke/gameboy/core/CPU.java 2166 2171
+----------------------------------------
+        } finally {
+            try {
+                in.close();
+            } catch (Exception e) {
+            }
+        }
+
+----------------------------------------
+            if (this.isPaused) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException ex) {
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995419
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 296 301
+src/de/joergjahnke/common/jme/WavePlayer.java 178 188
+----------------------------------------
+        } finally {
+            try {
+                out.close();
+            } catch (Exception e) {
+            }
+        }
+
+----------------------------------------
+            if (!this.players.isEmpty()) {
+                // then use the next player from the queue and play it
+                this.currentPlayer = (Player) this.players.elementAt(0);
+                this.players.removeElementAt(0);
+                try {
+                    this.currentPlayer.start();
+                } catch (Exception e) {
+                    // we couldn't start the player, we stop the sound as it does not seem to work
+                    producer.deleteObservers();
+                }
+            } else {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995980
+src/de/joergjahnke/gameboy/android/AndroidGB.java 499 507
+src/de/joergjahnke/common/jme/WavePlayer.java 178 188
+----------------------------------------
+			if(this.orientationSensorNotifier == null) {
+				try {
+					this.orientationSensorNotifier = new OrientationSensorNotifier();
+					this.orientationSensorNotifier.addListener(this.gameboyView);
+					this.orientationSensorNotifier.start();
+				} catch( Exception e ) {
+					// we could not attach the notifier, most probably no orientation sensor is available
+				}
+			}
+
+----------------------------------------
+            if (!this.players.isEmpty()) {
+                // then use the next player from the queue and play it
+                this.currentPlayer = (Player) this.players.elementAt(0);
+                this.players.removeElementAt(0);
+                try {
+                    this.currentPlayer.start();
+                } catch (Exception e) {
+                    // we couldn't start the player, we stop the sound as it does not seem to work
+                    producer.deleteObservers();
+                }
+            } else {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995983
+src/de/joergjahnke/common/extendeddevices/WavePlayer.java 64 70
+src/de/joergjahnke/common/jme/WavePlayer.java 178 188
+----------------------------------------
+                        synchronized (buffer) {
+                            buffer.reset();
+                            try {
+                                buffer.wait();
+                            } catch (InterruptedException e) {
+                            }
+                        }
+
+----------------------------------------
+            if (!this.players.isEmpty()) {
+                // then use the next player from the queue and play it
+                this.currentPlayer = (Player) this.players.elementAt(0);
+                this.players.removeElementAt(0);
+                try {
+                    this.currentPlayer.start();
+                } catch (Exception e) {
+                    // we couldn't start the player, we stop the sound as it does not seem to work
+                    producer.deleteObservers();
+                }
+            } else {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995985
+src/de/joergjahnke/common/bluetooth/BluetoothOBEXClient.java 240 250
+src/de/joergjahnke/common/jme/WavePlayer.java 178 188
+----------------------------------------
+    public void abortFileReception() {
+        super.stop();
+
+        try {
+            this.local.setDiscoverable(DiscoveryAgent.NOT_DISCOVERABLE);
+            this.notifier.close();
+            this.notifier = null;
+        } catch (Exception e) {
+            // we could not completely shut down the service, what to do now?
+        }
+    }
+
+----------------------------------------
+            if (!this.players.isEmpty()) {
+                // then use the next player from the queue and play it
+                this.currentPlayer = (Player) this.players.elementAt(0);
+                this.players.removeElementAt(0);
+                try {
+                    this.currentPlayer.start();
+                } catch (Exception e) {
+                    // we couldn't start the player, we stop the sound as it does not seem to work
+                    producer.deleteObservers();
+                }
+            } else {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995986
+src/de/joergjahnke/common/bluetooth/BluetoothOBEXClient.java 110 120
+src/de/joergjahnke/common/jme/WavePlayer.java 178 188
+----------------------------------------
+    public void disconnect() {
+        super.stop();
+
+        try {
+            this.clientSession.disconnect(null);
+            this.clientSession.close();
+        } catch (IOException e) {
+            // we had a problem with closing the streams, what to do now?
+        }
+        this.clientSession = null;
+    }
+
+----------------------------------------
+            if (!this.players.isEmpty()) {
+                // then use the next player from the queue and play it
+                this.currentPlayer = (Player) this.players.elementAt(0);
+                this.players.removeElementAt(0);
+                try {
+                    this.currentPlayer.start();
+                } catch (Exception e) {
+                    // we couldn't start the player, we stop the sound as it does not seem to work
+                    producer.deleteObservers();
+                }
+            } else {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995981
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 375 380
+src/de/joergjahnke/common/jme/WavePlayer.java 178 188
+----------------------------------------
+        } finally {
+            try {
+                in.close();
+            } catch (Exception e) {
+            }
+        }
+
+----------------------------------------
+            if (!this.players.isEmpty()) {
+                // then use the next player from the queue and play it
+                this.currentPlayer = (Player) this.players.elementAt(0);
+                this.players.removeElementAt(0);
+                try {
+                    this.currentPlayer.start();
+                } catch (Exception e) {
+                    // we couldn't start the player, we stop the sound as it does not seem to work
+                    producer.deleteObservers();
+                }
+            } else {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995416
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 393 400
+src/de/joergjahnke/common/jme/WavePlayer.java 178 188
+----------------------------------------
+        if (status == STATUS_LOAD_OK || status == STATUS_LOAD_FAILED) {
+            try {
+                new File(SUSPENDFILE_NAME).delete();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Could not remove the suspend file! Please remove the suspend file '" + SUSPENDFILE_NAME + "' manually.", this.commonResources.getString("CouldNotRemoveSuspendData"), JOptionPane.ERROR_MESSAGE);
+                e.printStackTrace();
+            }
+        }
+
+----------------------------------------
+            if (!this.players.isEmpty()) {
+                // then use the next player from the queue and play it
+                this.currentPlayer = (Player) this.players.elementAt(0);
+                this.players.removeElementAt(0);
+                try {
+                    this.currentPlayer.start();
+                } catch (Exception e) {
+                    // we couldn't start the player, we stop the sound as it does not seem to work
+                    producer.deleteObservers();
+                }
+            } else {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995418
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 510 515
+src/de/joergjahnke/common/jme/WavePlayer.java 178 188
+----------------------------------------
+        } finally {
+            try {
+                romStream.close();
+            } catch (Exception e) {
+            }
+        }
+
+----------------------------------------
+            if (!this.players.isEmpty()) {
+                // then use the next player from the queue and play it
+                this.currentPlayer = (Player) this.players.elementAt(0);
+                this.players.removeElementAt(0);
+                try {
+                    this.currentPlayer.start();
+                } catch (Exception e) {
+                    // we couldn't start the player, we stop the sound as it does not seem to work
+                    producer.deleteObservers();
+                }
+            } else {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995415
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 489 494
+src/de/joergjahnke/common/jme/WavePlayer.java 178 188
+----------------------------------------
+            } finally {
+                try {
+                    saveStream.close();
+                } catch (Exception e) {
+                }
+            }
+
+----------------------------------------
+            if (!this.players.isEmpty()) {
+                // then use the next player from the queue and play it
+                this.currentPlayer = (Player) this.players.elementAt(0);
+                this.players.removeElementAt(0);
+                try {
+                    this.currentPlayer.start();
+                } catch (Exception e) {
+                    // we couldn't start the player, we stop the sound as it does not seem to work
+                    producer.deleteObservers();
+                }
+            } else {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995420
+src/de/joergjahnke/gameboy/android/AndroidGB.java 476 484
+src/de/joergjahnke/common/jme/WavePlayer.java 178 188
+----------------------------------------
+            if (this.gameboy.getSoundChip().countObservers() == 0) {
+                try {
+                    this.gameboy.getSoundChip().addObserver(new WavePlayer(this.gameboy.getSoundChip()));
+                } catch (Throwable t) {
+                    // we could not add a player, that's OK
+                    this.gameboy.getLogger().warning("Could not create sound player! Sound output remains deactivated.");
+                    t.printStackTrace();
+                }
+            }
+
+----------------------------------------
+            if (!this.players.isEmpty()) {
+                // then use the next player from the queue and play it
+                this.currentPlayer = (Player) this.players.elementAt(0);
+                this.players.removeElementAt(0);
+                try {
+                    this.currentPlayer.start();
+                } catch (Exception e) {
+                    // we couldn't start the player, we stop the sound as it does not seem to work
+                    producer.deleteObservers();
+                }
+            } else {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995417
+src/de/joergjahnke/gameboy/core/Gameboy.java 207 216
+src/de/joergjahnke/common/jme/WavePlayer.java 178 188
+----------------------------------------
+        if (!isRunning()) {
+            this.logger.info("Gameboy starting");
+            super.run();
+            // we use this thread to run the CPU
+            try {
+                this.cpu.run();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+----------------------------------------
+            if (!this.players.isEmpty()) {
+                // then use the next player from the queue and play it
+                this.currentPlayer = (Player) this.players.elementAt(0);
+                this.players.removeElementAt(0);
+                try {
+                    this.currentPlayer.start();
+                } catch (Exception e) {
+                    // we couldn't start the player, we stop the sound as it does not seem to work
+                    producer.deleteObservers();
+                }
+            } else {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995982
+src/de/joergjahnke/common/jme/OrientationSensitiveCanvasHelper.java 113 119
+src/de/joergjahnke/common/jme/WavePlayer.java 178 188
+----------------------------------------
+    public void deactivateAccelerometer() {
+        try {
+            ((javax.microedition.sensor.SensorConnection) this.con).removeDataListener();
+            this.con.close();
+        } catch (Throwable t) {
+        }
+    }
+
+----------------------------------------
+            if (!this.players.isEmpty()) {
+                // then use the next player from the queue and play it
+                this.currentPlayer = (Player) this.players.elementAt(0);
+                this.players.removeElementAt(0);
+                try {
+                    this.currentPlayer.start();
+                } catch (Exception e) {
+                    // we couldn't start the player, we stop the sound as it does not seem to work
+                    producer.deleteObservers();
+                }
+            } else {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995984
+src/de/joergjahnke/gameboy/core/Gameboy.java 206 217
+src/de/joergjahnke/common/jme/WavePlayer.java 178 188
+----------------------------------------
+    public void run() {
+        if (!isRunning()) {
+            this.logger.info("Gameboy starting");
+            super.run();
+            // we use this thread to run the CPU
+            try {
+                this.cpu.run();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+----------------------------------------
+            if (!this.players.isEmpty()) {
+                // then use the next player from the queue and play it
+                this.currentPlayer = (Player) this.players.elementAt(0);
+                this.players.removeElementAt(0);
+                try {
+                    this.currentPlayer.start();
+                } catch (Exception e) {
+                    // we couldn't start the player, we stop the sound as it does not seem to work
+                    producer.deleteObservers();
+                }
+            } else {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995421
+src/de/joergjahnke/gameboy/core/CPU.java 688 694
+src/de/joergjahnke/gameboy/core/CPU.java 716 722
+----------------------------------------
+    private int operationSLA(final int data) {
+        final int value = (data << 1) & 0xff;
+
+        this.f = ((value == 0 ? ZERO : 0) + (data >= 0x80 ? CARRY : 0));
+
+        return value;
+    }
+
+----------------------------------------
+    private int operationRL(final int data) {
+        final int value = ((data << 1) + ((this.f & CARRY) != 0 ? 1 : 0)) & 0xff;
+
+        this.f = ((value == 0 ? ZERO : 0) + (data >= 0x80 ? CARRY : 0));
+
+        return value;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995422
+src/de/joergjahnke/gameboy/core/CPU.java 702 708
+src/de/joergjahnke/gameboy/core/CPU.java 716 722
+----------------------------------------
+    private int operationRLC(final int data) {
+        final int value = ((data << 1) + (data >> 7)) & 0xff;
+
+        this.f = ((value == 0 ? ZERO : 0) + (data >= 0x80 ? CARRY : 0));
+
+        return value;
+    }
+
+----------------------------------------
+    private int operationRL(final int data) {
+        final int value = ((data << 1) + ((this.f & CARRY) != 0 ? 1 : 0)) & 0xff;
+
+        this.f = ((value == 0 ? ZERO : 0) + (data >= 0x80 ? CARRY : 0));
+
+        return value;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995435
+src/de/joergjahnke/gameboy/core/VideoChip.java 1390 1398
+src/de/joergjahnke/gameboy/core/Tile.java 180 189
+----------------------------------------
+        if (!this.areAllTilesInvalid) {
+            final Tile[] tiles_ = this.tiles;
+
+            for (int i = 0, to = tiles_.length; i < to; ++i) {
+                tiles_[i].invalidate();
+            }
+
+            this.areAllTilesInvalid = true;
+        }
+
+----------------------------------------
+        if (!this.areAllVariantsInvalid) {
+            // we also have to recalculate the tile's RGB data
+            final int[][] pixels_ = this.pixels;
+
+            for (int i = 0, to = pixels_.length; i < to; ++i) {
+                pixels_[i] = null;
+            }
+
+            this.areAllVariantsInvalid = true;
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995436
+src/de/joergjahnke/gameboy/core/VideoChip.java 988 999
+src/de/joergjahnke/gameboy/core/CPU.java 2692 2700
+----------------------------------------
+        if (data != this.vRAM[vRAMAdr]) {
+            // store data
+            this.vRAM[vRAMAdr] = data;
+
+            // tile data was changed?
+            if (adr < 0x1800) {
+                // then invalidate the tile data, the pixels need to be recalculated anew
+                this.tiles[this.currentVRAMBank * (NUM_TILES >> 1) + (adr >> 4)].invalidate();
+            }
+            // we also have to repaint the screen
+            invalidateLines();
+        }
+
+----------------------------------------
+                    case HIGH_RAM_AREA: {
+                        // first write to RAM normally
+                        this.memory[adr] = data;
+
+                        if (adr < 0xfea0) {
+                            writeOAM(adr, data);
+                        }
+                        break;
+                    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995438
+src/de/joergjahnke/gameboy/core/CPU.java 2834 2839
+src/de/joergjahnke/gameboy/core/CPU.java 2856 2861
+----------------------------------------
+                if (adr == 0xff14) {
+                    if ((data & 0x80) != 0) {
+                        this.sound.getSoundChannels()[0].setRepeat((data & 0x40) == 0);
+                        this.sound.getSoundChannels()[0].setLength(0x40 - (this.memory[0xff11] & 0x3f));
+                    }
+                }
+
+----------------------------------------
+                if (adr == 0xff19) {
+                    if ((data & 0x80) != 0) {
+                        this.sound.getSoundChannels()[1].setRepeat((data & 0x40) == 0);
+                        this.sound.getSoundChannels()[1].setLength(0x40 - (this.memory[0xff16] & 0x3f));
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995439
+src/de/joergjahnke/gameboy/core/CPU.java 3355 3362
+src/de/joergjahnke/gameboy/core/Sprite.java 283 290
+----------------------------------------
+        public void deserialize(final DataInputStream in) throws IOException {
+            this.divCycle = in.readLong();
+            this.instructionsPerTima = in.readInt();
+            this.lastStartedCycle = in.readLong();
+            this.tma = in.readInt();
+            this.tac = in.readInt();
+            this.nextTimerIRQRequest = in.readLong();
+        }
+
+----------------------------------------
+    public void deserialize(final DataInputStream in) throws IOException {
+        setTile(in.readInt());
+        this.attributes = in.readInt();
+        this.hasPriority = in.readBoolean();
+        this.x = in.readInt();
+        this.y = in.readInt();
+        this.isVisible = in.readBoolean();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995446
+src/de/joergjahnke/gameboy/core/CPU.java 3355 3362
+src/de/joergjahnke/gameboy/core/Cartridge.java 503 508
+----------------------------------------
+        public void deserialize(final DataInputStream in) throws IOException {
+            this.divCycle = in.readLong();
+            this.instructionsPerTima = in.readInt();
+            this.lastStartedCycle = in.readLong();
+            this.tma = in.readInt();
+            this.tac = in.readInt();
+            this.nextTimerIRQRequest = in.readLong();
+        }
+
+----------------------------------------
+        public void deserialize(final DataInputStream in) throws IOException {
+            this.areRAMWritesEnabled = in.readBoolean();
+            this.isROMBankingMode = in.readBoolean();
+            this.currentROMBank = in.readInt();
+            this.currentRAMBank = in.readInt();
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995440
+src/de/joergjahnke/gameboy/core/Sprite.java 283 290
+src/de/joergjahnke/gameboy/core/Cartridge.java 503 508
+----------------------------------------
+    public void deserialize(final DataInputStream in) throws IOException {
+        setTile(in.readInt());
+        this.attributes = in.readInt();
+        this.hasPriority = in.readBoolean();
+        this.x = in.readInt();
+        this.y = in.readInt();
+        this.isVisible = in.readBoolean();
+    }
+
+----------------------------------------
+        public void deserialize(final DataInputStream in) throws IOException {
+            this.areRAMWritesEnabled = in.readBoolean();
+            this.isROMBankingMode = in.readBoolean();
+            this.currentROMBank = in.readInt();
+            this.currentRAMBank = in.readInt();
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995441
+src/de/joergjahnke/gameboy/core/CPU.java 2856 2861
+src/de/joergjahnke/gameboy/core/CPU.java 2883 2888
+----------------------------------------
+                if (adr == 0xff19) {
+                    if ((data & 0x80) != 0) {
+                        this.sound.getSoundChannels()[1].setRepeat((data & 0x40) == 0);
+                        this.sound.getSoundChannels()[1].setLength(0x40 - (this.memory[0xff16] & 0x3f));
+                    }
+                }
+
+----------------------------------------
+                if (adr == 0xff1e) {
+                    if ((data & 0x80) != 0) {
+                        this.sound.getSoundChannels()[2].setRepeat((data & 0x40) == 0);
+                        this.sound.getSoundChannels()[2].setLength(0xff - (this.memory[0xff1b] & 0xff));
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995442
+src/de/joergjahnke/gameboy/core/CPU.java 2834 2839
+src/de/joergjahnke/gameboy/core/CPU.java 2883 2888
+----------------------------------------
+                if (adr == 0xff14) {
+                    if ((data & 0x80) != 0) {
+                        this.sound.getSoundChannels()[0].setRepeat((data & 0x40) == 0);
+                        this.sound.getSoundChannels()[0].setLength(0x40 - (this.memory[0xff11] & 0x3f));
+                    }
+                }
+
+----------------------------------------
+                if (adr == 0xff1e) {
+                    if ((data & 0x80) != 0) {
+                        this.sound.getSoundChannels()[2].setRepeat((data & 0x40) == 0);
+                        this.sound.getSoundChannels()[2].setLength(0xff - (this.memory[0xff1b] & 0xff));
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995443
+src/de/joergjahnke/gameboy/core/CPU.java 3232 3238
+src/de/joergjahnke/common/jme/Menu.java 258 264
+----------------------------------------
+        public final int getTima() {
+            if (isRunning()) {
+                return (this.tima + (int) ((getCycles() - this.lastStartedCycle) / this.instructionsPerTima)) & 0xff;
+            } else {
+                return this.tima;
+            }
+        }
+
+----------------------------------------
+    private Displayable getPreviousRoot() {
+        if (this.previous instanceof Menu && ((Menu) this.previous).previous != this.previous) {
+            return ((Menu) this.previous).getPreviousRoot();
+        } else {
+            return this.previous;
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995444
+src/de/joergjahnke/gameboy/core/Cartridge.java 420 425
+src/de/joergjahnke/gameboy/core/Cartridge.java 427 432
+----------------------------------------
+    public void serialize(final DataOutputStream out) throws IOException {
+        this.cartridgeImpl.serialize(out);
+        for (int i = 0; i < this.ramBanks.length; ++i) {
+            SerializationUtils.serialize(out, this.ramBanks[i]);
+        }
+    }
+
+----------------------------------------
+    public void deserialize(final DataInputStream in) throws IOException {
+        this.cartridgeImpl.deserialize(in);
+        for (int i = 0; i < this.ramBanks.length; ++i) {
+            SerializationUtils.deserialize(in, this.ramBanks[i]);
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995445
+src/de/joergjahnke/gameboy/core/CPU.java 3346 3353
+src/de/joergjahnke/gameboy/core/Cartridge.java 496 501
+----------------------------------------
+        public void serialize(final DataOutputStream out) throws IOException {
+            out.writeLong(this.divCycle);
+            out.writeInt(this.instructionsPerTima);
+            out.writeLong(this.lastStartedCycle);
+            out.writeInt(this.tma);
+            out.writeInt(this.tac);
+            out.writeLong(this.nextTimerIRQRequest);
+        }
+
+----------------------------------------
+        public void serialize(final DataOutputStream out) throws IOException {
+            out.writeBoolean(this.areRAMWritesEnabled);
+            out.writeBoolean(this.isROMBankingMode);
+            out.writeInt(this.currentROMBank);
+            out.writeInt(this.currentRAMBank);
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995447
+src/de/joergjahnke/gameboy/core/VideoChip.java 1164 1171
+src/de/joergjahnke/gameboy/core/VideoChip.java 1424 1430
+----------------------------------------
+            if (this.windowY != this.nextWindowY) {
+                final int firstInvalid = Math.max(0, Math.min(this.nextWindowY, getWindowY()));
+
+                if (firstInvalid < SCREEN_HEIGHT) {
+                    invalidateLines(firstInvalid, SCREEN_HEIGHT - firstInvalid);
+                }
+                this.windowY = this.nextWindowY;
+            }
+
+----------------------------------------
+    private void invalidateWindowLines() {
+        final int firstInvalid = Math.max(0, getWindowY());
+
+        if (firstInvalid < SCREEN_HEIGHT) {
+            invalidateLines(firstInvalid, SCREEN_HEIGHT - firstInvalid);
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995448
+src/de/joergjahnke/gameboy/core/VoluntaryWaveChannel.java 95 117
+src/de/joergjahnke/gameboy/core/WhiteNoiseChannel.java 99 121
+----------------------------------------
+    public void mix(final byte[] buffer) {
+        final int sampleRate = this.sound.getSampleRate();
+        final boolean isLeftActive = isTerminalActive(LEFT);
+        final boolean isRightActive = isTerminalActive(RIGHT);
+
+        for (int i = 0, to = buffer.length; i < to; i += 2) {
+            // determine sample
+            final int idx = (this.audioIndex % sampleRate) * BUFFER_SIZE / sampleRate;
+            final int sample = this.active ? (this.wavePatterns[idx] * this.volumePercent / 100) << 1 : 0;
+
+            // apply sample to relevant output terminals
+            if (isLeftActive) {
+                buffer[i + LEFT] += sample;
+            }
+            if (isRightActive) {
+                buffer[i + RIGHT] += sample;
+            }
+
+            // proceed to next sample
+            this.audioIndex += this.frequency;
+            this.audioIndex %= sampleRate;
+        }
+    }
+
+----------------------------------------
+    public void mix(final byte[] buffer) {
+        final int sampleRate = this.sound.getSampleRate();
+        final boolean isLeftActive = isTerminalActive(LEFT);
+        final boolean isRightActive = isTerminalActive(RIGHT);
+        final int mod = sampleRate * (this.isSmallStepWidth ? 1 << 7 : 1 << 15);
+
+        for (int i = 0,  to = buffer.length; i < to; i += 2) {
+            final int index = this.audioIndex / sampleRate;
+            final int sample = randoms[index] ? this.volume << 1 : -this.volume << 1;
+
+            // apply sample to relevant output terminals
+            if (isLeftActive) {
+                buffer[i + LEFT] += sample;
+            }
+            if (isRightActive) {
+                buffer[i + RIGHT] += sample;
+            }
+
+            // proceed to next sample
+            this.audioIndex += this.frequency;
+            this.audioIndex %= mod;
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995449
+src/de/joergjahnke/gameboy/core/VoluntaryWaveChannel.java 100 116
+src/de/joergjahnke/gameboy/core/WhiteNoiseChannel.java 105 120
+----------------------------------------
+        for (int i = 0, to = buffer.length; i < to; i += 2) {
+            // determine sample
+            final int idx = (this.audioIndex % sampleRate) * BUFFER_SIZE / sampleRate;
+            final int sample = this.active ? (this.wavePatterns[idx] * this.volumePercent / 100) << 1 : 0;
+
+            // apply sample to relevant output terminals
+            if (isLeftActive) {
+                buffer[i + LEFT] += sample;
+            }
+            if (isRightActive) {
+                buffer[i + RIGHT] += sample;
+            }
+
+            // proceed to next sample
+            this.audioIndex += this.frequency;
+            this.audioIndex %= sampleRate;
+        }
+
+----------------------------------------
+        for (int i = 0,  to = buffer.length; i < to; i += 2) {
+            final int index = this.audioIndex / sampleRate;
+            final int sample = randoms[index] ? this.volume << 1 : -this.volume << 1;
+
+            // apply sample to relevant output terminals
+            if (isLeftActive) {
+                buffer[i + LEFT] += sample;
+            }
+            if (isRightActive) {
+                buffer[i + RIGHT] += sample;
+            }
+
+            // proceed to next sample
+            this.audioIndex += this.frequency;
+            this.audioIndex %= mod;
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995461
+src/de/joergjahnke/gameboy/core/Cartridge.java 496 501
+src/de/joergjahnke/gameboy/core/WhiteNoiseChannel.java 137 142
+----------------------------------------
+        public void serialize(final DataOutputStream out) throws IOException {
+            out.writeBoolean(this.areRAMWritesEnabled);
+            out.writeBoolean(this.isROMBankingMode);
+            out.writeInt(this.currentROMBank);
+            out.writeInt(this.currentRAMBank);
+        }
+
+----------------------------------------
+    public void serialize(final DataOutputStream out) throws IOException {
+        out.writeInt(this.envelopeSweeps);
+        out.writeInt(this.envelopeSweepsLeft);
+        out.writeInt(this.envelopeDirection);
+        out.writeBoolean(this.isSmallStepWidth);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995450
+src/de/joergjahnke/gameboy/core/CPU.java 3346 3353
+src/de/joergjahnke/gameboy/core/WhiteNoiseChannel.java 137 142
+----------------------------------------
+        public void serialize(final DataOutputStream out) throws IOException {
+            out.writeLong(this.divCycle);
+            out.writeInt(this.instructionsPerTima);
+            out.writeLong(this.lastStartedCycle);
+            out.writeInt(this.tma);
+            out.writeInt(this.tac);
+            out.writeLong(this.nextTimerIRQRequest);
+        }
+
+----------------------------------------
+    public void serialize(final DataOutputStream out) throws IOException {
+        out.writeInt(this.envelopeSweeps);
+        out.writeInt(this.envelopeSweepsLeft);
+        out.writeInt(this.envelopeDirection);
+        out.writeBoolean(this.isSmallStepWidth);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995463
+src/de/joergjahnke/gameboy/core/CPU.java 3355 3362
+src/de/joergjahnke/gameboy/core/WhiteNoiseChannel.java 144 149
+----------------------------------------
+        public void deserialize(final DataInputStream in) throws IOException {
+            this.divCycle = in.readLong();
+            this.instructionsPerTima = in.readInt();
+            this.lastStartedCycle = in.readLong();
+            this.tma = in.readInt();
+            this.tac = in.readInt();
+            this.nextTimerIRQRequest = in.readLong();
+        }
+
+----------------------------------------
+    public void deserialize(final DataInputStream in) throws IOException {
+        this.envelopeSweeps = in.readInt();
+        this.envelopeSweepsLeft = in.readInt();
+        this.envelopeDirection = in.readInt();
+        this.isSmallStepWidth = in.readBoolean();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995462
+src/de/joergjahnke/gameboy/core/Cartridge.java 503 508
+src/de/joergjahnke/gameboy/core/WhiteNoiseChannel.java 144 149
+----------------------------------------
+        public void deserialize(final DataInputStream in) throws IOException {
+            this.areRAMWritesEnabled = in.readBoolean();
+            this.isROMBankingMode = in.readBoolean();
+            this.currentROMBank = in.readInt();
+            this.currentRAMBank = in.readInt();
+        }
+
+----------------------------------------
+    public void deserialize(final DataInputStream in) throws IOException {
+        this.envelopeSweeps = in.readInt();
+        this.envelopeSweepsLeft = in.readInt();
+        this.envelopeDirection = in.readInt();
+        this.isSmallStepWidth = in.readBoolean();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995451
+src/de/joergjahnke/gameboy/core/Sprite.java 283 290
+src/de/joergjahnke/gameboy/core/WhiteNoiseChannel.java 144 149
+----------------------------------------
+    public void deserialize(final DataInputStream in) throws IOException {
+        setTile(in.readInt());
+        this.attributes = in.readInt();
+        this.hasPriority = in.readBoolean();
+        this.x = in.readInt();
+        this.y = in.readInt();
+        this.isVisible = in.readBoolean();
+    }
+
+----------------------------------------
+    public void deserialize(final DataInputStream in) throws IOException {
+        this.envelopeSweeps = in.readInt();
+        this.envelopeSweepsLeft = in.readInt();
+        this.envelopeDirection = in.readInt();
+        this.isSmallStepWidth = in.readBoolean();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995452
+src/de/joergjahnke/gameboy/core/Cartridge.java 420 425
+src/de/joergjahnke/gameboy/core/ColorPalette.java 57 63
+----------------------------------------
+    public void serialize(final DataOutputStream out) throws IOException {
+        this.cartridgeImpl.serialize(out);
+        for (int i = 0; i < this.ramBanks.length; ++i) {
+            SerializationUtils.serialize(out, this.ramBanks[i]);
+        }
+    }
+
+----------------------------------------
+    public ColorPalette(final VideoChip video, final int color) {
+        this.video = video;
+        // initialize all colors with the given color
+        for (int i = 0; i < this.colors.length; ++i) {
+            this.colors[i] = color;
+        }
+    }
+
+----------------------------------------

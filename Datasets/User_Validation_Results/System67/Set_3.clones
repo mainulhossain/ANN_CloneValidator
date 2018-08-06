@@ -1,0 +1,1211 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995100
+src/de/joergjahnke/gameboy/core/VideoChip.java 730 736
+src/de/joergjahnke/gameboy/core/VideoChip.java 779 785
+----------------------------------------
+        if (scrollX != this.scrollX) {
+            if (DEBUG) {
+                System.out.println("Set x-scroll to " + scrollX + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.scrollX = scrollX;
+            invalidateLines();
+        }
+
+----------------------------------------
+        if (windowX != this.windowX) {
+            if (DEBUG) {
+                System.out.println("Set window x-position to " + windowX + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.windowX = windowX;
+            invalidateWindowLines();
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995095
+src/de/joergjahnke/gameboy/core/VideoChip.java 621 629
+src/de/joergjahnke/gameboy/core/VideoChip.java 779 785
+----------------------------------------
+    public final void setSpritesEnabled(final boolean areSpritesEnabled) {
+        if (areSpritesEnabled != this.areSpritesEnabled) {
+            if (DEBUG) {
+                System.out.println("Set sprite enable to " + areSpritesEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            invalidateLines();
+        }
+        this.areSpritesEnabled = areSpritesEnabled;
+    }
+
+----------------------------------------
+        if (windowX != this.windowX) {
+            if (DEBUG) {
+                System.out.println("Set window x-position to " + windowX + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.windowX = windowX;
+            invalidateWindowLines();
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995090
+src/de/joergjahnke/gameboy/core/VideoChip.java 754 760
+src/de/joergjahnke/gameboy/core/VideoChip.java 779 785
+----------------------------------------
+        if (scrollY != this.scrollY) {
+            if (DEBUG) {
+                System.out.println("Set y-scroll to " + scrollY + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.scrollY = scrollY;
+            invalidateLines();
+        }
+
+----------------------------------------
+        if (windowX != this.windowX) {
+            if (DEBUG) {
+                System.out.println("Set window x-position to " + windowX + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.windowX = windowX;
+            invalidateWindowLines();
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995092
+src/de/joergjahnke/gameboy/core/VideoChip.java 646 652
+src/de/joergjahnke/gameboy/core/VideoChip.java 779 785
+----------------------------------------
+        if (isBGBlank != this.isBGBlank) {
+            if (DEBUG) {
+                System.out.println("Set background enable to " + !isBGBlank + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.isBGBlank = isBGBlank;
+            invalidateLines();
+        }
+
+----------------------------------------
+        if (windowX != this.windowX) {
+            if (DEBUG) {
+                System.out.println("Set window x-position to " + windowX + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.windowX = windowX;
+            invalidateWindowLines();
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995091
+src/de/joergjahnke/gameboy/core/VideoChip.java 522 528
+src/de/joergjahnke/gameboy/core/VideoChip.java 779 785
+----------------------------------------
+        if (this.windowTileMapAdr != (windowTileMapAdr & 0x1fff)) {
+            if (DEBUG) {
+                System.out.println("Set window tile area to " + Integer.toHexString(windowTileMapAdr) + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.windowTileMapAdr = windowTileMapAdr & 0x1fff;
+            invalidateLines();
+        }
+
+----------------------------------------
+        if (windowX != this.windowX) {
+            if (DEBUG) {
+                System.out.println("Set window x-position to " + windowX + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.windowX = windowX;
+            invalidateWindowLines();
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995097
+src/de/joergjahnke/gameboy/core/VideoChip.java 562 568
+src/de/joergjahnke/gameboy/core/VideoChip.java 779 785
+----------------------------------------
+        if (vRAMBank != this.currentVRAMBank) {
+            if (DEBUG) {
+                System.out.println("Set VRAM bank to " + vRAMBank + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.currentVRAMBank = vRAMBank;
+            this.currentVRAMOffset = vRAMBank * GBCVRAM_BANK_SIZE;
+        }
+
+----------------------------------------
+        if (windowX != this.windowX) {
+            if (DEBUG) {
+                System.out.println("Set window x-position to " + windowX + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.windowX = windowX;
+            invalidateWindowLines();
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995089
+src/de/joergjahnke/gameboy/core/VideoChip.java 454 462
+src/de/joergjahnke/gameboy/core/VideoChip.java 779 785
+----------------------------------------
+        if (isLCDEnabled != this.isLCDEnabled) {
+            if (DEBUG) {
+                System.out.println("Set LCD enable to " + isLCDEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.isLCDEnabled = isLCDEnabled;
+            this.currentLine = 0;
+            setSpriteHeight(isLCDEnabled ? VideoChip.TILE_HEIGHT * 2 : VideoChip.TILE_HEIGHT);
+            invalidateLines();
+        }
+
+----------------------------------------
+        if (windowX != this.windowX) {
+            if (DEBUG) {
+                System.out.println("Set window x-position to " + windowX + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.windowX = windowX;
+            invalidateWindowLines();
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995017
+src/de/joergjahnke/gameboy/core/VideoChip.java 454 462
+src/de/joergjahnke/gameboy/core/VideoChip.java 753 761
+----------------------------------------
+        if (isLCDEnabled != this.isLCDEnabled) {
+            if (DEBUG) {
+                System.out.println("Set LCD enable to " + isLCDEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.isLCDEnabled = isLCDEnabled;
+            this.currentLine = 0;
+            setSpriteHeight(isLCDEnabled ? VideoChip.TILE_HEIGHT * 2 : VideoChip.TILE_HEIGHT);
+            invalidateLines();
+        }
+
+----------------------------------------
+    public final void setScrollY(final int scrollY) {
+        if (scrollY != this.scrollY) {
+            if (DEBUG) {
+                System.out.println("Set y-scroll to " + scrollY + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.scrollY = scrollY;
+            invalidateLines();
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995020
+src/de/joergjahnke/gameboy/core/VideoChip.java 479 490
+src/de/joergjahnke/gameboy/core/VideoChip.java 753 761
+----------------------------------------
+    public final void setWindowEnabled(final boolean isWindowEnabled) {
+        if (isWindowEnabled != this.isWindowEnabled) {
+            if (DEBUG) {
+                System.out.println("Set window enable to " + isWindowEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.isWindowEnabled = isWindowEnabled;
+            if (isWindowEnabled && this.windowLine == 0 && this.currentLine > getWindowY()) {
+                this.windowLine = SCREEN_HEIGHT;
+            }
+            invalidateLines();
+        }
+    }
+
+----------------------------------------
+    public final void setScrollY(final int scrollY) {
+        if (scrollY != this.scrollY) {
+            if (DEBUG) {
+                System.out.println("Set y-scroll to " + scrollY + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.scrollY = scrollY;
+            invalidateLines();
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995019
+src/de/joergjahnke/gameboy/core/VideoChip.java 645 653
+src/de/joergjahnke/gameboy/core/VideoChip.java 753 761
+----------------------------------------
+    public final void setBackgroundBlank(final boolean isBGBlank) {
+        if (isBGBlank != this.isBGBlank) {
+            if (DEBUG) {
+                System.out.println("Set background enable to " + !isBGBlank + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.isBGBlank = isBGBlank;
+            invalidateLines();
+        }
+    }
+
+----------------------------------------
+    public final void setScrollY(final int scrollY) {
+        if (scrollY != this.scrollY) {
+            if (DEBUG) {
+                System.out.println("Set y-scroll to " + scrollY + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.scrollY = scrollY;
+            invalidateLines();
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995053
+src/de/joergjahnke/gameboy/core/VideoChip.java 480 489
+src/de/joergjahnke/gameboy/core/VideoChip.java 753 761
+----------------------------------------
+        if (isWindowEnabled != this.isWindowEnabled) {
+            if (DEBUG) {
+                System.out.println("Set window enable to " + isWindowEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.isWindowEnabled = isWindowEnabled;
+            if (isWindowEnabled && this.windowLine == 0 && this.currentLine > getWindowY()) {
+                this.windowLine = SCREEN_HEIGHT;
+            }
+            invalidateLines();
+        }
+
+----------------------------------------
+    public final void setScrollY(final int scrollY) {
+        if (scrollY != this.scrollY) {
+            if (DEBUG) {
+                System.out.println("Set y-scroll to " + scrollY + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.scrollY = scrollY;
+            invalidateLines();
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995052
+src/de/joergjahnke/gameboy/core/VideoChip.java 730 736
+src/de/joergjahnke/gameboy/core/VideoChip.java 753 761
+----------------------------------------
+        if (scrollX != this.scrollX) {
+            if (DEBUG) {
+                System.out.println("Set x-scroll to " + scrollX + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.scrollX = scrollX;
+            invalidateLines();
+        }
+
+----------------------------------------
+    public final void setScrollY(final int scrollY) {
+        if (scrollY != this.scrollY) {
+            if (DEBUG) {
+                System.out.println("Set y-scroll to " + scrollY + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.scrollY = scrollY;
+            invalidateLines();
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995018
+src/de/joergjahnke/gameboy/core/VideoChip.java 561 569
+src/de/joergjahnke/gameboy/core/VideoChip.java 753 761
+----------------------------------------
+    public void setGBCVRAMBank(final int vRAMBank) {
+        if (vRAMBank != this.currentVRAMBank) {
+            if (DEBUG) {
+                System.out.println("Set VRAM bank to " + vRAMBank + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.currentVRAMBank = vRAMBank;
+            this.currentVRAMOffset = vRAMBank * GBCVRAM_BANK_SIZE;
+        }
+    }
+
+----------------------------------------
+    public final void setScrollY(final int scrollY) {
+        if (scrollY != this.scrollY) {
+            if (DEBUG) {
+                System.out.println("Set y-scroll to " + scrollY + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.scrollY = scrollY;
+            invalidateLines();
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995051
+src/de/joergjahnke/gameboy/core/VideoChip.java 729 737
+src/de/joergjahnke/gameboy/core/VideoChip.java 753 761
+----------------------------------------
+    public final void setScrollX(final int scrollX) {
+        if (scrollX != this.scrollX) {
+            if (DEBUG) {
+                System.out.println("Set x-scroll to " + scrollX + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.scrollX = scrollX;
+            invalidateLines();
+        }
+    }
+
+----------------------------------------
+    public final void setScrollY(final int scrollY) {
+        if (scrollY != this.scrollY) {
+            if (DEBUG) {
+                System.out.println("Set y-scroll to " + scrollY + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.scrollY = scrollY;
+            invalidateLines();
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+28734568
+src/de/joergjahnke/gameboy/core/VideoChip.java 522 528
+src/de/joergjahnke/gameboy/core/VideoChip.java 753 761
+----------------------------------------
+        if (this.windowTileMapAdr != (windowTileMapAdr & 0x1fff)) {
+            if (DEBUG) {
+                System.out.println("Set window tile area to " + Integer.toHexString(windowTileMapAdr) + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.windowTileMapAdr = windowTileMapAdr & 0x1fff;
+            invalidateLines();
+        }
+
+----------------------------------------
+    public final void setScrollY(final int scrollY) {
+        if (scrollY != this.scrollY) {
+            if (DEBUG) {
+                System.out.println("Set y-scroll to " + scrollY + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.scrollY = scrollY;
+            invalidateLines();
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995016
+src/de/joergjahnke/gameboy/core/VideoChip.java 453 463
+src/de/joergjahnke/gameboy/core/VideoChip.java 753 761
+----------------------------------------
+    public final void setLCDEnabled(final boolean isLCDEnabled) {
+        if (isLCDEnabled != this.isLCDEnabled) {
+            if (DEBUG) {
+                System.out.println("Set LCD enable to " + isLCDEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.isLCDEnabled = isLCDEnabled;
+            this.currentLine = 0;
+            setSpriteHeight(isLCDEnabled ? VideoChip.TILE_HEIGHT * 2 : VideoChip.TILE_HEIGHT);
+            invalidateLines();
+        }
+    }
+
+----------------------------------------
+    public final void setScrollY(final int scrollY) {
+        if (scrollY != this.scrollY) {
+            if (DEBUG) {
+                System.out.println("Set y-scroll to " + scrollY + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.scrollY = scrollY;
+            invalidateLines();
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995099
+src/de/joergjahnke/gameboy/core/VideoChip.java 779 785
+src/de/joergjahnke/gameboy/core/VideoChip.java 753 761
+----------------------------------------
+        if (windowX != this.windowX) {
+            if (DEBUG) {
+                System.out.println("Set window x-position to " + windowX + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.windowX = windowX;
+            invalidateWindowLines();
+        }
+
+----------------------------------------
+    public final void setScrollY(final int scrollY) {
+        if (scrollY != this.scrollY) {
+            if (DEBUG) {
+                System.out.println("Set y-scroll to " + scrollY + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.scrollY = scrollY;
+            invalidateLines();
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995054
+src/de/joergjahnke/gameboy/core/VideoChip.java 621 629
+src/de/joergjahnke/gameboy/core/VideoChip.java 753 761
+----------------------------------------
+    public final void setSpritesEnabled(final boolean areSpritesEnabled) {
+        if (areSpritesEnabled != this.areSpritesEnabled) {
+            if (DEBUG) {
+                System.out.println("Set sprite enable to " + areSpritesEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            invalidateLines();
+        }
+        this.areSpritesEnabled = areSpritesEnabled;
+    }
+
+----------------------------------------
+    public final void setScrollY(final int scrollY) {
+        if (scrollY != this.scrollY) {
+            if (DEBUG) {
+                System.out.println("Set y-scroll to " + scrollY + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.scrollY = scrollY;
+            invalidateLines();
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995055
+src/de/joergjahnke/gameboy/core/VideoChip.java 595 604
+src/de/joergjahnke/gameboy/core/VideoChip.java 753 761
+----------------------------------------
+        if (spriteSize != this.spriteHeight) {
+            if (DEBUG) {
+                System.out.println("Set sprite size to " + spriteSize + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.spriteHeight = spriteSize;
+            // we have to update the sprite tiles
+            for (int i = 0; i < this.sprites.length; ++i) {
+                this.sprites[i].updateTile();
+            }
+        }
+
+----------------------------------------
+    public final void setScrollY(final int scrollY) {
+        if (scrollY != this.scrollY) {
+            if (DEBUG) {
+                System.out.println("Set y-scroll to " + scrollY + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.scrollY = scrollY;
+            invalidateLines();
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995021
+src/de/joergjahnke/gameboy/core/VideoChip.java 826 831
+src/de/joergjahnke/common/android/OrientationSensorNotifier.java 52 61
+----------------------------------------
+    public void setFrameSkip(final int frameSkip) {
+        if (frameSkip < 1) {
+            throw new IllegalArgumentException("Frameskip value must be > 0!");
+        }
+        this.frameSkip = frameSkip;
+    }
+
+----------------------------------------
+	public OrientationSensorNotifier(final long delay) {
+		// verify whether we have an orientation sensor available
+		if(!isSupported()) {
+			throw new IllegalStateException("No orientation sensor available!");
+		}
+		
+		Sensors.enableSensor(Sensors.SENSOR_ORIENTATION);
+		
+		this.delay = delay;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995024
+src/de/joergjahnke/gameboy/core/VideoChip.java 804 809
+src/de/joergjahnke/gameboy/core/VideoChip.java 847 852
+----------------------------------------
+        if (windowY != this.windowY) {
+            if (DEBUG) {
+                System.out.println("Set window y-position to " + windowY + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.nextWindowY = windowY;
+        }
+
+----------------------------------------
+    public final void setHBlankIRQEnabled(final boolean isHBlankIRQEnabled) {
+        if (DEBUG && isHBlankIRQEnabled != this.isHBlankIRQEnabled) {
+            System.out.println("Set HBlank IRQ enable to " + isHBlankIRQEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+        }
+        this.isHBlankIRQEnabled = isHBlankIRQEnabled;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995027
+src/de/joergjahnke/gameboy/core/VideoChip.java 779 785
+src/de/joergjahnke/gameboy/core/VideoChip.java 847 852
+----------------------------------------
+        if (windowX != this.windowX) {
+            if (DEBUG) {
+                System.out.println("Set window x-position to " + windowX + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.windowX = windowX;
+            invalidateWindowLines();
+        }
+
+----------------------------------------
+    public final void setHBlankIRQEnabled(final boolean isHBlankIRQEnabled) {
+        if (DEBUG && isHBlankIRQEnabled != this.isHBlankIRQEnabled) {
+            System.out.println("Set HBlank IRQ enable to " + isHBlankIRQEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+        }
+        this.isHBlankIRQEnabled = isHBlankIRQEnabled;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995022
+src/de/joergjahnke/gameboy/core/VideoChip.java 562 568
+src/de/joergjahnke/gameboy/core/VideoChip.java 847 852
+----------------------------------------
+        if (vRAMBank != this.currentVRAMBank) {
+            if (DEBUG) {
+                System.out.println("Set VRAM bank to " + vRAMBank + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.currentVRAMBank = vRAMBank;
+            this.currentVRAMOffset = vRAMBank * GBCVRAM_BANK_SIZE;
+        }
+
+----------------------------------------
+    public final void setHBlankIRQEnabled(final boolean isHBlankIRQEnabled) {
+        if (DEBUG && isHBlankIRQEnabled != this.isHBlankIRQEnabled) {
+            System.out.println("Set HBlank IRQ enable to " + isHBlankIRQEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+        }
+        this.isHBlankIRQEnabled = isHBlankIRQEnabled;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995023
+src/de/joergjahnke/gameboy/core/VideoChip.java 730 736
+src/de/joergjahnke/gameboy/core/VideoChip.java 847 852
+----------------------------------------
+        if (scrollX != this.scrollX) {
+            if (DEBUG) {
+                System.out.println("Set x-scroll to " + scrollX + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.scrollX = scrollX;
+            invalidateLines();
+        }
+
+----------------------------------------
+    public final void setHBlankIRQEnabled(final boolean isHBlankIRQEnabled) {
+        if (DEBUG && isHBlankIRQEnabled != this.isHBlankIRQEnabled) {
+            System.out.println("Set HBlank IRQ enable to " + isHBlankIRQEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+        }
+        this.isHBlankIRQEnabled = isHBlankIRQEnabled;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995025
+src/de/joergjahnke/gameboy/core/VideoChip.java 754 760
+src/de/joergjahnke/gameboy/core/VideoChip.java 847 852
+----------------------------------------
+        if (scrollY != this.scrollY) {
+            if (DEBUG) {
+                System.out.println("Set y-scroll to " + scrollY + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.scrollY = scrollY;
+            invalidateLines();
+        }
+
+----------------------------------------
+    public final void setHBlankIRQEnabled(final boolean isHBlankIRQEnabled) {
+        if (DEBUG && isHBlankIRQEnabled != this.isHBlankIRQEnabled) {
+            System.out.println("Set HBlank IRQ enable to " + isHBlankIRQEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+        }
+        this.isHBlankIRQEnabled = isHBlankIRQEnabled;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995026
+src/de/joergjahnke/gameboy/core/VideoChip.java 669 674
+src/de/joergjahnke/gameboy/core/VideoChip.java 847 852
+----------------------------------------
+    public final void setHaveSpritesPriority(final boolean haveSpritesPriority) {
+        if (DEBUG && haveSpritesPriority != this.haveSpritesPriority) {
+            System.out.println("Set sprite priority enable to " + haveSpritesPriority + " at line " + this.currentLine + " of frame " + this.frames);
+        }
+        this.haveSpritesPriority = haveSpritesPriority;
+    }
+
+----------------------------------------
+    public final void setHBlankIRQEnabled(final boolean isHBlankIRQEnabled) {
+        if (DEBUG && isHBlankIRQEnabled != this.isHBlankIRQEnabled) {
+            System.out.println("Set HBlank IRQ enable to " + isHBlankIRQEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+        }
+        this.isHBlankIRQEnabled = isHBlankIRQEnabled;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995044
+src/de/joergjahnke/gameboy/core/VideoChip.java 847 852
+src/de/joergjahnke/gameboy/core/VideoChip.java 868 873
+----------------------------------------
+    public final void setHBlankIRQEnabled(final boolean isHBlankIRQEnabled) {
+        if (DEBUG && isHBlankIRQEnabled != this.isHBlankIRQEnabled) {
+            System.out.println("Set HBlank IRQ enable to " + isHBlankIRQEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+        }
+        this.isHBlankIRQEnabled = isHBlankIRQEnabled;
+    }
+
+----------------------------------------
+    public final void setVBlankIRQEnabled(final boolean isVBlankIRQEnabled) {
+        if (DEBUG && isVBlankIRQEnabled != this.isVBlankIRQEnabled) {
+            System.out.println("Set VBlank IRQ enable to " + isVBlankIRQEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+        }
+        this.isVBlankIRQEnabled = isVBlankIRQEnabled;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995043
+src/de/joergjahnke/gameboy/core/VideoChip.java 779 785
+src/de/joergjahnke/gameboy/core/VideoChip.java 868 873
+----------------------------------------
+        if (windowX != this.windowX) {
+            if (DEBUG) {
+                System.out.println("Set window x-position to " + windowX + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.windowX = windowX;
+            invalidateWindowLines();
+        }
+
+----------------------------------------
+    public final void setVBlankIRQEnabled(final boolean isVBlankIRQEnabled) {
+        if (DEBUG && isVBlankIRQEnabled != this.isVBlankIRQEnabled) {
+            System.out.println("Set VBlank IRQ enable to " + isVBlankIRQEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+        }
+        this.isVBlankIRQEnabled = isVBlankIRQEnabled;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995030
+src/de/joergjahnke/gameboy/core/VideoChip.java 804 809
+src/de/joergjahnke/gameboy/core/VideoChip.java 868 873
+----------------------------------------
+        if (windowY != this.windowY) {
+            if (DEBUG) {
+                System.out.println("Set window y-position to " + windowY + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.nextWindowY = windowY;
+        }
+
+----------------------------------------
+    public final void setVBlankIRQEnabled(final boolean isVBlankIRQEnabled) {
+        if (DEBUG && isVBlankIRQEnabled != this.isVBlankIRQEnabled) {
+            System.out.println("Set VBlank IRQ enable to " + isVBlankIRQEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+        }
+        this.isVBlankIRQEnabled = isVBlankIRQEnabled;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995029
+src/de/joergjahnke/gameboy/core/VideoChip.java 730 736
+src/de/joergjahnke/gameboy/core/VideoChip.java 868 873
+----------------------------------------
+        if (scrollX != this.scrollX) {
+            if (DEBUG) {
+                System.out.println("Set x-scroll to " + scrollX + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.scrollX = scrollX;
+            invalidateLines();
+        }
+
+----------------------------------------
+    public final void setVBlankIRQEnabled(final boolean isVBlankIRQEnabled) {
+        if (DEBUG && isVBlankIRQEnabled != this.isVBlankIRQEnabled) {
+            System.out.println("Set VBlank IRQ enable to " + isVBlankIRQEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+        }
+        this.isVBlankIRQEnabled = isVBlankIRQEnabled;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995028
+src/de/joergjahnke/gameboy/core/VideoChip.java 562 568
+src/de/joergjahnke/gameboy/core/VideoChip.java 868 873
+----------------------------------------
+        if (vRAMBank != this.currentVRAMBank) {
+            if (DEBUG) {
+                System.out.println("Set VRAM bank to " + vRAMBank + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.currentVRAMBank = vRAMBank;
+            this.currentVRAMOffset = vRAMBank * GBCVRAM_BANK_SIZE;
+        }
+
+----------------------------------------
+    public final void setVBlankIRQEnabled(final boolean isVBlankIRQEnabled) {
+        if (DEBUG && isVBlankIRQEnabled != this.isVBlankIRQEnabled) {
+            System.out.println("Set VBlank IRQ enable to " + isVBlankIRQEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+        }
+        this.isVBlankIRQEnabled = isVBlankIRQEnabled;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995041
+src/de/joergjahnke/gameboy/core/VideoChip.java 754 760
+src/de/joergjahnke/gameboy/core/VideoChip.java 868 873
+----------------------------------------
+        if (scrollY != this.scrollY) {
+            if (DEBUG) {
+                System.out.println("Set y-scroll to " + scrollY + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.scrollY = scrollY;
+            invalidateLines();
+        }
+
+----------------------------------------
+    public final void setVBlankIRQEnabled(final boolean isVBlankIRQEnabled) {
+        if (DEBUG && isVBlankIRQEnabled != this.isVBlankIRQEnabled) {
+            System.out.println("Set VBlank IRQ enable to " + isVBlankIRQEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+        }
+        this.isVBlankIRQEnabled = isVBlankIRQEnabled;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995042
+src/de/joergjahnke/gameboy/core/VideoChip.java 669 674
+src/de/joergjahnke/gameboy/core/VideoChip.java 868 873
+----------------------------------------
+    public final void setHaveSpritesPriority(final boolean haveSpritesPriority) {
+        if (DEBUG && haveSpritesPriority != this.haveSpritesPriority) {
+            System.out.println("Set sprite priority enable to " + haveSpritesPriority + " at line " + this.currentLine + " of frame " + this.frames);
+        }
+        this.haveSpritesPriority = haveSpritesPriority;
+    }
+
+----------------------------------------
+    public final void setVBlankIRQEnabled(final boolean isVBlankIRQEnabled) {
+        if (DEBUG && isVBlankIRQEnabled != this.isVBlankIRQEnabled) {
+            System.out.println("Set VBlank IRQ enable to " + isVBlankIRQEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+        }
+        this.isVBlankIRQEnabled = isVBlankIRQEnabled;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995046
+src/de/joergjahnke/gameboy/core/VideoChip.java 730 736
+src/de/joergjahnke/gameboy/core/VideoChip.java 889 894
+----------------------------------------
+        if (scrollX != this.scrollX) {
+            if (DEBUG) {
+                System.out.println("Set x-scroll to " + scrollX + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.scrollX = scrollX;
+            invalidateLines();
+        }
+
+----------------------------------------
+    public final void setOAMIRQEnabled(final boolean isOAMIRQEnabled) {
+        if (DEBUG && isOAMIRQEnabled != this.isOAMIRQEnabled) {
+            System.out.println("Set OAM IRQ enable to " + isOAMIRQEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+        }
+        this.isOAMIRQEnabled = isOAMIRQEnabled;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995062
+src/de/joergjahnke/gameboy/core/VideoChip.java 847 852
+src/de/joergjahnke/gameboy/core/VideoChip.java 889 894
+----------------------------------------
+    public final void setHBlankIRQEnabled(final boolean isHBlankIRQEnabled) {
+        if (DEBUG && isHBlankIRQEnabled != this.isHBlankIRQEnabled) {
+            System.out.println("Set HBlank IRQ enable to " + isHBlankIRQEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+        }
+        this.isHBlankIRQEnabled = isHBlankIRQEnabled;
+    }
+
+----------------------------------------
+    public final void setOAMIRQEnabled(final boolean isOAMIRQEnabled) {
+        if (DEBUG && isOAMIRQEnabled != this.isOAMIRQEnabled) {
+            System.out.println("Set OAM IRQ enable to " + isOAMIRQEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+        }
+        this.isOAMIRQEnabled = isOAMIRQEnabled;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995050
+src/de/joergjahnke/gameboy/core/VideoChip.java 669 674
+src/de/joergjahnke/gameboy/core/VideoChip.java 889 894
+----------------------------------------
+    public final void setHaveSpritesPriority(final boolean haveSpritesPriority) {
+        if (DEBUG && haveSpritesPriority != this.haveSpritesPriority) {
+            System.out.println("Set sprite priority enable to " + haveSpritesPriority + " at line " + this.currentLine + " of frame " + this.frames);
+        }
+        this.haveSpritesPriority = haveSpritesPriority;
+    }
+
+----------------------------------------
+    public final void setOAMIRQEnabled(final boolean isOAMIRQEnabled) {
+        if (DEBUG && isOAMIRQEnabled != this.isOAMIRQEnabled) {
+            System.out.println("Set OAM IRQ enable to " + isOAMIRQEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+        }
+        this.isOAMIRQEnabled = isOAMIRQEnabled;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995061
+src/de/joergjahnke/gameboy/core/VideoChip.java 779 785
+src/de/joergjahnke/gameboy/core/VideoChip.java 889 894
+----------------------------------------
+        if (windowX != this.windowX) {
+            if (DEBUG) {
+                System.out.println("Set window x-position to " + windowX + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.windowX = windowX;
+            invalidateWindowLines();
+        }
+
+----------------------------------------
+    public final void setOAMIRQEnabled(final boolean isOAMIRQEnabled) {
+        if (DEBUG && isOAMIRQEnabled != this.isOAMIRQEnabled) {
+            System.out.println("Set OAM IRQ enable to " + isOAMIRQEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+        }
+        this.isOAMIRQEnabled = isOAMIRQEnabled;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995045
+src/de/joergjahnke/gameboy/core/VideoChip.java 562 568
+src/de/joergjahnke/gameboy/core/VideoChip.java 889 894
+----------------------------------------
+        if (vRAMBank != this.currentVRAMBank) {
+            if (DEBUG) {
+                System.out.println("Set VRAM bank to " + vRAMBank + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.currentVRAMBank = vRAMBank;
+            this.currentVRAMOffset = vRAMBank * GBCVRAM_BANK_SIZE;
+        }
+
+----------------------------------------
+    public final void setOAMIRQEnabled(final boolean isOAMIRQEnabled) {
+        if (DEBUG && isOAMIRQEnabled != this.isOAMIRQEnabled) {
+            System.out.println("Set OAM IRQ enable to " + isOAMIRQEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+        }
+        this.isOAMIRQEnabled = isOAMIRQEnabled;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995049
+src/de/joergjahnke/gameboy/core/VideoChip.java 754 760
+src/de/joergjahnke/gameboy/core/VideoChip.java 889 894
+----------------------------------------
+        if (scrollY != this.scrollY) {
+            if (DEBUG) {
+                System.out.println("Set y-scroll to " + scrollY + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.scrollY = scrollY;
+            invalidateLines();
+        }
+
+----------------------------------------
+    public final void setOAMIRQEnabled(final boolean isOAMIRQEnabled) {
+        if (DEBUG && isOAMIRQEnabled != this.isOAMIRQEnabled) {
+            System.out.println("Set OAM IRQ enable to " + isOAMIRQEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+        }
+        this.isOAMIRQEnabled = isOAMIRQEnabled;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995048
+src/de/joergjahnke/gameboy/core/VideoChip.java 804 809
+src/de/joergjahnke/gameboy/core/VideoChip.java 889 894
+----------------------------------------
+        if (windowY != this.windowY) {
+            if (DEBUG) {
+                System.out.println("Set window y-position to " + windowY + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.nextWindowY = windowY;
+        }
+
+----------------------------------------
+    public final void setOAMIRQEnabled(final boolean isOAMIRQEnabled) {
+        if (DEBUG && isOAMIRQEnabled != this.isOAMIRQEnabled) {
+            System.out.println("Set OAM IRQ enable to " + isOAMIRQEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+        }
+        this.isOAMIRQEnabled = isOAMIRQEnabled;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995047
+src/de/joergjahnke/gameboy/core/VideoChip.java 868 873
+src/de/joergjahnke/gameboy/core/VideoChip.java 889 894
+----------------------------------------
+    public final void setVBlankIRQEnabled(final boolean isVBlankIRQEnabled) {
+        if (DEBUG && isVBlankIRQEnabled != this.isVBlankIRQEnabled) {
+            System.out.println("Set VBlank IRQ enable to " + isVBlankIRQEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+        }
+        this.isVBlankIRQEnabled = isVBlankIRQEnabled;
+    }
+
+----------------------------------------
+    public final void setOAMIRQEnabled(final boolean isOAMIRQEnabled) {
+        if (DEBUG && isOAMIRQEnabled != this.isOAMIRQEnabled) {
+            System.out.println("Set OAM IRQ enable to " + isOAMIRQEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+        }
+        this.isOAMIRQEnabled = isOAMIRQEnabled;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995064
+src/de/joergjahnke/gameboy/core/VideoChip.java 562 568
+src/de/joergjahnke/gameboy/core/VideoChip.java 910 915
+----------------------------------------
+        if (vRAMBank != this.currentVRAMBank) {
+            if (DEBUG) {
+                System.out.println("Set VRAM bank to " + vRAMBank + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.currentVRAMBank = vRAMBank;
+            this.currentVRAMOffset = vRAMBank * GBCVRAM_BANK_SIZE;
+        }
+
+----------------------------------------
+    public final void setCoincidenceIRQEnabled(final boolean isCoincidenceIRQEnabled) {
+        if (DEBUG && isCoincidenceIRQEnabled != this.isCoincidenceIRQEnabled) {
+            System.out.println("Set Coincidence IRQ enable to " + isCoincidenceIRQEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+        }
+        this.isCoincidenceIRQEnabled = isCoincidenceIRQEnabled;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995065
+src/de/joergjahnke/gameboy/core/VideoChip.java 730 736
+src/de/joergjahnke/gameboy/core/VideoChip.java 910 915
+----------------------------------------
+        if (scrollX != this.scrollX) {
+            if (DEBUG) {
+                System.out.println("Set x-scroll to " + scrollX + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.scrollX = scrollX;
+            invalidateLines();
+        }
+
+----------------------------------------
+    public final void setCoincidenceIRQEnabled(final boolean isCoincidenceIRQEnabled) {
+        if (DEBUG && isCoincidenceIRQEnabled != this.isCoincidenceIRQEnabled) {
+            System.out.println("Set Coincidence IRQ enable to " + isCoincidenceIRQEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+        }
+        this.isCoincidenceIRQEnabled = isCoincidenceIRQEnabled;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995141
+src/de/joergjahnke/gameboy/core/VideoChip.java 847 852
+src/de/joergjahnke/gameboy/core/VideoChip.java 910 915
+----------------------------------------
+    public final void setHBlankIRQEnabled(final boolean isHBlankIRQEnabled) {
+        if (DEBUG && isHBlankIRQEnabled != this.isHBlankIRQEnabled) {
+            System.out.println("Set HBlank IRQ enable to " + isHBlankIRQEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+        }
+        this.isHBlankIRQEnabled = isHBlankIRQEnabled;
+    }
+
+----------------------------------------
+    public final void setCoincidenceIRQEnabled(final boolean isCoincidenceIRQEnabled) {
+        if (DEBUG && isCoincidenceIRQEnabled != this.isCoincidenceIRQEnabled) {
+            System.out.println("Set Coincidence IRQ enable to " + isCoincidenceIRQEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+        }
+        this.isCoincidenceIRQEnabled = isCoincidenceIRQEnabled;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995070
+src/de/joergjahnke/gameboy/core/VideoChip.java 779 785
+src/de/joergjahnke/gameboy/core/VideoChip.java 910 915
+----------------------------------------
+        if (windowX != this.windowX) {
+            if (DEBUG) {
+                System.out.println("Set window x-position to " + windowX + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.windowX = windowX;
+            invalidateWindowLines();
+        }
+
+----------------------------------------
+    public final void setCoincidenceIRQEnabled(final boolean isCoincidenceIRQEnabled) {
+        if (DEBUG && isCoincidenceIRQEnabled != this.isCoincidenceIRQEnabled) {
+            System.out.println("Set Coincidence IRQ enable to " + isCoincidenceIRQEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+        }
+        this.isCoincidenceIRQEnabled = isCoincidenceIRQEnabled;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995068
+src/de/joergjahnke/gameboy/core/VideoChip.java 754 760
+src/de/joergjahnke/gameboy/core/VideoChip.java 910 915
+----------------------------------------
+        if (scrollY != this.scrollY) {
+            if (DEBUG) {
+                System.out.println("Set y-scroll to " + scrollY + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.scrollY = scrollY;
+            invalidateLines();
+        }
+
+----------------------------------------
+    public final void setCoincidenceIRQEnabled(final boolean isCoincidenceIRQEnabled) {
+        if (DEBUG && isCoincidenceIRQEnabled != this.isCoincidenceIRQEnabled) {
+            System.out.println("Set Coincidence IRQ enable to " + isCoincidenceIRQEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+        }
+        this.isCoincidenceIRQEnabled = isCoincidenceIRQEnabled;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995067
+src/de/joergjahnke/gameboy/core/VideoChip.java 804 809
+src/de/joergjahnke/gameboy/core/VideoChip.java 910 915
+----------------------------------------
+        if (windowY != this.windowY) {
+            if (DEBUG) {
+                System.out.println("Set window y-position to " + windowY + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.nextWindowY = windowY;
+        }
+
+----------------------------------------
+    public final void setCoincidenceIRQEnabled(final boolean isCoincidenceIRQEnabled) {
+        if (DEBUG && isCoincidenceIRQEnabled != this.isCoincidenceIRQEnabled) {
+            System.out.println("Set Coincidence IRQ enable to " + isCoincidenceIRQEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+        }
+        this.isCoincidenceIRQEnabled = isCoincidenceIRQEnabled;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995066
+src/de/joergjahnke/gameboy/core/VideoChip.java 868 873
+src/de/joergjahnke/gameboy/core/VideoChip.java 910 915
+----------------------------------------
+    public final void setVBlankIRQEnabled(final boolean isVBlankIRQEnabled) {
+        if (DEBUG && isVBlankIRQEnabled != this.isVBlankIRQEnabled) {
+            System.out.println("Set VBlank IRQ enable to " + isVBlankIRQEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+        }
+        this.isVBlankIRQEnabled = isVBlankIRQEnabled;
+    }
+
+----------------------------------------
+    public final void setCoincidenceIRQEnabled(final boolean isCoincidenceIRQEnabled) {
+        if (DEBUG && isCoincidenceIRQEnabled != this.isCoincidenceIRQEnabled) {
+            System.out.println("Set Coincidence IRQ enable to " + isCoincidenceIRQEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+        }
+        this.isCoincidenceIRQEnabled = isCoincidenceIRQEnabled;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995063
+src/de/joergjahnke/gameboy/core/VideoChip.java 889 894
+src/de/joergjahnke/gameboy/core/VideoChip.java 910 915
+----------------------------------------
+    public final void setOAMIRQEnabled(final boolean isOAMIRQEnabled) {
+        if (DEBUG && isOAMIRQEnabled != this.isOAMIRQEnabled) {
+            System.out.println("Set OAM IRQ enable to " + isOAMIRQEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+        }
+        this.isOAMIRQEnabled = isOAMIRQEnabled;
+    }
+
+----------------------------------------
+    public final void setCoincidenceIRQEnabled(final boolean isCoincidenceIRQEnabled) {
+        if (DEBUG && isCoincidenceIRQEnabled != this.isCoincidenceIRQEnabled) {
+            System.out.println("Set Coincidence IRQ enable to " + isCoincidenceIRQEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+        }
+        this.isCoincidenceIRQEnabled = isCoincidenceIRQEnabled;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995069
+src/de/joergjahnke/gameboy/core/VideoChip.java 669 674
+src/de/joergjahnke/gameboy/core/VideoChip.java 910 915
+----------------------------------------
+    public final void setHaveSpritesPriority(final boolean haveSpritesPriority) {
+        if (DEBUG && haveSpritesPriority != this.haveSpritesPriority) {
+            System.out.println("Set sprite priority enable to " + haveSpritesPriority + " at line " + this.currentLine + " of frame " + this.frames);
+        }
+        this.haveSpritesPriority = haveSpritesPriority;
+    }
+
+----------------------------------------
+    public final void setCoincidenceIRQEnabled(final boolean isCoincidenceIRQEnabled) {
+        if (DEBUG && isCoincidenceIRQEnabled != this.isCoincidenceIRQEnabled) {
+            System.out.println("Set Coincidence IRQ enable to " + isCoincidenceIRQEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+        }
+        this.isCoincidenceIRQEnabled = isCoincidenceIRQEnabled;
+    }
+
+----------------------------------------

@@ -1,0 +1,1450 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512810
+pdfsam-alternate-mix/src/main/java/org/pdfsam/alternatemix/AlternateMixModule.java 139 145
+pdfsam-merge/src/main/java/org/pdfsam/merge/MergeModule.java 104 111
+----------------------------------------
+    protected AlternateMixParametersBuilder getBuilder(Consumer<String> onError) {
+        AlternateMixParametersBuilder builder = new AlternateMixParametersBuilder();
+        selectionPane.apply(builder, onError);
+        destinationFileField.apply(builder, onError);
+        destinationPane.apply(builder, onError);
+        return builder;
+    }
+
+----------------------------------------
+    protected MergeParametersBuilder getBuilder(Consumer<String> onError) {
+        MergeParametersBuilder builder = new MergeParametersBuilder();
+        selectionPane.apply(builder, onError);
+        mergeOptions.apply(builder, onError);
+        destinationFileField.apply(builder, onError);
+        destinationPane.apply(builder, onError);
+        return builder;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512812
+pdfsam-extract/src/main/java/org/pdfsam/extract/ExtractModule.java 96 104
+pdfsam-merge/src/main/java/org/pdfsam/merge/MergeModule.java 104 111
+----------------------------------------
+    protected ExtractParametersBuilder getBuilder(Consumer<String> onError) {
+        ExtractParametersBuilder builder = new ExtractParametersBuilder();
+        extractOptions.apply(builder, onError);
+        selectionPane.apply(builder, onError);
+        destinationDirectoryField.apply(builder, onError);
+        destinationPane.apply(builder, onError);
+        prefix.apply(builder, onError);
+        return builder;
+    }
+
+----------------------------------------
+    protected MergeParametersBuilder getBuilder(Consumer<String> onError) {
+        MergeParametersBuilder builder = new MergeParametersBuilder();
+        selectionPane.apply(builder, onError);
+        mergeOptions.apply(builder, onError);
+        destinationFileField.apply(builder, onError);
+        destinationPane.apply(builder, onError);
+        return builder;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512811
+pdfsam-rotate/src/main/java/org/pdfsam/rotate/RotateModule.java 92 100
+pdfsam-merge/src/main/java/org/pdfsam/merge/MergeModule.java 104 111
+----------------------------------------
+    protected RotateParametersBuilder getBuilder(Consumer<String> onError) {
+        RotateParametersBuilder builder = new RotateParametersBuilder();
+        rotateOptions.apply(builder, onError);
+        selectionPane.apply(builder, onError);
+        destinationDirectoryField.apply(builder, onError);
+        destinationPane.apply(builder, onError);
+        prefix.apply(builder, onError);
+        return builder;
+    }
+
+----------------------------------------
+    protected MergeParametersBuilder getBuilder(Consumer<String> onError) {
+        MergeParametersBuilder builder = new MergeParametersBuilder();
+        selectionPane.apply(builder, onError);
+        mergeOptions.apply(builder, onError);
+        destinationFileField.apply(builder, onError);
+        destinationPane.apply(builder, onError);
+        return builder;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512813
+pdfsam-merge/src/main/java/org/pdfsam/merge/MergeModule.java 114 123
+pdfsam-alternate-mix/src/main/java/org/pdfsam/alternatemix/AlternateMixModule.java 117 125
+----------------------------------------
+    protected VBox getInnerPanel() {
+        VBox pane = new VBox();
+        pane.setAlignment(Pos.TOP_CENTER);
+        VBox.setVgrow(selectionPane, Priority.ALWAYS);
+
+        pane.getChildren().addAll(selectionPane,
+                titledPane(DefaultI18nContext.getInstance().i18n("Merge settings"), mergeOptions),
+                titledPane(DefaultI18nContext.getInstance().i18n("Destination file"), destinationPane));
+        return pane;
+    }
+
+----------------------------------------
+    protected VBox getInnerPanel() {
+        VBox pane = new VBox();
+        pane.setAlignment(Pos.TOP_CENTER);
+        VBox.setVgrow(selectionPane, Priority.ALWAYS);
+
+        pane.getChildren().addAll(selectionPane,
+                Views.titledPane(DefaultI18nContext.getInstance().i18n("Destination file"), destinationPane));
+        return pane;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512826
+pdfsam-alternate-mix/src/main/java/org/pdfsam/alternatemix/AlternateMixModule.java 117 125
+pdfsam-gui/src/main/java/org/pdfsam/ui/notification/NotificationsController.java 125 141
+----------------------------------------
+    protected VBox getInnerPanel() {
+        VBox pane = new VBox();
+        pane.setAlignment(Pos.TOP_CENTER);
+        VBox.setVgrow(selectionPane, Priority.ALWAYS);
+
+        pane.getChildren().addAll(selectionPane,
+                Views.titledPane(DefaultI18nContext.getInstance().i18n("Destination file"), destinationPane));
+        return pane;
+    }
+
+----------------------------------------
+    private void addShareNotification(long usages) {
+        Region spacer = new Region();
+        HBox.setHgrow(spacer, Priority.ALWAYS);
+        VBox content = new VBox(3,
+                buildLabel(DefaultI18nContext.getInstance().i18n("You performed {0} tasks with PDFsam, did it help?",
+                        Long.toString(usages)), NotificationType.SHARE),
+                new HBox(3, spacer,
+                        styledUrlButton(null, pdfsam.property(ConfigurableProperty.GPLUS_SHARE_URL),
+                                FontAwesomeIcon.GOOGLE_PLUS),
+                        styledUrlButton(null, pdfsam.property(ConfigurableProperty.FACEBOOK_SHARE_URL),
+                                FontAwesomeIcon.FACEBOOK),
+                        styledUrlButton(DefaultI18nContext.getInstance().i18n("Spread the word!"),
+                                pdfsam.property(ConfigurableProperty.TWEETER_SHARE_URL), FontAwesomeIcon.TWITTER)));
+        content.setAlignment(Pos.TOP_RIGHT);
+
+        container.addStickyNotification(DefaultI18nContext.getInstance().i18n("PDFsam worked hard!"), content);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512814
+pdfsam-merge/src/main/java/org/pdfsam/merge/MergeModule.java 114 123
+pdfsam-gui/src/main/java/org/pdfsam/ui/notification/NotificationsController.java 125 141
+----------------------------------------
+    protected VBox getInnerPanel() {
+        VBox pane = new VBox();
+        pane.setAlignment(Pos.TOP_CENTER);
+        VBox.setVgrow(selectionPane, Priority.ALWAYS);
+
+        pane.getChildren().addAll(selectionPane,
+                titledPane(DefaultI18nContext.getInstance().i18n("Merge settings"), mergeOptions),
+                titledPane(DefaultI18nContext.getInstance().i18n("Destination file"), destinationPane));
+        return pane;
+    }
+
+----------------------------------------
+    private void addShareNotification(long usages) {
+        Region spacer = new Region();
+        HBox.setHgrow(spacer, Priority.ALWAYS);
+        VBox content = new VBox(3,
+                buildLabel(DefaultI18nContext.getInstance().i18n("You performed {0} tasks with PDFsam, did it help?",
+                        Long.toString(usages)), NotificationType.SHARE),
+                new HBox(3, spacer,
+                        styledUrlButton(null, pdfsam.property(ConfigurableProperty.GPLUS_SHARE_URL),
+                                FontAwesomeIcon.GOOGLE_PLUS),
+                        styledUrlButton(null, pdfsam.property(ConfigurableProperty.FACEBOOK_SHARE_URL),
+                                FontAwesomeIcon.FACEBOOK),
+                        styledUrlButton(DefaultI18nContext.getInstance().i18n("Spread the word!"),
+                                pdfsam.property(ConfigurableProperty.TWEETER_SHARE_URL), FontAwesomeIcon.TWITTER)));
+        content.setAlignment(Pos.TOP_RIGHT);
+
+        container.addStickyNotification(DefaultI18nContext.getInstance().i18n("PDFsam worked hard!"), content);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512815
+pdfsam-split-by-bookmarks/src/main/java/org/pdfsam/splitbybookmarks/SplitByOutlineLevelParametersBuilder.java 44 56
+pdfsam-split-by-size/src/main/java/org/pdfsam/splitbysize/SplitBySizeParametersBuilder.java 39 50
+----------------------------------------
+    public SplitByOutlineLevelParameters build() {
+        SplitByOutlineLevelParameters params = new SplitByOutlineLevelParameters(level);
+        params.setCompress(isCompress());
+        params.setExistingOutputPolicy(existingOutput());
+        params.setVersion(getVersion());
+        params.setMatchingTitleRegEx(regexp);
+        params.setOutput(getOutput());
+        params.setOutputPrefix(getPrefix());
+        params.setSource(getSource());
+        params.setOptimizationPolicy(getOptimizationPolicy());
+        params.discardOutline(isDiscardBookmarks());
+        return params;
+    }
+
+----------------------------------------
+    public SplitBySizeParameters build() {
+        SplitBySizeParameters params = new SplitBySizeParameters(size);
+        params.setCompress(isCompress());
+        params.setExistingOutputPolicy(existingOutput());
+        params.setVersion(getVersion());
+        params.setOutput(getOutput());
+        params.setOutputPrefix(getPrefix());
+        params.setSource(getSource());
+        params.setOptimizationPolicy(getOptimizationPolicy());
+        params.discardOutline(isDiscardBookmarks());
+        return params;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512818
+pdfsam-core/src/main/java/org/pdfsam/support/LocaleKeyValueItem.java 65 74
+pdfsam-core/src/main/java/org/pdfsam/support/KeyStringValueItem.java 87 96
+----------------------------------------
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (!(other instanceof LocaleKeyValueItem)) {
+            return false;
+        }
+        LocaleKeyValueItem item = (LocaleKeyValueItem) other;
+        return new EqualsBuilder().append(getKey(), item.getKey()).isEquals();
+    }
+
+----------------------------------------
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (!(other instanceof KeyStringValueItem)) {
+            return false;
+        }
+        KeyStringValueItem<?> item = (KeyStringValueItem<?>) other;
+        return new EqualsBuilder().append(key, item.getKey()).isEquals();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512819
+pdfsam-core/src/main/java/org/pdfsam/ui/StageStatus.java 132 142
+pdfsam-core/src/main/java/org/pdfsam/support/KeyStringValueItem.java 87 96
+----------------------------------------
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (!(other instanceof StageStatus)) {
+            return false;
+        }
+        StageStatus item = (StageStatus) other;
+        return new EqualsBuilder().append(x, item.getX()).append(y, item.getY()).append(width, item.getWidth())
+                .append(height, item.getHeight()).append(mode, item.getMode()).isEquals();
+    }
+
+----------------------------------------
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (!(other instanceof KeyStringValueItem)) {
+            return false;
+        }
+        KeyStringValueItem<?> item = (KeyStringValueItem<?>) other;
+        return new EqualsBuilder().append(key, item.getKey()).isEquals();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512820
+pdfsam-core/src/main/java/org/pdfsam/support/validation/PositiveIntegerStringValidator.java 30 37
+pdfsam-core/src/main/java/org/pdfsam/support/params/ConversionUtils.java 82 88
+----------------------------------------
+    public boolean isValid(String input) {
+        try {
+            return Integer.parseInt(input) > 0;
+        } catch (NumberFormatException e) {
+            // not a valid integer
+            return false;
+        }
+    }
+
+----------------------------------------
+    private static int parsePageNumber(String value) throws ConversionException {
+        try {
+            return Integer.parseInt(value.trim());
+        } catch (NumberFormatException nfe) {
+            throw new ConversionException(DefaultI18nContext.getInstance().i18n("Invalid number: {0}.", value));
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512821
+pdfsam-core/src/main/java/org/pdfsam/support/filter/FileFilterType.java 80 86
+pdfsam-core/src/main/java/org/pdfsam/support/params/ConversionUtils.java 82 88
+----------------------------------------
+    public boolean isValid(String input) {
+        try {
+            return StringUtils.isNotBlank(input) && accept(Paths.get(input).toFile());
+        } catch (InvalidPathException ipe) {
+            return false;
+        }
+    }
+
+----------------------------------------
+    private static int parsePageNumber(String value) throws ConversionException {
+        try {
+            return Integer.parseInt(value.trim());
+        } catch (NumberFormatException nfe) {
+            throw new ConversionException(DefaultI18nContext.getInstance().i18n("Invalid number: {0}.", value));
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512824
+pdfsam-core/src/main/java/org/pdfsam/ui/StageStatus.java 132 142
+pdfsam-core/src/main/java/org/pdfsam/task/BulkRotateParameters.java 89 99
+----------------------------------------
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (!(other instanceof StageStatus)) {
+            return false;
+        }
+        StageStatus item = (StageStatus) other;
+        return new EqualsBuilder().append(x, item.getX()).append(y, item.getY()).append(width, item.getWidth())
+                .append(height, item.getHeight()).append(mode, item.getMode()).isEquals();
+    }
+
+----------------------------------------
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (!(other instanceof BulkRotateParameters)) {
+            return false;
+        }
+        BulkRotateParameters params = (BulkRotateParameters) other;
+        return new EqualsBuilder().appendSuper(super.equals(other)).append(outputPrefix, params.outputPrefix)
+                .append(inputSet, params.inputSet).append(output, params.output).isEquals();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512822
+pdfsam-core/src/main/java/org/pdfsam/support/KeyStringValueItem.java 87 96
+pdfsam-core/src/main/java/org/pdfsam/task/BulkRotateParameters.java 89 99
+----------------------------------------
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (!(other instanceof KeyStringValueItem)) {
+            return false;
+        }
+        KeyStringValueItem<?> item = (KeyStringValueItem<?>) other;
+        return new EqualsBuilder().append(key, item.getKey()).isEquals();
+    }
+
+----------------------------------------
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (!(other instanceof BulkRotateParameters)) {
+            return false;
+        }
+        BulkRotateParameters params = (BulkRotateParameters) other;
+        return new EqualsBuilder().appendSuper(super.equals(other)).append(outputPrefix, params.outputPrefix)
+                .append(inputSet, params.inputSet).append(output, params.output).isEquals();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512823
+pdfsam-core/src/main/java/org/pdfsam/support/LocaleKeyValueItem.java 65 74
+pdfsam-core/src/main/java/org/pdfsam/task/BulkRotateParameters.java 89 99
+----------------------------------------
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (!(other instanceof LocaleKeyValueItem)) {
+            return false;
+        }
+        LocaleKeyValueItem item = (LocaleKeyValueItem) other;
+        return new EqualsBuilder().append(getKey(), item.getKey()).isEquals();
+    }
+
+----------------------------------------
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (!(other instanceof BulkRotateParameters)) {
+            return false;
+        }
+        BulkRotateParameters params = (BulkRotateParameters) other;
+        return new EqualsBuilder().appendSuper(super.equals(other)).append(outputPrefix, params.outputPrefix)
+                .append(inputSet, params.inputSet).append(output, params.output).isEquals();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512825
+pdfsam-alternate-mix/src/main/java/org/pdfsam/alternatemix/AlternateMixModule.java 75 80
+pdfsam-core/src/main/java/org/pdfsam/support/validation/PositiveIntRangeStringValidator.java 34 39
+----------------------------------------
+            @Named(MODULE_ID + "pane") PdfDestinationPane destinationPane, @Named(MODULE_ID + "footer") Footer footer) {
+        super(footer);
+        this.destinationFileField = destinationFileField;
+        this.destinationPane = destinationPane;
+
+    }
+
+----------------------------------------
+    public PositiveIntRangeStringValidator(int lower, int upper) {
+        require(lower > 0 && upper > 0,
+                "Lower and upper limit cannot be negative numbers, lower=" + lower + " upper=" + upper);
+        this.upper = upper;
+        this.lower = lower;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512828
+pdfsam-gui/src/main/java/org/pdfsam/ui/dialog/OverwriteDialogController.java 73 85
+pdfsam-gui/src/main/java/org/pdfsam/ui/dialog/OverwriteDialogController.java 89 103
+----------------------------------------
+                        if (isNotEmpty(output.getDestination().listFiles())) {
+                            if (!dialog.title(DefaultI18nContext.getInstance().i18n("Directory not empty"))
+                                    .messageTitle(DefaultI18nContext.getInstance()
+                                            .i18n("The selected directory is not empty"))
+                                    .messageContent(DefaultI18nContext.getInstance()
+                                            .i18n("Overwrite files with the same name as the generated ones?"))
+                                    .response()) {
+                                throw new BroadcastInterruptionException(
+                                        DefaultI18nContext.getInstance().i18n("Don't overwrite existing file"));
+                            }
+                            LOG.trace("Enabling overwrite of the existing output file");
+                            params.setExistingOutputPolicy(ExistingOutputPolicy.OVERWRITE);
+                        }
+
+----------------------------------------
+                    public void dispatch(FileTaskOutput output) {
+                        if (output.getDestination().exists()) {
+                            if (!dialog.title(DefaultI18nContext.getInstance().i18n("Overwrite confirmation"))
+                                    .messageTitle(DefaultI18nContext.getInstance()
+                                            .i18n("A file with the given name already exists"))
+                                    .messageContent(
+                                            DefaultI18nContext.getInstance().i18n("Do you want to overwrite it?"))
+                                    .response()) {
+                                throw new BroadcastInterruptionException(
+                                        DefaultI18nContext.getInstance().i18n("Don't overwrite existing file"));
+                            }
+                            LOG.trace("Enabling overwrite of the existing output file");
+                            params.setExistingOutputPolicy(ExistingOutputPolicy.OVERWRITE);
+                        }
+                    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512829
+pdfsam-gui/src/main/java/org/pdfsam/ui/dialog/OverwriteDialogController.java 89 103
+pdfsam-gui/src/main/java/org/pdfsam/ui/dialog/OverwriteDialogController.java 72 86
+----------------------------------------
+                    public void dispatch(FileTaskOutput output) {
+                        if (output.getDestination().exists()) {
+                            if (!dialog.title(DefaultI18nContext.getInstance().i18n("Overwrite confirmation"))
+                                    .messageTitle(DefaultI18nContext.getInstance()
+                                            .i18n("A file with the given name already exists"))
+                                    .messageContent(
+                                            DefaultI18nContext.getInstance().i18n("Do you want to overwrite it?"))
+                                    .response()) {
+                                throw new BroadcastInterruptionException(
+                                        DefaultI18nContext.getInstance().i18n("Don't overwrite existing file"));
+                            }
+                            LOG.trace("Enabling overwrite of the existing output file");
+                            params.setExistingOutputPolicy(ExistingOutputPolicy.OVERWRITE);
+                        }
+                    }
+
+----------------------------------------
+                    public void dispatch(DirectoryTaskOutput output) {
+                        if (isNotEmpty(output.getDestination().listFiles())) {
+                            if (!dialog.title(DefaultI18nContext.getInstance().i18n("Directory not empty"))
+                                    .messageTitle(DefaultI18nContext.getInstance()
+                                            .i18n("The selected directory is not empty"))
+                                    .messageContent(DefaultI18nContext.getInstance()
+                                            .i18n("Overwrite files with the same name as the generated ones?"))
+                                    .response()) {
+                                throw new BroadcastInterruptionException(
+                                        DefaultI18nContext.getInstance().i18n("Don't overwrite existing file"));
+                            }
+                            LOG.trace("Enabling overwrite of the existing output file");
+                            params.setExistingOutputPolicy(ExistingOutputPolicy.OVERWRITE);
+                        }
+                    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512830
+pdfsam-gui/src/main/java/org/pdfsam/ui/dialog/OverwriteDialogController.java 73 85
+pdfsam-gui/src/main/java/org/pdfsam/ui/dialog/OverwriteDialogController.java 90 102
+----------------------------------------
+                        if (isNotEmpty(output.getDestination().listFiles())) {
+                            if (!dialog.title(DefaultI18nContext.getInstance().i18n("Directory not empty"))
+                                    .messageTitle(DefaultI18nContext.getInstance()
+                                            .i18n("The selected directory is not empty"))
+                                    .messageContent(DefaultI18nContext.getInstance()
+                                            .i18n("Overwrite files with the same name as the generated ones?"))
+                                    .response()) {
+                                throw new BroadcastInterruptionException(
+                                        DefaultI18nContext.getInstance().i18n("Don't overwrite existing file"));
+                            }
+                            LOG.trace("Enabling overwrite of the existing output file");
+                            params.setExistingOutputPolicy(ExistingOutputPolicy.OVERWRITE);
+                        }
+
+----------------------------------------
+                        if (output.getDestination().exists()) {
+                            if (!dialog.title(DefaultI18nContext.getInstance().i18n("Overwrite confirmation"))
+                                    .messageTitle(DefaultI18nContext.getInstance()
+                                            .i18n("A file with the given name already exists"))
+                                    .messageContent(
+                                            DefaultI18nContext.getInstance().i18n("Do you want to overwrite it?"))
+                                    .response()) {
+                                throw new BroadcastInterruptionException(
+                                        DefaultI18nContext.getInstance().i18n("Don't overwrite existing file"));
+                            }
+                            LOG.trace("Enabling overwrite of the existing output file");
+                            params.setExistingOutputPolicy(ExistingOutputPolicy.OVERWRITE);
+                        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512831
+pdfsam-gui/src/main/java/org/pdfsam/ui/dialog/OverwriteDialogController.java 72 86
+pdfsam-gui/src/main/java/org/pdfsam/ui/dialog/OverwriteDialogController.java 90 102
+----------------------------------------
+                    public void dispatch(DirectoryTaskOutput output) {
+                        if (isNotEmpty(output.getDestination().listFiles())) {
+                            if (!dialog.title(DefaultI18nContext.getInstance().i18n("Directory not empty"))
+                                    .messageTitle(DefaultI18nContext.getInstance()
+                                            .i18n("The selected directory is not empty"))
+                                    .messageContent(DefaultI18nContext.getInstance()
+                                            .i18n("Overwrite files with the same name as the generated ones?"))
+                                    .response()) {
+                                throw new BroadcastInterruptionException(
+                                        DefaultI18nContext.getInstance().i18n("Don't overwrite existing file"));
+                            }
+                            LOG.trace("Enabling overwrite of the existing output file");
+                            params.setExistingOutputPolicy(ExistingOutputPolicy.OVERWRITE);
+                        }
+                    }
+
+----------------------------------------
+                        if (output.getDestination().exists()) {
+                            if (!dialog.title(DefaultI18nContext.getInstance().i18n("Overwrite confirmation"))
+                                    .messageTitle(DefaultI18nContext.getInstance()
+                                            .i18n("A file with the given name already exists"))
+                                    .messageContent(
+                                            DefaultI18nContext.getInstance().i18n("Do you want to overwrite it?"))
+                                    .response()) {
+                                throw new BroadcastInterruptionException(
+                                        DefaultI18nContext.getInstance().i18n("Don't overwrite existing file"));
+                            }
+                            LOG.trace("Enabling overwrite of the existing output file");
+                            params.setExistingOutputPolicy(ExistingOutputPolicy.OVERWRITE);
+                        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512834
+pdfsam-rotate/src/main/java/org/pdfsam/rotate/RotateModule.java 121 136
+pdfsam-extract/src/main/java/org/pdfsam/extract/ExtractModule.java 130 144
+----------------------------------------
+    protected VBox getInnerPanel() {
+        VBox pane = new VBox();
+        pane.setAlignment(Pos.TOP_CENTER);
+        VBox.setVgrow(selectionPane, Priority.ALWAYS);
+
+        TitledPane prefixTitled = Views.titledPane(DefaultI18nContext.getInstance().i18n("File names settings"),
+                prefix);
+        prefix.addMenuItemFor(Prefix.FILENUMBER);
+
+        TitledPane options = Views.titledPane(DefaultI18nContext.getInstance().i18n("Rotate settings"), rotateOptions);
+
+        pane.getChildren().addAll(selectionPane, options,
+                Views.titledPane(DefaultI18nContext.getInstance().i18n("Output settings"), destinationPane),
+                prefixTitled);
+        return pane;
+    }
+
+----------------------------------------
+    protected VBox getInnerPanel() {
+        VBox pane = new VBox();
+        pane.setAlignment(Pos.TOP_CENTER);
+        VBox.setVgrow(selectionPane, Priority.ALWAYS);
+
+        TitledPane prefixTitled = Views.titledPane(DefaultI18nContext.getInstance().i18n("File names settings"),
+                prefix);
+        prefix.addMenuItemFor(Prefix.FILENUMBER);
+
+        pane.getChildren().addAll(selectionPane,
+                titledPane(DefaultI18nContext.getInstance().i18n("Extract settings"), extractOptions),
+                titledPane(DefaultI18nContext.getInstance().i18n("Output settings"), destinationPane),
+                prefixTitled);
+        return pane;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512843
+pdfsam-merge/src/main/java/org/pdfsam/merge/MergeModule.java 104 111
+pdfsam-split-by-size/src/main/java/org/pdfsam/splitbysize/SplitBySizeModule.java 116 124
+----------------------------------------
+    protected MergeParametersBuilder getBuilder(Consumer<String> onError) {
+        MergeParametersBuilder builder = new MergeParametersBuilder();
+        selectionPane.apply(builder, onError);
+        mergeOptions.apply(builder, onError);
+        destinationFileField.apply(builder, onError);
+        destinationPane.apply(builder, onError);
+        return builder;
+    }
+
+----------------------------------------
+    protected Builder<SplitBySizeParameters> getBuilder(Consumer<String> onError) {
+        SplitBySizeParametersBuilder builder = new SplitBySizeParametersBuilder();
+        splitOptions.apply(builder, onError);
+        selectionPane.apply(builder, onError);
+        destinationDirectoryField.apply(builder, onError);
+        destinationPane.apply(builder, onError);
+        prefix.apply(builder, onError);
+        return builder;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512840
+pdfsam-alternate-mix/src/main/java/org/pdfsam/alternatemix/AlternateMixModule.java 139 145
+pdfsam-split-by-size/src/main/java/org/pdfsam/splitbysize/SplitBySizeModule.java 116 124
+----------------------------------------
+    protected AlternateMixParametersBuilder getBuilder(Consumer<String> onError) {
+        AlternateMixParametersBuilder builder = new AlternateMixParametersBuilder();
+        selectionPane.apply(builder, onError);
+        destinationFileField.apply(builder, onError);
+        destinationPane.apply(builder, onError);
+        return builder;
+    }
+
+----------------------------------------
+    protected Builder<SplitBySizeParameters> getBuilder(Consumer<String> onError) {
+        SplitBySizeParametersBuilder builder = new SplitBySizeParametersBuilder();
+        splitOptions.apply(builder, onError);
+        selectionPane.apply(builder, onError);
+        destinationDirectoryField.apply(builder, onError);
+        destinationPane.apply(builder, onError);
+        prefix.apply(builder, onError);
+        return builder;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512841
+pdfsam-rotate/src/main/java/org/pdfsam/rotate/RotateModule.java 92 100
+pdfsam-split-by-size/src/main/java/org/pdfsam/splitbysize/SplitBySizeModule.java 116 124
+----------------------------------------
+    protected RotateParametersBuilder getBuilder(Consumer<String> onError) {
+        RotateParametersBuilder builder = new RotateParametersBuilder();
+        rotateOptions.apply(builder, onError);
+        selectionPane.apply(builder, onError);
+        destinationDirectoryField.apply(builder, onError);
+        destinationPane.apply(builder, onError);
+        prefix.apply(builder, onError);
+        return builder;
+    }
+
+----------------------------------------
+    protected Builder<SplitBySizeParameters> getBuilder(Consumer<String> onError) {
+        SplitBySizeParametersBuilder builder = new SplitBySizeParametersBuilder();
+        splitOptions.apply(builder, onError);
+        selectionPane.apply(builder, onError);
+        destinationDirectoryField.apply(builder, onError);
+        destinationPane.apply(builder, onError);
+        prefix.apply(builder, onError);
+        return builder;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512842
+pdfsam-extract/src/main/java/org/pdfsam/extract/ExtractModule.java 96 104
+pdfsam-split-by-size/src/main/java/org/pdfsam/splitbysize/SplitBySizeModule.java 116 124
+----------------------------------------
+    protected ExtractParametersBuilder getBuilder(Consumer<String> onError) {
+        ExtractParametersBuilder builder = new ExtractParametersBuilder();
+        extractOptions.apply(builder, onError);
+        selectionPane.apply(builder, onError);
+        destinationDirectoryField.apply(builder, onError);
+        destinationPane.apply(builder, onError);
+        prefix.apply(builder, onError);
+        return builder;
+    }
+
+----------------------------------------
+    protected Builder<SplitBySizeParameters> getBuilder(Consumer<String> onError) {
+        SplitBySizeParametersBuilder builder = new SplitBySizeParametersBuilder();
+        splitOptions.apply(builder, onError);
+        selectionPane.apply(builder, onError);
+        destinationDirectoryField.apply(builder, onError);
+        destinationPane.apply(builder, onError);
+        prefix.apply(builder, onError);
+        return builder;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512844
+pdfsam-rotate/src/main/java/org/pdfsam/rotate/RotateModule.java 121 136
+pdfsam-split-by-size/src/main/java/org/pdfsam/splitbysize/SplitBySizeModule.java 127 141
+----------------------------------------
+    protected VBox getInnerPanel() {
+        VBox pane = new VBox();
+        pane.setAlignment(Pos.TOP_CENTER);
+        VBox.setVgrow(selectionPane, Priority.ALWAYS);
+
+        TitledPane prefixTitled = Views.titledPane(DefaultI18nContext.getInstance().i18n("File names settings"),
+                prefix);
+        prefix.addMenuItemFor(Prefix.FILENUMBER);
+
+        TitledPane options = Views.titledPane(DefaultI18nContext.getInstance().i18n("Rotate settings"), rotateOptions);
+
+        pane.getChildren().addAll(selectionPane, options,
+                Views.titledPane(DefaultI18nContext.getInstance().i18n("Output settings"), destinationPane),
+                prefixTitled);
+        return pane;
+    }
+
+----------------------------------------
+    protected VBox getInnerPanel() {
+        VBox pane = new VBox();
+        pane.setAlignment(Pos.TOP_CENTER);
+
+        TitledPane prefixTitled = Views.titledPane(DefaultI18nContext.getInstance().i18n("File names settings"),
+                prefix);
+        prefix.addMenuItemFor(Prefix.CURRENTPAGE);
+        prefix.addMenuItemFor(Prefix.FILENUMBER);
+
+        pane.getChildren().addAll(selectionPane,
+                Views.titledPane(DefaultI18nContext.getInstance().i18n("Split settings"), splitOptions),
+                Views.titledPane(DefaultI18nContext.getInstance().i18n("Output settings"), destinationPane),
+                prefixTitled);
+        return pane;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512845
+pdfsam-extract/src/main/java/org/pdfsam/extract/ExtractModule.java 130 144
+pdfsam-split-by-size/src/main/java/org/pdfsam/splitbysize/SplitBySizeModule.java 127 141
+----------------------------------------
+    protected VBox getInnerPanel() {
+        VBox pane = new VBox();
+        pane.setAlignment(Pos.TOP_CENTER);
+        VBox.setVgrow(selectionPane, Priority.ALWAYS);
+
+        TitledPane prefixTitled = Views.titledPane(DefaultI18nContext.getInstance().i18n("File names settings"),
+                prefix);
+        prefix.addMenuItemFor(Prefix.FILENUMBER);
+
+        pane.getChildren().addAll(selectionPane,
+                titledPane(DefaultI18nContext.getInstance().i18n("Extract settings"), extractOptions),
+                titledPane(DefaultI18nContext.getInstance().i18n("Output settings"), destinationPane),
+                prefixTitled);
+        return pane;
+    }
+
+----------------------------------------
+    protected VBox getInnerPanel() {
+        VBox pane = new VBox();
+        pane.setAlignment(Pos.TOP_CENTER);
+
+        TitledPane prefixTitled = Views.titledPane(DefaultI18nContext.getInstance().i18n("File names settings"),
+                prefix);
+        prefix.addMenuItemFor(Prefix.CURRENTPAGE);
+        prefix.addMenuItemFor(Prefix.FILENUMBER);
+
+        pane.getChildren().addAll(selectionPane,
+                Views.titledPane(DefaultI18nContext.getInstance().i18n("Split settings"), splitOptions),
+                Views.titledPane(DefaultI18nContext.getInstance().i18n("Output settings"), destinationPane),
+                prefixTitled);
+        return pane;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512846
+pdfsam-core/src/main/java/org/pdfsam/context/DefaultUserContext.java 124 132
+pdfsam-service/src/main/java/org/pdfsam/ui/DefaultStageService.java 48 56
+----------------------------------------
+    public void clear() {
+        try {
+            prefs.removeNode();
+            prefs.flush();
+            initNode();
+        } catch (BackingStoreException e) {
+            LOG.error("Unable to clear user preferences", e);
+        }
+    }
+
+----------------------------------------
+    public void save(StageStatus status) {
+        Preferences node = Preferences.userRoot().node(STAGE_PATH);
+        try {
+            node.put(STAGE_STATUS_KEY, JSON.std.asString(status));
+            LOG.trace("Stage status saved {}", status);
+        } catch (IOException e) {
+            LOG.error("Unable to increment modules usage statistics", e);
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512847
+pdfsam-core/src/main/java/org/pdfsam/context/DefaultUserContext.java 124 132
+pdfsam-service/src/main/java/org/pdfsam/ui/DefaultStageService.java 73 81
+----------------------------------------
+    public void clear() {
+        try {
+            prefs.removeNode();
+            prefs.flush();
+            initNode();
+        } catch (BackingStoreException e) {
+            LOG.error("Unable to clear user preferences", e);
+        }
+    }
+
+----------------------------------------
+    public void clear() {
+        Preferences prefs = Preferences.userRoot().node(STAGE_PATH);
+        try {
+            prefs.removeNode();
+            prefs.flush();
+        } catch (BackingStoreException e) {
+            LOG.error("Unable to clear stage status", e);
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512848
+pdfsam-service/src/main/java/org/pdfsam/ui/DefaultStageService.java 48 56
+pdfsam-service/src/main/java/org/pdfsam/ui/DefaultStageService.java 73 81
+----------------------------------------
+    public void save(StageStatus status) {
+        Preferences node = Preferences.userRoot().node(STAGE_PATH);
+        try {
+            node.put(STAGE_STATUS_KEY, JSON.std.asString(status));
+            LOG.trace("Stage status saved {}", status);
+        } catch (IOException e) {
+            LOG.error("Unable to increment modules usage statistics", e);
+        }
+    }
+
+----------------------------------------
+    public void clear() {
+        Preferences prefs = Preferences.userRoot().node(STAGE_PATH);
+        try {
+            prefs.removeNode();
+            prefs.flush();
+        } catch (BackingStoreException e) {
+            LOG.error("Unable to clear stage status", e);
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512849
+pdfsam-service/src/main/java/org/pdfsam/update/DefaultUpdateService.java 53 60
+pdfsam-service/src/main/java/org/pdfsam/news/DefaultNewsService.java 60 68
+----------------------------------------
+    public String getLatestVersion() {
+        try {
+            return JSON.std.mapFrom(jsonSource).getOrDefault(CURRENT_VERSION_KEY, "").toString();
+        } catch (IOException e) {
+            LOG.warn(DefaultI18nContext.getInstance().i18n("Unable to find the latest available version."), e);
+        }
+        return EMPTY;
+    }
+
+----------------------------------------
+    public List<NewsData> getLatestNews() {
+        try {
+            return JSON.std.with(Feature.READ_ONLY, true).listOfFrom(NewsData.class,
+                    new URL(pdfsam.property(ConfigurableProperty.NEWS_URL)));
+        } catch (IOException e) {
+            LOG.warn(DefaultI18nContext.getInstance().i18n("Unable to retrieve latest news"), e);
+        }
+        return Collections.emptyList();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512851
+pdfsam-fx/src/main/java/org/pdfsam/ui/io/BrowsablePdfInputField.java 52 59
+pdfsam-fx/src/main/java/org/pdfsam/ui/io/BrowsablePdfOutputField.java 47 54
+----------------------------------------
+    public void apply(SinglePdfSourceTaskParametersBuilder<?> builder, Consumer<String> onError) {
+        getTextField().validate();
+        if (getTextField().getValidationState() == ValidationState.VALID) {
+            builder.source(new PdfFileSourceAdapter(getTextField().getText()).getPdfFileSource());
+        } else {
+            onError.accept(DefaultI18nContext.getInstance().i18n("The selected PDF file is invalid"));
+        }
+    }
+
+----------------------------------------
+    public void apply(SingleOutputTaskParametersBuilder<?> builder, Consumer<String> onError) {
+        getTextField().validate();
+        if (getTextField().getValidationState() == ValidationState.VALID) {
+            builder.output(new FileOutputAdapter(getTextField().getText()).getFileOutput());
+        } else {
+            onError.accept(DefaultI18nContext.getInstance().i18n("The selected PDF file is invalid"));
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512852
+pdfsam-service/src/main/java/org/pdfsam/ui/DefaultStageService.java 73 81
+pdfsam-service/src/main/java/org/pdfsam/news/DefaultNewsService.java 93 101
+----------------------------------------
+    public void clear() {
+        Preferences prefs = Preferences.userRoot().node(STAGE_PATH);
+        try {
+            prefs.removeNode();
+            prefs.flush();
+        } catch (BackingStoreException e) {
+            LOG.error("Unable to clear stage status", e);
+        }
+    }
+
+----------------------------------------
+    public void clear() {
+        Preferences prefs = Preferences.userRoot().node(NEWS_PATH);
+        try {
+            prefs.removeNode();
+            prefs.flush();
+        } catch (BackingStoreException e) {
+            LOG.error("Unable to clear latest news store", e);
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512853
+pdfsam-core/src/main/java/org/pdfsam/context/DefaultUserContext.java 124 132
+pdfsam-service/src/main/java/org/pdfsam/news/DefaultNewsService.java 93 101
+----------------------------------------
+    public void clear() {
+        try {
+            prefs.removeNode();
+            prefs.flush();
+            initNode();
+        } catch (BackingStoreException e) {
+            LOG.error("Unable to clear user preferences", e);
+        }
+    }
+
+----------------------------------------
+    public void clear() {
+        Preferences prefs = Preferences.userRoot().node(NEWS_PATH);
+        try {
+            prefs.removeNode();
+            prefs.flush();
+        } catch (BackingStoreException e) {
+            LOG.error("Unable to clear latest news store", e);
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512854
+pdfsam-service/src/main/java/org/pdfsam/ui/DefaultStageService.java 48 56
+pdfsam-service/src/main/java/org/pdfsam/news/DefaultNewsService.java 93 101
+----------------------------------------
+    public void save(StageStatus status) {
+        Preferences node = Preferences.userRoot().node(STAGE_PATH);
+        try {
+            node.put(STAGE_STATUS_KEY, JSON.std.asString(status));
+            LOG.trace("Stage status saved {}", status);
+        } catch (IOException e) {
+            LOG.error("Unable to increment modules usage statistics", e);
+        }
+    }
+
+----------------------------------------
+    public void clear() {
+        Preferences prefs = Preferences.userRoot().node(NEWS_PATH);
+        try {
+            prefs.removeNode();
+            prefs.flush();
+        } catch (BackingStoreException e) {
+            LOG.error("Unable to clear latest news store", e);
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+24061960
+pdfsam-split-by-size/src/main/java/org/pdfsam/splitbysize/SplitBySizeModule.java 70 75
+pdfsam-split-by-bookmarks/src/main/java/org/pdfsam/splitbybookmarks/SplitByBookmarksModule.java 71 76
+----------------------------------------
+    private TaskParametersBuilderSingleSelectionPane selectionPane;
+    private BrowsableOutputDirectoryField destinationDirectoryField;
+    private PdfDestinationPane destinationPane;
+    private SplitOptionsPane splitOptions = new SplitOptionsPane();
+    private PrefixPane prefix = new PrefixPane();
+    private ModuleDescriptor descriptor = builder().category(ModuleCategory.SPLIT).inputTypes(ModuleInputOutputType.SINGLE_PDF)
+
+----------------------------------------
+    private TaskParametersBuilderSingleSelectionPane selectionPane;
+    private BrowsableOutputDirectoryField destinationDirectoryField;
+    private PdfDestinationPane destinationPane;
+    private SplitOptionsPane splitOptions = new SplitOptionsPane();
+    private PrefixPane prefix = new PrefixPane();
+    private ModuleDescriptor descriptor = builder().category(ModuleCategory.SPLIT).inputTypes(ModuleInputOutputType.SINGLE_PDF)
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+24061961
+pdfsam-split-by-size/src/main/java/org/pdfsam/splitbysize/SplitBySizeModule.java 70 75
+pdfsam-simple-split/src/main/java/org/pdfsam/split/SplitModule.java 72 77
+----------------------------------------
+    private TaskParametersBuilderSingleSelectionPane selectionPane;
+    private BrowsableOutputDirectoryField destinationDirectoryField;
+    private PdfDestinationPane destinationPane;
+    private SplitOptionsPane splitOptions = new SplitOptionsPane();
+    private PrefixPane prefix = new PrefixPane();
+    private ModuleDescriptor descriptor = builder().category(ModuleCategory.SPLIT).inputTypes(ModuleInputOutputType.SINGLE_PDF)
+
+----------------------------------------
+    private TaskParametersBuilderSingleSelectionPane selectionPane;
+    private BrowsableOutputDirectoryField destinationDirectoryField;
+    private PdfDestinationPane destinationPane;
+    private SplitOptionsPane splitOptions = new SplitOptionsPane();
+    private PrefixPane prefix = new PrefixPane();
+    private ModuleDescriptor descriptor = builder().category(ModuleCategory.SPLIT).inputTypes(ModuleInputOutputType.SINGLE_PDF)
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+24061962
+pdfsam-merge/src/main/java/org/pdfsam/merge/MergeModule.java 146 155
+pdfsam-alternate-mix/src/main/java/org/pdfsam/alternatemix/AlternateMixModule.java 157 166
+----------------------------------------
+            return new PdfDestinationPane(outputField, MODULE_ID, userContext);
+        }
+
+        @Bean(name = MODULE_ID + "footer")
+        public Footer footer(RunButton runButton, @Named(MODULE_ID + "openButton") OpenButton openButton) {
+            return new Footer(runButton, openButton, MODULE_ID);
+        }
+
+        @Bean(name = MODULE_ID + "openButton")
+        public OpenButton openButton() {
+
+----------------------------------------
+            return new PdfDestinationPane(outputField, MODULE_ID, userContext);
+        }
+
+        @Bean(name = MODULE_ID + "footer")
+        public Footer footer(RunButton runButton, @Named(MODULE_ID + "openButton") OpenButton openButton) {
+            return new Footer(runButton, openButton, MODULE_ID);
+        }
+
+        @Bean(name = MODULE_ID + "openButton")
+        public OpenButton openButton() {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+24061963
+pdfsam-merge/src/main/java/org/pdfsam/merge/MergeModule.java 146 155
+pdfsam-rotate/src/main/java/org/pdfsam/rotate/RotateModule.java 159 168
+----------------------------------------
+            return new PdfDestinationPane(outputField, MODULE_ID, userContext);
+        }
+
+        @Bean(name = MODULE_ID + "footer")
+        public Footer footer(RunButton runButton, @Named(MODULE_ID + "openButton") OpenButton openButton) {
+            return new Footer(runButton, openButton, MODULE_ID);
+        }
+
+        @Bean(name = MODULE_ID + "openButton")
+        public OpenButton openButton() {
+
+----------------------------------------
+            return new PdfDestinationPane(outputField, MODULE_ID, userContext);
+        }
+
+        @Bean(name = MODULE_ID + "footer")
+        public Footer footer(RunButton runButton, @Named(MODULE_ID + "openButton") OpenButton openButton) {
+            return new Footer(runButton, openButton, MODULE_ID);
+        }
+
+        @Bean(name = MODULE_ID + "openButton")
+        public OpenButton openButton() {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+24061964
+pdfsam-simple-split/src/main/java/org/pdfsam/split/SplitModule.java 173 180
+pdfsam-split-by-size/src/main/java/org/pdfsam/splitbysize/SplitBySizeModule.java 171 178
+----------------------------------------
+        @Bean(name = MODULE_ID + "footer")
+        public Footer footer(RunButton runButton, @Named(MODULE_ID + "openButton") OpenButton openButton) {
+            return new Footer(runButton, openButton, MODULE_ID);
+        }
+
+        @Bean(name = MODULE_ID + "openButton")
+        public OpenButton openButton() {
+            return new OpenButton(MODULE_ID, ModuleInputOutputType.MULTIPLE_PDF);
+
+----------------------------------------
+        @Bean(name = MODULE_ID + "footer")
+        public Footer footer(RunButton runButton, @Named(MODULE_ID + "openButton") OpenButton openButton) {
+            return new Footer(runButton, openButton, MODULE_ID);
+        }
+
+        @Bean(name = MODULE_ID + "openButton")
+        public OpenButton openButton() {
+            return new OpenButton(MODULE_ID, ModuleInputOutputType.MULTIPLE_PDF);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+24061965
+pdfsam-simple-split/src/main/java/org/pdfsam/split/SplitModule.java 173 180
+pdfsam-split-by-bookmarks/src/main/java/org/pdfsam/splitbybookmarks/SplitByBookmarksModule.java 180 187
+----------------------------------------
+        @Bean(name = MODULE_ID + "footer")
+        public Footer footer(RunButton runButton, @Named(MODULE_ID + "openButton") OpenButton openButton) {
+            return new Footer(runButton, openButton, MODULE_ID);
+        }
+
+        @Bean(name = MODULE_ID + "openButton")
+        public OpenButton openButton() {
+            return new OpenButton(MODULE_ID, ModuleInputOutputType.MULTIPLE_PDF);
+
+----------------------------------------
+        @Bean(name = MODULE_ID + "footer")
+        public Footer footer(RunButton runButton, @Named(MODULE_ID + "openButton") OpenButton openButton) {
+            return new Footer(runButton, openButton, MODULE_ID);
+        }
+
+        @Bean(name = MODULE_ID + "openButton")
+        public OpenButton openButton() {
+            return new OpenButton(MODULE_ID, ModuleInputOutputType.MULTIPLE_PDF);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+24061966
+pdfsam-simple-split/src/main/java/org/pdfsam/split/SplitModule.java 173 180
+pdfsam-extract/src/main/java/org/pdfsam/extract/ExtractModule.java 170 177
+----------------------------------------
+        @Bean(name = MODULE_ID + "footer")
+        public Footer footer(RunButton runButton, @Named(MODULE_ID + "openButton") OpenButton openButton) {
+            return new Footer(runButton, openButton, MODULE_ID);
+        }
+
+        @Bean(name = MODULE_ID + "openButton")
+        public OpenButton openButton() {
+            return new OpenButton(MODULE_ID, ModuleInputOutputType.MULTIPLE_PDF);
+
+----------------------------------------
+        @Bean(name = MODULE_ID + "footer")
+        public Footer footer(RunButton runButton, @Named(MODULE_ID + "openButton") OpenButton openButton) {
+            return new Footer(runButton, openButton, MODULE_ID);
+        }
+
+        @Bean(name = MODULE_ID + "openButton")
+        public OpenButton openButton() {
+            return new OpenButton(MODULE_ID, ModuleInputOutputType.MULTIPLE_PDF);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+24061967
+pdfsam-simple-split/src/main/java/org/pdfsam/split/SplitModule.java 173 180
+pdfsam-rotate/src/main/java/org/pdfsam/rotate/RotateModule.java 162 169
+----------------------------------------
+        @Bean(name = MODULE_ID + "footer")
+        public Footer footer(RunButton runButton, @Named(MODULE_ID + "openButton") OpenButton openButton) {
+            return new Footer(runButton, openButton, MODULE_ID);
+        }
+
+        @Bean(name = MODULE_ID + "openButton")
+        public OpenButton openButton() {
+            return new OpenButton(MODULE_ID, ModuleInputOutputType.MULTIPLE_PDF);
+
+----------------------------------------
+        @Bean(name = MODULE_ID + "footer")
+        public Footer footer(RunButton runButton, @Named(MODULE_ID + "openButton") OpenButton openButton) {
+            return new Footer(runButton, openButton, MODULE_ID);
+        }
+
+        @Bean(name = MODULE_ID + "openButton")
+        public OpenButton openButton() {
+            return new OpenButton(MODULE_ID, ModuleInputOutputType.MULTIPLE_PDF);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+24061968
+pdfsam-core/src/main/java/org/pdfsam/support/params/SinglePdfSourceMultipleOutputParametersBuilder.java 45 52
+pdfsam-rotate/src/main/java/org/pdfsam/rotate/RotateParametersBuilder.java 63 70
+----------------------------------------
+    @Override
+    public void output(DirectoryTaskOutput output) {
+        this.output = output;
+    }
+
+    @Override
+    public void prefix(String prefix) {
+        this.prefix = prefix;
+
+----------------------------------------
+    @Override
+    public void output(DirectoryTaskOutput output) {
+        this.output = output;
+    }
+
+    @Override
+    public void prefix(String prefix) {
+        this.prefix = prefix;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+24061969
+pdfsam-simple-split/src/main/java/org/pdfsam/split/SplitByEveryRadioButton.java 108 113
+pdfsam-simple-split/src/main/java/org/pdfsam/split/SplitAfterPredefinedSetOfPagesRadioButton.java 103 108
+----------------------------------------
+            params.setOutput(getOutput());
+            params.setOutputPrefix(getPrefix());
+            params.setSource(getSource());
+            params.setOptimizationPolicy(getOptimizationPolicy());
+            params.discardOutline(isDiscardBookmarks());
+            return params;
+
+----------------------------------------
+            params.setOutput(getOutput());
+            params.setOutputPrefix(getPrefix());
+            params.setSource(getSource());
+            params.setOptimizationPolicy(getOptimizationPolicy());
+            params.discardOutline(isDiscardBookmarks());
+            return params;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+24061970
+pdfsam-simple-split/src/main/java/org/pdfsam/split/SplitByEveryRadioButton.java 108 113
+pdfsam-split-by-bookmarks/src/main/java/org/pdfsam/splitbybookmarks/SplitByOutlineLevelParametersBuilder.java 50 55
+----------------------------------------
+            params.setOutput(getOutput());
+            params.setOutputPrefix(getPrefix());
+            params.setSource(getSource());
+            params.setOptimizationPolicy(getOptimizationPolicy());
+            params.discardOutline(isDiscardBookmarks());
+            return params;
+
+----------------------------------------
+        params.setOutput(getOutput());
+        params.setOutputPrefix(getPrefix());
+        params.setSource(getSource());
+        params.setOptimizationPolicy(getOptimizationPolicy());
+        params.discardOutline(isDiscardBookmarks());
+        return params;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+24061971
+pdfsam-simple-split/src/main/java/org/pdfsam/split/SplitByEveryRadioButton.java 108 113
+pdfsam-simple-split/src/main/java/org/pdfsam/split/SplitAfterRadioButton.java 105 110
+----------------------------------------
+            params.setOutput(getOutput());
+            params.setOutputPrefix(getPrefix());
+            params.setSource(getSource());
+            params.setOptimizationPolicy(getOptimizationPolicy());
+            params.discardOutline(isDiscardBookmarks());
+            return params;
+
+----------------------------------------
+            params.setOutput(getOutput());
+            params.setOutputPrefix(getPrefix());
+            params.setSource(getSource());
+            params.setOptimizationPolicy(getOptimizationPolicy());
+            params.discardOutline(isDiscardBookmarks());
+            return params;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+24061972
+pdfsam-simple-split/src/main/java/org/pdfsam/split/SplitByEveryRadioButton.java 108 113
+pdfsam-split-by-size/src/main/java/org/pdfsam/splitbysize/SplitBySizeParametersBuilder.java 44 49
+----------------------------------------
+            params.setOutput(getOutput());
+            params.setOutputPrefix(getPrefix());
+            params.setSource(getSource());
+            params.setOptimizationPolicy(getOptimizationPolicy());
+            params.discardOutline(isDiscardBookmarks());
+            return params;
+
+----------------------------------------
+        params.setOutput(getOutput());
+        params.setOutputPrefix(getPrefix());
+        params.setSource(getSource());
+        params.setOptimizationPolicy(getOptimizationPolicy());
+        params.discardOutline(isDiscardBookmarks());
+        return params;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+24061973
+pdfsam-fx/src/main/java/org/pdfsam/ui/selection/multiple/PaceColumn.java 71 78
+pdfsam-fx/src/main/java/org/pdfsam/ui/selection/multiple/PageRangesColumn.java 80 87
+----------------------------------------
+        return tableColumn;
+    }
+
+    @Override
+    public Callback<TableColumn<SelectionTableRowData, String>, TableCell<SelectionTableRowData, String>> cellFactory() {
+        return new Callback<TableColumn<SelectionTableRowData, String>, TableCell<SelectionTableRowData, String>>() {
+            @Override
+            public TableCell<SelectionTableRowData, String> call(TableColumn<SelectionTableRowData, String> param) {
+
+----------------------------------------
+        return tableColumn;
+    }
+
+    @Override
+    public Callback<TableColumn<SelectionTableRowData, String>, TableCell<SelectionTableRowData, String>> cellFactory() {
+        return new Callback<TableColumn<SelectionTableRowData, String>, TableCell<SelectionTableRowData, String>>() {
+            @Override
+            public TableCell<SelectionTableRowData, String> call(TableColumn<SelectionTableRowData, String> param) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+24061974
+pdfsam-gui/src/main/java/org/pdfsam/ui/info/SummaryTab.java 93 100
+pdfsam-gui/src/main/java/org/pdfsam/ui/info/KeywordsTab.java 66 73
+----------------------------------------
+        eventStudio().addAnnotatedListeners(this);
+    }
+
+    @EventListener
+    void requestShow(ShowPdfDescriptorRequest event) {
+        if (current != event.getDescriptor()) {
+            current = event.getDescriptor();
+            current.loadingStatus().addListener(new WeakChangeListener<>(this));
+
+----------------------------------------
+        eventStudio().addAnnotatedListeners(this);
+    }
+
+    @EventListener
+    void requestShow(ShowPdfDescriptorRequest event) {
+        if (current != event.getDescriptor()) {
+            current = event.getDescriptor();
+            current.loadingStatus().addListener(new WeakChangeListener<>(this));
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+24061975
+pdfsam-fx/src/main/java/org/pdfsam/ui/io/RememberingLatestFileChooserWrapper.java 41 50
+pdfsam-fx/src/main/java/org/pdfsam/ui/io/RememberingLatestDirectoryChooserWrapper.java 38 47
+----------------------------------------
+        eventStudio().addAnnotatedListeners(this);
+    }
+
+    final void setTitle(String value) {
+        wrapped.setTitle(value);
+    }
+
+    @Override
+    final void setInitialDirectory(File value) {
+        wrapped.setInitialDirectory(value);
+
+----------------------------------------
+        eventStudio().addAnnotatedListeners(this);
+    }
+
+    public final void setTitle(String value) {
+        wrapped.setTitle(value);
+    }
+
+    @Override
+    public final void setInitialDirectory(File value) {
+        wrapped.setInitialDirectory(value);
+
+----------------------------------------

@@ -1,0 +1,2994 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834551
+net/sf/varscan/LimitVariants.java 232 297
+net/sf/varscan/Coverage.java 349 399
+----------------------------------------
+	    	{
+	    		lineCounter++;
+	    		String[] lineContents = line.split("\t");
+
+	    		if(line.substring(0, 1).equals("#"))
+	    		{
+	    			// Ignore VCF headers //
+	    		}
+	    		else if(lineContents.length >= 2)
+	    		{
+	    			// Try to parse chrom and position //
+	    			try
+	    			{
+	    				String refName = lineContents[0];
+
+	    				// Get or create BitSet for this refName //
+	    				BitSet refPositions;
+
+	    				if(positionsByChrom.containsKey(refName))
+	    				{
+	    					refPositions = positionsByChrom.get(refName);
+	    				}
+	    				else
+	    				{
+	    					refPositions = new BitSet();
+	    				}
+
+	    				// Mark position or regions, depending on what was provided //
+	    				int chrStart = 0;
+	    				int chrStop = 0;
+
+	    				if(fileType.equals("positions") && lineContents.length > 1)
+	    				{
+		    				// Set the position to true //
+		    				int position = Integer.parseInt(lineContents[1]);
+		    				chrStart = position - marginSize;
+		    				chrStop = position + marginSize;
+	    				}
+	    				else if(fileType.equals("regions") && lineContents.length > 2)
+	    				{
+	    					chrStart = Integer.parseInt(lineContents[1]) - marginSize;
+	    					chrStop = Integer.parseInt(lineContents[2]) + marginSize;
+	    				}
+
+    					// Check that it won't be an infinite loop//
+    					if(chrStart <= chrStop)
+    					{
+	    					// Mark every position //
+	    					for(int position = chrStart; position <= chrStop; position++)
+	    					{
+	    						refPositions.set(position, true);
+	    					}
+    					}
+
+	    				// Return it to the hash //
+	    				positionsByChrom.put(refName, refPositions);
+	    			}
+	    			catch(Exception e)
+	    			{
+	    				if(lineCounter > 1)
+	    					System.err.println("Warning: Unable to parse chrom/position from " + line);
+	    			}
+
+
+	    		}
+	    	}
+
+----------------------------------------
+	    			{
+	    				String refName = lineContents[0];
+
+	    				// Get or create BitSet for this refName //
+	    				BitSet refPositions;
+
+	    				if(positionsByChrom.containsKey(refName))
+	    				{
+	    					refPositions = positionsByChrom.get(refName);
+	    				}
+	    				else
+	    				{
+	    					refPositions = new BitSet();
+	    				}
+
+	    				// Mark position or regions, depending on what was provided //
+	    				int chrStart = 0;
+	    				int chrStop = 0;
+
+	    				if(fileType.equals("positions") && lineContents.length > 1)
+	    				{
+		    				// Set the position to true //
+		    				int position = Integer.parseInt(lineContents[1]);
+		    				chrStart = position - marginSize;
+		    				chrStop = position + marginSize;
+	    				}
+	    				else if(fileType.equals("regions") && lineContents.length > 2)
+	    				{
+	    					chrStart = Integer.parseInt(lineContents[1]) - marginSize;
+	    					chrStop = Integer.parseInt(lineContents[2]) + marginSize;
+	    				}
+
+    					// Check that it won't be an infinite loop//
+    					if(chrStart <= chrStop)
+    					{
+    						numRegions++;
+
+	    					// Mark every position //
+	    					for(int position = chrStart; position <= chrStop; position++)
+	    					{
+	    						if(!refPositions.get(position))
+	    						{
+	    							numBases++;
+	    							refPositions.set(position, true);
+	    						}
+	    					}
+    					}
+
+	    				// Return it to the hash //
+	    				positionsByChrom.put(refName, refPositions);
+	    			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834512
+net/sf/varscan/Somatic.java 1035 1054
+net/sf/varscan/Copynumber.java 648 667
+----------------------------------------
+		    	{
+		    		//System.err.println("Normal (" + chromNormal + ") catching up to " + chromTumor);
+		    		// Get next line from normal pileup //
+		    		if((lineNormal = normal.readLine()) != null)
+		    		{
+		    			String[] normalContents = lineNormal.split("\t");
+
+				    	if(normalContents.length > 1)
+				    	{
+					    	chromNormal = normalContents[0];
+					    	posNormal = Integer.parseInt(normalContents[1]);
+				    	}
+		    		}
+		    		else
+		    		{
+		    			flagEOF = true;
+		    		}
+
+
+		    	}
+
+----------------------------------------
+		    	{
+		    		//System.err.println("Normal (" + chromNormal + ") catching up to " + chromTumor);
+		    		// Get next line from normal pileup //
+		    		if((lineNormal = normal.readLine()) != null)
+		    		{
+		    			String[] normalContents = lineNormal.split("\t");
+
+				    	if(normalContents.length > 1)
+				    	{
+					    	chromNormal = normalContents[0];
+					    	posNormal = Integer.parseInt(normalContents[1]);
+				    	}
+		    		}
+		    		else
+		    		{
+		    			flagEOF = true;
+		    		}
+
+
+		    	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834511
+net/sf/varscan/Somatic.java 1404 1419
+net/sf/varscan/Copynumber.java 648 667
+----------------------------------------
+		    		{
+		    			if((lineTumor = tumor.readLine()) != null)
+		    			{
+			    			tumorContents = lineTumor.split("\t");
+
+					    	if(tumorContents.length > 1)
+					    	{
+						    	chromTumor = tumorContents[0];
+						    	posTumor = Integer.parseInt(tumorContents[1]);
+					    	}
+		    			}
+		    			else
+		    			{
+		    				flagEOF = true;
+		    			}
+		    		}
+
+----------------------------------------
+		    	{
+		    		//System.err.println("Normal (" + chromNormal + ") catching up to " + chromTumor);
+		    		// Get next line from normal pileup //
+		    		if((lineNormal = normal.readLine()) != null)
+		    		{
+		    			String[] normalContents = lineNormal.split("\t");
+
+				    	if(normalContents.length > 1)
+				    	{
+					    	chromNormal = normalContents[0];
+					    	posNormal = Integer.parseInt(normalContents[1]);
+				    	}
+		    		}
+		    		else
+		    		{
+		    			flagEOF = true;
+		    		}
+
+
+		    	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834590
+net/sf/varscan/FpFilter.java 562 567
+net/sf/varscan/FpFilter.java 623 628
+----------------------------------------
+            	    							{
+            	    								if(failReason.length() > 0)
+            	    									failReason += ",";
+            	    								failReason += "VarBaseQual";
+            	    								stats.put("numFailVarBaseQual", (stats.get("numFailVarBaseQual") + 1));
+            	    							}
+
+----------------------------------------
+                	    							{
+                	    								if(failReason.length() > 0)
+                	    									failReason += ",";
+                	    								failReason += "ReadLenDiff";
+                	    								stats.put("numFailReadLenDiff", (stats.get("numFailReadLenDiff") + 1));
+                	    							}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834520
+net/sf/varscan/FpFilter.java 613 618
+net/sf/varscan/FpFilter.java 623 628
+----------------------------------------
+                	    							{
+                	    								if(failReason.length() > 0)
+                	    									failReason += ",";
+                	    								failReason += "MapQualDiff";
+                	    								stats.put("numFailMapQualDiff", (stats.get("numFailMapQualDiff") + 1));
+                	    							}
+
+----------------------------------------
+                	    							{
+                	    								if(failReason.length() > 0)
+                	    									failReason += ",";
+                	    								failReason += "ReadLenDiff";
+                	    								stats.put("numFailReadLenDiff", (stats.get("numFailReadLenDiff") + 1));
+                	    							}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834525
+net/sf/varscan/FpFilter.java 496 501
+net/sf/varscan/FpFilter.java 623 628
+----------------------------------------
+            	    							{
+            	    								if(failReason.length() > 0)
+            	    									failReason += ",";
+            	    								failReason += "VarFreq";
+            	    								stats.put("numFailVarFreq", (stats.get("numFailVarFreq") + 1));
+            	    							}
+
+----------------------------------------
+                	    							{
+                	    								if(failReason.length() > 0)
+                	    									failReason += ",";
+                	    								failReason += "ReadLenDiff";
+                	    								stats.put("numFailReadLenDiff", (stats.get("numFailReadLenDiff") + 1));
+                	    							}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834528
+net/sf/varscan/FpFilter.java 581 587
+net/sf/varscan/FpFilter.java 623 628
+----------------------------------------
+        	    									{
+                	    								if(failReason.length() > 0)
+                	    									failReason += ",";
+                	    								failReason += "Strand";
+                	    								stats.put("numFailStrand", (stats.get("numFailStrand") + 1));
+//                    	    								System.err.println(positionKey + "\t" + refReadsPlus + "\t" + refReadsMinus + "\t" + refStrandedness + "\t" + varReadsPlus + "\t" + varReadsMinus + "\t" + varStrandedness);
+        	    									}
+
+----------------------------------------
+                	    							{
+                	    								if(failReason.length() > 0)
+                	    									failReason += ",";
+                	    								failReason += "ReadLenDiff";
+                	    								stats.put("numFailReadLenDiff", (stats.get("numFailReadLenDiff") + 1));
+                	    							}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834523
+net/sf/varscan/FpFilter.java 484 489
+net/sf/varscan/FpFilter.java 623 628
+----------------------------------------
+            	    							{
+            	    								if(failReason.length() > 0)
+            	    									failReason += ",";
+            	    								failReason += "VarCount";
+            	    								stats.put("numFailVarCount", (stats.get("numFailVarCount") + 1));
+            	    							}
+
+----------------------------------------
+                	    							{
+                	    								if(failReason.length() > 0)
+                	    									failReason += ",";
+                	    								failReason += "ReadLenDiff";
+                	    								stats.put("numFailReadLenDiff", (stats.get("numFailReadLenDiff") + 1));
+                	    							}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834519
+net/sf/varscan/FpFilter.java 524 529
+net/sf/varscan/FpFilter.java 623 628
+----------------------------------------
+            	    							{
+            	    								if(failReason.length() > 0)
+            	    									failReason += ",";
+            	    								failReason += "VarMMQS";
+            	    								stats.put("numFailVarMMQS", (stats.get("numFailVarMMQS") + 1));
+            	    							}
+
+----------------------------------------
+                	    							{
+                	    								if(failReason.length() > 0)
+                	    									failReason += ",";
+                	    								failReason += "ReadLenDiff";
+                	    								stats.put("numFailReadLenDiff", (stats.get("numFailReadLenDiff") + 1));
+                	    							}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834524
+net/sf/varscan/FpFilter.java 553 559
+net/sf/varscan/FpFilter.java 623 628
+----------------------------------------
+            	    							{
+            	    								if(failReason.length() > 0)
+            	    									failReason += ",";
+            	    								failReason += "RefBaseQual";
+            	    								stats.put("numFailRefBaseQual", (stats.get("numFailRefBaseQual") + 1));
+
+            	    							}
+
+----------------------------------------
+                	    							{
+                	    								if(failReason.length() > 0)
+                	    									failReason += ",";
+                	    								failReason += "ReadLenDiff";
+                	    								stats.put("numFailReadLenDiff", (stats.get("numFailReadLenDiff") + 1));
+                	    							}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834521
+net/sf/varscan/FpFilter.java 513 518
+net/sf/varscan/FpFilter.java 623 628
+----------------------------------------
+            	    							{
+            	    								if(failReason.length() > 0)
+            	    									failReason += ",";
+            	    								failReason += "VarDist3";
+            	    								stats.put("numFailVarDist3", (stats.get("numFailVarDist3") + 1));
+            	    							}
+
+----------------------------------------
+                	    							{
+                	    								if(failReason.length() > 0)
+                	    									failReason += ",";
+                	    								failReason += "ReadLenDiff";
+                	    								stats.put("numFailReadLenDiff", (stats.get("numFailReadLenDiff") + 1));
+                	    							}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834526
+net/sf/varscan/FpFilter.java 505 510
+net/sf/varscan/FpFilter.java 623 628
+----------------------------------------
+            	    							{
+            	    								if(failReason.length() > 0)
+            	    									failReason += ",";
+            	    								failReason += "VarReadPos";
+            	    								stats.put("numFailVarReadPos", (stats.get("numFailVarReadPos") + 1));
+            	    							}
+
+----------------------------------------
+                	    							{
+                	    								if(failReason.length() > 0)
+                	    									failReason += ",";
+                	    								failReason += "ReadLenDiff";
+                	    								stats.put("numFailReadLenDiff", (stats.get("numFailReadLenDiff") + 1));
+                	    							}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834529
+net/sf/varscan/FpFilter.java 534 540
+net/sf/varscan/FpFilter.java 623 628
+----------------------------------------
+            	    							{
+            	    								if(failReason.length() > 0)
+            	    									failReason += ",";
+            	    								failReason += "RefMapQual";
+            	    								stats.put("numFailRefMapQual", (stats.get("numFailRefMapQual") + 1));
+
+            	    							}
+
+----------------------------------------
+                	    							{
+                	    								if(failReason.length() > 0)
+                	    									failReason += ",";
+                	    								failReason += "ReadLenDiff";
+                	    								stats.put("numFailReadLenDiff", (stats.get("numFailReadLenDiff") + 1));
+                	    							}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834527
+net/sf/varscan/FpFilter.java 599 604
+net/sf/varscan/FpFilter.java 623 628
+----------------------------------------
+                	    							{
+                	    								if(failReason.length() > 0)
+                	    									failReason += ",";
+                	    								failReason += "MMQSdiff";
+                	    								stats.put("numFailMMQSdiff", (stats.get("numFailMMQSdiff") + 1));
+                	    							}
+
+----------------------------------------
+                	    							{
+                	    								if(failReason.length() > 0)
+                	    									failReason += ",";
+                	    								failReason += "ReadLenDiff";
+                	    								stats.put("numFailReadLenDiff", (stats.get("numFailReadLenDiff") + 1));
+                	    							}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834522
+net/sf/varscan/FpFilter.java 543 548
+net/sf/varscan/FpFilter.java 623 628
+----------------------------------------
+            	    							{
+            	    								if(failReason.length() > 0)
+            	    									failReason += ",";
+            	    								failReason += "VarMapQual";
+            	    								stats.put("numFailVarMapQual", (stats.get("numFailVarMapQual") + 1));
+            	    							}
+
+----------------------------------------
+                	    							{
+                	    								if(failReason.length() > 0)
+                	    									failReason += ",";
+                	    								failReason += "ReadLenDiff";
+                	    								stats.put("numFailReadLenDiff", (stats.get("numFailReadLenDiff") + 1));
+                	    							}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834531
+net/sf/varscan/Copynumber.java 347 372
+net/sf/varscan/Copynumber.java 870 895
+----------------------------------------
+	    					{
+	    						// If minimum coverage was not met, print region //
+		    					// If we had a copyNumber region that met minimum coverage, report it //
+		    					if(copyPositions >= minSegmentSize)
+		    					{
+		    						rawCopySegments++;
+		    						String regionResults = processCopyRegion(copyChrom, copyStart, copyStop, copyPositions, copyPositionsGC, copySumNormal, copySumTumor, minCoverage, dataRatio);
+
+		    						if(regionResults.length() > 0)
+		    						{
+		    							outCopySegments.println(regionResults);
+		    							goodCopySegments++;
+		    						}
+		    					}
+
+		    					// Reset the copyNumber region //
+		    					copyChrom = "";
+		    					copyStart = 0;
+		    					copyStop = 0;
+		    					copyDepthNormal = 0;
+		    					copyDepthTumor = 0;
+		    					copySumNormal = 0;
+		    					copySumTumor = 0;
+		    					copyPositions = 0;
+		    					copyPositionsGC = 0;
+	    					}
+
+----------------------------------------
+    					{
+    						// If minimum coverage was not met, print region //
+	    					// If we had a copyNumber region that met minimum coverage, report it //
+	    					if(copyPositions >= minSegmentSize)
+	    					{
+	    						rawCopySegments++;
+	    						String regionResults = processCopyRegion(copyChrom, copyStart, copyStop, copyPositions, copyPositionsGC, copySumNormal, copySumTumor, minCoverage, dataRatio);
+
+	    						if(regionResults.length() > 0)
+	    						{
+	    							outCopySegments.println(regionResults);
+	    							goodCopySegments++;
+	    						}
+	    					}
+
+	    					// Reset the copyNumber region //
+	    					copyChrom = "";
+	    					copyStart = 0;
+	    					copyStop = 0;
+	    					copyDepthNormal = 0;
+	    					copyDepthTumor = 0;
+	    					copySumNormal = 0;
+	    					copySumTumor = 0;
+	    					copyPositions = 0;
+	    					copyPositionsGC = 0;
+    					}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834533
+net/sf/varscan/Copynumber.java 841 850
+net/sf/varscan/Copynumber.java 874 883
+----------------------------------------
+    	    					{
+    	    						rawCopySegments++;
+    	    						String regionResults = processCopyRegion(copyChrom, copyStart, copyStop, copyPositions, copyPositionsGC, copySumNormal, copySumTumor, minCoverage, dataRatio);
+
+    	    						if(regionResults.length() > 0)
+    	    						{
+    	    							outCopySegments.println(regionResults);
+    	    							goodCopySegments++;
+    	    						}
+    	    					}
+
+----------------------------------------
+	    					{
+	    						rawCopySegments++;
+	    						String regionResults = processCopyRegion(copyChrom, copyStart, copyStop, copyPositions, copyPositionsGC, copySumNormal, copySumTumor, minCoverage, dataRatio);
+
+	    						if(regionResults.length() > 0)
+	    						{
+	    							outCopySegments.println(regionResults);
+	    							goodCopySegments++;
+	    						}
+	    					}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834534
+net/sf/varscan/Copynumber.java 351 360
+net/sf/varscan/Copynumber.java 874 883
+----------------------------------------
+		    					{
+		    						rawCopySegments++;
+		    						String regionResults = processCopyRegion(copyChrom, copyStart, copyStop, copyPositions, copyPositionsGC, copySumNormal, copySumTumor, minCoverage, dataRatio);
+
+		    						if(regionResults.length() > 0)
+		    						{
+		    							outCopySegments.println(regionResults);
+		    							goodCopySegments++;
+		    						}
+		    					}
+
+----------------------------------------
+	    					{
+	    						rawCopySegments++;
+	    						String regionResults = processCopyRegion(copyChrom, copyStart, copyStop, copyPositions, copyPositionsGC, copySumNormal, copySumTumor, minCoverage, dataRatio);
+
+	    						if(regionResults.length() > 0)
+	    						{
+	    							outCopySegments.println(regionResults);
+	    							goodCopySegments++;
+	    						}
+	    					}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834535
+net/sf/varscan/ProcessSomatic.java 266 274
+net/sf/varscan/Copynumber.java 874 883
+----------------------------------------
+		    				{
+		    					numGermline++;
+		    					outGermline.println(line);
+		    					if(normalFreq >= minTumorFreq && tumorFreq >= minTumorFreq && somaticPvalue <= pValueForHC)
+		    					{
+		    						numGermlineHC++;
+		    						outGermlineHC.println(line);
+		    					}
+		    				}
+
+----------------------------------------
+	    					{
+	    						rawCopySegments++;
+	    						String regionResults = processCopyRegion(copyChrom, copyStart, copyStop, copyPositions, copyPositionsGC, copySumNormal, copySumTumor, minCoverage, dataRatio);
+
+	    						if(regionResults.length() > 0)
+	    						{
+	    							outCopySegments.println(regionResults);
+	    							goodCopySegments++;
+	    						}
+	    					}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834536
+net/sf/varscan/Copynumber.java 399 408
+net/sf/varscan/Copynumber.java 874 883
+----------------------------------------
+				{
+					rawCopySegments++;
+					String regionResults = processCopyRegion(copyChrom, copyStart, copyStop, copyPositions, copyPositionsGC, copySumNormal, copySumTumor, minCoverage, dataRatio);
+
+					if(regionResults.length() > 0)
+					{
+						outCopySegments.println(regionResults);
+						goodCopySegments++;
+					}
+				}
+
+----------------------------------------
+	    					{
+	    						rawCopySegments++;
+	    						String regionResults = processCopyRegion(copyChrom, copyStart, copyStop, copyPositions, copyPositionsGC, copySumNormal, copySumTumor, minCoverage, dataRatio);
+
+	    						if(regionResults.length() > 0)
+	    						{
+	    							outCopySegments.println(regionResults);
+	    							goodCopySegments++;
+	    						}
+	    					}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834537
+net/sf/varscan/Copynumber.java 318 327
+net/sf/varscan/Copynumber.java 874 883
+----------------------------------------
+	    	    					{
+	    	    						rawCopySegments++;
+	    	    						String regionResults = processCopyRegion(copyChrom, copyStart, copyStop, copyPositions, copyPositionsGC, copySumNormal, copySumTumor, minCoverage, dataRatio);
+
+	    	    						if(regionResults.length() > 0)
+	    	    						{
+	    	    							outCopySegments.println(regionResults);
+	    	    							goodCopySegments++;
+	    	    						}
+	    	    					}
+
+----------------------------------------
+	    					{
+	    						rawCopySegments++;
+	    						String regionResults = processCopyRegion(copyChrom, copyStart, copyStop, copyPositions, copyPositionsGC, copySumNormal, copySumTumor, minCoverage, dataRatio);
+
+	    						if(regionResults.length() > 0)
+	    						{
+	    							outCopySegments.println(regionResults);
+	    							goodCopySegments++;
+	    						}
+	    					}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834532
+net/sf/varscan/ProcessSomatic.java 256 264
+net/sf/varscan/Copynumber.java 874 883
+----------------------------------------
+		    				{
+		    					numSomatic++;
+		    					outSomatic.println(line);
+		    					if(normalFreq <= maxNormalFreq && tumorFreq >= minTumorFreq && somaticPvalue <= pValueForHC)
+		    					{
+		    						numSomaticHC++;
+		    						outSomaticHC.println(line);
+		    					}
+		    				}
+
+----------------------------------------
+	    					{
+	    						rawCopySegments++;
+	    						String regionResults = processCopyRegion(copyChrom, copyStart, copyStop, copyPositions, copyPositionsGC, copySumNormal, copySumTumor, minCoverage, dataRatio);
+
+	    						if(regionResults.length() > 0)
+	    						{
+	    							outCopySegments.println(regionResults);
+	    							goodCopySegments++;
+	    						}
+	    					}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834538
+net/sf/varscan/Trio.java 540 629
+net/sf/varscan/Trio.java 636 725
+----------------------------------------
+	    	        				{
+	    	        					if(fatherContents.length >= 16)
+	    	        						fatherAllele = fatherContents[15];
+	    	        					String consBase = fatherContents[0];
+		    	        				int reads1 = Integer.parseInt(fatherContents[1]);
+		    	        				int reads2 = Integer.parseInt(fatherContents[2]);
+		    	        				String varFreq = fatherContents[3];
+		    	        				int qual1 = Integer.parseInt(fatherContents[6]);
+		    	        				int qual2 = Integer.parseInt(fatherContents[7]);
+		    	        				double pValue = Double.parseDouble(fatherContents[8]);
+		    	        				int reads1plus = Integer.parseInt(fatherContents[11]);
+		    	        				int reads1minus = Integer.parseInt(fatherContents[12]);
+		    	        				int reads2plus = Integer.parseInt(fatherContents[13]);
+		    	        				int reads2minus = Integer.parseInt(fatherContents[14]);
+
+		    	        				double logP = 0;
+		    	        				try {
+			    	        				logP = 0 - (10 * java.lang.Math.log10(pValue));
+			    	        				if(logP > 255)
+			    	        					logP = 255;
+		    	        				}
+		    	        				catch(Exception e)
+		    	        				{
+		    	        					// Stick with default logP value
+		    	        				}
+
+		    	        				// Father is wildtype //
+		    	        				if(consBase.equals(refBase))
+		    	        				{
+		    	        					// A reference call - recalculate p-value against a possible het //
+		    	        					int expReads1 = (reads1 + reads2) / 2;
+		    	        					int expReads2 = (reads1 + reads2) - expReads1;
+		    	        					double newPvalue = VarScan.getSignificance(reads1, reads2, expReads1, expReads2);
+		    	        					double newLogP = 0;
+			    	        				try {
+				    	        				newLogP = 0 - (10 * java.lang.Math.log10(newPvalue));
+			    	        				}
+			    	        				catch(Exception e)
+			    	        				{
+			    	        					// Stick with default logP value
+			    	        				}
+		    	        					fatherVCF = "0" + "/" + "0";
+		    	        					fatherVCF += ":" + (int) newLogP + ":" + fatherDepth + ":" + fatherQualityDepth;
+	    	        						fatherVCF += ":" + reads1 + ":" + reads2 + ":" + varFreq + ":" + pvalueFormat.format(pValue);
+	    	        						fatherVCF += ":" + qual1 + ":" + qual2;
+	    	        						fatherVCF += ":" + reads1plus + ":" + reads1minus + ":" + reads2plus + ":" + reads2minus;
+
+		    	        				}
+		    	        				// Father is variant //
+		    	        				else if(fatherAllele.length() > 0 && !fatherAllele.equals("N") && !fatherAllele.equals("."))
+		    	        				{
+		    	        					// Determine how many variant alleles have been seen //
+
+		    	        					int varAlleleNumber = 0;
+
+		    	        					// Determine if we've seen the variant and what its number is ##
+
+			    	        				if(varAlleles.containsKey(fatherAllele))
+			    	        				{
+			    	        					varAlleleNumber = varAlleles.get(fatherAllele);
+			    	        				}
+			    	        				else
+			    	        				{
+			    	        					// IF no variants yet seen, this is variant allele 1 //
+			    	        					varAlleleNumber = varAlleles.size() + 1;
+			    	        					varAlleles.put(fatherAllele, varAlleleNumber);
+			    	        				}
+
+			    	        				if(fatherContents.length >= 1)
+			    	        				{
+			    	        					if(VarScan.isHomozygous(consBase))
+			    	        					{
+			    	        						fatherVCF = varAlleleNumber + "/" + varAlleleNumber;
+			    	        					}
+			    	        					else
+			    	        					{
+			    	        						fatherVCF = "0" + "/" + varAlleleNumber;
+			    	        					}
+
+			    	        					fatherVCF += ":" + (int) logP + ":" + fatherDepth + ":" + fatherQualityDepth;
+		    	        						fatherVCF += ":" + reads1 + ":" + reads2 + ":" + varFreq + ":" + pvalueFormat.format(pValue);
+		    	        						fatherVCF += ":" + qual1 + ":" + qual2;
+		    	        						fatherVCF += ":" + reads1plus + ":" + reads1minus + ":" + reads2plus + ":" + reads2minus;
+			    	        				}
+
+		    	        					if(fatherAllele.length() > 1)
+		    	        						variantType = "Indel";
+		    	        				}
+
+	    	        				}
+
+----------------------------------------
+	    	        				{
+	    	        					if(motherContents.length >= 16)
+	    	        						motherAllele = motherContents[15];
+	    	        					String consBase = motherContents[0];
+		    	        				int reads1 = Integer.parseInt(motherContents[1]);
+		    	        				int reads2 = Integer.parseInt(motherContents[2]);
+		    	        				String varFreq = motherContents[3];
+		    	        				int qual1 = Integer.parseInt(motherContents[6]);
+		    	        				int qual2 = Integer.parseInt(motherContents[7]);
+		    	        				double pValue = Double.parseDouble(motherContents[8]);
+		    	        				int reads1plus = Integer.parseInt(motherContents[11]);
+		    	        				int reads1minus = Integer.parseInt(motherContents[12]);
+		    	        				int reads2plus = Integer.parseInt(motherContents[13]);
+		    	        				int reads2minus = Integer.parseInt(motherContents[14]);
+
+		    	        				double logP = 0;
+		    	        				try {
+			    	        				logP = 0 - (10 * java.lang.Math.log10(pValue));
+			    	        				if(logP > 255)
+			    	        					logP = 255;
+		    	        				}
+		    	        				catch(Exception e)
+		    	        				{
+		    	        					// Stick with default logP value
+		    	        				}
+
+		    	        				// mother is wildtype //
+		    	        				if(consBase.equals(refBase))
+		    	        				{
+		    	        					// A reference call - recalculate p-value against a possible het //
+		    	        					int expReads1 = (reads1 + reads2) / 2;
+		    	        					int expReads2 = (reads1 + reads2) - expReads1;
+		    	        					double newPvalue = VarScan.getSignificance(reads1, reads2, expReads1, expReads2);
+		    	        					double newLogP = 0;
+			    	        				try {
+				    	        				newLogP = 0 - (10 * java.lang.Math.log10(newPvalue));
+			    	        				}
+			    	        				catch(Exception e)
+			    	        				{
+			    	        					// Stick with default logP value
+			    	        				}
+		    	        					motherVCF = "0" + "/" + "0";
+		    	        					motherVCF += ":" + (int) newLogP + ":" + motherDepth + ":" + motherQualityDepth;
+	    	        						motherVCF += ":" + reads1 + ":" + reads2 + ":" + varFreq + ":" + pvalueFormat.format(pValue);
+	    	        						motherVCF += ":" + qual1 + ":" + qual2;
+	    	        						motherVCF += ":" + reads1plus + ":" + reads1minus + ":" + reads2plus + ":" + reads2minus;
+
+		    	        				}
+		    	        				// mother is variant //
+		    	        				else if(motherAllele.length() > 0 && !motherAllele.equals("N") && !motherAllele.equals("."))
+		    	        				{
+		    	        					// Determine how many variant alleles have been seen //
+
+		    	        					int varAlleleNumber = 0;
+
+		    	        					// Determine if we've seen the variant and what its number is ##
+
+			    	        				if(varAlleles.containsKey(motherAllele))
+			    	        				{
+			    	        					varAlleleNumber = varAlleles.get(motherAllele);
+			    	        				}
+			    	        				else
+			    	        				{
+			    	        					// IF no variants yet seen, this is variant allele 1 //
+			    	        					varAlleleNumber = varAlleles.size() + 1;
+			    	        					varAlleles.put(motherAllele, varAlleleNumber);
+			    	        				}
+
+			    	        				if(motherContents.length >= 1)
+			    	        				{
+			    	        					if(VarScan.isHomozygous(consBase))
+			    	        					{
+			    	        						motherVCF = varAlleleNumber + "/" + varAlleleNumber;
+			    	        					}
+			    	        					else
+			    	        					{
+			    	        						motherVCF = "0" + "/" + varAlleleNumber;
+			    	        					}
+
+			    	        					motherVCF += ":" + (int) logP + ":" + motherDepth + ":" + motherQualityDepth;
+		    	        						motherVCF += ":" + reads1 + ":" + reads2 + ":" + varFreq + ":" + pvalueFormat.format(pValue);
+		    	        						motherVCF += ":" + qual1 + ":" + qual2;
+		    	        						motherVCF += ":" + reads1plus + ":" + reads1minus + ":" + reads2plus + ":" + reads2minus;
+			    	        				}
+
+		    	        					if(motherAllele.length() > 1)
+		    	        						variantType = "Indel";
+		    	        				}
+
+	    	        				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834539
+net/sf/varscan/Trio.java 636 725
+net/sf/varscan/CallMpileup.java 403 521
+----------------------------------------
+	    	        				{
+	    	        					if(motherContents.length >= 16)
+	    	        						motherAllele = motherContents[15];
+	    	        					String consBase = motherContents[0];
+		    	        				int reads1 = Integer.parseInt(motherContents[1]);
+		    	        				int reads2 = Integer.parseInt(motherContents[2]);
+		    	        				String varFreq = motherContents[3];
+		    	        				int qual1 = Integer.parseInt(motherContents[6]);
+		    	        				int qual2 = Integer.parseInt(motherContents[7]);
+		    	        				double pValue = Double.parseDouble(motherContents[8]);
+		    	        				int reads1plus = Integer.parseInt(motherContents[11]);
+		    	        				int reads1minus = Integer.parseInt(motherContents[12]);
+		    	        				int reads2plus = Integer.parseInt(motherContents[13]);
+		    	        				int reads2minus = Integer.parseInt(motherContents[14]);
+
+		    	        				double logP = 0;
+		    	        				try {
+			    	        				logP = 0 - (10 * java.lang.Math.log10(pValue));
+			    	        				if(logP > 255)
+			    	        					logP = 255;
+		    	        				}
+		    	        				catch(Exception e)
+		    	        				{
+		    	        					// Stick with default logP value
+		    	        				}
+
+		    	        				// mother is wildtype //
+		    	        				if(consBase.equals(refBase))
+		    	        				{
+		    	        					// A reference call - recalculate p-value against a possible het //
+		    	        					int expReads1 = (reads1 + reads2) / 2;
+		    	        					int expReads2 = (reads1 + reads2) - expReads1;
+		    	        					double newPvalue = VarScan.getSignificance(reads1, reads2, expReads1, expReads2);
+		    	        					double newLogP = 0;
+			    	        				try {
+				    	        				newLogP = 0 - (10 * java.lang.Math.log10(newPvalue));
+			    	        				}
+			    	        				catch(Exception e)
+			    	        				{
+			    	        					// Stick with default logP value
+			    	        				}
+		    	        					motherVCF = "0" + "/" + "0";
+		    	        					motherVCF += ":" + (int) newLogP + ":" + motherDepth + ":" + motherQualityDepth;
+	    	        						motherVCF += ":" + reads1 + ":" + reads2 + ":" + varFreq + ":" + pvalueFormat.format(pValue);
+	    	        						motherVCF += ":" + qual1 + ":" + qual2;
+	    	        						motherVCF += ":" + reads1plus + ":" + reads1minus + ":" + reads2plus + ":" + reads2minus;
+
+		    	        				}
+		    	        				// mother is variant //
+		    	        				else if(motherAllele.length() > 0 && !motherAllele.equals("N") && !motherAllele.equals("."))
+		    	        				{
+		    	        					// Determine how many variant alleles have been seen //
+
+		    	        					int varAlleleNumber = 0;
+
+		    	        					// Determine if we've seen the variant and what its number is ##
+
+			    	        				if(varAlleles.containsKey(motherAllele))
+			    	        				{
+			    	        					varAlleleNumber = varAlleles.get(motherAllele);
+			    	        				}
+			    	        				else
+			    	        				{
+			    	        					// IF no variants yet seen, this is variant allele 1 //
+			    	        					varAlleleNumber = varAlleles.size() + 1;
+			    	        					varAlleles.put(motherAllele, varAlleleNumber);
+			    	        				}
+
+			    	        				if(motherContents.length >= 1)
+			    	        				{
+			    	        					if(VarScan.isHomozygous(consBase))
+			    	        					{
+			    	        						motherVCF = varAlleleNumber + "/" + varAlleleNumber;
+			    	        					}
+			    	        					else
+			    	        					{
+			    	        						motherVCF = "0" + "/" + varAlleleNumber;
+			    	        					}
+
+			    	        					motherVCF += ":" + (int) logP + ":" + motherDepth + ":" + motherQualityDepth;
+		    	        						motherVCF += ":" + reads1 + ":" + reads2 + ":" + varFreq + ":" + pvalueFormat.format(pValue);
+		    	        						motherVCF += ":" + qual1 + ":" + qual2;
+		    	        						motherVCF += ":" + reads1plus + ":" + reads1minus + ":" + reads2plus + ":" + reads2minus;
+			    	        				}
+
+		    	        					if(motherAllele.length() > 1)
+		    	        						variantType = "Indel";
+		    	        				}
+
+	    	        				}
+
+----------------------------------------
+			    	        			{
+			    	        				// Determine type of call that was made //
+			    	        				String[] callContents = callLines[lineCounter].split("\t");
+			    	        				String consBase = callContents[0];
+			    	        				int reads1 = Integer.parseInt(callContents[1]);
+			    	        				int reads2 = Integer.parseInt(callContents[2]);
+			    	        				String varFreq = callContents[3];
+			    	        				int strands1 = Integer.parseInt(callContents[4]);
+			    	        				int strands2 = Integer.parseInt(callContents[5]);
+			    	        				int qual1 = Integer.parseInt(callContents[6]);
+			    	        				int qual2 = Integer.parseInt(callContents[7]);
+			    	        				double pValue = Double.parseDouble(callContents[8]);
+			    	        				int reads1plus = Integer.parseInt(callContents[11]);
+			    	        				int reads1minus = Integer.parseInt(callContents[12]);
+			    	        				int reads2plus = Integer.parseInt(callContents[13]);
+			    	        				int reads2minus = Integer.parseInt(callContents[14]);
+			    	        				String varAllele = "";
+
+			    	        				double logP = 0;
+			    	        				try {
+				    	        				logP = 0 - (10 * java.lang.Math.log10(pValue));
+				    	        				if(logP > 255)
+				    	        					logP = 255;
+			    	        				}
+			    	        				catch(Exception e)
+			    	        				{
+			    	        					// Stick with default logP value
+			    	        				}
+
+
+			    	        				// Capture the variant allele if there is one //
+
+			    	        				if(!consBase.equals(refBase) && !consBase.equals("N") && callContents.length > 15)
+			    	        				{
+			    	        					varAllele = callContents[15];
+
+			    	        					// Determine how many variant alleles have been seen //
+
+			    	        					int varAlleleNumber = 0;
+
+			    	        					// Determine if we've seen the variant and what its number is ##
+
+				    	        				if(varAlleles.containsKey(varAllele))
+				    	        				{
+				    	        					varAlleleNumber = varAlleles.get(varAllele);
+				    	        				}
+				    	        				else
+				    	        				{
+				    	        					// IF no variants yet seen, this is variant allele 1 //
+				    	        					varAlleleNumber = varAlleles.size() + 1;
+				    	        					varAlleles.put(varAllele, varAlleleNumber);
+				    	        				}
+
+			    	        					if(VarScan.isHomozygous(consBase))
+			    	        					{
+			    	        						samplesHom++;
+			    	        						thisVCF = varAlleleNumber + "/" + varAlleleNumber;
+			    	        					}
+			    	        					else
+			    	        					{
+			    	        						samplesHet++;
+			    	        						thisVCF = "0" + "/" + varAlleleNumber;
+			    	        					}
+
+			    	        					thisVCF += ":" + (int) logP + ":" + readDepth + ":" + qualityDepth;
+		    	        						thisVCF += ":" + reads1 + ":" + reads2 + ":" + varFreq + ":" + pvalueFormat.format(pValue);
+		    	        						thisVCF += ":" + qual1 + ":" + qual2;
+		    	        						thisVCF += ":" + reads1plus + ":" + reads1minus + ":" + reads2plus + ":" + reads2minus;
+			    	        				}
+			    	        				else if(consBase.equals(refBase))
+			    	        				{
+			    	        					// A reference call - recalculate p-value against a possible het //
+			    	        					int expReads1 = (reads1 + reads2) / 2;
+			    	        					int expReads2 = (reads1 + reads2) - expReads1;
+			    	        					double newPvalue = VarScan.getSignificance(reads1, reads2, expReads1, expReads2);
+			    	        					double newLogP = 0;
+				    	        				try {
+					    	        				newLogP = 0 - (10 * java.lang.Math.log10(newPvalue));
+				    	        				}
+				    	        				catch(Exception e)
+				    	        				{
+				    	        					// Stick with default logP value
+				    	        				}
+			    	        					thisVCF = "0" + "/" + "0";
+			    	        					thisVCF += ":" + (int) newLogP + ":" + readDepth + ":" + qualityDepth;
+		    	        						thisVCF += ":" + reads1 + ":" + reads2 + ":" + varFreq + ":" + pvalueFormat.format(pValue);
+		    	        						thisVCF += ":" + qual1 + ":" + qual2;
+		    	        						thisVCF += ":" + reads1plus + ":" + reads1minus + ":" + reads2plus + ":" + reads2minus;
+
+			    	        				}
+
+
+			    	        				thisCall = consBase + ":" + qualityDepth + ":" + reads1 + ":" + reads2 + ":" + varFreq;
+			    	        				thisCall += ":" + pvalueFormat.format(pValue);
+
+			    	        				if(!consBase.equals(refBase) && !consBase.equals("N"))
+			    	        				{
+			    	        					variantFlag = true;
+
+			    	        					// Flag what type of variant was observed //
+			    	        					if(consBase.length() > 1)
+			    	        						indelFlag = true;
+			    	        					else
+			    	        						snpFlag = true;
+
+			    	        					// Save reads1plus and reads1minus //
+
+			    	        					allReads1plus += reads1plus;
+			    	        					allReads1minus += reads1minus;
+			    	        					allReads2plus += reads2plus;
+			    	        					allReads2minus += reads2minus;
+
+
+			    	        				}
+			    	        				else
+			    	        				{
+			    	        					samplesRef++;
+			    	        				}
+			    	        			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834668
+net/sf/varscan/Trio.java 540 629
+net/sf/varscan/CallMpileup.java 403 521
+----------------------------------------
+	    	        				{
+	    	        					if(fatherContents.length >= 16)
+	    	        						fatherAllele = fatherContents[15];
+	    	        					String consBase = fatherContents[0];
+		    	        				int reads1 = Integer.parseInt(fatherContents[1]);
+		    	        				int reads2 = Integer.parseInt(fatherContents[2]);
+		    	        				String varFreq = fatherContents[3];
+		    	        				int qual1 = Integer.parseInt(fatherContents[6]);
+		    	        				int qual2 = Integer.parseInt(fatherContents[7]);
+		    	        				double pValue = Double.parseDouble(fatherContents[8]);
+		    	        				int reads1plus = Integer.parseInt(fatherContents[11]);
+		    	        				int reads1minus = Integer.parseInt(fatherContents[12]);
+		    	        				int reads2plus = Integer.parseInt(fatherContents[13]);
+		    	        				int reads2minus = Integer.parseInt(fatherContents[14]);
+
+		    	        				double logP = 0;
+		    	        				try {
+			    	        				logP = 0 - (10 * java.lang.Math.log10(pValue));
+			    	        				if(logP > 255)
+			    	        					logP = 255;
+		    	        				}
+		    	        				catch(Exception e)
+		    	        				{
+		    	        					// Stick with default logP value
+		    	        				}
+
+		    	        				// Father is wildtype //
+		    	        				if(consBase.equals(refBase))
+		    	        				{
+		    	        					// A reference call - recalculate p-value against a possible het //
+		    	        					int expReads1 = (reads1 + reads2) / 2;
+		    	        					int expReads2 = (reads1 + reads2) - expReads1;
+		    	        					double newPvalue = VarScan.getSignificance(reads1, reads2, expReads1, expReads2);
+		    	        					double newLogP = 0;
+			    	        				try {
+				    	        				newLogP = 0 - (10 * java.lang.Math.log10(newPvalue));
+			    	        				}
+			    	        				catch(Exception e)
+			    	        				{
+			    	        					// Stick with default logP value
+			    	        				}
+		    	        					fatherVCF = "0" + "/" + "0";
+		    	        					fatherVCF += ":" + (int) newLogP + ":" + fatherDepth + ":" + fatherQualityDepth;
+	    	        						fatherVCF += ":" + reads1 + ":" + reads2 + ":" + varFreq + ":" + pvalueFormat.format(pValue);
+	    	        						fatherVCF += ":" + qual1 + ":" + qual2;
+	    	        						fatherVCF += ":" + reads1plus + ":" + reads1minus + ":" + reads2plus + ":" + reads2minus;
+
+		    	        				}
+		    	        				// Father is variant //
+		    	        				else if(fatherAllele.length() > 0 && !fatherAllele.equals("N") && !fatherAllele.equals("."))
+		    	        				{
+		    	        					// Determine how many variant alleles have been seen //
+
+		    	        					int varAlleleNumber = 0;
+
+		    	        					// Determine if we've seen the variant and what its number is ##
+
+			    	        				if(varAlleles.containsKey(fatherAllele))
+			    	        				{
+			    	        					varAlleleNumber = varAlleles.get(fatherAllele);
+			    	        				}
+			    	        				else
+			    	        				{
+			    	        					// IF no variants yet seen, this is variant allele 1 //
+			    	        					varAlleleNumber = varAlleles.size() + 1;
+			    	        					varAlleles.put(fatherAllele, varAlleleNumber);
+			    	        				}
+
+			    	        				if(fatherContents.length >= 1)
+			    	        				{
+			    	        					if(VarScan.isHomozygous(consBase))
+			    	        					{
+			    	        						fatherVCF = varAlleleNumber + "/" + varAlleleNumber;
+			    	        					}
+			    	        					else
+			    	        					{
+			    	        						fatherVCF = "0" + "/" + varAlleleNumber;
+			    	        					}
+
+			    	        					fatherVCF += ":" + (int) logP + ":" + fatherDepth + ":" + fatherQualityDepth;
+		    	        						fatherVCF += ":" + reads1 + ":" + reads2 + ":" + varFreq + ":" + pvalueFormat.format(pValue);
+		    	        						fatherVCF += ":" + qual1 + ":" + qual2;
+		    	        						fatherVCF += ":" + reads1plus + ":" + reads1minus + ":" + reads2plus + ":" + reads2minus;
+			    	        				}
+
+		    	        					if(fatherAllele.length() > 1)
+		    	        						variantType = "Indel";
+		    	        				}
+
+	    	        				}
+
+----------------------------------------
+			    	        			{
+			    	        				// Determine type of call that was made //
+			    	        				String[] callContents = callLines[lineCounter].split("\t");
+			    	        				String consBase = callContents[0];
+			    	        				int reads1 = Integer.parseInt(callContents[1]);
+			    	        				int reads2 = Integer.parseInt(callContents[2]);
+			    	        				String varFreq = callContents[3];
+			    	        				int strands1 = Integer.parseInt(callContents[4]);
+			    	        				int strands2 = Integer.parseInt(callContents[5]);
+			    	        				int qual1 = Integer.parseInt(callContents[6]);
+			    	        				int qual2 = Integer.parseInt(callContents[7]);
+			    	        				double pValue = Double.parseDouble(callContents[8]);
+			    	        				int reads1plus = Integer.parseInt(callContents[11]);
+			    	        				int reads1minus = Integer.parseInt(callContents[12]);
+			    	        				int reads2plus = Integer.parseInt(callContents[13]);
+			    	        				int reads2minus = Integer.parseInt(callContents[14]);
+			    	        				String varAllele = "";
+
+			    	        				double logP = 0;
+			    	        				try {
+				    	        				logP = 0 - (10 * java.lang.Math.log10(pValue));
+				    	        				if(logP > 255)
+				    	        					logP = 255;
+			    	        				}
+			    	        				catch(Exception e)
+			    	        				{
+			    	        					// Stick with default logP value
+			    	        				}
+
+
+			    	        				// Capture the variant allele if there is one //
+
+			    	        				if(!consBase.equals(refBase) && !consBase.equals("N") && callContents.length > 15)
+			    	        				{
+			    	        					varAllele = callContents[15];
+
+			    	        					// Determine how many variant alleles have been seen //
+
+			    	        					int varAlleleNumber = 0;
+
+			    	        					// Determine if we've seen the variant and what its number is ##
+
+				    	        				if(varAlleles.containsKey(varAllele))
+				    	        				{
+				    	        					varAlleleNumber = varAlleles.get(varAllele);
+				    	        				}
+				    	        				else
+				    	        				{
+				    	        					// IF no variants yet seen, this is variant allele 1 //
+				    	        					varAlleleNumber = varAlleles.size() + 1;
+				    	        					varAlleles.put(varAllele, varAlleleNumber);
+				    	        				}
+
+			    	        					if(VarScan.isHomozygous(consBase))
+			    	        					{
+			    	        						samplesHom++;
+			    	        						thisVCF = varAlleleNumber + "/" + varAlleleNumber;
+			    	        					}
+			    	        					else
+			    	        					{
+			    	        						samplesHet++;
+			    	        						thisVCF = "0" + "/" + varAlleleNumber;
+			    	        					}
+
+			    	        					thisVCF += ":" + (int) logP + ":" + readDepth + ":" + qualityDepth;
+		    	        						thisVCF += ":" + reads1 + ":" + reads2 + ":" + varFreq + ":" + pvalueFormat.format(pValue);
+		    	        						thisVCF += ":" + qual1 + ":" + qual2;
+		    	        						thisVCF += ":" + reads1plus + ":" + reads1minus + ":" + reads2plus + ":" + reads2minus;
+			    	        				}
+			    	        				else if(consBase.equals(refBase))
+			    	        				{
+			    	        					// A reference call - recalculate p-value against a possible het //
+			    	        					int expReads1 = (reads1 + reads2) / 2;
+			    	        					int expReads2 = (reads1 + reads2) - expReads1;
+			    	        					double newPvalue = VarScan.getSignificance(reads1, reads2, expReads1, expReads2);
+			    	        					double newLogP = 0;
+				    	        				try {
+					    	        				newLogP = 0 - (10 * java.lang.Math.log10(newPvalue));
+				    	        				}
+				    	        				catch(Exception e)
+				    	        				{
+				    	        					// Stick with default logP value
+				    	        				}
+			    	        					thisVCF = "0" + "/" + "0";
+			    	        					thisVCF += ":" + (int) newLogP + ":" + readDepth + ":" + qualityDepth;
+		    	        						thisVCF += ":" + reads1 + ":" + reads2 + ":" + varFreq + ":" + pvalueFormat.format(pValue);
+		    	        						thisVCF += ":" + qual1 + ":" + qual2;
+		    	        						thisVCF += ":" + reads1plus + ":" + reads1minus + ":" + reads2plus + ":" + reads2minus;
+
+			    	        				}
+
+
+			    	        				thisCall = consBase + ":" + qualityDepth + ":" + reads1 + ":" + reads2 + ":" + varFreq;
+			    	        				thisCall += ":" + pvalueFormat.format(pValue);
+
+			    	        				if(!consBase.equals(refBase) && !consBase.equals("N"))
+			    	        				{
+			    	        					variantFlag = true;
+
+			    	        					// Flag what type of variant was observed //
+			    	        					if(consBase.length() > 1)
+			    	        						indelFlag = true;
+			    	        					else
+			    	        						snpFlag = true;
+
+			    	        					// Save reads1plus and reads1minus //
+
+			    	        					allReads1plus += reads1plus;
+			    	        					allReads1minus += reads1minus;
+			    	        					allReads2plus += reads2plus;
+			    	        					allReads2minus += reads2minus;
+
+
+			    	        				}
+			    	        				else
+			    	        				{
+			    	        					samplesRef++;
+			    	        				}
+			    	        			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834540
+net/sf/varscan/Trio.java 568 587
+net/sf/varscan/Trio.java 664 683
+----------------------------------------
+		    	        				{
+		    	        					// A reference call - recalculate p-value against a possible het //
+		    	        					int expReads1 = (reads1 + reads2) / 2;
+		    	        					int expReads2 = (reads1 + reads2) - expReads1;
+		    	        					double newPvalue = VarScan.getSignificance(reads1, reads2, expReads1, expReads2);
+		    	        					double newLogP = 0;
+			    	        				try {
+				    	        				newLogP = 0 - (10 * java.lang.Math.log10(newPvalue));
+			    	        				}
+			    	        				catch(Exception e)
+			    	        				{
+			    	        					// Stick with default logP value
+			    	        				}
+		    	        					fatherVCF = "0" + "/" + "0";
+		    	        					fatherVCF += ":" + (int) newLogP + ":" + fatherDepth + ":" + fatherQualityDepth;
+	    	        						fatherVCF += ":" + reads1 + ":" + reads2 + ":" + varFreq + ":" + pvalueFormat.format(pValue);
+	    	        						fatherVCF += ":" + qual1 + ":" + qual2;
+	    	        						fatherVCF += ":" + reads1plus + ":" + reads1minus + ":" + reads2plus + ":" + reads2minus;
+
+		    	        				}
+
+----------------------------------------
+		    	        				{
+		    	        					// A reference call - recalculate p-value against a possible het //
+		    	        					int expReads1 = (reads1 + reads2) / 2;
+		    	        					int expReads2 = (reads1 + reads2) - expReads1;
+		    	        					double newPvalue = VarScan.getSignificance(reads1, reads2, expReads1, expReads2);
+		    	        					double newLogP = 0;
+			    	        				try {
+				    	        				newLogP = 0 - (10 * java.lang.Math.log10(newPvalue));
+			    	        				}
+			    	        				catch(Exception e)
+			    	        				{
+			    	        					// Stick with default logP value
+			    	        				}
+		    	        					motherVCF = "0" + "/" + "0";
+		    	        					motherVCF += ":" + (int) newLogP + ":" + motherDepth + ":" + motherQualityDepth;
+	    	        						motherVCF += ":" + reads1 + ":" + reads2 + ":" + varFreq + ":" + pvalueFormat.format(pValue);
+	    	        						motherVCF += ":" + qual1 + ":" + qual2;
+	    	        						motherVCF += ":" + reads1plus + ":" + reads1minus + ":" + reads2plus + ":" + reads2minus;
+
+		    	        				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834541
+net/sf/varscan/Trio.java 664 683
+net/sf/varscan/CallMpileup.java 473 492
+----------------------------------------
+		    	        				{
+		    	        					// A reference call - recalculate p-value against a possible het //
+		    	        					int expReads1 = (reads1 + reads2) / 2;
+		    	        					int expReads2 = (reads1 + reads2) - expReads1;
+		    	        					double newPvalue = VarScan.getSignificance(reads1, reads2, expReads1, expReads2);
+		    	        					double newLogP = 0;
+			    	        				try {
+				    	        				newLogP = 0 - (10 * java.lang.Math.log10(newPvalue));
+			    	        				}
+			    	        				catch(Exception e)
+			    	        				{
+			    	        					// Stick with default logP value
+			    	        				}
+		    	        					motherVCF = "0" + "/" + "0";
+		    	        					motherVCF += ":" + (int) newLogP + ":" + motherDepth + ":" + motherQualityDepth;
+	    	        						motherVCF += ":" + reads1 + ":" + reads2 + ":" + varFreq + ":" + pvalueFormat.format(pValue);
+	    	        						motherVCF += ":" + qual1 + ":" + qual2;
+	    	        						motherVCF += ":" + reads1plus + ":" + reads1minus + ":" + reads2plus + ":" + reads2minus;
+
+		    	        				}
+
+----------------------------------------
+			    	        				{
+			    	        					// A reference call - recalculate p-value against a possible het //
+			    	        					int expReads1 = (reads1 + reads2) / 2;
+			    	        					int expReads2 = (reads1 + reads2) - expReads1;
+			    	        					double newPvalue = VarScan.getSignificance(reads1, reads2, expReads1, expReads2);
+			    	        					double newLogP = 0;
+				    	        				try {
+					    	        				newLogP = 0 - (10 * java.lang.Math.log10(newPvalue));
+				    	        				}
+				    	        				catch(Exception e)
+				    	        				{
+				    	        					// Stick with default logP value
+				    	        				}
+			    	        					thisVCF = "0" + "/" + "0";
+			    	        					thisVCF += ":" + (int) newLogP + ":" + readDepth + ":" + qualityDepth;
+		    	        						thisVCF += ":" + reads1 + ":" + reads2 + ":" + varFreq + ":" + pvalueFormat.format(pValue);
+		    	        						thisVCF += ":" + qual1 + ":" + qual2;
+		    	        						thisVCF += ":" + reads1plus + ":" + reads1minus + ":" + reads2plus + ":" + reads2minus;
+
+			    	        				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834669
+net/sf/varscan/Trio.java 568 587
+net/sf/varscan/CallMpileup.java 473 492
+----------------------------------------
+		    	        				{
+		    	        					// A reference call - recalculate p-value against a possible het //
+		    	        					int expReads1 = (reads1 + reads2) / 2;
+		    	        					int expReads2 = (reads1 + reads2) - expReads1;
+		    	        					double newPvalue = VarScan.getSignificance(reads1, reads2, expReads1, expReads2);
+		    	        					double newLogP = 0;
+			    	        				try {
+				    	        				newLogP = 0 - (10 * java.lang.Math.log10(newPvalue));
+			    	        				}
+			    	        				catch(Exception e)
+			    	        				{
+			    	        					// Stick with default logP value
+			    	        				}
+		    	        					fatherVCF = "0" + "/" + "0";
+		    	        					fatherVCF += ":" + (int) newLogP + ":" + fatherDepth + ":" + fatherQualityDepth;
+	    	        						fatherVCF += ":" + reads1 + ":" + reads2 + ":" + varFreq + ":" + pvalueFormat.format(pValue);
+	    	        						fatherVCF += ":" + qual1 + ":" + qual2;
+	    	        						fatherVCF += ":" + reads1plus + ":" + reads1minus + ":" + reads2plus + ":" + reads2minus;
+
+		    	        				}
+
+----------------------------------------
+			    	        				{
+			    	        					// A reference call - recalculate p-value against a possible het //
+			    	        					int expReads1 = (reads1 + reads2) / 2;
+			    	        					int expReads2 = (reads1 + reads2) - expReads1;
+			    	        					double newPvalue = VarScan.getSignificance(reads1, reads2, expReads1, expReads2);
+			    	        					double newLogP = 0;
+				    	        				try {
+					    	        				newLogP = 0 - (10 * java.lang.Math.log10(newPvalue));
+				    	        				}
+				    	        				catch(Exception e)
+				    	        				{
+				    	        					// Stick with default logP value
+				    	        				}
+			    	        					thisVCF = "0" + "/" + "0";
+			    	        					thisVCF += ":" + (int) newLogP + ":" + readDepth + ":" + qualityDepth;
+		    	        						thisVCF += ":" + reads1 + ":" + reads2 + ":" + varFreq + ":" + pvalueFormat.format(pValue);
+		    	        						thisVCF += ":" + qual1 + ":" + qual2;
+		    	        						thisVCF += ":" + reads1plus + ":" + reads1minus + ":" + reads2plus + ":" + reads2minus;
+
+			    	        				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834542
+net/sf/varscan/CallMpileup.java 436 471
+net/sf/varscan/Trio.java 686 723
+----------------------------------------
+			    	        				{
+			    	        					varAllele = callContents[15];
+
+			    	        					// Determine how many variant alleles have been seen //
+
+			    	        					int varAlleleNumber = 0;
+
+			    	        					// Determine if we've seen the variant and what its number is ##
+
+				    	        				if(varAlleles.containsKey(varAllele))
+				    	        				{
+				    	        					varAlleleNumber = varAlleles.get(varAllele);
+				    	        				}
+				    	        				else
+				    	        				{
+				    	        					// IF no variants yet seen, this is variant allele 1 //
+				    	        					varAlleleNumber = varAlleles.size() + 1;
+				    	        					varAlleles.put(varAllele, varAlleleNumber);
+				    	        				}
+
+			    	        					if(VarScan.isHomozygous(consBase))
+			    	        					{
+			    	        						samplesHom++;
+			    	        						thisVCF = varAlleleNumber + "/" + varAlleleNumber;
+			    	        					}
+			    	        					else
+			    	        					{
+			    	        						samplesHet++;
+			    	        						thisVCF = "0" + "/" + varAlleleNumber;
+			    	        					}
+
+			    	        					thisVCF += ":" + (int) logP + ":" + readDepth + ":" + qualityDepth;
+		    	        						thisVCF += ":" + reads1 + ":" + reads2 + ":" + varFreq + ":" + pvalueFormat.format(pValue);
+		    	        						thisVCF += ":" + qual1 + ":" + qual2;
+		    	        						thisVCF += ":" + reads1plus + ":" + reads1minus + ":" + reads2plus + ":" + reads2minus;
+			    	        				}
+
+----------------------------------------
+		    	        				{
+		    	        					// Determine how many variant alleles have been seen //
+
+		    	        					int varAlleleNumber = 0;
+
+		    	        					// Determine if we've seen the variant and what its number is ##
+
+			    	        				if(varAlleles.containsKey(motherAllele))
+			    	        				{
+			    	        					varAlleleNumber = varAlleles.get(motherAllele);
+			    	        				}
+			    	        				else
+			    	        				{
+			    	        					// IF no variants yet seen, this is variant allele 1 //
+			    	        					varAlleleNumber = varAlleles.size() + 1;
+			    	        					varAlleles.put(motherAllele, varAlleleNumber);
+			    	        				}
+
+			    	        				if(motherContents.length >= 1)
+			    	        				{
+			    	        					if(VarScan.isHomozygous(consBase))
+			    	        					{
+			    	        						motherVCF = varAlleleNumber + "/" + varAlleleNumber;
+			    	        					}
+			    	        					else
+			    	        					{
+			    	        						motherVCF = "0" + "/" + varAlleleNumber;
+			    	        					}
+
+			    	        					motherVCF += ":" + (int) logP + ":" + motherDepth + ":" + motherQualityDepth;
+		    	        						motherVCF += ":" + reads1 + ":" + reads2 + ":" + varFreq + ":" + pvalueFormat.format(pValue);
+		    	        						motherVCF += ":" + qual1 + ":" + qual2;
+		    	        						motherVCF += ":" + reads1plus + ":" + reads1minus + ":" + reads2plus + ":" + reads2minus;
+			    	        				}
+
+		    	        					if(motherAllele.length() > 1)
+		    	        						variantType = "Indel";
+		    	        				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834728
+net/sf/varscan/CallMpileup.java 436 471
+net/sf/varscan/Trio.java 590 627
+----------------------------------------
+			    	        				{
+			    	        					varAllele = callContents[15];
+
+			    	        					// Determine how many variant alleles have been seen //
+
+			    	        					int varAlleleNumber = 0;
+
+			    	        					// Determine if we've seen the variant and what its number is ##
+
+				    	        				if(varAlleles.containsKey(varAllele))
+				    	        				{
+				    	        					varAlleleNumber = varAlleles.get(varAllele);
+				    	        				}
+				    	        				else
+				    	        				{
+				    	        					// IF no variants yet seen, this is variant allele 1 //
+				    	        					varAlleleNumber = varAlleles.size() + 1;
+				    	        					varAlleles.put(varAllele, varAlleleNumber);
+				    	        				}
+
+			    	        					if(VarScan.isHomozygous(consBase))
+			    	        					{
+			    	        						samplesHom++;
+			    	        						thisVCF = varAlleleNumber + "/" + varAlleleNumber;
+			    	        					}
+			    	        					else
+			    	        					{
+			    	        						samplesHet++;
+			    	        						thisVCF = "0" + "/" + varAlleleNumber;
+			    	        					}
+
+			    	        					thisVCF += ":" + (int) logP + ":" + readDepth + ":" + qualityDepth;
+		    	        						thisVCF += ":" + reads1 + ":" + reads2 + ":" + varFreq + ":" + pvalueFormat.format(pValue);
+		    	        						thisVCF += ":" + qual1 + ":" + qual2;
+		    	        						thisVCF += ":" + reads1plus + ":" + reads1minus + ":" + reads2plus + ":" + reads2minus;
+			    	        				}
+
+----------------------------------------
+		    	        				{
+		    	        					// Determine how many variant alleles have been seen //
+
+		    	        					int varAlleleNumber = 0;
+
+		    	        					// Determine if we've seen the variant and what its number is ##
+
+			    	        				if(varAlleles.containsKey(fatherAllele))
+			    	        				{
+			    	        					varAlleleNumber = varAlleles.get(fatherAllele);
+			    	        				}
+			    	        				else
+			    	        				{
+			    	        					// IF no variants yet seen, this is variant allele 1 //
+			    	        					varAlleleNumber = varAlleles.size() + 1;
+			    	        					varAlleles.put(fatherAllele, varAlleleNumber);
+			    	        				}
+
+			    	        				if(fatherContents.length >= 1)
+			    	        				{
+			    	        					if(VarScan.isHomozygous(consBase))
+			    	        					{
+			    	        						fatherVCF = varAlleleNumber + "/" + varAlleleNumber;
+			    	        					}
+			    	        					else
+			    	        					{
+			    	        						fatherVCF = "0" + "/" + varAlleleNumber;
+			    	        					}
+
+			    	        					fatherVCF += ":" + (int) logP + ":" + fatherDepth + ":" + fatherQualityDepth;
+		    	        						fatherVCF += ":" + reads1 + ":" + reads2 + ":" + varFreq + ":" + pvalueFormat.format(pValue);
+		    	        						fatherVCF += ":" + qual1 + ":" + qual2;
+		    	        						fatherVCF += ":" + reads1plus + ":" + reads1minus + ":" + reads2plus + ":" + reads2minus;
+			    	        				}
+
+		    	        					if(fatherAllele.length() > 1)
+		    	        						variantType = "Indel";
+		    	        				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834543
+net/sf/varscan/Trio.java 686 723
+net/sf/varscan/Trio.java 590 627
+----------------------------------------
+		    	        				{
+		    	        					// Determine how many variant alleles have been seen //
+
+		    	        					int varAlleleNumber = 0;
+
+		    	        					// Determine if we've seen the variant and what its number is ##
+
+			    	        				if(varAlleles.containsKey(motherAllele))
+			    	        				{
+			    	        					varAlleleNumber = varAlleles.get(motherAllele);
+			    	        				}
+			    	        				else
+			    	        				{
+			    	        					// IF no variants yet seen, this is variant allele 1 //
+			    	        					varAlleleNumber = varAlleles.size() + 1;
+			    	        					varAlleles.put(motherAllele, varAlleleNumber);
+			    	        				}
+
+			    	        				if(motherContents.length >= 1)
+			    	        				{
+			    	        					if(VarScan.isHomozygous(consBase))
+			    	        					{
+			    	        						motherVCF = varAlleleNumber + "/" + varAlleleNumber;
+			    	        					}
+			    	        					else
+			    	        					{
+			    	        						motherVCF = "0" + "/" + varAlleleNumber;
+			    	        					}
+
+			    	        					motherVCF += ":" + (int) logP + ":" + motherDepth + ":" + motherQualityDepth;
+		    	        						motherVCF += ":" + reads1 + ":" + reads2 + ":" + varFreq + ":" + pvalueFormat.format(pValue);
+		    	        						motherVCF += ":" + qual1 + ":" + qual2;
+		    	        						motherVCF += ":" + reads1plus + ":" + reads1minus + ":" + reads2plus + ":" + reads2minus;
+			    	        				}
+
+		    	        					if(motherAllele.length() > 1)
+		    	        						variantType = "Indel";
+		    	        				}
+
+----------------------------------------
+		    	        				{
+		    	        					// Determine how many variant alleles have been seen //
+
+		    	        					int varAlleleNumber = 0;
+
+		    	        					// Determine if we've seen the variant and what its number is ##
+
+			    	        				if(varAlleles.containsKey(fatherAllele))
+			    	        				{
+			    	        					varAlleleNumber = varAlleles.get(fatherAllele);
+			    	        				}
+			    	        				else
+			    	        				{
+			    	        					// IF no variants yet seen, this is variant allele 1 //
+			    	        					varAlleleNumber = varAlleles.size() + 1;
+			    	        					varAlleles.put(fatherAllele, varAlleleNumber);
+			    	        				}
+
+			    	        				if(fatherContents.length >= 1)
+			    	        				{
+			    	        					if(VarScan.isHomozygous(consBase))
+			    	        					{
+			    	        						fatherVCF = varAlleleNumber + "/" + varAlleleNumber;
+			    	        					}
+			    	        					else
+			    	        					{
+			    	        						fatherVCF = "0" + "/" + varAlleleNumber;
+			    	        					}
+
+			    	        					fatherVCF += ":" + (int) logP + ":" + fatherDepth + ":" + fatherQualityDepth;
+		    	        						fatherVCF += ":" + reads1 + ":" + reads2 + ":" + varFreq + ":" + pvalueFormat.format(pValue);
+		    	        						fatherVCF += ":" + qual1 + ":" + qual2;
+		    	        						fatherVCF += ":" + reads1plus + ":" + reads1minus + ":" + reads2plus + ":" + reads2minus;
+			    	        				}
+
+		    	        					if(fatherAllele.length() > 1)
+		    	        						variantType = "Indel";
+		    	        				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834544
+net/sf/varscan/Trio.java 609 623
+net/sf/varscan/Trio.java 705 719
+----------------------------------------
+			    	        				{
+			    	        					if(VarScan.isHomozygous(consBase))
+			    	        					{
+			    	        						fatherVCF = varAlleleNumber + "/" + varAlleleNumber;
+			    	        					}
+			    	        					else
+			    	        					{
+			    	        						fatherVCF = "0" + "/" + varAlleleNumber;
+			    	        					}
+
+			    	        					fatherVCF += ":" + (int) logP + ":" + fatherDepth + ":" + fatherQualityDepth;
+		    	        						fatherVCF += ":" + reads1 + ":" + reads2 + ":" + varFreq + ":" + pvalueFormat.format(pValue);
+		    	        						fatherVCF += ":" + qual1 + ":" + qual2;
+		    	        						fatherVCF += ":" + reads1plus + ":" + reads1minus + ":" + reads2plus + ":" + reads2minus;
+			    	        				}
+
+----------------------------------------
+			    	        				{
+			    	        					if(VarScan.isHomozygous(consBase))
+			    	        					{
+			    	        						motherVCF = varAlleleNumber + "/" + varAlleleNumber;
+			    	        					}
+			    	        					else
+			    	        					{
+			    	        						motherVCF = "0" + "/" + varAlleleNumber;
+			    	        					}
+
+			    	        					motherVCF += ":" + (int) logP + ":" + motherDepth + ":" + motherQualityDepth;
+		    	        						motherVCF += ":" + reads1 + ":" + reads2 + ":" + varFreq + ":" + pvalueFormat.format(pValue);
+		    	        						motherVCF += ":" + qual1 + ":" + qual2;
+		    	        						motherVCF += ":" + reads1plus + ":" + reads1minus + ":" + reads2plus + ":" + reads2minus;
+			    	        				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834545
+net/sf/varscan/Trio.java 540 629
+net/sf/varscan/Trio.java 732 821
+----------------------------------------
+	    	        				{
+	    	        					if(fatherContents.length >= 16)
+	    	        						fatherAllele = fatherContents[15];
+	    	        					String consBase = fatherContents[0];
+		    	        				int reads1 = Integer.parseInt(fatherContents[1]);
+		    	        				int reads2 = Integer.parseInt(fatherContents[2]);
+		    	        				String varFreq = fatherContents[3];
+		    	        				int qual1 = Integer.parseInt(fatherContents[6]);
+		    	        				int qual2 = Integer.parseInt(fatherContents[7]);
+		    	        				double pValue = Double.parseDouble(fatherContents[8]);
+		    	        				int reads1plus = Integer.parseInt(fatherContents[11]);
+		    	        				int reads1minus = Integer.parseInt(fatherContents[12]);
+		    	        				int reads2plus = Integer.parseInt(fatherContents[13]);
+		    	        				int reads2minus = Integer.parseInt(fatherContents[14]);
+
+		    	        				double logP = 0;
+		    	        				try {
+			    	        				logP = 0 - (10 * java.lang.Math.log10(pValue));
+			    	        				if(logP > 255)
+			    	        					logP = 255;
+		    	        				}
+		    	        				catch(Exception e)
+		    	        				{
+		    	        					// Stick with default logP value
+		    	        				}
+
+		    	        				// Father is wildtype //
+		    	        				if(consBase.equals(refBase))
+		    	        				{
+		    	        					// A reference call - recalculate p-value against a possible het //
+		    	        					int expReads1 = (reads1 + reads2) / 2;
+		    	        					int expReads2 = (reads1 + reads2) - expReads1;
+		    	        					double newPvalue = VarScan.getSignificance(reads1, reads2, expReads1, expReads2);
+		    	        					double newLogP = 0;
+			    	        				try {
+				    	        				newLogP = 0 - (10 * java.lang.Math.log10(newPvalue));
+			    	        				}
+			    	        				catch(Exception e)
+			    	        				{
+			    	        					// Stick with default logP value
+			    	        				}
+		    	        					fatherVCF = "0" + "/" + "0";
+		    	        					fatherVCF += ":" + (int) newLogP + ":" + fatherDepth + ":" + fatherQualityDepth;
+	    	        						fatherVCF += ":" + reads1 + ":" + reads2 + ":" + varFreq + ":" + pvalueFormat.format(pValue);
+	    	        						fatherVCF += ":" + qual1 + ":" + qual2;
+	    	        						fatherVCF += ":" + reads1plus + ":" + reads1minus + ":" + reads2plus + ":" + reads2minus;
+
+		    	        				}
+		    	        				// Father is variant //
+		    	        				else if(fatherAllele.length() > 0 && !fatherAllele.equals("N") && !fatherAllele.equals("."))
+		    	        				{
+		    	        					// Determine how many variant alleles have been seen //
+
+		    	        					int varAlleleNumber = 0;
+
+		    	        					// Determine if we've seen the variant and what its number is ##
+
+			    	        				if(varAlleles.containsKey(fatherAllele))
+			    	        				{
+			    	        					varAlleleNumber = varAlleles.get(fatherAllele);
+			    	        				}
+			    	        				else
+			    	        				{
+			    	        					// IF no variants yet seen, this is variant allele 1 //
+			    	        					varAlleleNumber = varAlleles.size() + 1;
+			    	        					varAlleles.put(fatherAllele, varAlleleNumber);
+			    	        				}
+
+			    	        				if(fatherContents.length >= 1)
+			    	        				{
+			    	        					if(VarScan.isHomozygous(consBase))
+			    	        					{
+			    	        						fatherVCF = varAlleleNumber + "/" + varAlleleNumber;
+			    	        					}
+			    	        					else
+			    	        					{
+			    	        						fatherVCF = "0" + "/" + varAlleleNumber;
+			    	        					}
+
+			    	        					fatherVCF += ":" + (int) logP + ":" + fatherDepth + ":" + fatherQualityDepth;
+		    	        						fatherVCF += ":" + reads1 + ":" + reads2 + ":" + varFreq + ":" + pvalueFormat.format(pValue);
+		    	        						fatherVCF += ":" + qual1 + ":" + qual2;
+		    	        						fatherVCF += ":" + reads1plus + ":" + reads1minus + ":" + reads2plus + ":" + reads2minus;
+			    	        				}
+
+		    	        					if(fatherAllele.length() > 1)
+		    	        						variantType = "Indel";
+		    	        				}
+
+	    	        				}
+
+----------------------------------------
+	    	        				{
+	    	        					if(childContents.length >= 16)
+	    	        						childAllele = childContents[15];
+	    	        					String consBase = childContents[0];
+		    	        				int reads1 = Integer.parseInt(childContents[1]);
+		    	        				int reads2 = Integer.parseInt(childContents[2]);
+		    	        				String varFreq = childContents[3];
+		    	        				int qual1 = Integer.parseInt(childContents[6]);
+		    	        				int qual2 = Integer.parseInt(childContents[7]);
+		    	        				double pValue = Double.parseDouble(childContents[8]);
+		    	        				int reads1plus = Integer.parseInt(childContents[11]);
+		    	        				int reads1minus = Integer.parseInt(childContents[12]);
+		    	        				int reads2plus = Integer.parseInt(childContents[13]);
+		    	        				int reads2minus = Integer.parseInt(childContents[14]);
+
+		    	        				double logP = 0;
+		    	        				try {
+			    	        				logP = 0 - (10 * java.lang.Math.log10(pValue));
+			    	        				if(logP > 255)
+			    	        					logP = 255;
+		    	        				}
+		    	        				catch(Exception e)
+		    	        				{
+		    	        					// Stick with default logP value
+		    	        				}
+
+		    	        				// child is wildtype //
+		    	        				if(consBase.equals(refBase))
+		    	        				{
+		    	        					// A reference call - recalculate p-value against a possible het //
+		    	        					int expReads1 = (reads1 + reads2) / 2;
+		    	        					int expReads2 = (reads1 + reads2) - expReads1;
+		    	        					double newPvalue = VarScan.getSignificance(reads1, reads2, expReads1, expReads2);
+		    	        					double newLogP = 0;
+			    	        				try {
+				    	        				newLogP = 0 - (10 * java.lang.Math.log10(newPvalue));
+			    	        				}
+			    	        				catch(Exception e)
+			    	        				{
+			    	        					// Stick with default logP value
+			    	        				}
+		    	        					childVCF = "0" + "/" + "0";
+		    	        					childVCF += ":" + (int) newLogP + ":" + childDepth + ":" + childQualityDepth;
+	    	        						childVCF += ":" + reads1 + ":" + reads2 + ":" + varFreq + ":" + pvalueFormat.format(pValue);
+	    	        						childVCF += ":" + qual1 + ":" + qual2;
+	    	        						childVCF += ":" + reads1plus + ":" + reads1minus + ":" + reads2plus + ":" + reads2minus;
+
+		    	        				}
+		    	        				// child is variant //
+		    	        				else if(childAllele.length() > 0 && !childAllele.equals("N") && !childAllele.equals("."))
+		    	        				{
+		    	        					// Determine how many variant alleles have been seen //
+
+		    	        					int varAlleleNumber = 0;
+
+		    	        					// Determine if we've seen the variant and what its number is ##
+
+			    	        				if(varAlleles.containsKey(childAllele))
+			    	        				{
+			    	        					varAlleleNumber = varAlleles.get(childAllele);
+			    	        				}
+			    	        				else
+			    	        				{
+			    	        					// IF no variants yet seen, this is variant allele 1 //
+			    	        					varAlleleNumber = varAlleles.size() + 1;
+			    	        					varAlleles.put(childAllele, varAlleleNumber);
+			    	        				}
+
+			    	        				if(childContents.length >= 1)
+			    	        				{
+			    	        					if(VarScan.isHomozygous(consBase))
+			    	        					{
+			    	        						childVCF = varAlleleNumber + "/" + varAlleleNumber;
+			    	        					}
+			    	        					else
+			    	        					{
+			    	        						childVCF = "0" + "/" + varAlleleNumber;
+			    	        					}
+
+			    	        					childVCF += ":" + (int) logP + ":" + childDepth + ":" + childQualityDepth;
+		    	        						childVCF += ":" + reads1 + ":" + reads2 + ":" + varFreq + ":" + pvalueFormat.format(pValue);
+		    	        						childVCF += ":" + qual1 + ":" + qual2;
+		    	        						childVCF += ":" + reads1plus + ":" + reads1minus + ":" + reads2plus + ":" + reads2minus;
+			    	        				}
+
+		    	        					if(childAllele.length() > 1)
+		    	        						variantType = "Indel";
+		    	        				}
+
+	    	        				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834546
+net/sf/varscan/CallMpileup.java 403 521
+net/sf/varscan/Trio.java 732 821
+----------------------------------------
+			    	        			{
+			    	        				// Determine type of call that was made //
+			    	        				String[] callContents = callLines[lineCounter].split("\t");
+			    	        				String consBase = callContents[0];
+			    	        				int reads1 = Integer.parseInt(callContents[1]);
+			    	        				int reads2 = Integer.parseInt(callContents[2]);
+			    	        				String varFreq = callContents[3];
+			    	        				int strands1 = Integer.parseInt(callContents[4]);
+			    	        				int strands2 = Integer.parseInt(callContents[5]);
+			    	        				int qual1 = Integer.parseInt(callContents[6]);
+			    	        				int qual2 = Integer.parseInt(callContents[7]);
+			    	        				double pValue = Double.parseDouble(callContents[8]);
+			    	        				int reads1plus = Integer.parseInt(callContents[11]);
+			    	        				int reads1minus = Integer.parseInt(callContents[12]);
+			    	        				int reads2plus = Integer.parseInt(callContents[13]);
+			    	        				int reads2minus = Integer.parseInt(callContents[14]);
+			    	        				String varAllele = "";
+
+			    	        				double logP = 0;
+			    	        				try {
+				    	        				logP = 0 - (10 * java.lang.Math.log10(pValue));
+				    	        				if(logP > 255)
+				    	        					logP = 255;
+			    	        				}
+			    	        				catch(Exception e)
+			    	        				{
+			    	        					// Stick with default logP value
+			    	        				}
+
+
+			    	        				// Capture the variant allele if there is one //
+
+			    	        				if(!consBase.equals(refBase) && !consBase.equals("N") && callContents.length > 15)
+			    	        				{
+			    	        					varAllele = callContents[15];
+
+			    	        					// Determine how many variant alleles have been seen //
+
+			    	        					int varAlleleNumber = 0;
+
+			    	        					// Determine if we've seen the variant and what its number is ##
+
+				    	        				if(varAlleles.containsKey(varAllele))
+				    	        				{
+				    	        					varAlleleNumber = varAlleles.get(varAllele);
+				    	        				}
+				    	        				else
+				    	        				{
+				    	        					// IF no variants yet seen, this is variant allele 1 //
+				    	        					varAlleleNumber = varAlleles.size() + 1;
+				    	        					varAlleles.put(varAllele, varAlleleNumber);
+				    	        				}
+
+			    	        					if(VarScan.isHomozygous(consBase))
+			    	        					{
+			    	        						samplesHom++;
+			    	        						thisVCF = varAlleleNumber + "/" + varAlleleNumber;
+			    	        					}
+			    	        					else
+			    	        					{
+			    	        						samplesHet++;
+			    	        						thisVCF = "0" + "/" + varAlleleNumber;
+			    	        					}
+
+			    	        					thisVCF += ":" + (int) logP + ":" + readDepth + ":" + qualityDepth;
+		    	        						thisVCF += ":" + reads1 + ":" + reads2 + ":" + varFreq + ":" + pvalueFormat.format(pValue);
+		    	        						thisVCF += ":" + qual1 + ":" + qual2;
+		    	        						thisVCF += ":" + reads1plus + ":" + reads1minus + ":" + reads2plus + ":" + reads2minus;
+			    	        				}
+			    	        				else if(consBase.equals(refBase))
+			    	        				{
+			    	        					// A reference call - recalculate p-value against a possible het //
+			    	        					int expReads1 = (reads1 + reads2) / 2;
+			    	        					int expReads2 = (reads1 + reads2) - expReads1;
+			    	        					double newPvalue = VarScan.getSignificance(reads1, reads2, expReads1, expReads2);
+			    	        					double newLogP = 0;
+				    	        				try {
+					    	        				newLogP = 0 - (10 * java.lang.Math.log10(newPvalue));
+				    	        				}
+				    	        				catch(Exception e)
+				    	        				{
+				    	        					// Stick with default logP value
+				    	        				}
+			    	        					thisVCF = "0" + "/" + "0";
+			    	        					thisVCF += ":" + (int) newLogP + ":" + readDepth + ":" + qualityDepth;
+		    	        						thisVCF += ":" + reads1 + ":" + reads2 + ":" + varFreq + ":" + pvalueFormat.format(pValue);
+		    	        						thisVCF += ":" + qual1 + ":" + qual2;
+		    	        						thisVCF += ":" + reads1plus + ":" + reads1minus + ":" + reads2plus + ":" + reads2minus;
+
+			    	        				}
+
+
+			    	        				thisCall = consBase + ":" + qualityDepth + ":" + reads1 + ":" + reads2 + ":" + varFreq;
+			    	        				thisCall += ":" + pvalueFormat.format(pValue);
+
+			    	        				if(!consBase.equals(refBase) && !consBase.equals("N"))
+			    	        				{
+			    	        					variantFlag = true;
+
+			    	        					// Flag what type of variant was observed //
+			    	        					if(consBase.length() > 1)
+			    	        						indelFlag = true;
+			    	        					else
+			    	        						snpFlag = true;
+
+			    	        					// Save reads1plus and reads1minus //
+
+			    	        					allReads1plus += reads1plus;
+			    	        					allReads1minus += reads1minus;
+			    	        					allReads2plus += reads2plus;
+			    	        					allReads2minus += reads2minus;
+
+
+			    	        				}
+			    	        				else
+			    	        				{
+			    	        					samplesRef++;
+			    	        				}
+			    	        			}
+
+----------------------------------------
+	    	        				{
+	    	        					if(childContents.length >= 16)
+	    	        						childAllele = childContents[15];
+	    	        					String consBase = childContents[0];
+		    	        				int reads1 = Integer.parseInt(childContents[1]);
+		    	        				int reads2 = Integer.parseInt(childContents[2]);
+		    	        				String varFreq = childContents[3];
+		    	        				int qual1 = Integer.parseInt(childContents[6]);
+		    	        				int qual2 = Integer.parseInt(childContents[7]);
+		    	        				double pValue = Double.parseDouble(childContents[8]);
+		    	        				int reads1plus = Integer.parseInt(childContents[11]);
+		    	        				int reads1minus = Integer.parseInt(childContents[12]);
+		    	        				int reads2plus = Integer.parseInt(childContents[13]);
+		    	        				int reads2minus = Integer.parseInt(childContents[14]);
+
+		    	        				double logP = 0;
+		    	        				try {
+			    	        				logP = 0 - (10 * java.lang.Math.log10(pValue));
+			    	        				if(logP > 255)
+			    	        					logP = 255;
+		    	        				}
+		    	        				catch(Exception e)
+		    	        				{
+		    	        					// Stick with default logP value
+		    	        				}
+
+		    	        				// child is wildtype //
+		    	        				if(consBase.equals(refBase))
+		    	        				{
+		    	        					// A reference call - recalculate p-value against a possible het //
+		    	        					int expReads1 = (reads1 + reads2) / 2;
+		    	        					int expReads2 = (reads1 + reads2) - expReads1;
+		    	        					double newPvalue = VarScan.getSignificance(reads1, reads2, expReads1, expReads2);
+		    	        					double newLogP = 0;
+			    	        				try {
+				    	        				newLogP = 0 - (10 * java.lang.Math.log10(newPvalue));
+			    	        				}
+			    	        				catch(Exception e)
+			    	        				{
+			    	        					// Stick with default logP value
+			    	        				}
+		    	        					childVCF = "0" + "/" + "0";
+		    	        					childVCF += ":" + (int) newLogP + ":" + childDepth + ":" + childQualityDepth;
+	    	        						childVCF += ":" + reads1 + ":" + reads2 + ":" + varFreq + ":" + pvalueFormat.format(pValue);
+	    	        						childVCF += ":" + qual1 + ":" + qual2;
+	    	        						childVCF += ":" + reads1plus + ":" + reads1minus + ":" + reads2plus + ":" + reads2minus;
+
+		    	        				}
+		    	        				// child is variant //
+		    	        				else if(childAllele.length() > 0 && !childAllele.equals("N") && !childAllele.equals("."))
+		    	        				{
+		    	        					// Determine how many variant alleles have been seen //
+
+		    	        					int varAlleleNumber = 0;
+
+		    	        					// Determine if we've seen the variant and what its number is ##
+
+			    	        				if(varAlleles.containsKey(childAllele))
+			    	        				{
+			    	        					varAlleleNumber = varAlleles.get(childAllele);
+			    	        				}
+			    	        				else
+			    	        				{
+			    	        					// IF no variants yet seen, this is variant allele 1 //
+			    	        					varAlleleNumber = varAlleles.size() + 1;
+			    	        					varAlleles.put(childAllele, varAlleleNumber);
+			    	        				}
+
+			    	        				if(childContents.length >= 1)
+			    	        				{
+			    	        					if(VarScan.isHomozygous(consBase))
+			    	        					{
+			    	        						childVCF = varAlleleNumber + "/" + varAlleleNumber;
+			    	        					}
+			    	        					else
+			    	        					{
+			    	        						childVCF = "0" + "/" + varAlleleNumber;
+			    	        					}
+
+			    	        					childVCF += ":" + (int) logP + ":" + childDepth + ":" + childQualityDepth;
+		    	        						childVCF += ":" + reads1 + ":" + reads2 + ":" + varFreq + ":" + pvalueFormat.format(pValue);
+		    	        						childVCF += ":" + qual1 + ":" + qual2;
+		    	        						childVCF += ":" + reads1plus + ":" + reads1minus + ":" + reads2plus + ":" + reads2minus;
+			    	        				}
+
+		    	        					if(childAllele.length() > 1)
+		    	        						variantType = "Indel";
+		    	        				}
+
+	    	        				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834547
+net/sf/varscan/Trio.java 636 725
+net/sf/varscan/Trio.java 732 821
+----------------------------------------
+	    	        				{
+	    	        					if(motherContents.length >= 16)
+	    	        						motherAllele = motherContents[15];
+	    	        					String consBase = motherContents[0];
+		    	        				int reads1 = Integer.parseInt(motherContents[1]);
+		    	        				int reads2 = Integer.parseInt(motherContents[2]);
+		    	        				String varFreq = motherContents[3];
+		    	        				int qual1 = Integer.parseInt(motherContents[6]);
+		    	        				int qual2 = Integer.parseInt(motherContents[7]);
+		    	        				double pValue = Double.parseDouble(motherContents[8]);
+		    	        				int reads1plus = Integer.parseInt(motherContents[11]);
+		    	        				int reads1minus = Integer.parseInt(motherContents[12]);
+		    	        				int reads2plus = Integer.parseInt(motherContents[13]);
+		    	        				int reads2minus = Integer.parseInt(motherContents[14]);
+
+		    	        				double logP = 0;
+		    	        				try {
+			    	        				logP = 0 - (10 * java.lang.Math.log10(pValue));
+			    	        				if(logP > 255)
+			    	        					logP = 255;
+		    	        				}
+		    	        				catch(Exception e)
+		    	        				{
+		    	        					// Stick with default logP value
+		    	        				}
+
+		    	        				// mother is wildtype //
+		    	        				if(consBase.equals(refBase))
+		    	        				{
+		    	        					// A reference call - recalculate p-value against a possible het //
+		    	        					int expReads1 = (reads1 + reads2) / 2;
+		    	        					int expReads2 = (reads1 + reads2) - expReads1;
+		    	        					double newPvalue = VarScan.getSignificance(reads1, reads2, expReads1, expReads2);
+		    	        					double newLogP = 0;
+			    	        				try {
+				    	        				newLogP = 0 - (10 * java.lang.Math.log10(newPvalue));
+			    	        				}
+			    	        				catch(Exception e)
+			    	        				{
+			    	        					// Stick with default logP value
+			    	        				}
+		    	        					motherVCF = "0" + "/" + "0";
+		    	        					motherVCF += ":" + (int) newLogP + ":" + motherDepth + ":" + motherQualityDepth;
+	    	        						motherVCF += ":" + reads1 + ":" + reads2 + ":" + varFreq + ":" + pvalueFormat.format(pValue);
+	    	        						motherVCF += ":" + qual1 + ":" + qual2;
+	    	        						motherVCF += ":" + reads1plus + ":" + reads1minus + ":" + reads2plus + ":" + reads2minus;
+
+		    	        				}
+		    	        				// mother is variant //
+		    	        				else if(motherAllele.length() > 0 && !motherAllele.equals("N") && !motherAllele.equals("."))
+		    	        				{
+		    	        					// Determine how many variant alleles have been seen //
+
+		    	        					int varAlleleNumber = 0;
+
+		    	        					// Determine if we've seen the variant and what its number is ##
+
+			    	        				if(varAlleles.containsKey(motherAllele))
+			    	        				{
+			    	        					varAlleleNumber = varAlleles.get(motherAllele);
+			    	        				}
+			    	        				else
+			    	        				{
+			    	        					// IF no variants yet seen, this is variant allele 1 //
+			    	        					varAlleleNumber = varAlleles.size() + 1;
+			    	        					varAlleles.put(motherAllele, varAlleleNumber);
+			    	        				}
+
+			    	        				if(motherContents.length >= 1)
+			    	        				{
+			    	        					if(VarScan.isHomozygous(consBase))
+			    	        					{
+			    	        						motherVCF = varAlleleNumber + "/" + varAlleleNumber;
+			    	        					}
+			    	        					else
+			    	        					{
+			    	        						motherVCF = "0" + "/" + varAlleleNumber;
+			    	        					}
+
+			    	        					motherVCF += ":" + (int) logP + ":" + motherDepth + ":" + motherQualityDepth;
+		    	        						motherVCF += ":" + reads1 + ":" + reads2 + ":" + varFreq + ":" + pvalueFormat.format(pValue);
+		    	        						motherVCF += ":" + qual1 + ":" + qual2;
+		    	        						motherVCF += ":" + reads1plus + ":" + reads1minus + ":" + reads2plus + ":" + reads2minus;
+			    	        				}
+
+		    	        					if(motherAllele.length() > 1)
+		    	        						variantType = "Indel";
+		    	        				}
+
+	    	        				}
+
+----------------------------------------
+	    	        				{
+	    	        					if(childContents.length >= 16)
+	    	        						childAllele = childContents[15];
+	    	        					String consBase = childContents[0];
+		    	        				int reads1 = Integer.parseInt(childContents[1]);
+		    	        				int reads2 = Integer.parseInt(childContents[2]);
+		    	        				String varFreq = childContents[3];
+		    	        				int qual1 = Integer.parseInt(childContents[6]);
+		    	        				int qual2 = Integer.parseInt(childContents[7]);
+		    	        				double pValue = Double.parseDouble(childContents[8]);
+		    	        				int reads1plus = Integer.parseInt(childContents[11]);
+		    	        				int reads1minus = Integer.parseInt(childContents[12]);
+		    	        				int reads2plus = Integer.parseInt(childContents[13]);
+		    	        				int reads2minus = Integer.parseInt(childContents[14]);
+
+		    	        				double logP = 0;
+		    	        				try {
+			    	        				logP = 0 - (10 * java.lang.Math.log10(pValue));
+			    	        				if(logP > 255)
+			    	        					logP = 255;
+		    	        				}
+		    	        				catch(Exception e)
+		    	        				{
+		    	        					// Stick with default logP value
+		    	        				}
+
+		    	        				// child is wildtype //
+		    	        				if(consBase.equals(refBase))
+		    	        				{
+		    	        					// A reference call - recalculate p-value against a possible het //
+		    	        					int expReads1 = (reads1 + reads2) / 2;
+		    	        					int expReads2 = (reads1 + reads2) - expReads1;
+		    	        					double newPvalue = VarScan.getSignificance(reads1, reads2, expReads1, expReads2);
+		    	        					double newLogP = 0;
+			    	        				try {
+				    	        				newLogP = 0 - (10 * java.lang.Math.log10(newPvalue));
+			    	        				}
+			    	        				catch(Exception e)
+			    	        				{
+			    	        					// Stick with default logP value
+			    	        				}
+		    	        					childVCF = "0" + "/" + "0";
+		    	        					childVCF += ":" + (int) newLogP + ":" + childDepth + ":" + childQualityDepth;
+	    	        						childVCF += ":" + reads1 + ":" + reads2 + ":" + varFreq + ":" + pvalueFormat.format(pValue);
+	    	        						childVCF += ":" + qual1 + ":" + qual2;
+	    	        						childVCF += ":" + reads1plus + ":" + reads1minus + ":" + reads2plus + ":" + reads2minus;
+
+		    	        				}
+		    	        				// child is variant //
+		    	        				else if(childAllele.length() > 0 && !childAllele.equals("N") && !childAllele.equals("."))
+		    	        				{
+		    	        					// Determine how many variant alleles have been seen //
+
+		    	        					int varAlleleNumber = 0;
+
+		    	        					// Determine if we've seen the variant and what its number is ##
+
+			    	        				if(varAlleles.containsKey(childAllele))
+			    	        				{
+			    	        					varAlleleNumber = varAlleles.get(childAllele);
+			    	        				}
+			    	        				else
+			    	        				{
+			    	        					// IF no variants yet seen, this is variant allele 1 //
+			    	        					varAlleleNumber = varAlleles.size() + 1;
+			    	        					varAlleles.put(childAllele, varAlleleNumber);
+			    	        				}
+
+			    	        				if(childContents.length >= 1)
+			    	        				{
+			    	        					if(VarScan.isHomozygous(consBase))
+			    	        					{
+			    	        						childVCF = varAlleleNumber + "/" + varAlleleNumber;
+			    	        					}
+			    	        					else
+			    	        					{
+			    	        						childVCF = "0" + "/" + varAlleleNumber;
+			    	        					}
+
+			    	        					childVCF += ":" + (int) logP + ":" + childDepth + ":" + childQualityDepth;
+		    	        						childVCF += ":" + reads1 + ":" + reads2 + ":" + varFreq + ":" + pvalueFormat.format(pValue);
+		    	        						childVCF += ":" + qual1 + ":" + qual2;
+		    	        						childVCF += ":" + reads1plus + ":" + reads1minus + ":" + reads2plus + ":" + reads2minus;
+			    	        				}
+
+		    	        					if(childAllele.length() > 1)
+		    	        						variantType = "Indel";
+		    	        				}
+
+	    	        				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834549
+net/sf/varscan/CallMpileup.java 473 492
+net/sf/varscan/Trio.java 760 779
+----------------------------------------
+			    	        				{
+			    	        					// A reference call - recalculate p-value against a possible het //
+			    	        					int expReads1 = (reads1 + reads2) / 2;
+			    	        					int expReads2 = (reads1 + reads2) - expReads1;
+			    	        					double newPvalue = VarScan.getSignificance(reads1, reads2, expReads1, expReads2);
+			    	        					double newLogP = 0;
+				    	        				try {
+					    	        				newLogP = 0 - (10 * java.lang.Math.log10(newPvalue));
+				    	        				}
+				    	        				catch(Exception e)
+				    	        				{
+				    	        					// Stick with default logP value
+				    	        				}
+			    	        					thisVCF = "0" + "/" + "0";
+			    	        					thisVCF += ":" + (int) newLogP + ":" + readDepth + ":" + qualityDepth;
+		    	        						thisVCF += ":" + reads1 + ":" + reads2 + ":" + varFreq + ":" + pvalueFormat.format(pValue);
+		    	        						thisVCF += ":" + qual1 + ":" + qual2;
+		    	        						thisVCF += ":" + reads1plus + ":" + reads1minus + ":" + reads2plus + ":" + reads2minus;
+
+			    	        				}
+
+----------------------------------------
+		    	        				{
+		    	        					// A reference call - recalculate p-value against a possible het //
+		    	        					int expReads1 = (reads1 + reads2) / 2;
+		    	        					int expReads2 = (reads1 + reads2) - expReads1;
+		    	        					double newPvalue = VarScan.getSignificance(reads1, reads2, expReads1, expReads2);
+		    	        					double newLogP = 0;
+			    	        				try {
+				    	        				newLogP = 0 - (10 * java.lang.Math.log10(newPvalue));
+			    	        				}
+			    	        				catch(Exception e)
+			    	        				{
+			    	        					// Stick with default logP value
+			    	        				}
+		    	        					childVCF = "0" + "/" + "0";
+		    	        					childVCF += ":" + (int) newLogP + ":" + childDepth + ":" + childQualityDepth;
+	    	        						childVCF += ":" + reads1 + ":" + reads2 + ":" + varFreq + ":" + pvalueFormat.format(pValue);
+	    	        						childVCF += ":" + qual1 + ":" + qual2;
+	    	        						childVCF += ":" + reads1plus + ":" + reads1minus + ":" + reads2plus + ":" + reads2minus;
+
+		    	        				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834548
+net/sf/varscan/Trio.java 568 587
+net/sf/varscan/Trio.java 760 779
+----------------------------------------
+		    	        				{
+		    	        					// A reference call - recalculate p-value against a possible het //
+		    	        					int expReads1 = (reads1 + reads2) / 2;
+		    	        					int expReads2 = (reads1 + reads2) - expReads1;
+		    	        					double newPvalue = VarScan.getSignificance(reads1, reads2, expReads1, expReads2);
+		    	        					double newLogP = 0;
+			    	        				try {
+				    	        				newLogP = 0 - (10 * java.lang.Math.log10(newPvalue));
+			    	        				}
+			    	        				catch(Exception e)
+			    	        				{
+			    	        					// Stick with default logP value
+			    	        				}
+		    	        					fatherVCF = "0" + "/" + "0";
+		    	        					fatherVCF += ":" + (int) newLogP + ":" + fatherDepth + ":" + fatherQualityDepth;
+	    	        						fatherVCF += ":" + reads1 + ":" + reads2 + ":" + varFreq + ":" + pvalueFormat.format(pValue);
+	    	        						fatherVCF += ":" + qual1 + ":" + qual2;
+	    	        						fatherVCF += ":" + reads1plus + ":" + reads1minus + ":" + reads2plus + ":" + reads2minus;
+
+		    	        				}
+
+----------------------------------------
+		    	        				{
+		    	        					// A reference call - recalculate p-value against a possible het //
+		    	        					int expReads1 = (reads1 + reads2) / 2;
+		    	        					int expReads2 = (reads1 + reads2) - expReads1;
+		    	        					double newPvalue = VarScan.getSignificance(reads1, reads2, expReads1, expReads2);
+		    	        					double newLogP = 0;
+			    	        				try {
+				    	        				newLogP = 0 - (10 * java.lang.Math.log10(newPvalue));
+			    	        				}
+			    	        				catch(Exception e)
+			    	        				{
+			    	        					// Stick with default logP value
+			    	        				}
+		    	        					childVCF = "0" + "/" + "0";
+		    	        					childVCF += ":" + (int) newLogP + ":" + childDepth + ":" + childQualityDepth;
+	    	        						childVCF += ":" + reads1 + ":" + reads2 + ":" + varFreq + ":" + pvalueFormat.format(pValue);
+	    	        						childVCF += ":" + qual1 + ":" + qual2;
+	    	        						childVCF += ":" + reads1plus + ":" + reads1minus + ":" + reads2plus + ":" + reads2minus;
+
+		    	        				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834570
+net/sf/varscan/Trio.java 664 683
+net/sf/varscan/Trio.java 760 779
+----------------------------------------
+		    	        				{
+		    	        					// A reference call - recalculate p-value against a possible het //
+		    	        					int expReads1 = (reads1 + reads2) / 2;
+		    	        					int expReads2 = (reads1 + reads2) - expReads1;
+		    	        					double newPvalue = VarScan.getSignificance(reads1, reads2, expReads1, expReads2);
+		    	        					double newLogP = 0;
+			    	        				try {
+				    	        				newLogP = 0 - (10 * java.lang.Math.log10(newPvalue));
+			    	        				}
+			    	        				catch(Exception e)
+			    	        				{
+			    	        					// Stick with default logP value
+			    	        				}
+		    	        					motherVCF = "0" + "/" + "0";
+		    	        					motherVCF += ":" + (int) newLogP + ":" + motherDepth + ":" + motherQualityDepth;
+	    	        						motherVCF += ":" + reads1 + ":" + reads2 + ":" + varFreq + ":" + pvalueFormat.format(pValue);
+	    	        						motherVCF += ":" + qual1 + ":" + qual2;
+	    	        						motherVCF += ":" + reads1plus + ":" + reads1minus + ":" + reads2plus + ":" + reads2minus;
+
+		    	        				}
+
+----------------------------------------
+		    	        				{
+		    	        					// A reference call - recalculate p-value against a possible het //
+		    	        					int expReads1 = (reads1 + reads2) / 2;
+		    	        					int expReads2 = (reads1 + reads2) - expReads1;
+		    	        					double newPvalue = VarScan.getSignificance(reads1, reads2, expReads1, expReads2);
+		    	        					double newLogP = 0;
+			    	        				try {
+				    	        				newLogP = 0 - (10 * java.lang.Math.log10(newPvalue));
+			    	        				}
+			    	        				catch(Exception e)
+			    	        				{
+			    	        					// Stick with default logP value
+			    	        				}
+		    	        					childVCF = "0" + "/" + "0";
+		    	        					childVCF += ":" + (int) newLogP + ":" + childDepth + ":" + childQualityDepth;
+	    	        						childVCF += ":" + reads1 + ":" + reads2 + ":" + varFreq + ":" + pvalueFormat.format(pValue);
+	    	        						childVCF += ":" + qual1 + ":" + qual2;
+	    	        						childVCF += ":" + reads1plus + ":" + reads1minus + ":" + reads2plus + ":" + reads2minus;
+
+		    	        				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834555
+net/sf/varscan/LimitVariants.java 264 269
+net/sf/varscan/Coverage.java 369 374
+----------------------------------------
+	    				{
+		    				// Set the position to true //
+		    				int position = Integer.parseInt(lineContents[1]);
+		    				chrStart = position - marginSize;
+		    				chrStop = position + marginSize;
+	    				}
+
+----------------------------------------
+	    				{
+		    				// Set the position to true //
+		    				int position = Integer.parseInt(lineContents[1]);
+		    				chrStart = position - marginSize;
+		    				chrStop = position + marginSize;
+	    				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834554
+net/sf/varscan/ProcessSomatic.java 385 390
+net/sf/varscan/Coverage.java 369 374
+----------------------------------------
+	    				{
+		    				// Set the position to true //
+		    				int position = Integer.parseInt(lineContents[1]);
+		    				chrStart = position - marginSize;
+		    				chrStop = position + marginSize;
+	    				}
+
+----------------------------------------
+	    				{
+		    				// Set the position to true //
+		    				int position = Integer.parseInt(lineContents[1]);
+		    				chrStart = position - marginSize;
+		    				chrStop = position + marginSize;
+	    				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834556
+net/sf/varscan/FilterSomatic.java 552 559
+net/sf/varscan/Coverage.java 388 394
+----------------------------------------
+        			{
+        				String thisKey = chrom + "\t" + thisPosition;
+        				if(snps.containsKey(thisKey))
+        				{
+        					clusterSNPs.put(thisKey, true);
+        					numClusterSNPs++;
+        				}
+        			}
+
+----------------------------------------
+	    					{
+	    						if(!refPositions.get(position))
+	    						{
+	    							numBases++;
+	    							refPositions.set(position, true);
+	    						}
+	    					}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834557
+net/sf/varscan/Somatic.java 1400 1438
+net/sf/varscan/Copynumber.java 915 953
+----------------------------------------
+		    	{
+		    		flagEOF = false;
+
+		    		while(prevChromTumor.equals(chromTumor) && !flagEOF)
+		    		{
+		    			if((lineTumor = tumor.readLine()) != null)
+		    			{
+			    			tumorContents = lineTumor.split("\t");
+
+					    	if(tumorContents.length > 1)
+					    	{
+						    	chromTumor = tumorContents[0];
+						    	posTumor = Integer.parseInt(tumorContents[1]);
+					    	}
+		    			}
+		    			else
+		    			{
+		    				flagEOF = true;
+		    			}
+		    		}
+
+		    		// Reset the normal file if we've already passed this chromosome in normal //
+
+		    		if(!flagEOF && !normalWasReset)
+		    		{
+		    			if(inSortOrder(chromNormal, chromTumor))
+		    			{
+		    				System.err.println("Not resetting normal file because " + chromNormal + " < " + chromTumor);
+		    			}
+		    			else
+		    			{
+		    				System.err.println("Resetting normal file because " + chromNormal + " > " + chromTumor);
+				    		normalWasReset = true;
+			    			normal.close();
+				    		normal = new BufferedReader(new FileReader(normalPileupFile));
+		    			}
+
+		    		}
+		    	}
+
+----------------------------------------
+		    	{
+		    		flagEOF = false;
+
+		    		while(prevChromTumor.equals(chromTumor) && !flagEOF)
+		    		{
+		    			if((lineTumor = tumor.readLine()) != null)
+		    			{
+			    			tumorContents = lineTumor.split("\t");
+
+					    	if(tumorContents.length > 1)
+					    	{
+						    	chromTumor = tumorContents[0];
+						    	posTumor = Integer.parseInt(tumorContents[1]);
+					    	}
+		    			}
+		    			else
+		    			{
+		    				flagEOF = true;
+		    			}
+		    		}
+
+		    		// Reset the normal file if we've already passed this chromosome in normal //
+
+		    		if(!flagEOF && !normalWasReset)
+		    		{
+		    			if(inSortOrder(chromNormal, chromTumor))
+		    			{
+		    				System.err.println("Not resetting normal file because " + chromNormal + " < " + chromTumor);
+		    			}
+		    			else
+		    			{
+		    				System.err.println("Resetting normal file because " + chromNormal + " > " + chromTumor);
+				    		normalWasReset = true;
+			    			normal.close();
+				    		normal = new BufferedReader(new FileReader(normalPileupFile));
+		    			}
+
+		    		}
+		    	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834559
+net/sf/varscan/Somatic.java 1035 1054
+net/sf/varscan/Copynumber.java 919 934
+----------------------------------------
+		    	{
+		    		//System.err.println("Normal (" + chromNormal + ") catching up to " + chromTumor);
+		    		// Get next line from normal pileup //
+		    		if((lineNormal = normal.readLine()) != null)
+		    		{
+		    			String[] normalContents = lineNormal.split("\t");
+
+				    	if(normalContents.length > 1)
+				    	{
+					    	chromNormal = normalContents[0];
+					    	posNormal = Integer.parseInt(normalContents[1]);
+				    	}
+		    		}
+		    		else
+		    		{
+		    			flagEOF = true;
+		    		}
+
+
+		    	}
+
+----------------------------------------
+		    		{
+		    			if((lineTumor = tumor.readLine()) != null)
+		    			{
+			    			tumorContents = lineTumor.split("\t");
+
+					    	if(tumorContents.length > 1)
+					    	{
+						    	chromTumor = tumorContents[0];
+						    	posTumor = Integer.parseInt(tumorContents[1]);
+					    	}
+		    			}
+		    			else
+		    			{
+		    				flagEOF = true;
+		    			}
+		    		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+28918699
+net/sf/varscan/FpFilter.java 367 381
+net/sf/varscan/Copynumber.java 919 934
+----------------------------------------
+        	    						{
+        	    							isIndel = true;
+        	    							// CONVERT INDEL //
+        	    							if(cns.contains("/"))
+        	    							{
+            	    							String[] indelContents = cns.split("/");
+            	    							if(indelContents.length > 1)
+            	    								alt = indelContents[1];
+        	    							}
+        	    							else
+        	    							{
+        	    								alt = cns;
+        	    							}
+
+        	    						}
+
+----------------------------------------
+		    		{
+		    			if((lineTumor = tumor.readLine()) != null)
+		    			{
+			    			tumorContents = lineTumor.split("\t");
+
+					    	if(tumorContents.length > 1)
+					    	{
+						    	chromTumor = tumorContents[0];
+						    	posTumor = Integer.parseInt(tumorContents[1]);
+					    	}
+		    			}
+		    			else
+		    			{
+		    				flagEOF = true;
+		    			}
+		    		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834560
+net/sf/varscan/Copynumber.java 648 667
+net/sf/varscan/Copynumber.java 919 934
+----------------------------------------
+		    	{
+		    		//System.err.println("Normal (" + chromNormal + ") catching up to " + chromTumor);
+		    		// Get next line from normal pileup //
+		    		if((lineNormal = normal.readLine()) != null)
+		    		{
+		    			String[] normalContents = lineNormal.split("\t");
+
+				    	if(normalContents.length > 1)
+				    	{
+					    	chromNormal = normalContents[0];
+					    	posNormal = Integer.parseInt(normalContents[1]);
+				    	}
+		    		}
+		    		else
+		    		{
+		    			flagEOF = true;
+		    		}
+
+
+		    	}
+
+----------------------------------------
+		    		{
+		    			if((lineTumor = tumor.readLine()) != null)
+		    			{
+			    			tumorContents = lineTumor.split("\t");
+
+					    	if(tumorContents.length > 1)
+					    	{
+						    	chromTumor = tumorContents[0];
+						    	posTumor = Integer.parseInt(tumorContents[1]);
+					    	}
+		    			}
+		    			else
+		    			{
+		    				flagEOF = true;
+		    			}
+		    		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834558
+net/sf/varscan/Somatic.java 1404 1419
+net/sf/varscan/Copynumber.java 919 934
+----------------------------------------
+		    		{
+		    			if((lineTumor = tumor.readLine()) != null)
+		    			{
+			    			tumorContents = lineTumor.split("\t");
+
+					    	if(tumorContents.length > 1)
+					    	{
+						    	chromTumor = tumorContents[0];
+						    	posTumor = Integer.parseInt(tumorContents[1]);
+					    	}
+		    			}
+		    			else
+		    			{
+		    				flagEOF = true;
+		    			}
+		    		}
+
+----------------------------------------
+		    		{
+		    			if((lineTumor = tumor.readLine()) != null)
+		    			{
+			    			tumorContents = lineTumor.split("\t");
+
+					    	if(tumorContents.length > 1)
+					    	{
+						    	chromTumor = tumorContents[0];
+						    	posTumor = Integer.parseInt(tumorContents[1]);
+					    	}
+		    			}
+		    			else
+		    			{
+		    				flagEOF = true;
+		    			}
+		    		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834565
+net/sf/varscan/Copynumber.java 713 720
+net/sf/varscan/Copynumber.java 921 929
+----------------------------------------
+		    		{
+		    			tumorContents = lineTumor.split("\t");
+				    	if(tumorContents.length > 1)
+				    	{
+					    	chromTumor = tumorContents[0];
+					    	posTumor = Integer.parseInt(tumorContents[1]);
+				    	}
+		    		}
+
+----------------------------------------
+		    			{
+			    			tumorContents = lineTumor.split("\t");
+
+					    	if(tumorContents.length > 1)
+					    	{
+						    	chromTumor = tumorContents[0];
+						    	posTumor = Integer.parseInt(tumorContents[1]);
+					    	}
+		    			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834562
+net/sf/varscan/Somatic.java 1006 1014
+net/sf/varscan/Copynumber.java 921 929
+----------------------------------------
+		    {
+		    	String[] normalContents = lineNormal.split("\t");
+
+		    	if(normalContents.length > 1)
+		    	{
+			    	chromNormal = normalContents[0];
+			    	posNormal = Integer.parseInt(normalContents[1]);
+		    	}
+		    }
+
+----------------------------------------
+		    			{
+			    			tumorContents = lineTumor.split("\t");
+
+					    	if(tumorContents.length > 1)
+					    	{
+						    	chromTumor = tumorContents[0];
+						    	posTumor = Integer.parseInt(tumorContents[1]);
+					    	}
+		    			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834566
+net/sf/varscan/Somatic.java 1406 1414
+net/sf/varscan/Copynumber.java 921 929
+----------------------------------------
+		    			{
+			    			tumorContents = lineTumor.split("\t");
+
+					    	if(tumorContents.length > 1)
+					    	{
+						    	chromTumor = tumorContents[0];
+						    	posTumor = Integer.parseInt(tumorContents[1]);
+					    	}
+		    			}
+
+----------------------------------------
+		    			{
+			    			tumorContents = lineTumor.split("\t");
+
+					    	if(tumorContents.length > 1)
+					    	{
+						    	chromTumor = tumorContents[0];
+						    	posTumor = Integer.parseInt(tumorContents[1]);
+					    	}
+		    			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834567
+net/sf/varscan/Copynumber.java 652 660
+net/sf/varscan/Copynumber.java 921 929
+----------------------------------------
+		    		{
+		    			String[] normalContents = lineNormal.split("\t");
+
+				    	if(normalContents.length > 1)
+				    	{
+					    	chromNormal = normalContents[0];
+					    	posNormal = Integer.parseInt(normalContents[1]);
+				    	}
+		    		}
+
+----------------------------------------
+		    			{
+			    			tumorContents = lineTumor.split("\t");
+
+					    	if(tumorContents.length > 1)
+					    	{
+						    	chromTumor = tumorContents[0];
+						    	posTumor = Integer.parseInt(tumorContents[1]);
+					    	}
+		    			}
+
+----------------------------------------

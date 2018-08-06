@@ -1,0 +1,2361 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834691
+net/sf/varscan/CopyCaller.java 286 297
+net/sf/varscan/FilterVariants.java 484 492
+----------------------------------------
+	    		    {
+	    		    	System.err.println("Parsing Exception on line:\n" + line + "\n" + e.getLocalizedMessage());
+
+	    				stats.put("numParsingExceptions", (stats.get("numParsingExceptions") + 1));
+
+	    				if(stats.get("numParsingExceptions") >= 5)
+	    				{
+	    					System.err.println("Too many parsing exceptions encountered; exiting");
+		    				System.exit(11);
+	    				}
+
+	    		    }
+
+----------------------------------------
+	    				{
+		    				System.err.println("Parsing Exception on line:\n" + line + "\n" + e.getLocalizedMessage());
+		    				stats.put("numParsingExceptions", (stats.get("numParsingExceptions") + 1));
+		    				if(stats.get("numParsingExceptions") >= 5)
+		    				{
+		    					System.err.println("Too many parsing exceptions encountered; exiting");
+		    					return;
+		    				}
+	    				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834690
+net/sf/varscan/FilterSomatic.java 359 367
+net/sf/varscan/FilterVariants.java 484 492
+----------------------------------------
+	    				{
+		    				System.err.println("Parsing Exception on line:\n" + line + "\n" + e.getLocalizedMessage());
+		    				stats.put("numParsingExceptions", (stats.get("numParsingExceptions") + 1));
+		    				if(stats.get("numParsingExceptions") >= 5)
+		    				{
+		    					System.err.println("Too many parsing exceptions encountered; exiting");
+		    					return;
+		    				}
+	    				}
+
+----------------------------------------
+	    				{
+		    				System.err.println("Parsing Exception on line:\n" + line + "\n" + e.getLocalizedMessage());
+		    				stats.put("numParsingExceptions", (stats.get("numParsingExceptions") + 1));
+		    				if(stats.get("numParsingExceptions") >= 5)
+		    				{
+		    					System.err.println("Too many parsing exceptions encountered; exiting");
+		    					return;
+		    				}
+	    				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834692
+net/sf/varscan/ReadCounts.java 303 312
+net/sf/varscan/FilterVariants.java 484 492
+----------------------------------------
+	    		    {
+	    		    	System.err.println("Parsing Exception on line:\n" + line + "\n" + e.getLocalizedMessage());
+	    				stats.put("numParsingExceptions", (stats.get("numParsingExceptions") + 1));
+	    				if(stats.get("numParsingExceptions") >= 5)
+	    				{
+	    					System.err.println("Too many parsing exceptions encountered; exiting");
+	    					return;
+	    				}
+	    		    	return;
+	    		    }
+
+----------------------------------------
+	    				{
+		    				System.err.println("Parsing Exception on line:\n" + line + "\n" + e.getLocalizedMessage());
+		    				stats.put("numParsingExceptions", (stats.get("numParsingExceptions") + 1));
+		    				if(stats.get("numParsingExceptions") >= 5)
+		    				{
+		    					System.err.println("Too many parsing exceptions encountered; exiting");
+		    					return;
+		    				}
+	    				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834693
+net/sf/varscan/FilterSomatic.java 412 448
+net/sf/varscan/FilterVariants.java 535 582
+----------------------------------------
+	    {
+	    	// Declare file-parsing variables //
+
+	    	String line;
+
+    		File infile = new File(filename);
+    		if(infile.exists())
+    		{
+    			BufferedReader in = new BufferedReader(new FileReader(infile));
+
+    			if(in.ready())
+    			{
+    				while ((line = in.readLine()) != null)
+    				{
+    					String[] lineContents = line.split("\t");
+    					String chrom = lineContents[0];
+    					if(chrom.equals("Chrom") || line.startsWith("#"))
+    					{
+    						// Ignore headers //
+    					}
+    					else
+    					{
+	    					String position = lineContents[1];
+	    					String indelKey = chrom + "\t" + position;
+	    					indels.put(indelKey, Boolean.TRUE);
+    					}
+
+    				}
+    			}
+    			else
+    			{
+    				System.err.println("Unable to open indels file for reading");
+    			}
+
+    			in.close();
+    		}
+	    }
+
+----------------------------------------
+	{
+    	HashMap<String, Boolean> indels = new HashMap<String, Boolean>();
+
+	    try
+	    {
+	    	// Declare file-parsing variables //
+
+	    	String line;
+
+    		File infile = new File(filename);
+    		if(infile.exists())
+    		{
+    			BufferedReader in = new BufferedReader(new FileReader(infile));
+
+    			if(in.ready())
+    			{
+    				while ((line = in.readLine()) != null)
+    				{
+    					if(line.startsWith("#"))
+    					{
+    						// Ignore //
+    					}
+    					else
+    					{
+        					String[] lineContents = line.split("\t");
+        					String chrom = lineContents[0];
+        					String position = lineContents[1];
+        					String indelKey = chrom + "\t" + position;
+        					indels.put(indelKey, Boolean.TRUE);
+    					}
+
+    				}
+    			}
+    			else
+    			{
+    				System.err.println("Unable to open indels file for reading");
+    			}
+
+    			in.close();
+    		}
+	    }
+	    catch(Exception e)
+	    {
+	    	System.err.println("Error Parsing Indel File: " + e.getLocalizedMessage());
+	    }
+
+	    return(indels);
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834694
+net/sf/varscan/FilterVariants.java 535 582
+net/sf/varscan/FilterSomatic.java 408 455
+----------------------------------------
+	{
+    	HashMap<String, Boolean> indels = new HashMap<String, Boolean>();
+
+	    try
+	    {
+	    	// Declare file-parsing variables //
+
+	    	String line;
+
+    		File infile = new File(filename);
+    		if(infile.exists())
+    		{
+    			BufferedReader in = new BufferedReader(new FileReader(infile));
+
+    			if(in.ready())
+    			{
+    				while ((line = in.readLine()) != null)
+    				{
+    					if(line.startsWith("#"))
+    					{
+    						// Ignore //
+    					}
+    					else
+    					{
+        					String[] lineContents = line.split("\t");
+        					String chrom = lineContents[0];
+        					String position = lineContents[1];
+        					String indelKey = chrom + "\t" + position;
+        					indels.put(indelKey, Boolean.TRUE);
+    					}
+
+    				}
+    			}
+    			else
+    			{
+    				System.err.println("Unable to open indels file for reading");
+    			}
+
+    			in.close();
+    		}
+	    }
+	    catch(Exception e)
+	    {
+	    	System.err.println("Error Parsing Indel File: " + e.getLocalizedMessage());
+	    }
+
+	    return(indels);
+	}
+
+----------------------------------------
+	{
+    	HashMap<String, Boolean> indels = new HashMap<String, Boolean>();
+
+	    try
+	    {
+	    	// Declare file-parsing variables //
+
+	    	String line;
+
+    		File infile = new File(filename);
+    		if(infile.exists())
+    		{
+    			BufferedReader in = new BufferedReader(new FileReader(infile));
+
+    			if(in.ready())
+    			{
+    				while ((line = in.readLine()) != null)
+    				{
+    					String[] lineContents = line.split("\t");
+    					String chrom = lineContents[0];
+    					if(chrom.equals("Chrom") || line.startsWith("#"))
+    					{
+    						// Ignore headers //
+    					}
+    					else
+    					{
+	    					String position = lineContents[1];
+	    					String indelKey = chrom + "\t" + position;
+	    					indels.put(indelKey, Boolean.TRUE);
+    					}
+
+    				}
+    			}
+    			else
+    			{
+    				System.err.println("Unable to open indels file for reading");
+    			}
+
+    			in.close();
+    		}
+	    }
+	    catch(Exception e)
+	    {
+	    	System.err.println("Error Parsing Indel File: " + e.getLocalizedMessage());
+	    }
+
+	    return(indels);
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834697
+net/sf/varscan/FilterSomatic.java 408 455
+net/sf/varscan/FilterVariants.java 539 575
+----------------------------------------
+	{
+    	HashMap<String, Boolean> indels = new HashMap<String, Boolean>();
+
+	    try
+	    {
+	    	// Declare file-parsing variables //
+
+	    	String line;
+
+    		File infile = new File(filename);
+    		if(infile.exists())
+    		{
+    			BufferedReader in = new BufferedReader(new FileReader(infile));
+
+    			if(in.ready())
+    			{
+    				while ((line = in.readLine()) != null)
+    				{
+    					String[] lineContents = line.split("\t");
+    					String chrom = lineContents[0];
+    					if(chrom.equals("Chrom") || line.startsWith("#"))
+    					{
+    						// Ignore headers //
+    					}
+    					else
+    					{
+	    					String position = lineContents[1];
+	    					String indelKey = chrom + "\t" + position;
+	    					indels.put(indelKey, Boolean.TRUE);
+    					}
+
+    				}
+    			}
+    			else
+    			{
+    				System.err.println("Unable to open indels file for reading");
+    			}
+
+    			in.close();
+    		}
+	    }
+	    catch(Exception e)
+	    {
+	    	System.err.println("Error Parsing Indel File: " + e.getLocalizedMessage());
+	    }
+
+	    return(indels);
+	}
+
+----------------------------------------
+	    {
+	    	// Declare file-parsing variables //
+
+	    	String line;
+
+    		File infile = new File(filename);
+    		if(infile.exists())
+    		{
+    			BufferedReader in = new BufferedReader(new FileReader(infile));
+
+    			if(in.ready())
+    			{
+    				while ((line = in.readLine()) != null)
+    				{
+    					if(line.startsWith("#"))
+    					{
+    						// Ignore //
+    					}
+    					else
+    					{
+        					String[] lineContents = line.split("\t");
+        					String chrom = lineContents[0];
+        					String position = lineContents[1];
+        					String indelKey = chrom + "\t" + position;
+        					indels.put(indelKey, Boolean.TRUE);
+    					}
+
+    				}
+    			}
+    			else
+    			{
+    				System.err.println("Unable to open indels file for reading");
+    			}
+
+    			in.close();
+    		}
+	    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834696
+net/sf/varscan/FilterSomatic.java 419 447
+net/sf/varscan/FilterVariants.java 539 575
+----------------------------------------
+    		{
+    			BufferedReader in = new BufferedReader(new FileReader(infile));
+
+    			if(in.ready())
+    			{
+    				while ((line = in.readLine()) != null)
+    				{
+    					String[] lineContents = line.split("\t");
+    					String chrom = lineContents[0];
+    					if(chrom.equals("Chrom") || line.startsWith("#"))
+    					{
+    						// Ignore headers //
+    					}
+    					else
+    					{
+	    					String position = lineContents[1];
+	    					String indelKey = chrom + "\t" + position;
+	    					indels.put(indelKey, Boolean.TRUE);
+    					}
+
+    				}
+    			}
+    			else
+    			{
+    				System.err.println("Unable to open indels file for reading");
+    			}
+
+    			in.close();
+    		}
+
+----------------------------------------
+	    {
+	    	// Declare file-parsing variables //
+
+	    	String line;
+
+    		File infile = new File(filename);
+    		if(infile.exists())
+    		{
+    			BufferedReader in = new BufferedReader(new FileReader(infile));
+
+    			if(in.ready())
+    			{
+    				while ((line = in.readLine()) != null)
+    				{
+    					if(line.startsWith("#"))
+    					{
+    						// Ignore //
+    					}
+    					else
+    					{
+        					String[] lineContents = line.split("\t");
+        					String chrom = lineContents[0];
+        					String position = lineContents[1];
+        					String indelKey = chrom + "\t" + position;
+        					indels.put(indelKey, Boolean.TRUE);
+    					}
+
+    				}
+    			}
+    			else
+    			{
+    				System.err.println("Unable to open indels file for reading");
+    			}
+
+    			in.close();
+    		}
+	    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834695
+net/sf/varscan/FilterSomatic.java 412 448
+net/sf/varscan/FilterVariants.java 539 575
+----------------------------------------
+	    {
+	    	// Declare file-parsing variables //
+
+	    	String line;
+
+    		File infile = new File(filename);
+    		if(infile.exists())
+    		{
+    			BufferedReader in = new BufferedReader(new FileReader(infile));
+
+    			if(in.ready())
+    			{
+    				while ((line = in.readLine()) != null)
+    				{
+    					String[] lineContents = line.split("\t");
+    					String chrom = lineContents[0];
+    					if(chrom.equals("Chrom") || line.startsWith("#"))
+    					{
+    						// Ignore headers //
+    					}
+    					else
+    					{
+	    					String position = lineContents[1];
+	    					String indelKey = chrom + "\t" + position;
+	    					indels.put(indelKey, Boolean.TRUE);
+    					}
+
+    				}
+    			}
+    			else
+    			{
+    				System.err.println("Unable to open indels file for reading");
+    			}
+
+    			in.close();
+    		}
+	    }
+
+----------------------------------------
+	    {
+	    	// Declare file-parsing variables //
+
+	    	String line;
+
+    		File infile = new File(filename);
+    		if(infile.exists())
+    		{
+    			BufferedReader in = new BufferedReader(new FileReader(infile));
+
+    			if(in.ready())
+    			{
+    				while ((line = in.readLine()) != null)
+    				{
+    					if(line.startsWith("#"))
+    					{
+    						// Ignore //
+    					}
+    					else
+    					{
+        					String[] lineContents = line.split("\t");
+        					String chrom = lineContents[0];
+        					String position = lineContents[1];
+        					String indelKey = chrom + "\t" + position;
+        					indels.put(indelKey, Boolean.TRUE);
+    					}
+
+    				}
+    			}
+    			else
+    			{
+    				System.err.println("Unable to open indels file for reading");
+    			}
+
+    			in.close();
+    		}
+	    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834699
+net/sf/varscan/FilterSomatic.java 479 510
+net/sf/varscan/FilterVariants.java 546 574
+----------------------------------------
+	    	{
+	    		// Parse the infile line by line //
+
+	    		while ((line = in.readLine()) != null)
+	    		{
+	    			lineCounter++;
+
+	    			try
+	    			{
+		    			String[] lineContents = line.split("\t");
+		    			String chrom = lineContents[0];
+
+
+		    			if(chrom.equals("Chrom") || line.startsWith("#"))
+		    			{
+		    				// Ignore headers //
+		    			}
+		    			else
+		    			{
+			    			int position = Integer.parseInt(lineContents[1]);
+	    					String snpKey = chrom + "\t" + position;
+	    					snps.put(snpKey, Boolean.TRUE);
+		    			}
+	    			}
+	    			catch(Exception e)
+	    			{
+	    				// Ignore parsing exceptions for now
+	    			}
+	    		}
+
+	    		in.close();
+	    	}
+
+----------------------------------------
+    		{
+    			BufferedReader in = new BufferedReader(new FileReader(infile));
+
+    			if(in.ready())
+    			{
+    				while ((line = in.readLine()) != null)
+    				{
+    					if(line.startsWith("#"))
+    					{
+    						// Ignore //
+    					}
+    					else
+    					{
+        					String[] lineContents = line.split("\t");
+        					String chrom = lineContents[0];
+        					String position = lineContents[1];
+        					String indelKey = chrom + "\t" + position;
+        					indels.put(indelKey, Boolean.TRUE);
+    					}
+
+    				}
+    			}
+    			else
+    			{
+    				System.err.println("Unable to open indels file for reading");
+    			}
+
+    			in.close();
+    		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834777
+net/sf/varscan/FilterSomatic.java 419 447
+net/sf/varscan/FilterVariants.java 546 574
+----------------------------------------
+    		{
+    			BufferedReader in = new BufferedReader(new FileReader(infile));
+
+    			if(in.ready())
+    			{
+    				while ((line = in.readLine()) != null)
+    				{
+    					String[] lineContents = line.split("\t");
+    					String chrom = lineContents[0];
+    					if(chrom.equals("Chrom") || line.startsWith("#"))
+    					{
+    						// Ignore headers //
+    					}
+    					else
+    					{
+	    					String position = lineContents[1];
+	    					String indelKey = chrom + "\t" + position;
+	    					indels.put(indelKey, Boolean.TRUE);
+    					}
+
+    				}
+    			}
+    			else
+    			{
+    				System.err.println("Unable to open indels file for reading");
+    			}
+
+    			in.close();
+    		}
+
+----------------------------------------
+    		{
+    			BufferedReader in = new BufferedReader(new FileReader(infile));
+
+    			if(in.ready())
+    			{
+    				while ((line = in.readLine()) != null)
+    				{
+    					if(line.startsWith("#"))
+    					{
+    						// Ignore //
+    					}
+    					else
+    					{
+        					String[] lineContents = line.split("\t");
+        					String chrom = lineContents[0];
+        					String position = lineContents[1];
+        					String indelKey = chrom + "\t" + position;
+        					indels.put(indelKey, Boolean.TRUE);
+    					}
+
+    				}
+    			}
+    			else
+    			{
+    				System.err.println("Unable to open indels file for reading");
+    			}
+
+    			in.close();
+    		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834698
+net/sf/varscan/FilterSomatic.java 412 448
+net/sf/varscan/FilterVariants.java 546 574
+----------------------------------------
+	    {
+	    	// Declare file-parsing variables //
+
+	    	String line;
+
+    		File infile = new File(filename);
+    		if(infile.exists())
+    		{
+    			BufferedReader in = new BufferedReader(new FileReader(infile));
+
+    			if(in.ready())
+    			{
+    				while ((line = in.readLine()) != null)
+    				{
+    					String[] lineContents = line.split("\t");
+    					String chrom = lineContents[0];
+    					if(chrom.equals("Chrom") || line.startsWith("#"))
+    					{
+    						// Ignore headers //
+    					}
+    					else
+    					{
+	    					String position = lineContents[1];
+	    					String indelKey = chrom + "\t" + position;
+	    					indels.put(indelKey, Boolean.TRUE);
+    					}
+
+    				}
+    			}
+    			else
+    			{
+    				System.err.println("Unable to open indels file for reading");
+    			}
+
+    			in.close();
+    		}
+	    }
+
+----------------------------------------
+    		{
+    			BufferedReader in = new BufferedReader(new FileReader(infile));
+
+    			if(in.ready())
+    			{
+    				while ((line = in.readLine()) != null)
+    				{
+    					if(line.startsWith("#"))
+    					{
+    						// Ignore //
+    					}
+    					else
+    					{
+        					String[] lineContents = line.split("\t");
+        					String chrom = lineContents[0];
+        					String position = lineContents[1];
+        					String indelKey = chrom + "\t" + position;
+        					indels.put(indelKey, Boolean.TRUE);
+    					}
+
+    				}
+    			}
+    			else
+    			{
+    				System.err.println("Unable to open indels file for reading");
+    			}
+
+    			in.close();
+    		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834707
+net/sf/varscan/FpFilter.java 649 654
+net/sf/varscan/CopyCaller.java 444 449
+----------------------------------------
+        	    						{
+        	    							// Unable to get readcounts for ref or var allele //
+        	    							failReason = "NoReadCounts";
+        	    							stats.put("numFailNoRC", (stats.get("numFailNoRC") + 1));
+        	    							filterFlag = true;
+        	    						}
+
+----------------------------------------
+			    	        			{
+			    	        				stats.put("numAmp", (stats.get("numAmp") + 1));
+			    	        				baseCounts.put("numAmp", (baseCounts.get("numAmp") + regionSize));
+
+			    	        				regionCall = "amp";
+			    	        			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834708
+net/sf/varscan/Somatic.java 385 411
+net/sf/varscan/Somatic.java 1108 1134
+----------------------------------------
+				    			{
+				    				try
+				    				{
+				    					int tumorReads1plus = Integer.parseInt(compareContents[13]);
+				    					int tumorReads1minus = Integer.parseInt(compareContents[14]);
+				    					int tumorReads2plus = Integer.parseInt(compareContents[15]);
+				    					int tumorReads2minus = Integer.parseInt(compareContents[16]);
+
+				    					if(tumorReads1plus > 0 || tumorReads1minus > 0)
+				    					{
+				    						strandedness1 = (double) tumorReads1plus / (double) (tumorReads1plus + tumorReads1minus);
+				    					}
+
+				    					if(tumorReads2plus > 0 || tumorReads2minus > 0)
+				    					{
+				    						strandedness2 = (double) tumorReads2plus / (double) (tumorReads2plus + tumorReads2minus);
+				    						if(tumorReads1plus > 0 || tumorReads1minus > 0)
+				    						{
+				    							strandednessDiff = java.lang.Math.abs(strandedness1 - strandedness2);
+				    						}
+				    					}
+				    				}
+				    				catch(Exception e)
+				    				{
+				    					// Exception parsing info from compareResult //
+				    				}
+				    			}
+
+----------------------------------------
+			    			{
+			    				try
+			    				{
+			    					int tumorReads1plus = Integer.parseInt(compareContents[13]);
+			    					int tumorReads1minus = Integer.parseInt(compareContents[14]);
+			    					int tumorReads2plus = Integer.parseInt(compareContents[15]);
+			    					int tumorReads2minus = Integer.parseInt(compareContents[16]);
+
+			    					if(tumorReads1plus > 0 || tumorReads1minus > 0)
+			    					{
+			    						strandedness1 = (double) tumorReads1plus / (double) (tumorReads1plus + tumorReads1minus);
+			    					}
+
+			    					if(tumorReads2plus > 0 || tumorReads2minus > 0)
+			    					{
+			    						strandedness2 = (double) tumorReads2plus / (double) (tumorReads2plus + tumorReads2minus);
+			    						if(tumorReads1plus > 0 || tumorReads1minus > 0)
+			    						{
+			    							strandednessDiff = java.lang.Math.abs(strandedness1 - strandedness2);
+			    						}
+			    					}
+			    				}
+			    				catch(Exception e)
+			    				{
+			    					// Exception parsing info from compareResult //
+			    				}
+			    			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834709
+net/sf/varscan/Somatic.java 1108 1134
+net/sf/varscan/Somatic.java 387 406
+----------------------------------------
+			    			{
+			    				try
+			    				{
+			    					int tumorReads1plus = Integer.parseInt(compareContents[13]);
+			    					int tumorReads1minus = Integer.parseInt(compareContents[14]);
+			    					int tumorReads2plus = Integer.parseInt(compareContents[15]);
+			    					int tumorReads2minus = Integer.parseInt(compareContents[16]);
+
+			    					if(tumorReads1plus > 0 || tumorReads1minus > 0)
+			    					{
+			    						strandedness1 = (double) tumorReads1plus / (double) (tumorReads1plus + tumorReads1minus);
+			    					}
+
+			    					if(tumorReads2plus > 0 || tumorReads2minus > 0)
+			    					{
+			    						strandedness2 = (double) tumorReads2plus / (double) (tumorReads2plus + tumorReads2minus);
+			    						if(tumorReads1plus > 0 || tumorReads1minus > 0)
+			    						{
+			    							strandednessDiff = java.lang.Math.abs(strandedness1 - strandedness2);
+			    						}
+			    					}
+			    				}
+			    				catch(Exception e)
+			    				{
+			    					// Exception parsing info from compareResult //
+			    				}
+			    			}
+
+----------------------------------------
+				    				{
+				    					int tumorReads1plus = Integer.parseInt(compareContents[13]);
+				    					int tumorReads1minus = Integer.parseInt(compareContents[14]);
+				    					int tumorReads2plus = Integer.parseInt(compareContents[15]);
+				    					int tumorReads2minus = Integer.parseInt(compareContents[16]);
+
+				    					if(tumorReads1plus > 0 || tumorReads1minus > 0)
+				    					{
+				    						strandedness1 = (double) tumorReads1plus / (double) (tumorReads1plus + tumorReads1minus);
+				    					}
+
+				    					if(tumorReads2plus > 0 || tumorReads2minus > 0)
+				    					{
+				    						strandedness2 = (double) tumorReads2plus / (double) (tumorReads2plus + tumorReads2minus);
+				    						if(tumorReads1plus > 0 || tumorReads1minus > 0)
+				    						{
+				    							strandednessDiff = java.lang.Math.abs(strandedness1 - strandedness2);
+				    						}
+				    					}
+				    				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834710
+net/sf/varscan/Somatic.java 385 411
+net/sf/varscan/Somatic.java 1110 1129
+----------------------------------------
+				    			{
+				    				try
+				    				{
+				    					int tumorReads1plus = Integer.parseInt(compareContents[13]);
+				    					int tumorReads1minus = Integer.parseInt(compareContents[14]);
+				    					int tumorReads2plus = Integer.parseInt(compareContents[15]);
+				    					int tumorReads2minus = Integer.parseInt(compareContents[16]);
+
+				    					if(tumorReads1plus > 0 || tumorReads1minus > 0)
+				    					{
+				    						strandedness1 = (double) tumorReads1plus / (double) (tumorReads1plus + tumorReads1minus);
+				    					}
+
+				    					if(tumorReads2plus > 0 || tumorReads2minus > 0)
+				    					{
+				    						strandedness2 = (double) tumorReads2plus / (double) (tumorReads2plus + tumorReads2minus);
+				    						if(tumorReads1plus > 0 || tumorReads1minus > 0)
+				    						{
+				    							strandednessDiff = java.lang.Math.abs(strandedness1 - strandedness2);
+				    						}
+				    					}
+				    				}
+				    				catch(Exception e)
+				    				{
+				    					// Exception parsing info from compareResult //
+				    				}
+				    			}
+
+----------------------------------------
+			    				{
+			    					int tumorReads1plus = Integer.parseInt(compareContents[13]);
+			    					int tumorReads1minus = Integer.parseInt(compareContents[14]);
+			    					int tumorReads2plus = Integer.parseInt(compareContents[15]);
+			    					int tumorReads2minus = Integer.parseInt(compareContents[16]);
+
+			    					if(tumorReads1plus > 0 || tumorReads1minus > 0)
+			    					{
+			    						strandedness1 = (double) tumorReads1plus / (double) (tumorReads1plus + tumorReads1minus);
+			    					}
+
+			    					if(tumorReads2plus > 0 || tumorReads2minus > 0)
+			    					{
+			    						strandedness2 = (double) tumorReads2plus / (double) (tumorReads2plus + tumorReads2minus);
+			    						if(tumorReads1plus > 0 || tumorReads1minus > 0)
+			    						{
+			    							strandednessDiff = java.lang.Math.abs(strandedness1 - strandedness2);
+			    						}
+			    					}
+			    				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834711
+net/sf/varscan/Somatic.java 387 406
+net/sf/varscan/Somatic.java 1110 1129
+----------------------------------------
+				    				{
+				    					int tumorReads1plus = Integer.parseInt(compareContents[13]);
+				    					int tumorReads1minus = Integer.parseInt(compareContents[14]);
+				    					int tumorReads2plus = Integer.parseInt(compareContents[15]);
+				    					int tumorReads2minus = Integer.parseInt(compareContents[16]);
+
+				    					if(tumorReads1plus > 0 || tumorReads1minus > 0)
+				    					{
+				    						strandedness1 = (double) tumorReads1plus / (double) (tumorReads1plus + tumorReads1minus);
+				    					}
+
+				    					if(tumorReads2plus > 0 || tumorReads2minus > 0)
+				    					{
+				    						strandedness2 = (double) tumorReads2plus / (double) (tumorReads2plus + tumorReads2minus);
+				    						if(tumorReads1plus > 0 || tumorReads1minus > 0)
+				    						{
+				    							strandednessDiff = java.lang.Math.abs(strandedness1 - strandedness2);
+				    						}
+				    					}
+				    				}
+
+----------------------------------------
+			    				{
+			    					int tumorReads1plus = Integer.parseInt(compareContents[13]);
+			    					int tumorReads1minus = Integer.parseInt(compareContents[14]);
+			    					int tumorReads2plus = Integer.parseInt(compareContents[15]);
+			    					int tumorReads2minus = Integer.parseInt(compareContents[16]);
+
+			    					if(tumorReads1plus > 0 || tumorReads1minus > 0)
+			    					{
+			    						strandedness1 = (double) tumorReads1plus / (double) (tumorReads1plus + tumorReads1minus);
+			    					}
+
+			    					if(tumorReads2plus > 0 || tumorReads2minus > 0)
+			    					{
+			    						strandedness2 = (double) tumorReads2plus / (double) (tumorReads2plus + tumorReads2minus);
+			    						if(tumorReads1plus > 0 || tumorReads1minus > 0)
+			    						{
+			    							strandednessDiff = java.lang.Math.abs(strandedness1 - strandedness2);
+			    						}
+			    					}
+			    				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834731
+net/sf/varscan/FilterSomatic.java 341 346
+net/sf/varscan/FilterVariants.java 308 314
+----------------------------------------
+		    				{
+		    					if(params.containsKey("output-file"))
+		    						outFile.println(line);
+
+		    					stats.put("numPassFilter", (stats.get("numPassFilter") + 1));
+		    				}
+
+----------------------------------------
+			    							{
+			    								stats.put("numCalledRef", (stats.get("numCalledRef") + 1));
+
+			    								if(!isFiltered)
+			    									numSamplesReferencePass++;
+			    								// Don't try to filter wild-type calls //
+			    							}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834732
+net/sf/varscan/FilterSomatic.java 352 369
+net/sf/varscan/FilterVariants.java 475 493
+----------------------------------------
+	    			{
+	    				if(lineCounter == 1)
+	    				{
+	    					if(params.containsKey("output-file"))
+	    						outFile.println(line);
+	    				}
+	    				else
+	    				{
+		    				System.err.println("Parsing Exception on line:\n" + line + "\n" + e.getLocalizedMessage());
+		    				stats.put("numParsingExceptions", (stats.get("numParsingExceptions") + 1));
+		    				if(stats.get("numParsingExceptions") >= 5)
+		    				{
+		    					System.err.println("Too many parsing exceptions encountered; exiting");
+		    					return;
+		    				}
+	    				}
+
+	    			}
+
+----------------------------------------
+	    			{
+	    				if(lineCounter == 1)
+	    				{
+	    					// Print header //
+	    					System.out.println(line);
+							if(params.containsKey("output-file"))
+	    						outFile.println(line);
+	    				}
+	    				else
+	    				{
+		    				System.err.println("Parsing Exception on line:\n" + line + "\n" + e.getLocalizedMessage());
+		    				stats.put("numParsingExceptions", (stats.get("numParsingExceptions") + 1));
+		    				if(stats.get("numParsingExceptions") >= 5)
+		    				{
+		    					System.err.println("Too many parsing exceptions encountered; exiting");
+		    					return;
+		    				}
+	    				}
+	    			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834733
+net/sf/varscan/CopyCaller.java 286 297
+net/sf/varscan/CopyCaller.java 505 516
+----------------------------------------
+	    		    {
+	    		    	System.err.println("Parsing Exception on line:\n" + line + "\n" + e.getLocalizedMessage());
+
+	    				stats.put("numParsingExceptions", (stats.get("numParsingExceptions") + 1));
+
+	    				if(stats.get("numParsingExceptions") >= 5)
+	    				{
+	    					System.err.println("Too many parsing exceptions encountered; exiting");
+		    				System.exit(11);
+	    				}
+
+	    		    }
+
+----------------------------------------
+	    		    {
+	    		    	System.err.println("Parsing Exception on line:\n" + line + "\n" + e.getMessage() + "\n" + e.getLocalizedMessage());
+	    		    	System.err.println(e.toString());
+	    				stats.put("numParsingExceptions", (stats.get("numParsingExceptions") + 1));
+
+	    				if(stats.get("numParsingExceptions") >= 5)
+	    				{
+	    					System.err.println("Too many parsing exceptions encountered; exiting");
+		    				System.exit(11);
+	    				}
+
+	    		    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+28918708
+net/sf/varscan/CallPileup.java 60 86
+net/sf/varscan/FilterVariants.java 61 98
+----------------------------------------
+		{
+			if(params.containsKey("min-coverage"))
+				 minCoverage = Integer.parseInt(params.get("min-coverage"));
+
+			if(params.containsKey("min-reads2"))
+				 minReads2 = Integer.parseInt(params.get("min-reads2"));
+
+			if(params.containsKey("min-var-freq"))
+				 minVarFreq = Double.parseDouble(params.get("min-var-freq"));
+
+			if(params.containsKey("min-freq-for-hom"))
+				 minFreqForHom = Double.parseDouble(params.get("min-freq-for-hom"));
+
+			if(params.containsKey("min-avg-qual"))
+				 minAvgQual = Integer.parseInt(params.get("min-avg-qual"));
+
+			if(params.containsKey("p-value"))
+				 pValueThreshold = Double.parseDouble(params.get("p-value"));
+			else
+				System.err.println("Warning: No p-value threshold provided, so p-values will not be calculated");
+
+			 System.err.println("Min coverage:\t" + minCoverage);
+			 System.err.println("Min reads2:\t" + minReads2);
+			 System.err.println("Min var freq:\t" + minVarFreq);
+			 System.err.println("Min avg qual:\t" + minAvgQual);
+			 System.err.println("P-value thresh:\t" + pValueThreshold);
+		}
+
+----------------------------------------
+		{
+			if(params.containsKey("min-coverage"))
+				 minCoverage = Integer.parseInt(params.get("min-coverage"));
+
+			if(params.containsKey("min-reads2"))
+				 minReads2 = Integer.parseInt(params.get("min-reads2"));
+
+			if(params.containsKey("min-strands2"))
+				 minStrands2 = Integer.parseInt(params.get("min-strands2"));
+
+			if(params.containsKey("min-var-freq"))
+				 minVarFreq = Double.parseDouble(params.get("min-var-freq"));
+
+			if(params.containsKey("min-avg-qual"))
+				 minAvgQual = Integer.parseInt(params.get("min-avg-qual"));
+
+			if(params.containsKey("p-value"))
+				 pValueThreshold = Double.parseDouble(params.get("p-value"));
+
+			if(params.containsKey("indel-file"))
+			{
+				indelPositions = loadIndels(params.get("indel-file"));
+			}
+
+			if(params.containsKey("output-file"))
+				outFileName = params.get("output-file");
+
+			if(params.containsKey("not-file"))
+				notFileName = params.get("not-file");
+
+			System.err.println("Min coverage:\t" + minCoverage);
+			System.err.println("Min reads2:\t" + minReads2);
+			System.err.println("Min strands2:\t" + minStrands2);
+			System.err.println("Min var freq:\t" + minVarFreq);
+			System.err.println("Min avg qual:\t" + minAvgQual);
+			System.err.println("P-value thresh:\t" + pValueThreshold);
+
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834734
+net/sf/varscan/FilterSomatic.java 66 107
+net/sf/varscan/FilterVariants.java 61 98
+----------------------------------------
+		{
+			if(params.containsKey("output-file"))
+				outFileName = params.get("output-file");
+
+			if(params.containsKey("window-size"))
+				 windowSize = Integer.parseInt(params.get("window-size"));
+
+			if(params.containsKey("window-snps"))
+				 windowSNPs = Integer.parseInt(params.get("window-snps"));
+
+			if(params.containsKey("indel-margin"))
+				 indelMargin = Integer.parseInt(params.get("indel-margin"));
+
+			if(params.containsKey("indel-file"))
+			{
+				indelPositions = loadIndels(params.get("indel-file"));
+			}
+
+			if(params.containsKey("min-coverage"))
+				 minCoverage = Integer.parseInt(params.get("min-coverage"));
+
+			if(params.containsKey("min-reads2"))
+				 minReads2 = Integer.parseInt(params.get("min-reads2"));
+
+			if(params.containsKey("min-strands2"))
+				 minStrands2 = Integer.parseInt(params.get("min-strands2"));
+
+			if(params.containsKey("min-var-freq"))
+				 minVarFreq = Double.parseDouble(params.get("min-var-freq"));
+
+			if(params.containsKey("min-avg-qual"))
+				 minAvgQual = Integer.parseInt(params.get("min-avg-qual"));
+
+			if(params.containsKey("p-value"))
+				 pValueThreshold = Double.parseDouble(params.get("p-value"));
+
+
+			System.err.println("Window size:\t" + windowSize);
+			System.err.println("Window SNPs:\t" + windowSNPs);
+			System.err.println("Indel margin:\t" + indelMargin);
+
+		}
+
+----------------------------------------
+		{
+			if(params.containsKey("min-coverage"))
+				 minCoverage = Integer.parseInt(params.get("min-coverage"));
+
+			if(params.containsKey("min-reads2"))
+				 minReads2 = Integer.parseInt(params.get("min-reads2"));
+
+			if(params.containsKey("min-strands2"))
+				 minStrands2 = Integer.parseInt(params.get("min-strands2"));
+
+			if(params.containsKey("min-var-freq"))
+				 minVarFreq = Double.parseDouble(params.get("min-var-freq"));
+
+			if(params.containsKey("min-avg-qual"))
+				 minAvgQual = Integer.parseInt(params.get("min-avg-qual"));
+
+			if(params.containsKey("p-value"))
+				 pValueThreshold = Double.parseDouble(params.get("p-value"));
+
+			if(params.containsKey("indel-file"))
+			{
+				indelPositions = loadIndels(params.get("indel-file"));
+			}
+
+			if(params.containsKey("output-file"))
+				outFileName = params.get("output-file");
+
+			if(params.containsKey("not-file"))
+				notFileName = params.get("not-file");
+
+			System.err.println("Min coverage:\t" + minCoverage);
+			System.err.println("Min reads2:\t" + minReads2);
+			System.err.println("Min strands2:\t" + minStrands2);
+			System.err.println("Min var freq:\t" + minVarFreq);
+			System.err.println("Min avg qual:\t" + minAvgQual);
+			System.err.println("P-value thresh:\t" + pValueThreshold);
+
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834763
+net/sf/varscan/Trio.java 878 888
+net/sf/varscan/CallMpileup.java 755 765
+----------------------------------------
+		    							{
+		    								if(varAllele.startsWith("-"))
+		    								{
+		    									varAllele = varAllele.replace("-", "");
+		    									if(varAllele.length() > maxDelSize)
+		    									{
+		    										maxDelBases = varAllele;
+		    										maxDelSize = varAllele.length();
+		    									}
+		    								}
+		    							}
+
+----------------------------------------
+	    							{
+	    								if(varAllele.startsWith("-"))
+	    								{
+	    									varAllele = varAllele.replace("-", "");
+	    									if(varAllele.length() > maxDelSize)
+	    									{
+	    										maxDelBases = varAllele;
+	    										maxDelSize = varAllele.length();
+	    									}
+	    								}
+	    							}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834765
+net/sf/varscan/CallMpileup.java 755 765
+net/sf/varscan/Trio.java 880 887
+----------------------------------------
+	    							{
+	    								if(varAllele.startsWith("-"))
+	    								{
+	    									varAllele = varAllele.replace("-", "");
+	    									if(varAllele.length() > maxDelSize)
+	    									{
+	    										maxDelBases = varAllele;
+	    										maxDelSize = varAllele.length();
+	    									}
+	    								}
+	    							}
+
+----------------------------------------
+		    								{
+		    									varAllele = varAllele.replace("-", "");
+		    									if(varAllele.length() > maxDelSize)
+		    									{
+		    										maxDelBases = varAllele;
+		    										maxDelSize = varAllele.length();
+		    									}
+		    								}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834764
+net/sf/varscan/CallMpileup.java 757 764
+net/sf/varscan/Trio.java 880 887
+----------------------------------------
+	    								{
+	    									varAllele = varAllele.replace("-", "");
+	    									if(varAllele.length() > maxDelSize)
+	    									{
+	    										maxDelBases = varAllele;
+	    										maxDelSize = varAllele.length();
+	    									}
+	    								}
+
+----------------------------------------
+		    								{
+		    									varAllele = varAllele.replace("-", "");
+		    									if(varAllele.length() > maxDelSize)
+		    									{
+		    										maxDelBases = varAllele;
+		    										maxDelSize = varAllele.length();
+		    									}
+		    								}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834766
+net/sf/varscan/CallMpileup.java 774 804
+net/sf/varscan/Trio.java 897 927
+----------------------------------------
+	    							{
+    									if(varColumn.length() > 0)
+    										varColumn = varColumn + ",";
+
+	    								if(varAllele.startsWith("-"))
+	    								{
+	    									varAllele = varAllele.replace("-", "");
+
+	    									// For the smaller deletion, determine ref bases to add //
+	    									if(varAllele.length() < maxDelSize)
+	    									{
+	    										String varEntry = maxDelBases.replace(varAllele, "");
+	    										varColumn = varColumn + refBase + varEntry;
+	    									}
+	    									else
+	    									{
+	    										varColumn = varColumn + refBase;
+	    									}
+	    								}
+	    								else if(varAllele.startsWith("+"))
+	    								{
+	    									varAllele = varAllele.replace("+", "");
+	    									String varEntry = refBase + varAllele + maxDelBases;
+	    									varColumn = varColumn + varEntry;
+	    								}
+	    								else
+	    								{
+	    									String varEntry = varAllele + maxDelBases;
+	    									varColumn = varColumn + varEntry;
+	    								}
+	    							}
+
+----------------------------------------
+		    							{
+	    									if(varColumn.length() > 0)
+	    										varColumn = varColumn + ",";
+
+		    								if(varAllele.startsWith("-"))
+		    								{
+		    									varAllele = varAllele.replace("-", "");
+
+		    									// For the smaller deletion, determine ref bases to add //
+		    									if(varAllele.length() < maxDelSize)
+		    									{
+		    										String varEntry = maxDelBases.replace(varAllele, "");
+		    										varColumn = varColumn + refBase + varEntry;
+		    									}
+		    									else
+		    									{
+		    										varColumn = varColumn + refBase;
+		    									}
+		    								}
+		    								else if(varAllele.startsWith("+"))
+		    								{
+		    									varAllele = varAllele.replace("+", "");
+		    									String varEntry = refBase + varAllele + maxDelBases;
+		    									varColumn = varColumn + varEntry;
+		    								}
+		    								else
+		    								{
+		    									String varEntry = varAllele + maxDelBases;
+		    									varColumn = varColumn + varEntry;
+		    								}
+		    							}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834767
+net/sf/varscan/CallMpileup.java 779 792
+net/sf/varscan/Trio.java 902 915
+----------------------------------------
+	    								{
+	    									varAllele = varAllele.replace("-", "");
+
+	    									// For the smaller deletion, determine ref bases to add //
+	    									if(varAllele.length() < maxDelSize)
+	    									{
+	    										String varEntry = maxDelBases.replace(varAllele, "");
+	    										varColumn = varColumn + refBase + varEntry;
+	    									}
+	    									else
+	    									{
+	    										varColumn = varColumn + refBase;
+	    									}
+	    								}
+
+----------------------------------------
+		    								{
+		    									varAllele = varAllele.replace("-", "");
+
+		    									// For the smaller deletion, determine ref bases to add //
+		    									if(varAllele.length() < maxDelSize)
+		    									{
+		    										String varEntry = maxDelBases.replace(varAllele, "");
+		    										varColumn = varColumn + refBase + varEntry;
+		    									}
+		    									else
+		    									{
+		    										varColumn = varColumn + refBase;
+		    									}
+		    								}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834768
+net/sf/varscan/CallMpileup.java 810 815
+net/sf/varscan/Trio.java 933 939
+----------------------------------------
+		    					{
+		    						// INSERTION //
+		    						// Ref = ref base; Var = ref base followed by inserted bases //
+	    							refColumn = refBase;
+		    						varColumn = refBase + varBases.replace("+", "");
+		    					}
+
+----------------------------------------
+			    					{
+		    							variantType = "INDEL";
+			    						// INSERTION //
+			    						// Ref = ref base; Var = ref base followed by inserted bases //
+		    							refColumn = refBase;
+			    						varColumn = refBase + varBases.replace("+", "");
+			    					}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834769
+net/sf/varscan/CallMpileup.java 817 822
+net/sf/varscan/Trio.java 933 939
+----------------------------------------
+		    					{
+		    						// DELETION //
+		    						// Ref = ref base followed by deleted bases; var = ref base //
+		    						refColumn = refBase + varBases.replace("-", "");
+		    						varColumn = refBase;
+		    					}
+
+----------------------------------------
+			    					{
+		    							variantType = "INDEL";
+			    						// INSERTION //
+			    						// Ref = ref base; Var = ref base followed by inserted bases //
+		    							refColumn = refBase;
+			    						varColumn = refBase + varBases.replace("+", "");
+			    					}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834772
+net/sf/varscan/CallMpileup.java 817 822
+net/sf/varscan/Trio.java 941 947
+----------------------------------------
+		    					{
+		    						// DELETION //
+		    						// Ref = ref base followed by deleted bases; var = ref base //
+		    						refColumn = refBase + varBases.replace("-", "");
+		    						varColumn = refBase;
+		    					}
+
+----------------------------------------
+			    					{
+			    						variantType = "INDEL";
+			    						// DELETION //
+			    						// Ref = ref base followed by deleted bases; var = ref base //
+			    						refColumn = refBase + varBases.replace("-", "");
+			    						varColumn = refBase;
+			    					}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834771
+net/sf/varscan/CallMpileup.java 810 815
+net/sf/varscan/Trio.java 941 947
+----------------------------------------
+		    					{
+		    						// INSERTION //
+		    						// Ref = ref base; Var = ref base followed by inserted bases //
+	    							refColumn = refBase;
+		    						varColumn = refBase + varBases.replace("+", "");
+		    					}
+
+----------------------------------------
+			    					{
+			    						variantType = "INDEL";
+			    						// DELETION //
+			    						// Ref = ref base followed by deleted bases; var = ref base //
+			    						refColumn = refBase + varBases.replace("-", "");
+			    						varColumn = refBase;
+			    					}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834770
+net/sf/varscan/Trio.java 933 939
+net/sf/varscan/Trio.java 941 947
+----------------------------------------
+			    					{
+		    							variantType = "INDEL";
+			    						// INSERTION //
+			    						// Ref = ref base; Var = ref base followed by inserted bases //
+		    							refColumn = refBase;
+			    						varColumn = refBase + varBases.replace("+", "");
+			    					}
+
+----------------------------------------
+			    					{
+			    						variantType = "INDEL";
+			    						// DELETION //
+			    						// Ref = ref base followed by deleted bases; var = ref base //
+			    						refColumn = refBase + varBases.replace("-", "");
+			    						varColumn = refBase;
+			    					}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834773
+net/sf/varscan/ReadCounts.java 281 292
+net/sf/varscan/Trio.java 1058 1067
+----------------------------------------
+			    	        	{
+			    	    			// Insufficient coverage - Print the output line //
+
+			    	    			if(params.containsKey("output-file"))
+			    	    			{
+			    	    				out.println(outputLine);
+			    	    			}
+			    	    			else
+			    	    			{
+			    	    				System.err.println(outputLine);
+			    	    			}
+			    	        	}
+
+----------------------------------------
+			    	    			{
+			    	    				if(variantType.equals("SNP"))
+			    	    				{
+			    	    					outSnp.println(outLine);
+			    	    				}
+			    	    				else if(variantType.equals("INDEL"))
+			    	    				{
+			    	    					outIndel.println(outLine);
+			    	    				}
+			    	    			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834774
+net/sf/varscan/Trio.java 1058 1067
+net/sf/varscan/FpFilter.java 262 278
+----------------------------------------
+			    	    			{
+			    	    				if(variantType.equals("SNP"))
+			    	    				{
+			    	    					outSnp.println(outLine);
+			    	    				}
+			    	    				else if(variantType.equals("INDEL"))
+			    	    				{
+			    	    					outIndel.println(outLine);
+			    	    				}
+			    	    			}
+
+----------------------------------------
+    		    				{
+	    	    					if(params.containsKey("output-file"))
+	    	    					{
+	    	    						if(line.startsWith("#CHROM"))
+	    	    							outFile.println(vcfHeaderInfo);
+
+	    	    						outFile.println(line);
+	    	    					}
+
+	    	    					if(params.containsKey("filtered-file"))
+	    	    					{
+	    	    						if(line.startsWith("#CHROM"))
+	    	    							filteredFile.println(vcfHeaderInfo);
+
+	    	    						filteredFile.println(line);
+	    	    					}
+    		    				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834778
+net/sf/varscan/FilterSomatic.java 423 440
+net/sf/varscan/FilterVariants.java 550 567
+----------------------------------------
+    			{
+    				while ((line = in.readLine()) != null)
+    				{
+    					String[] lineContents = line.split("\t");
+    					String chrom = lineContents[0];
+    					if(chrom.equals("Chrom") || line.startsWith("#"))
+    					{
+    						// Ignore headers //
+    					}
+    					else
+    					{
+	    					String position = lineContents[1];
+	    					String indelKey = chrom + "\t" + position;
+	    					indels.put(indelKey, Boolean.TRUE);
+    					}
+
+    				}
+    			}
+
+----------------------------------------
+    			{
+    				while ((line = in.readLine()) != null)
+    				{
+    					if(line.startsWith("#"))
+    					{
+    						// Ignore //
+    					}
+    					else
+    					{
+        					String[] lineContents = line.split("\t");
+        					String chrom = lineContents[0];
+        					String position = lineContents[1];
+        					String indelKey = chrom + "\t" + position;
+        					indels.put(indelKey, Boolean.TRUE);
+    					}
+
+    				}
+    			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834779
+net/sf/varscan/FilterSomatic.java 425 439
+net/sf/varscan/FilterVariants.java 550 567
+----------------------------------------
+    				{
+    					String[] lineContents = line.split("\t");
+    					String chrom = lineContents[0];
+    					if(chrom.equals("Chrom") || line.startsWith("#"))
+    					{
+    						// Ignore headers //
+    					}
+    					else
+    					{
+	    					String position = lineContents[1];
+	    					String indelKey = chrom + "\t" + position;
+	    					indels.put(indelKey, Boolean.TRUE);
+    					}
+
+    				}
+
+----------------------------------------
+    			{
+    				while ((line = in.readLine()) != null)
+    				{
+    					if(line.startsWith("#"))
+    					{
+    						// Ignore //
+    					}
+    					else
+    					{
+        					String[] lineContents = line.split("\t");
+        					String chrom = lineContents[0];
+        					String position = lineContents[1];
+        					String indelKey = chrom + "\t" + position;
+        					indels.put(indelKey, Boolean.TRUE);
+    					}
+
+    				}
+    			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834783
+net/sf/varscan/FilterSomatic.java 425 439
+net/sf/varscan/FilterVariants.java 552 566
+----------------------------------------
+    				{
+    					String[] lineContents = line.split("\t");
+    					String chrom = lineContents[0];
+    					if(chrom.equals("Chrom") || line.startsWith("#"))
+    					{
+    						// Ignore headers //
+    					}
+    					else
+    					{
+	    					String position = lineContents[1];
+	    					String indelKey = chrom + "\t" + position;
+	    					indels.put(indelKey, Boolean.TRUE);
+    					}
+
+    				}
+
+----------------------------------------
+    				{
+    					if(line.startsWith("#"))
+    					{
+    						// Ignore //
+    					}
+    					else
+    					{
+        					String[] lineContents = line.split("\t");
+        					String chrom = lineContents[0];
+        					String position = lineContents[1];
+        					String indelKey = chrom + "\t" + position;
+        					indels.put(indelKey, Boolean.TRUE);
+    					}
+
+    				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834780
+net/sf/varscan/VarScan.java 1671 1685
+net/sf/varscan/FilterVariants.java 552 566
+----------------------------------------
+			 {
+				 String[] gtContents = gt.split("-");
+				 String indel_type = gtContents[0];
+				 String indel_size = gtContents[1];
+				 String indel_bases = gtContents[2];
+
+				 if(indel_type.contains("INS"))
+				 {
+					 return("+" + indel_bases);
+				 }
+				 else
+				 {
+					 return("-" + indel_bases);
+				 }
+			 }
+
+----------------------------------------
+    				{
+    					if(line.startsWith("#"))
+    					{
+    						// Ignore //
+    					}
+    					else
+    					{
+        					String[] lineContents = line.split("\t");
+        					String chrom = lineContents[0];
+        					String position = lineContents[1];
+        					String indelKey = chrom + "\t" + position;
+        					indels.put(indelKey, Boolean.TRUE);
+    					}
+
+    				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834781
+net/sf/varscan/FilterSomatic.java 487 502
+net/sf/varscan/FilterVariants.java 552 566
+----------------------------------------
+	    			{
+		    			String[] lineContents = line.split("\t");
+		    			String chrom = lineContents[0];
+
+
+		    			if(chrom.equals("Chrom") || line.startsWith("#"))
+		    			{
+		    				// Ignore headers //
+		    			}
+		    			else
+		    			{
+			    			int position = Integer.parseInt(lineContents[1]);
+	    					String snpKey = chrom + "\t" + position;
+	    					snps.put(snpKey, Boolean.TRUE);
+		    			}
+	    			}
+
+----------------------------------------
+    				{
+    					if(line.startsWith("#"))
+    					{
+    						// Ignore //
+    					}
+    					else
+    					{
+        					String[] lineContents = line.split("\t");
+        					String chrom = lineContents[0];
+        					String position = lineContents[1];
+        					String indelKey = chrom + "\t" + position;
+        					indels.put(indelKey, Boolean.TRUE);
+    					}
+
+    				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834782
+net/sf/varscan/FilterSomatic.java 423 440
+net/sf/varscan/FilterVariants.java 552 566
+----------------------------------------
+    			{
+    				while ((line = in.readLine()) != null)
+    				{
+    					String[] lineContents = line.split("\t");
+    					String chrom = lineContents[0];
+    					if(chrom.equals("Chrom") || line.startsWith("#"))
+    					{
+    						// Ignore headers //
+    					}
+    					else
+    					{
+	    					String position = lineContents[1];
+	    					String indelKey = chrom + "\t" + position;
+	    					indels.put(indelKey, Boolean.TRUE);
+    					}
+
+    				}
+    			}
+
+----------------------------------------
+    				{
+    					if(line.startsWith("#"))
+    					{
+    						// Ignore //
+    					}
+    					else
+    					{
+        					String[] lineContents = line.split("\t");
+        					String chrom = lineContents[0];
+        					String position = lineContents[1];
+        					String indelKey = chrom + "\t" + position;
+        					indels.put(indelKey, Boolean.TRUE);
+    					}
+
+    				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834790
+net/sf/varscan/VarScan.java 1633 1638
+net/sf/varscan/VarScan.java 1649 1654
+----------------------------------------
+			{
+				if(refBase.equals("G"))
+					varAllele = "C";
+				else
+					varAllele = "G";
+			}
+
+----------------------------------------
+			{
+				if(refBase.equals("G"))
+					varAllele = "T";
+				else
+					varAllele = "G";
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834788
+net/sf/varscan/VarScan.java 1641 1646
+net/sf/varscan/VarScan.java 1649 1654
+----------------------------------------
+			{
+				if(refBase.equals("C"))
+					varAllele = "T";
+				else
+					varAllele = "C";
+			}
+
+----------------------------------------
+			{
+				if(refBase.equals("G"))
+					varAllele = "T";
+				else
+					varAllele = "G";
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834792
+net/sf/varscan/VarScan.java 1617 1622
+net/sf/varscan/VarScan.java 1649 1654
+----------------------------------------
+			{
+				if(refBase.equals("A"))
+					varAllele = "G";
+				else
+					varAllele = "A";
+			}
+
+----------------------------------------
+			{
+				if(refBase.equals("G"))
+					varAllele = "T";
+				else
+					varAllele = "G";
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834789
+net/sf/varscan/VarScan.java 1609 1614
+net/sf/varscan/VarScan.java 1649 1654
+----------------------------------------
+			{
+				if(refBase.equals("A"))
+					varAllele = "C";
+				else
+					varAllele = "A";
+			}
+
+----------------------------------------
+			{
+				if(refBase.equals("G"))
+					varAllele = "T";
+				else
+					varAllele = "G";
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834791
+net/sf/varscan/VarScan.java 1625 1630
+net/sf/varscan/VarScan.java 1649 1654
+----------------------------------------
+			{
+				if(refBase.equals("A"))
+					varAllele = "T";
+				else
+					varAllele = "A";
+			}
+
+----------------------------------------
+			{
+				if(refBase.equals("G"))
+					varAllele = "T";
+				else
+					varAllele = "G";
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834794
+net/sf/varscan/CallMpileup.java 258 293
+net/sf/varscan/Trio.java 285 320
+----------------------------------------
+	    		{
+	    			if(params.containsKey("output-vcf"))
+	    			{
+	    				// Output VCF Header //
+
+	    				vcfHeader += "\n" + "##source=VarScan2";
+	    				vcfHeader += "\n" + "##INFO=<ID=ADP,Number=1,Type=Integer,Description=\"Average per-sample depth of bases with Phred score >= " + minAvgQual + "\">";
+	    				vcfHeader += "\n" + "##INFO=<ID=WT,Number=1,Type=Integer,Description=\"Number of samples called reference (wild-type)\">";
+	    				vcfHeader += "\n" + "##INFO=<ID=HET,Number=1,Type=Integer,Description=\"Number of samples called heterozygous-variant\">";
+	    				vcfHeader += "\n" + "##INFO=<ID=HOM,Number=1,Type=Integer,Description=\"Number of samples called homozygous-variant\">";
+	    				vcfHeader += "\n" + "##INFO=<ID=NC,Number=1,Type=Integer,Description=\"Number of samples not called\">";
+	    				vcfHeader += "\n" + "##FILTER=<ID=str10,Description=\"Less than 10% or more than 90% of variant supporting reads on one strand\">";
+	    				vcfHeader += "\n" + "##FILTER=<ID=indelError,Description=\"Likely artifact due to indel reads at this position\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=GT,Number=1,Type=String,Description=\"Genotype\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=GQ,Number=1,Type=Integer,Description=\"Genotype Quality\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=SDP,Number=1,Type=Integer,Description=\"Raw Read Depth as reported by SAMtools\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=DP,Number=1,Type=Integer,Description=\"Quality Read Depth of bases with Phred score >= " + minAvgQual + "\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=RD,Number=1,Type=Integer,Description=\"Depth of reference-supporting bases (reads1)\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=AD,Number=1,Type=Integer,Description=\"Depth of variant-supporting bases (reads2)\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=FREQ,Number=1,Type=String,Description=\"Variant allele frequency\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=PVAL,Number=1,Type=String,Description=\"P-value from Fisher's Exact Test\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=RBQ,Number=1,Type=Integer,Description=\"Average quality of reference-supporting bases (qual1)\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=ABQ,Number=1,Type=Integer,Description=\"Average quality of variant-supporting bases (qual2)\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=RDF,Number=1,Type=Integer,Description=\"Depth of reference-supporting bases on forward strand (reads1plus)\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=RDR,Number=1,Type=Integer,Description=\"Depth of reference-supporting bases on reverse strand (reads1minus)\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=ADF,Number=1,Type=Integer,Description=\"Depth of variant-supporting bases on forward strand (reads2plus)\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=ADR,Number=1,Type=Integer,Description=\"Depth of variant-supporting bases on reverse strand (reads2minus)\">";
+
+	    			}
+	    			else
+	    			{
+	    				// Output VarScan Header //
+		    			System.out.println("Chrom\tPosition\tRef\tVar\tCons:Cov:Reads1:Reads2:Freq:P-value\tStrandFilter:R1+:R1-:R2+:R2-:pval\tSamplesRef\tSamplesHet\tSamplesHom\tSamplesNC\tCons:Cov:Reads1:Reads2:Freq:P-value");
+	    			}
+
+	    		}
+
+----------------------------------------
+	    		{
+	    			if(params.containsKey("output-vcf"))
+	    			{
+	    				// Output VCF Header //
+
+	    				vcfHeader += "\n" + "##source=VarScan2";
+	    				vcfHeader += "\n" + "##INFO=<ID=ADP,Number=1,Type=Integer,Description=\"Average per-sample depth of bases with Phred score >= " + minAvgQual + "\">";
+	    				vcfHeader += "\n" + "##INFO=<ID=STATUS,Number=1,Type=String,Description=\"Variant status in trio (1=untransmitted, 2=transmitted, 3=denovo, 4=MIE)\">";
+	    				vcfHeader += "\n" + "##INFO=<ID=DENOVO,Number=0,Type=Flag,Description=\"Indicates apparent de novo mutations unique to the child\">";
+	    				vcfHeader += "\n" + "##FILTER=<ID=str10,Description=\"Less than 10% or more than 90% of variant supporting reads on one strand\">";
+	    				vcfHeader += "\n" + "##FILTER=<ID=indelError,Description=\"Likely artifact due to indel reads at this position\">";
+	    				vcfHeader += "\n" + "##FILTER=<ID=mendelError,Description=\"Apparent Mendelian inheritance error (MIE) in trio\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=GT,Number=1,Type=String,Description=\"Genotype\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=GQ,Number=1,Type=Integer,Description=\"Genotype Quality\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=SDP,Number=1,Type=Integer,Description=\"Raw Read Depth as reported by SAMtools\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=DP,Number=1,Type=Integer,Description=\"Quality Read Depth of bases with Phred score >= " + minAvgQual + "\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=RD,Number=1,Type=Integer,Description=\"Depth of reference-supporting bases (reads1)\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=AD,Number=1,Type=Integer,Description=\"Depth of variant-supporting bases (reads2)\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=FREQ,Number=1,Type=String,Description=\"Variant allele frequency\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=PVAL,Number=1,Type=String,Description=\"P-value from Fisher's Exact Test\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=RBQ,Number=1,Type=Integer,Description=\"Average quality of reference-supporting bases (qual1)\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=ABQ,Number=1,Type=Integer,Description=\"Average quality of variant-supporting bases (qual2)\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=RDF,Number=1,Type=Integer,Description=\"Depth of reference-supporting bases on forward strand (reads1plus)\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=RDR,Number=1,Type=Integer,Description=\"Depth of reference-supporting bases on reverse strand (reads1minus)\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=ADF,Number=1,Type=Integer,Description=\"Depth of variant-supporting bases on forward strand (reads2plus)\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=ADR,Number=1,Type=Integer,Description=\"Depth of variant-supporting bases on reverse strand (reads2minus)\">";
+
+
+	    			}
+	    			else
+	    			{
+	    				// Output VarScan Header //
+		    			System.out.println("Chrom\tPosition\tRef\tVar\tStrandFilter:R1+:R1-:R2+:R2-:pval\tFather:Cov:Reads1:Reads2:Freq:P-value\tMother:Cov:Reads1:Reads2:Freq:P-value\tChild:Cov:Reads1:Reads2:Freq:P-value");
+	    			}
+
+	    		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834795
+net/sf/varscan/Trio.java 285 320
+net/sf/varscan/CallMpileup.java 260 286
+----------------------------------------
+	    		{
+	    			if(params.containsKey("output-vcf"))
+	    			{
+	    				// Output VCF Header //
+
+	    				vcfHeader += "\n" + "##source=VarScan2";
+	    				vcfHeader += "\n" + "##INFO=<ID=ADP,Number=1,Type=Integer,Description=\"Average per-sample depth of bases with Phred score >= " + minAvgQual + "\">";
+	    				vcfHeader += "\n" + "##INFO=<ID=STATUS,Number=1,Type=String,Description=\"Variant status in trio (1=untransmitted, 2=transmitted, 3=denovo, 4=MIE)\">";
+	    				vcfHeader += "\n" + "##INFO=<ID=DENOVO,Number=0,Type=Flag,Description=\"Indicates apparent de novo mutations unique to the child\">";
+	    				vcfHeader += "\n" + "##FILTER=<ID=str10,Description=\"Less than 10% or more than 90% of variant supporting reads on one strand\">";
+	    				vcfHeader += "\n" + "##FILTER=<ID=indelError,Description=\"Likely artifact due to indel reads at this position\">";
+	    				vcfHeader += "\n" + "##FILTER=<ID=mendelError,Description=\"Apparent Mendelian inheritance error (MIE) in trio\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=GT,Number=1,Type=String,Description=\"Genotype\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=GQ,Number=1,Type=Integer,Description=\"Genotype Quality\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=SDP,Number=1,Type=Integer,Description=\"Raw Read Depth as reported by SAMtools\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=DP,Number=1,Type=Integer,Description=\"Quality Read Depth of bases with Phred score >= " + minAvgQual + "\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=RD,Number=1,Type=Integer,Description=\"Depth of reference-supporting bases (reads1)\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=AD,Number=1,Type=Integer,Description=\"Depth of variant-supporting bases (reads2)\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=FREQ,Number=1,Type=String,Description=\"Variant allele frequency\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=PVAL,Number=1,Type=String,Description=\"P-value from Fisher's Exact Test\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=RBQ,Number=1,Type=Integer,Description=\"Average quality of reference-supporting bases (qual1)\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=ABQ,Number=1,Type=Integer,Description=\"Average quality of variant-supporting bases (qual2)\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=RDF,Number=1,Type=Integer,Description=\"Depth of reference-supporting bases on forward strand (reads1plus)\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=RDR,Number=1,Type=Integer,Description=\"Depth of reference-supporting bases on reverse strand (reads1minus)\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=ADF,Number=1,Type=Integer,Description=\"Depth of variant-supporting bases on forward strand (reads2plus)\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=ADR,Number=1,Type=Integer,Description=\"Depth of variant-supporting bases on reverse strand (reads2minus)\">";
+
+
+	    			}
+	    			else
+	    			{
+	    				// Output VarScan Header //
+		    			System.out.println("Chrom\tPosition\tRef\tVar\tStrandFilter:R1+:R1-:R2+:R2-:pval\tFather:Cov:Reads1:Reads2:Freq:P-value\tMother:Cov:Reads1:Reads2:Freq:P-value\tChild:Cov:Reads1:Reads2:Freq:P-value");
+	    			}
+
+	    		}
+
+----------------------------------------
+	    			{
+	    				// Output VCF Header //
+
+	    				vcfHeader += "\n" + "##source=VarScan2";
+	    				vcfHeader += "\n" + "##INFO=<ID=ADP,Number=1,Type=Integer,Description=\"Average per-sample depth of bases with Phred score >= " + minAvgQual + "\">";
+	    				vcfHeader += "\n" + "##INFO=<ID=WT,Number=1,Type=Integer,Description=\"Number of samples called reference (wild-type)\">";
+	    				vcfHeader += "\n" + "##INFO=<ID=HET,Number=1,Type=Integer,Description=\"Number of samples called heterozygous-variant\">";
+	    				vcfHeader += "\n" + "##INFO=<ID=HOM,Number=1,Type=Integer,Description=\"Number of samples called homozygous-variant\">";
+	    				vcfHeader += "\n" + "##INFO=<ID=NC,Number=1,Type=Integer,Description=\"Number of samples not called\">";
+	    				vcfHeader += "\n" + "##FILTER=<ID=str10,Description=\"Less than 10% or more than 90% of variant supporting reads on one strand\">";
+	    				vcfHeader += "\n" + "##FILTER=<ID=indelError,Description=\"Likely artifact due to indel reads at this position\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=GT,Number=1,Type=String,Description=\"Genotype\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=GQ,Number=1,Type=Integer,Description=\"Genotype Quality\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=SDP,Number=1,Type=Integer,Description=\"Raw Read Depth as reported by SAMtools\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=DP,Number=1,Type=Integer,Description=\"Quality Read Depth of bases with Phred score >= " + minAvgQual + "\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=RD,Number=1,Type=Integer,Description=\"Depth of reference-supporting bases (reads1)\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=AD,Number=1,Type=Integer,Description=\"Depth of variant-supporting bases (reads2)\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=FREQ,Number=1,Type=String,Description=\"Variant allele frequency\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=PVAL,Number=1,Type=String,Description=\"P-value from Fisher's Exact Test\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=RBQ,Number=1,Type=Integer,Description=\"Average quality of reference-supporting bases (qual1)\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=ABQ,Number=1,Type=Integer,Description=\"Average quality of variant-supporting bases (qual2)\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=RDF,Number=1,Type=Integer,Description=\"Depth of reference-supporting bases on forward strand (reads1plus)\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=RDR,Number=1,Type=Integer,Description=\"Depth of reference-supporting bases on reverse strand (reads1minus)\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=ADF,Number=1,Type=Integer,Description=\"Depth of variant-supporting bases on forward strand (reads2plus)\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=ADR,Number=1,Type=Integer,Description=\"Depth of variant-supporting bases on reverse strand (reads2minus)\">";
+
+	    			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834796
+net/sf/varscan/CallMpileup.java 260 286
+net/sf/varscan/Trio.java 287 313
+----------------------------------------
+	    			{
+	    				// Output VCF Header //
+
+	    				vcfHeader += "\n" + "##source=VarScan2";
+	    				vcfHeader += "\n" + "##INFO=<ID=ADP,Number=1,Type=Integer,Description=\"Average per-sample depth of bases with Phred score >= " + minAvgQual + "\">";
+	    				vcfHeader += "\n" + "##INFO=<ID=WT,Number=1,Type=Integer,Description=\"Number of samples called reference (wild-type)\">";
+	    				vcfHeader += "\n" + "##INFO=<ID=HET,Number=1,Type=Integer,Description=\"Number of samples called heterozygous-variant\">";
+	    				vcfHeader += "\n" + "##INFO=<ID=HOM,Number=1,Type=Integer,Description=\"Number of samples called homozygous-variant\">";
+	    				vcfHeader += "\n" + "##INFO=<ID=NC,Number=1,Type=Integer,Description=\"Number of samples not called\">";
+	    				vcfHeader += "\n" + "##FILTER=<ID=str10,Description=\"Less than 10% or more than 90% of variant supporting reads on one strand\">";
+	    				vcfHeader += "\n" + "##FILTER=<ID=indelError,Description=\"Likely artifact due to indel reads at this position\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=GT,Number=1,Type=String,Description=\"Genotype\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=GQ,Number=1,Type=Integer,Description=\"Genotype Quality\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=SDP,Number=1,Type=Integer,Description=\"Raw Read Depth as reported by SAMtools\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=DP,Number=1,Type=Integer,Description=\"Quality Read Depth of bases with Phred score >= " + minAvgQual + "\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=RD,Number=1,Type=Integer,Description=\"Depth of reference-supporting bases (reads1)\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=AD,Number=1,Type=Integer,Description=\"Depth of variant-supporting bases (reads2)\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=FREQ,Number=1,Type=String,Description=\"Variant allele frequency\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=PVAL,Number=1,Type=String,Description=\"P-value from Fisher's Exact Test\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=RBQ,Number=1,Type=Integer,Description=\"Average quality of reference-supporting bases (qual1)\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=ABQ,Number=1,Type=Integer,Description=\"Average quality of variant-supporting bases (qual2)\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=RDF,Number=1,Type=Integer,Description=\"Depth of reference-supporting bases on forward strand (reads1plus)\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=RDR,Number=1,Type=Integer,Description=\"Depth of reference-supporting bases on reverse strand (reads1minus)\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=ADF,Number=1,Type=Integer,Description=\"Depth of variant-supporting bases on forward strand (reads2plus)\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=ADR,Number=1,Type=Integer,Description=\"Depth of variant-supporting bases on reverse strand (reads2minus)\">";
+
+	    			}
+
+----------------------------------------
+	    			{
+	    				// Output VCF Header //
+
+	    				vcfHeader += "\n" + "##source=VarScan2";
+	    				vcfHeader += "\n" + "##INFO=<ID=ADP,Number=1,Type=Integer,Description=\"Average per-sample depth of bases with Phred score >= " + minAvgQual + "\">";
+	    				vcfHeader += "\n" + "##INFO=<ID=STATUS,Number=1,Type=String,Description=\"Variant status in trio (1=untransmitted, 2=transmitted, 3=denovo, 4=MIE)\">";
+	    				vcfHeader += "\n" + "##INFO=<ID=DENOVO,Number=0,Type=Flag,Description=\"Indicates apparent de novo mutations unique to the child\">";
+	    				vcfHeader += "\n" + "##FILTER=<ID=str10,Description=\"Less than 10% or more than 90% of variant supporting reads on one strand\">";
+	    				vcfHeader += "\n" + "##FILTER=<ID=indelError,Description=\"Likely artifact due to indel reads at this position\">";
+	    				vcfHeader += "\n" + "##FILTER=<ID=mendelError,Description=\"Apparent Mendelian inheritance error (MIE) in trio\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=GT,Number=1,Type=String,Description=\"Genotype\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=GQ,Number=1,Type=Integer,Description=\"Genotype Quality\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=SDP,Number=1,Type=Integer,Description=\"Raw Read Depth as reported by SAMtools\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=DP,Number=1,Type=Integer,Description=\"Quality Read Depth of bases with Phred score >= " + minAvgQual + "\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=RD,Number=1,Type=Integer,Description=\"Depth of reference-supporting bases (reads1)\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=AD,Number=1,Type=Integer,Description=\"Depth of variant-supporting bases (reads2)\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=FREQ,Number=1,Type=String,Description=\"Variant allele frequency\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=PVAL,Number=1,Type=String,Description=\"P-value from Fisher's Exact Test\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=RBQ,Number=1,Type=Integer,Description=\"Average quality of reference-supporting bases (qual1)\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=ABQ,Number=1,Type=Integer,Description=\"Average quality of variant-supporting bases (qual2)\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=RDF,Number=1,Type=Integer,Description=\"Depth of reference-supporting bases on forward strand (reads1plus)\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=RDR,Number=1,Type=Integer,Description=\"Depth of reference-supporting bases on reverse strand (reads1minus)\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=ADF,Number=1,Type=Integer,Description=\"Depth of variant-supporting bases on forward strand (reads2plus)\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=ADR,Number=1,Type=Integer,Description=\"Depth of variant-supporting bases on reverse strand (reads2minus)\">";
+
+
+	    			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834797
+net/sf/varscan/CallMpileup.java 258 293
+net/sf/varscan/Trio.java 287 313
+----------------------------------------
+	    		{
+	    			if(params.containsKey("output-vcf"))
+	    			{
+	    				// Output VCF Header //
+
+	    				vcfHeader += "\n" + "##source=VarScan2";
+	    				vcfHeader += "\n" + "##INFO=<ID=ADP,Number=1,Type=Integer,Description=\"Average per-sample depth of bases with Phred score >= " + minAvgQual + "\">";
+	    				vcfHeader += "\n" + "##INFO=<ID=WT,Number=1,Type=Integer,Description=\"Number of samples called reference (wild-type)\">";
+	    				vcfHeader += "\n" + "##INFO=<ID=HET,Number=1,Type=Integer,Description=\"Number of samples called heterozygous-variant\">";
+	    				vcfHeader += "\n" + "##INFO=<ID=HOM,Number=1,Type=Integer,Description=\"Number of samples called homozygous-variant\">";
+	    				vcfHeader += "\n" + "##INFO=<ID=NC,Number=1,Type=Integer,Description=\"Number of samples not called\">";
+	    				vcfHeader += "\n" + "##FILTER=<ID=str10,Description=\"Less than 10% or more than 90% of variant supporting reads on one strand\">";
+	    				vcfHeader += "\n" + "##FILTER=<ID=indelError,Description=\"Likely artifact due to indel reads at this position\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=GT,Number=1,Type=String,Description=\"Genotype\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=GQ,Number=1,Type=Integer,Description=\"Genotype Quality\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=SDP,Number=1,Type=Integer,Description=\"Raw Read Depth as reported by SAMtools\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=DP,Number=1,Type=Integer,Description=\"Quality Read Depth of bases with Phred score >= " + minAvgQual + "\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=RD,Number=1,Type=Integer,Description=\"Depth of reference-supporting bases (reads1)\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=AD,Number=1,Type=Integer,Description=\"Depth of variant-supporting bases (reads2)\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=FREQ,Number=1,Type=String,Description=\"Variant allele frequency\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=PVAL,Number=1,Type=String,Description=\"P-value from Fisher's Exact Test\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=RBQ,Number=1,Type=Integer,Description=\"Average quality of reference-supporting bases (qual1)\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=ABQ,Number=1,Type=Integer,Description=\"Average quality of variant-supporting bases (qual2)\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=RDF,Number=1,Type=Integer,Description=\"Depth of reference-supporting bases on forward strand (reads1plus)\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=RDR,Number=1,Type=Integer,Description=\"Depth of reference-supporting bases on reverse strand (reads1minus)\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=ADF,Number=1,Type=Integer,Description=\"Depth of variant-supporting bases on forward strand (reads2plus)\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=ADR,Number=1,Type=Integer,Description=\"Depth of variant-supporting bases on reverse strand (reads2minus)\">";
+
+	    			}
+	    			else
+	    			{
+	    				// Output VarScan Header //
+		    			System.out.println("Chrom\tPosition\tRef\tVar\tCons:Cov:Reads1:Reads2:Freq:P-value\tStrandFilter:R1+:R1-:R2+:R2-:pval\tSamplesRef\tSamplesHet\tSamplesHom\tSamplesNC\tCons:Cov:Reads1:Reads2:Freq:P-value");
+	    			}
+
+	    		}
+
+----------------------------------------
+	    			{
+	    				// Output VCF Header //
+
+	    				vcfHeader += "\n" + "##source=VarScan2";
+	    				vcfHeader += "\n" + "##INFO=<ID=ADP,Number=1,Type=Integer,Description=\"Average per-sample depth of bases with Phred score >= " + minAvgQual + "\">";
+	    				vcfHeader += "\n" + "##INFO=<ID=STATUS,Number=1,Type=String,Description=\"Variant status in trio (1=untransmitted, 2=transmitted, 3=denovo, 4=MIE)\">";
+	    				vcfHeader += "\n" + "##INFO=<ID=DENOVO,Number=0,Type=Flag,Description=\"Indicates apparent de novo mutations unique to the child\">";
+	    				vcfHeader += "\n" + "##FILTER=<ID=str10,Description=\"Less than 10% or more than 90% of variant supporting reads on one strand\">";
+	    				vcfHeader += "\n" + "##FILTER=<ID=indelError,Description=\"Likely artifact due to indel reads at this position\">";
+	    				vcfHeader += "\n" + "##FILTER=<ID=mendelError,Description=\"Apparent Mendelian inheritance error (MIE) in trio\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=GT,Number=1,Type=String,Description=\"Genotype\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=GQ,Number=1,Type=Integer,Description=\"Genotype Quality\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=SDP,Number=1,Type=Integer,Description=\"Raw Read Depth as reported by SAMtools\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=DP,Number=1,Type=Integer,Description=\"Quality Read Depth of bases with Phred score >= " + minAvgQual + "\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=RD,Number=1,Type=Integer,Description=\"Depth of reference-supporting bases (reads1)\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=AD,Number=1,Type=Integer,Description=\"Depth of variant-supporting bases (reads2)\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=FREQ,Number=1,Type=String,Description=\"Variant allele frequency\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=PVAL,Number=1,Type=String,Description=\"P-value from Fisher's Exact Test\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=RBQ,Number=1,Type=Integer,Description=\"Average quality of reference-supporting bases (qual1)\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=ABQ,Number=1,Type=Integer,Description=\"Average quality of variant-supporting bases (qual2)\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=RDF,Number=1,Type=Integer,Description=\"Depth of reference-supporting bases on forward strand (reads1plus)\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=RDR,Number=1,Type=Integer,Description=\"Depth of reference-supporting bases on reverse strand (reads1minus)\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=ADF,Number=1,Type=Integer,Description=\"Depth of variant-supporting bases on forward strand (reads2plus)\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=ADR,Number=1,Type=Integer,Description=\"Depth of variant-supporting bases on reverse strand (reads2minus)\">";
+
+
+	    			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+24079505
+net/sf/varscan/Somatic.java 1457 1462
+net/sf/varscan/Somatic.java 690 695
+----------------------------------------
+		    	System.err.println(strandFilter + " were removed by the strand filter");
+		    System.err.println(calledGermline + " were called Germline");
+		    System.err.println(calledLOH + " were called LOH");
+		    System.err.println(calledSomatic + " were called Somatic");
+		    System.err.println(calledUnknown + " were called Unknown");
+		    System.err.println(calledVariant + " were called Variant");
+
+----------------------------------------
+			    	System.err.println(strandFilter + " were removed by the strand filter");
+			    System.err.println(calledGermline + " were called Germline");
+			    System.err.println(calledLOH + " were called LOH");
+			    System.err.println(calledSomatic + " were called Somatic");
+			    System.err.println(calledUnknown + " were called Unknown");
+			    System.err.println(calledVariant + " were called Variant");
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+24079506
+net/sf/varscan/Trio.java 449 455
+net/sf/varscan/Trio.java 527 533
+----------------------------------------
+		    	        				String[] fatherContents = fatherCall.split(":");
+		    	        				String[] motherContents = motherCall.split(":");
+		    	        				String[] childContents = childCall.split(":");
+
+		    	        				String fatherAllele = refBase;
+		    	        				String motherAllele = refBase;
+		    	        				String childAllele = refBase;
+
+----------------------------------------
+	    	        				String[] fatherContents = fatherCall.split(":");
+	    	        				String[] motherContents = motherCall.split(":");
+	    	        				String[] childContents = childCall.split(":");
+
+	    	        				String fatherAllele = refBase;
+	    	        				String motherAllele = refBase;
+	    	        				String childAllele = refBase;
+
+----------------------------------------

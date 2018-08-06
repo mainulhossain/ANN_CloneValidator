@@ -1,0 +1,1360 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+28918709
+net/sf/varscan/FilterVariants.java 255 360
+net/sf/varscan/FilterVariants.java 263 359
+----------------------------------------
+		    					{
+		    						if(colCounter < 9)
+		    						{
+		    							if(colCounter > 0)
+		    								vcfLine += "\t";
+		    							vcfLine += lineContents[colCounter];
+		    						}
+		    						else
+		    						{
+		    							numSamples++;
+		    							vcfLine += "\t";
+		    							// Evaluate sample //
+		    							//GT:GQ:SDP:DP:RD:AD:FREQ:PVAL:RBQ:ABQ:RDF:RDR:ADF:ADR//
+		    							String[] sampleContents = lineContents[colCounter].split(":");
+		    							String gt = sampleContents[0];
+
+		    							stats.put("numVariants", (stats.get("numVariants") + 1));
+
+		    							if(gt.contains("."))
+		    							{
+		    								// Blank genotype, so ignore //
+		    								stats.put("numNoGenotype", (stats.get("numNoGenotype") + 1));
+		    							}
+		    							else
+		    							{
+			    							int qualityDepth = Integer.parseInt(sampleContents[3]);
+			    							int reads1 = Integer.parseInt(sampleContents[4]);
+			    							int reads2 = Integer.parseInt(sampleContents[5]);
+			    							double varFreq = (double) reads2 / (double) ((reads1 + reads2));
+			    							double pValue = Float.parseFloat(sampleContents[7]);
+			    							int qual1 = Integer.parseInt(sampleContents[8]);
+			    							int qual2 = Integer.parseInt(sampleContents[9]);
+			    							int reads1plus = Integer.parseInt(sampleContents[10]);
+			    							int reads1minus = Integer.parseInt(sampleContents[11]);
+			    							int reads2plus = Integer.parseInt(sampleContents[12]);
+			    							int reads2minus = Integer.parseInt(sampleContents[13]);
+			    							boolean strandFail = false;
+			    							if(reads1plus > 0 && reads1minus > 0)
+			    							{
+			    								if(reads2plus == 0 || reads2minus == 0)
+			    									strandFail = true;
+			    							}
+
+			    							boolean isFiltered = true;
+
+			    							/// Begin checks for either reference or variant //
+			    							if(qualityDepth < minCoverage)
+			    							{
+			    								stats.put("numFailCoverage", (stats.get("numFailCoverage") + 1));
+			    								isFiltered = true;
+			    							}
+
+			    							if(gt.equals("0/0"))
+			    							{
+			    								stats.put("numCalledRef", (stats.get("numCalledRef") + 1));
+
+			    								if(!isFiltered)
+			    									numSamplesReferencePass++;
+			    								// Don't try to filter wild-type calls //
+			    							}
+			    							else if(reads2 < minReads2)
+			    							{
+			    								stats.put("numFailReads2", (stats.get("numFailReads2") + 1));
+			    								isFiltered = true;
+			    							}
+			    							else if (qual2 < minAvgQual)
+			    							{
+			    								stats.put("numFailQual", (stats.get("numFailQual") + 1));
+			    								isFiltered = true;
+			    							}
+			    							else if(varFreq < minVarFreq)
+			    							{
+			    								stats.put("numFailFreq", (stats.get("numFailFreq") + 1));
+			    								isFiltered = true;
+			    							}
+			    							else if (strandFail)
+			    							{
+			    								stats.put("numFailStrands", (stats.get("numFailStrands") + 1));
+			    								isFiltered = true;
+			    							}
+			    							else if (pValue > pValueThreshold)
+			    							{
+			    								stats.put("numFailPvalue", (stats.get("numFailPvalue") + 1));
+			    								isFiltered = true;
+			    							}
+			    							else
+			    							{
+				    							// Pass the variant //
+				    							stats.put("numPassFilter", (stats.get("numPassFilter") + 1));
+				    							numSamplesVariantPass++;
+			    							}
+
+			    							// IF we have a variant filtered, address that //
+
+			    							if(isFiltered)
+			    							{
+			    								// Replace genotype with blank value //
+			    								lineContents[colCounter].replace(gt, "./.");
+			    							}
+		    							}
+
+
+		    							// Append to line //
+		    							vcfLine += lineContents[colCounter];
+		    						}
+		    					}
+
+----------------------------------------
+		    						{
+		    							numSamples++;
+		    							vcfLine += "\t";
+		    							// Evaluate sample //
+		    							//GT:GQ:SDP:DP:RD:AD:FREQ:PVAL:RBQ:ABQ:RDF:RDR:ADF:ADR//
+		    							String[] sampleContents = lineContents[colCounter].split(":");
+		    							String gt = sampleContents[0];
+
+		    							stats.put("numVariants", (stats.get("numVariants") + 1));
+
+		    							if(gt.contains("."))
+		    							{
+		    								// Blank genotype, so ignore //
+		    								stats.put("numNoGenotype", (stats.get("numNoGenotype") + 1));
+		    							}
+		    							else
+		    							{
+			    							int qualityDepth = Integer.parseInt(sampleContents[3]);
+			    							int reads1 = Integer.parseInt(sampleContents[4]);
+			    							int reads2 = Integer.parseInt(sampleContents[5]);
+			    							double varFreq = (double) reads2 / (double) ((reads1 + reads2));
+			    							double pValue = Float.parseFloat(sampleContents[7]);
+			    							int qual1 = Integer.parseInt(sampleContents[8]);
+			    							int qual2 = Integer.parseInt(sampleContents[9]);
+			    							int reads1plus = Integer.parseInt(sampleContents[10]);
+			    							int reads1minus = Integer.parseInt(sampleContents[11]);
+			    							int reads2plus = Integer.parseInt(sampleContents[12]);
+			    							int reads2minus = Integer.parseInt(sampleContents[13]);
+			    							boolean strandFail = false;
+			    							if(reads1plus > 0 && reads1minus > 0)
+			    							{
+			    								if(reads2plus == 0 || reads2minus == 0)
+			    									strandFail = true;
+			    							}
+
+			    							boolean isFiltered = true;
+
+			    							/// Begin checks for either reference or variant //
+			    							if(qualityDepth < minCoverage)
+			    							{
+			    								stats.put("numFailCoverage", (stats.get("numFailCoverage") + 1));
+			    								isFiltered = true;
+			    							}
+
+			    							if(gt.equals("0/0"))
+			    							{
+			    								stats.put("numCalledRef", (stats.get("numCalledRef") + 1));
+
+			    								if(!isFiltered)
+			    									numSamplesReferencePass++;
+			    								// Don't try to filter wild-type calls //
+			    							}
+			    							else if(reads2 < minReads2)
+			    							{
+			    								stats.put("numFailReads2", (stats.get("numFailReads2") + 1));
+			    								isFiltered = true;
+			    							}
+			    							else if (qual2 < minAvgQual)
+			    							{
+			    								stats.put("numFailQual", (stats.get("numFailQual") + 1));
+			    								isFiltered = true;
+			    							}
+			    							else if(varFreq < minVarFreq)
+			    							{
+			    								stats.put("numFailFreq", (stats.get("numFailFreq") + 1));
+			    								isFiltered = true;
+			    							}
+			    							else if (strandFail)
+			    							{
+			    								stats.put("numFailStrands", (stats.get("numFailStrands") + 1));
+			    								isFiltered = true;
+			    							}
+			    							else if (pValue > pValueThreshold)
+			    							{
+			    								stats.put("numFailPvalue", (stats.get("numFailPvalue") + 1));
+			    								isFiltered = true;
+			    							}
+			    							else
+			    							{
+				    							// Pass the variant //
+				    							stats.put("numPassFilter", (stats.get("numPassFilter") + 1));
+				    							numSamplesVariantPass++;
+			    							}
+
+			    							// IF we have a variant filtered, address that //
+
+			    							if(isFiltered)
+			    							{
+			    								// Replace genotype with blank value //
+			    								lineContents[colCounter].replace(gt, "./.");
+			    							}
+		    							}
+
+
+		    							// Append to line //
+		    							vcfLine += lineContents[colCounter];
+		    						}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+28918710
+net/sf/varscan/FilterVariants.java 408 453
+net/sf/varscan/FilterVariants.java 412 443
+----------------------------------------
+			    					{
+			    						if(strands2 >= minStrands2)
+			    						{
+			    							if(qual2 >= minAvgQual)
+			    							{
+			    								if(varFreq >= minVarFreq)
+			    								{
+			    									// Calculate p-value if it has value of 0.98 meaning not calculated //
+
+			    				    				if(pValue >= 0.98)
+			    				    				{
+			    				    					pValue = VarScan.getSignificance(reads1, reads2);
+			    				    				}
+
+
+				    								if(pValue <= pValueThreshold)
+				    								{
+				    									stats.put("numPassFilter", (stats.get("numPassFilter") + 1));
+
+				    									if(params.containsKey("output-file"))
+				    			    						outFile.println(line);
+				    									else
+				    										System.out.println(line);
+
+				    									isFiltered = false;
+				    								}
+				    								else
+				    								{
+				    									stats.put("numFailPvalue", (stats.get("numFailPvalue") + 1));
+				    								}
+			    								}
+			    								else
+			    								{
+			    									stats.put("numFailFreq", (stats.get("numFailFreq") + 1));
+			    								}
+			    							}
+			    							else
+		    								{
+		    									stats.put("numFailQual", (stats.get("numFailQual") + 1));
+		    								}
+			    						}
+			    						else
+	    								{
+	    									stats.put("numFailStrands", (stats.get("numFailStrands") + 1));
+	    								}
+			    					}
+
+----------------------------------------
+			    							{
+			    								if(varFreq >= minVarFreq)
+			    								{
+			    									// Calculate p-value if it has value of 0.98 meaning not calculated //
+
+			    				    				if(pValue >= 0.98)
+			    				    				{
+			    				    					pValue = VarScan.getSignificance(reads1, reads2);
+			    				    				}
+
+
+				    								if(pValue <= pValueThreshold)
+				    								{
+				    									stats.put("numPassFilter", (stats.get("numPassFilter") + 1));
+
+				    									if(params.containsKey("output-file"))
+				    			    						outFile.println(line);
+				    									else
+				    										System.out.println(line);
+
+				    									isFiltered = false;
+				    								}
+				    								else
+				    								{
+				    									stats.put("numFailPvalue", (stats.get("numFailPvalue") + 1));
+				    								}
+			    								}
+			    								else
+			    								{
+			    									stats.put("numFailFreq", (stats.get("numFailFreq") + 1));
+			    								}
+			    							}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+28918711
+net/sf/varscan/LimitVariants.java 141 188
+net/sf/varscan/LimitVariants.java 144 178
+----------------------------------------
+	    		{
+	    			// Try to parse chrom and position //
+	    			try
+	    			{
+	    				String refName = lineContents[0];
+	    				int position = Integer.parseInt(lineContents[1]);
+
+	    				numVariants++;
+
+	    				// Declare a BitSet //
+	    				BitSet refPositions;
+
+	    				boolean inTarget = false;
+
+	    				// Get the position BitSet for this chromosome//
+	    				if(targetHash.containsKey(refName))
+	    				{
+	    					refPositions = targetHash.get(refName);
+
+	    					// Check to see if position set //
+	    					if(refPositions.get(position))
+	    					{
+	    						inTarget = true;
+    							numInTarget++;
+	    						if(params.containsKey("output-file"))
+	    						{
+	    							outFile.println(line);
+	    						}
+	    					}
+	    				}
+
+	    				// If no match and not file declared, print to it //
+	    				if(!inTarget && params.containsKey("not-file"))
+	    				{
+	    					notFile.println(line);
+	    				}
+
+	    			}
+	    			catch(Exception e)
+	    			{
+	    				if(lineCounter == 1)
+	    				{
+//	    					 Skip header // outFile.println(line);
+	    				}
+	    				else
+	    					System.err.println("Warning: Unable to parse chrom/position from " + line);
+	    			}
+	    		}
+
+----------------------------------------
+	    			{
+	    				String refName = lineContents[0];
+	    				int position = Integer.parseInt(lineContents[1]);
+
+	    				numVariants++;
+
+	    				// Declare a BitSet //
+	    				BitSet refPositions;
+
+	    				boolean inTarget = false;
+
+	    				// Get the position BitSet for this chromosome//
+	    				if(targetHash.containsKey(refName))
+	    				{
+	    					refPositions = targetHash.get(refName);
+
+	    					// Check to see if position set //
+	    					if(refPositions.get(position))
+	    					{
+	    						inTarget = true;
+    							numInTarget++;
+	    						if(params.containsKey("output-file"))
+	    						{
+	    							outFile.println(line);
+	    						}
+	    					}
+	    				}
+
+	    				// If no match and not file declared, print to it //
+	    				if(!inTarget && params.containsKey("not-file"))
+	    				{
+	    					notFile.println(line);
+	    				}
+
+	    			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+28918712
+net/sf/varscan/Comparison.java 160 210
+net/sf/varscan/LimitVariants.java 144 178
+----------------------------------------
+	    		{
+	    			// Try to parse chrom and position //
+	    			try
+	    			{
+	    				String refName = lineContents[0];
+	    				int position = Integer.parseInt(lineContents[1]);
+
+	    				// Declare booleans //
+
+	    				boolean inFile1 = false;
+	    				boolean inFile2 = false;
+
+	    				// Declare a BitSet //
+	    				BitSet refPositions;
+
+	    				if(positionHash1.containsKey(refName))
+	    				{
+	    					refPositions = positionHash1.get(refName);
+	    					if(refPositions.get(position))
+	    						inFile1 = true;
+	    				}
+
+	    				if(positionHash2.containsKey(refName))
+	    				{
+	    					refPositions = positionHash2.get(refName);
+	    					if(refPositions.get(position))
+	    						inFile2 = true;
+	    				}
+
+	    				// Check to see if shared //
+	    				if(inFile1 && inFile2)
+	    				{
+	    					// Already counted and printed in file 1 //
+	    				}
+	    				else if(inFile2)
+	    				{
+	    					if(comparisonType.equals("merge") || comparisonType.equals("unique2"))
+	    						outFile.println(line);
+
+	    					uniqueToFile2++;
+	    				}
+
+	    			}
+	    			catch(Exception e)
+	    			{
+	    				if(lineCounter == 1)
+	    					outFile.println(line);
+	    				else
+	    					System.err.println("Warning: Unable to parse chrom/position from " + line);
+	    			}
+	    		}
+
+----------------------------------------
+	    			{
+	    				String refName = lineContents[0];
+	    				int position = Integer.parseInt(lineContents[1]);
+
+	    				numVariants++;
+
+	    				// Declare a BitSet //
+	    				BitSet refPositions;
+
+	    				boolean inTarget = false;
+
+	    				// Get the position BitSet for this chromosome//
+	    				if(targetHash.containsKey(refName))
+	    				{
+	    					refPositions = targetHash.get(refName);
+
+	    					// Check to see if position set //
+	    					if(refPositions.get(position))
+	    					{
+	    						inTarget = true;
+    							numInTarget++;
+	    						if(params.containsKey("output-file"))
+	    						{
+	    							outFile.println(line);
+	    						}
+	    					}
+	    				}
+
+	    				// If no match and not file declared, print to it //
+	    				if(!inTarget && params.containsKey("not-file"))
+	    				{
+	    					notFile.println(line);
+	    				}
+
+	    			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+28918714
+net/sf/varscan/FishersExact.java 57 73
+net/sf/varscan/FishersExact.java 59 67
+----------------------------------------
+    public final double getP(int a, int b, int c, int d) {
+    	try
+    	{
+	        int n = a + b + c + d;
+	        if (n > maxSize) {
+	            return Double.NaN;
+	        }
+	        double p;
+	        p = (f[a + b] + f[c + d] + f[a + c] + f[b + d]) - (f[a] + f[b] + f[c] + f[d] + f[n]);
+	        return Math.exp(p);
+    	}
+    	catch(Exception e)
+    	{
+    		return Double.NaN;
+    	}
+
+    }
+
+----------------------------------------
+    	{
+	        int n = a + b + c + d;
+	        if (n > maxSize) {
+	            return Double.NaN;
+	        }
+	        double p;
+	        p = (f[a + b] + f[c + d] + f[a + c] + f[b + d]) - (f[a] + f[b] + f[c] + f[d] + f[n]);
+	        return Math.exp(p);
+    	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+28918720
+net/sf/varscan/Somatic.java 1718 1744
+net/sf/varscan/FishersExact.java 156 178
+----------------------------------------
+							 {
+								 // CASE 0: Normal and Tumor Match //
+
+								 if(normalConsensus.equals(refBase))
+								 {
+									 somaticStatus = "Reference";
+								 }
+								 else
+								 {
+									 // Recalculate p-value //
+									 int totalReads1 = normalReads1 + tumorReads1;
+									 int totalReads2 = normalReads2 + tumorReads2;
+									 int totalCoverage = totalReads1 + totalReads2;
+									 // P-value of Germline variant //
+									 pValue = VarScan.getSignificance(totalCoverage, 0, totalReads1, totalReads2);
+									 if(pValue <= somaticPvalue) //Changed from if(pValue <= pValueThreshold) 11-jun-2012
+									 {
+										 somaticStatus = "Germline";
+										 allele2 = tumorAllele2;
+									 }
+									 else
+									 {
+										 somaticStatus = "Reference";
+										 allele2 = refBase;
+									 }
+								 }
+							 }
+
+----------------------------------------
+    public final double getLeftTailedP(int a, int b, int c, int d) {
+        int min, i;
+        int n = a + b + c + d;
+        if (n > maxSize) {
+            return Double.NaN;
+        }
+        double p = 0;
+
+        p += getP(a, b, c, d);
+        if (DEBUG) {System.out.println("p = " + p);}
+        if (DEBUG) {System.out.println("doing L-tail: a=" + a + " b=" + b + " c=" + c + " d=" + d);}
+        min = (a < d) ? a : d;
+        for (i = 0; i < min; i++) {
+            if (DEBUG) {System.out.print("doing round " + i);}
+            double pTemp = getP(--a, ++b, ++c, --d);
+            if (DEBUG) {System.out.print("\tpTemp = " + pTemp);}
+            p += pTemp;
+            if (DEBUG) {System.out.println("\ta=" + a + " b=" + b + " c=" + c + " d=" + d);}
+        }
+
+
+        return p;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+28918715
+net/sf/varscan/FishersExact.java 85 117
+net/sf/varscan/FishersExact.java 156 178
+----------------------------------------
+    public final double getCumlativeP(int a, int b, int c, int d) {
+        int min, i;
+        int n = a + b + c + d;
+        if (n > maxSize) {
+            return Double.NaN;
+        }
+        double p = 0;
+
+        p += getP(a, b, c, d);
+        if (DEBUG) {System.out.println("p = " + p);}
+        if ((a * d) >= (b * c)) {
+            if (DEBUG) {System.out.println("doing R-tail: a=" + a + " b=" + b + " c=" + c + " d=" + d);}
+            min = (c < b) ? c : b;
+            for (i = 0; i < min; i++) {
+                if (DEBUG) {System.out.print("doing round " + i);}
+                p += getP(++a, --b, --c, ++d);
+                if (DEBUG) {System.out.println("\ta=" + a + " b=" + b + " c=" + c + " d=" + d);}
+            }
+            System.out.println("");
+        }
+        if ((a * d) < (b * c)) {
+            if (DEBUG) {System.out.println("doing L-tail: a=" + a + " b=" + b + " c=" + c + " d=" + d);}
+            min = (a < d) ? a : d;
+            for (i = 0; i < min; i++) {
+                if (DEBUG) {System.out.print("doing round " + i);}
+                double pTemp = getP(--a, ++b, ++c, --d);
+                if (DEBUG) {System.out.print("\tpTemp = " + pTemp);}
+                p += pTemp;
+                if (DEBUG) {System.out.println("\ta=" + a + " b=" + b + " c=" + c + " d=" + d);}
+            }
+        }
+        return p;
+    }
+
+----------------------------------------
+    public final double getLeftTailedP(int a, int b, int c, int d) {
+        int min, i;
+        int n = a + b + c + d;
+        if (n > maxSize) {
+            return Double.NaN;
+        }
+        double p = 0;
+
+        p += getP(a, b, c, d);
+        if (DEBUG) {System.out.println("p = " + p);}
+        if (DEBUG) {System.out.println("doing L-tail: a=" + a + " b=" + b + " c=" + c + " d=" + d);}
+        min = (a < d) ? a : d;
+        for (i = 0; i < min; i++) {
+            if (DEBUG) {System.out.print("doing round " + i);}
+            double pTemp = getP(--a, ++b, ++c, --d);
+            if (DEBUG) {System.out.print("\tpTemp = " + pTemp);}
+            p += pTemp;
+            if (DEBUG) {System.out.println("\ta=" + a + " b=" + b + " c=" + c + " d=" + d);}
+        }
+
+
+        return p;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+28918716
+net/sf/varscan/FishersExact.java 85 117
+net/sf/varscan/FishersExact.java 197 249
+----------------------------------------
+    public final double getCumlativeP(int a, int b, int c, int d) {
+        int min, i;
+        int n = a + b + c + d;
+        if (n > maxSize) {
+            return Double.NaN;
+        }
+        double p = 0;
+
+        p += getP(a, b, c, d);
+        if (DEBUG) {System.out.println("p = " + p);}
+        if ((a * d) >= (b * c)) {
+            if (DEBUG) {System.out.println("doing R-tail: a=" + a + " b=" + b + " c=" + c + " d=" + d);}
+            min = (c < b) ? c : b;
+            for (i = 0; i < min; i++) {
+                if (DEBUG) {System.out.print("doing round " + i);}
+                p += getP(++a, --b, --c, ++d);
+                if (DEBUG) {System.out.println("\ta=" + a + " b=" + b + " c=" + c + " d=" + d);}
+            }
+            System.out.println("");
+        }
+        if ((a * d) < (b * c)) {
+            if (DEBUG) {System.out.println("doing L-tail: a=" + a + " b=" + b + " c=" + c + " d=" + d);}
+            min = (a < d) ? a : d;
+            for (i = 0; i < min; i++) {
+                if (DEBUG) {System.out.print("doing round " + i);}
+                double pTemp = getP(--a, ++b, ++c, --d);
+                if (DEBUG) {System.out.print("\tpTemp = " + pTemp);}
+                p += pTemp;
+                if (DEBUG) {System.out.println("\ta=" + a + " b=" + b + " c=" + c + " d=" + d);}
+            }
+        }
+        return p;
+    }
+
+----------------------------------------
+    public final double getTwoTailedP(int a, int b, int c, int d) {
+        int min, i;
+        int n = a + b + c + d;
+        if (n > maxSize) {
+            return Double.NaN;
+        }
+        double p = 0;
+
+        double baseP = getP(a, b, c, d);
+//         in order for a table under consideration to have its p-value included
+//         in the final result, it must have a p-value less than the baseP, i.e.
+//         Fisher's exact test computes the probability, given the observed marginal
+//         frequencies, of obtaining exactly the frequencies observed and any configuration more extreme.
+//         By "more extreme," we mean any configuration (given observed marginals) with a smaller probability of
+//         occurrence in the same direction (one-tailed) or in both directions (two-tailed).
+
+        if (DEBUG) {System.out.println("baseP = " + baseP);}
+        int initialA = a, initialB = b, initialC = c, initialD = d;
+        p += baseP;
+        if (DEBUG) {System.out.println("p = " + p);}
+        if (DEBUG) {System.out.println("Starting with R-tail: a=" + a + " b=" + b + " c=" + c + " d=" + d);}
+        min = (c < b) ? c : b;
+        for (i = 0; i < min; i++) {
+            if (DEBUG) {System.out.print("doing round " + i);}
+            double tempP = getP(++a, --b, --c, ++d);
+            if (tempP <= baseP) {
+                if (DEBUG) {System.out.print("\ttempP (" + tempP + ") is less than baseP (" + baseP + ")");}
+                p += tempP;
+            }
+            if (DEBUG) {System.out.println(" a=" + a + " b=" + b + " c=" + c + " d=" + d);}
+        }
+
+        // reset the values to their original so we can repeat this process for the other side
+        a = initialA;
+        b = initialB;
+        c = initialC;
+        d = initialD;
+
+        if (DEBUG) {System.out.println("Now doing L-tail: a=" + a + " b=" + b + " c=" + c + " d=" + d);}
+        min = (a < d) ? a : d;
+        if (DEBUG) {System.out.println("min = " + min);}
+        for (i = 0; i < min; i++) {
+            if (DEBUG) {System.out.print("doing round " + i);}
+            double pTemp = getP(--a, ++b, ++c, --d);
+            if (DEBUG) {System.out.println("  pTemp = " + pTemp);}
+            if (pTemp <= baseP) {
+                if (DEBUG) {System.out.print("\ttempP (" + pTemp + ") is less than baseP (" + baseP + ")");}
+                p += pTemp;
+            }
+            if (DEBUG) {System.out.println(" a=" + a + " b=" + b + " c=" + c + " d=" + d);}
+        }
+        return p;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+28918719
+net/sf/varscan/FishersExact.java 156 178
+net/sf/varscan/FishersExact.java 128 145
+----------------------------------------
+    public final double getLeftTailedP(int a, int b, int c, int d) {
+        int min, i;
+        int n = a + b + c + d;
+        if (n > maxSize) {
+            return Double.NaN;
+        }
+        double p = 0;
+
+        p += getP(a, b, c, d);
+        if (DEBUG) {System.out.println("p = " + p);}
+        if (DEBUG) {System.out.println("doing L-tail: a=" + a + " b=" + b + " c=" + c + " d=" + d);}
+        min = (a < d) ? a : d;
+        for (i = 0; i < min; i++) {
+            if (DEBUG) {System.out.print("doing round " + i);}
+            double pTemp = getP(--a, ++b, ++c, --d);
+            if (DEBUG) {System.out.print("\tpTemp = " + pTemp);}
+            p += pTemp;
+            if (DEBUG) {System.out.println("\ta=" + a + " b=" + b + " c=" + c + " d=" + d);}
+        }
+
+
+        return p;
+    }
+
+----------------------------------------
+    public final double getRightTailedP(int a, int b, int c, int d) {
+        int min, i;
+        int n = a + b + c + d;
+        if (n > maxSize) {
+            return Double.NaN;
+        }
+        double p = 0;
+
+        p += getP(a, b, c, d);
+        if (DEBUG) {System.out.println("p = " + p);}
+        if (DEBUG) {System.out.println("doing R-tail: a=" + a + " b=" + b + " c=" + c + " d=" + d);}
+        min = (c < b) ? c : b;
+        for (i = 0; i < min; i++) {
+            p += getP(++a, --b, --c, ++d);
+
+        }
+        return p;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+28918718
+net/sf/varscan/Somatic.java 1718 1744
+net/sf/varscan/FishersExact.java 128 145
+----------------------------------------
+							 {
+								 // CASE 0: Normal and Tumor Match //
+
+								 if(normalConsensus.equals(refBase))
+								 {
+									 somaticStatus = "Reference";
+								 }
+								 else
+								 {
+									 // Recalculate p-value //
+									 int totalReads1 = normalReads1 + tumorReads1;
+									 int totalReads2 = normalReads2 + tumorReads2;
+									 int totalCoverage = totalReads1 + totalReads2;
+									 // P-value of Germline variant //
+									 pValue = VarScan.getSignificance(totalCoverage, 0, totalReads1, totalReads2);
+									 if(pValue <= somaticPvalue) //Changed from if(pValue <= pValueThreshold) 11-jun-2012
+									 {
+										 somaticStatus = "Germline";
+										 allele2 = tumorAllele2;
+									 }
+									 else
+									 {
+										 somaticStatus = "Reference";
+										 allele2 = refBase;
+									 }
+								 }
+							 }
+
+----------------------------------------
+    public final double getRightTailedP(int a, int b, int c, int d) {
+        int min, i;
+        int n = a + b + c + d;
+        if (n > maxSize) {
+            return Double.NaN;
+        }
+        double p = 0;
+
+        p += getP(a, b, c, d);
+        if (DEBUG) {System.out.println("p = " + p);}
+        if (DEBUG) {System.out.println("doing R-tail: a=" + a + " b=" + b + " c=" + c + " d=" + d);}
+        min = (c < b) ? c : b;
+        for (i = 0; i < min; i++) {
+            p += getP(++a, --b, --c, ++d);
+
+        }
+        return p;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+28918717
+net/sf/varscan/FishersExact.java 128 145
+net/sf/varscan/Copynumber.java 1015 1037
+----------------------------------------
+    public final double getRightTailedP(int a, int b, int c, int d) {
+        int min, i;
+        int n = a + b + c + d;
+        if (n > maxSize) {
+            return Double.NaN;
+        }
+        double p = 0;
+
+        p += getP(a, b, c, d);
+        if (DEBUG) {System.out.println("p = " + p);}
+        if (DEBUG) {System.out.println("doing R-tail: a=" + a + " b=" + b + " c=" + c + " d=" + d);}
+        min = (c < b) ? c : b;
+        for (i = 0; i < min; i++) {
+            p += getP(++a, --b, --c, ++d);
+
+        }
+        return p;
+    }
+
+----------------------------------------
+			{
+    			// Determine ratio and diff //
+    			if(avgNormal >= 0.01 && avgTumor >= 0.01)
+    			{
+    		 		float tumorNormalRatio = adjustedTumorDepth / avgNormal;
+    				double log2ratio = Math.log(tumorNormalRatio) / Math.log(2);
+
+					return(copyChrom + "\t" + copyStart + "\t" + copyStop + "\t" + copyPositions + "\t" + oneDigit.format(avgNormal) + "\t" + oneDigit.format(avgTumor) + "\t" + threeDigits.format(log2ratio) + "\t" + oneDigit.format(gcContent));
+    			}
+    			else if (avgTumor >= 0.01)
+    			{
+    				// If only tumor has coverage, handle it //
+    				double log2ratio = 2.00;
+					return(copyChrom + "\t" + copyStart + "\t" + copyStop + "\t" + copyPositions + "\t" + oneDigit.format(avgNormal) + "\t" + oneDigit.format(avgTumor) + "\t" + threeDigits.format(log2ratio) + "\t" + oneDigit.format(gcContent));
+    			}
+    			else
+    			{
+    				// If only normal has coverage, mark as homozygyous deletion //
+    				double log2ratio = -2.00;
+					return(copyChrom + "\t" + copyStart + "\t" + copyStop + "\t" + copyPositions + "\t" + oneDigit.format(avgNormal) + "\t" + oneDigit.format(avgTumor) + "\t" + threeDigits.format(log2ratio) + "\t" + oneDigit.format(gcContent));
+    			}
+
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+28918722
+net/sf/varscan/Copynumber.java 491 516
+net/sf/varscan/CopyCaller.java 73 112
+----------------------------------------
+		{
+			if(params.containsKey("min-coverage"))
+			{
+				 minCoverage = Integer.parseInt(params.get("min-coverage"));
+			}
+
+			if(params.containsKey("min-base-qual"))
+				 minBaseQual = Integer.parseInt(params.get("min-base-qual"));
+
+			if(params.containsKey("min-segment-size"))
+				 minSegmentSize = Integer.parseInt(params.get("min-segment-size"));
+
+			if(params.containsKey("max-segment-size"))
+				 maxSegmentSize = Integer.parseInt(params.get("max-segment-size"));
+
+			if(params.containsKey("p-value"))
+				 pValueThreshold = Double.parseDouble(params.get("p-value"));
+
+			if(params.containsKey("data-ratio"))
+				 dataRatio = Double.parseDouble(params.get("data-ratio"));
+
+			System.err.println("Min coverage:\t" + minCoverage);
+			System.err.println("Min avg qual:\t" + minBaseQual);
+			System.err.println("P-value thresh:\t" + pValueThreshold);
+
+		}
+
+----------------------------------------
+		{
+			if(params.containsKey("min-coverage"))
+				 minCoverage = Integer.parseInt(params.get("min-coverage"));
+
+			if(params.containsKey("min-tumor-coverage"))
+				 minTumorCoverage = Integer.parseInt(params.get("min-tumor-coverage"));
+
+			if(params.containsKey("max-homdel-coverage"))
+				 maxHomdelCoverage = Integer.parseInt(params.get("max-homdel-coverage"));
+
+			if(params.containsKey("min-region-size"))
+				 minRegionSize = Integer.parseInt(params.get("min-region-size"));
+
+			if(params.containsKey("amp-threshold"))
+				ampThreshold = Double.parseDouble(params.get("amp-threshold"));
+
+			if(params.containsKey("del-threshold"))
+			{
+				delThreshold = 0 - Double.parseDouble(params.get("del-threshold"));
+			}
+
+			if(params.containsKey("recenter-up"))
+			{
+				recenterBaseline = Double.parseDouble(params.get("recenter-up"));
+			}
+
+			if(params.containsKey("recenter-down"))
+			{
+				recenterBaseline = Double.parseDouble(params.get("recenter-down"));
+				recenterBaseline = 0.00 - recenterBaseline;
+			}
+
+			if(params.containsKey("output-file"))
+				 outputFile = params.get("output-file");
+
+			if(params.containsKey("output-homdel-file"))
+				 homdelFile = params.get("output-homdel-file");
+
+			 System.err.println("Min coverage:\t" + minCoverage);
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+28918721
+net/sf/varscan/Copynumber.java 68 93
+net/sf/varscan/CopyCaller.java 73 112
+----------------------------------------
+		{
+			if(params.containsKey("min-coverage"))
+			{
+				 minCoverage = Integer.parseInt(params.get("min-coverage"));
+			}
+
+			if(params.containsKey("min-base-qual"))
+				 minBaseQual = Integer.parseInt(params.get("min-base-qual"));
+
+			if(params.containsKey("min-segment-size"))
+				 minSegmentSize = Integer.parseInt(params.get("min-segment-size"));
+
+			if(params.containsKey("max-segment-size"))
+				 maxSegmentSize = Integer.parseInt(params.get("max-segment-size"));
+
+			if(params.containsKey("p-value"))
+				 pValueThreshold = Double.parseDouble(params.get("p-value"));
+
+			if(params.containsKey("data-ratio"))
+				 dataRatio = Double.parseDouble(params.get("data-ratio"));
+
+			System.err.println("Min coverage:\t" + minCoverage);
+			System.err.println("Min avg qual:\t" + minBaseQual);
+			System.err.println("P-value thresh:\t" + pValueThreshold);
+
+		}
+
+----------------------------------------
+		{
+			if(params.containsKey("min-coverage"))
+				 minCoverage = Integer.parseInt(params.get("min-coverage"));
+
+			if(params.containsKey("min-tumor-coverage"))
+				 minTumorCoverage = Integer.parseInt(params.get("min-tumor-coverage"));
+
+			if(params.containsKey("max-homdel-coverage"))
+				 maxHomdelCoverage = Integer.parseInt(params.get("max-homdel-coverage"));
+
+			if(params.containsKey("min-region-size"))
+				 minRegionSize = Integer.parseInt(params.get("min-region-size"));
+
+			if(params.containsKey("amp-threshold"))
+				ampThreshold = Double.parseDouble(params.get("amp-threshold"));
+
+			if(params.containsKey("del-threshold"))
+			{
+				delThreshold = 0 - Double.parseDouble(params.get("del-threshold"));
+			}
+
+			if(params.containsKey("recenter-up"))
+			{
+				recenterBaseline = Double.parseDouble(params.get("recenter-up"));
+			}
+
+			if(params.containsKey("recenter-down"))
+			{
+				recenterBaseline = Double.parseDouble(params.get("recenter-down"));
+				recenterBaseline = 0.00 - recenterBaseline;
+			}
+
+			if(params.containsKey("output-file"))
+				 outputFile = params.get("output-file");
+
+			if(params.containsKey("output-homdel-file"))
+				 homdelFile = params.get("output-homdel-file");
+
+			 System.err.println("Min coverage:\t" + minCoverage);
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+28918723
+net/sf/varscan/ProcessSomatic.java 350 421
+net/sf/varscan/CopyCaller.java 396 492
+----------------------------------------
+		{
+			BufferedReader infile = new BufferedReader(new FileReader(fileName));
+
+			String line = "";
+			int lineCounter = 0;
+
+	    	while ((line = infile.readLine()) != null)
+	    	{
+	    		lineCounter++;
+
+	    		String[] lineContents = line.split("\t");
+	    		if(lineContents.length >= 2)
+	    		{
+	    			// Try to parse chrom and position //
+	    			try
+	    			{
+	    				String refName = lineContents[0];
+
+	    				// Get or create BitSet for this refName //
+	    				BitSet refPositions;
+
+	    				if(positionsByChrom.containsKey(refName))
+	    				{
+	    					refPositions = positionsByChrom.get(refName);
+	    				}
+	    				else
+	    				{
+	    					refPositions = new BitSet();
+	    				}
+
+	    				// Mark position or regions, depending on what was provided //
+	    				int chrStart = 0;
+	    				int chrStop = 0;
+
+	    				if(fileType.equals("positions") && lineContents.length > 1)
+	    				{
+		    				// Set the position to true //
+		    				int position = Integer.parseInt(lineContents[1]);
+		    				chrStart = position - marginSize;
+		    				chrStop = position + marginSize;
+	    				}
+	    				else if(fileType.equals("regions") && lineContents.length > 2)
+	    				{
+	    					chrStart = Integer.parseInt(lineContents[1]) - marginSize;
+	    					chrStop = Integer.parseInt(lineContents[2]) + marginSize;
+	    				}
+
+    					// Check that it won't be an infinite loop//
+    					if(chrStart <= chrStop)
+    					{
+	    					// Mark every position //
+	    					for(int position = chrStart; position <= chrStop; position++)
+	    					{
+	    						refPositions.set(position, true);
+	    					}
+    					}
+
+	    				// Return it to the hash //
+	    				positionsByChrom.put(refName, refPositions);
+	    			}
+	    			catch(Exception e)
+	    			{
+	    				if(lineCounter > 1)
+	    					System.err.println("Warning: Unable to parse chrom/position from " + line);
+	    			}
+
+
+	    		}
+	    	}
+
+	    	infile.close();
+		}
+
+----------------------------------------
+	    					{
+	    						stats.put("numRegions", (stats.get("numRegions") + 1));
+
+		    					long regionStart = Long.parseLong(lineContents[1]);
+		    					long regionStop = Long.parseLong(lineContents[2]);
+		    					long numPositions = Long.parseLong(lineContents[3]);
+		    					float normalDepth = Float.parseFloat(lineContents[4].replace(',', '.'));
+		    					float tumorDepth = Float.parseFloat(lineContents[5].replace(',', '.'));
+			    	        	double logratio = Double.parseDouble(lineContents[6].replace(',', '.'));
+			    	        	double adjustedRatio = logratio;
+
+			    	        	// If recentering, adjust the adjusted log ratio //
+
+			    	        	if(recenterBaseline != 0)
+			    	        		adjustedRatio = adjustedRatio - recenterBaseline;
+
+			    	        	float gcContent = (float) -1;
+			    	        	if(lineContents.length >= 8)
+			    	        	{
+			    	        		gcContent = Float.parseFloat(lineContents[7].replace(',', '.'));
+			    	        		int gcBin = (int) gcContent;
+			    	        		// If there was an adjustment for this GC bin, make it so //
+			    	        		if(gcBin >= 0 && gcBin <= 100) // && normalDepth >= minCoverage && tumorDepth >= minTumorCoverage
+			    	        		{
+			    	        			if(gcLogMeanSD[gcBin] != (float) 0)
+			    	        			{
+			    	        				adjustedRatio = adjustedRatio - gcLogMeanSD[gcBin];
+			    	        			}
+			    	        		}
+			    	        	}
+
+
+			    	        	// Check to see if this position meets minimum depth //
+		    	        		long regionSize = regionStop - regionStart + 1;
+
+			    	        	if(normalDepth >= minCoverage && tumorDepth >= minTumorCoverage)
+			    	        	{
+			    	        		stats.put("metMinDepth", (stats.get("metMinDepth") + 1));
+
+			    	        		String regionCall = "neutral";
+
+			    	        		if(regionSize >= minRegionSize)
+			    	        		{
+			    	        			stats.put("metMinSize", (stats.get("metMinSize") + 1));
+
+			    	        			// Determine class based on user-specified thresholds //
+
+			    	        			if(adjustedRatio >= ampThreshold)
+			    	        			{
+			    	        				stats.put("numAmp", (stats.get("numAmp") + 1));
+			    	        				baseCounts.put("numAmp", (baseCounts.get("numAmp") + regionSize));
+
+			    	        				regionCall = "amp";
+			    	        			}
+			    	        			else if(adjustedRatio <= delThreshold)
+			    	        			{
+			    	        				stats.put("numDel", (stats.get("numDel") + 1));
+			    	        				baseCounts.put("numDel", (baseCounts.get("numDel") + regionSize));
+			    	        				regionCall = "del";
+			    	        			}
+			    	        			else
+			    	        			{
+			    	        				stats.put("numNeutral", (stats.get("numNeutral") + 1));
+			    	        				baseCounts.put("numNeutral", (baseCounts.get("numNeutral") + regionSize));
+			    	        			}
+
+			    	        			String outLine = refName + "\t" + regionStart + "\t" + regionStop + "\t" + numPositions + "\t";
+			    	        			outLine += normalDepth + "\t" + tumorDepth + "\t" + threeDigits.format(adjustedRatio) + "\t" + gcContent + "\t" + regionCall + "\t" + logratio;
+
+			    	        			// Print to outfile or standardout //
+
+			    	        			if(params.containsKey("output-file"))
+			    	        			{
+			    	        				out.println(outLine);
+			    	        			}
+			    	        			else
+			    	        			{
+			    	        				System.err.println(outLine);
+			    	        			}
+			    	        		}
+
+			    	        	}
+			    	        	else if(normalDepth >= minCoverage && tumorDepth <= maxHomdelCoverage && regionSize >= minRegionSize && adjustedRatio <= delThreshold)
+			    	        	{
+			    	        		// Output candidate homozygous deletion //
+		    	        			String outLine = refName + "\t" + regionStart + "\t" + regionStop + "\t" + numPositions + "\t";
+		    	        			outLine += normalDepth + "\t" + tumorDepth + "\t" + threeDigits.format(adjustedRatio) + "\t" + gcContent + "\thomozygous_deletion\t" + logratio;
+		    	        			stats.put("numHomDel", (stats.get("numHomDel") + 1));
+	    	        				baseCounts.put("numHomDel", (baseCounts.get("numHomDel") + regionSize));
+	    	        				if(params.containsKey("output-homdel-file"))
+	    	        				{
+	    	        					outHomdel.println(outLine);
+	    	        				}
+
+			    	        	}
+
+	    					}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+28918726
+net/sf/varscan/Copynumber.java 676 708
+net/sf/varscan/Comparison.java 250 288
+----------------------------------------
+		    		{
+		    			String[] normalContents = lineNormal.split("\t");
+				    	if(normalContents.length > 1)
+				    	{
+					    	chromNormal = normalContents[0];
+					    	posNormal = Integer.parseInt(normalContents[1]);
+
+					    	// If still less than tumor position, look for homozygous del //
+					    	if(posNormal < posTumor)
+					    	{
+					    		int pileupDepthNormal = 0;
+					    		String normalQualities = "";
+
+			    				// Pileup Files have 6-7 columns //
+		    					if(normalContents.length <= 7)
+		    					{
+		    						pileupDepthNormal = Integer.parseInt(normalContents[3]);
+		    						normalQualities = normalContents[5];
+		    					}
+		    					// Pileup lines in CNS files have 10-11 columns
+		    					else if (normalContents.length >= 10 && normalContents.length <= 11)
+		    					{
+		    						pileupDepthNormal = Integer.parseInt(normalContents[7]);
+		    						normalQualities = normalContents[9];
+		    					}
+
+					    	}
+					    	else
+					    	{
+
+					    	}
+				    	}
+		    		}
+
+----------------------------------------
+	    	{
+	    		lineCounter++;
+
+	    		String[] lineContents = line.split("\t");
+	    		if(lineContents.length >= 2)
+	    		{
+	    			// Try to parse chrom and position //
+	    			try
+	    			{
+	    				String refName = lineContents[0];
+	    				int position = Integer.parseInt(lineContents[1]);
+
+	    				// Get or create BitSet //
+	    				BitSet refPositions;
+
+	    				if(positionsByChrom.containsKey(refName))
+	    				{
+	    					refPositions = positionsByChrom.get(refName);
+	    				}
+	    				else
+	    				{
+	    					refPositions = new BitSet(position + 1);
+	    				}
+
+	    				// Set the position to true //
+	    				refPositions.set(position, true);
+
+	    				// Return it to the hash //
+	    				positionsByChrom.put(refName, refPositions);
+	    			}
+	    			catch(Exception e)
+	    			{
+	    				if(lineCounter > 1)
+	    					System.err.println("Warning: Unable to parse chrom/position from " + line);
+	    			}
+
+
+	    		}
+	    	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+28918727
+net/sf/varscan/Copynumber.java 562 581
+net/sf/varscan/Copynumber.java 564 575
+----------------------------------------
+		    {
+		    	// Delay a few seconds to let SAMtools pileup start outputting //
+		    	try {
+			    	Thread.sleep(5000);
+
+			    	if(!(normal.ready() && tumor.ready()))
+			    		Thread.sleep(5000);
+
+			    	if(!(normal.ready() && tumor.ready()))
+			    		Thread.sleep(5000);
+
+			    	if(!(normal.ready() && tumor.ready()))
+			    		Thread.sleep(5000);
+		    	}
+		    	catch(Exception e)
+		    	{
+
+		    	}
+
+		    }
+
+----------------------------------------
+		    	try {
+			    	Thread.sleep(5000);
+
+			    	if(!(normal.ready() && tumor.ready()))
+			    		Thread.sleep(5000);
+
+			    	if(!(normal.ready() && tumor.ready()))
+			    		Thread.sleep(5000);
+
+			    	if(!(normal.ready() && tumor.ready()))
+			    		Thread.sleep(5000);
+		    	}
+
+----------------------------------------

@@ -1,0 +1,1869 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917524
+source/net/filebot/cli/BindingsHandler.java 31 58
+source/net/filebot/archive/SevenZipNativeBindings.java 59 74
+----------------------------------------
+	public int parseArguments(Parameters params) throws CmdLineException {
+		FieldSetter fs = setter.asFieldSetter();
+		Map map = (Map) fs.getValue();
+		if (map == null) {
+			map = createNewCollection(fs.getType());
+			fs.addValue(map);
+		}
+
+		int pos = 0;
+		while (pos < params.size()) {
+			if (params.getParameter(pos).startsWith("-")) {
+				return pos;
+			}
+
+			String[] nv = EQUALS.split(params.getParameter(pos), 2);
+			if (nv.length < 2) {
+				return pos;
+			}
+
+			String n = getName(nv[0]);
+			String v = getValue(nv[1]);
+
+			addToMap(map, n, v);
+			pos++;
+		}
+
+		return pos;
+	}
+
+----------------------------------------
+	public List<FileInfo> listFiles() throws SevenZipException {
+		List<FileInfo> paths = new ArrayList<FileInfo>();
+
+		for (int i = 0; i < inArchive.getNumberOfItems(); i++) {
+			boolean isFolder = (Boolean) inArchive.getProperty(i, PropID.IS_FOLDER);
+			if (!isFolder) {
+				String path = (String) inArchive.getProperty(i, PropID.PATH);
+				Long length = (Long) inArchive.getProperty(i, PropID.SIZE);
+				if (path != null) {
+					paths.add(new SimpleFileInfo(path, length != null ? length : -1));
+				}
+			}
+		}
+
+		return paths;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917525
+source/net/filebot/cli/BindingsHandler.java 40 55
+source/net/filebot/web/MoviePart.java 31 38
+----------------------------------------
+		while (pos < params.size()) {
+			if (params.getParameter(pos).startsWith("-")) {
+				return pos;
+			}
+
+			String[] nv = EQUALS.split(params.getParameter(pos), 2);
+			if (nv.length < 2) {
+				return pos;
+			}
+
+			String n = getName(nv[0]);
+			String v = getValue(nv[1]);
+
+			addToMap(map, n, v);
+			pos++;
+		}
+
+----------------------------------------
+	public boolean equals(Object object) {
+		if (object instanceof MoviePart && super.equals(object)) {
+			MoviePart other = (MoviePart) object;
+			return partIndex == other.partIndex && partCount == other.partCount;
+		}
+
+		return super.equals(object);
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917532
+source/net/filebot/subtitle/SubtitleReader.java 39 49
+source/net/filebot/ui/SelectButtonTextField.java 216 229
+----------------------------------------
+	public SubtitleElement next() {
+		if (!hasNext()) {
+			throw new NoSuchElementException();
+		}
+
+		try {
+			return current;
+		} finally {
+			current = null;
+		}
+	}
+
+----------------------------------------
+		protected FocusListener createFocusListener() {
+			return new FocusHandler() {
+
+				/**
+				 * Prevent action events from being fired on focusLost.
+				 */
+				@Override
+				public void focusLost(FocusEvent e) {
+					if (isPopupVisible(comboBox)) {
+						setPopupVisible(comboBox, false);
+					}
+				}
+			};
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917627
+source/net/filebot/hash/VerificationFileReader.java 46 58
+source/net/filebot/ui/SelectButtonTextField.java 216 229
+----------------------------------------
+	public Entry<File, String> next() {
+		// cache next entry
+		if (!hasNext()) {
+			throw new NoSuchElementException();
+		}
+
+		try {
+			return buffer;
+		} finally {
+			// invalidate cache
+			buffer = null;
+		}
+	}
+
+----------------------------------------
+		protected FocusListener createFocusListener() {
+			return new FocusHandler() {
+
+				/**
+				 * Prevent action events from being fired on focusLost.
+				 */
+				@Override
+				public void focusLost(FocusEvent e) {
+					if (isPopupVisible(comboBox)) {
+						setPopupVisible(comboBox, false);
+					}
+				}
+			};
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917630
+source/net/filebot/web/OpenSubtitlesXmlRpc.java 74 83
+source/net/filebot/ui/rename/ExpressionFormatter.java 90 103
+----------------------------------------
+	public synchronized void logout() throws XmlRpcFault {
+		try {
+			invoke("LogOut", token);
+		} catch (XmlRpcFault e) {
+			// anonymous users will always get an 401 Unauthorized when trying to logout,
+			// so we ignore the status of the logout response
+		} finally {
+			token = null;
+		}
+	}
+
+----------------------------------------
+		try {
+			File structureRoot = getStructureRoot(source);
+			if (structureRoot != null) {
+				for (File f : listPath(parent)) {
+					if (isVolumeRoot(structureRoot)) {
+						break;
+					}
+					if (isStructureRoot(f)) {
+						structureRoot = structureRoot.getParentFile();
+					}
+				}
+				return new File(structureRoot, destination).getAbsolutePath();
+			}
+		} catch (Exception e) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917631
+source/net/filebot/hash/VerificationFileReader.java 46 58
+source/net/filebot/ui/rename/ExpressionFormatter.java 90 103
+----------------------------------------
+	public Entry<File, String> next() {
+		// cache next entry
+		if (!hasNext()) {
+			throw new NoSuchElementException();
+		}
+
+		try {
+			return buffer;
+		} finally {
+			// invalidate cache
+			buffer = null;
+		}
+	}
+
+----------------------------------------
+		try {
+			File structureRoot = getStructureRoot(source);
+			if (structureRoot != null) {
+				for (File f : listPath(parent)) {
+					if (isVolumeRoot(structureRoot)) {
+						break;
+					}
+					if (isStructureRoot(f)) {
+						structureRoot = structureRoot.getParentFile();
+					}
+				}
+				return new File(structureRoot, destination).getAbsolutePath();
+			}
+		} catch (Exception e) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917533
+source/net/filebot/subtitle/SubtitleReader.java 39 49
+source/net/filebot/ui/rename/ExpressionFormatter.java 90 103
+----------------------------------------
+	public SubtitleElement next() {
+		if (!hasNext()) {
+			throw new NoSuchElementException();
+		}
+
+		try {
+			return current;
+		} finally {
+			current = null;
+		}
+	}
+
+----------------------------------------
+		try {
+			File structureRoot = getStructureRoot(source);
+			if (structureRoot != null) {
+				for (File f : listPath(parent)) {
+					if (isVolumeRoot(structureRoot)) {
+						break;
+					}
+					if (isStructureRoot(f)) {
+						structureRoot = structureRoot.getParentFile();
+					}
+				}
+				return new File(structureRoot, destination).getAbsolutePath();
+			}
+		} catch (Exception e) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917535
+source/net/filebot/subtitle/SubtitleReader.java 39 49
+source/net/filebot/ui/transfer/TransferablePolicy.java 18 35
+----------------------------------------
+	public SubtitleElement next() {
+		if (!hasNext()) {
+			throw new NoSuchElementException();
+		}
+
+		try {
+			return current;
+		} finally {
+			current = null;
+		}
+	}
+
+----------------------------------------
+	public boolean canImport(TransferSupport support) {
+		if (support.isDrop()) {
+			support.setShowDropLocation(false);
+		}
+
+		try {
+			return accept(support.getTransferable());
+		} catch (InvalidDnDOperationException e) {
+			// final drop may cause this exception because, the transfer data can only be accessed
+			// *after* the drop has been accepted, but canImport is called before that
+
+			// just assume that the transferable will be accepted, accept will be called in importData again anyway
+			return true;
+		} catch (Exception e) {
+			debug.log(Level.WARNING, e.getMessage(), e);
+			return false;
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917546
+source/net/filebot/web/OpenSubtitlesXmlRpc.java 74 83
+source/net/filebot/ui/transfer/TransferablePolicy.java 18 35
+----------------------------------------
+	public synchronized void logout() throws XmlRpcFault {
+		try {
+			invoke("LogOut", token);
+		} catch (XmlRpcFault e) {
+			// anonymous users will always get an 401 Unauthorized when trying to logout,
+			// so we ignore the status of the logout response
+		} finally {
+			token = null;
+		}
+	}
+
+----------------------------------------
+	public boolean canImport(TransferSupport support) {
+		if (support.isDrop()) {
+			support.setShowDropLocation(false);
+		}
+
+		try {
+			return accept(support.getTransferable());
+		} catch (InvalidDnDOperationException e) {
+			// final drop may cause this exception because, the transfer data can only be accessed
+			// *after* the drop has been accepted, but canImport is called before that
+
+			// just assume that the transferable will be accepted, accept will be called in importData again anyway
+			return true;
+		} catch (Exception e) {
+			debug.log(Level.WARNING, e.getMessage(), e);
+			return false;
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917547
+source/net/filebot/hash/VerificationFileReader.java 46 58
+source/net/filebot/ui/transfer/TransferablePolicy.java 18 35
+----------------------------------------
+	public Entry<File, String> next() {
+		// cache next entry
+		if (!hasNext()) {
+			throw new NoSuchElementException();
+		}
+
+		try {
+			return buffer;
+		} finally {
+			// invalidate cache
+			buffer = null;
+		}
+	}
+
+----------------------------------------
+	public boolean canImport(TransferSupport support) {
+		if (support.isDrop()) {
+			support.setShowDropLocation(false);
+		}
+
+		try {
+			return accept(support.getTransferable());
+		} catch (InvalidDnDOperationException e) {
+			// final drop may cause this exception because, the transfer data can only be accessed
+			// *after* the drop has been accepted, but canImport is called before that
+
+			// just assume that the transferable will be accepted, accept will be called in importData again anyway
+			return true;
+		} catch (Exception e) {
+			debug.log(Level.WARNING, e.getMessage(), e);
+			return false;
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917541
+source/net/filebot/ui/transfer/ArrayTransferable.java 26 32
+source/net/filebot/ui/transfer/TransferablePolicy.java 18 35
+----------------------------------------
+	public Object getTransferData(DataFlavor flavor) throws UnsupportedFlavorException, IOException {
+		if (isDataFlavorSupported(flavor)) {
+			return getArray();
+		}
+
+		return null;
+	}
+
+----------------------------------------
+	public boolean canImport(TransferSupport support) {
+		if (support.isDrop()) {
+			support.setShowDropLocation(false);
+		}
+
+		try {
+			return accept(support.getTransferable());
+		} catch (InvalidDnDOperationException e) {
+			// final drop may cause this exception because, the transfer data can only be accessed
+			// *after* the drop has been accepted, but canImport is called before that
+
+			// just assume that the transferable will be accepted, accept will be called in importData again anyway
+			return true;
+		} catch (Exception e) {
+			debug.log(Level.WARNING, e.getMessage(), e);
+			return false;
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917543
+source/net/filebot/util/BOM.java 64 71
+source/net/filebot/ui/transfer/TransferablePolicy.java 18 35
+----------------------------------------
+	public static BOM detect(byte[] bytes) {
+		for (BOM bom : values()) {
+			if (bom.matches(bytes)) {
+				return bom;
+			}
+		}
+		return null;
+	}
+
+----------------------------------------
+	public boolean canImport(TransferSupport support) {
+		if (support.isDrop()) {
+			support.setShowDropLocation(false);
+		}
+
+		try {
+			return accept(support.getTransferable());
+		} catch (InvalidDnDOperationException e) {
+			// final drop may cause this exception because, the transfer data can only be accessed
+			// *after* the drop has been accepted, but canImport is called before that
+
+			// just assume that the transferable will be accepted, accept will be called in importData again anyway
+			return true;
+		} catch (Exception e) {
+			debug.log(Level.WARNING, e.getMessage(), e);
+			return false;
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917545
+source/net/filebot/util/ui/SimpleLabelProvider.java 52 62
+source/net/filebot/ui/transfer/TransferablePolicy.java 18 35
+----------------------------------------
+	private Method findAnyMethod(Class<T> type, String... names) {
+		for (String name : names) {
+			try {
+				return type.getMethod(name);
+			} catch (NoSuchMethodException e) {
+				// try next method name
+			}
+		}
+
+		throw new IllegalArgumentException("Method not found: " + Arrays.toString(names));
+	}
+
+----------------------------------------
+	public boolean canImport(TransferSupport support) {
+		if (support.isDrop()) {
+			support.setShowDropLocation(false);
+		}
+
+		try {
+			return accept(support.getTransferable());
+		} catch (InvalidDnDOperationException e) {
+			// final drop may cause this exception because, the transfer data can only be accessed
+			// *after* the drop has been accepted, but canImport is called before that
+
+			// just assume that the transferable will be accepted, accept will be called in importData again anyway
+			return true;
+		} catch (Exception e) {
+			debug.log(Level.WARNING, e.getMessage(), e);
+			return false;
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917542
+source/net/filebot/ui/sfv/ChecksumComputationService.java 34 41
+source/net/filebot/ui/transfer/TransferablePolicy.java 18 35
+----------------------------------------
+			for (ExecutorService executor : executors) {
+				for (Runnable runnable : executor.shutdownNow()) {
+					// cancel all remaining tasks
+					if (runnable instanceof Future) {
+						((Future<?>) runnable).cancel(false);
+					}
+				}
+			}
+
+----------------------------------------
+	public boolean canImport(TransferSupport support) {
+		if (support.isDrop()) {
+			support.setShowDropLocation(false);
+		}
+
+		try {
+			return accept(support.getTransferable());
+		} catch (InvalidDnDOperationException e) {
+			// final drop may cause this exception because, the transfer data can only be accessed
+			// *after* the drop has been accepted, but canImport is called before that
+
+			// just assume that the transferable will be accepted, accept will be called in importData again anyway
+			return true;
+		} catch (Exception e) {
+			debug.log(Level.WARNING, e.getMessage(), e);
+			return false;
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917602
+source/net/filebot/archive/ExtractCallback.java 65 73
+source/net/filebot/ui/sfv/ChecksumTable.java 47 64
+----------------------------------------
+		if (output != null) {
+			try {
+				output.close();
+			} catch (IOException e) {
+				throw new SevenZipException(e);
+			} finally {
+				output = null;
+			}
+		}
+
+----------------------------------------
+	protected JTableHeader createDefaultTableHeader() {
+		return new JTableHeader(columnModel) {
+
+			@Override
+			public String getToolTipText(MouseEvent evt) {
+				try {
+					int columnIndex = columnModel.getColumnIndexAtX(evt.getX());
+					int modelIndex = columnModel.getColumn(columnIndex).getModelIndex();
+
+					// display column root of checksum column
+					return getModel().getColumnRoot(modelIndex).getPath();
+				} catch (Exception e) {
+					// ignore, column is not a checksum column
+					return null;
+				}
+			};
+		};
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917637
+source/net/filebot/web/OpenSubtitlesXmlRpc.java 74 83
+source/net/filebot/ui/sfv/ChecksumTable.java 47 64
+----------------------------------------
+	public synchronized void logout() throws XmlRpcFault {
+		try {
+			invoke("LogOut", token);
+		} catch (XmlRpcFault e) {
+			// anonymous users will always get an 401 Unauthorized when trying to logout,
+			// so we ignore the status of the logout response
+		} finally {
+			token = null;
+		}
+	}
+
+----------------------------------------
+	protected JTableHeader createDefaultTableHeader() {
+		return new JTableHeader(columnModel) {
+
+			@Override
+			public String getToolTipText(MouseEvent evt) {
+				try {
+					int columnIndex = columnModel.getColumnIndexAtX(evt.getX());
+					int modelIndex = columnModel.getColumn(columnIndex).getModelIndex();
+
+					// display column root of checksum column
+					return getModel().getColumnRoot(modelIndex).getPath();
+				} catch (Exception e) {
+					// ignore, column is not a checksum column
+					return null;
+				}
+			};
+		};
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917536
+source/net/filebot/subtitle/SubtitleReader.java 39 49
+source/net/filebot/ui/sfv/ChecksumTable.java 47 64
+----------------------------------------
+	public SubtitleElement next() {
+		if (!hasNext()) {
+			throw new NoSuchElementException();
+		}
+
+		try {
+			return current;
+		} finally {
+			current = null;
+		}
+	}
+
+----------------------------------------
+	protected JTableHeader createDefaultTableHeader() {
+		return new JTableHeader(columnModel) {
+
+			@Override
+			public String getToolTipText(MouseEvent evt) {
+				try {
+					int columnIndex = columnModel.getColumnIndexAtX(evt.getX());
+					int modelIndex = columnModel.getColumn(columnIndex).getModelIndex();
+
+					// display column root of checksum column
+					return getModel().getColumnRoot(modelIndex).getPath();
+				} catch (Exception e) {
+					// ignore, column is not a checksum column
+					return null;
+				}
+			};
+		};
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917644
+source/net/filebot/hash/VerificationFileReader.java 46 58
+source/net/filebot/ui/sfv/ChecksumTable.java 47 64
+----------------------------------------
+	public Entry<File, String> next() {
+		// cache next entry
+		if (!hasNext()) {
+			throw new NoSuchElementException();
+		}
+
+		try {
+			return buffer;
+		} finally {
+			// invalidate cache
+			buffer = null;
+		}
+	}
+
+----------------------------------------
+	protected JTableHeader createDefaultTableHeader() {
+		return new JTableHeader(columnModel) {
+
+			@Override
+			public String getToolTipText(MouseEvent evt) {
+				try {
+					int columnIndex = columnModel.getColumnIndexAtX(evt.getX());
+					int modelIndex = columnModel.getColumn(columnIndex).getModelIndex();
+
+					// display column root of checksum column
+					return getModel().getColumnRoot(modelIndex).getPath();
+				} catch (Exception e) {
+					// ignore, column is not a checksum column
+					return null;
+				}
+			};
+		};
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917598
+source/net/filebot/ui/sfv/ChecksumCell.java 155 170
+source/net/filebot/ui/sfv/ChecksumTable.java 47 64
+----------------------------------------
+		protected void done(PropertyChangeEvent evt) {
+			try {
+				hashes.putAll(task.get());
+			} catch (Exception e) {
+				Throwable cause = ExceptionUtilities.getRootCause(e);
+
+				// ignore cancellation
+				if (cause instanceof CancellationException) {
+					return;
+				}
+
+				error = cause;
+			} finally {
+				task = null;
+			}
+		}
+
+----------------------------------------
+	protected JTableHeader createDefaultTableHeader() {
+		return new JTableHeader(columnModel) {
+
+			@Override
+			public String getToolTipText(MouseEvent evt) {
+				try {
+					int columnIndex = columnModel.getColumnIndexAtX(evt.getX());
+					int modelIndex = columnModel.getColumn(columnIndex).getModelIndex();
+
+					// display column root of checksum column
+					return getModel().getColumnRoot(modelIndex).getPath();
+				} catch (Exception e) {
+					// ignore, column is not a checksum column
+					return null;
+				}
+			};
+		};
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917537
+source/net/filebot/ui/sfv/ChecksumComputationService.java 34 41
+source/net/filebot/util/ui/FancyTreeCellRenderer.java 43 57
+----------------------------------------
+			for (ExecutorService executor : executors) {
+				for (Runnable runnable : executor.shutdownNow()) {
+					// cancel all remaining tasks
+					if (runnable instanceof Future) {
+						((Future<?>) runnable).cancel(false);
+					}
+				}
+			}
+
+----------------------------------------
+	public Component getTreeCellRendererComponent(JTree tree, Object value, boolean selected, boolean expanded, boolean leaf, int row, boolean hasFocus) {
+		super.getTreeCellRendererComponent(tree, value, selected, expanded, leaf, row, false);
+
+		setIconTextGap(5);
+
+		if (selected) {
+			setPaintGradient(true);
+			setGradientBeginColor(backgroundSelectionColor.brighter());
+			setGradientEndColor(backgroundSelectionColor);
+		} else {
+			setPaintGradient(false);
+		}
+
+		return this;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917538
+source/net/filebot/format/SecureCompiledScript.java 80 88
+source/net/filebot/format/PrivilegedInvocation.java 28 49
+----------------------------------------
+		try {
+			return AccessController.doPrivileged(new PrivilegedExceptionAction<Object>() {
+
+				@Override
+				public Object run() throws ScriptException {
+					return compiledScript.eval(context);
+				}
+			}, sandbox);
+		} catch (PrivilegedActionException e) {
+
+----------------------------------------
+	public Object invoke(final Object proxy, final Method method, final Object[] args) throws Throwable {
+		try {
+			return AccessController.doPrivileged(new PrivilegedExceptionAction<Object>() {
+
+				@Override
+				public Object run() throws Exception {
+					return method.invoke(object, args);
+				}
+			}, context);
+		} catch (PrivilegedActionException e) {
+			Throwable cause = e.getException();
+
+			// the underlying method may have throw an exception
+			if (cause instanceof InvocationTargetException) {
+				// get actual cause
+				cause = cause.getCause();
+			}
+
+			// forward cause
+			throw cause;
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917539
+source/net/filebot/format/ExpressionBindings.java 58 74
+source/net/filebot/format/PrivilegedInvocation.java 28 49
+----------------------------------------
+		if (method != null) {
+			try {
+				Object value = method.invoke(bindingBean);
+				if (!isUndefined(value)) {
+					return value;
+				}
+				if (undefined != null) {
+					return undefined.invoke(bindingBean, key); // invoke fallback method
+				}
+			} catch (Exception e) {
+				// check InvocationTargetException cause
+				if (e.getCause() instanceof BindingException) {
+					throw (BindingException) e.getCause();
+				}
+				throw new BindingException(key.toString(), getRootCauseMessage(e), e);
+			}
+		}
+
+----------------------------------------
+	public Object invoke(final Object proxy, final Method method, final Object[] args) throws Throwable {
+		try {
+			return AccessController.doPrivileged(new PrivilegedExceptionAction<Object>() {
+
+				@Override
+				public Object run() throws Exception {
+					return method.invoke(object, args);
+				}
+			}, context);
+		} catch (PrivilegedActionException e) {
+			Throwable cause = e.getException();
+
+			// the underlying method may have throw an exception
+			if (cause instanceof InvocationTargetException) {
+				// get actual cause
+				cause = cause.getCause();
+			}
+
+			// forward cause
+			throw cause;
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917540
+source/net/filebot/cli/FolderWatchService.java 105 112
+source/net/filebot/web/MovieFormat.java 26 47
+----------------------------------------
+	public synchronized void watchFolder(File folder) throws IOException {
+		if (!watchTree) {
+			startWatch(folder);
+			return;
+		}
+
+		watchFolderTree(folder);
+	}
+
+----------------------------------------
+	public StringBuffer format(Object obj, StringBuffer sb, FieldPosition pos) {
+		// format episode object, e.g. Avatar (2009), Part 1
+		Movie movie = (Movie) obj;
+
+		sb.append(movie.getName());
+
+		if (includeYear) {
+			if (!smart || movie.getYear() > 0) {
+				sb.append(' ').append('(').append(movie.getYear()).append(')');
+			}
+		}
+
+		if (includePartIndex && movie instanceof MoviePart) {
+			MoviePart part = (MoviePart) movie;
+
+			if (!smart || part.partCount > 1) {
+				sb.append(", Part ").append(part.partIndex);
+			}
+		}
+
+		return sb;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917544
+source/net/filebot/ui/transfer/TransferablePolicy.java 18 35
+source/net/filebot/ui/transfer/LoadAction.java 68 75
+----------------------------------------
+	public boolean canImport(TransferSupport support) {
+		if (support.isDrop()) {
+			support.setShowDropLocation(false);
+		}
+
+		try {
+			return accept(support.getTransferable());
+		} catch (InvalidDnDOperationException e) {
+			// final drop may cause this exception because, the transfer data can only be accessed
+			// *after* the drop has been accepted, but canImport is called before that
+
+			// just assume that the transferable will be accepted, accept will be called in importData again anyway
+			return true;
+		} catch (Exception e) {
+			debug.log(Level.WARNING, e.getMessage(), e);
+			return false;
+		}
+	}
+
+----------------------------------------
+			if (ftp.getFileFilterDescription() != null && ftp.getFileFilterExtensions() != null) {
+				return new ExtensionFileFilter(ftp.getFileFilterExtensions()) {
+					@Override
+					public String toString() {
+						return ftp.getFileFilterDescription();
+					};
+				};
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917549
+source/net/filebot/ui/transfer/ArrayTransferable.java 26 32
+source/net/filebot/similarity/FileSizeMetric.java 25 31
+----------------------------------------
+	public Object getTransferData(DataFlavor flavor) throws UnsupportedFlavorException, IOException {
+		if (isDataFlavorSupported(flavor)) {
+			return getArray();
+		}
+
+		return null;
+	}
+
+----------------------------------------
+	protected long getLength(Object object) {
+		if (object instanceof File) {
+			return ((File) object).length();
+		}
+
+		return -1;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917560
+source/net/filebot/ui/SelectButtonTextField.java 216 229
+source/net/filebot/util/ui/LoadingOverlayPane.java 56 73
+----------------------------------------
+		protected FocusListener createFocusListener() {
+			return new FocusHandler() {
+
+				/**
+				 * Prevent action events from being fired on focusLost.
+				 */
+				@Override
+				public void focusLost(FocusEvent e) {
+					if (isPopupVisible(comboBox)) {
+						setPopupVisible(comboBox, false);
+					}
+				}
+			};
+		}
+
+----------------------------------------
+	public void setOverlayVisible(boolean b) {
+		overlayEnabled = b;
+
+		if (overlayEnabled) {
+			SwingUI.invokeLater(millisToOverlay, new Runnable() {
+
+				@Override
+				public void run() {
+					if (overlayEnabled) {
+						animationComponent.setVisible(true);
+					}
+				}
+
+			});
+		} else {
+			animationComponent.setVisible(false);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917561
+source/net/filebot/util/ui/ProgressIndicator.java 119 132
+source/net/filebot/util/ui/LoadingOverlayPane.java 59 70
+----------------------------------------
+	public void startAnimation() {
+		if (updateTimer == null) {
+			updateTimer = new Timer(20, new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					animateOnce();
+					repaint();
+				}
+			});
+
+			updateTimer.start();
+		}
+	}
+
+----------------------------------------
+		if (overlayEnabled) {
+			SwingUI.invokeLater(millisToOverlay, new Runnable() {
+
+				@Override
+				public void run() {
+					if (overlayEnabled) {
+						animationComponent.setVisible(true);
+					}
+				}
+
+			});
+		} else {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917562
+source/net/filebot/util/ui/LoadingOverlayPane.java 59 70
+source/net/filebot/util/TemporaryFolder.java 46 58
+----------------------------------------
+		if (overlayEnabled) {
+			SwingUI.invokeLater(millisToOverlay, new Runnable() {
+
+				@Override
+				public void run() {
+					if (overlayEnabled) {
+						animationComponent.setVisible(true);
+					}
+				}
+
+			});
+		} else {
+
+----------------------------------------
+	static {
+		Runtime.getRuntime().addShutdownHook(new Thread("TemporaryFolder Cleanup") {
+
+			@Override
+			public void run() {
+				synchronized (folders) {
+					for (TemporaryFolder folder : folders.values()) {
+						folder.delete();
+					}
+				}
+			}
+		});
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917580
+source/net/filebot/util/ui/ProgressIndicator.java 119 132
+source/net/filebot/util/TemporaryFolder.java 46 58
+----------------------------------------
+	public void startAnimation() {
+		if (updateTimer == null) {
+			updateTimer = new Timer(20, new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					animateOnce();
+					repaint();
+				}
+			});
+
+			updateTimer.start();
+		}
+	}
+
+----------------------------------------
+	static {
+		Runtime.getRuntime().addShutdownHook(new Thread("TemporaryFolder Cleanup") {
+
+			@Override
+			public void run() {
+				synchronized (folders) {
+					for (TemporaryFolder folder : folders.values()) {
+						folder.delete();
+					}
+				}
+			}
+		});
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917563
+source/net/filebot/vfs/ZipArchive.java 28 34
+source/net/filebot/similarity/TimeStampMetric.java 31 48
+----------------------------------------
+	public Iterator<MemoryFile> iterator() {
+		try {
+			return extract().iterator();
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+	public long getTimeStamp(Object object) {
+		if (object instanceof File) {
+			File f = (File) object;
+			try {
+				BasicFileAttributes attr = Files.readAttributes(f.toPath(), BasicFileAttributes.class);
+				long creationTime = attr.creationTime().toMillis();
+				if (creationTime > 0) {
+					return creationTime;
+				} else {
+					return attr.lastModifiedTime().toMillis();
+				}
+			} catch (Exception e) {
+				// ignore, default to -1
+			}
+		}
+
+		return -1;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917564
+source/net/filebot/MediaTypes.java 31 49
+source/net/filebot/similarity/Matcher.java 139 156
+----------------------------------------
+	private static MediaTypes parseDefault() {
+		try {
+			Document dom = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(MediaTypes.class.getResourceAsStream("media.types"));
+			Map<String, List<String>> types = new LinkedHashMap<String, List<String>>();
+
+			for (Node it : getChildren("type", dom.getFirstChild())) {
+				List<String> extensions = new ArrayList<String>(2);
+				for (Node ie : getChildren("extension", it)) {
+					extensions.add(getTextContent(ie));
+				}
+
+				types.put(getAttribute("name", it), extensions);
+			}
+
+			return new MediaTypes(types);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+		for (Match<V, C> possibleMatch : possibleMatches) {
+			float similarity = metric.getSimilarity(possibleMatch.getValue(), possibleMatch.getCandidate());
+
+			// DEBUG
+			debug.finest(format("%s %.04f => %s", metric, similarity, possibleMatch));
+
+			Set<Match<V, C>> matchSet = similarityMap.get(similarity);
+			if (matchSet == null) {
+				matchSet = new LinkedHashSet<Match<V, C>>();
+				similarityMap.put(similarity, matchSet);
+			}
+			matchSet.add(possibleMatch);
+
+			// unwind this thread if we have been interrupted
+			if (Thread.interrupted()) {
+				throw new InterruptedException();
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917565
+source/net/filebot/similarity/NumericSimilarityMetric.java 39 49
+source/net/filebot/MediaTypes.java 58 68
+----------------------------------------
+		public ArrayList<String> tokenizeToArrayList(String s) {
+			ArrayList<String> tokens = new ArrayList<String>();
+
+			Matcher m = DIGIT.matcher(s);
+			while (m.find()) {
+				// remove leading zeros
+				tokens.add(new Integer(m.group()).toString());
+			}
+
+			return tokens;
+		}
+
+----------------------------------------
+	public List<String> getExtensionList(String name) {
+		List<String> list = new ArrayList<String>();
+
+		for (Entry<String, List<String>> type : types.entrySet()) {
+			if (type.getKey().startsWith(name)) {
+				list.addAll(type.getValue());
+			}
+		}
+
+		return list;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917569
+source/net/filebot/format/ExpressionFormat.java 78 98
+source/net/filebot/ui/transfer/TextFileTransferable.java 36 48
+----------------------------------------
+				if (level == 1) {
+					if (token.length() > 0) {
+						try {
+							compilation.add(compileScriptlet(token.toString()));
+						} catch (ScriptException e) {
+							// try to extract syntax exception
+							ScriptException illegalSyntax = e;
+
+							try {
+								String message = findCause(e, MultipleCompilationErrorsException.class).getErrorCollector().getSyntaxError(0).getOriginalMessage();
+								illegalSyntax = new ScriptException("SyntaxError: " + message);
+							} catch (Exception ignore) {
+								// ignore, just use original exception
+							}
+
+							throw illegalSyntax;
+						} finally {
+							token.setLength(0);
+						}
+					}
+				} else {
+
+----------------------------------------
+	public Object getTransferData(DataFlavor flavor) throws UnsupportedFlavorException {
+		// check file flavor first, because text/uri-list is also text flavor
+		if (super.isDataFlavorSupported(flavor)) {
+			return super.getTransferData(flavor);
+		}
+
+		// check text flavor
+		if (flavor.isFlavorTextType()) {
+			return text;
+		}
+
+		throw new UnsupportedFlavorException(flavor);
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917571
+source/net/filebot/ui/sfv/ChecksumCell.java 155 170
+source/net/filebot/format/ExpressionFormat.java 153 166
+----------------------------------------
+		protected void done(PropertyChangeEvent evt) {
+			try {
+				hashes.putAll(task.get());
+			} catch (Exception e) {
+				Throwable cause = ExceptionUtilities.getRootCause(e);
+
+				// ignore cancellation
+				if (cause instanceof CancellationException) {
+					return;
+				}
+
+				error = cause;
+			} finally {
+				task = null;
+			}
+		}
+
+----------------------------------------
+		for (Object snippet : compilation) {
+			if (snippet instanceof CompiledScript) {
+				try {
+					CharSequence value = normalizeExpressionValue(((CompiledScript) snippet).eval(context));
+					if (value != null) {
+						sb.append(value);
+					}
+				} catch (ScriptException e) {
+					suppressed.add(normalizeExpressionException(e));
+				}
+			} else {
+				sb.append(snippet);
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917570
+source/net/filebot/format/ExpressionFormat.java 153 166
+source/net/filebot/ui/sfv/ChecksumComputationService.java 32 50
+----------------------------------------
+		for (Object snippet : compilation) {
+			if (snippet instanceof CompiledScript) {
+				try {
+					CharSequence value = normalizeExpressionValue(((CompiledScript) snippet).eval(context));
+					if (value != null) {
+						sb.append(value);
+					}
+				} catch (ScriptException e) {
+					suppressed.add(normalizeExpressionException(e));
+				}
+			} else {
+				sb.append(snippet);
+			}
+		}
+
+----------------------------------------
+	public void reset() {
+		synchronized (executors) {
+			for (ExecutorService executor : executors) {
+				for (Runnable runnable : executor.shutdownNow()) {
+					// cancel all remaining tasks
+					if (runnable instanceof Future) {
+						((Future<?>) runnable).cancel(false);
+					}
+				}
+			}
+
+			totalTaskCount.set(0);
+			completedTaskCount.set(0);
+
+			executors.clear();
+		}
+
+		pcs.firePropertyChange(TASK_COUNT_PROPERTY, -1, getTaskCount());
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917574
+source/net/filebot/format/ExpressionFormat.java 289 301
+source/net/filebot/ui/transfer/ByteBufferTransferable.java 31 46
+----------------------------------------
+		public Object eval(ScriptContext context) throws ScriptException {
+			try {
+				Object value = context.getAttribute(name);
+				if (value == null) {
+					throw new MissingPropertyException(name, Variable.class);
+				}
+				return value;
+			} catch (Exception e) {
+				throw new ScriptException(e);
+			} catch (Throwable t) {
+				throw new ScriptException(new ExecutionException(t));
+			}
+		}
+
+----------------------------------------
+	public Object getTransferData(DataFlavor flavor) throws UnsupportedFlavorException {
+		if (FileTransferable.isFileListFlavor(flavor)) {
+			try {
+				// create file for transfer on demand
+				if (transferable == null) {
+					transferable = createFileTransferable();
+				}
+
+				return transferable.getTransferData(flavor);
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
+		}
+
+		throw new UnsupportedFlavorException(flavor);
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917577
+source/net/filebot/ui/filter/FileTreeExportHandler.java 25 35
+source/net/filebot/web/SimpleDate.java 67 72
+----------------------------------------
+		for (TreePath path : tree.getSelectionPaths()) {
+			TreeNode node = (TreeNode) path.getLastPathComponent();
+
+			if (node instanceof FileNode) {
+				files.add(((FileNode) node).getFile());
+			} else if (node instanceof FolderNode) {
+				for (Iterator<File> iterator = ((FolderNode) node).fileIterator(); iterator.hasNext();) {
+					files.add(iterator.next());
+				}
+			}
+		}
+
+----------------------------------------
+		} else if (other instanceof CharSequence) {
+			SimpleDate otherDate = parse(other.toString());
+			if (otherDate != null) {
+				return compareTo(otherDate);
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917614
+source/net/filebot/ui/list/ListItem.java 26 35
+source/net/filebot/ui/sfv/ChecksumComputationService.java 146 154
+----------------------------------------
+	public Object getFormattedValue() {
+		if (value == null) {
+			try {
+				value = format.format(bindings);
+			} catch (Exception e) {
+				value = e;
+			}
+		}
+		return value;
+	}
+
+----------------------------------------
+			if (isValid()) {
+				if (r instanceof Future && ((Future<?>) r).isCancelled()) {
+					totalTaskCount.decrementAndGet();
+				} else {
+					completedTaskCount.incrementAndGet();
+				}
+
+				pcs.firePropertyChange(TASK_COUNT_PROPERTY, getTaskCount() + 1, getTaskCount());
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917578
+source/net/filebot/ui/filter/FileTreeExportHandler.java 25 35
+source/net/filebot/ui/sfv/ChecksumComputationService.java 146 154
+----------------------------------------
+		for (TreePath path : tree.getSelectionPaths()) {
+			TreeNode node = (TreeNode) path.getLastPathComponent();
+
+			if (node instanceof FileNode) {
+				files.add(((FileNode) node).getFile());
+			} else if (node instanceof FolderNode) {
+				for (Iterator<File> iterator = ((FolderNode) node).fileIterator(); iterator.hasNext();) {
+					files.add(iterator.next());
+				}
+			}
+		}
+
+----------------------------------------
+			if (isValid()) {
+				if (r instanceof Future && ((Future<?>) r).isCancelled()) {
+					totalTaskCount.decrementAndGet();
+				} else {
+					completedTaskCount.incrementAndGet();
+				}
+
+				pcs.firePropertyChange(TASK_COUNT_PROPERTY, getTaskCount() + 1, getTaskCount());
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917582
+source/net/filebot/util/ui/notification/SeparatorBorder.java 88 94
+source/net/filebot/web/SeriesInfo.java 58 63
+----------------------------------------
+	public SeparatorBorder(int height, Color beginColor, Color endColor, GradientStyle gradientStyle, Position position) {
+		this.borderWidth = height;
+		this.beginColor = beginColor;
+		this.endColor = endColor;
+		this.gradientStyle = gradientStyle;
+		this.position = position;
+	}
+
+----------------------------------------
+	public SeriesInfo(Datasource database, SortOrder order, Locale language, Integer id) {
+		this.database = database.getIdentifier();
+		this.order = order.name();
+		this.language = language.getLanguage();
+		this.id = id;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917584
+source/net/filebot/archive/SevenZipNativeBindings.java 24 39
+source/net/filebot/archive/SevenZipNativeBindings.java 64 70
+----------------------------------------
+	public SevenZipNativeBindings(File file) throws Exception {
+		// initialize 7-Zip-JBinding
+		if (!file.exists()) {
+			throw new FileNotFoundException(file.getAbsolutePath());
+		}
+
+		openVolume = new ArchiveOpenVolumeCallback();
+
+		if (!Archive.hasMultiPartIndex(file)) {
+			// single volume archives and multi-volume rar archives
+			inArchive = SevenZipLoader.open(openVolume.getStream(file.getAbsolutePath()), openVolume);
+		} else {
+			// raw multi-volume archives
+			inArchive = SevenZipLoader.open(new net.sf.sevenzipjbinding.impl.VolumedArchiveInStream(file.getAbsolutePath(), openVolume), null);
+		}
+	}
+
+----------------------------------------
+			if (!isFolder) {
+				String path = (String) inArchive.getProperty(i, PropID.PATH);
+				Long length = (Long) inArchive.getProperty(i, PropID.SIZE);
+				if (path != null) {
+					paths.add(new SimpleFileInfo(path, length != null ? length : -1));
+				}
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917587
+source/net/filebot/ui/subtitle/SubtitlePackage.java 163 182
+source/net/filebot/util/ui/PrototypeCellValueUpdater.java 36 51
+----------------------------------------
+		private List<MemoryFile> extract(ArchiveType archiveType, ByteBuffer data) throws IOException {
+			List<MemoryFile> vfs = new ArrayList<MemoryFile>();
+
+			for (MemoryFile file : archiveType.fromData(data)) {
+				if (SUBTITLE_FILES.accept(file.getName())) {
+					// add subtitle files, ignore non-subtitle files
+					vfs.add(file);
+				} else {
+					// check if file is a supported archive
+					ArchiveType type = ArchiveType.forName(FileUtilities.getExtension(file.getName()));
+
+					if (type != ArchiveType.UNKOWN) {
+						// extract nested archives recursively
+						vfs.addAll(extract(type, file.getData()));
+					}
+				}
+			}
+
+			return vfs;
+		}
+
+----------------------------------------
+	public void contentsChanged(ListDataEvent evt) {
+		ListModel<T> m = (ListModel<T>) evt.getSource();
+		for (int i = evt.getIndex0(); i <= evt.getIndex1() && i < m.getSize(); i++) {
+			T item = m.getElementAt(i);
+			int itemLength = item.toString().length();
+			if (itemLength > longestItemLength) {
+				// cell values will not be updated if the prototype object remains the same (even if the object has changed) so we need to reset it
+				if (item == list.getPrototypeCellValue()) {
+					list.setPrototypeCellValue(defaultValue);
+				}
+
+				longestItemLength = itemLength;
+				list.setPrototypeCellValue(item);
+			}
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917588
+source/net/filebot/archive/ArchiveOpenVolumeCallback.java 53 89
+source/net/filebot/archive/ArchiveOpenVolumeCallback.java 54 77
+----------------------------------------
+	public IInStream getStream(String filename) throws SevenZipException {
+		try {
+			// We use caching of opened streams, so check cache first
+			RandomAccessFile randomAccessFile = openedRandomAccessFileList.get(filename);
+			if (randomAccessFile != null) { // Cache hit.
+				// Move the file pointer back to the beginning
+				// in order to emulating new stream
+				randomAccessFile.seek(0);
+
+				// Save current volume name in case getProperty() will be called
+				name = filename;
+
+				return new RandomAccessFileInStream(randomAccessFile);
+			}
+
+			// Nothing useful in cache. Open required volume.
+			randomAccessFile = new RandomAccessFile(filename, "r");
+
+			// Put new stream in the cache
+			openedRandomAccessFileList.put(filename, randomAccessFile);
+
+			// Save current volume name in case getProperty() will be called
+			name = filename;
+			return new RandomAccessFileInStream(randomAccessFile);
+		} catch (FileNotFoundException fileNotFoundException) {
+			// Required volume doesn't exist. This happens if the volume:
+			// 1. never exists. 7-Zip doesn't know how many volumes should
+			// exist, so it have to try each volume.
+			// 2. should be there, but doesn't. This is an error case.
+
+			// Since normal and error cases are possible,
+			// we can't throw an error message
+			return null; // We return always null in this case
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+		try {
+			// We use caching of opened streams, so check cache first
+			RandomAccessFile randomAccessFile = openedRandomAccessFileList.get(filename);
+			if (randomAccessFile != null) { // Cache hit.
+				// Move the file pointer back to the beginning
+				// in order to emulating new stream
+				randomAccessFile.seek(0);
+
+				// Save current volume name in case getProperty() will be called
+				name = filename;
+
+				return new RandomAccessFileInStream(randomAccessFile);
+			}
+
+			// Nothing useful in cache. Open required volume.
+			randomAccessFile = new RandomAccessFile(filename, "r");
+
+			// Put new stream in the cache
+			openedRandomAccessFileList.put(filename, randomAccessFile);
+
+			// Save current volume name in case getProperty() will be called
+			name = filename;
+			return new RandomAccessFileInStream(randomAccessFile);
+		} catch (FileNotFoundException fileNotFoundException) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917591
+source/net/filebot/util/BOM.java 64 71
+source/net/filebot/util/TemporaryFolder.java 125 137
+----------------------------------------
+	public static BOM detect(byte[] bytes) {
+		for (BOM bom : values()) {
+			if (bom.matches(bytes)) {
+				return bom;
+			}
+		}
+		return null;
+	}
+
+----------------------------------------
+	private void list(File file, List<File> list, boolean recursive) {
+		if (file.isDirectory()) {
+			for (File entry : getChildren(file)) {
+				if (entry.isDirectory()) {
+					if (recursive) {
+						list(entry, list, recursive);
+					}
+				} else {
+					list.add(entry);
+				}
+			}
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917629
+source/net/filebot/ui/SelectButtonTextField.java 216 229
+source/net/filebot/util/TemporaryFolder.java 125 137
+----------------------------------------
+		protected FocusListener createFocusListener() {
+			return new FocusHandler() {
+
+				/**
+				 * Prevent action events from being fired on focusLost.
+				 */
+				@Override
+				public void focusLost(FocusEvent e) {
+					if (isPopupVisible(comboBox)) {
+						setPopupVisible(comboBox, false);
+					}
+				}
+			};
+		}
+
+----------------------------------------
+	private void list(File file, List<File> list, boolean recursive) {
+		if (file.isDirectory()) {
+			for (File entry : getChildren(file)) {
+				if (entry.isDirectory()) {
+					if (recursive) {
+						list(entry, list, recursive);
+					}
+				} else {
+					list.add(entry);
+				}
+			}
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917592
+source/net/filebot/ui/transfer/FileTransferablePolicy.java 15 30
+source/net/filebot/ui/transfer/FileTransferablePolicy.java 16 25
+----------------------------------------
+	public boolean accept(Transferable tr) throws Exception {
+		try {
+			List<File> files = getFilesFromTransferable(tr);
+
+			// ignore temporary files (may not work on all platforms since the DnD data may not be accessible during the drag)
+			if (files != null && files.size() > 0 && containsOnly(files, TEMPORARY)) {
+				return false;
+			}
+
+			return accept(files);
+		} catch (UnsupportedFlavorException e) {
+			// no file list flavor
+		}
+
+		return false;
+	}
+
+----------------------------------------
+		try {
+			List<File> files = getFilesFromTransferable(tr);
+
+			// ignore temporary files (may not work on all platforms since the DnD data may not be accessible during the drag)
+			if (files != null && files.size() > 0 && containsOnly(files, TEMPORARY)) {
+				return false;
+			}
+
+			return accept(files);
+		} catch (UnsupportedFlavorException e) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917593
+source/net/filebot/ui/sfv/ChecksumCell.java 155 170
+source/net/filebot/format/ExpressionBindings.java 59 67
+----------------------------------------
+		protected void done(PropertyChangeEvent evt) {
+			try {
+				hashes.putAll(task.get());
+			} catch (Exception e) {
+				Throwable cause = ExceptionUtilities.getRootCause(e);
+
+				// ignore cancellation
+				if (cause instanceof CancellationException) {
+					return;
+				}
+
+				error = cause;
+			} finally {
+				task = null;
+			}
+		}
+
+----------------------------------------
+			try {
+				Object value = method.invoke(bindingBean);
+				if (!isUndefined(value)) {
+					return value;
+				}
+				if (undefined != null) {
+					return undefined.invoke(bindingBean, key); // invoke fallback method
+				}
+			} catch (Exception e) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917635
+source/net/filebot/web/OpenSubtitlesXmlRpc.java 74 83
+source/net/filebot/format/ExpressionBindings.java 59 67
+----------------------------------------
+	public synchronized void logout() throws XmlRpcFault {
+		try {
+			invoke("LogOut", token);
+		} catch (XmlRpcFault e) {
+			// anonymous users will always get an 401 Unauthorized when trying to logout,
+			// so we ignore the status of the logout response
+		} finally {
+			token = null;
+		}
+	}
+
+----------------------------------------
+			try {
+				Object value = method.invoke(bindingBean);
+				if (!isUndefined(value)) {
+					return value;
+				}
+				if (undefined != null) {
+					return undefined.invoke(bindingBean, key); // invoke fallback method
+				}
+			} catch (Exception e) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917620
+source/net/filebot/web/SimpleDate.java 64 75
+source/net/filebot/format/ExpressionBindings.java 59 67
+----------------------------------------
+	public int compareTo(Object other) {
+		if (other instanceof SimpleDate) {
+			return compareTo((SimpleDate) other);
+		} else if (other instanceof CharSequence) {
+			SimpleDate otherDate = parse(other.toString());
+			if (otherDate != null) {
+				return compareTo(otherDate);
+			}
+		}
+
+		throw new IllegalArgumentException(String.valueOf(other));
+	}
+
+----------------------------------------
+			try {
+				Object value = method.invoke(bindingBean);
+				if (!isUndefined(value)) {
+					return value;
+				}
+				if (undefined != null) {
+					return undefined.invoke(bindingBean, key); // invoke fallback method
+				}
+			} catch (Exception e) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917633
+source/net/filebot/ui/transfer/ByteBufferTransferable.java 33 40
+source/net/filebot/ui/rename/ExpressionFormatter.java 92 102
+----------------------------------------
+			try {
+				// create file for transfer on demand
+				if (transferable == null) {
+					transferable = createFileTransferable();
+				}
+
+				return transferable.getTransferData(flavor);
+			} catch (IOException e) {
+
+----------------------------------------
+			if (structureRoot != null) {
+				for (File f : listPath(parent)) {
+					if (isVolumeRoot(structureRoot)) {
+						break;
+					}
+					if (isStructureRoot(f)) {
+						structureRoot = structureRoot.getParentFile();
+					}
+				}
+				return new File(structureRoot, destination).getAbsolutePath();
+			}
+
+----------------------------------------

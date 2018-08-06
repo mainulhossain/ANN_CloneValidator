@@ -1,0 +1,1246 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830550
+source/net/filebot/util/ui/SimpleLabelProvider.java 53 59
+source/net/filebot/util/prefs/FilePreferences.java 83 89
+----------------------------------------
+		for (String name : names) {
+			try {
+				return type.getMethod(name);
+			} catch (NoSuchMethodException e) {
+				// try next method name
+			}
+		}
+
+----------------------------------------
+	protected void flushSpi() throws BackingStoreException {
+		try {
+			store.flush();
+		} catch (Exception e) {
+			throw new BackingStoreException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830578
+source/net/filebot/Settings.java 30 36
+source/net/filebot/util/prefs/FilePreferences.java 83 89
+----------------------------------------
+	public static int getApplicationRevisionNumber() {
+		try {
+			return Integer.parseInt(getApplicationProperty("application.revision"));
+		} catch (Exception e) {
+			return 0;
+		}
+	}
+
+----------------------------------------
+	protected void flushSpi() throws BackingStoreException {
+		try {
+			store.flush();
+		} catch (Exception e) {
+			throw new BackingStoreException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830572
+source/net/filebot/web/OpenSubtitlesXmlRpc.java 335 341
+source/net/filebot/util/prefs/FilePreferences.java 83 89
+----------------------------------------
+				public void parse(InputStream input) throws XmlRpcException {
+					try {
+						super.parse(new GZIPInputStream(input));
+					} catch (IOException e) {
+						throw new XmlRpcException(e.getMessage(), e);
+					}
+				};
+
+----------------------------------------
+	protected void flushSpi() throws BackingStoreException {
+		try {
+			store.flush();
+		} catch (Exception e) {
+			throw new BackingStoreException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830577
+source/net/filebot/hash/MessageDigestHash.java 15 21
+source/net/filebot/util/prefs/FilePreferences.java 83 89
+----------------------------------------
+	public MessageDigestHash(String algorithm) {
+		try {
+			this.md = MessageDigest.getInstance(algorithm);
+		} catch (NoSuchAlgorithmException e) {
+			throw new IllegalArgumentException(e);
+		}
+	}
+
+----------------------------------------
+	protected void flushSpi() throws BackingStoreException {
+		try {
+			store.flush();
+		} catch (Exception e) {
+			throw new BackingStoreException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830576
+source/net/filebot/Settings.java 44 50
+source/net/filebot/util/prefs/FilePreferences.java 83 89
+----------------------------------------
+		if (isAppStore()) {
+			try {
+				return bundle.getString("apikey.appstore." + name);
+			} catch (MissingResourceException e) {
+				// use default value
+			}
+		}
+
+----------------------------------------
+	protected void flushSpi() throws BackingStoreException {
+		try {
+			store.flush();
+		} catch (Exception e) {
+			throw new BackingStoreException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830571
+source/net/filebot/ui/list/ListItem.java 27 33
+source/net/filebot/util/prefs/FilePreferences.java 83 89
+----------------------------------------
+		if (value == null) {
+			try {
+				value = format.format(bindings);
+			} catch (Exception e) {
+				value = e;
+			}
+		}
+
+----------------------------------------
+	protected void flushSpi() throws BackingStoreException {
+		try {
+			store.flush();
+		} catch (Exception e) {
+			throw new BackingStoreException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830574
+source/net/filebot/vfs/ZipArchive.java 28 34
+source/net/filebot/util/prefs/FilePreferences.java 83 89
+----------------------------------------
+	public Iterator<MemoryFile> iterator() {
+		try {
+			return extract().iterator();
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+	protected void flushSpi() throws BackingStoreException {
+		try {
+			store.flush();
+		} catch (Exception e) {
+			throw new BackingStoreException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830566
+source/net/filebot/subtitle/SubtitleReader.java 27 33
+source/net/filebot/util/prefs/FilePreferences.java 83 89
+----------------------------------------
+		while (current == null && scanner.hasNextLine()) {
+			try {
+				current = readNext();
+			} catch (Exception e) {
+				debug.warning(format("%s: %s", getFormatName(), e.getMessage())); // log and ignore
+			}
+		}
+
+----------------------------------------
+	protected void flushSpi() throws BackingStoreException {
+		try {
+			store.flush();
+		} catch (Exception e) {
+			throw new BackingStoreException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830569
+source/net/filebot/win/WinAppUtilities.java 13 19
+source/net/filebot/util/prefs/FilePreferences.java 83 89
+----------------------------------------
+	public static void setAppUserModelID(String appID) {
+		try {
+			Shell32.INSTANCE.SetCurrentProcessExplicitAppUserModelID(new WString(appID));
+		} catch (Throwable t) {
+			debug.log(Level.WARNING, t.getMessage(), t);
+		}
+	}
+
+----------------------------------------
+	protected void flushSpi() throws BackingStoreException {
+		try {
+			store.flush();
+		} catch (Exception e) {
+			throw new BackingStoreException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830564
+source/net/filebot/ui/rename/HighlightListCellRenderer.java 61 68
+source/net/filebot/util/prefs/FilePreferences.java 83 89
+----------------------------------------
+		while (matcher.find()) {
+			try {
+				textComponent.getHighlighter().addHighlight(matcher.start(0), matcher.end(0), highlightPainter);
+			} catch (BadLocationException e) {
+				// should not happen
+				debug.log(Level.SEVERE, e.getMessage(), e);
+			}
+		}
+
+----------------------------------------
+	protected void flushSpi() throws BackingStoreException {
+		try {
+			store.flush();
+		} catch (Exception e) {
+			throw new BackingStoreException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830681
+source/net/filebot/hash/Ed2kHash.java 16 22
+source/net/filebot/util/prefs/FilePreferences.java 83 89
+----------------------------------------
+	public Ed2kHash() {
+		try {
+			this.ed2k = new Edonkey();
+		} catch (NoSuchAlgorithmException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+	protected void flushSpi() throws BackingStoreException {
+		try {
+			store.flush();
+		} catch (Exception e) {
+			throw new BackingStoreException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830575
+source/net/filebot/util/prefs/FilePreferences.java 68 74
+source/net/filebot/util/prefs/FilePreferences.java 83 89
+----------------------------------------
+	protected void syncSpi() throws BackingStoreException {
+		try {
+			store.sync();
+		} catch (Exception e) {
+			throw new BackingStoreException(e);
+		}
+	}
+
+----------------------------------------
+	protected void flushSpi() throws BackingStoreException {
+		try {
+			store.flush();
+		} catch (Exception e) {
+			throw new BackingStoreException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830570
+source/net/filebot/archive/ExtractOutStream.java 24 31
+source/net/filebot/util/prefs/FilePreferences.java 83 89
+----------------------------------------
+	public int write(byte[] data) throws SevenZipException {
+		try {
+			out.write(data);
+		} catch (IOException e) {
+			throw new SevenZipException(e);
+		}
+		return data.length; // return amount of proceed data
+	}
+
+----------------------------------------
+	protected void flushSpi() throws BackingStoreException {
+		try {
+			store.flush();
+		} catch (Exception e) {
+			throw new BackingStoreException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830565
+source/net/filebot/hash/VerificationFileReader.java 69 76
+source/net/filebot/util/prefs/FilePreferences.java 83 89
+----------------------------------------
+			if (!isComment(line)) {
+				try {
+					entry = format.parseObject(line);
+				} catch (ParseException e) {
+					// log and ignore
+					debug.warning(format("Illegal format on line %d: %s", lineNumber, line));
+				}
+			}
+
+----------------------------------------
+	protected void flushSpi() throws BackingStoreException {
+		try {
+			store.flush();
+		} catch (Exception e) {
+			throw new BackingStoreException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830568
+source/net/filebot/web/OpenSubtitlesXmlRpc.java 361 367
+source/net/filebot/util/prefs/FilePreferences.java 83 89
+----------------------------------------
+	protected URL getXmlRpcUrl() {
+		try {
+			return new URL(System.getProperty("net.filebot.OpenSubtitlesXmlRpc.url", "https://api.opensubtitles.org/xml-rpc"));
+		} catch (MalformedURLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+	protected void flushSpi() throws BackingStoreException {
+		try {
+			store.flush();
+		} catch (Exception e) {
+			throw new BackingStoreException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830580
+source/net/filebot/archive/ExtractCallback.java 65 73
+source/net/filebot/util/prefs/FilePreferences.java 83 89
+----------------------------------------
+		if (output != null) {
+			try {
+				output.close();
+			} catch (IOException e) {
+				throw new SevenZipException(e);
+			} finally {
+				output = null;
+			}
+		}
+
+----------------------------------------
+	protected void flushSpi() throws BackingStoreException {
+		try {
+			store.flush();
+		} catch (Exception e) {
+			throw new BackingStoreException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830552
+source/net/filebot/ui/filter/AttributeTool.java 109 121
+source/net/filebot/ui/subtitle/upload/SubtitleMappingTableModel.java 48 62
+----------------------------------------
+		public String getColumnName(int column) {
+			switch (column) {
+			case 0:
+				return "Meta ID";
+			case 1:
+				return "Meta Attributes";
+			case 2:
+				return "Original Name";
+			case 3:
+				return "File Path";
+			}
+			return null;
+		}
+
+----------------------------------------
+	public String getColumnName(int column) {
+		switch (column) {
+		case 0:
+			return "Movie / Series";
+		case 1:
+			return "Video File";
+		case 2:
+			return "Subtitle File";
+		case 3:
+			return "Language";
+		case 4:
+			return "Status";
+		}
+		return null;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830553
+source/net/filebot/ui/transfer/TransferablePolicy.java 25 31
+source/net/filebot/subtitle/MicroDVDReader.java 55 61
+----------------------------------------
+		} catch (InvalidDnDOperationException e) {
+			// final drop may cause this exception because, the transfer data can only be accessed
+			// *after* the drop has been accepted, but canImport is called before that
+
+			// just assume that the transferable will be accepted, accept will be called in importData again anyway
+			return true;
+		} catch (Exception e) {
+
+----------------------------------------
+		if (startFrame == 1 && endFrame == 1) {
+			// override fps
+			fps = Double.parseDouble(text);
+
+			// ignore line
+			return null;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830554
+source/net/filebot/ui/filter/FileTreeCellRenderer.java 35 40
+source/net/filebot/subtitle/MicroDVDReader.java 55 61
+----------------------------------------
+	private boolean isFolder(Object value) {
+		if (((TreeNode) value).getAllowsChildren())
+			return true;
+
+		return false;
+	}
+
+----------------------------------------
+		if (startFrame == 1 && endFrame == 1) {
+			// override fps
+			fps = Double.parseDouble(text);
+
+			// ignore line
+			return null;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830555
+source/net/filebot/ui/sfv/ChecksumTableExportHandler.java 48 56
+source/net/filebot/torrent/Torrent.java 101 109
+----------------------------------------
+	public void export(File file, File column) throws IOException {
+		VerificationFileWriter writer = new VerificationFileWriter(file, model.getHashType().getFormat(), UTF_8);
+
+		try {
+			export(writer, column, model.getHashType());
+		} finally {
+			writer.close();
+		}
+	}
+
+----------------------------------------
+	private static Map<?, ?> decodeTorrent(File torrent) throws IOException {
+		InputStream in = new BufferedInputStream(new FileInputStream(torrent));
+
+		try {
+			return BDecoder.decode(in);
+		} finally {
+			in.close();
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830556
+source/net/filebot/torrent/Torrent.java 111 116
+source/net/filebot/torrent/Torrent.java 118 123
+----------------------------------------
+	private String decodeString(Object byteArray, Charset charset) {
+		if (byteArray == null)
+			return null;
+
+		return new String((byte[]) byteArray, charset);
+	}
+
+----------------------------------------
+	private Long decodeLong(Object number) {
+		if (number == null)
+			return null;
+
+		return (Long) number;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830587
+source/net/filebot/hash/MessageDigestHash.java 15 21
+source/net/filebot/util/ui/SimpleLabelProvider.java 65 71
+----------------------------------------
+	public MessageDigestHash(String algorithm) {
+		try {
+			this.md = MessageDigest.getInstance(algorithm);
+		} catch (NoSuchAlgorithmException e) {
+			throw new IllegalArgumentException(e);
+		}
+	}
+
+----------------------------------------
+	public String getText(T value) {
+		try {
+			return (String) getTextMethod.invoke(value);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830615
+source/net/filebot/ui/list/ListItem.java 27 33
+source/net/filebot/util/ui/SimpleLabelProvider.java 65 71
+----------------------------------------
+		if (value == null) {
+			try {
+				value = format.format(bindings);
+			} catch (Exception e) {
+				value = e;
+			}
+		}
+
+----------------------------------------
+	public String getText(T value) {
+		try {
+			return (String) getTextMethod.invoke(value);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830584
+source/net/filebot/hash/VerificationFileReader.java 69 76
+source/net/filebot/util/ui/SimpleLabelProvider.java 65 71
+----------------------------------------
+			if (!isComment(line)) {
+				try {
+					entry = format.parseObject(line);
+				} catch (ParseException e) {
+					// log and ignore
+					debug.warning(format("Illegal format on line %d: %s", lineNumber, line));
+				}
+			}
+
+----------------------------------------
+	public String getText(T value) {
+		try {
+			return (String) getTextMethod.invoke(value);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830589
+source/net/filebot/Settings.java 30 36
+source/net/filebot/util/ui/SimpleLabelProvider.java 65 71
+----------------------------------------
+	public static int getApplicationRevisionNumber() {
+		try {
+			return Integer.parseInt(getApplicationProperty("application.revision"));
+		} catch (Exception e) {
+			return 0;
+		}
+	}
+
+----------------------------------------
+	public String getText(T value) {
+		try {
+			return (String) getTextMethod.invoke(value);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830611
+source/net/filebot/web/OpenSubtitlesXmlRpc.java 361 367
+source/net/filebot/util/ui/SimpleLabelProvider.java 65 71
+----------------------------------------
+	protected URL getXmlRpcUrl() {
+		try {
+			return new URL(System.getProperty("net.filebot.OpenSubtitlesXmlRpc.url", "https://api.opensubtitles.org/xml-rpc"));
+		} catch (MalformedURLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+	public String getText(T value) {
+		try {
+			return (String) getTextMethod.invoke(value);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830620
+source/net/filebot/util/prefs/FilePreferences.java 68 74
+source/net/filebot/util/ui/SimpleLabelProvider.java 65 71
+----------------------------------------
+	protected void syncSpi() throws BackingStoreException {
+		try {
+			store.sync();
+		} catch (Exception e) {
+			throw new BackingStoreException(e);
+		}
+	}
+
+----------------------------------------
+	public String getText(T value) {
+		try {
+			return (String) getTextMethod.invoke(value);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830618
+source/net/filebot/MetaAttributeView.java 129 137
+source/net/filebot/util/ui/SimpleLabelProvider.java 65 71
+----------------------------------------
+	public void clear() {
+		try {
+			for (String key : this.list()) {
+				this.put(key, null);
+			}
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+	public String getText(T value) {
+		try {
+			return (String) getTextMethod.invoke(value);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830613
+source/net/filebot/win/WinAppUtilities.java 13 19
+source/net/filebot/util/ui/SimpleLabelProvider.java 65 71
+----------------------------------------
+	public static void setAppUserModelID(String appID) {
+		try {
+			Shell32.INSTANCE.SetCurrentProcessExplicitAppUserModelID(new WString(appID));
+		} catch (Throwable t) {
+			debug.log(Level.WARNING, t.getMessage(), t);
+		}
+	}
+
+----------------------------------------
+	public String getText(T value) {
+		try {
+			return (String) getTextMethod.invoke(value);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830616
+source/net/filebot/web/OpenSubtitlesXmlRpc.java 335 341
+source/net/filebot/util/ui/SimpleLabelProvider.java 65 71
+----------------------------------------
+				public void parse(InputStream input) throws XmlRpcException {
+					try {
+						super.parse(new GZIPInputStream(input));
+					} catch (IOException e) {
+						throw new XmlRpcException(e.getMessage(), e);
+					}
+				};
+
+----------------------------------------
+	public String getText(T value) {
+		try {
+			return (String) getTextMethod.invoke(value);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830586
+source/net/filebot/Settings.java 44 50
+source/net/filebot/util/ui/SimpleLabelProvider.java 65 71
+----------------------------------------
+		if (isAppStore()) {
+			try {
+				return bundle.getString("apikey.appstore." + name);
+			} catch (MissingResourceException e) {
+				// use default value
+			}
+		}
+
+----------------------------------------
+	public String getText(T value) {
+		try {
+			return (String) getTextMethod.invoke(value);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830614
+source/net/filebot/archive/ExtractOutStream.java 24 31
+source/net/filebot/util/ui/SimpleLabelProvider.java 65 71
+----------------------------------------
+	public int write(byte[] data) throws SevenZipException {
+		try {
+			out.write(data);
+		} catch (IOException e) {
+			throw new SevenZipException(e);
+		}
+		return data.length; // return amount of proceed data
+	}
+
+----------------------------------------
+	public String getText(T value) {
+		try {
+			return (String) getTextMethod.invoke(value);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830619
+source/net/filebot/vfs/ZipArchive.java 28 34
+source/net/filebot/util/ui/SimpleLabelProvider.java 65 71
+----------------------------------------
+	public Iterator<MemoryFile> iterator() {
+		try {
+			return extract().iterator();
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+	public String getText(T value) {
+		try {
+			return (String) getTextMethod.invoke(value);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830583
+source/net/filebot/ui/rename/HighlightListCellRenderer.java 61 68
+source/net/filebot/util/ui/SimpleLabelProvider.java 65 71
+----------------------------------------
+		while (matcher.find()) {
+			try {
+				textComponent.getHighlighter().addHighlight(matcher.start(0), matcher.end(0), highlightPainter);
+			} catch (BadLocationException e) {
+				// should not happen
+				debug.log(Level.SEVERE, e.getMessage(), e);
+			}
+		}
+
+----------------------------------------
+	public String getText(T value) {
+		try {
+			return (String) getTextMethod.invoke(value);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830588
+source/net/filebot/util/ui/SimpleLabelProvider.java 53 59
+source/net/filebot/util/ui/SimpleLabelProvider.java 65 71
+----------------------------------------
+		for (String name : names) {
+			try {
+				return type.getMethod(name);
+			} catch (NoSuchMethodException e) {
+				// try next method name
+			}
+		}
+
+----------------------------------------
+	public String getText(T value) {
+		try {
+			return (String) getTextMethod.invoke(value);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830585
+source/net/filebot/subtitle/SubtitleReader.java 27 33
+source/net/filebot/util/ui/SimpleLabelProvider.java 65 71
+----------------------------------------
+		while (current == null && scanner.hasNextLine()) {
+			try {
+				current = readNext();
+			} catch (Exception e) {
+				debug.warning(format("%s: %s", getFormatName(), e.getMessage())); // log and ignore
+			}
+		}
+
+----------------------------------------
+	public String getText(T value) {
+		try {
+			return (String) getTextMethod.invoke(value);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830612
+source/net/filebot/hash/Ed2kHash.java 16 22
+source/net/filebot/util/ui/SimpleLabelProvider.java 65 71
+----------------------------------------
+	public Ed2kHash() {
+		try {
+			this.ed2k = new Edonkey();
+		} catch (NoSuchAlgorithmException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+	public String getText(T value) {
+		try {
+			return (String) getTextMethod.invoke(value);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830617
+source/net/filebot/util/prefs/FilePreferences.java 83 89
+source/net/filebot/util/ui/SimpleLabelProvider.java 65 71
+----------------------------------------
+	protected void flushSpi() throws BackingStoreException {
+		try {
+			store.flush();
+		} catch (Exception e) {
+			throw new BackingStoreException(e);
+		}
+	}
+
+----------------------------------------
+	public String getText(T value) {
+		try {
+			return (String) getTextMethod.invoke(value);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830590
+source/net/filebot/similarity/CrossPropertyMetric.java 45 51
+source/net/filebot/util/ui/SimpleLabelProvider.java 65 71
+----------------------------------------
+		for (String k : keys) {
+			try {
+				feedback += metric.getSimilarity(m1.get(k), m2.get(k));
+			} catch (Exception e) {
+				// ignore
+			}
+		}
+
+----------------------------------------
+	public String getText(T value) {
+		try {
+			return (String) getTextMethod.invoke(value);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830591
+source/net/filebot/format/PropertyBindings.java 46 63
+source/net/filebot/format/ExpressionFormat.java 289 301
+----------------------------------------
+	public Object get(Object key) {
+		Object value = properties.get(key);
+
+		// evaluate method
+		if (value instanceof Method) {
+			try {
+				value = ((Method) value).invoke(object);
+
+				if (value == null) {
+					value = defaultValue;
+				}
+			} catch (Exception e) {
+				throw new RuntimeException(e);
+			}
+		}
+
+		return value;
+	}
+
+----------------------------------------
+		public Object eval(ScriptContext context) throws ScriptException {
+			try {
+				Object value = context.getAttribute(name);
+				if (value == null) {
+					throw new MissingPropertyException(name, Variable.class);
+				}
+				return value;
+			} catch (Exception e) {
+				throw new ScriptException(e);
+			} catch (Throwable t) {
+				throw new ScriptException(new ExecutionException(t));
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830592
+source/net/filebot/format/ExpressionFormat.java 258 263
+source/net/filebot/format/ExpressionFormat.java 290 296
+----------------------------------------
+	protected static synchronized ScriptEngine getGroovyScriptEngine() throws ScriptException {
+		if (engine == null) {
+			engine = createScriptEngine();
+		}
+		return engine;
+	}
+
+----------------------------------------
+			try {
+				Object value = context.getAttribute(name);
+				if (value == null) {
+					throw new MissingPropertyException(name, Variable.class);
+				}
+				return value;
+			} catch (Exception e) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830594
+source/net/filebot/cli/PseudoConsole.java 24 29
+source/net/filebot/format/ExpressionFormat.java 290 296
+----------------------------------------
+	public static synchronized PseudoConsole getSystemConsole() {
+		if (STDIO == null) {
+			STDIO = new PseudoConsole(System.in, System.out, StandardCharsets.UTF_8);
+		}
+		return STDIO;
+	}
+
+----------------------------------------
+			try {
+				Object value = context.getAttribute(name);
+				if (value == null) {
+					throw new MissingPropertyException(name, Variable.class);
+				}
+				return value;
+			} catch (Exception e) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830593
+source/net/filebot/MediaTypes.java 24 29
+source/net/filebot/format/ExpressionFormat.java 290 296
+----------------------------------------
+	public static synchronized MediaTypes getDefault() {
+		if (defaultInstance == null) {
+			defaultInstance = parseDefault();
+		}
+		return defaultInstance;
+	}
+
+----------------------------------------
+			try {
+				Object value = context.getAttribute(name);
+				if (value == null) {
+					throw new MissingPropertyException(name, Variable.class);
+				}
+				return value;
+			} catch (Exception e) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830595
+source/net/filebot/format/ExpressionBindings.java 26 37
+source/net/filebot/archive/SevenZipNativeBindings.java 45 56
+----------------------------------------
+		for (Method method : bindingBean.getClass().getMethods()) {
+			Define define = method.getAnnotation(Define.class);
+
+			if (define != null) {
+				for (String name : define.value()) {
+					Method existingBinding = bindings.put(name, method);
+
+					if (existingBinding != null)
+						throw new IllegalArgumentException(String.format("Illegal binding {%s} on %s", name, method.getName()));
+				}
+			}
+		}
+
+----------------------------------------
+	public Map<PropID, Object> getItem(int index) throws SevenZipException {
+		Map<PropID, Object> item = new EnumMap<PropID, Object>(PropID.class);
+
+		for (PropID prop : PropID.values()) {
+			Object value = inArchive.getProperty(index, prop);
+			if (value != null) {
+				item.put(prop, value);
+			}
+		}
+
+		return item;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830596
+source/net/filebot/format/ExpressionFormat.java 290 296
+source/net/filebot/MediaTypes.java 70 79
+----------------------------------------
+			try {
+				Object value = context.getAttribute(name);
+				if (value == null) {
+					throw new MissingPropertyException(name, Variable.class);
+				}
+				return value;
+			} catch (Exception e) {
+
+----------------------------------------
+	public ExtensionFileFilter getFilter(String name) {
+		ExtensionFileFilter filter = filters.get(name);
+
+		if (filter == null) {
+			filter = new ExtensionFileFilter(getExtensionList(name));
+			filters.put(name, filter);
+		}
+
+		return filter;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917572
+source/net/filebot/format/ExpressionFormat.java 155 160
+source/net/filebot/media/IndexEntry.java 33 38
+----------------------------------------
+				try {
+					CharSequence value = normalizeExpressionValue(((CompiledScript) snippet).eval(context));
+					if (value != null) {
+						sb.append(value);
+					}
+				} catch (ScriptException e) {
+
+----------------------------------------
+	public CollationKey[] getLenientKey() {
+		if (lenientKey == null && lenientName != null) {
+			lenientKey = HighPerformanceMatcher.prepare(lenientName);
+		}
+		return lenientKey;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917573
+source/net/filebot/format/ExpressionFormat.java 155 160
+source/net/filebot/media/IndexEntry.java 40 45
+----------------------------------------
+				try {
+					CharSequence value = normalizeExpressionValue(((CompiledScript) snippet).eval(context));
+					if (value != null) {
+						sb.append(value);
+					}
+				} catch (ScriptException e) {
+
+----------------------------------------
+	public CollationKey[] getStrictKey() {
+		if (strictKey == null && strictName != null) {
+			strictKey = HighPerformanceMatcher.prepare(strictName);
+		}
+		return strictKey;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830597
+source/net/filebot/media/IndexEntry.java 33 38
+source/net/filebot/media/IndexEntry.java 40 45
+----------------------------------------
+	public CollationKey[] getLenientKey() {
+		if (lenientKey == null && lenientName != null) {
+			lenientKey = HighPerformanceMatcher.prepare(lenientName);
+		}
+		return lenientKey;
+	}
+
+----------------------------------------
+	public CollationKey[] getStrictKey() {
+		if (strictKey == null && strictName != null) {
+			strictKey = HighPerformanceMatcher.prepare(strictName);
+		}
+		return strictKey;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830624
+source/net/filebot/Settings.java 44 50
+source/net/filebot/util/ui/SimpleLabelProvider.java 74 80
+----------------------------------------
+		if (isAppStore()) {
+			try {
+				return bundle.getString("apikey.appstore." + name);
+			} catch (MissingResourceException e) {
+				// use default value
+			}
+		}
+
+----------------------------------------
+	public Icon getIcon(T value) {
+		try {
+			return (Icon) getIconMethod.invoke(value);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830668
+source/net/filebot/vfs/ZipArchive.java 28 34
+source/net/filebot/util/ui/SimpleLabelProvider.java 74 80
+----------------------------------------
+	public Iterator<MemoryFile> iterator() {
+		try {
+			return extract().iterator();
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+	public Icon getIcon(T value) {
+		try {
+			return (Icon) getIconMethod.invoke(value);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------

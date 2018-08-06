@@ -1,0 +1,1520 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830434
+source/net/filebot/format/PropertyBindings.java 103 129
+source/net/filebot/format/ExpressionBindings.java 106 130
+----------------------------------------
+	public Set<Entry<String, Object>> entrySet() {
+		Set<Entry<String, Object>> entrySet = new HashSet<Entry<String, Object>>();
+
+		for (final String key : keySet()) {
+			entrySet.add(new Entry<String, Object>() {
+
+				@Override
+				public String getKey() {
+					return key;
+				}
+
+
+				@Override
+				public Object getValue() {
+					return get(key);
+				}
+
+
+				@Override
+				public Object setValue(Object value) {
+					return put(key, value);
+				}
+			});
+		}
+
+		return entrySet;
+	}
+
+----------------------------------------
+	public Set<Entry<String, Object>> entrySet() {
+		Set<Entry<String, Object>> entrySet = new HashSet<Entry<String, Object>>();
+
+		for (final String key : keySet()) {
+			entrySet.add(new Entry<String, Object>() {
+
+				@Override
+				public String getKey() {
+					return key;
+				}
+
+				@Override
+				public Object getValue() {
+					return get(key);
+				}
+
+				@Override
+				public Object setValue(Object value) {
+					return put(key, value);
+				}
+			});
+		}
+
+		return entrySet;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830435
+source/net/filebot/format/ExpressionBindings.java 106 130
+source/net/filebot/format/PropertyBindings.java 106 126
+----------------------------------------
+	public Set<Entry<String, Object>> entrySet() {
+		Set<Entry<String, Object>> entrySet = new HashSet<Entry<String, Object>>();
+
+		for (final String key : keySet()) {
+			entrySet.add(new Entry<String, Object>() {
+
+				@Override
+				public String getKey() {
+					return key;
+				}
+
+				@Override
+				public Object getValue() {
+					return get(key);
+				}
+
+				@Override
+				public Object setValue(Object value) {
+					return put(key, value);
+				}
+			});
+		}
+
+		return entrySet;
+	}
+
+----------------------------------------
+		for (final String key : keySet()) {
+			entrySet.add(new Entry<String, Object>() {
+
+				@Override
+				public String getKey() {
+					return key;
+				}
+
+
+				@Override
+				public Object getValue() {
+					return get(key);
+				}
+
+
+				@Override
+				public Object setValue(Object value) {
+					return put(key, value);
+				}
+			});
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830437
+source/net/filebot/format/PropertyBindings.java 106 126
+source/net/filebot/format/ExpressionBindings.java 109 127
+----------------------------------------
+		for (final String key : keySet()) {
+			entrySet.add(new Entry<String, Object>() {
+
+				@Override
+				public String getKey() {
+					return key;
+				}
+
+
+				@Override
+				public Object getValue() {
+					return get(key);
+				}
+
+
+				@Override
+				public Object setValue(Object value) {
+					return put(key, value);
+				}
+			});
+		}
+
+----------------------------------------
+		for (final String key : keySet()) {
+			entrySet.add(new Entry<String, Object>() {
+
+				@Override
+				public String getKey() {
+					return key;
+				}
+
+				@Override
+				public Object getValue() {
+					return get(key);
+				}
+
+				@Override
+				public Object setValue(Object value) {
+					return put(key, value);
+				}
+			});
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830436
+source/net/filebot/format/PropertyBindings.java 103 129
+source/net/filebot/format/ExpressionBindings.java 109 127
+----------------------------------------
+	public Set<Entry<String, Object>> entrySet() {
+		Set<Entry<String, Object>> entrySet = new HashSet<Entry<String, Object>>();
+
+		for (final String key : keySet()) {
+			entrySet.add(new Entry<String, Object>() {
+
+				@Override
+				public String getKey() {
+					return key;
+				}
+
+
+				@Override
+				public Object getValue() {
+					return get(key);
+				}
+
+
+				@Override
+				public Object setValue(Object value) {
+					return put(key, value);
+				}
+			});
+		}
+
+		return entrySet;
+	}
+
+----------------------------------------
+		for (final String key : keySet()) {
+			entrySet.add(new Entry<String, Object>() {
+
+				@Override
+				public String getKey() {
+					return key;
+				}
+
+				@Override
+				public Object getValue() {
+					return get(key);
+				}
+
+				@Override
+				public Object setValue(Object value) {
+					return put(key, value);
+				}
+			});
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917568
+source/net/filebot/Settings.java 110 117
+source/net/filebot/ui/rename/RenameListCellRenderer.java 213 225
+----------------------------------------
+	private static boolean isApplicationDeployment(String... ids) {
+		String current = getApplicationDeployment();
+		for (String id : ids) {
+			if (current != null && current.equals(id))
+				return true;
+		}
+		return false;
+	}
+
+----------------------------------------
+	protected String getType(File file) {
+		if (file.isDirectory()) {
+			return "Folder";
+		}
+
+		String extension = FileUtilities.getExtension(file);
+		if (extension != null) {
+			return extension.toLowerCase();
+		}
+
+		// some file with no extension
+		return "File";
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830438
+source/net/filebot/ui/rename/RenameListCellRenderer.java 213 225
+source/net/filebot/web/SimpleDate.java 112 120
+----------------------------------------
+	protected String getType(File file) {
+		if (file.isDirectory()) {
+			return "Folder";
+		}
+
+		String extension = FileUtilities.getExtension(file);
+		if (extension != null) {
+			return extension.toLowerCase();
+		}
+
+		// some file with no extension
+		return "File";
+	}
+
+----------------------------------------
+	public static SimpleDate parse(String date) {
+		if (date != null && date.length() > 0) {
+			Matcher m = DATE_FORMAT.matcher(date);
+			if (m.matches()) {
+				return new SimpleDate(Integer.parseInt(m.group(1)), Integer.parseInt(m.group(2)), Integer.parseInt(m.group(3)));
+			}
+		}
+		return null;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830651
+source/net/filebot/similarity/Match.java 25 32
+source/net/filebot/web/EpisodeInfo.java 83 90
+----------------------------------------
+	public boolean equals(Object obj) {
+		if (obj instanceof Match) {
+			Match<?, ?> other = (Match<?, ?>) obj;
+			return value == other.value && candidate == other.candidate;
+		}
+
+		return false;
+	}
+
+----------------------------------------
+	public boolean equals(Object obj) {
+		if (obj instanceof EpisodeInfo) {
+			EpisodeInfo other = (EpisodeInfo) obj;
+			return Objects.equals(id, other.id) && Objects.equals(database, other.database);
+		}
+
+		return false;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830652
+source/net/filebot/web/SeriesInfo.java 183 189
+source/net/filebot/web/EpisodeInfo.java 83 90
+----------------------------------------
+	public boolean equals(Object object) {
+		if (object instanceof SeriesInfo) {
+			SeriesInfo other = (SeriesInfo) object;
+			return Objects.equals(id, other.id) && Objects.equals(database, other.database);
+		}
+		return false;
+	}
+
+----------------------------------------
+	public boolean equals(Object obj) {
+		if (obj instanceof EpisodeInfo) {
+			EpisodeInfo other = (EpisodeInfo) obj;
+			return Objects.equals(id, other.id) && Objects.equals(database, other.database);
+		}
+
+		return false;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830439
+source/net/filebot/similarity/FileNameMetric.java 26 33
+source/net/filebot/web/EpisodeInfo.java 83 90
+----------------------------------------
+	protected String getFileName(Object object) {
+		if (object instanceof File) {
+			// name without extension normalized to lower-case
+			return getName((File) object).trim().toLowerCase();
+		}
+
+		return null;
+	}
+
+----------------------------------------
+	public boolean equals(Object obj) {
+		if (obj instanceof EpisodeInfo) {
+			EpisodeInfo other = (EpisodeInfo) obj;
+			return Objects.equals(id, other.id) && Objects.equals(database, other.database);
+		}
+
+		return false;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830451
+source/net/filebot/web/SeriesInfo.java 183 189
+source/net/filebot/ui/LanguageComboBoxModel.java 65 70
+----------------------------------------
+	public boolean equals(Object object) {
+		if (object instanceof SeriesInfo) {
+			SeriesInfo other = (SeriesInfo) object;
+			return Objects.equals(id, other.id) && Objects.equals(database, other.database);
+		}
+		return false;
+	}
+
+----------------------------------------
+	public void setSelectedItem(Object value) {
+		if (value instanceof Language) {
+			Language language = (Language) value;
+			selection = ALL_LANGUAGES.getCode().equals(language.getCode()) ? ALL_LANGUAGES : language;
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830440
+source/net/filebot/web/EpisodeInfo.java 83 90
+source/net/filebot/ui/LanguageComboBoxModel.java 65 70
+----------------------------------------
+	public boolean equals(Object obj) {
+		if (obj instanceof EpisodeInfo) {
+			EpisodeInfo other = (EpisodeInfo) obj;
+			return Objects.equals(id, other.id) && Objects.equals(database, other.database);
+		}
+
+		return false;
+	}
+
+----------------------------------------
+	public void setSelectedItem(Object value) {
+		if (value instanceof Language) {
+			Language language = (Language) value;
+			selection = ALL_LANGUAGES.getCode().equals(language.getCode()) ? ALL_LANGUAGES : language;
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830447
+source/net/filebot/ui/AbstractSearchPanel.java 92 102
+source/net/filebot/archive/SevenZipNativeBindings.java 111 119
+----------------------------------------
+					protected void done() {
+						if (engine == searchTextField.getSelectButton().getSelectedValue()) {
+							try {
+								searchHistory.clear();
+								searchHistory.addAll(get());
+							} catch (Exception e) {
+								debug.log(Level.WARNING, e.getMessage(), e);
+							}
+						}
+
+					};
+
+----------------------------------------
+	public void close() throws IOException {
+		try {
+			inArchive.close();
+		} catch (SevenZipException e) {
+			throw new IOException(e);
+		} finally {
+			openVolume.close();
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830445
+source/net/filebot/ui/transfer/ByteBufferTransferable.java 32 43
+source/net/filebot/archive/SevenZipNativeBindings.java 111 119
+----------------------------------------
+		if (FileTransferable.isFileListFlavor(flavor)) {
+			try {
+				// create file for transfer on demand
+				if (transferable == null) {
+					transferable = createFileTransferable();
+				}
+
+				return transferable.getTransferData(flavor);
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
+		}
+
+----------------------------------------
+	public void close() throws IOException {
+		try {
+			inArchive.close();
+		} catch (SevenZipException e) {
+			throw new IOException(e);
+		} finally {
+			openVolume.close();
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830441
+source/net/filebot/format/PropertyBindings.java 50 60
+source/net/filebot/archive/SevenZipNativeBindings.java 111 119
+----------------------------------------
+		if (value instanceof Method) {
+			try {
+				value = ((Method) value).invoke(object);
+
+				if (value == null) {
+					value = defaultValue;
+				}
+			} catch (Exception e) {
+				throw new RuntimeException(e);
+			}
+		}
+
+----------------------------------------
+	public void close() throws IOException {
+		try {
+			inArchive.close();
+		} catch (SevenZipException e) {
+			throw new IOException(e);
+		} finally {
+			openVolume.close();
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830446
+source/net/filebot/archive/ExtractCallback.java 65 73
+source/net/filebot/archive/SevenZipNativeBindings.java 111 119
+----------------------------------------
+		if (output != null) {
+			try {
+				output.close();
+			} catch (IOException e) {
+				throw new SevenZipException(e);
+			} finally {
+				output = null;
+			}
+		}
+
+----------------------------------------
+	public void close() throws IOException {
+		try {
+			inArchive.close();
+		} catch (SevenZipException e) {
+			throw new IOException(e);
+		} finally {
+			openVolume.close();
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830443
+source/net/filebot/MetaAttributeView.java 129 137
+source/net/filebot/archive/SevenZipNativeBindings.java 111 119
+----------------------------------------
+	public void clear() {
+		try {
+			for (String key : this.list()) {
+				this.put(key, null);
+			}
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+	public void close() throws IOException {
+		try {
+			inArchive.close();
+		} catch (SevenZipException e) {
+			throw new IOException(e);
+		} finally {
+			openVolume.close();
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830444
+source/net/filebot/web/OpenSubtitlesXmlRpc.java 74 83
+source/net/filebot/archive/SevenZipNativeBindings.java 111 119
+----------------------------------------
+	public synchronized void logout() throws XmlRpcFault {
+		try {
+			invoke("LogOut", token);
+		} catch (XmlRpcFault e) {
+			// anonymous users will always get an 401 Unauthorized when trying to logout,
+			// so we ignore the status of the logout response
+		} finally {
+			token = null;
+		}
+	}
+
+----------------------------------------
+	public void close() throws IOException {
+		try {
+			inArchive.close();
+		} catch (SevenZipException e) {
+			throw new IOException(e);
+		} finally {
+			openVolume.close();
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830442
+source/net/filebot/Settings.java 247 259
+source/net/filebot/archive/SevenZipNativeBindings.java 111 119
+----------------------------------------
+	public void clear() {
+		try {
+			// remove child nodes
+			for (String nodeName : prefs.childrenNames()) {
+				prefs.node(nodeName).removeNode();
+			}
+
+			// remove entries
+			prefs.clear();
+		} catch (BackingStoreException e) {
+			debug.warning(e.getMessage());
+		}
+	}
+
+----------------------------------------
+	public void close() throws IOException {
+		try {
+			inArchive.close();
+		} catch (SevenZipException e) {
+			throw new IOException(e);
+		} finally {
+			openVolume.close();
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917566
+source/net/filebot/Settings.java 44 50
+source/net/filebot/archive/ExtractOutStream.java 24 31
+----------------------------------------
+		if (isAppStore()) {
+			try {
+				return bundle.getString("apikey.appstore." + name);
+			} catch (MissingResourceException e) {
+				// use default value
+			}
+		}
+
+----------------------------------------
+	public int write(byte[] data) throws SevenZipException {
+		try {
+			out.write(data);
+		} catch (IOException e) {
+			throw new SevenZipException(e);
+		}
+		return data.length; // return amount of proceed data
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830450
+source/net/filebot/hash/MessageDigestHash.java 15 21
+source/net/filebot/archive/ExtractOutStream.java 24 31
+----------------------------------------
+	public MessageDigestHash(String algorithm) {
+		try {
+			this.md = MessageDigest.getInstance(algorithm);
+		} catch (NoSuchAlgorithmException e) {
+			throw new IllegalArgumentException(e);
+		}
+	}
+
+----------------------------------------
+	public int write(byte[] data) throws SevenZipException {
+		try {
+			out.write(data);
+		} catch (IOException e) {
+			throw new SevenZipException(e);
+		}
+		return data.length; // return amount of proceed data
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830471
+source/net/filebot/hash/Ed2kHash.java 16 22
+source/net/filebot/archive/ExtractOutStream.java 24 31
+----------------------------------------
+	public Ed2kHash() {
+		try {
+			this.ed2k = new Edonkey();
+		} catch (NoSuchAlgorithmException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+	public int write(byte[] data) throws SevenZipException {
+		try {
+			out.write(data);
+		} catch (IOException e) {
+			throw new SevenZipException(e);
+		}
+		return data.length; // return amount of proceed data
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830448
+source/net/filebot/web/OpenSubtitlesXmlRpc.java 361 367
+source/net/filebot/archive/ExtractOutStream.java 24 31
+----------------------------------------
+	protected URL getXmlRpcUrl() {
+		try {
+			return new URL(System.getProperty("net.filebot.OpenSubtitlesXmlRpc.url", "https://api.opensubtitles.org/xml-rpc"));
+		} catch (MalformedURLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+	public int write(byte[] data) throws SevenZipException {
+		try {
+			out.write(data);
+		} catch (IOException e) {
+			throw new SevenZipException(e);
+		}
+		return data.length; // return amount of proceed data
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830449
+source/net/filebot/MetaAttributeView.java 129 137
+source/net/filebot/archive/ExtractOutStream.java 24 31
+----------------------------------------
+	public void clear() {
+		try {
+			for (String key : this.list()) {
+				this.put(key, null);
+			}
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+	public int write(byte[] data) throws SevenZipException {
+		try {
+			out.write(data);
+		} catch (IOException e) {
+			throw new SevenZipException(e);
+		}
+		return data.length; // return amount of proceed data
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830453
+source/net/filebot/ui/sfv/ChecksumCell.java 44 52
+source/net/filebot/web/Movie.java 33 39
+----------------------------------------
+	public ChecksumCell(String name, File root, ChecksumComputationTask task) {
+		this.name = name;
+		this.root = root;
+		this.hashes = new EnumMap<HashType, String>(HashType.class);
+		this.task = task;
+
+		// forward property change events
+		task.addPropertyChangeListener(taskListener);
+	}
+
+----------------------------------------
+	public Movie(String name, String[] aliasNames, int year, int imdbId, int tmdbId, Locale locale) {
+		super(tmdbId > 0 ? tmdbId : imdbId > 0 ? imdbId : 0, name, aliasNames);
+		this.year = year;
+		this.imdbId = imdbId;
+		this.tmdbId = tmdbId;
+		this.language = locale == null ? null : locale.getLanguage();
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830455
+source/net/filebot/ui/rename/TextColorizer.java 28 33
+source/net/filebot/web/Movie.java 33 39
+----------------------------------------
+	public TextColorizer(String before, String after, Color pathRainbowBeginColor, Color pathRainbowEndColor) {
+		this.before = before;
+		this.after = after;
+		this.pathRainbowBeginColor = pathRainbowBeginColor;
+		this.pathRainbowEndColor = pathRainbowEndColor;
+	}
+
+----------------------------------------
+	public Movie(String name, String[] aliasNames, int year, int imdbId, int tmdbId, Locale locale) {
+		super(tmdbId > 0 ? tmdbId : imdbId > 0 ? imdbId : 0, name, aliasNames);
+		this.year = year;
+		this.imdbId = imdbId;
+		this.tmdbId = tmdbId;
+		this.language = locale == null ? null : locale.getLanguage();
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830456
+source/net/filebot/ui/rename/RenameModel.java 318 323
+source/net/filebot/web/Movie.java 33 39
+----------------------------------------
+		private FormattedFuture(Match<Object, File> match, boolean extension, MatchFormatter formatter, Map<File, Object> context) {
+			this.match = match;
+			this.extension = extension;
+			this.formatter = formatter;
+			this.context = context;
+		}
+
+----------------------------------------
+	public Movie(String name, String[] aliasNames, int year, int imdbId, int tmdbId, Locale locale) {
+		super(tmdbId > 0 ? tmdbId : imdbId > 0 ? imdbId : 0, name, aliasNames);
+		this.year = year;
+		this.imdbId = imdbId;
+		this.tmdbId = tmdbId;
+		this.language = locale == null ? null : locale.getLanguage();
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830454
+source/net/filebot/ui/subtitle/upload/SubtitleMapping.java 20 26
+source/net/filebot/web/Movie.java 33 39
+----------------------------------------
+	public SubtitleMapping(File subtitle, File video, Language language) {
+		this.subtitle = subtitle;
+		this.video = video;
+		this.language = language;
+
+		this.status = (video == null || subtitle == null) ? Status.IllegalInput : Status.CheckPending;
+	}
+
+----------------------------------------
+	public Movie(String name, String[] aliasNames, int year, int imdbId, int tmdbId, Locale locale) {
+		super(tmdbId > 0 ? tmdbId : imdbId > 0 ? imdbId : 0, name, aliasNames);
+		this.year = year;
+		this.imdbId = imdbId;
+		this.tmdbId = tmdbId;
+		this.language = locale == null ? null : locale.getLanguage();
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830460
+source/net/filebot/ui/rename/HighlightListCellRenderer.java 72 79
+source/net/filebot/util/ui/ListView.java 60 69
+----------------------------------------
+	public void setForeground(Color fg) {
+		super.setForeground(fg);
+
+		// textComponent is null while in super constructor
+		if (textComponent != null) {
+			textComponent.setForeground(fg);
+		}
+	}
+
+----------------------------------------
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+
+		Rectangle selection = blockSelectionHandler.getSelection();
+
+		// paint block selection
+		if (selection != null) {
+			paintBlockSelection((Graphics2D) g, selection);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830459
+source/net/filebot/format/ExpressionFormat.java 155 160
+source/net/filebot/util/ui/ListView.java 60 69
+----------------------------------------
+				try {
+					CharSequence value = normalizeExpressionValue(((CompiledScript) snippet).eval(context));
+					if (value != null) {
+						sb.append(value);
+					}
+				} catch (ScriptException e) {
+
+----------------------------------------
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+
+		Rectangle selection = blockSelectionHandler.getSelection();
+
+		// paint block selection
+		if (selection != null) {
+			paintBlockSelection((Graphics2D) g, selection);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830458
+source/net/filebot/similarity/Matcher.java 59 65
+source/net/filebot/util/ui/ListView.java 60 69
+----------------------------------------
+		for (V value : values) {
+			Match<V, C> match = disjointMatchCollection.getByValue(value);
+
+			if (match != null) {
+				result.add(match);
+			}
+		}
+
+----------------------------------------
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+
+		Rectangle selection = blockSelectionHandler.getSelection();
+
+		// paint block selection
+		if (selection != null) {
+			paintBlockSelection((Graphics2D) g, selection);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917548
+source/net/filebot/web/OpenSubtitlesXmlRpc.java 74 83
+source/net/filebot/ui/transfer/TransferablePolicy.java 37 51
+----------------------------------------
+	public synchronized void logout() throws XmlRpcFault {
+		try {
+			invoke("LogOut", token);
+		} catch (XmlRpcFault e) {
+			// anonymous users will always get an 401 Unauthorized when trying to logout,
+			// so we ignore the status of the logout response
+		} finally {
+			token = null;
+		}
+	}
+
+----------------------------------------
+	public boolean importData(TransferSupport support) {
+		Transferable transferable = support.getTransferable();
+
+		try {
+			if (accept(transferable)) {
+				handleTransferable(transferable, getTransferAction(support));
+				return true;
+			}
+		} catch (Exception e) {
+			debug.log(Level.WARNING, e.getMessage(), e);
+		}
+
+		// transferable was not accepted, or transfer failed
+		return false;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917551
+source/net/filebot/archive/ExtractCallback.java 65 73
+source/net/filebot/win/WinAppUtilities.java 21 32
+----------------------------------------
+		if (output != null) {
+			try {
+				output.close();
+			} catch (IOException e) {
+				throw new SevenZipException(e);
+			} finally {
+				output = null;
+			}
+		}
+
+----------------------------------------
+	public static String getAppUserModelID() {
+		try {
+			PointerByReference r = new PointerByReference();
+			if (Shell32.INSTANCE.GetCurrentProcessExplicitAppUserModelID(r).longValue() != 0) {
+				Pointer p = r.getPointer();
+				return p.getWideString(0); // LEAK NATIVE MEMORY
+			}
+		} catch (Throwable t) {
+			debug.log(Level.WARNING, t.getMessage(), t);
+		}
+		return null;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830464
+source/net/filebot/ui/transfer/TransferablePolicy.java 37 51
+source/net/filebot/win/WinAppUtilities.java 21 32
+----------------------------------------
+	public boolean importData(TransferSupport support) {
+		Transferable transferable = support.getTransferable();
+
+		try {
+			if (accept(transferable)) {
+				handleTransferable(transferable, getTransferAction(support));
+				return true;
+			}
+		} catch (Exception e) {
+			debug.log(Level.WARNING, e.getMessage(), e);
+		}
+
+		// transferable was not accepted, or transfer failed
+		return false;
+	}
+
+----------------------------------------
+	public static String getAppUserModelID() {
+		try {
+			PointerByReference r = new PointerByReference();
+			if (Shell32.INSTANCE.GetCurrentProcessExplicitAppUserModelID(r).longValue() != 0) {
+				Pointer p = r.getPointer();
+				return p.getWideString(0); // LEAK NATIVE MEMORY
+			}
+		} catch (Throwable t) {
+			debug.log(Level.WARNING, t.getMessage(), t);
+		}
+		return null;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917550
+source/net/filebot/web/OpenSubtitlesXmlRpc.java 74 83
+source/net/filebot/win/WinAppUtilities.java 21 32
+----------------------------------------
+	public synchronized void logout() throws XmlRpcFault {
+		try {
+			invoke("LogOut", token);
+		} catch (XmlRpcFault e) {
+			// anonymous users will always get an 401 Unauthorized when trying to logout,
+			// so we ignore the status of the logout response
+		} finally {
+			token = null;
+		}
+	}
+
+----------------------------------------
+	public static String getAppUserModelID() {
+		try {
+			PointerByReference r = new PointerByReference();
+			if (Shell32.INSTANCE.GetCurrentProcessExplicitAppUserModelID(r).longValue() != 0) {
+				Pointer p = r.getPointer();
+				return p.getWideString(0); // LEAK NATIVE MEMORY
+			}
+		} catch (Throwable t) {
+			debug.log(Level.WARNING, t.getMessage(), t);
+		}
+		return null;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917553
+source/net/filebot/ui/sfv/ChecksumCell.java 155 170
+source/net/filebot/win/WinAppUtilities.java 21 32
+----------------------------------------
+		protected void done(PropertyChangeEvent evt) {
+			try {
+				hashes.putAll(task.get());
+			} catch (Exception e) {
+				Throwable cause = ExceptionUtilities.getRootCause(e);
+
+				// ignore cancellation
+				if (cause instanceof CancellationException) {
+					return;
+				}
+
+				error = cause;
+			} finally {
+				task = null;
+			}
+		}
+
+----------------------------------------
+	public static String getAppUserModelID() {
+		try {
+			PointerByReference r = new PointerByReference();
+			if (Shell32.INSTANCE.GetCurrentProcessExplicitAppUserModelID(r).longValue() != 0) {
+				Pointer p = r.getPointer();
+				return p.getWideString(0); // LEAK NATIVE MEMORY
+			}
+		} catch (Throwable t) {
+			debug.log(Level.WARNING, t.getMessage(), t);
+		}
+		return null;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830465
+source/net/filebot/ui/subtitle/SubtitlePackageCellRenderer.java 60 76
+source/net/filebot/util/BOM.java 46 62
+----------------------------------------
+	private Icon getIcon(SubtitlePackage subtitle) {
+		switch (subtitle.getDownload().getPhase()) {
+		case PENDING:
+			return ResourceManager.getIcon("bullet.green");
+		case WAITING:
+			return ResourceManager.getIcon("worker.pending");
+		case DOWNLOADING:
+			return ResourceManager.getIcon("package.fetch");
+		case EXTRACTING:
+			return ResourceManager.getIcon("package.extract");
+		case DONE:
+			return ResourceManager.getIcon("status.ok");
+		}
+
+		// unreachable
+		return null;
+	}
+
+----------------------------------------
+	public Charset getCharset() {
+		switch (this) {
+		case UTF_8:
+			return StandardCharsets.UTF_8;
+		case UTF_16BE:
+			return StandardCharsets.UTF_16BE;
+		case UTF_16LE:
+			return StandardCharsets.UTF_16LE;
+		case UTF_32BE:
+			return Charset.forName("UTF-32BE");
+		case UTF_32LE:
+			return Charset.forName("UTF-32LE");
+		case GB_18030:
+			return Charset.forName("GB18030");
+		}
+		return null;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917519
+source/net/filebot/ui/sfv/ChecksumTableExportHandler.java 38 46
+source/net/filebot/ui/rename/RenameModel.java 129 137
+----------------------------------------
+	protected File defaultColumn() {
+		// select first column that is not a verification file column
+		for (File root : model.getChecksumColumns()) {
+			if (root.isDirectory())
+				return root;
+		}
+
+		return null;
+	}
+
+----------------------------------------
+	private MatchFormatter getFormatter(Match<Object, File> match) {
+		for (MatchFormatter formatter : formatters.values()) {
+			if (formatter.canFormat(match)) {
+				return formatter;
+			}
+		}
+
+		return defaultFormatter;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830466
+source/net/filebot/ui/rename/RenameModel.java 129 137
+source/net/filebot/util/BOM.java 64 71
+----------------------------------------
+	private MatchFormatter getFormatter(Match<Object, File> match) {
+		for (MatchFormatter formatter : formatters.values()) {
+			if (formatter.canFormat(match)) {
+				return formatter;
+			}
+		}
+
+		return defaultFormatter;
+	}
+
+----------------------------------------
+	public static BOM detect(byte[] bytes) {
+		for (BOM bom : values()) {
+			if (bom.matches(bytes)) {
+				return bom;
+			}
+		}
+		return null;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917589
+source/net/filebot/web/OpenSubtitlesXmlRpc.java 74 83
+source/net/filebot/util/BOM.java 64 71
+----------------------------------------
+	public synchronized void logout() throws XmlRpcFault {
+		try {
+			invoke("LogOut", token);
+		} catch (XmlRpcFault e) {
+			// anonymous users will always get an 401 Unauthorized when trying to logout,
+			// so we ignore the status of the logout response
+		} finally {
+			token = null;
+		}
+	}
+
+----------------------------------------
+	public static BOM detect(byte[] bytes) {
+		for (BOM bom : values()) {
+			if (bom.matches(bytes)) {
+				return bom;
+			}
+		}
+		return null;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917557
+source/net/filebot/ui/transfer/ArrayTransferable.java 26 32
+source/net/filebot/util/BOM.java 64 71
+----------------------------------------
+	public Object getTransferData(DataFlavor flavor) throws UnsupportedFlavorException, IOException {
+		if (isDataFlavorSupported(flavor)) {
+			return getArray();
+		}
+
+		return null;
+	}
+
+----------------------------------------
+	public static BOM detect(byte[] bytes) {
+		for (BOM bom : values()) {
+			if (bom.matches(bytes)) {
+				return bom;
+			}
+		}
+		return null;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917567
+source/net/filebot/Settings.java 110 117
+source/net/filebot/util/BOM.java 64 71
+----------------------------------------
+	private static boolean isApplicationDeployment(String... ids) {
+		String current = getApplicationDeployment();
+		for (String id : ids) {
+			if (current != null && current.equals(id))
+				return true;
+		}
+		return false;
+	}
+
+----------------------------------------
+	public static BOM detect(byte[] bytes) {
+		for (BOM bom : values()) {
+			if (bom.matches(bytes)) {
+				return bom;
+			}
+		}
+		return null;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917590
+source/net/filebot/hash/VerificationFileReader.java 46 58
+source/net/filebot/util/BOM.java 64 71
+----------------------------------------
+	public Entry<File, String> next() {
+		// cache next entry
+		if (!hasNext()) {
+			throw new NoSuchElementException();
+		}
+
+		try {
+			return buffer;
+		} finally {
+			// invalidate cache
+			buffer = null;
+		}
+	}
+
+----------------------------------------
+	public static BOM detect(byte[] bytes) {
+		for (BOM bom : values()) {
+			if (bom.matches(bytes)) {
+				return bom;
+			}
+		}
+		return null;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917529
+source/net/filebot/subtitle/SubtitleReader.java 39 49
+source/net/filebot/util/BOM.java 64 71
+----------------------------------------
+	public SubtitleElement next() {
+		if (!hasNext()) {
+			throw new NoSuchElementException();
+		}
+
+		try {
+			return current;
+		} finally {
+			current = null;
+		}
+	}
+
+----------------------------------------
+	public static BOM detect(byte[] bytes) {
+		for (BOM bom : values()) {
+			if (bom.matches(bytes)) {
+				return bom;
+			}
+		}
+		return null;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830467
+source/net/filebot/web/SubtitleSearchResult.java 58 65
+source/net/filebot/web/SubtitleSearchResult.java 68 75
+----------------------------------------
+	public List<String> getEffectiveNames() {
+		switch (kind) {
+		case Series:
+			return super.getEffectiveNamesWithoutYear();
+		default:
+			return super.getEffectiveNames(); // with year
+		}
+	}
+
+----------------------------------------
+	public String toString() {
+		switch (kind) {
+		case Series:
+			return super.getName(); // without year
+		default:
+			return super.toString(); // with year
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830481
+source/net/filebot/similarity/Match.java 25 32
+source/net/filebot/History.java 63 70
+----------------------------------------
+	public boolean equals(Object obj) {
+		if (obj instanceof Match) {
+			Match<?, ?> other = (Match<?, ?>) obj;
+			return value == other.value && candidate == other.candidate;
+		}
+
+		return false;
+	}
+
+----------------------------------------
+		public boolean equals(Object obj) {
+			if (obj instanceof Sequence) {
+				Sequence other = (Sequence) obj;
+				return date.equals(other.date) && elements.equals(other.elements);
+			}
+
+			return false;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830470
+source/net/filebot/ui/LanguageComboBoxModel.java 65 70
+source/net/filebot/History.java 63 70
+----------------------------------------
+	public void setSelectedItem(Object value) {
+		if (value instanceof Language) {
+			Language language = (Language) value;
+			selection = ALL_LANGUAGES.getCode().equals(language.getCode()) ? ALL_LANGUAGES : language;
+		}
+	}
+
+----------------------------------------
+		public boolean equals(Object obj) {
+			if (obj instanceof Sequence) {
+				Sequence other = (Sequence) obj;
+				return date.equals(other.date) && elements.equals(other.elements);
+			}
+
+			return false;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830482
+source/net/filebot/web/SeriesInfo.java 183 189
+source/net/filebot/History.java 63 70
+----------------------------------------
+	public boolean equals(Object object) {
+		if (object instanceof SeriesInfo) {
+			SeriesInfo other = (SeriesInfo) object;
+			return Objects.equals(id, other.id) && Objects.equals(database, other.database);
+		}
+		return false;
+	}
+
+----------------------------------------
+		public boolean equals(Object obj) {
+			if (obj instanceof Sequence) {
+				Sequence other = (Sequence) obj;
+				return date.equals(other.date) && elements.equals(other.elements);
+			}
+
+			return false;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830468
+source/net/filebot/web/EpisodeInfo.java 83 90
+source/net/filebot/History.java 63 70
+----------------------------------------
+	public boolean equals(Object obj) {
+		if (obj instanceof EpisodeInfo) {
+			EpisodeInfo other = (EpisodeInfo) obj;
+			return Objects.equals(id, other.id) && Objects.equals(database, other.database);
+		}
+
+		return false;
+	}
+
+----------------------------------------
+		public boolean equals(Object obj) {
+			if (obj instanceof Sequence) {
+				Sequence other = (Sequence) obj;
+				return date.equals(other.date) && elements.equals(other.elements);
+			}
+
+			return false;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830469
+source/net/filebot/similarity/FileNameMetric.java 26 33
+source/net/filebot/History.java 63 70
+----------------------------------------
+	protected String getFileName(Object object) {
+		if (object instanceof File) {
+			// name without extension normalized to lower-case
+			return getName((File) object).trim().toLowerCase();
+		}
+
+		return null;
+	}
+
+----------------------------------------
+		public boolean equals(Object obj) {
+			if (obj instanceof Sequence) {
+				Sequence other = (Sequence) obj;
+				return date.equals(other.date) && elements.equals(other.elements);
+			}
+
+			return false;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830472
+source/net/filebot/archive/ExtractOutStream.java 24 31
+source/net/filebot/web/OpenSubtitlesXmlRpc.java 369 383
+----------------------------------------
+	public int write(byte[] data) throws SevenZipException {
+		try {
+			out.write(data);
+		} catch (IOException e) {
+			throw new SevenZipException(e);
+		}
+		return data.length; // return amount of proceed data
+	}
+
+----------------------------------------
+	protected static String encodeData(byte[] data) {
+		try {
+			DeflaterInputStream compressedDataStream = new DeflaterInputStream(new ByteArrayInputStream(data));
+
+			// compress data
+			ByteBufferOutputStream buffer = new ByteBufferOutputStream(data.length);
+			buffer.transferFully(compressedDataStream);
+
+			// base64 encode
+			return new String(Base64.encode(buffer.getByteArray()));
+		} catch (IOException e) {
+			// will never happen
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------

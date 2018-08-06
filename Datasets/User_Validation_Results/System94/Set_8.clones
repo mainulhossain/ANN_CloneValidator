@@ -1,0 +1,1275 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830627
+source/net/filebot/Settings.java 30 36
+source/net/filebot/util/ui/SimpleLabelProvider.java 74 80
+----------------------------------------
+	public static int getApplicationRevisionNumber() {
+		try {
+			return Integer.parseInt(getApplicationProperty("application.revision"));
+		} catch (Exception e) {
+			return 0;
+		}
+	}
+
+----------------------------------------
+	public Icon getIcon(T value) {
+		try {
+			return (Icon) getIconMethod.invoke(value);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830622
+source/net/filebot/hash/VerificationFileReader.java 69 76
+source/net/filebot/util/ui/SimpleLabelProvider.java 74 80
+----------------------------------------
+			if (!isComment(line)) {
+				try {
+					entry = format.parseObject(line);
+				} catch (ParseException e) {
+					// log and ignore
+					debug.warning(format("Illegal format on line %d: %s", lineNumber, line));
+				}
+			}
+
+----------------------------------------
+	public Icon getIcon(T value) {
+		try {
+			return (Icon) getIconMethod.invoke(value);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830664
+source/net/filebot/web/OpenSubtitlesXmlRpc.java 335 341
+source/net/filebot/util/ui/SimpleLabelProvider.java 74 80
+----------------------------------------
+				public void parse(InputStream input) throws XmlRpcException {
+					try {
+						super.parse(new GZIPInputStream(input));
+					} catch (IOException e) {
+						throw new XmlRpcException(e.getMessage(), e);
+					}
+				};
+
+----------------------------------------
+	public Icon getIcon(T value) {
+		try {
+			return (Icon) getIconMethod.invoke(value);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830629
+source/net/filebot/web/OpenSubtitlesXmlRpc.java 361 367
+source/net/filebot/util/ui/SimpleLabelProvider.java 74 80
+----------------------------------------
+	protected URL getXmlRpcUrl() {
+		try {
+			return new URL(System.getProperty("net.filebot.OpenSubtitlesXmlRpc.url", "https://api.opensubtitles.org/xml-rpc"));
+		} catch (MalformedURLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+	public Icon getIcon(T value) {
+		try {
+			return (Icon) getIconMethod.invoke(value);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830626
+source/net/filebot/util/ui/SimpleLabelProvider.java 53 59
+source/net/filebot/util/ui/SimpleLabelProvider.java 74 80
+----------------------------------------
+		for (String name : names) {
+			try {
+				return type.getMethod(name);
+			} catch (NoSuchMethodException e) {
+				// try next method name
+			}
+		}
+
+----------------------------------------
+	public Icon getIcon(T value) {
+		try {
+			return (Icon) getIconMethod.invoke(value);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830665
+source/net/filebot/util/ui/SimpleLabelProvider.java 65 71
+source/net/filebot/util/ui/SimpleLabelProvider.java 74 80
+----------------------------------------
+	public String getText(T value) {
+		try {
+			return (String) getTextMethod.invoke(value);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+	public Icon getIcon(T value) {
+		try {
+			return (Icon) getIconMethod.invoke(value);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830669
+source/net/filebot/util/prefs/FilePreferences.java 68 74
+source/net/filebot/util/ui/SimpleLabelProvider.java 74 80
+----------------------------------------
+	protected void syncSpi() throws BackingStoreException {
+		try {
+			store.sync();
+		} catch (Exception e) {
+			throw new BackingStoreException(e);
+		}
+	}
+
+----------------------------------------
+	public Icon getIcon(T value) {
+		try {
+			return (Icon) getIconMethod.invoke(value);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830621
+source/net/filebot/ui/rename/HighlightListCellRenderer.java 61 68
+source/net/filebot/util/ui/SimpleLabelProvider.java 74 80
+----------------------------------------
+		while (matcher.find()) {
+			try {
+				textComponent.getHighlighter().addHighlight(matcher.start(0), matcher.end(0), highlightPainter);
+			} catch (BadLocationException e) {
+				// should not happen
+				debug.log(Level.SEVERE, e.getMessage(), e);
+			}
+		}
+
+----------------------------------------
+	public Icon getIcon(T value) {
+		try {
+			return (Icon) getIconMethod.invoke(value);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830666
+source/net/filebot/util/prefs/FilePreferences.java 83 89
+source/net/filebot/util/ui/SimpleLabelProvider.java 74 80
+----------------------------------------
+	protected void flushSpi() throws BackingStoreException {
+		try {
+			store.flush();
+		} catch (Exception e) {
+			throw new BackingStoreException(e);
+		}
+	}
+
+----------------------------------------
+	public Icon getIcon(T value) {
+		try {
+			return (Icon) getIconMethod.invoke(value);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830661
+source/net/filebot/win/WinAppUtilities.java 13 19
+source/net/filebot/util/ui/SimpleLabelProvider.java 74 80
+----------------------------------------
+	public static void setAppUserModelID(String appID) {
+		try {
+			Shell32.INSTANCE.SetCurrentProcessExplicitAppUserModelID(new WString(appID));
+		} catch (Throwable t) {
+			debug.log(Level.WARNING, t.getMessage(), t);
+		}
+	}
+
+----------------------------------------
+	public Icon getIcon(T value) {
+		try {
+			return (Icon) getIconMethod.invoke(value);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830623
+source/net/filebot/subtitle/SubtitleReader.java 27 33
+source/net/filebot/util/ui/SimpleLabelProvider.java 74 80
+----------------------------------------
+		while (current == null && scanner.hasNextLine()) {
+			try {
+				current = readNext();
+			} catch (Exception e) {
+				debug.warning(format("%s: %s", getFormatName(), e.getMessage())); // log and ignore
+			}
+		}
+
+----------------------------------------
+	public Icon getIcon(T value) {
+		try {
+			return (Icon) getIconMethod.invoke(value);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830628
+source/net/filebot/similarity/CrossPropertyMetric.java 45 51
+source/net/filebot/util/ui/SimpleLabelProvider.java 74 80
+----------------------------------------
+		for (String k : keys) {
+			try {
+				feedback += metric.getSimilarity(m1.get(k), m2.get(k));
+			} catch (Exception e) {
+				// ignore
+			}
+		}
+
+----------------------------------------
+	public Icon getIcon(T value) {
+		try {
+			return (Icon) getIconMethod.invoke(value);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830630
+source/net/filebot/hash/Ed2kHash.java 16 22
+source/net/filebot/util/ui/SimpleLabelProvider.java 74 80
+----------------------------------------
+	public Ed2kHash() {
+		try {
+			this.ed2k = new Edonkey();
+		} catch (NoSuchAlgorithmException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+	public Icon getIcon(T value) {
+		try {
+			return (Icon) getIconMethod.invoke(value);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830667
+source/net/filebot/MetaAttributeView.java 129 137
+source/net/filebot/util/ui/SimpleLabelProvider.java 74 80
+----------------------------------------
+	public void clear() {
+		try {
+			for (String key : this.list()) {
+				this.put(key, null);
+			}
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+	public Icon getIcon(T value) {
+		try {
+			return (Icon) getIconMethod.invoke(value);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830662
+source/net/filebot/archive/ExtractOutStream.java 24 31
+source/net/filebot/util/ui/SimpleLabelProvider.java 74 80
+----------------------------------------
+	public int write(byte[] data) throws SevenZipException {
+		try {
+			out.write(data);
+		} catch (IOException e) {
+			throw new SevenZipException(e);
+		}
+		return data.length; // return amount of proceed data
+	}
+
+----------------------------------------
+	public Icon getIcon(T value) {
+		try {
+			return (Icon) getIconMethod.invoke(value);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830625
+source/net/filebot/hash/MessageDigestHash.java 15 21
+source/net/filebot/util/ui/SimpleLabelProvider.java 74 80
+----------------------------------------
+	public MessageDigestHash(String algorithm) {
+		try {
+			this.md = MessageDigest.getInstance(algorithm);
+		} catch (NoSuchAlgorithmException e) {
+			throw new IllegalArgumentException(e);
+		}
+	}
+
+----------------------------------------
+	public Icon getIcon(T value) {
+		try {
+			return (Icon) getIconMethod.invoke(value);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830663
+source/net/filebot/ui/list/ListItem.java 27 33
+source/net/filebot/util/ui/SimpleLabelProvider.java 74 80
+----------------------------------------
+		if (value == null) {
+			try {
+				value = format.format(bindings);
+			} catch (Exception e) {
+				value = e;
+			}
+		}
+
+----------------------------------------
+	public Icon getIcon(T value) {
+		try {
+			return (Icon) getIconMethod.invoke(value);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830632
+source/net/filebot/subtitle/MicroDVDReader.java 55 61
+source/net/filebot/archive/ArchiveOpenVolumeCallback.java 77 86
+----------------------------------------
+		if (startFrame == 1 && endFrame == 1) {
+			// override fps
+			fps = Double.parseDouble(text);
+
+			// ignore line
+			return null;
+		}
+
+----------------------------------------
+		} catch (FileNotFoundException fileNotFoundException) {
+			// Required volume doesn't exist. This happens if the volume:
+			// 1. never exists. 7-Zip doesn't know how many volumes should
+			// exist, so it have to try each volume.
+			// 2. should be there, but doesn't. This is an error case.
+
+			// Since normal and error cases are possible,
+			// we can't throw an error message
+			return null; // We return always null in this case
+		} catch (Exception e) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830633
+source/net/filebot/ui/filter/FileTreeCellRenderer.java 35 40
+source/net/filebot/archive/ArchiveOpenVolumeCallback.java 77 86
+----------------------------------------
+	private boolean isFolder(Object value) {
+		if (((TreeNode) value).getAllowsChildren())
+			return true;
+
+		return false;
+	}
+
+----------------------------------------
+		} catch (FileNotFoundException fileNotFoundException) {
+			// Required volume doesn't exist. This happens if the volume:
+			// 1. never exists. 7-Zip doesn't know how many volumes should
+			// exist, so it have to try each volume.
+			// 2. should be there, but doesn't. This is an error case.
+
+			// Since normal and error cases are possible,
+			// we can't throw an error message
+			return null; // We return always null in this case
+		} catch (Exception e) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830631
+source/net/filebot/ui/transfer/TransferablePolicy.java 25 31
+source/net/filebot/archive/ArchiveOpenVolumeCallback.java 77 86
+----------------------------------------
+		} catch (InvalidDnDOperationException e) {
+			// final drop may cause this exception because, the transfer data can only be accessed
+			// *after* the drop has been accepted, but canImport is called before that
+
+			// just assume that the transferable will be accepted, accept will be called in importData again anyway
+			return true;
+		} catch (Exception e) {
+
+----------------------------------------
+		} catch (FileNotFoundException fileNotFoundException) {
+			// Required volume doesn't exist. This happens if the volume:
+			// 1. never exists. 7-Zip doesn't know how many volumes should
+			// exist, so it have to try each volume.
+			// 2. should be there, but doesn't. This is an error case.
+
+			// Since normal and error cases are possible,
+			// we can't throw an error message
+			return null; // We return always null in this case
+		} catch (Exception e) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830710
+source/net/filebot/ui/episodelist/SeasonSpinnerModel.java 51 58
+source/net/filebot/util/ui/ProgressIndicator.java 135 140
+----------------------------------------
+	public void unlock() {
+		setList(getSeasonValues());
+
+		if (valueBeforeLock != null) {
+			setValue(valueBeforeLock);
+		}
+		valueBeforeLock = null;
+	}
+
+----------------------------------------
+	public void stopAnimation() {
+		if (updateTimer != null) {
+			updateTimer.stop();
+			updateTimer = null;
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917581
+source/net/filebot/hash/VerificationFileReader.java 35 42
+source/net/filebot/util/ui/ProgressIndicator.java 135 140
+----------------------------------------
+	public boolean hasNext() {
+		if (buffer == null) {
+			// cache next entry
+			buffer = nextEntry();
+		}
+
+		return buffer != null;
+	}
+
+----------------------------------------
+	public void stopAnimation() {
+		if (updateTimer != null) {
+			updateTimer.stop();
+			updateTimer = null;
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830634
+source/net/filebot/util/ui/ProgressIndicator.java 135 140
+source/net/filebot/util/ui/notification/SimpleNotificationLayout.java 67 72
+----------------------------------------
+	public void stopAnimation() {
+		if (updateTimer != null) {
+			updateTimer.stop();
+			updateTimer = null;
+		}
+	}
+
+----------------------------------------
+	public void remove(NotificationWindow notification) {
+		if (current != null && current == notification) {
+			current.close();
+		}
+		current = null;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917649
+source/net/filebot/hash/VerificationFileReader.java 35 42
+source/net/filebot/util/ui/notification/SimpleNotificationLayout.java 67 72
+----------------------------------------
+	public boolean hasNext() {
+		if (buffer == null) {
+			// cache next entry
+			buffer = nextEntry();
+		}
+
+		return buffer != null;
+	}
+
+----------------------------------------
+	public void remove(NotificationWindow notification) {
+		if (current != null && current == notification) {
+			current.close();
+		}
+		current = null;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830635
+source/net/filebot/similarity/Matcher.java 59 65
+source/net/filebot/util/ui/DefaultFancyListCellRenderer.java 59 66
+----------------------------------------
+		for (V value : values) {
+			Match<V, C> match = disjointMatchCollection.getByValue(value);
+
+			if (match != null) {
+				result.add(match);
+			}
+		}
+
+----------------------------------------
+	public void setForeground(Color fg) {
+		super.setForeground(fg);
+
+		// label is null while in super constructor
+		if (label != null) {
+			label.setForeground(fg);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830637
+source/net/filebot/ui/rename/HighlightListCellRenderer.java 72 79
+source/net/filebot/util/ui/DefaultFancyListCellRenderer.java 59 66
+----------------------------------------
+	public void setForeground(Color fg) {
+		super.setForeground(fg);
+
+		// textComponent is null while in super constructor
+		if (textComponent != null) {
+			textComponent.setForeground(fg);
+		}
+	}
+
+----------------------------------------
+	public void setForeground(Color fg) {
+		super.setForeground(fg);
+
+		// label is null while in super constructor
+		if (label != null) {
+			label.setForeground(fg);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830638
+source/net/filebot/util/ui/ListView.java 60 69
+source/net/filebot/util/ui/DefaultFancyListCellRenderer.java 59 66
+----------------------------------------
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+
+		Rectangle selection = blockSelectionHandler.getSelection();
+
+		// paint block selection
+		if (selection != null) {
+			paintBlockSelection((Graphics2D) g, selection);
+		}
+	}
+
+----------------------------------------
+	public void setForeground(Color fg) {
+		super.setForeground(fg);
+
+		// label is null while in super constructor
+		if (label != null) {
+			label.setForeground(fg);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830636
+source/net/filebot/format/ExpressionFormat.java 155 160
+source/net/filebot/util/ui/DefaultFancyListCellRenderer.java 59 66
+----------------------------------------
+				try {
+					CharSequence value = normalizeExpressionValue(((CompiledScript) snippet).eval(context));
+					if (value != null) {
+						sb.append(value);
+					}
+				} catch (ScriptException e) {
+
+----------------------------------------
+	public void setForeground(Color fg) {
+		super.setForeground(fg);
+
+		// label is null while in super constructor
+		if (label != null) {
+			label.setForeground(fg);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830672
+source/net/filebot/ui/transfer/ByteBufferTransferable.java 32 43
+source/net/filebot/util/ui/SimpleLabelProvider.java 52 62
+----------------------------------------
+		if (FileTransferable.isFileListFlavor(flavor)) {
+			try {
+				// create file for transfer on demand
+				if (transferable == null) {
+					transferable = createFileTransferable();
+				}
+
+				return transferable.getTransferData(flavor);
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
+		}
+
+----------------------------------------
+	private Method findAnyMethod(Class<T> type, String... names) {
+		for (String name : names) {
+			try {
+				return type.getMethod(name);
+			} catch (NoSuchMethodException e) {
+				// try next method name
+			}
+		}
+
+		throw new IllegalArgumentException("Method not found: " + Arrays.toString(names));
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830671
+source/net/filebot/web/OpenSubtitlesXmlRpc.java 74 83
+source/net/filebot/util/ui/SimpleLabelProvider.java 52 62
+----------------------------------------
+	public synchronized void logout() throws XmlRpcFault {
+		try {
+			invoke("LogOut", token);
+		} catch (XmlRpcFault e) {
+			// anonymous users will always get an 401 Unauthorized when trying to logout,
+			// so we ignore the status of the logout response
+		} finally {
+			token = null;
+		}
+	}
+
+----------------------------------------
+	private Method findAnyMethod(Class<T> type, String... names) {
+		for (String name : names) {
+			try {
+				return type.getMethod(name);
+			} catch (NoSuchMethodException e) {
+				// try next method name
+			}
+		}
+
+		throw new IllegalArgumentException("Method not found: " + Arrays.toString(names));
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830640
+source/net/filebot/MetaAttributeView.java 129 137
+source/net/filebot/util/ui/SimpleLabelProvider.java 52 62
+----------------------------------------
+	public void clear() {
+		try {
+			for (String key : this.list()) {
+				this.put(key, null);
+			}
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+	private Method findAnyMethod(Class<T> type, String... names) {
+		for (String name : names) {
+			try {
+				return type.getMethod(name);
+			} catch (NoSuchMethodException e) {
+				// try next method name
+			}
+		}
+
+		throw new IllegalArgumentException("Method not found: " + Arrays.toString(names));
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917609
+source/net/filebot/format/PropertyBindings.java 50 60
+source/net/filebot/util/ui/SimpleLabelProvider.java 52 62
+----------------------------------------
+		if (value instanceof Method) {
+			try {
+				value = ((Method) value).invoke(object);
+
+				if (value == null) {
+					value = defaultValue;
+				}
+			} catch (Exception e) {
+				throw new RuntimeException(e);
+			}
+		}
+
+----------------------------------------
+	private Method findAnyMethod(Class<T> type, String... names) {
+		for (String name : names) {
+			try {
+				return type.getMethod(name);
+			} catch (NoSuchMethodException e) {
+				// try next method name
+			}
+		}
+
+		throw new IllegalArgumentException("Method not found: " + Arrays.toString(names));
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830673
+source/net/filebot/cli/FolderWatchService.java 194 202
+source/net/filebot/util/ui/SimpleLabelProvider.java 52 62
+----------------------------------------
+		public void run() {
+			try {
+				watch();
+			} catch (InterruptedException e) {
+				// ignore, part of an orderly shutdown
+			} catch (Exception e) {
+				debug.log(Level.WARNING, e.getMessage(), e);
+			}
+		}
+
+----------------------------------------
+	private Method findAnyMethod(Class<T> type, String... names) {
+		for (String name : names) {
+			try {
+				return type.getMethod(name);
+			} catch (NoSuchMethodException e) {
+				// try next method name
+			}
+		}
+
+		throw new IllegalArgumentException("Method not found: " + Arrays.toString(names));
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917607
+source/net/filebot/cli/FolderWatchService.java 114 120
+source/net/filebot/util/ui/SimpleLabelProvider.java 52 62
+----------------------------------------
+	private void watchFolderTree(File root) throws IOException {
+		for (File it : getChildren(root, FOLDERS)) {
+			watchFolderTree(it);
+		}
+
+		startWatch(root);
+	}
+
+----------------------------------------
+	private Method findAnyMethod(Class<T> type, String... names) {
+		for (String name : names) {
+			try {
+				return type.getMethod(name);
+			} catch (NoSuchMethodException e) {
+				// try next method name
+			}
+		}
+
+		throw new IllegalArgumentException("Method not found: " + Arrays.toString(names));
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917608
+source/net/filebot/cli/FolderWatchService.java 158 164
+source/net/filebot/util/ui/SimpleLabelProvider.java 52 62
+----------------------------------------
+			protected void modified(File file) {
+				synchronized (commitSet) {
+					if (!file.isDirectory()) {
+						commitSet.add(file);
+					}
+				}
+			}
+
+----------------------------------------
+	private Method findAnyMethod(Class<T> type, String... names) {
+		for (String name : names) {
+			try {
+				return type.getMethod(name);
+			} catch (NoSuchMethodException e) {
+				// try next method name
+			}
+		}
+
+		throw new IllegalArgumentException("Method not found: " + Arrays.toString(names));
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830639
+source/net/filebot/format/DynamicBindings.java 19 28
+source/net/filebot/util/ui/SimpleLabelProvider.java 52 62
+----------------------------------------
+	public Object getProperty(String property) {
+		try {
+			return properties.get(property);
+		} catch (Exception e) {
+			if (e instanceof BindingException) {
+				throw (BindingException) e;
+			}
+			throw new BindingException(property, e.getMessage(), e);
+		}
+	}
+
+----------------------------------------
+	private Method findAnyMethod(Class<T> type, String... names) {
+		for (String name : names) {
+			try {
+				return type.getMethod(name);
+			} catch (NoSuchMethodException e) {
+				// try next method name
+			}
+		}
+
+		throw new IllegalArgumentException("Method not found: " + Arrays.toString(names));
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830645
+source/net/filebot/similarity/Match.java 25 32
+source/net/filebot/vfs/SimpleFileInfo.java 48 55
+----------------------------------------
+	public boolean equals(Object obj) {
+		if (obj instanceof Match) {
+			Match<?, ?> other = (Match<?, ?>) obj;
+			return value == other.value && candidate == other.candidate;
+		}
+
+		return false;
+	}
+
+----------------------------------------
+	public boolean equals(Object obj) {
+		if (obj instanceof FileInfo) {
+			FileInfo other = (FileInfo) obj;
+			return other.getLength() == getLength() && other.getPath().equals(getPath());
+		}
+
+		return false;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830646
+source/net/filebot/web/SeriesInfo.java 183 189
+source/net/filebot/vfs/SimpleFileInfo.java 48 55
+----------------------------------------
+	public boolean equals(Object object) {
+		if (object instanceof SeriesInfo) {
+			SeriesInfo other = (SeriesInfo) object;
+			return Objects.equals(id, other.id) && Objects.equals(database, other.database);
+		}
+		return false;
+	}
+
+----------------------------------------
+	public boolean equals(Object obj) {
+		if (obj instanceof FileInfo) {
+			FileInfo other = (FileInfo) obj;
+			return other.getLength() == getLength() && other.getPath().equals(getPath());
+		}
+
+		return false;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830641
+source/net/filebot/web/EpisodeInfo.java 83 90
+source/net/filebot/vfs/SimpleFileInfo.java 48 55
+----------------------------------------
+	public boolean equals(Object obj) {
+		if (obj instanceof EpisodeInfo) {
+			EpisodeInfo other = (EpisodeInfo) obj;
+			return Objects.equals(id, other.id) && Objects.equals(database, other.database);
+		}
+
+		return false;
+	}
+
+----------------------------------------
+	public boolean equals(Object obj) {
+		if (obj instanceof FileInfo) {
+			FileInfo other = (FileInfo) obj;
+			return other.getLength() == getLength() && other.getPath().equals(getPath());
+		}
+
+		return false;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830647
+source/net/filebot/History.java 63 70
+source/net/filebot/vfs/SimpleFileInfo.java 48 55
+----------------------------------------
+		public boolean equals(Object obj) {
+			if (obj instanceof Sequence) {
+				Sequence other = (Sequence) obj;
+				return date.equals(other.date) && elements.equals(other.elements);
+			}
+
+			return false;
+		}
+
+----------------------------------------
+	public boolean equals(Object obj) {
+		if (obj instanceof FileInfo) {
+			FileInfo other = (FileInfo) obj;
+			return other.getLength() == getLength() && other.getPath().equals(getPath());
+		}
+
+		return false;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830644
+source/net/filebot/ui/LanguageComboBoxModel.java 65 70
+source/net/filebot/vfs/SimpleFileInfo.java 48 55
+----------------------------------------
+	public void setSelectedItem(Object value) {
+		if (value instanceof Language) {
+			Language language = (Language) value;
+			selection = ALL_LANGUAGES.getCode().equals(language.getCode()) ? ALL_LANGUAGES : language;
+		}
+	}
+
+----------------------------------------
+	public boolean equals(Object obj) {
+		if (obj instanceof FileInfo) {
+			FileInfo other = (FileInfo) obj;
+			return other.getLength() == getLength() && other.getPath().equals(getPath());
+		}
+
+		return false;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830643
+source/net/filebot/History.java 168 175
+source/net/filebot/vfs/SimpleFileInfo.java 48 55
+----------------------------------------
+	public boolean equals(Object obj) {
+		if (obj instanceof History) {
+			History other = (History) obj;
+			return sequences.equals(other.sequences);
+		}
+
+		return false;
+	}
+
+----------------------------------------
+	public boolean equals(Object obj) {
+		if (obj instanceof FileInfo) {
+			FileInfo other = (FileInfo) obj;
+			return other.getLength() == getLength() && other.getPath().equals(getPath());
+		}
+
+		return false;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830648
+source/net/filebot/History.java 112 119
+source/net/filebot/vfs/SimpleFileInfo.java 48 55
+----------------------------------------
+		public boolean equals(Object obj) {
+			if (obj instanceof Element) {
+				Element element = (Element) obj;
+				return to.equals(element.to) && from.equals(element.from) && dir.getPath().equals(element.dir.getPath());
+			}
+
+			return false;
+		}
+
+----------------------------------------
+	public boolean equals(Object obj) {
+		if (obj instanceof FileInfo) {
+			FileInfo other = (FileInfo) obj;
+			return other.getLength() == getLength() && other.getPath().equals(getPath());
+		}
+
+		return false;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830642
+source/net/filebot/similarity/FileNameMetric.java 26 33
+source/net/filebot/vfs/SimpleFileInfo.java 48 55
+----------------------------------------
+	protected String getFileName(Object object) {
+		if (object instanceof File) {
+			// name without extension normalized to lower-case
+			return getName((File) object).trim().toLowerCase();
+		}
+
+		return null;
+	}
+
+----------------------------------------
+	public boolean equals(Object obj) {
+		if (obj instanceof FileInfo) {
+			FileInfo other = (FileInfo) obj;
+			return other.getLength() == getLength() && other.getPath().equals(getPath());
+		}
+
+		return false;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830712
+source/net/filebot/ui/rename/TextColorizer.java 28 33
+source/net/filebot/util/ui/DashedSeparator.java 27 32
+----------------------------------------
+	public TextColorizer(String before, String after, Color pathRainbowBeginColor, Color pathRainbowEndColor) {
+		this.before = before;
+		this.after = after;
+		this.pathRainbowBeginColor = pathRainbowBeginColor;
+		this.pathRainbowEndColor = pathRainbowEndColor;
+	}
+
+----------------------------------------
+	public DashedSeparator(int height, int dash, Color foreground, Color background) {
+		this.height = height;
+		this.dash = dash;
+		this.foreground = foreground;
+		this.background = background;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830711
+source/net/filebot/web/AudioTrack.java 42 47
+source/net/filebot/util/ui/DashedSeparator.java 27 32
+----------------------------------------
+	public AudioTrack(String artist, String title, String album, String database) {
+		this.artist = artist;
+		this.title = title;
+		this.album = album;
+		this.database = database;
+	}
+
+----------------------------------------
+	public DashedSeparator(int height, int dash, Color foreground, Color background) {
+		this.height = height;
+		this.dash = dash;
+		this.foreground = foreground;
+		this.background = background;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830714
+source/net/filebot/ui/rename/RenameModel.java 318 323
+source/net/filebot/util/ui/DashedSeparator.java 27 32
+----------------------------------------
+		private FormattedFuture(Match<Object, File> match, boolean extension, MatchFormatter formatter, Map<File, Object> context) {
+			this.match = match;
+			this.extension = extension;
+			this.formatter = formatter;
+			this.context = context;
+		}
+
+----------------------------------------
+	public DashedSeparator(int height, int dash, Color foreground, Color background) {
+		this.height = height;
+		this.dash = dash;
+		this.foreground = foreground;
+		this.background = background;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830715
+source/net/filebot/util/ui/notification/Direction.java 26 32
+source/net/filebot/util/ui/DashedSeparator.java 27 32
+----------------------------------------
+	private Direction(int vx, int vy, double ax, double ay, int swingConstant) {
+		this.vx = vx;
+		this.vy = vy;
+		this.ax = ax;
+		this.ay = ay;
+		this.swingConstant = swingConstant;
+	}
+
+----------------------------------------
+	public DashedSeparator(int height, int dash, Color foreground, Color background) {
+		this.height = height;
+		this.dash = dash;
+		this.foreground = foreground;
+		this.background = background;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830649
+source/net/filebot/ui/sfv/ChecksumCell.java 44 52
+source/net/filebot/util/ui/DashedSeparator.java 27 32
+----------------------------------------
+	public ChecksumCell(String name, File root, ChecksumComputationTask task) {
+		this.name = name;
+		this.root = root;
+		this.hashes = new EnumMap<HashType, String>(HashType.class);
+		this.task = task;
+
+		// forward property change events
+		task.addPropertyChangeListener(taskListener);
+	}
+
+----------------------------------------
+	public DashedSeparator(int height, int dash, Color foreground, Color background) {
+		this.height = height;
+		this.dash = dash;
+		this.foreground = foreground;
+		this.background = background;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830713
+source/net/filebot/web/Movie.java 33 39
+source/net/filebot/util/ui/DashedSeparator.java 27 32
+----------------------------------------
+	public Movie(String name, String[] aliasNames, int year, int imdbId, int tmdbId, Locale locale) {
+		super(tmdbId > 0 ? tmdbId : imdbId > 0 ? imdbId : 0, name, aliasNames);
+		this.year = year;
+		this.imdbId = imdbId;
+		this.tmdbId = tmdbId;
+		this.language = locale == null ? null : locale.getLanguage();
+	}
+
+----------------------------------------
+	public DashedSeparator(int height, int dash, Color foreground, Color background) {
+		this.height = height;
+		this.dash = dash;
+		this.foreground = foreground;
+		this.background = background;
+	}
+
+----------------------------------------

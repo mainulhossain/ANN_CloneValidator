@@ -1,0 +1,1662 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513227
+src/org/jfm/views/fview/FindTextDialog.java 38 47
+src/org/jfm/views/fview/FileViewPanel.java 76 84
+----------------------------------------
+  public FindTextDialog(Frame owner, String title, boolean modal) {
+    super(owner, title, modal);
+    try {
+      jbInit();
+      //pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+  public FileViewPanel(String fileSystem) {
+	 super(fileSystem);
+    try {
+      jbInit();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513335
+src/org/jfm/po/ButtonsPanel.java 28 36
+src/org/jfm/views/fview/FileViewPanel.java 76 84
+----------------------------------------
+  public ButtonsPanel(Vector buttons) {
+    try {
+      jbInit();
+      setButtons(buttons);
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+  public FileViewPanel(String fileSystem) {
+	 super(fileSystem);
+    try {
+      jbInit();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513222
+src/org/jfm/views/list/detailview/DetailView.java 54 62
+src/org/jfm/views/fview/FileViewPanel.java 76 84
+----------------------------------------
+	public DetailView(String fs) {
+		super(fs);
+	    try {
+	      init();
+	    }
+	    catch(Exception ex) {
+	      ex.printStackTrace();
+	    }	    
+	}
+
+----------------------------------------
+  public FileViewPanel(String fileSystem) {
+	 super(fileSystem);
+    try {
+      jbInit();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513232
+src/org/jfm/filesystems/JFMFileSystem.java 153 162
+src/org/jfm/views/fview/FileViewPanel.java 76 84
+----------------------------------------
+		if(fs==null){
+			name=null;
+			try {
+				Class fsClass=Class.forName(DEFAULT_FILESYSTEM);
+				fs=(JFMFileSystem)fsClass.newInstance();
+			} catch (Exception e) {
+				e.printStackTrace();
+				//ignore the exception
+			}
+		}
+
+----------------------------------------
+  public FileViewPanel(String fileSystem) {
+	 super(fileSystem);
+    try {
+      jbInit();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513217
+src/org/jfm/help/HelpBrowser.java 104 113
+src/org/jfm/views/fview/FileViewPanel.java 76 84
+----------------------------------------
+					{
+						DocPrintJob job=service.createPrintJob();
+						try{						
+							job.print(doc, aset);
+						}catch(Exception exc)
+						{
+							exc.printStackTrace();
+							JOptionPane.showMessageDialog(HelpBrowser.this, "Error printing: "+exc.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+						}
+					}
+
+----------------------------------------
+  public FileViewPanel(String fileSystem) {
+	 super(fileSystem);
+    try {
+      jbInit();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513212
+src/org/jfm/po/CommandOutputViewDialog.java 23 32
+src/org/jfm/views/fview/FileViewPanel.java 76 84
+----------------------------------------
+  public CommandOutputViewDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+      //pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+  public FileViewPanel(String fileSystem) {
+	 super(fileSystem);
+    try {
+      jbInit();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513214
+src/org/jfm/po/CommandOutputViewDialog.java 81 91
+src/org/jfm/views/fview/FileViewPanel.java 76 84
+----------------------------------------
+    public void run(){
+      try {
+          //i'm not interested in the return value of the process 
+          //i just want to know when it's over
+          process.waitFor();
+      }
+      catch (InterruptedException ex) {}
+      finally {
+        CommandOutputViewDialog.this.dispose();
+      }
+    }
+
+----------------------------------------
+  public FileViewPanel(String fileSystem) {
+	 super(fileSystem);
+    try {
+      jbInit();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513208
+src/org/jfm/main/MainPanel.java 30 37
+src/org/jfm/views/fview/FileViewPanel.java 76 84
+----------------------------------------
+  public MainPanel() {
+    try {
+      jbInit();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+  public FileViewPanel(String fileSystem) {
+	 super(fileSystem);
+    try {
+      jbInit();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513219
+src/org/jfm/views/list/ListView.java 32 40
+src/org/jfm/views/fview/FileViewPanel.java 76 84
+----------------------------------------
+  public ListView(String fs) {
+  	super(fs);
+    try {
+      jbInit();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }  	
+  }
+
+----------------------------------------
+  public FileViewPanel(String fileSystem) {
+	 super(fileSystem);
+    try {
+      jbInit();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513213
+src/org/jfm/po/copy/CopyProgressDialog.java 179 188
+src/org/jfm/views/fview/FileViewPanel.java 76 84
+----------------------------------------
+  public CopyProgressDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+  public FileViewPanel(String fileSystem) {
+	 super(fileSystem);
+    try {
+      jbInit();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513224
+src/org/jfm/filesystems/JFMFileSystem.java 141 150
+src/org/jfm/views/fview/FileViewPanel.java 76 84
+----------------------------------------
+			if(name.equals(fsClassName)){
+				try {
+					Class fsClass=Class.forName(fsClassName,true,JFMClassLoader.getLoader());
+					fs=(JFMFileSystem)fsClass.newInstance();
+					return fs;
+				} catch (Exception e) {
+					e.printStackTrace();
+					//ignore the exception
+				}
+			}
+
+----------------------------------------
+  public FileViewPanel(String fileSystem) {
+	 super(fileSystem);
+    try {
+      jbInit();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513338
+src/org/jfm/po/copy/CopyConfirmDialog.java 34 43
+src/org/jfm/views/fview/FileViewPanel.java 76 84
+----------------------------------------
+  public CopyConfirmDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+  public FileViewPanel(String fileSystem) {
+	 super(fileSystem);
+    try {
+      jbInit();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513218
+src/org/jfm/filesystems/JFMFileSystem.java 89 97
+src/org/jfm/views/fview/FileViewPanel.java 76 84
+----------------------------------------
+		  {
+			  if(!files[i].isFile() || !files[i].getName().endsWith("jar")) continue;
+			  try{
+				  registerFilesystem(files[i]);
+			  }catch(Exception ignored)
+			  {
+				  ignored.printStackTrace();
+			  }
+		  }
+
+----------------------------------------
+  public FileViewPanel(String fileSystem) {
+	 super(fileSystem);
+    try {
+      jbInit();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513223
+src/org/jfm/po/FilePropertiesDialog.java 36 45
+src/org/jfm/views/fview/FileViewPanel.java 76 84
+----------------------------------------
+  public FilePropertiesDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+  public FileViewPanel(String fileSystem) {
+	 super(fileSystem);
+    try {
+      jbInit();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513228
+src/org/jfm/views/JFMView.java 133 143
+src/org/jfm/views/fview/FileViewPanel.java 76 84
+----------------------------------------
+                  if(representation.equals(viewClassName)){
+                          try {
+                                  Class viewClass=Class.forName(viewClassName.getClassName());
+                                  view=(JFMView)viewClass.getConstructor(new Class[]{String.class}).newInstance(new Object[]{filesystem});
+                                  //viewClass.newInstance();
+                                  return view;
+                          } catch (Exception e) {
+                                  e.printStackTrace();
+                                  //ignore the exception
+                          }
+                  }
+
+----------------------------------------
+  public FileViewPanel(String fileSystem) {
+	 super(fileSystem);
+    try {
+      jbInit();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513234
+src/org/jfm/filesystems/local/JFMLocalFilesystem.java 51 57
+src/org/jfm/views/fview/FileViewPanel.java 76 84
+----------------------------------------
+		for(int i=0;i<files.length;i++){
+			try{
+				jfmFiles[i]=new JFMLocalFile(files[i].getAbsolutePath());
+			}catch(Exception ignored){
+				ignored.printStackTrace();
+			}
+		}
+
+----------------------------------------
+  public FileViewPanel(String fileSystem) {
+	 super(fileSystem);
+    try {
+      jbInit();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513233
+src/org/jfm/views/fview/FileViewDialog.java 37 46
+src/org/jfm/views/fview/FileViewPanel.java 76 84
+----------------------------------------
+  public FileViewDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+    //  pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+  public FileViewPanel(String fileSystem) {
+	 super(fileSystem);
+    try {
+      jbInit();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513337
+src/org/jfm/main/MainFrame.java 60 68
+src/org/jfm/views/fview/FileViewPanel.java 76 84
+----------------------------------------
+  public MainFrame() {
+    enableEvents(AWTEvent.WINDOW_EVENT_MASK);
+    try {
+      jbInit();
+    }
+    catch(Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+----------------------------------------
+  public FileViewPanel(String fileSystem) {
+	 super(fileSystem);
+    try {
+      jbInit();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513226
+src/org/jfm/main/MainFrame_AboutBox.java 38 48
+src/org/jfm/views/fview/FileViewPanel.java 76 84
+----------------------------------------
+  public MainFrame_AboutBox(Frame parent) {
+    super(parent);
+    enableEvents(AWTEvent.WINDOW_EVENT_MASK);
+    try {
+      jbInit();
+    }
+    catch(Exception e) {
+      e.printStackTrace();
+    }
+    pack();
+  }
+
+----------------------------------------
+  public FileViewPanel(String fileSystem) {
+	 super(fileSystem);
+    try {
+      jbInit();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513210
+src/org/jfm/main/SearchDialog.java 42 51
+src/org/jfm/views/fview/FileViewPanel.java 76 84
+----------------------------------------
+  public SearchDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+  public FileViewPanel(String fileSystem) {
+	 super(fileSystem);
+    try {
+      jbInit();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513229
+src/org/jfm/filesystems/local/JFMLocalFile.java 75 83
+src/org/jfm/views/fview/FileViewPanel.java 76 84
+----------------------------------------
+	public OutputStream getOutputStream(){
+		java.io.FileOutputStream out=null;
+		try{
+			out=new java.io.FileOutputStream(theFile);
+		}catch(IOException exc){
+			exc.printStackTrace();
+		}
+		return out;
+	}
+
+----------------------------------------
+  public FileViewPanel(String fileSystem) {
+	 super(fileSystem);
+    try {
+      jbInit();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513216
+src/org/jfm/filesystems/JFMFileSystem.java 69 79
+src/org/jfm/views/fview/FileViewPanel.java 76 84
+----------------------------------------
+		  {
+			  String nextJarFile=tokenizer.nextToken();
+			  //we're only interested in this file if it ends with a .jar and if it exists
+			  try{
+				  java.io.File f=new java.io.File(nextJarFile);
+				  if(!(nextJarFile.endsWith("jar") && f.exists() && f.isFile())) continue;
+				  registerFilesystem(f);
+			  }catch(Exception ignored){
+				  ignored.printStackTrace();
+			  }
+		  }
+
+----------------------------------------
+  public FileViewPanel(String fileSystem) {
+	 super(fileSystem);
+    try {
+      jbInit();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513211
+src/org/jfm/views/list/briefview/BriefView.java 48 56
+src/org/jfm/views/fview/FileViewPanel.java 76 84
+----------------------------------------
+	public BriefView(String fs){
+		super(fs);
+	    try {
+	      init();
+	    }
+	    catch(Exception ex) {
+	      ex.printStackTrace();
+	    }	    
+	}
+
+----------------------------------------
+  public FileViewPanel(String fileSystem) {
+	 super(fileSystem);
+    try {
+      jbInit();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513215
+src/org/jfm/po/ProgressActionDialog.java 57 66
+src/org/jfm/views/fview/FileViewPanel.java 76 84
+----------------------------------------
+  public ProgressActionDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+  public FileViewPanel(String fileSystem) {
+	 super(fileSystem);
+    try {
+      jbInit();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513220
+src/org/jfm/main/Options.java 99 106
+src/org/jfm/views/fview/FileViewPanel.java 76 84
+----------------------------------------
+  public static Preferences getPreferences(){
+  	try {
+	  	preferences.sync();	
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+  	return preferences;
+  }
+
+----------------------------------------
+  public FileViewPanel(String fileSystem) {
+	 super(fileSystem);
+    try {
+      jbInit();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513225
+src/org/jfm/views/JFMView.java 146 154
+src/org/jfm/views/fview/FileViewPanel.java 76 84
+----------------------------------------
+          if(view==null){
+                  try {
+                          Class viewClass=Class.forName(DEFAULT_VIEW.getClassName());
+                          view=(JFMView)viewClass.newInstance();
+                  } catch (Exception e) {
+                          e.printStackTrace();
+                          //ignore the exception
+                  }
+          }
+
+----------------------------------------
+  public FileViewPanel(String fileSystem) {
+	 super(fileSystem);
+    try {
+      jbInit();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513336
+src/org/jfm/main/Options.java 108 114
+src/org/jfm/views/fview/FileViewPanel.java 76 84
+----------------------------------------
+  public static void savePreferences(){
+  	try {
+		getPreferences().flush();
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+  }
+
+----------------------------------------
+  public FileViewPanel(String fileSystem) {
+	 super(fileSystem);
+    try {
+      jbInit();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513230
+src/org/jfm/main/MainFrame.java 196 201
+src/org/jfm/views/fview/FileViewPanel.java 76 84
+----------------------------------------
+            public void actionPerformed(ActionEvent e){
+              try{
+                UIManager.setLookAndFeel(className);
+                SwingUtilities.updateComponentTreeUI(MainFrame.this);
+              }catch(Exception exception){exception.printStackTrace();}
+            }
+
+----------------------------------------
+  public FileViewPanel(String fileSystem) {
+	 super(fileSystem);
+    try {
+      jbInit();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513221
+src/org/jfm/views/list/detailview/DetailsTableModel.java 82 90
+src/org/jfm/views/fview/FileViewPanel.java 76 84
+----------------------------------------
+    public JFMFile getFileAt(int index){
+      JFMFile file=null;
+      try {
+       file=(JFMFile)getValueAt(index, 0);
+      }catch (Exception ex){
+        ex.printStackTrace();
+      }
+      return file;
+    }
+
+----------------------------------------
+  public FileViewPanel(String fileSystem) {
+	 super(fileSystem);
+    try {
+      jbInit();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513231
+src/org/jfm/po/copy/CopyProgressDialog.java 154 160
+src/org/jfm/views/fview/FileViewPanel.java 76 84
+----------------------------------------
+      }finally{
+        try {
+          in.close();
+          out.close();
+        }
+        catch (Exception ignored) {}
+      }
+
+----------------------------------------
+  public FileViewPanel(String fileSystem) {
+	 super(fileSystem);
+    try {
+      jbInit();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513489
+src/org/jfm/po/MoveAction.java 145 174
+src/org/jfm/po/copy/CopyProgressDialog.java 90 117
+----------------------------------------
+    if(fout.exists() && !overwriteAll && !skipAll){
+
+      java.text.SimpleDateFormat format=new java.text.SimpleDateFormat("EEE, MMM d, yyyy 'at' hh:mm:ss");
+
+      String message="Target file "+fout.getPath()+"  already exists."+System.getProperty("line.separator")+System.getProperty("line.separator")+
+                     "Source last modified date: "+format.format(new java.util.Date(fin.lastModified()))+System.getProperty("line.separator")+
+                     "Target last modified date: "+format.format(new java.util.Date(fout.lastModified()))+System.getProperty("line.separator")+System.getProperty("line.separator")+
+                     "What should I do?";
+      String[] buttons=new String[]{"Overwrite","Overwrite all","Skip","Skip all","Cancel"};
+
+      int result=JOptionPane.showOptionDialog(progress,message,"File exists",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE,null,buttons,buttons[2]);
+
+      switch (result){
+        case 0:
+          break;
+        case 1:
+          overwriteAll=true;
+          break;
+        case 2:
+          totalBytesWritten+=fin.length();          
+          int t_percent=totalFilesSizes!=0?(int)((totalBytesWritten*100)/totalFilesSizes):0;
+          progress.setTotalProgresssValue(t_percent);
+          return;
+        case 3:
+          skipAll=true;
+          break;
+          case 4:
+            throw new ActionCancelledException();
+      }
+    }
+
+----------------------------------------
+    if(fout.exists() && !overwriteAll && !skipAll){
+
+      java.text.SimpleDateFormat format=new java.text.SimpleDateFormat("EEE, MMM d, yyyy 'at' hh:mm:ss");
+
+      String message="Target file "+fout.getPath()+"  already exists."+System.getProperty("line.separator")+System.getProperty("line.separator")+
+                     "Source last modified date: "+format.format(new java.util.Date(fin.lastModified()))+System.getProperty("line.separator")+
+                     "Target last modified date: "+format.format(new java.util.Date(fout.lastModified()))+System.getProperty("line.separator")+System.getProperty("line.separator")+
+                     "What should I do?";
+      String[] buttons=new String[]{"Overwrite","Overwrite all","Skip","Skip all","Append"};
+      int result=JOptionPane.showOptionDialog(this,message,"File exists",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE,null,buttons,buttons[2]);
+      switch (result){
+        case 0:
+          break;
+        case 1:
+          overwriteAll=true;
+          break;
+        case 2:
+          totalBytesWritten+=fin.length();
+          int t_percent=(int)((totalBytesWritten*100)/totalFilesSizes);
+          totalCopyProgressBar.setValue(t_percent);
+          return;
+        case 3:
+          skipAll=true;
+          break;
+          case 4:
+            break;
+      }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513235
+src/org/jfm/po/CopyAction.java 136 165
+src/org/jfm/po/copy/CopyProgressDialog.java 90 117
+----------------------------------------
+    if(fout.exists() && !overwriteAll && !skipAll){
+
+      java.text.SimpleDateFormat format=new java.text.SimpleDateFormat("EEE, MMM d, yyyy 'at' hh:mm:ss");
+
+      String message="Target file "+fout.getPath()+"  already exists."+System.getProperty("line.separator")+System.getProperty("line.separator")+
+                     "Source last modified date: "+format.format(new java.util.Date(fin.lastModified()))+System.getProperty("line.separator")+
+                     "Target last modified date: "+format.format(new java.util.Date(fout.lastModified()))+System.getProperty("line.separator")+System.getProperty("line.separator")+
+                     "What should I do?";
+      String[] buttons=new String[]{"Overwrite","Overwrite all","Skip","Skip all","Cancel"};
+
+      int result=JOptionPane.showOptionDialog(progress,message,"File exists",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE,null,buttons,buttons[2]);
+
+      switch (result){
+        case 0:
+          break;
+        case 1:
+          overwriteAll=true;
+          break;
+        case 2:
+          totalBytesWritten+=fin.length();          
+          int t_percent=totalFilesSizes!=0?(int)((totalBytesWritten*100)/totalFilesSizes):0;
+          progress.setTotalProgresssValue(t_percent);
+          return;
+        case 3:
+          skipAll=true;
+          break;
+          case 4:
+            throw new ActionCancelledException();
+      }
+    }
+
+----------------------------------------
+    if(fout.exists() && !overwriteAll && !skipAll){
+
+      java.text.SimpleDateFormat format=new java.text.SimpleDateFormat("EEE, MMM d, yyyy 'at' hh:mm:ss");
+
+      String message="Target file "+fout.getPath()+"  already exists."+System.getProperty("line.separator")+System.getProperty("line.separator")+
+                     "Source last modified date: "+format.format(new java.util.Date(fin.lastModified()))+System.getProperty("line.separator")+
+                     "Target last modified date: "+format.format(new java.util.Date(fout.lastModified()))+System.getProperty("line.separator")+System.getProperty("line.separator")+
+                     "What should I do?";
+      String[] buttons=new String[]{"Overwrite","Overwrite all","Skip","Skip all","Append"};
+      int result=JOptionPane.showOptionDialog(this,message,"File exists",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE,null,buttons,buttons[2]);
+      switch (result){
+        case 0:
+          break;
+        case 1:
+          overwriteAll=true;
+          break;
+        case 2:
+          totalBytesWritten+=fin.length();
+          int t_percent=(int)((totalBytesWritten*100)/totalFilesSizes);
+          totalCopyProgressBar.setValue(t_percent);
+          return;
+        case 3:
+          skipAll=true;
+          break;
+          case 4:
+            break;
+      }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513236
+src/org/jfm/po/MoveAction.java 176 182
+src/org/jfm/po/CopyAction.java 167 173
+----------------------------------------
+    if(fout.exists() && skipAll){
+          totalBytesWritten+=fin.length();
+          int t_percent=(int)((totalBytesWritten*100)/totalFilesSizes);
+          progress.setTotalProgresssValue(t_percent);
+          progress.setFileProgresssValue(100);
+          return;
+    }
+
+----------------------------------------
+    if(fout.exists() && skipAll){
+          totalBytesWritten+=fin.length();
+          int t_percent=(int)((totalBytesWritten*100)/totalFilesSizes);
+          progress.setTotalProgresssValue(t_percent);
+          progress.setFileProgresssValue(100);
+          return;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513237
+src/org/jfm/po/CopyAction.java 167 173
+src/org/jfm/po/copy/CopyProgressDialog.java 119 125
+----------------------------------------
+    if(fout.exists() && skipAll){
+          totalBytesWritten+=fin.length();
+          int t_percent=(int)((totalBytesWritten*100)/totalFilesSizes);
+          progress.setTotalProgresssValue(t_percent);
+          progress.setFileProgresssValue(100);
+          return;
+    }
+
+----------------------------------------
+    if(fout.exists() && skipAll){
+          totalBytesWritten+=fin.length();
+          int t_percent=(int)((totalBytesWritten*100)/totalFilesSizes);
+          totalCopyProgressBar.setValue(t_percent);
+          fileCopyProgressBar.setValue(100);
+          return;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513490
+src/org/jfm/po/MoveAction.java 176 182
+src/org/jfm/po/copy/CopyProgressDialog.java 119 125
+----------------------------------------
+    if(fout.exists() && skipAll){
+          totalBytesWritten+=fin.length();
+          int t_percent=(int)((totalBytesWritten*100)/totalFilesSizes);
+          progress.setTotalProgresssValue(t_percent);
+          progress.setFileProgresssValue(100);
+          return;
+    }
+
+----------------------------------------
+    if(fout.exists() && skipAll){
+          totalBytesWritten+=fin.length();
+          int t_percent=(int)((totalBytesWritten*100)/totalFilesSizes);
+          totalCopyProgressBar.setValue(t_percent);
+          fileCopyProgressBar.setValue(100);
+          return;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513238
+src/org/jfm/po/MoveAction.java 185 211
+src/org/jfm/po/CopyAction.java 176 202
+----------------------------------------
+      try{
+        in=fin.getInputStream();
+        //WAS new FileOutputStream(fout.getPath(),append);
+        out=fout.getOutputStream();
+        progress.setFileProgresssValue(0);
+        curentlyCopiedFile=fout;
+        byte[] data=new byte[1024];
+        int read=0;
+        long bytesWrote=0;
+        long f_length=fin.length();
+
+        /**@todo Maybe async IO would be nice here**/
+        while((read=in.read(data))>=0){
+          if(cancel){
+            throw new ActionCancelledException();
+          }
+
+          out.write(data,0,read);
+          bytesWrote+=read;
+          totalBytesWritten+=read;
+          int f_percent=(int)((bytesWrote*100)/f_length);
+          int t_percent=(int)((totalBytesWritten*100)/totalFilesSizes);
+          progress.setFileProgresssValue(f_percent);
+          progress.setTotalProgresssValue(t_percent);
+        }
+        progress.setFileProgresssValue(100);
+      }catch(ActionCancelledException ex){
+
+----------------------------------------
+      try{
+        in=fin.getInputStream();
+        //WAS new FileOutputStream(fout.getPath(),append);
+        out=fout.getOutputStream();
+        progress.setFileProgresssValue(0);
+        curentlyCopiedFile=fout;
+        byte[] data=new byte[1024];
+        int read=0;
+        long bytesWrote=0;
+        long f_length=fin.length();
+
+        /**@todo Maybe async IO would be nice here**/
+        while((read=in.read(data))>=0){
+          if(cancel){
+            throw new ActionCancelledException();
+          }
+
+          out.write(data,0,read);
+          bytesWrote+=read;
+          totalBytesWritten+=read;
+          int f_percent=(int)((bytesWrote*100)/f_length);
+          int t_percent=(int)((totalBytesWritten*100)/totalFilesSizes);
+          progress.setFileProgresssValue(f_percent);
+          progress.setTotalProgresssValue(t_percent);
+        }
+        progress.setFileProgresssValue(100);
+      }catch(ActionCancelledException ex){
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513491
+src/org/jfm/po/MoveAction.java 185 211
+src/org/jfm/po/copy/CopyProgressDialog.java 128 151
+----------------------------------------
+      try{
+        in=fin.getInputStream();
+        //WAS new FileOutputStream(fout.getPath(),append);
+        out=fout.getOutputStream();
+        progress.setFileProgresssValue(0);
+        curentlyCopiedFile=fout;
+        byte[] data=new byte[1024];
+        int read=0;
+        long bytesWrote=0;
+        long f_length=fin.length();
+
+        /**@todo Maybe async IO would be nice here**/
+        while((read=in.read(data))>=0){
+          if(cancel){
+            throw new ActionCancelledException();
+          }
+
+          out.write(data,0,read);
+          bytesWrote+=read;
+          totalBytesWritten+=read;
+          int f_percent=(int)((bytesWrote*100)/f_length);
+          int t_percent=(int)((totalBytesWritten*100)/totalFilesSizes);
+          progress.setFileProgresssValue(f_percent);
+          progress.setTotalProgresssValue(t_percent);
+        }
+        progress.setFileProgresssValue(100);
+      }catch(ActionCancelledException ex){
+
+----------------------------------------
+      try{
+        in=fin.getInputStream();
+        out=fout.getOutputStream();
+        fileCopyProgressBar.setValue(0);
+        byte[] data=new byte[1024];
+        int read=0;
+        long bytesWrote=0;
+        long f_length=fin.length();
+
+        while((read=in.read(data))>=0){
+          if(cancel){
+            throw new CopyCancelledException();
+          }
+
+          out.write(data,0,read);
+          bytesWrote+=read;
+          totalBytesWritten+=read;
+          int f_percent=(int)((bytesWrote*100)/f_length);
+          int t_percent=(int)((totalBytesWritten*100)/totalFilesSizes);
+          fileCopyProgressBar.setValue(f_percent);
+          totalCopyProgressBar.setValue(t_percent);
+        }
+        fileCopyProgressBar.setValue(100);
+      }catch(Exception ex){
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513239
+src/org/jfm/po/CopyAction.java 176 202
+src/org/jfm/po/copy/CopyProgressDialog.java 128 151
+----------------------------------------
+      try{
+        in=fin.getInputStream();
+        //WAS new FileOutputStream(fout.getPath(),append);
+        out=fout.getOutputStream();
+        progress.setFileProgresssValue(0);
+        curentlyCopiedFile=fout;
+        byte[] data=new byte[1024];
+        int read=0;
+        long bytesWrote=0;
+        long f_length=fin.length();
+
+        /**@todo Maybe async IO would be nice here**/
+        while((read=in.read(data))>=0){
+          if(cancel){
+            throw new ActionCancelledException();
+          }
+
+          out.write(data,0,read);
+          bytesWrote+=read;
+          totalBytesWritten+=read;
+          int f_percent=(int)((bytesWrote*100)/f_length);
+          int t_percent=(int)((totalBytesWritten*100)/totalFilesSizes);
+          progress.setFileProgresssValue(f_percent);
+          progress.setTotalProgresssValue(t_percent);
+        }
+        progress.setFileProgresssValue(100);
+      }catch(ActionCancelledException ex){
+
+----------------------------------------
+      try{
+        in=fin.getInputStream();
+        out=fout.getOutputStream();
+        fileCopyProgressBar.setValue(0);
+        byte[] data=new byte[1024];
+        int read=0;
+        long bytesWrote=0;
+        long f_length=fin.length();
+
+        while((read=in.read(data))>=0){
+          if(cancel){
+            throw new CopyCancelledException();
+          }
+
+          out.write(data,0,read);
+          bytesWrote+=read;
+          totalBytesWritten+=read;
+          int f_percent=(int)((bytesWrote*100)/f_length);
+          int t_percent=(int)((totalBytesWritten*100)/totalFilesSizes);
+          fileCopyProgressBar.setValue(f_percent);
+          totalCopyProgressBar.setValue(t_percent);
+        }
+        fileCopyProgressBar.setValue(100);
+      }catch(Exception ex){
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513240
+src/org/jfm/event/Broadcaster.java 66 76
+src/org/jfm/event/Broadcaster.java 93 102
+----------------------------------------
+  {
+
+      Iterator it = getListenerIterator(ChangeDirectoryListener.class);
+      ChangeDirectoryListener listener;
+      while(it.hasNext())
+      { 
+      	      	
+        listener = (ChangeDirectoryListener)it.next();
+        listener.changeDirectory(event);
+      }            
+  }
+
+----------------------------------------
+  {
+
+      Iterator it = getListenerIterator(ChangePanelListener.class);
+      ChangePanelListener listener;
+      while(it.hasNext())
+      {
+        listener = (ChangePanelListener)it.next();
+        listener.changePanel(event);
+      }            
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513241
+src/org/jfm/event/Broadcaster.java 66 76
+src/org/jfm/event/Broadcaster.java 118 127
+----------------------------------------
+  {
+
+      Iterator it = getListenerIterator(ChangeDirectoryListener.class);
+      ChangeDirectoryListener listener;
+      while(it.hasNext())
+      { 
+      	      	
+        listener = (ChangeDirectoryListener)it.next();
+        listener.changeDirectory(event);
+      }            
+  }
+
+----------------------------------------
+  {
+
+      Iterator it = getListenerIterator(ChangeViewListener.class);
+      ChangeViewListener listener;
+      while(it.hasNext())
+      {
+        listener = (ChangeViewListener)it.next();
+        listener.viewChanged(event);
+      }            
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513242
+src/org/jfm/event/Broadcaster.java 93 102
+src/org/jfm/event/Broadcaster.java 118 127
+----------------------------------------
+  {
+
+      Iterator it = getListenerIterator(ChangePanelListener.class);
+      ChangePanelListener listener;
+      while(it.hasNext())
+      {
+        listener = (ChangePanelListener)it.next();
+        listener.changePanel(event);
+      }            
+  }
+
+----------------------------------------
+  {
+
+      Iterator it = getListenerIterator(ChangeViewListener.class);
+      ChangeViewListener listener;
+      while(it.hasNext())
+      {
+        listener = (ChangeViewListener)it.next();
+        listener.viewChanged(event);
+      }            
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513275
+src/org/jfm/event/Broadcaster.java 93 102
+src/org/jfm/event/Broadcaster.java 143 152
+----------------------------------------
+  {
+
+      Iterator it = getListenerIterator(ChangePanelListener.class);
+      ChangePanelListener listener;
+      while(it.hasNext())
+      {
+        listener = (ChangePanelListener)it.next();
+        listener.changePanel(event);
+      }            
+  }
+
+----------------------------------------
+  {
+
+      Iterator it = getListenerIterator(FileListSelectionListener.class);
+      FileListSelectionListener listener;
+      while(it.hasNext())
+      {
+        listener = (FileListSelectionListener)it.next();
+        listener.fileListSelectionChanged(event);
+      }            
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513244
+src/org/jfm/event/Broadcaster.java 66 76
+src/org/jfm/event/Broadcaster.java 143 152
+----------------------------------------
+  {
+
+      Iterator it = getListenerIterator(ChangeDirectoryListener.class);
+      ChangeDirectoryListener listener;
+      while(it.hasNext())
+      { 
+      	      	
+        listener = (ChangeDirectoryListener)it.next();
+        listener.changeDirectory(event);
+      }            
+  }
+
+----------------------------------------
+  {
+
+      Iterator it = getListenerIterator(FileListSelectionListener.class);
+      FileListSelectionListener listener;
+      while(it.hasNext())
+      {
+        listener = (FileListSelectionListener)it.next();
+        listener.fileListSelectionChanged(event);
+      }            
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513243
+src/org/jfm/event/Broadcaster.java 118 127
+src/org/jfm/event/Broadcaster.java 143 152
+----------------------------------------
+  {
+
+      Iterator it = getListenerIterator(ChangeViewListener.class);
+      ChangeViewListener listener;
+      while(it.hasNext())
+      {
+        listener = (ChangeViewListener)it.next();
+        listener.viewChanged(event);
+      }            
+  }
+
+----------------------------------------
+  {
+
+      Iterator it = getListenerIterator(FileListSelectionListener.class);
+      FileListSelectionListener listener;
+      while(it.hasNext())
+      {
+        listener = (FileListSelectionListener)it.next();
+        listener.fileListSelectionChanged(event);
+      }            
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513246
+src/org/jfm/views/fview/FView.java 32 46
+src/org/jfm/po/MoveAction.java 127 142
+----------------------------------------
+  private void calculateDirInfo(JFMFile f,DirInfo info){
+    if(!f.isDirectory()){
+        return;
+    }
+    JFMFile[] files=f.listFiles();
+    if(files==null) return;
+    for(int i=0;i<files.length;i++){
+        if(files[i].isDirectory()){
+          info.addDir();
+          calculateDirInfo(files[i],info);
+        }else{
+           info.addFile(files[i].length());
+        }
+    }
+  }
+
+----------------------------------------
+  private void copyDir(JFMFile dir,JFMFile dest) throws ActionCancelledException{
+    JFMFile[] f=dir.listFiles();
+    if(f==null) return;
+    //File destFile=new File(toDir.getPath()+(toDir.getPath().endsWith(File.separator)?"":File.separator)+el.getName());
+    for(int i=0;i<f.length;i++){    	      
+      if(f[i].isDirectory()){
+        JFMFile destFile=dest.mkdir(f[i].getName());
+        copyDir(f[i],destFile);
+        f[i].delete();
+      }else{
+    	JFMFile destFile=dest.createFile(f[i].getName());
+        copyFile(f[i],destFile);
+        f[i].delete();
+      }
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513247
+src/org/jfm/views/fview/FView.java 32 46
+src/org/jfm/po/CopyAction.java 120 133
+----------------------------------------
+  private void calculateDirInfo(JFMFile f,DirInfo info){
+    if(!f.isDirectory()){
+        return;
+    }
+    JFMFile[] files=f.listFiles();
+    if(files==null) return;
+    for(int i=0;i<files.length;i++){
+        if(files[i].isDirectory()){
+          info.addDir();
+          calculateDirInfo(files[i],info);
+        }else{
+           info.addFile(files[i].length());
+        }
+    }
+  }
+
+----------------------------------------
+  private void copyDir(JFMFile dir,JFMFile dest) throws ActionCancelledException{
+    JFMFile[] f=dir.listFiles();
+    if(f==null) return;
+    //File destFile=new File(toDir.getPath()+(toDir.getPath().endsWith(File.separator)?"":File.separator)+el.getName());
+    for(int i=0;i<f.length;i++){    	      
+      if(f[i].isDirectory()){
+        JFMFile destFile=dest.mkdir(f[i].getName());
+        copyDir(f[i],destFile);
+      }else{
+    	JFMFile destFile=dest.createFile(f[i].getName());
+        copyFile(f[i],destFile);
+      }
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513537
+src/org/jfm/po/MoveAction.java 127 142
+src/org/jfm/po/CopyAction.java 120 133
+----------------------------------------
+  private void copyDir(JFMFile dir,JFMFile dest) throws ActionCancelledException{
+    JFMFile[] f=dir.listFiles();
+    if(f==null) return;
+    //File destFile=new File(toDir.getPath()+(toDir.getPath().endsWith(File.separator)?"":File.separator)+el.getName());
+    for(int i=0;i<f.length;i++){    	      
+      if(f[i].isDirectory()){
+        JFMFile destFile=dest.mkdir(f[i].getName());
+        copyDir(f[i],destFile);
+        f[i].delete();
+      }else{
+    	JFMFile destFile=dest.createFile(f[i].getName());
+        copyFile(f[i],destFile);
+        f[i].delete();
+      }
+    }
+  }
+
+----------------------------------------
+  private void copyDir(JFMFile dir,JFMFile dest) throws ActionCancelledException{
+    JFMFile[] f=dir.listFiles();
+    if(f==null) return;
+    //File destFile=new File(toDir.getPath()+(toDir.getPath().endsWith(File.separator)?"":File.separator)+el.getName());
+    for(int i=0;i<f.length;i++){    	      
+      if(f[i].isDirectory()){
+        JFMFile destFile=dest.mkdir(f[i].getName());
+        copyDir(f[i],destFile);
+      }else{
+    	JFMFile destFile=dest.createFile(f[i].getName());
+        copyFile(f[i],destFile);
+      }
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513487
+src/org/jfm/po/MoveAction.java 127 142
+src/org/jfm/po/copy/CopyProgressDialog.java 74 87
+----------------------------------------
+  private void copyDir(JFMFile dir,JFMFile dest) throws ActionCancelledException{
+    JFMFile[] f=dir.listFiles();
+    if(f==null) return;
+    //File destFile=new File(toDir.getPath()+(toDir.getPath().endsWith(File.separator)?"":File.separator)+el.getName());
+    for(int i=0;i<f.length;i++){    	      
+      if(f[i].isDirectory()){
+        JFMFile destFile=dest.mkdir(f[i].getName());
+        copyDir(f[i],destFile);
+        f[i].delete();
+      }else{
+    	JFMFile destFile=dest.createFile(f[i].getName());
+        copyFile(f[i],destFile);
+        f[i].delete();
+      }
+    }
+  }
+
+----------------------------------------
+  private void copyDir(JFMFile dir,JFMFile dest) throws CopyCancelledException{
+    JFMFile[] f=dir.listFiles();
+    if(f==null) return;
+    //File destFile=new File(toDir.getPath()+(toDir.getPath().endsWith(File.separator)?"":File.separator)+el.getName());
+    for(int i=0;i<f.length;i++){
+      JFMFile destFile=null;//new File(dest.getPath()+(dest.getPath().endsWith(File.separator)?"":File.separator)+f[i].getName());
+      if(f[i].isDirectory()){
+       // destFile.mkdir();
+        copyDir(f[i],destFile);
+      }else{
+        copyFile(f[i],destFile);
+      }
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513538
+src/org/jfm/po/CopyAction.java 120 133
+src/org/jfm/po/copy/CopyProgressDialog.java 74 87
+----------------------------------------
+  private void copyDir(JFMFile dir,JFMFile dest) throws ActionCancelledException{
+    JFMFile[] f=dir.listFiles();
+    if(f==null) return;
+    //File destFile=new File(toDir.getPath()+(toDir.getPath().endsWith(File.separator)?"":File.separator)+el.getName());
+    for(int i=0;i<f.length;i++){    	      
+      if(f[i].isDirectory()){
+        JFMFile destFile=dest.mkdir(f[i].getName());
+        copyDir(f[i],destFile);
+      }else{
+    	JFMFile destFile=dest.createFile(f[i].getName());
+        copyFile(f[i],destFile);
+      }
+    }
+  }
+
+----------------------------------------
+  private void copyDir(JFMFile dir,JFMFile dest) throws CopyCancelledException{
+    JFMFile[] f=dir.listFiles();
+    if(f==null) return;
+    //File destFile=new File(toDir.getPath()+(toDir.getPath().endsWith(File.separator)?"":File.separator)+el.getName());
+    for(int i=0;i<f.length;i++){
+      JFMFile destFile=null;//new File(dest.getPath()+(dest.getPath().endsWith(File.separator)?"":File.separator)+f[i].getName());
+      if(f[i].isDirectory()){
+       // destFile.mkdir();
+        copyDir(f[i],destFile);
+      }else{
+        copyFile(f[i],destFile);
+      }
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513248
+src/org/jfm/views/fview/FView.java 32 46
+src/org/jfm/po/copy/CopyProgressDialog.java 74 87
+----------------------------------------
+  private void calculateDirInfo(JFMFile f,DirInfo info){
+    if(!f.isDirectory()){
+        return;
+    }
+    JFMFile[] files=f.listFiles();
+    if(files==null) return;
+    for(int i=0;i<files.length;i++){
+        if(files[i].isDirectory()){
+          info.addDir();
+          calculateDirInfo(files[i],info);
+        }else{
+           info.addFile(files[i].length());
+        }
+    }
+  }
+
+----------------------------------------
+  private void copyDir(JFMFile dir,JFMFile dest) throws CopyCancelledException{
+    JFMFile[] f=dir.listFiles();
+    if(f==null) return;
+    //File destFile=new File(toDir.getPath()+(toDir.getPath().endsWith(File.separator)?"":File.separator)+el.getName());
+    for(int i=0;i<f.length;i++){
+      JFMFile destFile=null;//new File(dest.getPath()+(dest.getPath().endsWith(File.separator)?"":File.separator)+f[i].getName());
+      if(f[i].isDirectory()){
+       // destFile.mkdir();
+        copyDir(f[i],destFile);
+      }else{
+        copyFile(f[i],destFile);
+      }
+    }
+  }
+
+----------------------------------------

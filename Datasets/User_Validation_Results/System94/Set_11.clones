@@ -1,0 +1,1957 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+24079296
+source/net/filebot/ui/rename/MovieMatcher.java 77 102
+source/net/filebot/cli/CmdlineOperations.java 314 339
+----------------------------------------
+		Set<File> movieFiles = new TreeSet<File>(filter(fileset, VIDEO_FILES));
+		Set<File> nfoFiles = new TreeSet<File>(filter(fileset, NFO_FILES));
+
+		List<File> orphanedFiles = new ArrayList<File>(filter(fileset, FILES));
+		orphanedFiles.removeAll(movieFiles);
+		orphanedFiles.removeAll(nfoFiles);
+
+		Map<File, List<File>> derivatesByMovieFile = new HashMap<File, List<File>>();
+		for (File movieFile : movieFiles) {
+			derivatesByMovieFile.put(movieFile, new ArrayList<File>());
+		}
+		for (File file : orphanedFiles) {
+			List<File> orphanParent = listPath(file);
+			for (File movieFile : movieFiles) {
+				if (orphanParent.contains(movieFile.getParentFile()) && isDerived(file, movieFile)) {
+					derivatesByMovieFile.get(movieFile).add(file);
+					break;
+				}
+			}
+		}
+		for (List<File> derivates : derivatesByMovieFile.values()) {
+			orphanedFiles.removeAll(derivates);
+		}
+
+		// match movie hashes online
+		Map<File, Movie> movieByFile = new TreeMap<File, Movie>();
+
+----------------------------------------
+		Set<File> movieFiles = new TreeSet<File>(filter(fileset, VIDEO_FILES));
+		Set<File> nfoFiles = new TreeSet<File>(filter(fileset, NFO_FILES));
+
+		List<File> orphanedFiles = new ArrayList<File>(filter(fileset, FILES));
+		orphanedFiles.removeAll(movieFiles);
+		orphanedFiles.removeAll(nfoFiles);
+
+		Map<File, List<File>> derivatesByMovieFile = new HashMap<File, List<File>>();
+		for (File movieFile : movieFiles) {
+			derivatesByMovieFile.put(movieFile, new ArrayList<File>());
+		}
+		for (File file : orphanedFiles) {
+			List<File> orphanParent = listPath(file);
+			for (File movieFile : movieFiles) {
+				if (orphanParent.contains(movieFile.getParentFile()) && isDerived(file, movieFile)) {
+					derivatesByMovieFile.get(movieFile).add(file);
+					break;
+				}
+			}
+		}
+		for (List<File> derivates : derivatesByMovieFile.values()) {
+			orphanedFiles.removeAll(derivates);
+		}
+
+		// match movie hashes online
+		Map<File, Movie> movieByFile = new TreeMap<File, Movie>();
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+24079297
+source/net/filebot/ui/subtitle/SubtitlePanel.java 152 173
+source/net/filebot/ui/subtitle/SubtitlePanel.java 100 121
+----------------------------------------
+		@Override
+		protected void paintComponent(Graphics g) {
+			Graphics2D g2d = (Graphics2D) g.create();
+			g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+			Path2D path = new Path2D.Float();
+			path.moveTo(0, 0);
+			path.lineTo(0, getHeight() - 1 - 12);
+			path.lineTo(12, getHeight() - 1);
+			path.lineTo(getWidth() - 1 - 12, getHeight() - 1);
+			path.lineTo(getWidth() - 1, getHeight() - 1 - 12);
+			path.lineTo(getWidth() - 1, 0);
+
+			g2d.setPaint(getBackground());
+			g2d.fill(path);
+
+			g2d.setPaint(Color.gray);
+			g2d.draw(path);
+
+			g2d.translate(2, 0);
+			super.paintComponent(g2d);
+			g2d.dispose();
+
+----------------------------------------
+		@Override
+		protected void paintComponent(Graphics g) {
+			Graphics2D g2d = (Graphics2D) g.create();
+			g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+			Path2D path = new Path2D.Float();
+			path.moveTo(0, 0);
+			path.lineTo(0, getHeight() - 1 - 12);
+			path.lineTo(12, getHeight() - 1);
+			path.lineTo(getWidth() - 1 - 12, getHeight() - 1);
+			path.lineTo(getWidth() - 1, getHeight() - 1 - 12);
+			path.lineTo(getWidth() - 1, 0);
+
+			g2d.setPaint(getBackground());
+			g2d.fill(path);
+
+			g2d.setPaint(Color.gray);
+			g2d.draw(path);
+
+			g2d.translate(2, 0);
+			super.paintComponent(g2d);
+			g2d.dispose();
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+24079298
+source/net/filebot/ui/subtitle/upload/MovieEditor.java 109 141
+source/net/filebot/ui/subtitle/upload/FileEditor.java 28 60
+----------------------------------------
+		return null;
+	}
+
+	@Override
+	public boolean stopCellEditing() {
+		return true;
+	}
+
+	@Override
+	public boolean shouldSelectCell(EventObject evt) {
+		return false;
+	}
+
+	@Override
+	public void removeCellEditorListener(CellEditorListener listener) {
+	}
+
+	@Override
+	public boolean isCellEditable(EventObject evt) {
+		return true;
+	}
+
+	@Override
+	public Object getCellEditorValue() {
+		return null;
+	}
+
+	@Override
+	public void cancelCellEditing() {
+	}
+
+	@Override
+	public void addCellEditorListener(CellEditorListener evt) {
+
+----------------------------------------
+		return null;
+	}
+
+	@Override
+	public boolean stopCellEditing() {
+		return true;
+	}
+
+	@Override
+	public boolean shouldSelectCell(EventObject evt) {
+		return false;
+	}
+
+	@Override
+	public void removeCellEditorListener(CellEditorListener listener) {
+	}
+
+	@Override
+	public boolean isCellEditable(EventObject evt) {
+		return true;
+	}
+
+	@Override
+	public Object getCellEditorValue() {
+		return null;
+	}
+
+	@Override
+	public void cancelCellEditing() {
+	}
+
+	@Override
+	public void addCellEditorListener(CellEditorListener evt) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+24079299
+source/net/filebot/cli/CmdlineOperations.java 342 381
+source/net/filebot/ui/rename/MovieMatcher.java 105 144
+----------------------------------------
+			Set<File> effectiveNfoFileSet = new TreeSet<File>(nfoFiles);
+			for (File dir : mapByFolder(movieFiles).keySet()) {
+				effectiveNfoFileSet.addAll(getChildren(dir, NFO_FILES));
+			}
+			for (File dir : filter(fileset, FOLDERS)) {
+				effectiveNfoFileSet.addAll(getChildren(dir, NFO_FILES));
+			}
+
+			for (File nfo : effectiveNfoFileSet) {
+				try {
+					Movie movie = grepMovie(nfo, service, locale);
+
+					// ignore illegal nfos
+					if (movie == null) {
+						continue;
+					}
+
+					if (nfoFiles.contains(nfo)) {
+						movieByFile.put(nfo, movie);
+					}
+
+					if (isDiskFolder(nfo.getParentFile())) {
+						// special handling for disk folders
+						for (File folder : fileset) {
+							if (nfo.getParentFile().equals(folder)) {
+								movieByFile.put(folder, movie);
+							}
+						}
+					} else {
+						// match movie info to movie files that match the nfo file name
+						SortedSet<File> siblingMovieFiles = new TreeSet<File>(filter(movieFiles, new ParentFilter(nfo.getParentFile())));
+						String baseName = stripReleaseInfo(getName(nfo)).toLowerCase();
+
+						for (File movieFile : siblingMovieFiles) {
+							if (!baseName.isEmpty() && stripReleaseInfo(getName(movieFile)).toLowerCase().startsWith(baseName)) {
+								movieByFile.put(movieFile, movie);
+							}
+						}
+					}
+				} catch (Exception e) {
+
+----------------------------------------
+		Set<File> effectiveNfoFileSet = new TreeSet<File>(nfoFiles);
+		for (File dir : mapByFolder(movieFiles).keySet()) {
+			effectiveNfoFileSet.addAll(getChildren(dir, NFO_FILES));
+		}
+		for (File dir : filter(fileset, FOLDERS)) {
+			effectiveNfoFileSet.addAll(getChildren(dir, NFO_FILES));
+		}
+
+		for (File nfo : effectiveNfoFileSet) {
+			try {
+				Movie movie = grepMovie(nfo, service, locale);
+
+				// ignore illegal nfos
+				if (movie == null) {
+					continue;
+				}
+
+				if (nfoFiles.contains(nfo)) {
+					movieByFile.put(nfo, movie);
+				}
+
+				if (isDiskFolder(nfo.getParentFile())) {
+					// special handling for disk folders
+					for (File folder : fileset) {
+						if (nfo.getParentFile().equals(folder)) {
+							movieByFile.put(folder, movie);
+						}
+					}
+				} else {
+					// match movie info to movie files that match the nfo file name
+					SortedSet<File> siblingMovieFiles = new TreeSet<File>(filter(movieFiles, new ParentFilter(nfo.getParentFile())));
+					String baseName = stripReleaseInfo(getName(nfo)).toLowerCase();
+
+					for (File movieFile : siblingMovieFiles) {
+						if (!baseName.isEmpty() && stripReleaseInfo(getName(movieFile)).toLowerCase().startsWith(baseName)) {
+							movieByFile.put(movieFile, movie);
+						}
+					}
+				}
+			} catch (Exception e) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+26804807
+source/net/filebot/ui/rename/FormatDialog.java 179 189
+source/net/filebot/ui/rename/HistoryDialog.java 109 117
+----------------------------------------
+		progressIndicator.setVisible(false);
+
+		// bold title label in header
+		title.setFont(title.getFont().deriveFont(BOLD));
+
+		JPanel header = new JPanel(new MigLayout("insets dialog, nogrid, novisualpadding"));
+
+		header.setBackground(Color.white);
+		header.setBorder(new SeparatorBorder(1, new Color(0xB4B4B4), new Color(0xACACAC), GradientStyle.LEFT_TO_RIGHT, Position.BOTTOM));
+
+		header.add(progressIndicator, "pos 1al 0al, hidemode 3");
+
+----------------------------------------
+		JLabel title = new JLabel(this.getTitle());
+		title.setFont(title.getFont().deriveFont(BOLD));
+
+		JPanel header = new JPanel(new MigLayout("insets dialog, nogrid, fillx"));
+
+		header.setBackground(Color.white);
+		header.setBorder(new SeparatorBorder(1, new Color(0xB4B4B4), new Color(0xACACAC), GradientStyle.LEFT_TO_RIGHT, Position.BOTTOM));
+
+		header.add(title, "wrap");
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+26804808
+source/net/filebot/ui/filter/ExtractTool.java 50 63
+source/net/filebot/ui/filter/MediaInfoTool.java 36 49
+----------------------------------------
+		super("Archives");
+
+		table.setAutoCreateRowSorter(true);
+		table.setAutoCreateColumnsFromModel(true);
+		table.setFillsViewportHeight(true);
+
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
+		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+
+		table.setBackground(Color.white);
+		table.setGridColor(new Color(0xEEEEEE));
+		table.setRowHeight(25);
+
+		JScrollPane tableScrollPane = new JScrollPane(table);
+
+----------------------------------------
+		super("MediaInfo");
+
+		table.setAutoCreateRowSorter(true);
+		table.setAutoCreateColumnsFromModel(true);
+		table.setFillsViewportHeight(true);
+
+		table.setCellSelectionEnabled(true);
+		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+
+		table.setBackground(Color.white);
+		table.setGridColor(new Color(0xEEEEEE));
+		table.setRowHeight(25);
+
+		JScrollPane scrollPane = new JScrollPane(table);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+26804809
+source/net/filebot/similarity/EpisodeMetrics.java 259 278
+source/net/filebot/subtitle/SubtitleMetrics.java 91 111
+----------------------------------------
+			return (float) (Math.floor(max * 4) / 4);
+		}
+
+		@Override
+		protected String normalize(Object object) {
+			return object.toString();
+		}
+
+		protected String[] getNormalizedEffectiveIdentifiers(Object object) {
+			List<?> identifiers = getEffectiveIdentifiers(object);
+			String[] names = new String[identifiers.size()];
+
+			for (int i = 0; i < names.length; i++) {
+				names[i] = normalizeObject(identifiers.get(i));
+			}
+			return names;
+		}
+
+		protected List<?> getEffectiveIdentifiers(Object object) {
+			if (object instanceof Episode) {
+
+----------------------------------------
+			return match.length() > 0 ? 1 : 0;
+		}
+
+		@Override
+		protected String normalize(Object object) {
+			return object.toString();
+		}
+
+		protected String[] getNormalizedEffectiveIdentifiers(Object object) {
+			List<?> identifiers = getEffectiveIdentifiers(object);
+			String[] names = new String[identifiers.size()];
+
+			for (int i = 0; i < names.length; i++) {
+				names[i] = EpisodeMetrics.normalizeObject(identifiers.get(i));
+			}
+
+			return names;
+		}
+
+		protected List<?> getEffectiveIdentifiers(Object object) {
+			if (object instanceof OpenSubtitlesSubtitleDescriptor) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+26804810
+source/net/filebot/ui/episodelist/EpisodeListPanel.java 251 267
+source/net/filebot/ui/list/ListPanel.java 83 95
+----------------------------------------
+			for (PanelBuilder panel : PanelBuilder.episodeHandlerSequence()) {
+				menu.add(newAction(panel.getName(), panel.getIcon(), evt -> {
+					// switch to Rename panel
+					SwingEventBus.getInstance().post(panel);
+
+					// load episode data
+					invokeLater(200, () -> SwingEventBus.getInstance().post(exportHandler.export(this, false)));
+				}));
+			}
+
+			popup.add(menu);
+			popup.addSeparator();
+
+			popup.add(newAction("Copy", ResourceManager.getIcon("rename.action.copy"), evt -> {
+				getTransferHandler().getClipboardHandler().exportToClipboard(this, Toolkit.getDefaultToolkit().getSystemClipboard(), TransferHandler.COPY);
+			}));
+			popup.add(new SaveAction(getExportHandler()));
+
+----------------------------------------
+		for (PanelBuilder panel : PanelBuilder.textHandlerSequence()) {
+			menu.add(newAction(panel.getName(), panel.getIcon(), evt -> {
+				String text = list.getExportHandler().export();
+				SwingEventBus.getInstance().post(panel);
+				invokeLater(200, () -> SwingEventBus.getInstance().post(new StringSelection(text)));
+			}));
+		}
+		popup.add(menu);
+		popup.addSeparator();
+		popup.add(newAction("Copy", ResourceManager.getIcon("rename.action.copy"), evt -> {
+			list.getTransferHandler().getClipboardHandler().exportToClipboard(this, Toolkit.getDefaultToolkit().getSystemClipboard(), TransferHandler.COPY);
+		}));
+		popup.add(new SaveAction(list.getExportHandler()));
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+26804811
+source/net/filebot/ui/rename/EpisodeListMatcher.java 242 253
+source/net/filebot/ui/rename/MovieMatcher.java 357 368
+----------------------------------------
+			selectDialog.setTitle(provider.getName());
+			selectDialog.getMessageLabel().setText("<html>Select best match for \"<b>" + escapeHTML(query) + "</b>\":</html>");
+			selectDialog.getCancelAction().putValue(Action.NAME, "Skip");
+			selectDialog.pack();
+
+			// show dialog
+			selectDialog.restoreState(Preferences.userNodeForPackage(EpisodeListMatcher.class));
+			selectDialog.setLocation(getOffsetLocation(selectDialog.getOwner()));
+			selectDialog.setVisible(true);
+
+			// remember dialog state
+			selectDialog.saveState(Preferences.userNodeForPackage(EpisodeListMatcher.class));
+
+----------------------------------------
+			selectDialog.setTitle(service.getName());
+			selectDialog.getMessageLabel().setText("<html>Select best match for \"<b>" + escapeHTML(query) + "</b>\":</html>");
+			selectDialog.getCancelAction().putValue(Action.NAME, "Skip");
+			selectDialog.pack();
+
+			// show dialog
+			selectDialog.restoreState(Preferences.userNodeForPackage(MovieMatcher.class));
+			selectDialog.setLocation(getOffsetLocation(selectDialog.getOwner()));
+			selectDialog.setVisible(true);
+
+			// remember dialog state
+			selectDialog.saveState(Preferences.userNodeForPackage(MovieMatcher.class));
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+26804812
+source/net/filebot/ui/rename/EpisodeListMatcher.java 305 316
+source/net/filebot/ui/rename/MovieMatcher.java 255 264
+----------------------------------------
+		StringBuilder html = new StringBuilder(512);
+		html.append("<html>");
+		if (header != null) {
+			html.append(escapeHTML(header)).append("<br>");
+		}
+
+		TextColorizer colorizer = new TextColorizer("<nobr>• ", "</nobr><br>");
+		for (File file : selection) {
+			File path = getStructurePathTail(file);
+			if (path == null) {
+				path = getRelativePathTail(file, 3);
+			}
+
+----------------------------------------
+		StringBuilder html = new StringBuilder(512);
+		html.append("<html>");
+		if (header != null) {
+			html.append(escapeHTML(header)).append("<br>");
+		}
+
+		File path = getStructurePathTail(file);
+		if (path == null) {
+			path = getRelativePathTail(file, 3);
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+26804813
+source/net/filebot/ui/subtitle/SubtitlePanel.java 100 123
+source/net/filebot/ui/subtitle/SubtitlePanel.java 152 175
+----------------------------------------
+		@Override
+		protected void paintComponent(Graphics g) {
+			Graphics2D g2d = (Graphics2D) g.create();
+			g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+			Path2D path = new Path2D.Float();
+			path.moveTo(0, 0);
+			path.lineTo(0, getHeight() - 1 - 12);
+			path.lineTo(12, getHeight() - 1);
+			path.lineTo(getWidth() - 1 - 12, getHeight() - 1);
+			path.lineTo(getWidth() - 1, getHeight() - 1 - 12);
+			path.lineTo(getWidth() - 1, 0);
+
+			g2d.setPaint(getBackground());
+			g2d.fill(path);
+
+			g2d.setPaint(Color.gray);
+			g2d.draw(path);
+
+			g2d.translate(2, 0);
+			super.paintComponent(g2d);
+			g2d.dispose();
+		}
+	};
+
+----------------------------------------
+		@Override
+		protected void paintComponent(Graphics g) {
+			Graphics2D g2d = (Graphics2D) g.create();
+			g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+			Path2D path = new Path2D.Float();
+			path.moveTo(0, 0);
+			path.lineTo(0, getHeight() - 1 - 12);
+			path.lineTo(12, getHeight() - 1);
+			path.lineTo(getWidth() - 1 - 12, getHeight() - 1);
+			path.lineTo(getWidth() - 1, getHeight() - 1 - 12);
+			path.lineTo(getWidth() - 1, 0);
+
+			g2d.setPaint(getBackground());
+			g2d.fill(path);
+
+			g2d.setPaint(Color.gray);
+			g2d.draw(path);
+
+			g2d.translate(2, 0);
+			super.paintComponent(g2d);
+			g2d.dispose();
+		}
+	};
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+26804814
+source/net/filebot/ui/rename/HighlightListCellRenderer.java 59 69
+source/net/filebot/ui/rename/ValidateDialog.java 127 137
+----------------------------------------
+		Matcher matcher = pattern.matcher(textComponent.getText());
+
+		while (matcher.find()) {
+			try {
+				textComponent.getHighlighter().addHighlight(matcher.start(0), matcher.end(0), highlightPainter);
+			} catch (BadLocationException e) {
+				// should not happen
+				debug.log(Level.SEVERE, e.getMessage(), e);
+			}
+		}
+	}
+
+----------------------------------------
+				matcher.region(limit - element.getName().length(), limit);
+
+				while (matcher.find()) {
+					try {
+						textComponent.getHighlighter().addHighlight(matcher.start(0), matcher.end(0), highlightPainter);
+					} catch (BadLocationException e) {
+						// should not happen
+						debug.log(Level.SEVERE, e.getMessage(), e);
+					}
+				}
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+26804815
+source/net/filebot/media/MediaDetection.java 1078 1091
+source/net/filebot/util/FileUtilities.java 533 546
+----------------------------------------
+				key = key.toLowerCase();
+			}
+
+			List<File> valueList = map.get(key);
+			if (valueList == null) {
+				valueList = new ArrayList<File>();
+				map.put(key, valueList);
+			}
+
+			valueList.add(file);
+		}
+
+		return map;
+	}
+
+----------------------------------------
+				throw new IllegalArgumentException("Parent is null: " + file);
+			}
+
+			List<File> valueList = map.get(key);
+			if (valueList == null) {
+				valueList = new ArrayList<File>();
+				map.put(key, valueList);
+			}
+
+			valueList.add(file);
+		}
+
+		return map;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+26804817
+source/net/filebot/util/FileUtilities.java 533 546
+source/net/filebot/util/FileUtilities.java 554 567
+----------------------------------------
+				throw new IllegalArgumentException("Parent is null: " + file);
+			}
+
+			List<File> valueList = map.get(key);
+			if (valueList == null) {
+				valueList = new ArrayList<File>();
+				map.put(key, valueList);
+			}
+
+			valueList.add(file);
+		}
+
+		return map;
+	}
+
+----------------------------------------
+				key = key.toLowerCase();
+			}
+
+			List<File> valueList = map.get(key);
+			if (valueList == null) {
+				valueList = new ArrayList<File>();
+				map.put(key, valueList);
+			}
+
+			valueList.add(file);
+		}
+
+		return map;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+26804816
+source/net/filebot/media/MediaDetection.java 1078 1091
+source/net/filebot/util/FileUtilities.java 554 567
+----------------------------------------
+				key = key.toLowerCase();
+			}
+
+			List<File> valueList = map.get(key);
+			if (valueList == null) {
+				valueList = new ArrayList<File>();
+				map.put(key, valueList);
+			}
+
+			valueList.add(file);
+		}
+
+		return map;
+	}
+
+----------------------------------------
+				key = key.toLowerCase();
+			}
+
+			List<File> valueList = map.get(key);
+			if (valueList == null) {
+				valueList = new ArrayList<File>();
+				map.put(key, valueList);
+			}
+
+			valueList.add(file);
+		}
+
+		return map;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+26804818
+source/net/filebot/ui/filter/AttributeTool.java 31 42
+source/net/filebot/ui/filter/ExtractTool.java 50 61
+----------------------------------------
+		super("Attributes");
+
+		table.setAutoCreateRowSorter(true);
+		table.setAutoCreateColumnsFromModel(true);
+		table.setFillsViewportHeight(true);
+
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
+		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+
+		table.setBackground(Color.white);
+		table.setGridColor(new Color(0xEEEEEE));
+		table.setRowHeight(25);
+
+----------------------------------------
+		super("Archives");
+
+		table.setAutoCreateRowSorter(true);
+		table.setAutoCreateColumnsFromModel(true);
+		table.setFillsViewportHeight(true);
+
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
+		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+
+		table.setBackground(Color.white);
+		table.setGridColor(new Color(0xEEEEEE));
+		table.setRowHeight(25);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+26804819
+source/net/filebot/ui/filter/AttributeTool.java 31 42
+source/net/filebot/ui/rename/BindingDialog.java 276 286
+----------------------------------------
+		super("Attributes");
+
+		table.setAutoCreateRowSorter(true);
+		table.setAutoCreateColumnsFromModel(true);
+		table.setFillsViewportHeight(true);
+
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
+		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+
+		table.setBackground(Color.white);
+		table.setGridColor(new Color(0xEEEEEE));
+		table.setRowHeight(25);
+
+----------------------------------------
+					JTable table = new JTable(new ParameterTableModel(parameters));
+					table.setAutoCreateRowSorter(true);
+					table.setAutoCreateColumnsFromModel(true);
+					table.setFillsViewportHeight(true);
+
+					table.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
+					table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+
+					table.setBackground(Color.white);
+					table.setGridColor(new Color(0xEEEEEE));
+					table.setRowHeight(25);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+26804820
+source/net/filebot/ui/filter/ExtractTool.java 50 61
+source/net/filebot/ui/rename/BindingDialog.java 276 286
+----------------------------------------
+		super("Archives");
+
+		table.setAutoCreateRowSorter(true);
+		table.setAutoCreateColumnsFromModel(true);
+		table.setFillsViewportHeight(true);
+
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
+		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+
+		table.setBackground(Color.white);
+		table.setGridColor(new Color(0xEEEEEE));
+		table.setRowHeight(25);
+
+----------------------------------------
+					JTable table = new JTable(new ParameterTableModel(parameters));
+					table.setAutoCreateRowSorter(true);
+					table.setAutoCreateColumnsFromModel(true);
+					table.setFillsViewportHeight(true);
+
+					table.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
+					table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+
+					table.setBackground(Color.white);
+					table.setGridColor(new Color(0xEEEEEE));
+					table.setRowHeight(25);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+26804821
+source/net/filebot/cli/CmdlineOperations.java 1066 1093
+source/net/filebot/ui/filter/ExtractTool.java 216 243
+----------------------------------------
+				List<FileInfo> outputMapping = new ArrayList<FileInfo>();
+				for (FileInfo it : archive.listFiles()) {
+					File outputPath = outputMapper.getOutputFile(it.toFile());
+					outputMapping.add(new SimpleFileInfo(outputPath.getPath(), it.getLength()));
+				}
+
+				Set<FileInfo> selection = new TreeSet<FileInfo>();
+				for (FileInfo future : outputMapping) {
+					if (filter == null || filter.accept(future.toFile())) {
+						selection.add(future);
+					}
+				}
+
+				// check if there is anything to extract at all
+				if (selection.isEmpty()) {
+					continue;
+				}
+
+				boolean skip = true;
+				for (FileInfo future : filter == null || forceExtractAll ? outputMapping : selection) {
+					if (conflict == ConflictAction.AUTO) {
+						skip &= (future.toFile().exists() && future.getLength() == future.toFile().length());
+					} else {
+						skip &= (future.toFile().exists());
+					}
+				}
+
+				if (!skip || conflict == ConflictAction.OVERRIDE) {
+
+----------------------------------------
+						final List<FileInfo> outputMapping = new ArrayList<FileInfo>();
+						for (FileInfo it : archive.listFiles()) {
+							File outputPath = outputMapper.getOutputFile(it.toFile());
+							outputMapping.add(new SimpleFileInfo(outputPath.getPath(), it.getLength()));
+						}
+
+						final Set<FileInfo> selection = new TreeSet<FileInfo>();
+						for (FileInfo future : outputMapping) {
+							if (filter == null || filter.accept(future.toFile())) {
+								selection.add(future);
+							}
+						}
+
+						// check if there is anything to extract at all
+						if (selection.isEmpty()) {
+							continue;
+						}
+
+						boolean skip = true;
+						for (FileInfo future : filter == null || forceExtractAll ? outputMapping : selection) {
+							if (conflictAction == ConflictAction.AUTO) {
+								skip &= (future.toFile().exists() && future.getLength() == future.toFile().length());
+							} else {
+								skip &= (future.toFile().exists());
+							}
+						}
+
+						if (!skip || conflictAction == ConflictAction.OVERRIDE) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+26804822
+source/net/filebot/cli/CmdlineOperations.java 311 384
+source/net/filebot/ui/rename/MovieMatcher.java 74 147
+----------------------------------------
+		List<File> fileset = sortByUniquePath(filter(files, not(getClutterFileFilter())));
+
+		// handle movie files
+		Set<File> movieFiles = new TreeSet<File>(filter(fileset, VIDEO_FILES));
+		Set<File> nfoFiles = new TreeSet<File>(filter(fileset, NFO_FILES));
+
+		List<File> orphanedFiles = new ArrayList<File>(filter(fileset, FILES));
+		orphanedFiles.removeAll(movieFiles);
+		orphanedFiles.removeAll(nfoFiles);
+
+		Map<File, List<File>> derivatesByMovieFile = new HashMap<File, List<File>>();
+		for (File movieFile : movieFiles) {
+			derivatesByMovieFile.put(movieFile, new ArrayList<File>());
+		}
+		for (File file : orphanedFiles) {
+			List<File> orphanParent = listPath(file);
+			for (File movieFile : movieFiles) {
+				if (orphanParent.contains(movieFile.getParentFile()) && isDerived(file, movieFile)) {
+					derivatesByMovieFile.get(movieFile).add(file);
+					break;
+				}
+			}
+		}
+		for (List<File> derivates : derivatesByMovieFile.values()) {
+			orphanedFiles.removeAll(derivates);
+		}
+
+		// match movie hashes online
+		Map<File, Movie> movieByFile = new TreeMap<File, Movie>();
+		if (query == null) {
+			// collect useful nfo files even if they are not part of the selected fileset
+			Set<File> effectiveNfoFileSet = new TreeSet<File>(nfoFiles);
+			for (File dir : mapByFolder(movieFiles).keySet()) {
+				effectiveNfoFileSet.addAll(getChildren(dir, NFO_FILES));
+			}
+			for (File dir : filter(fileset, FOLDERS)) {
+				effectiveNfoFileSet.addAll(getChildren(dir, NFO_FILES));
+			}
+
+			for (File nfo : effectiveNfoFileSet) {
+				try {
+					Movie movie = grepMovie(nfo, service, locale);
+
+					// ignore illegal nfos
+					if (movie == null) {
+						continue;
+					}
+
+					if (nfoFiles.contains(nfo)) {
+						movieByFile.put(nfo, movie);
+					}
+
+					if (isDiskFolder(nfo.getParentFile())) {
+						// special handling for disk folders
+						for (File folder : fileset) {
+							if (nfo.getParentFile().equals(folder)) {
+								movieByFile.put(folder, movie);
+							}
+						}
+					} else {
+						// match movie info to movie files that match the nfo file name
+						SortedSet<File> siblingMovieFiles = new TreeSet<File>(filter(movieFiles, new ParentFilter(nfo.getParentFile())));
+						String baseName = stripReleaseInfo(getName(nfo)).toLowerCase();
+
+						for (File movieFile : siblingMovieFiles) {
+							if (!baseName.isEmpty() && stripReleaseInfo(getName(movieFile)).toLowerCase().startsWith(baseName)) {
+								movieByFile.put(movieFile, movie);
+							}
+						}
+					}
+				} catch (Exception e) {
+					log.log(Level.WARNING, "Failed to grep IMDbID: " + nfo.getName(), e);
+				}
+			}
+
+----------------------------------------
+		List<File> fileset = autodetect ? filter(files, not(getClutterFileFilter())) : new ArrayList<File>(files);
+
+		// handle movie files
+		Set<File> movieFiles = new TreeSet<File>(filter(fileset, VIDEO_FILES));
+		Set<File> nfoFiles = new TreeSet<File>(filter(fileset, NFO_FILES));
+
+		List<File> orphanedFiles = new ArrayList<File>(filter(fileset, FILES));
+		orphanedFiles.removeAll(movieFiles);
+		orphanedFiles.removeAll(nfoFiles);
+
+		Map<File, List<File>> derivatesByMovieFile = new HashMap<File, List<File>>();
+		for (File movieFile : movieFiles) {
+			derivatesByMovieFile.put(movieFile, new ArrayList<File>());
+		}
+		for (File file : orphanedFiles) {
+			List<File> orphanParent = listPath(file);
+			for (File movieFile : movieFiles) {
+				if (orphanParent.contains(movieFile.getParentFile()) && isDerived(file, movieFile)) {
+					derivatesByMovieFile.get(movieFile).add(file);
+					break;
+				}
+			}
+		}
+		for (List<File> derivates : derivatesByMovieFile.values()) {
+			orphanedFiles.removeAll(derivates);
+		}
+
+		// match movie hashes online
+		Map<File, Movie> movieByFile = new TreeMap<File, Movie>();
+
+		// collect useful nfo files even if they are not part of the selected fileset
+		Set<File> effectiveNfoFileSet = new TreeSet<File>(nfoFiles);
+		for (File dir : mapByFolder(movieFiles).keySet()) {
+			effectiveNfoFileSet.addAll(getChildren(dir, NFO_FILES));
+		}
+		for (File dir : filter(fileset, FOLDERS)) {
+			effectiveNfoFileSet.addAll(getChildren(dir, NFO_FILES));
+		}
+
+		for (File nfo : effectiveNfoFileSet) {
+			try {
+				Movie movie = grepMovie(nfo, service, locale);
+
+				// ignore illegal nfos
+				if (movie == null) {
+					continue;
+				}
+
+				if (nfoFiles.contains(nfo)) {
+					movieByFile.put(nfo, movie);
+				}
+
+				if (isDiskFolder(nfo.getParentFile())) {
+					// special handling for disk folders
+					for (File folder : fileset) {
+						if (nfo.getParentFile().equals(folder)) {
+							movieByFile.put(folder, movie);
+						}
+					}
+				} else {
+					// match movie info to movie files that match the nfo file name
+					SortedSet<File> siblingMovieFiles = new TreeSet<File>(filter(movieFiles, new ParentFilter(nfo.getParentFile())));
+					String baseName = stripReleaseInfo(getName(nfo)).toLowerCase();
+
+					for (File movieFile : siblingMovieFiles) {
+						if (!baseName.isEmpty() && stripReleaseInfo(getName(movieFile)).toLowerCase().startsWith(baseName)) {
+							movieByFile.put(movieFile, movie);
+						}
+					}
+				}
+			} catch (Exception e) {
+				debug.log(Level.WARNING, "Failed to grep IMDbID: " + nfo.getName(), e);
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+26804823
+source/net/filebot/cli/CmdlineOperations.java 396 405
+source/net/filebot/ui/rename/MovieMatcher.java 145 154
+----------------------------------------
+				movieByFile.put(file, result);
+			}
+		}
+
+		// collect files that will be matched one by one
+		List<File> movieMatchFiles = new ArrayList<File>();
+		movieMatchFiles.addAll(movieFiles);
+		movieMatchFiles.addAll(nfoFiles);
+		movieMatchFiles.addAll(filter(files, FOLDERS));
+		movieMatchFiles.addAll(filter(orphanedFiles, SUBTITLE_FILES)); // run movie detection only on orphaned subtitle files
+
+----------------------------------------
+				debug.log(Level.WARNING, "Failed to grep IMDbID: " + nfo.getName(), e);
+			}
+		}
+
+		// collect files that will be matched one by one
+		List<File> movieMatchFiles = new ArrayList<File>();
+		movieMatchFiles.addAll(movieFiles);
+		movieMatchFiles.addAll(nfoFiles);
+		movieMatchFiles.addAll(filter(files, FOLDERS));
+		movieMatchFiles.addAll(filter(orphanedFiles, SUBTITLE_FILES)); // run movie detection only on orphaned subtitle files
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+26804824
+source/net/filebot/cli/CmdlineOperations.java 461 479
+source/net/filebot/ui/rename/MovieMatcher.java 201 219
+----------------------------------------
+		List<Match<File, ?>> matches = new ArrayList<Match<File, ?>>();
+
+		filesByMovie.forEach((movie, fs) -> {
+			groupByMediaCharacteristics(fs).forEach(moviePartFiles -> {
+				// resolve movie parts
+				for (int i = 0; i < moviePartFiles.size(); i++) {
+					Movie moviePart = moviePartFiles.size() == 1 ? movie : new MoviePart(movie, i + 1, moviePartFiles.size());
+					matches.add(new Match<File, Movie>(moviePartFiles.get(i), moviePart.clone()));
+
+					// automatically add matches for derived files
+					List<File> derivates = derivatesByMovieFile.get(moviePartFiles.get(i));
+					if (derivates != null) {
+						for (File derivate : derivates) {
+							matches.add(new Match<File, Movie>(derivate, moviePart.clone()));
+						}
+					}
+				}
+			});
+		});
+
+----------------------------------------
+		List<Match<File, ?>> matches = new ArrayList<Match<File, ?>>();
+
+		filesByMovie.forEach((movie, fs) -> {
+			groupByMediaCharacteristics(fs).forEach(moviePartFiles -> {
+				// resolve movie parts
+				for (int i = 0; i < moviePartFiles.size(); i++) {
+					Movie moviePart = moviePartFiles.size() == 1 ? movie : new MoviePart(movie, i + 1, moviePartFiles.size());
+					matches.add(new Match<File, Movie>(moviePartFiles.get(i), moviePart.clone()));
+
+					// automatically add matches for derived files
+					List<File> derivates = derivatesByMovieFile.get(moviePartFiles.get(i));
+					if (derivates != null) {
+						for (File derivate : derivates) {
+							matches.add(new Match<File, Movie>(derivate, moviePart.clone()));
+						}
+					}
+				}
+			});
+		});
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+26804825
+source/net/filebot/media/MediaDetection.java 1077 1091
+source/net/filebot/util/FileUtilities.java 553 567
+----------------------------------------
+			if (key != null) {
+				key = key.toLowerCase();
+			}
+
+			List<File> valueList = map.get(key);
+			if (valueList == null) {
+				valueList = new ArrayList<File>();
+				map.put(key, valueList);
+			}
+
+			valueList.add(file);
+		}
+
+		return map;
+	}
+
+----------------------------------------
+			if (key != null) {
+				key = key.toLowerCase();
+			}
+
+			List<File> valueList = map.get(key);
+			if (valueList == null) {
+				valueList = new ArrayList<File>();
+				map.put(key, valueList);
+			}
+
+			valueList.add(file);
+		}
+
+		return map;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+26804826
+source/net/filebot/cli/CmdlineOperations.java 236 251
+source/net/filebot/cli/CmdlineOperations.java 479 494
+----------------------------------------
+		matches.addAll(derivateMatches);
+
+		// map old files to new paths by applying formatting and validating filenames
+		Map<File, File> renameMap = new LinkedHashMap<File, File>();
+
+		for (Match<File, ?> match : matches) {
+			File file = match.getValue();
+			Object episode = match.getCandidate();
+			String newName = (format != null) ? format.format(new MediaBindingBean(episode, file, getContext(matches))) : validateFileName(EpisodeFormat.SeasonEpisode.format(episode));
+
+			renameMap.put(file, getDestinationFile(file, newName, outputDir));
+		}
+
+		// rename episodes
+		return renameAll(renameMap, renameAction, conflictAction, matches);
+	}
+
+----------------------------------------
+		});
+
+		// map old files to new paths by applying formatting and validating filenames
+		Map<File, File> renameMap = new LinkedHashMap<File, File>();
+
+		for (Match<File, ?> match : matches) {
+			File file = match.getValue();
+			Object movie = match.getCandidate();
+			String newName = (format != null) ? format.format(new MediaBindingBean(movie, file, getContext(matches))) : validateFileName(MovieFormat.NameYear.format(movie));
+
+			renameMap.put(file, getDestinationFile(file, newName, outputDir));
+		}
+
+		// rename movies
+		return renameAll(renameMap, renameAction, conflictAction, matches);
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+26804827
+source/net/filebot/cli/CmdlineOperations.java 690 695
+source/net/filebot/cli/CmdlineOperations.java 706 711
+----------------------------------------
+				Map<File, List<SubtitleDescriptor>> options = lookupSubtitlesByHash(service, remainingVideos, language.getName(), false, strict);
+				Map<File, File> downloads = downloadSubtitleBatch(service, options, output, encoding, format);
+				remainingVideos.removeAll(downloads.keySet());
+				subtitleFiles.addAll(downloads.values());
+			} catch (Exception e) {
+				log.warning("Lookup by hash failed: " + e.getMessage());
+
+----------------------------------------
+				Map<File, List<SubtitleDescriptor>> options = findSubtitlesByName(service, remainingVideos, language.getName(), query, false, strict);
+				Map<File, File> downloads = downloadSubtitleBatch(service, options, output, encoding, format);
+				remainingVideos.removeAll(downloads.keySet());
+				subtitleFiles.addAll(downloads.values());
+			} catch (Exception e) {
+				log.warning(format("Search by name failed: %s", e.getMessage()));
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+26804828
+source/net/filebot/cli/CmdlineOperations.java 500 504
+source/net/filebot/ui/rename/MusicMatcher.java 29 33
+----------------------------------------
+		List<Match<File, ?>> matches = new ArrayList<Match<File, ?>>();
+		LinkedHashSet<File> remaining = new LinkedHashSet<File>(audioFiles);
+
+		// check audio files against all services
+		for (int i = 0; i < services.length && remaining.size() > 0; i++) {
+
+----------------------------------------
+		List<Match<File, ?>> matches = new ArrayList<Match<File, ?>>();
+		LinkedHashSet<File> remaining = new LinkedHashSet<File>(filter(files, AUDIO_FILES, VIDEO_FILES));
+
+		// check audio files against all services
+		for (int i = 0; i < services.length && remaining.size() > 0; i++) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+26804829
+source/net/filebot/ui/rename/ConflictDialog.java 82 92
+source/net/filebot/ui/rename/ValidateDialog.java 61 71
+----------------------------------------
+		c.add(b, "tag next");
+
+		// focus "Continue" button
+		SwingUtilities.invokeLater(c.getComponent(2)::requestFocusInWindow);
+
+		installAction(c, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), newAction("Cancel", this::cancel));
+
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		setMinimumSize(new Dimension(365, 280));
+		pack();
+	}
+
+----------------------------------------
+		c.add(new JButton(continueAction), "tag ok");
+
+		// focus "Validate" button
+		SwingUtilities.invokeLater(c.getComponent(2)::requestFocusInWindow);
+
+		installAction(c, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), cancelAction);
+
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		setMinimumSize(new Dimension(365, 280));
+		pack();
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+26804830
+source/net/filebot/media/MediaDetection.java 536 556
+source/net/filebot/media/MediaDetection.java 894 914
+----------------------------------------
+	public static List<SearchResult> matchSeriesFromStringWithoutSpacing(Collection<String> names, boolean strict, List<IndexEntry<SearchResult>> index) throws IOException {
+		// clear name of punctuation, spacing, and leading 'The' or 'A' that are common causes for word-lookup to fail
+		Pattern spacing = Pattern.compile("(^(?i)(The|A)\\b)|[\\p{Punct}\\p{Space}]+");
+
+		List<String> terms = new ArrayList<String>(names.size());
+		for (String it : names) {
+			String term = spacing.matcher(it).replaceAll("").toLowerCase();
+			if (term.length() >= 3) {
+				terms.add(term); // only consider words, not just random letters
+			}
+		}
+
+		// similarity threshold based on strict/non-strict
+		SimilarityMetric metric = new NameSimilarityMetric();
+		float similarityThreshold = strict ? 0.75f : 0.5f;
+
+		List<SearchResult> seriesList = new ArrayList<SearchResult>();
+		for (IndexEntry<SearchResult> it : index) {
+			String name = spacing.matcher(it.getLenientName()).replaceAll("").toLowerCase();
+			for (String term : terms) {
+				if (term.contains(name)) {
+
+----------------------------------------
+	public static List<Movie> matchMovieFromStringWithoutSpacing(Collection<String> names, boolean strict) {
+		// clear name of punctuation, spacing, and leading 'The' or 'A' that are common causes for word-lookup to fail
+		Pattern spacing = Pattern.compile("(^(?i)(The|A)\\b)|[\\p{Punct}\\p{Space}]+");
+
+		List<String> terms = new ArrayList<String>(names.size());
+		for (String it : names) {
+			String term = spacing.matcher(it).replaceAll("").toLowerCase();
+			if (term.length() >= 3) {
+				terms.add(term); // only consider words, not just random letters
+			}
+		}
+
+		// similarity threshold based on strict/non-strict
+		SimilarityMetric metric = new NameSimilarityMetric();
+		float similarityThreshold = strict ? 0.9f : 0.5f;
+
+		LinkedList<Movie> movies = new LinkedList<Movie>();
+		for (IndexEntry<Movie> it : getMovieIndex()) {
+			String name = spacing.matcher(it.getLenientName()).replaceAll("").toLowerCase();
+			for (String term : terms) {
+				if (term.contains(name)) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+26804831
+source/net/filebot/media/MediaDetection.java 807 810
+source/net/filebot/media/MediaDetection.java 817 820
+----------------------------------------
+			File f = movieFile.getParentFile();
+			for (int i = 0; f != null && i < 3 && !isStructureRoot(f); f = f.getParentFile(), i++) {
+				String term = stripReleaseInfo(f.getName());
+				if (term.length() > 0 && checkMovie(f, strictness) != null) {
+
+----------------------------------------
+		File f = movieFile.getParentFile();
+		for (int i = 0; f != null && i < 2 && !isStructureRoot(f); f = f.getParentFile(), i++) {
+			String term = stripReleaseInfo(f.getName());
+			if (term.length() > 0) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+26804832
+source/net/filebot/cli/ArgumentProcessor.java 89 90
+source/net/filebot/cli/ScriptShellBaseClass.java 350 351
+----------------------------------------
+			cli.rename(files, args.getRenameAction(), args.getConflictAction(), args.getAbsoluteOutputFolder(), args.getExpressionFormat(), args.getDatasource(), args.getSearchQuery(), args.getSortOrder(), args.getExpressionFilter(), args.getLanguage().getLocale(), args.isStrict());
+		}
+
+----------------------------------------
+				return getCLI().rename(files, args.getRenameAction(), args.getConflictAction(), args.getAbsoluteOutputFolder(), args.getExpressionFormat(), args.getDatasource(), args.getSearchQuery(), args.getSortOrder(), args.getExpressionFilter(), args.getLanguage().getLocale(), args.isStrict());
+			} else {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+26804833
+source/net/filebot/torrent/BDecoder.java 169 178
+source/net/filebot/torrent/BDecoder.java 201 209
+----------------------------------------
+		bais.reset();
+
+		// get the length
+		byte[] tempArray = new byte[length];
+		int count = 0;
+		int len = 0;
+
+		// get the string
+		while ((count != length) && ((len = bais.read(tempArray, count, length - count)) > 0))
+			count += len;
+
+----------------------------------------
+			throw (new IOException("Byte array length too large (" + length + ")"));
+
+		byte[] tempArray = new byte[length];
+		int count = 0;
+		int len = 0;
+
+		// get the string
+		while ((count != length) && ((len = bais.read(tempArray, count, length - count)) > 0))
+			count += len;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+26804834
+source/net/filebot/ui/FileBotListExportHandler.java 37 44
+source/net/filebot/ui/FileBotListExportHandler.java 55 62
+----------------------------------------
+		try {
+			list.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+			for (T item : list.getModel()) {
+				exportItem.accept(item, out);
+			}
+		} finally {
+			list.setCursor(Cursor.getDefaultCursor());
+		}
+
+----------------------------------------
+		try (PrintWriter out = new PrintWriter(buffer)) {
+			list.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+			for (T item : list.getListComponent().getSelectedValuesList()) {
+				exportItem.accept(item, out);
+			}
+		} finally {
+			list.setCursor(Cursor.getDefaultCursor());
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+26804835
+source/net/filebot/ui/rename/MatchModel.java 266 273
+source/net/filebot/ui/rename/RenameModel.java 207 214
+----------------------------------------
+		public void listChanged(ListEvent<Match<Value, Candidate>> listChanges) {
+			updates.beginEvent(true);
+
+			while (listChanges.next()) {
+				int index = listChanges.getIndex();
+				int type = listChanges.getType();
+
+				if (type == ListEvent.INSERT || type == ListEvent.UPDATE) {
+
+----------------------------------------
+		public void listChanged(ListEvent<Object> listChanges) {
+			updates.beginEvent(true);
+
+			while (listChanges.next()) {
+				int index = listChanges.getIndex();
+				int type = listChanges.getType();
+
+				if (type == ListEvent.INSERT || type == ListEvent.UPDATE) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+26804836
+source/net/filebot/web/OpenSubtitlesClient.java 148 153
+source/net/filebot/web/OpenSubtitlesClient.java 158 163
+----------------------------------------
+					return getSubtitleList(searchResult, s, -1, languageName).stream();
+				} catch (Exception e) {
+					throw new RuntimeException(String.format("Failed to retrieve subtitle list for season: %s S%02d [%s]", searchResult, s, languageName), e);
+				}
+			}).distinct().collect(toList());
+		}
+
+----------------------------------------
+				return getSubtitleList(searchResult, ii[0], ii[1], languageName).stream();
+			} catch (Exception e) {
+				throw new RuntimeException(String.format("Failed to retrieve subtitle list for episode: %s %s [%s]", searchResult, asList(ii), languageName), e);
+			}
+		}).distinct().collect(toList());
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+26804837
+source/net/filebot/similarity/CommonSequenceMatcher.java 100 111
+source/net/filebot/similarity/SeriesNameMatcher.java 245 256
+----------------------------------------
+		for (int i = 0; i < seq1.length && i <= maxStartIndex; i++) {
+			for (int j = 0; j < seq2.length && j <= maxStartIndex; j++) {
+				// common sequence length
+				int len = 0;
+
+				// iterate over common sequence
+				while ((i + len < seq1.length) && (j + len < seq2.length) && (seq1[i + len].compareTo(seq2[j + len]) == 0)) {
+					len++;
+				}
+
+				// check if a common sequence was found
+				if (len > (matchSeq == null ? 0 : matchSeq.length)) {
+
+----------------------------------------
+		for (int i = 0; i < seq1.length && i <= maxStartIndex; i++) {
+			for (int j = 0; j < seq2.length && j <= maxStartIndex; j++) {
+				// common sequence length
+				int len = 0;
+
+				// iterate over common sequence
+				while ((i + len < seq1.length) && (j + len < seq2.length) && (equalsComparator.compare(seq1[i + len], seq2[j + len]) == 0)) {
+					len++;
+				}
+
+				// check if a common sequence was found
+				if (len > 0) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+26804838
+source/net/filebot/ui/rename/HistoryDialog.java 110 124
+source/net/filebot/ui/subtitle/SubtitleViewer.java 70 84
+----------------------------------------
+		title.setFont(title.getFont().deriveFont(BOLD));
+
+		JPanel header = new JPanel(new MigLayout("insets dialog, nogrid, fillx"));
+
+		header.setBackground(Color.white);
+		header.setBorder(new SeparatorBorder(1, new Color(0xB4B4B4), new Color(0xACACAC), GradientStyle.LEFT_TO_RIGHT, Position.BOTTOM));
+
+		header.add(title, "wrap");
+		header.add(infoLabel, "gap indent*2, wrap");
+
+		JPanel content = new JPanel(new MigLayout("fill, insets dialog, nogrid, novisualpadding", "", "[pref!][150px:pref:200px][200px:pref:max, grow][pref!]"));
+
+		content.add(new JLabel("Filter:"), "gap indent:push");
+		content.add(filterEditor, "wmin 120px, gap rel");
+		content.add(createImageButton(clearFilterAction), "w pref!, h pref!, gap right indent, wrap");
+
+----------------------------------------
+		titleLabel.setFont(titleLabel.getFont().deriveFont(BOLD));
+
+		JPanel header = new JPanel(new MigLayout("insets dialog, nogrid, novisualpadding, fillx"));
+
+		header.setBackground(Color.white);
+		header.setBorder(new SeparatorBorder(1, new Color(0xB4B4B4), new Color(0xACACAC), GradientStyle.LEFT_TO_RIGHT, Position.BOTTOM));
+
+		header.add(titleLabel, "wrap, h pref!");
+		header.add(infoLabel, "gap indent*2, h pref!, wrap");
+
+		JPanel content = new JPanel(new MigLayout("fill, insets dialog, nogrid, novisualpadding", "[fill]", "[pref!][fill]"));
+
+		content.add(new JLabel("Filter:"), "gap indent:push");
+		content.add(filterEditor, "wmin 120px, gap rel");
+		content.add(createImageButton(clearFilterAction), "w pref!, h pref!, wrap");
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+26804839
+source/net/filebot/ui/rename/HistoryDialog.java 180 190
+source/net/filebot/ui/subtitle/SubtitleViewer.java 122 132
+----------------------------------------
+			@Override
+			public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+				return super.getTableCellRendererComponent(table, format.format(value), isSelected, hasFocus, row, column);
+			}
+		});
+
+		// display broken status in second column
+		elementTable.setDefaultRenderer(String.class, new DefaultTableCellRenderer() {
+
+			@Override
+			public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+
+----------------------------------------
+			@Override
+			public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+				return super.getTableCellRendererComponent(table, timeFormat.format(value), isSelected, hasFocus, row, column);
+			}
+		});
+
+		// change text format
+		table.setDefaultRenderer(String.class, new DefaultTableCellRenderer() {
+
+			@Override
+			public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+26804840
+source/net/filebot/ui/rename/HistoryDialog.java 290 301
+source/net/filebot/ui/subtitle/SubtitleViewer.java 101 109
+----------------------------------------
+		JTable table = new JTable(model);
+		table.setBackground(Color.white);
+		table.setAutoCreateRowSorter(true);
+		table.setFillsViewportHeight(true);
+
+		// hide grid
+		table.setShowGrid(false);
+		table.setIntercellSpacing(new Dimension(0, 0));
+
+		// decrease column width for the row number columns
+		DefaultTableColumnModel m = ((DefaultTableColumnModel) table.getColumnModel());
+		m.getColumn(0).setMaxWidth(50);
+
+----------------------------------------
+		final JTable table = new JTable(model);
+		table.setBackground(Color.white);
+		table.setAutoCreateRowSorter(true);
+		table.setFillsViewportHeight(true);
+		table.setRowHeight(18);
+
+		// decrease column width for the row number columns
+		DefaultTableColumnModel m = ((DefaultTableColumnModel) table.getColumnModel());
+		m.getColumn(0).setMaxWidth(40);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+26804841
+source/net/filebot/ui/rename/MusicMatcher.java 28 29
+source/net/filebot/ui/rename/XattrFileMatcher.java 17 18
+----------------------------------------
+	public List<Match<File, ?>> match(Collection<File> files, boolean strict, SortOrder order, Locale locale, boolean autodetection, Component parent) throws Exception {
+		List<Match<File, ?>> matches = new ArrayList<Match<File, ?>>();
+
+----------------------------------------
+	public List<Match<File, ?>> match(Collection<File> files, boolean strict, SortOrder order, Locale locale, boolean autodetection, Component parent) throws Exception {
+		List<Match<File, ?>> matches = new ArrayList<Match<File, ?>>();
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+26804842
+source/net/filebot/util/ui/ShadowBorder.java 113 118
+source/net/filebot/util/ui/ShadowBorder.java 121 126
+----------------------------------------
+			case TOP_LEFT:
+				center = new Point2D.Double(shape.getX() + radius, shape.getY() + radius);
+				break;
+
+			case TOP_RIGHT:
+				center = new Point2D.Double(shape.getX() + 0, shape.getY() + radius);
+
+----------------------------------------
+			case BOTTOM_LEFT:
+				center = new Point2D.Double(shape.getX() + radius, shape.getY() + 0);
+				break;
+
+			case BOTTOM_RIGHT:
+				center = new Point2D.Double(shape.getX() + 0, shape.getY() + 0);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+26804843
+source/net/filebot/ui/rename/PresetEditor.java 238 242
+source/net/filebot/ui/rename/PresetEditor.java 257 261
+----------------------------------------
+		ListCellRenderer<? super Datasource> renderer = combo.getRenderer();
+		combo.setRenderer((list, value, index, isSelected, cellHasFocus) -> {
+			JLabel label = (JLabel) renderer.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+
+			if (value instanceof Datasource) {
+
+----------------------------------------
+		ListCellRenderer<? super Language> renderer = combo.getRenderer();
+		combo.setRenderer((list, value, index, isSelected, cellHasFocus) -> {
+			JLabel label = (JLabel) renderer.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+
+			if (value instanceof Language) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+26804844
+source/net/filebot/ui/rename/PresetEditor.java 238 242
+source/net/filebot/ui/rename/PresetEditor.java 276 280
+----------------------------------------
+		ListCellRenderer<? super Datasource> renderer = combo.getRenderer();
+		combo.setRenderer((list, value, index, isSelected, cellHasFocus) -> {
+			JLabel label = (JLabel) renderer.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+
+			if (value instanceof Datasource) {
+
+----------------------------------------
+		ListCellRenderer<? super RenameAction> renderer = combo.getRenderer();
+		combo.setRenderer((list, value, index, isSelected, cellHasFocus) -> {
+			JLabel label = (JLabel) renderer.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+
+			if (value instanceof StandardRenameAction) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+26804845
+source/net/filebot/ui/rename/PresetEditor.java 257 261
+source/net/filebot/ui/rename/PresetEditor.java 276 280
+----------------------------------------
+		ListCellRenderer<? super Language> renderer = combo.getRenderer();
+		combo.setRenderer((list, value, index, isSelected, cellHasFocus) -> {
+			JLabel label = (JLabel) renderer.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+
+			if (value instanceof Language) {
+
+----------------------------------------
+		ListCellRenderer<? super RenameAction> renderer = combo.getRenderer();
+		combo.setRenderer((list, value, index, isSelected, cellHasFocus) -> {
+			JLabel label = (JLabel) renderer.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+
+			if (value instanceof StandardRenameAction) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+26804846
+source/net/filebot/ui/list/ListPanel.java 123 132
+source/net/filebot/ui/rename/FormatDialog.java 194 203
+----------------------------------------
+		toSpinner.setEditor(new NumberEditor(toSpinner, "#"));
+
+		RTextScrollPane editorScrollPane = new RTextScrollPane(editor, false);
+		editorScrollPane.setLineNumbersEnabled(false);
+		editorScrollPane.setFoldIndicatorEnabled(false);
+		editorScrollPane.setIconRowHeaderEnabled(false);
+
+		editorScrollPane.setVerticalScrollBarPolicy(RTextScrollPane.VERTICAL_SCROLLBAR_NEVER);
+		editorScrollPane.setHorizontalScrollBarPolicy(RTextScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		editorScrollPane.setBackground(editor.getBackground());
+
+----------------------------------------
+		JPanel content = new JPanel(new MigLayout("insets dialog, nogrid, fill"));
+
+		RTextScrollPane editorScrollPane = new RTextScrollPane(editor, false);
+		editorScrollPane.setLineNumbersEnabled(false);
+		editorScrollPane.setFoldIndicatorEnabled(false);
+		editorScrollPane.setIconRowHeaderEnabled(false);
+
+		editorScrollPane.setVerticalScrollBarPolicy(RTextScrollPane.VERTICAL_SCROLLBAR_NEVER);
+		editorScrollPane.setHorizontalScrollBarPolicy(RTextScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		editorScrollPane.setViewportBorder(createEmptyBorder(7, 2, 7, 2));
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+26804847
+source/net/filebot/cli/ScriptShellBaseClass.java 364 375
+source/net/filebot/cli/ScriptShellBaseClass.java 377 388
+----------------------------------------
+	public List<File> getSubtitles(Map<String, ?> parameters) throws Exception {
+		List<File> files = getInputFileList(parameters);
+		ArgumentBean args = getArgumentBean(parameters);
+
+		try {
+			return getCLI().getSubtitles(files, args.getSearchQuery(), args.getLanguage(), args.getSubtitleOutputFormat(), args.getEncoding(), args.getSubtitleNamingFormat(), args.isStrict());
+		} catch (Exception e) {
+			printException(e);
+		}
+
+		return null;
+	}
+
+----------------------------------------
+	public List<File> getMissingSubtitles(Map<String, ?> parameters) throws Exception {
+		List<File> files = getInputFileList(parameters);
+		ArgumentBean args = getArgumentBean(parameters);
+
+		try {
+			return getCLI().getMissingSubtitles(files, args.getSearchQuery(), args.getLanguage(), args.getSubtitleOutputFormat(), args.getEncoding(), args.getSubtitleNamingFormat(), args.isStrict());
+		} catch (Exception e) {
+			printException(e);
+		}
+
+		return null;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+26804848
+source/net/filebot/similarity/EpisodeMetrics.java 242 253
+source/net/filebot/similarity/EpisodeMetrics.java 435 447
+----------------------------------------
+	NameSubstringSequence(new SequenceMatchSimilarity() {
+
+		@Override
+		public float getSimilarity(Object o1, Object o2) {
+			String[] f1 = getNormalizedEffectiveIdentifiers(o1);
+			String[] f2 = getNormalizedEffectiveIdentifiers(o2);
+
+			// match all fields and average similarity
+			float max = 0;
+			for (String s1 : f1) {
+				for (String s2 : f2) {
+					max = Math.max(super.getSimilarity(s1, s2), max);
+
+----------------------------------------
+	Numeric(new NumericSimilarityMetric() {
+
+		@Override
+		public float getSimilarity(Object o1, Object o2) {
+			String[] f1 = fields(o1);
+			String[] f2 = fields(o2);
+
+			// match all fields and average similarity
+			float max = 0;
+			for (String s1 : f1) {
+				for (String s2 : f2) {
+					if (s1 != null && s2 != null) {
+						max = Math.max(super.getSimilarity(s1, s2), max);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+26804849
+source/net/filebot/similarity/EpisodeMetrics.java 244 267
+source/net/filebot/similarity/EpisodeMetrics.java 311 334
+----------------------------------------
+		@Override
+		public float getSimilarity(Object o1, Object o2) {
+			String[] f1 = getNormalizedEffectiveIdentifiers(o1);
+			String[] f2 = getNormalizedEffectiveIdentifiers(o2);
+
+			// match all fields and average similarity
+			float max = 0;
+			for (String s1 : f1) {
+				for (String s2 : f2) {
+					max = Math.max(super.getSimilarity(s1, s2), max);
+				}
+			}
+
+			// normalize absolute similarity to similarity rank (4 ranks in total),
+			// so we are less likely to fall for false positives in this pass, and move on to the next one
+			return (float) (Math.floor(max * 4) / 4);
+		}
+
+		@Override
+		protected String normalize(Object object) {
+			return object.toString();
+		}
+
+		protected String[] getNormalizedEffectiveIdentifiers(Object object) {
+
+----------------------------------------
+		@Override
+		public float getSimilarity(Object o1, Object o2) {
+			String[] f1 = getNormalizedEffectiveIdentifiers(o1);
+			String[] f2 = getNormalizedEffectiveIdentifiers(o2);
+
+			// match all fields and average similarity
+			float max = 0;
+			for (String s1 : f1) {
+				for (String s2 : f2) {
+					max = Math.max(super.getSimilarity(s1, s2), max);
+				}
+			}
+
+			// normalize absolute similarity to similarity rank (4 ranks in total),
+			// so we are less likely to fall for false positives in this pass, and move on to the next one
+			return (float) (Math.floor(max * 4) / 4);
+		}
+
+		@Override
+		protected String normalize(Object object) {
+			return object.toString();
+		}
+
+		protected String[] getNormalizedEffectiveIdentifiers(Object object) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+26804850
+source/net/filebot/similarity/EpisodeMetrics.java 580 596
+source/net/filebot/similarity/EpisodeMetrics.java 610 623
+----------------------------------------
+	SeriesRating(new SimilarityMetric() {
+
+		@Override
+		public float getSimilarity(Object o1, Object o2) {
+			float r1 = getScore(o1);
+			float r2 = getScore(o2);
+
+			if (r1 < 0 || r2 < 0)
+				return -1;
+
+			return Math.max(r1, r2);
+		}
+
+		public float getScore(Object object) {
+			if (object instanceof Episode) {
+				SeriesInfo seriesInfo = ((Episode) object).getSeriesInfo();
+				if (seriesInfo != null && seriesInfo.getRating() != null && seriesInfo.getRatingCount() != null) {
+
+----------------------------------------
+	VoteRate(new SimilarityMetric() {
+
+		@Override
+		public float getSimilarity(Object o1, Object o2) {
+			float r1 = getScore(o1);
+			float r2 = getScore(o2);
+
+			return Math.max(r1, r2) >= 0.1 ? 1 : 0;
+		}
+
+		public float getScore(Object object) {
+			if (object instanceof Episode) {
+				SeriesInfo seriesInfo = ((Episode) object).getSeriesInfo();
+				if (seriesInfo != null && seriesInfo.getRating() != null && seriesInfo.getRatingCount() != null && seriesInfo.getStartDate() != null) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+26804851
+source/net/filebot/archive/SevenZipNativeBindings.java 60 65
+source/net/filebot/archive/SevenZipNativeBindings.java 91 96
+----------------------------------------
+		List<FileInfo> paths = new ArrayList<FileInfo>();
+
+		for (int i = 0; i < inArchive.getNumberOfItems(); i++) {
+			boolean isFolder = (Boolean) inArchive.getProperty(i, PropID.IS_FOLDER);
+			if (!isFolder) {
+				String path = (String) inArchive.getProperty(i, PropID.PATH);
+
+----------------------------------------
+		List<Integer> selection = new ArrayList<Integer>();
+
+		for (int i = 0; i < inArchive.getNumberOfItems(); i++) {
+			boolean isFolder = (Boolean) inArchive.getProperty(i, PropID.IS_FOLDER);
+			if (!isFolder) {
+				String path = (String) inArchive.getProperty(i, PropID.PATH);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+26804852
+source/net/filebot/cli/CmdlineOperations.java 218 236
+source/net/filebot/ui/rename/EpisodeListMatcher.java 119 137
+----------------------------------------
+			throw new CmdlineException("Failed to match files to episode data");
+		}
+
+		// handle derived files
+		List<Match<File, ?>> derivateMatches = new ArrayList<Match<File, ?>>();
+		SortedSet<File> derivateFiles = new TreeSet<File>(fileset);
+		derivateFiles.removeAll(mediaFiles);
+
+		for (File file : derivateFiles) {
+			for (Match<File, ?> match : matches) {
+				if (file.getPath().startsWith(match.getValue().getParentFile().getPath()) && isDerived(file, match.getValue()) && match.getCandidate() instanceof Episode) {
+					derivateMatches.add(new Match<File, Object>(file, ((Episode) match.getCandidate()).clone()));
+					break;
+				}
+			}
+		}
+
+		// add matches from other files that are linked via filenames
+		matches.addAll(derivateMatches);
+
+----------------------------------------
+			workerThreadPool.shutdownNow();
+		}
+
+		// handle derived files
+		List<Match<File, ?>> derivateMatches = new ArrayList<Match<File, ?>>();
+		Set<File> derivateFiles = new TreeSet<File>(fileset);
+		derivateFiles.removeAll(mediaFiles);
+
+		for (File file : derivateFiles) {
+			for (Match<File, ?> match : matches) {
+				if (file.getPath().startsWith(match.getValue().getParentFile().getPath()) && isDerived(file, match.getValue()) && match.getCandidate() instanceof Episode) {
+					derivateMatches.add(new Match<File, Object>(file, ((Episode) match.getCandidate()).clone()));
+					break;
+				}
+			}
+		}
+
+		// add matches from other files that are linked via filenames
+		matches.addAll(derivateMatches);
+
+----------------------------------------

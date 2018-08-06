@@ -1,0 +1,2285 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+26806037
+src/com/levelonelabs/aim/AIMClient.java 548 560
+src/com/levelonelabs/aim/AIMClient.java 655 667
+----------------------------------------
+    public void addBuddies(List buddyList) {
+        // make a list of buddys for each "group"
+        Map groupMap = createGroupMap(buddyList);
+
+        // iterate over the groups and send the buddies
+        Iterator groupIter = groupMap.keySet().iterator();
+        while (groupIter.hasNext()) {
+            String group = (String) groupIter.next();
+            String currentlist = "toc2_new_buddies {g:" + group + "\n";
+            List groupList = (List) groupMap.get(group);
+            for (int i = 0; i < groupList.size(); i++) {
+                AIMBuddy buddy = (AIMBuddy) groupList.get(i);
+                buddyHash.put(imNormalize(buddy.getName()), buddy);
+
+----------------------------------------
+    public void removeBuddies(List buddyList) {
+        // make a list of buddys for each "group"
+        Map groupMap = createGroupMap(buddyList);
+
+        // iterate over the groups and remove the buddies
+        Iterator groupIter = groupMap.keySet().iterator();
+        while (groupIter.hasNext()) {
+            String group = (String) groupIter.next();
+            String currentlist = "toc2_remove_buddy";
+            List groupList = (List) groupMap.get(group);
+            for (int i = 0; i < groupList.size(); i++) {
+                AIMBuddy buddy = (AIMBuddy) groupList.get(i);
+                buddyHash.remove(imNormalize(buddy.getName()));
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+26806048
+src/com/levelonelabs/aim/AIMClient.java 1004 1018
+src/com/levelonelabs/aim/AIMClient.java 926 942
+----------------------------------------
+    private void generateBuddyUnavailable(String buddy, String message) {
+        AIMBuddy aimbud = getBuddy(buddy);
+        if (aimbud == null) {
+            logger.severe("ERROR:  NOTIFICATION ABOUT NON BUDDY(" + buddy + ")");
+            return;
+        }
+
+        for (int i = 0; i < aimListeners.size(); i++) {
+            try {
+                ((AIMListener) aimListeners.get(i)).handleBuddyUnavailable(aimbud, message);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+----------------------------------------
+    private void generateBuddySignOn(String buddy, String message) {
+        AIMBuddy aimbud = getBuddy(buddy);
+        if (aimbud == null) {
+            logger.severe("ERROR:  NOTIFICATION ABOUT NON BUDDY(" + buddy + ")");
+            return;
+        }
+
+        if (!aimbud.isOnline()) {
+            aimbud.setOnline(true);
+            for (int i = 0; i < aimListeners.size(); i++) {
+                try {
+                    ((AIMListener) aimListeners.get(i)).handleBuddySignOn(aimbud, message);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+26806038
+src/com/levelonelabs/aim/AIMClient.java 953 969
+src/com/levelonelabs/aim/AIMClient.java 926 942
+----------------------------------------
+    private void generateBuddySignOff(String buddy, String message) {
+        AIMBuddy aimbud = getBuddy(buddy);
+        if (aimbud == null) {
+            logger.severe("ERROR:  NOTIFICATION ABOUT NON BUDDY(" + buddy + ")");
+            return;
+        }
+
+        // logger.fine("XML = \n" + aimbud.toXML());
+        aimbud.setOnline(false);
+        for (int i = 0; i < aimListeners.size(); i++) {
+            try {
+                ((AIMListener) aimListeners.get(i)).handleBuddySignOff(aimbud, message);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+----------------------------------------
+    private void generateBuddySignOn(String buddy, String message) {
+        AIMBuddy aimbud = getBuddy(buddy);
+        if (aimbud == null) {
+            logger.severe("ERROR:  NOTIFICATION ABOUT NON BUDDY(" + buddy + ")");
+            return;
+        }
+
+        if (!aimbud.isOnline()) {
+            aimbud.setOnline(true);
+            for (int i = 0; i < aimListeners.size(); i++) {
+                try {
+                    ((AIMListener) aimListeners.get(i)).handleBuddySignOn(aimbud, message);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+26806047
+src/com/levelonelabs/aim/AIMClient.java 980 993
+src/com/levelonelabs/aim/AIMClient.java 926 942
+----------------------------------------
+    private void generateBuddyAvailable(String buddy, String message) {
+        AIMBuddy aimbud = getBuddy(buddy);
+        if (aimbud == null) {
+            logger.severe("ERROR:  NOTIFICATION ABOUT NON BUDDY(" + buddy + ")");
+            return;
+        }
+        for (int i = 0; i < aimListeners.size(); i++) {
+            try {
+                ((AIMListener) aimListeners.get(i)).handleBuddyAvailable(aimbud, message);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+----------------------------------------
+    private void generateBuddySignOn(String buddy, String message) {
+        AIMBuddy aimbud = getBuddy(buddy);
+        if (aimbud == null) {
+            logger.severe("ERROR:  NOTIFICATION ABOUT NON BUDDY(" + buddy + ")");
+            return;
+        }
+
+        if (!aimbud.isOnline()) {
+            aimbud.setOnline(true);
+            for (int i = 0; i < aimListeners.size(); i++) {
+                try {
+                    ((AIMListener) aimListeners.get(i)).handleBuddySignOn(aimbud, message);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+26806039
+src/com/levelonelabs/aim/AIMClient.java 980 988
+src/com/levelonelabs/aim/AIMClient.java 1004 1013
+----------------------------------------
+    private void generateBuddyAvailable(String buddy, String message) {
+        AIMBuddy aimbud = getBuddy(buddy);
+        if (aimbud == null) {
+            logger.severe("ERROR:  NOTIFICATION ABOUT NON BUDDY(" + buddy + ")");
+            return;
+        }
+        for (int i = 0; i < aimListeners.size(); i++) {
+            try {
+                ((AIMListener) aimListeners.get(i)).handleBuddyAvailable(aimbud, message);
+
+----------------------------------------
+    private void generateBuddyUnavailable(String buddy, String message) {
+        AIMBuddy aimbud = getBuddy(buddy);
+        if (aimbud == null) {
+            logger.severe("ERROR:  NOTIFICATION ABOUT NON BUDDY(" + buddy + ")");
+            return;
+        }
+
+        for (int i = 0; i < aimListeners.size(); i++) {
+            try {
+                ((AIMListener) aimListeners.get(i)).handleBuddyUnavailable(aimbud, message);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+26806040
+src/com/levelonelabs/aimbot/modules/MessengerModule.java 216 235
+src/com/levelonelabs/aimbot/modules/UserInformationModule.java 143 162
+----------------------------------------
+			if (st.countTokens() < 3) {
+				sendMessage(buddy, "ERROR:\n" + help());
+				return;
+			}
+
+			//grab the command and target
+			String imcommand = st.nextToken();
+			if (!imcommand.toLowerCase().equals("tell")) {
+				sendMessage(buddy, "ERROR:\n" + help());
+				return;
+			}
+			String imcommandTo = st.nextToken();
+			AIMBuddy to = getBuddy(imcommandTo);
+
+			//verify they are a user of the bot
+			if (to == null) {
+				sendMessage(buddy, "User " + imcommandTo
+					+ " does not exist in the system.\nUse the ADDUSER command to add them.");
+				return;
+			}
+
+----------------------------------------
+			if (st.countTokens() < 2) {
+				sendMessage(buddy, "ERROR:\n" + help());
+				return;
+			}
+
+			//grab the command and target
+			String imcommand = st.nextToken();
+			if (!imcommand.toLowerCase().equals("history")) {
+				sendMessage(buddy, "ERROR:\n" + help());
+				return;
+			}
+			String imcommandTo = st.nextToken();
+			AIMBuddy to = getBuddy(imcommandTo);
+
+			//verify they are a user of the bot
+			if (to == null) {
+				sendMessage(buddy, "User " + imcommandTo
+					+ " does not exist in the system.\nUse the ADDUSER command to add them.");
+				return;
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+26806041
+src/com/levelonelabs/aimbot/modules/ScheduleModule.java 482 490
+src/com/levelonelabs/aimbot/modules/ScheduleModule.java 504 512
+----------------------------------------
+    public void addEvent(AIMBuddy buddy, long period, String command) {
+        ArrayList br = (ArrayList) events.get(buddy.getName());
+        if (br == null) {
+            br = new ArrayList();
+            events.put(buddy.getName(), br);
+        }
+
+        SchedulerTask st = new SchedulerTask(buddy, command);
+        timer.schedule(st, period);
+
+----------------------------------------
+    public void addEvent(AIMBuddy buddy, Date eventDate, String command) {
+        ArrayList br = (ArrayList) events.get(buddy.getName());
+        if (br == null) {
+            br = new ArrayList();
+            events.put(buddy.getName(), br);
+        }
+
+        SchedulerTask st = new SchedulerTask(buddy, command);
+        timer.schedule(st, eventDate);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+26806042
+src/com/levelonelabs/aimbot/modules/ListModule.java 179 187
+src/com/levelonelabs/aimbot/modules/ListModule.java 209 218
+----------------------------------------
+    private void processRemoveListMember(AIMBuddy buddy, StringTokenizer st) {
+        if (!buddy.hasRole(AIMBot.ROLE_ADMINISTRATOR)) {
+            super.sendMessage(buddy, "Sorry. This command is for admins only.");
+        } else if (st.countTokens() < 3) {
+            super.sendMessage(buddy, "Error:\n" + help());
+        } else {
+            String imcommand = st.nextToken();
+            String list = st.nextToken();
+            String buddyname = st.nextToken();
+
+----------------------------------------
+    private void processAddListMember(AIMBuddy buddy, StringTokenizer st) {
+        if (!buddy.hasRole(AIMBot.ROLE_ADMINISTRATOR)) {
+            super.sendMessage(buddy, "Sorry. This command is for admins only.");
+        } else if (st.countTokens() < 3) {
+            super.sendMessage(buddy, "Error: \n" + help());
+
+        } else {
+            String imcommand = st.nextToken();
+            String list = st.nextToken();
+            String buddyname = st.nextToken();
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+26806043
+src/com/levelonelabs/aimbot/modules/ListModule.java 292 300
+src/com/levelonelabs/aimbot/modules/ListModule.java 313 321
+----------------------------------------
+    private void processMakeList(AIMBuddy buddy, StringTokenizer st) {
+        if (!buddy.hasRole(AIMBot.ROLE_ADMINISTRATOR)) {
+            super.sendMessage(buddy, "Sorry. This command is for admins only.");
+        } else {
+            String imcommand = st.nextToken();
+            String list = st.nextToken();
+            AIMGroup group = super.bot.getGroup(list);
+            if (group != null) {
+                super.sendMessage(buddy, "The list, " + list + ", already exists.");
+
+----------------------------------------
+    private void processMembers(AIMBuddy buddy, StringTokenizer st) {
+        if (!buddy.hasRole(AIMBot.ROLE_ADMINISTRATOR)) {
+            super.sendMessage(buddy, "Sorry. This command is for admins only.");
+        } else {
+            String imcommand = st.nextToken();
+            String list = st.nextToken();
+            AIMGroup group = super.bot.getGroup(list);
+            if (group != null) {
+                super.sendMessage(buddy, "The list, " + list + ", contains: " + group.toString());
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+26806044
+src/com/levelonelabs/aimbot/modules/UserAdminModule.java 145 160
+src/com/levelonelabs/aimbot/modules/UserAdminModule.java 165 180
+----------------------------------------
+        } else if (query.toLowerCase().startsWith("rmuser")) {
+            // remove a user
+            StringTokenizer st = new StringTokenizer(query, " ");
+            if (st.countTokens() < 2) {
+                super.sendMessage(buddy, "ERROR:\n" + help());
+                return;
+            }
+
+            // grab the user to remove
+            String imcommand = st.nextToken();
+            String imcommandTo = st.nextToken();
+            AIMBuddy to = super.getBuddy(imcommandTo);
+            if (to == null) {
+                super.sendMessage(buddy, "User " + imcommandTo + " does not exist in the system.");
+            } else if (buddy.hasRole(AIMBot.ROLE_ADMINISTRATOR)) {
+                super.removeBuddy(to);
+
+----------------------------------------
+        } else if (query.toLowerCase().startsWith("denyuser")) {
+            // deny a user
+            StringTokenizer st = new StringTokenizer(query, " ");
+            if (st.countTokens() < 2) {
+                super.sendMessage(buddy, "ERROR:\n" + help());
+                return;
+            }
+
+            // grab the user to deny
+            String imcommand = st.nextToken();
+            String imcommandTo = st.nextToken();
+            AIMBuddy to = super.getBuddy(imcommandTo);
+            if (to == null) {
+                super.sendMessage(buddy, "User " + imcommandTo + " does not exist in the system.");
+            } else if (buddy.hasRole(AIMBot.ROLE_ADMINISTRATOR)) {
+                super.denyBuddy(to);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+26806046
+src/com/levelonelabs/aimbot/modules/UserAdminModule.java 165 180
+src/com/levelonelabs/aimbot/modules/UserAdminModule.java 185 200
+----------------------------------------
+        } else if (query.toLowerCase().startsWith("denyuser")) {
+            // deny a user
+            StringTokenizer st = new StringTokenizer(query, " ");
+            if (st.countTokens() < 2) {
+                super.sendMessage(buddy, "ERROR:\n" + help());
+                return;
+            }
+
+            // grab the user to deny
+            String imcommand = st.nextToken();
+            String imcommandTo = st.nextToken();
+            AIMBuddy to = super.getBuddy(imcommandTo);
+            if (to == null) {
+                super.sendMessage(buddy, "User " + imcommandTo + " does not exist in the system.");
+            } else if (buddy.hasRole(AIMBot.ROLE_ADMINISTRATOR)) {
+                super.denyBuddy(to);
+
+----------------------------------------
+        } else if (query.toLowerCase().startsWith("permituser")) {
+            // permit a user
+            StringTokenizer st = new StringTokenizer(query, " ");
+            if (st.countTokens() < 2) {
+                super.sendMessage(buddy, "ERROR:\n" + help());
+                return;
+            }
+
+            // grab the user to permit
+            String imcommand = st.nextToken();
+            String imcommandTo = st.nextToken();
+            AIMBuddy to = super.getBuddy(imcommandTo);
+            if (to == null) {
+                super.sendMessage(buddy, "User " + imcommandTo + " does not exist in the system.");
+            } else if (buddy.hasRole(AIMBot.ROLE_ADMINISTRATOR)) {
+                super.permitBuddy(to);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+26806045
+src/com/levelonelabs/aimbot/modules/UserAdminModule.java 145 160
+src/com/levelonelabs/aimbot/modules/UserAdminModule.java 185 200
+----------------------------------------
+        } else if (query.toLowerCase().startsWith("rmuser")) {
+            // remove a user
+            StringTokenizer st = new StringTokenizer(query, " ");
+            if (st.countTokens() < 2) {
+                super.sendMessage(buddy, "ERROR:\n" + help());
+                return;
+            }
+
+            // grab the user to remove
+            String imcommand = st.nextToken();
+            String imcommandTo = st.nextToken();
+            AIMBuddy to = super.getBuddy(imcommandTo);
+            if (to == null) {
+                super.sendMessage(buddy, "User " + imcommandTo + " does not exist in the system.");
+            } else if (buddy.hasRole(AIMBot.ROLE_ADMINISTRATOR)) {
+                super.removeBuddy(to);
+
+----------------------------------------
+        } else if (query.toLowerCase().startsWith("permituser")) {
+            // permit a user
+            StringTokenizer st = new StringTokenizer(query, " ");
+            if (st.countTokens() < 2) {
+                super.sendMessage(buddy, "ERROR:\n" + help());
+                return;
+            }
+
+            // grab the user to permit
+            String imcommand = st.nextToken();
+            String imcommandTo = st.nextToken();
+            AIMBuddy to = super.getBuddy(imcommandTo);
+            if (to == null) {
+                super.sendMessage(buddy, "User " + imcommandTo + " does not exist in the system.");
+            } else if (buddy.hasRole(AIMBot.ROLE_ADMINISTRATOR)) {
+                super.permitBuddy(to);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+26806049
+src/com/levelonelabs/aimbot/AIMBot.java 646 651
+src/com/levelonelabs/aimbot/modules/ReminderModule.java 316 320
+----------------------------------------
+		NodeList list = buddiesTag.getElementsByTagName("buddy");
+		for (int i = 0; i < list.getLength(); i++) {
+			Element buddyElem = (Element) list.item(i);
+			String name = buddyElem.getAttribute("name");
+
+			AIMBuddy buddy = new AIMBuddy(name);
+
+----------------------------------------
+        NodeList list = fullStateElement.getElementsByTagName("buddy");
+        for (int i = 0; i < list.getLength(); i++) {
+            Element buddyElem = (Element) list.item(i);
+            String name = buddyElem.getAttribute("name");
+            AIMBuddy buddy = getBuddy(name);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+28918774
+src/com/levelonelabs/aimbot/modules/MoviesModule.java 386 398
+src/com/levelonelabs/aimbot/modules/BuddyManagementModule.java 172 193
+----------------------------------------
+    public ArrayList getTimes() {
+        try {
+            URL url=new URL(urlPart+zipcode);
+            logger.fine("Looking for movies for: "+zipcode+" using URL="+url);
+            URLConnection conn=url.openConnection();
+            BufferedReader br=new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            ParserDelegator pd=new ParserDelegator();
+            pd.parse(br, this, true);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        return this.result;
+    }
+
+----------------------------------------
+            } else if (option.equalsIgnoreCase("inactive")) {
+                int numRemoved = 0;
+                Iterator iter = super.getBuddyNames();
+                List toRemoveList = new ArrayList();
+                while (iter.hasNext()) {
+                    String name = (String) iter.next();
+                    AIMBuddy bud = super.getBuddy(name);
+                    // if we found a user without admin role, that isnt us
+                    if (bud.hasRole(AIMBot.ROLE_USER) && !bud.hasRole(AIMBot.ROLE_ADMINISTRATOR)
+                        && !super.bot.getUsername().equalsIgnoreCase(name)) {
+                        // if they are inactive, remove them
+                        if (isInactive(bud)) {
+                            logger.fine("Removing inactive buddy " + bud.getName());
+                            toRemoveList.add(bud);
+                            numRemoved++;
+                        }
+                    }
+                }
+                super.removeBuddies(toRemoveList);
+                super.sendMessage(buddy, "Removed " + numRemoved + " inactive users.");
+                return;
+            } else {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+27177784
+src/com/levelonelabs/aimbot/modules/BuddyManagementModule.java 153 172
+src/com/levelonelabs/aimbot/modules/BuddyManagementModule.java 172 193
+----------------------------------------
+            if (option.equalsIgnoreCase("buddies")) {
+                int numRemoved = 0;
+                Iterator iter = super.getBuddyNames();
+                List toRemoveList = new ArrayList();
+                while (iter.hasNext()) {
+                    String name = (String) iter.next();
+                    AIMBuddy bud = super.getBuddy(name);
+                    // if we found a buddy without user/admin role, that isnt
+                    // us
+                    if (!bud.hasRole(AIMBot.ROLE_USER) && !bud.hasRole(AIMBot.ROLE_ADMINISTRATOR)
+                        && !super.bot.getUsername().equalsIgnoreCase(name)) {
+                        logger.fine("Removing non-user buddy " + bud.getName());
+                        toRemoveList.add(bud);
+                        numRemoved++;
+                    }
+                }
+                super.removeBuddies(toRemoveList);
+                super.sendMessage(buddy, "Removed " + numRemoved + " non-user buddies.");
+                return;
+            } else if (option.equalsIgnoreCase("inactive")) {
+
+----------------------------------------
+            } else if (option.equalsIgnoreCase("inactive")) {
+                int numRemoved = 0;
+                Iterator iter = super.getBuddyNames();
+                List toRemoveList = new ArrayList();
+                while (iter.hasNext()) {
+                    String name = (String) iter.next();
+                    AIMBuddy bud = super.getBuddy(name);
+                    // if we found a user without admin role, that isnt us
+                    if (bud.hasRole(AIMBot.ROLE_USER) && !bud.hasRole(AIMBot.ROLE_ADMINISTRATOR)
+                        && !super.bot.getUsername().equalsIgnoreCase(name)) {
+                        // if they are inactive, remove them
+                        if (isInactive(bud)) {
+                            logger.fine("Removing inactive buddy " + bud.getName());
+                            toRemoveList.add(bud);
+                            numRemoved++;
+                        }
+                    }
+                }
+                super.removeBuddies(toRemoveList);
+                super.sendMessage(buddy, "Removed " + numRemoved + " inactive users.");
+                return;
+            } else {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+27177785
+src/com/levelonelabs/aim/AIMClient.java 210 218
+src/com/levelonelabs/aim/AIMClient.java 218 227
+----------------------------------------
+                    || ((sb.charAt(i + 1) >= 'A') && (sb.charAt(i + 1) <= 'Z'))) {
+                    for (int j = i + 1; j < sb.length(); j++) {
+                        if (sb.charAt(j) == '>') {
+                            sb = sb.replace(i, j + 1, "");
+                            i--;
+                            break;
+                        }
+                    }
+                } else if (sb.charAt(i + 1) == '!') {
+
+----------------------------------------
+                } else if (sb.charAt(i + 1) == '!') {
+                    // Comments
+                    for (int j = i + 1; j < sb.length(); j++) {
+                        if ((sb.charAt(j) == '>') && (sb.charAt(j - 1) == '-') && (sb.charAt(j - 2) == '-')) {
+                            sb = sb.replace(i, j + 1, "");
+                            i--;
+                            break;
+                        }
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+27177786
+src/com/levelonelabs/aimbot/modules/TicTacToeModule.java 208 216
+src/com/levelonelabs/aimbot/modules/TicTacToeModule.java 200 208
+----------------------------------------
+                    } else if (command.equals("no")) {
+                        if ((tttg.state == tttg.REQUESTED) && (tttg.getPlayerNumber(you) == 1)) {
+                            sendMessage(getBuddy(comp), you + " said no to tic tac toe.");
+                            games.remove(comp);
+                            games.remove(you);
+                        } else {
+                            sendMessage(buddy, "Not sure what you are saying no to.");
+                        }
+                    } else {
+
+----------------------------------------
+                    } else if (command.equals("yes")) {
+                        if ((tttg.state == tttg.REQUESTED) && (tttg.getPlayerNumber(you) == 1)) {
+                            tttg.state = tttg.STARTED;
+                            sendMessage(getBuddy(tttg.getCurrentPlayer()), "\n" + tttg.displayMoves() + "\nSelect "
+                                + tttg.getCurrentXO() + " Move  (ttt N):");
+                        } else {
+                            sendMessage(buddy, "Not sure what you are saying yes to.");
+                        }
+                    } else if (command.equals("no")) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+27177787
+src/com/levelonelabs/aimbot/modules/TVListingsModule.java 310 314
+src/com/levelonelabs/aimbot/modules/ScheduleModule.java 180 186
+----------------------------------------
+			if (codes.size() == names.size()) {
+				for (int i = 0; i < codes.size(); i++) {
+					result.put(codes.get(i), names.get(i));
+				}
+			}
+
+----------------------------------------
+            if (br.size() != 0) {
+                // collect the messages
+                for (int i = 0; i < br.size(); i++) {
+                    SchedulerTask st = (SchedulerTask) br.get(i);
+                    eventlist += ((i + 1) + ")" + (st.getCommand() + " scheduled " + st.getCreateDate() + "<BR>"));
+                }
+            } else
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+27177788
+src/com/levelonelabs/aimbot/modules/ScheduleModule.java 180 186
+src/com/levelonelabs/aimbot/AIMBot.java 484 488
+----------------------------------------
+            if (br.size() != 0) {
+                // collect the messages
+                for (int i = 0; i < br.size(); i++) {
+                    SchedulerTask st = (SchedulerTask) br.get(i);
+                    eventlist += ((i + 1) + ")" + (st.getCommand() + " scheduled " + st.getCreateDate() + "<BR>"));
+                }
+            } else
+
+----------------------------------------
+		if (servicesList != null) {
+			for (int i = 0; i < servicesList.size(); i++) {
+				registerService((String) servicesList.get(i), mod);
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+27177790
+src/com/levelonelabs/aimbot/modules/TVListingsModule.java 310 314
+src/com/levelonelabs/aimbot/AIMBot.java 484 488
+----------------------------------------
+			if (codes.size() == names.size()) {
+				for (int i = 0; i < codes.size(); i++) {
+					result.put(codes.get(i), names.get(i));
+				}
+			}
+
+----------------------------------------
+		if (servicesList != null) {
+			for (int i = 0; i < servicesList.size(); i++) {
+				registerService((String) servicesList.get(i), mod);
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+27177791
+src/com/levelonelabs/aimbot/AIMBot.java 484 488
+src/com/levelonelabs/aimbot/modules/SkiReportModule.java 311 315
+----------------------------------------
+		if (servicesList != null) {
+			for (int i = 0; i < servicesList.size(); i++) {
+				registerService((String) servicesList.get(i), mod);
+			}
+		}
+
+----------------------------------------
+            if (codes.size() == names.size()) {
+                for (int i = 0; i < codes.size(); i++) {
+                    result.put(codes.get(i), names.get(i));
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+27177789
+src/com/levelonelabs/aimbot/modules/ScheduleModule.java 180 186
+src/com/levelonelabs/aimbot/modules/SkiReportModule.java 311 315
+----------------------------------------
+            if (br.size() != 0) {
+                // collect the messages
+                for (int i = 0; i < br.size(); i++) {
+                    SchedulerTask st = (SchedulerTask) br.get(i);
+                    eventlist += ((i + 1) + ")" + (st.getCommand() + " scheduled " + st.getCreateDate() + "<BR>"));
+                }
+            } else
+
+----------------------------------------
+            if (codes.size() == names.size()) {
+                for (int i = 0; i < codes.size(); i++) {
+                    result.put(codes.get(i), names.get(i));
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+28418776
+src/com/levelonelabs/aim/AIMGroup.java 140 152
+src/com/levelonelabs/aimbot/modules/ReminderModule.java 307 320
+----------------------------------------
+    }
+
+
+    /**
+     * @see com.levelonelabs.aim.XMLizable#readState(Element)
+     */
+    public void readState(Element fullStateElement) {
+        buddies=new ArrayList();
+        NodeList list=fullStateElement.getElementsByTagName("buddy");
+        for(int i=0; i < list.getLength(); i++) {
+            Element buddyElem=(Element) list.item(i);
+            String name=buddyElem.getAttribute("name");
+            add(name);
+
+----------------------------------------
+    }
+
+
+    /**
+     * @see com.levelonelabs.aim.XMLizable#readState(Element)
+     */
+    public void readState(Element fullStateElement) {
+        // parse reminders
+        reminders = new HashMap();
+        NodeList list = fullStateElement.getElementsByTagName("buddy");
+        for (int i = 0; i < list.getLength(); i++) {
+            Element buddyElem = (Element) list.item(i);
+            String name = buddyElem.getAttribute("name");
+            AIMBuddy buddy = getBuddy(name);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+28418777
+src/com/levelonelabs/aim/AIMGroup.java 147 152
+src/com/levelonelabs/aimbot/AIMBot.java 645 651
+----------------------------------------
+        buddies=new ArrayList();
+        NodeList list=fullStateElement.getElementsByTagName("buddy");
+        for(int i=0; i < list.getLength(); i++) {
+            Element buddyElem=(Element) list.item(i);
+            String name=buddyElem.getAttribute("name");
+            add(name);
+
+----------------------------------------
+		Element buddiesTag = (Element) root.getElementsByTagName("buddies").item(0);
+		NodeList list = buddiesTag.getElementsByTagName("buddy");
+		for (int i = 0; i < list.getLength(); i++) {
+			Element buddyElem = (Element) list.item(i);
+			String name = buddyElem.getAttribute("name");
+
+			AIMBuddy buddy = new AIMBuddy(name);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+28418778
+src/com/levelonelabs/aimbot/AIMBot.java 645 651
+src/com/levelonelabs/aimbot/modules/ReminderModule.java 315 320
+----------------------------------------
+		Element buddiesTag = (Element) root.getElementsByTagName("buddies").item(0);
+		NodeList list = buddiesTag.getElementsByTagName("buddy");
+		for (int i = 0; i < list.getLength(); i++) {
+			Element buddyElem = (Element) list.item(i);
+			String name = buddyElem.getAttribute("name");
+
+			AIMBuddy buddy = new AIMBuddy(name);
+
+----------------------------------------
+        reminders = new HashMap();
+        NodeList list = fullStateElement.getElementsByTagName("buddy");
+        for (int i = 0; i < list.getLength(); i++) {
+            Element buddyElem = (Element) list.item(i);
+            String name = buddyElem.getAttribute("name");
+            AIMBuddy buddy = getBuddy(name);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+28418779
+src/com/levelonelabs/aimbot/modules/TicTacToeModule.java 33 55
+src/com/levelonelabs/aimbot/modules/BuddyManagementModule.java 33 53
+----------------------------------------
+package com.levelonelabs.aimbot.modules;
+
+import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.Random;
+import java.util.StringTokenizer;
+import java.util.logging.Logger;
+
+import com.levelonelabs.aim.AIMBuddy;
+import com.levelonelabs.aimbot.AIMBot;
+import com.levelonelabs.aimbot.BotModule;
+
+
+/**
+ * Allows someone to play Tic Tac Toe against the computer or competitior. This
+ * is to demonstrate how state can be saved for a game or other type of module.
+ * Thanks to Niel Eyde for the idea.
+ * 
+ * @author Will Gorman
+ * @created April 18, 2003
+ */
+public class TicTacToeModule extends BotModule {
+    private static ArrayList services;
+
+----------------------------------------
+package com.levelonelabs.aimbot.modules;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.StringTokenizer;
+import java.util.logging.Logger;
+
+import com.levelonelabs.aim.AIMBuddy;
+import com.levelonelabs.aimbot.AIMBot;
+import com.levelonelabs.aimbot.BotModule;
+
+
+/**
+ * Used to hanle administration of buddies.
+ * 
+ * @author Scott Oster
+ * @created January 09, 2004
+ */
+public class BuddyManagementModule extends BotModule {
+    private static ArrayList services;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+28418780
+src/com/levelonelabs/aimbot/modules/MessengerModule.java 38 55
+src/com/levelonelabs/aimbot/modules/UserInformationModule.java 35 57
+----------------------------------------
+import java.util.logging.Logger;
+
+import com.levelonelabs.aim.AIMAdapter;
+import com.levelonelabs.aim.AIMBuddy;
+import com.levelonelabs.aimbot.AIMBot;
+import com.levelonelabs.aimbot.BotModule;
+
+
+/**
+ * A class to handle on-offline messaging
+ * 
+ * @author Will Gorman, Scott Oster
+ * 
+ * @created January 28, 2002
+ */
+public class MessengerModule extends BotModule {
+	private static ArrayList services;
+	private static Logger logger = Logger.getLogger(MessengerModule.class.getName());
+
+----------------------------------------
+import java.util.*;
+
+import com.levelonelabs.aim.AIMAdapter;
+import com.levelonelabs.aim.AIMBuddy;
+import com.levelonelabs.aimbot.AIMBot;
+import com.levelonelabs.aimbot.BotModule;
+
+
+/**
+ * Handles requests for user queries
+ *
+ * @author Scott Oster
+ *
+ * @created September 6, 2002
+ *
+ * @todo instead of string, store HistoryObject (signon/off, date), then can easily compute on/off
+ *       line durations
+ * @todo attempt to remove signons caused by bot being offline and coming back
+ * @todo when get to HistObjs attempt to maintain sanity of off/on/off/on cycle
+ */
+public class UserInformationModule extends BotModule {
+	private static ArrayList services;
+	private static final int SIZE = 6;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+28418781
+src/com/levelonelabs/aimbot/modules/WeatherModule.java 123 128
+src/com/levelonelabs/aimbot/modules/SkiReportModule.java 132 137
+----------------------------------------
+            String zipPref=buddy.getPreference("zipcode");
+            if((zipPref == null) && (st.countTokens() < 2)) {
+                super.sendMessage(buddy, "ERROR:\n"+help());
+            } else {
+                String imcommand=st.nextToken();
+                String zipcode="";
+
+----------------------------------------
+            String mntPref = buddy.getPreference(MOUNTAIN_PREF);
+            if ((mntPref == null) && (st.countTokens() < 2)) {
+                super.sendMessage(buddy, "ERROR:\n" + help());
+            } else {
+                String imcommand = st.nextToken();
+                String state = "";
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+28418782
+src/com/levelonelabs/aimbot/modules/WeatherModule.java 34 47
+src/com/levelonelabs/aimbot/modules/MoviesModule.java 34 47
+----------------------------------------
+package com.levelonelabs.aimbot.modules;
+
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
+import java.net.URL;
+import java.net.URLConnection;
+
+import java.util.ArrayList;
+import java.util.StringTokenizer;
+import java.util.logging.Logger;
+
+import javax.swing.text.html.HTMLEditorKit.ParserCallback;
+
+----------------------------------------
+package com.levelonelabs.aimbot.modules;
+
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
+import java.net.URL;
+import java.net.URLConnection;
+
+import java.util.ArrayList;
+import java.util.StringTokenizer;
+import java.util.logging.Logger;
+
+import javax.swing.text.MutableAttributeSet;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+28418783
+src/com/levelonelabs/aimbot/modules/SkiReportModule.java 333 337
+src/com/levelonelabs/aimbot/modules/TVListingsModule.java 155 160
+----------------------------------------
+        Map mounts = scrapper.getMountains();
+        for (Iterator iter = mounts.keySet().iterator(); iter.hasNext();) {
+            String key = (String) iter.next();
+            String value = (String) mounts.get(key);
+            System.out.println(value + "\t use --> " + key);
+
+----------------------------------------
+						result = "Set the preference <b>tvprovider</b> to your providers code.\n";
+						//seemed to have gotten a decent result, so display it
+						for (Iterator iter = providers.keySet().iterator(); iter.hasNext();) {
+							String key = (String) iter.next();
+							String value = (String) providers.get(key);
+							logger.fine(value + "\t use --> " + key);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+28418784
+src/com/levelonelabs/aimbot/modules/SkiReportModule.java 186 190
+src/com/levelonelabs/aimbot/modules/TVListingsModule.java 332 336
+----------------------------------------
+                        result = "Ski Resort codes for " + state + ":\n";
+                        for (Iterator iter = mntMap.keySet().iterator(); iter.hasNext();) {
+                            String key = (String) iter.next();
+                            String value = (String) mntMap.get(key);
+                            logger.fine(value + "\t use --> " + state + ":" + key);
+
+----------------------------------------
+		Map providers = scrapper.getProviders();
+		for (Iterator iter = providers.keySet().iterator(); iter.hasNext();) {
+			String key = (String) iter.next();
+			String value = (String) providers.get(key);
+			System.out.println(value + "\t use --> " + key);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+28418785
+src/com/levelonelabs/aimbot/modules/SkiReportModule.java 132 137
+src/com/levelonelabs/aimbot/modules/TVListingsModule.java 138 143
+----------------------------------------
+            String mntPref = buddy.getPreference(MOUNTAIN_PREF);
+            if ((mntPref == null) && (st.countTokens() < 2)) {
+                super.sendMessage(buddy, "ERROR:\n" + help());
+            } else {
+                String imcommand = st.nextToken();
+                String state = "";
+
+----------------------------------------
+			String zipPref = buddy.getPreference("zipcode");
+			if ((zipPref == null) && (st.countTokens() < 2)) {
+				super.sendMessage(buddy, "ERROR:\n" + help());
+			} else {
+				String imcommand = st.nextToken();
+				String zipcode = "";
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+28918732
+src/com/levelonelabs/aim/AIMClient.java 1004 1018
+src/com/levelonelabs/aimbot/modules/TelnetModule.java 217 262
+----------------------------------------
+    private void generateBuddyUnavailable(String buddy, String message) {
+        AIMBuddy aimbud = getBuddy(buddy);
+        if (aimbud == null) {
+            logger.severe("ERROR:  NOTIFICATION ABOUT NON BUDDY(" + buddy + ")");
+            return;
+        }
+
+        for (int i = 0; i < aimListeners.size(); i++) {
+            try {
+                ((AIMListener) aimListeners.get(i)).handleBuddyUnavailable(aimbud, message);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+----------------------------------------
+			public void run() {
+				StringBuffer cmdBuf = new StringBuffer();
+				String cmd;
+				int ch;
+
+				if (bRunState == false) {
+					return;
+				}
+
+				//logger.fine("Running Telnet Handler");
+				try {
+					osw.write("Welcome to Jaimbot's Telnet Module.  Type quit to quit.\n");
+					osw.flush();
+					do {
+						while ((ch = isr.read()) != '\n') {
+							cmdBuf.append((char) ch); // append the string
+							osw.write((char) ch);
+							// echo the character to the telnet client
+							osw.flush();
+						}
+						osw.write('\n');
+						osw.flush();
+
+						cmd = cmdBuf.toString();
+						cmdBuf = new StringBuffer();
+						cmd = cmd.trim();
+
+						logger.fine("Received command: ");
+						logger.fine("-" + cmd + "-");
+
+						if (!cmd.equals("quit")) {
+							logger.fine("Executing bot command...");
+							parentBot.handleMessage(getModBuddy(), cmd);
+							logger.fine("Ok");
+						}
+					} while (!cmd.equals("quit"));
+
+					// Attempt to clean up after ourselves
+					isr.close();
+					osw.close();
+					sock.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+					logger.severe("Trouble in TelnetHandler");
+				}
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+28918731
+src/com/levelonelabs/aim/AIMClient.java 980 993
+src/com/levelonelabs/aimbot/modules/TelnetModule.java 217 262
+----------------------------------------
+    private void generateBuddyAvailable(String buddy, String message) {
+        AIMBuddy aimbud = getBuddy(buddy);
+        if (aimbud == null) {
+            logger.severe("ERROR:  NOTIFICATION ABOUT NON BUDDY(" + buddy + ")");
+            return;
+        }
+        for (int i = 0; i < aimListeners.size(); i++) {
+            try {
+                ((AIMListener) aimListeners.get(i)).handleBuddyAvailable(aimbud, message);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+----------------------------------------
+			public void run() {
+				StringBuffer cmdBuf = new StringBuffer();
+				String cmd;
+				int ch;
+
+				if (bRunState == false) {
+					return;
+				}
+
+				//logger.fine("Running Telnet Handler");
+				try {
+					osw.write("Welcome to Jaimbot's Telnet Module.  Type quit to quit.\n");
+					osw.flush();
+					do {
+						while ((ch = isr.read()) != '\n') {
+							cmdBuf.append((char) ch); // append the string
+							osw.write((char) ch);
+							// echo the character to the telnet client
+							osw.flush();
+						}
+						osw.write('\n');
+						osw.flush();
+
+						cmd = cmdBuf.toString();
+						cmdBuf = new StringBuffer();
+						cmd = cmd.trim();
+
+						logger.fine("Received command: ");
+						logger.fine("-" + cmd + "-");
+
+						if (!cmd.equals("quit")) {
+							logger.fine("Executing bot command...");
+							parentBot.handleMessage(getModBuddy(), cmd);
+							logger.fine("Ok");
+						}
+					} while (!cmd.equals("quit"));
+
+					// Attempt to clean up after ourselves
+					isr.close();
+					osw.close();
+					sock.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+					logger.severe("Trouble in TelnetHandler");
+				}
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+28918730
+src/com/levelonelabs/aimbot/modules/TelnetModule.java 217 262
+src/com/levelonelabs/aimbot/modules/SkiReportModule.java 280 294
+----------------------------------------
+			public void run() {
+				StringBuffer cmdBuf = new StringBuffer();
+				String cmd;
+				int ch;
+
+				if (bRunState == false) {
+					return;
+				}
+
+				//logger.fine("Running Telnet Handler");
+				try {
+					osw.write("Welcome to Jaimbot's Telnet Module.  Type quit to quit.\n");
+					osw.flush();
+					do {
+						while ((ch = isr.read()) != '\n') {
+							cmdBuf.append((char) ch); // append the string
+							osw.write((char) ch);
+							// echo the character to the telnet client
+							osw.flush();
+						}
+						osw.write('\n');
+						osw.flush();
+
+						cmd = cmdBuf.toString();
+						cmdBuf = new StringBuffer();
+						cmd = cmd.trim();
+
+						logger.fine("Received command: ");
+						logger.fine("-" + cmd + "-");
+
+						if (!cmd.equals("quit")) {
+							logger.fine("Executing bot command...");
+							parentBot.handleMessage(getModBuddy(), cmd);
+							logger.fine("Ok");
+						}
+					} while (!cmd.equals("quit"));
+
+					// Attempt to clean up after ourselves
+					isr.close();
+					osw.close();
+					sock.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+					logger.severe("Trouble in TelnetHandler");
+				}
+			}
+
+----------------------------------------
+    public void handleText(char[] data, int pos) {
+        if (grabURLText == true) {
+            String name = new String(data).trim();
+            if (!name.startsWith("Don't see the resort")) {
+                names.add(name);
+            }
+            grabURLText = false;
+        } else {
+            String line = new String(data).trim();
+            // ignore the time zone providers
+            if (line.equals("Resort Name")) {
+                validLink = true;
+            }
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+28918733
+src/com/levelonelabs/aimbot/modules/TicTacToeModule.java 216 258
+src/com/levelonelabs/aimbot/modules/TicTacToeModule.java 218 251
+----------------------------------------
+                    } else {
+                        if (tttg.state == tttg.STARTED) {
+                            try {
+                                int move = Integer.parseInt(command);
+
+                                // make sure move is valid
+                                boolean valid = tttg.playerMove(you, move);
+                                if (valid) {
+                                    if (comp.equals(bot.getUsername())) {
+                                        tttg.computerMove();
+                                    }
+                                    if (tttg.gameOver()) {
+                                        int w = tttg.winner();
+                                        if (w != -1) {
+                                            String winner = tttg.getPlayerName(w);
+                                            String loser = tttg.getCompetitor(winner);
+                                            sendMessageUnlessRobot(getBuddy(winner), "\n" + tttg.displayMoves()
+                                                + "\nYou won!");
+                                            sendMessageUnlessRobot(getBuddy(loser), "\n" + tttg.displayMoves()
+                                                + "\nYou lost!");
+                                        } else {
+                                            sendMessage(buddy, "\n" + tttg.displayMoves() + "\nIt was a tie!");
+                                            sendMessageUnlessRobot(getBuddy(comp), "\n" + tttg.displayMoves()
+                                                + "\nIt was a tie!");
+                                        }
+                                        games.remove(comp);
+                                        games.remove(you);
+                                    } else {
+                                        sendMessage(getBuddy(tttg.getCurrentPlayer()), "\n" + tttg.displayMoves()
+                                            + "\nSelect " + tttg.getCurrentXO() + " Move (ttt N):");
+                                    }
+                                } else {
+                                    sendMessage(buddy, "\n" + tttg.displayMoves()
+                                        + "\nInvalid move. Type \"ttt show\" to see the current state of the game.");
+                                }
+                            } catch (Exception e) {
+                                logger.severe("Error: " + command + ":" + e.getMessage());
+                                sendMessage(buddy, "Unrecognized tic tac toe command: " + command);
+                            }
+                        } else {
+                            sendMessage(buddy, "state of game not started.  sorry.");
+                        }
+                    }
+
+----------------------------------------
+                            try {
+                                int move = Integer.parseInt(command);
+
+                                // make sure move is valid
+                                boolean valid = tttg.playerMove(you, move);
+                                if (valid) {
+                                    if (comp.equals(bot.getUsername())) {
+                                        tttg.computerMove();
+                                    }
+                                    if (tttg.gameOver()) {
+                                        int w = tttg.winner();
+                                        if (w != -1) {
+                                            String winner = tttg.getPlayerName(w);
+                                            String loser = tttg.getCompetitor(winner);
+                                            sendMessageUnlessRobot(getBuddy(winner), "\n" + tttg.displayMoves()
+                                                + "\nYou won!");
+                                            sendMessageUnlessRobot(getBuddy(loser), "\n" + tttg.displayMoves()
+                                                + "\nYou lost!");
+                                        } else {
+                                            sendMessage(buddy, "\n" + tttg.displayMoves() + "\nIt was a tie!");
+                                            sendMessageUnlessRobot(getBuddy(comp), "\n" + tttg.displayMoves()
+                                                + "\nIt was a tie!");
+                                        }
+                                        games.remove(comp);
+                                        games.remove(you);
+                                    } else {
+                                        sendMessage(getBuddy(tttg.getCurrentPlayer()), "\n" + tttg.displayMoves()
+                                            + "\nSelect " + tttg.getCurrentXO() + " Move (ttt N):");
+                                    }
+                                } else {
+                                    sendMessage(buddy, "\n" + tttg.displayMoves()
+                                        + "\nInvalid move. Type \"ttt show\" to see the current state of the game.");
+                                }
+                            } catch (Exception e) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+28918734
+src/com/levelonelabs/aimbot/modules/TicTacToeModule.java 217 255
+src/com/levelonelabs/aimbot/modules/PreferenceModule.java 115 143
+----------------------------------------
+                        if (tttg.state == tttg.STARTED) {
+                            try {
+                                int move = Integer.parseInt(command);
+
+                                // make sure move is valid
+                                boolean valid = tttg.playerMove(you, move);
+                                if (valid) {
+                                    if (comp.equals(bot.getUsername())) {
+                                        tttg.computerMove();
+                                    }
+                                    if (tttg.gameOver()) {
+                                        int w = tttg.winner();
+                                        if (w != -1) {
+                                            String winner = tttg.getPlayerName(w);
+                                            String loser = tttg.getCompetitor(winner);
+                                            sendMessageUnlessRobot(getBuddy(winner), "\n" + tttg.displayMoves()
+                                                + "\nYou won!");
+                                            sendMessageUnlessRobot(getBuddy(loser), "\n" + tttg.displayMoves()
+                                                + "\nYou lost!");
+                                        } else {
+                                            sendMessage(buddy, "\n" + tttg.displayMoves() + "\nIt was a tie!");
+                                            sendMessageUnlessRobot(getBuddy(comp), "\n" + tttg.displayMoves()
+                                                + "\nIt was a tie!");
+                                        }
+                                        games.remove(comp);
+                                        games.remove(you);
+                                    } else {
+                                        sendMessage(getBuddy(tttg.getCurrentPlayer()), "\n" + tttg.displayMoves()
+                                            + "\nSelect " + tttg.getCurrentXO() + " Move (ttt N):");
+                                    }
+                                } else {
+                                    sendMessage(buddy, "\n" + tttg.displayMoves()
+                                        + "\nInvalid move. Type \"ttt show\" to see the current state of the game.");
+                                }
+                            } catch (Exception e) {
+                                logger.severe("Error: " + command + ":" + e.getMessage());
+                                sendMessage(buddy, "Unrecognized tic tac toe command: " + command);
+                            }
+                        } else {
+
+----------------------------------------
+    public void performService(AIMBuddy buddy, String query) {
+        if(query.toLowerCase().startsWith("listprefs")) {
+            // RETURN A LIST OF PREFERENCES
+            HashMap prefs=buddy.getPreferences();
+            Iterator iter=prefs.keySet().iterator();
+            StringBuffer sb=new StringBuffer();
+            sb.append("Preferences:\n");
+            while(iter.hasNext()) {
+                String key=(String) iter.next();
+                sb.append(key).append(" = ").append(prefs.get(key)).append("\n");
+            }
+            super.sendMessage(buddy, sb.toString());
+        } else if(query.toLowerCase().startsWith("setpref")) {
+            //store the desired pref
+            StringTokenizer st=new StringTokenizer(query, " ");
+            if(st.countTokens() < 3) {
+                super.sendMessage(buddy, "ERROR:\n"+help());
+            } else {
+                String imcommand=st.nextToken();
+                String preference=st.nextToken();
+                String value=st.nextToken();
+                while(st.hasMoreTokens()) {
+                    value+=(" "+st.nextToken());
+                }
+                buddy.setPreference(preference, value);
+                super.sendMessage(buddy, "Preference ("+preference+" = "+value+") added.");
+            }
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+28918735
+src/com/levelonelabs/aimbot/modules/TicTacToeModule.java 217 255
+src/com/levelonelabs/aimbot/modules/MessengerModule.java 208 259
+----------------------------------------
+                        if (tttg.state == tttg.STARTED) {
+                            try {
+                                int move = Integer.parseInt(command);
+
+                                // make sure move is valid
+                                boolean valid = tttg.playerMove(you, move);
+                                if (valid) {
+                                    if (comp.equals(bot.getUsername())) {
+                                        tttg.computerMove();
+                                    }
+                                    if (tttg.gameOver()) {
+                                        int w = tttg.winner();
+                                        if (w != -1) {
+                                            String winner = tttg.getPlayerName(w);
+                                            String loser = tttg.getCompetitor(winner);
+                                            sendMessageUnlessRobot(getBuddy(winner), "\n" + tttg.displayMoves()
+                                                + "\nYou won!");
+                                            sendMessageUnlessRobot(getBuddy(loser), "\n" + tttg.displayMoves()
+                                                + "\nYou lost!");
+                                        } else {
+                                            sendMessage(buddy, "\n" + tttg.displayMoves() + "\nIt was a tie!");
+                                            sendMessageUnlessRobot(getBuddy(comp), "\n" + tttg.displayMoves()
+                                                + "\nIt was a tie!");
+                                        }
+                                        games.remove(comp);
+                                        games.remove(you);
+                                    } else {
+                                        sendMessage(getBuddy(tttg.getCurrentPlayer()), "\n" + tttg.displayMoves()
+                                            + "\nSelect " + tttg.getCurrentXO() + " Move (ttt N):");
+                                    }
+                                } else {
+                                    sendMessage(buddy, "\n" + tttg.displayMoves()
+                                        + "\nInvalid move. Type \"ttt show\" to see the current state of the game.");
+                                }
+                            } catch (Exception e) {
+                                logger.severe("Error: " + command + ":" + e.getMessage());
+                                sendMessage(buddy, "Unrecognized tic tac toe command: " + command);
+                            }
+                        } else {
+
+----------------------------------------
+	private void handleTell(AIMBuddy buddy, String query) {
+		String name = "Someone";
+
+		//sendMessage(getBuddy("osterCRD"), "YEP, POOP");
+		if (query.toLowerCase().startsWith("tell")) {
+			StringTokenizer st = new StringTokenizer(query, " ");
+
+			//check for right number of arguments
+			if (st.countTokens() < 3) {
+				sendMessage(buddy, "ERROR:\n" + help());
+				return;
+			}
+
+			//grab the command and target
+			String imcommand = st.nextToken();
+			if (!imcommand.toLowerCase().equals("tell")) {
+				sendMessage(buddy, "ERROR:\n" + help());
+				return;
+			}
+			String imcommandTo = st.nextToken();
+			AIMBuddy to = getBuddy(imcommandTo);
+
+			//verify they are a user of the bot
+			if (to == null) {
+				sendMessage(buddy, "User " + imcommandTo
+					+ " does not exist in the system.\nUse the ADDUSER command to add them.");
+				return;
+			}
+
+			//grab the rest of the message and send it to the target
+			String imcommandText = "";
+			while (st.hasMoreTokens()) {
+				imcommandText = imcommandText + " " + st.nextToken();
+			}
+
+			//only send a message if there is somethign there.
+			if (!imcommandText.equals("")) {
+				//if the target if not online we need to store the message for
+				// when they sign on
+				if (to.isOnline()) {
+					if (buddy != null) {
+						name = buddy.getName();
+					}
+
+					sendMessage(to, name + " said: " + imcommandText);
+				} else {
+					sendMessage(buddy, imcommandTo + " is offline and will be told when they signon.");
+					addMessage(to, buddy, imcommandText);
+				}
+			}
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+28918761
+src/com/levelonelabs/aimbot/modules/ListModule.java 242 258
+src/com/levelonelabs/aimbot/modules/MessengerModule.java 208 259
+----------------------------------------
+    private void processRemoveList(AIMBuddy buddy, StringTokenizer st) {
+        if (!buddy.hasRole(AIMBot.ROLE_ADMINISTRATOR)) {
+            super.sendMessage(buddy, "Sorry. This command is for admins only.");
+        } else if (st.countTokens() < 1) {
+            super.sendMessage(buddy, "Error: \n" + help());
+        } else {
+            String list = st.nextToken();
+            list = st.nextToken();
+            AIMGroup group = super.bot.getGroup(list);
+            if (group != null) {
+                super.bot.removeGroup(group);
+                super.sendMessage(buddy, "The list " + list + " has been removed");
+            } else {
+                super.sendMessage(buddy, "The list " + list + " does not exist");
+            }
+        }
+    }
+
+----------------------------------------
+	private void handleTell(AIMBuddy buddy, String query) {
+		String name = "Someone";
+
+		//sendMessage(getBuddy("osterCRD"), "YEP, POOP");
+		if (query.toLowerCase().startsWith("tell")) {
+			StringTokenizer st = new StringTokenizer(query, " ");
+
+			//check for right number of arguments
+			if (st.countTokens() < 3) {
+				sendMessage(buddy, "ERROR:\n" + help());
+				return;
+			}
+
+			//grab the command and target
+			String imcommand = st.nextToken();
+			if (!imcommand.toLowerCase().equals("tell")) {
+				sendMessage(buddy, "ERROR:\n" + help());
+				return;
+			}
+			String imcommandTo = st.nextToken();
+			AIMBuddy to = getBuddy(imcommandTo);
+
+			//verify they are a user of the bot
+			if (to == null) {
+				sendMessage(buddy, "User " + imcommandTo
+					+ " does not exist in the system.\nUse the ADDUSER command to add them.");
+				return;
+			}
+
+			//grab the rest of the message and send it to the target
+			String imcommandText = "";
+			while (st.hasMoreTokens()) {
+				imcommandText = imcommandText + " " + st.nextToken();
+			}
+
+			//only send a message if there is somethign there.
+			if (!imcommandText.equals("")) {
+				//if the target if not online we need to store the message for
+				// when they sign on
+				if (to.isOnline()) {
+					if (buddy != null) {
+						name = buddy.getName();
+					}
+
+					sendMessage(to, name + " said: " + imcommandText);
+				} else {
+					sendMessage(buddy, imcommandTo + " is offline and will be told when they signon.");
+					addMessage(to, buddy, imcommandText);
+				}
+			}
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+28918736
+src/com/levelonelabs/aimbot/modules/TicTacToeModule.java 385 432
+src/com/levelonelabs/aimbot/modules/TicTacToeModule.java 389 423
+----------------------------------------
+        public int winner() {
+            int d1 = -1;
+            int d2 = -1;
+
+            for (int i = 0; i < 3; i++) {
+                int v = -1;
+                int h = -1;
+
+                if (i == 0) {
+                    d1 = board[i][i];
+                    d2 = board[2 - i][i];
+                } else {
+                    if (board[i][i] != d1) {
+                        d1 = -1;
+                    }
+                    if (board[2 - i][i] != d2) {
+                        d2 = -1;
+                    }
+                }
+                for (int j = 0; j < 3; j++) {
+                    if (j == 0) {
+                        v = board[i][j];
+                        h = board[j][i];
+                    } else {
+                        if (board[i][j] != v) {
+                            v = -1;
+                        }
+                        if (board[j][i] != h) {
+                            h = -1;
+                        }
+                    }
+                }
+                if ((v != -1) && (v != ' ')) {
+                    return ((v == xo[0]) ? 0 : 1);
+                }
+                if ((h != -1) && (h != ' ')) {
+                    return ((h == xo[0]) ? 0 : 1);
+                }
+            }
+            if ((d1 != -1) && (d1 != ' ')) {
+                return ((d1 == xo[0]) ? 0 : 1);
+            }
+            if ((d2 != -1) && (d2 != ' ')) {
+                return ((d2 == xo[0]) ? 0 : 1);
+            }
+
+            return -1;
+        }
+
+----------------------------------------
+            for (int i = 0; i < 3; i++) {
+                int v = -1;
+                int h = -1;
+
+                if (i == 0) {
+                    d1 = board[i][i];
+                    d2 = board[2 - i][i];
+                } else {
+                    if (board[i][i] != d1) {
+                        d1 = -1;
+                    }
+                    if (board[2 - i][i] != d2) {
+                        d2 = -1;
+                    }
+                }
+                for (int j = 0; j < 3; j++) {
+                    if (j == 0) {
+                        v = board[i][j];
+                        h = board[j][i];
+                    } else {
+                        if (board[i][j] != v) {
+                            v = -1;
+                        }
+                        if (board[j][i] != h) {
+                            h = -1;
+                        }
+                    }
+                }
+                if ((v != -1) && (v != ' ')) {
+                    return ((v == xo[0]) ? 0 : 1);
+                }
+                if ((h != -1) && (h != ' ')) {
+                    return ((h == xo[0]) ? 0 : 1);
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+28918737
+src/com/levelonelabs/aimbot/modules/TicTacToeModule.java 485 501
+src/com/levelonelabs/aimbot/modules/TicTacToeModule.java 486 497
+----------------------------------------
+            for (int i = 0; i < 3; i++) { // Y dir
+                for (int j = 0; j < 3; j++) { // X dir
+                    if (board[j][i] == ' ') {
+                        b += ((i * 3) + (j + 1));
+                    } else {
+                        b += "<b>" + board[j][i] + "</b>";
+                    }
+                    if (j != 2) {
+                        b += "|";
+                    } else {
+                        b += "\n";
+                    }
+                }
+                if (i != 2) {
+                    b += "-+-+-\n";
+                }
+            }
+
+----------------------------------------
+                for (int j = 0; j < 3; j++) { // X dir
+                    if (board[j][i] == ' ') {
+                        b += ((i * 3) + (j + 1));
+                    } else {
+                        b += "<b>" + board[j][i] + "</b>";
+                    }
+                    if (j != 2) {
+                        b += "|";
+                    } else {
+                        b += "\n";
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+28918738
+src/com/levelonelabs/aim/AIMClient.java 220 226
+src/com/levelonelabs/aim/AIMClient.java 206 229
+----------------------------------------
+                    for (int j = i + 1; j < sb.length(); j++) {
+                        if ((sb.charAt(j) == '>') && (sb.charAt(j - 1) == '-') && (sb.charAt(j - 2) == '-')) {
+                            sb = sb.replace(i, j + 1, "");
+                            i--;
+                            break;
+                        }
+                    }
+
+----------------------------------------
+        for (int i = 0; i < (sb.length() - 1); i++) {
+            if (sb.charAt(i) == '<') {
+                // Most tags
+                if ((sb.charAt(i + 1) == '/') || ((sb.charAt(i + 1) >= 'a') && (sb.charAt(i + 1) <= 'z'))
+                    || ((sb.charAt(i + 1) >= 'A') && (sb.charAt(i + 1) <= 'Z'))) {
+                    for (int j = i + 1; j < sb.length(); j++) {
+                        if (sb.charAt(j) == '>') {
+                            sb = sb.replace(i, j + 1, "");
+                            i--;
+                            break;
+                        }
+                    }
+                } else if (sb.charAt(i + 1) == '!') {
+                    // Comments
+                    for (int j = i + 1; j < sb.length(); j++) {
+                        if ((sb.charAt(j) == '>') && (sb.charAt(j - 1) == '-') && (sb.charAt(j - 2) == '-')) {
+                            sb = sb.replace(i, j + 1, "");
+                            i--;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+28918739
+src/com/levelonelabs/aim/AIMClient.java 345 455
+src/com/levelonelabs/aimbot/modules/SkiReportModule.java 477 505
+----------------------------------------
+    public void run() {
+        int length;
+        seqNo = (int) Math.floor(Math.random() * 65535.0);
+
+        // AOL likes to have a bunch of bogus IPs for some reason, so lets try
+        // them all until one works
+        InetAddress[] loginIPs = null;
+        try {
+            loginIPs = InetAddress.getAllByName(loginServer);
+        } catch (UnknownHostException e) {
+            signoff("0");
+            generateError("Signon err", e.getMessage());
+            return;
+        }
+
+        for (int i = 0; i < loginIPs.length; i++) {
+            try {
+                logger.fine("Attempting to logon using IP:" + loginIPs[i]);
+                // * Client connects to TOC
+                connection = new Socket(loginIPs[i], loginPort);
+                connection.setSoTimeout(10000);
+                in = new DataInputStream(connection.getInputStream());
+                out = new DataOutputStream(new BufferedOutputStream(connection.getOutputStream()));
+                logger.fine("Successfully connected using IP:" + loginIPs[i]);
+                break;
+            } catch (Exception e) {
+                // try the next one
+            }
+        }
+
+        if (connection == null || in == null || out == null) {
+            signoff("1");
+            generateError("Signon err", "Unable to establish connection to logon server.");
+            return;
+        }
+
+        logger.fine("*** Starting AIM CLIENT (SEQNO:" + seqNo + ") ***");
+        try {
+            // * Client sends "FLAPON\r\n\r\n"
+            out.writeBytes("FLAPON\r\n\r\n");
+            out.flush();
+            // 6 byte header, plus 4 FLAP version (1)
+            byte[] signon = new byte[10];
+            // * TOC sends Client FLAP SIGNON
+            in.readFully(signon);
+            // * Client sends TOC FLAP SIGNON
+            out.writeByte(42);// *
+            out.writeByte(1); // SIGNON TYPE
+            out.writeShort(seqNo); // SEQ NO
+            seqNo = (seqNo + 1) & 65535;
+            out.writeShort(name.length() + 8); // data length = username length
+            // + SIGNON DATA
+            out.writeInt(1); // FLAP VERSION
+            out.writeShort(1); // TLF TAG
+            out.writeShort(name.length()); // username length
+            out.writeBytes(name); // usename
+            out.flush();
+
+            // * Client sends TOC "toc_signon" message
+            frameSend("toc2_signon " + authorizerServer + " " + authorizerPort + " " + name + " " + imRoast(pass)
+                + " English " + REVISION + " " + toc2MagicNumber(name, pass) + "\0");
+
+            // * if login fails TOC drops client's connection
+            // else TOC sends client SIGN_ON reply
+            in.skip(4); // seq num
+            length = in.readShort(); // data length
+            signon = new byte[length];
+            in.readFully(signon); // data
+            if (new String(signon).startsWith("ERROR")) {
+                fromAIM(signon);
+                logger.severe("Signon error");
+                signoff("2");
+                return;
+            }
+
+            in.skip(4); // seq num
+            length = in.readShort(); // data length
+            signon = new byte[length];
+            in.readFully(signon); // data
+            // * Client sends TOC toc_init_done message
+            frameSend("toc_init_done\0");
+            online = true;
+            generateConnected();
+            frameSend("toc_set_info \"" + info + "\"\0");
+            logger.fine("Done with AIM logon");
+            connection.setSoTimeout(3000);
+        } catch (InterruptedIOException e) {
+            signoff("2.25");
+        } catch (IOException e) {
+            signoff("3");
+        }
+
+        byte[] data;
+        while (true) {
+            try {
+                in.skip(4);
+                length = in.readShort();
+                data = new byte[length];
+                in.readFully(data);
+                fromAIM(data);
+                // logger.fine("SEQNO:"+seqNo);
+            } catch (InterruptedIOException e) {
+                // This is normal; read times out when we dont read anything.
+                // logger.fine("*** AIM ERROR: " + e + " ***");
+            } catch (IOException e) {
+                logger.severe("*** AIM ERROR: " + e + " ***");
+                break;
+            }
+        }
+        signoff("Connection reset.");
+    }
+
+----------------------------------------
+    public SnowReport getSnowReport() {
+        URL url = null;
+        try {
+            url = new URL(BASE_URL + state + "/" + resortCode + "/" + URL_END);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        logger.fine("Looking for Snow report for resort " + resortCode + " in state" + state + " using URL= " + url);
+        SnowReport tempResult;
+        try {
+            URLConnection conn = url.openConnection();
+            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            ParserDelegator pd = new ParserDelegator();
+            pd.parse(br, this, true);
+
+            tempResult = result;
+            if (statesVisited != 6) {
+                tempResult = null;
+            }
+        } catch (Exception e) {
+            // e.printStackTrace();
+            logger.severe(e.toString());
+            return null;
+        }
+
+        return tempResult;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+28918783
+src/com/levelonelabs/aimbot/modules/MessengerModule.java 208 259
+src/com/levelonelabs/aimbot/modules/SkiReportModule.java 477 505
+----------------------------------------
+	private void handleTell(AIMBuddy buddy, String query) {
+		String name = "Someone";
+
+		//sendMessage(getBuddy("osterCRD"), "YEP, POOP");
+		if (query.toLowerCase().startsWith("tell")) {
+			StringTokenizer st = new StringTokenizer(query, " ");
+
+			//check for right number of arguments
+			if (st.countTokens() < 3) {
+				sendMessage(buddy, "ERROR:\n" + help());
+				return;
+			}
+
+			//grab the command and target
+			String imcommand = st.nextToken();
+			if (!imcommand.toLowerCase().equals("tell")) {
+				sendMessage(buddy, "ERROR:\n" + help());
+				return;
+			}
+			String imcommandTo = st.nextToken();
+			AIMBuddy to = getBuddy(imcommandTo);
+
+			//verify they are a user of the bot
+			if (to == null) {
+				sendMessage(buddy, "User " + imcommandTo
+					+ " does not exist in the system.\nUse the ADDUSER command to add them.");
+				return;
+			}
+
+			//grab the rest of the message and send it to the target
+			String imcommandText = "";
+			while (st.hasMoreTokens()) {
+				imcommandText = imcommandText + " " + st.nextToken();
+			}
+
+			//only send a message if there is somethign there.
+			if (!imcommandText.equals("")) {
+				//if the target if not online we need to store the message for
+				// when they sign on
+				if (to.isOnline()) {
+					if (buddy != null) {
+						name = buddy.getName();
+					}
+
+					sendMessage(to, name + " said: " + imcommandText);
+				} else {
+					sendMessage(buddy, imcommandTo + " is offline and will be told when they signon.");
+					addMessage(to, buddy, imcommandText);
+				}
+			}
+		}
+	}
+
+----------------------------------------
+    public SnowReport getSnowReport() {
+        URL url = null;
+        try {
+            url = new URL(BASE_URL + state + "/" + resortCode + "/" + URL_END);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        logger.fine("Looking for Snow report for resort " + resortCode + " in state" + state + " using URL= " + url);
+        SnowReport tempResult;
+        try {
+            URLConnection conn = url.openConnection();
+            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            ParserDelegator pd = new ParserDelegator();
+            pd.parse(br, this, true);
+
+            tempResult = result;
+            if (statesVisited != 6) {
+                tempResult = null;
+            }
+        } catch (Exception e) {
+            // e.printStackTrace();
+            logger.severe(e.toString());
+            return null;
+        }
+
+        return tempResult;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+28918740
+src/com/levelonelabs/aim/AIMClient.java 382 431
+src/com/levelonelabs/aimbot/modules/WeatherModule.java 158 166
+----------------------------------------
+        try {
+            // * Client sends "FLAPON\r\n\r\n"
+            out.writeBytes("FLAPON\r\n\r\n");
+            out.flush();
+            // 6 byte header, plus 4 FLAP version (1)
+            byte[] signon = new byte[10];
+            // * TOC sends Client FLAP SIGNON
+            in.readFully(signon);
+            // * Client sends TOC FLAP SIGNON
+            out.writeByte(42);// *
+            out.writeByte(1); // SIGNON TYPE
+            out.writeShort(seqNo); // SEQ NO
+            seqNo = (seqNo + 1) & 65535;
+            out.writeShort(name.length() + 8); // data length = username length
+            // + SIGNON DATA
+            out.writeInt(1); // FLAP VERSION
+            out.writeShort(1); // TLF TAG
+            out.writeShort(name.length()); // username length
+            out.writeBytes(name); // usename
+            out.flush();
+
+            // * Client sends TOC "toc_signon" message
+            frameSend("toc2_signon " + authorizerServer + " " + authorizerPort + " " + name + " " + imRoast(pass)
+                + " English " + REVISION + " " + toc2MagicNumber(name, pass) + "\0");
+
+            // * if login fails TOC drops client's connection
+            // else TOC sends client SIGN_ON reply
+            in.skip(4); // seq num
+            length = in.readShort(); // data length
+            signon = new byte[length];
+            in.readFully(signon); // data
+            if (new String(signon).startsWith("ERROR")) {
+                fromAIM(signon);
+                logger.severe("Signon error");
+                signoff("2");
+                return;
+            }
+
+            in.skip(4); // seq num
+            length = in.readShort(); // data length
+            signon = new byte[length];
+            in.readFully(signon); // data
+            // * Client sends TOC toc_init_done message
+            frameSend("toc_init_done\0");
+            online = true;
+            generateConnected();
+            frameSend("toc_set_info \"" + info + "\"\0");
+            logger.fine("Done with AIM logon");
+            connection.setSoTimeout(3000);
+        } catch (InterruptedIOException e) {
+
+----------------------------------------
+        if(zipcode.length() == 5) {
+            WeatherScrapper scrapper=mod.new WeatherScrapper();
+            String temp=scrapper.getWeather(zipcode);
+            if(!temp.trim().equals("")) {
+                //seemed to have gotten a decent result, so display it
+                String mapURL=WeatherModule.MAP_URL+zipcode;
+                result="Weather for zipcode <a href=\""+mapURL+"\">"+zipcode+"</a>:"+temp;
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+28918741
+src/com/levelonelabs/aim/AIMClient.java 499 508
+src/com/levelonelabs/aim/AIMClient.java 492 509
+----------------------------------------
+        } else {
+            // for some reason we are sending a message to an offline buddy
+            // this will generate a status request for them (this message will
+            // be lost, but if they are online, we should get an update)
+            try {
+                frameSend("toc_get_status " + imNormalize(buddy.getName()) + "\0");
+            } catch (IOException e) {
+                logger.severe("Error sending status request for offline buddy: " + e.getMessage());
+            }
+        }
+
+----------------------------------------
+    public void sendMessage(AIMBuddy buddy, String text) {
+        if ((buddy == null) || buddy.isBanned()) {
+            return;
+        }
+
+        if (buddy.isOnline()) {
+            sendMesg(buddy.getName(), text);
+        } else {
+            // for some reason we are sending a message to an offline buddy
+            // this will generate a status request for them (this message will
+            // be lost, but if they are online, we should get an update)
+            try {
+                frameSend("toc_get_status " + imNormalize(buddy.getName()) + "\0");
+            } catch (IOException e) {
+                logger.severe("Error sending status request for offline buddy: " + e.getMessage());
+            }
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+28918742
+src/com/levelonelabs/aim/AIMClient.java 625 646
+src/com/levelonelabs/aimbot/modules/ListModule.java 378 387
+----------------------------------------
+    public void removeBuddy(AIMBuddy buddy) {
+        if (buddy == null) {
+            return;
+        }
+
+        if (getBuddy(buddy.getName()) == null) {
+            return;
+        }
+
+        String buddyname = imNormalize(buddy.getName());
+
+        String toBeSent = "toc2_remove_buddy";
+        try {
+            frameSend(toBeSent + " " + buddyname + " " + buddy.getGroup() + "\0");
+        } catch (IOException e) {
+            logger.severe(e.toString());
+            signoff("Error removing buddy.");
+        }
+
+        // logger.fine("Removed buddy from hash");
+        buddyHash.remove(imNormalize(buddy.getName()));
+    }
+
+----------------------------------------
+        for (ListIterator it = group.getList().listIterator(); it.hasNext();) {
+            AIMBuddy next = getBuddy((String) it.next());
+            if (next.isOnline()) {
+                super.sendMessage(next, from.getName() + " posted to the " + group.getName() + " list:" + message);
+                toldNow++;
+            } else {
+                next.addMessage(from.getName() + " posted to the " + group.getName() + " list: \"" + message + "\" at "
+                    + new Date());
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+28918743
+src/com/levelonelabs/aim/AIMClient.java 625 646
+src/com/levelonelabs/aimbot/modules/HeyuModule.java 119 134
+----------------------------------------
+    public void removeBuddy(AIMBuddy buddy) {
+        if (buddy == null) {
+            return;
+        }
+
+        if (getBuddy(buddy.getName()) == null) {
+            return;
+        }
+
+        String buddyname = imNormalize(buddy.getName());
+
+        String toBeSent = "toc2_remove_buddy";
+        try {
+            frameSend(toBeSent + " " + buddyname + " " + buddy.getGroup() + "\0");
+        } catch (IOException e) {
+            logger.severe(e.toString());
+            signoff("Error removing buddy.");
+        }
+
+        // logger.fine("Removed buddy from hash");
+        buddyHash.remove(imNormalize(buddy.getName()));
+    }
+
+----------------------------------------
+		if (buddy.hasRole(requiredRole)) {
+			if (query.toLowerCase().startsWith("turn")) {
+				try {
+					Runtime.getRuntime().exec(heyuPath + " " + query.toLowerCase());
+					logger.finest(buddy.getName() + " performed: " + query.toLowerCase());
+					if (successMessage != null && successMessage.trim().length() > 0) {
+						super.sendMessage(buddy, successMessage);
+					}
+				} catch (IOException ioe) {
+					super.sendMessage(buddy, "Error processing command: " + ioe.getMessage());
+					logger.severe("Error processing command: " + ioe.getMessage());
+				}
+			} else if (query.toLowerCase().startsWith("heyu")) {
+				super.sendMessage(buddy, getModules());
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+28918744
+src/com/levelonelabs/aim/AIMClient.java 762 772
+src/com/levelonelabs/aim/AIMClient.java 740 754
+----------------------------------------
+    private void sendPermit(String buddyname) {
+        logger.fine("Attempting to permit: " + buddyname + ".");
+
+        String toBeSent = "toc2_add_permit";
+        try {
+            frameSend(toBeSent + " " + buddyname + "\0");
+        } catch (IOException e) {
+            logger.severe(e.getMessage());
+            signoff("7.875");
+        }
+    }
+
+----------------------------------------
+    private void sendDeny(String buddyname) {
+        if (buddyname.length() == 0) {
+            logger.fine("Attempting to permit all.");
+        } else {
+            logger.fine("Attempting to deny: " + buddyname + ".");
+        }
+
+        String toBeSent = "toc2_add_deny";
+        try {
+            frameSend(toBeSent + " " + buddyname + "\0");
+        } catch (IOException e) {
+            logger.severe(e.toString());
+            signoff("7.75");
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+28918745
+src/com/levelonelabs/aim/AIMClient.java 788 799
+src/com/levelonelabs/aimbot/modules/MegaHalModule.java 194 207
+----------------------------------------
+            if (sendLimit < MAX_POINTS) {
+                // sendLimit could be less than 0, this still works properly
+                logger.fine("Current send limit=" + sendLimit + " out of " + MAX_POINTS);
+                try {
+                    // this will wait for every point below the max
+                    int waitAmount = MAX_POINTS - sendLimit;
+                    logger.fine("Delaying send " + waitAmount + " units");
+                    Thread.sleep(RECOVER_RATE * waitAmount);
+                    sendLimit += waitAmount;
+                } catch (InterruptedException ie) {
+                }
+            }
+
+----------------------------------------
+			} else if (imcommand.toLowerCase().equals("think") && (st.countTokens() == 1)) {
+				int delay = MegaModel.timeout;
+				String newDelay = st.nextToken();
+				try {
+					delay = Integer.parseInt(newDelay);
+				} catch (Exception e) {
+					super.sendMessage(buddy, "Error! " + newDelay + " did not parse.");
+				}
+				synchronized (model) {
+					MegaModel.timeout = delay;
+				}
+				super.sendMessage(buddy, "Changing thinking time to " + delay + " seconds.");
+				return;
+			} else {
+
+----------------------------------------

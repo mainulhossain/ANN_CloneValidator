@@ -1,0 +1,2215 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805461
+net/sf/varscan/Coverage.java 345 383
+net/sf/varscan/LimitVariants.java 240 278
+----------------------------------------
+	    		if(lineContents.length >= 2)
+	    		{
+	    			// Try to parse chrom and position //
+	    			try
+	    			{
+	    				String refName = lineContents[0];
+
+	    				// Get or create BitSet for this refName //
+	    				BitSet refPositions;
+
+	    				if(positionsByChrom.containsKey(refName))
+	    				{
+	    					refPositions = positionsByChrom.get(refName);
+	    				}
+	    				else
+	    				{
+	    					refPositions = new BitSet();
+	    				}
+
+	    				// Mark position or regions, depending on what was provided //
+	    				int chrStart = 0;
+	    				int chrStop = 0;
+
+	    				if(fileType.equals("positions") && lineContents.length > 1)
+	    				{
+		    				// Set the position to true //
+		    				int position = Integer.parseInt(lineContents[1]);
+		    				chrStart = position - marginSize;
+		    				chrStop = position + marginSize;
+	    				}
+	    				else if(fileType.equals("regions") && lineContents.length > 2)
+	    				{
+	    					chrStart = Integer.parseInt(lineContents[1]) - marginSize;
+	    					chrStop = Integer.parseInt(lineContents[2]) + marginSize;
+	    				}
+
+    					// Check that it won't be an infinite loop//
+    					if(chrStart <= chrStop)
+    					{
+
+----------------------------------------
+	    		else if(lineContents.length >= 2)
+	    		{
+	    			// Try to parse chrom and position //
+	    			try
+	    			{
+	    				String refName = lineContents[0];
+
+	    				// Get or create BitSet for this refName //
+	    				BitSet refPositions;
+
+	    				if(positionsByChrom.containsKey(refName))
+	    				{
+	    					refPositions = positionsByChrom.get(refName);
+	    				}
+	    				else
+	    				{
+	    					refPositions = new BitSet();
+	    				}
+
+	    				// Mark position or regions, depending on what was provided //
+	    				int chrStart = 0;
+	    				int chrStop = 0;
+
+	    				if(fileType.equals("positions") && lineContents.length > 1)
+	    				{
+		    				// Set the position to true //
+		    				int position = Integer.parseInt(lineContents[1]);
+		    				chrStart = position - marginSize;
+		    				chrStop = position + marginSize;
+	    				}
+	    				else if(fileType.equals("regions") && lineContents.length > 2)
+	    				{
+	    					chrStart = Integer.parseInt(lineContents[1]) - marginSize;
+	    					chrStop = Integer.parseInt(lineContents[2]) + marginSize;
+	    				}
+
+    					// Check that it won't be an infinite loop//
+    					if(chrStart <= chrStop)
+    					{
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805462
+net/sf/varscan/Coverage.java 345 383
+net/sf/varscan/ProcessSomatic.java 361 399
+----------------------------------------
+	    		if(lineContents.length >= 2)
+	    		{
+	    			// Try to parse chrom and position //
+	    			try
+	    			{
+	    				String refName = lineContents[0];
+
+	    				// Get or create BitSet for this refName //
+	    				BitSet refPositions;
+
+	    				if(positionsByChrom.containsKey(refName))
+	    				{
+	    					refPositions = positionsByChrom.get(refName);
+	    				}
+	    				else
+	    				{
+	    					refPositions = new BitSet();
+	    				}
+
+	    				// Mark position or regions, depending on what was provided //
+	    				int chrStart = 0;
+	    				int chrStop = 0;
+
+	    				if(fileType.equals("positions") && lineContents.length > 1)
+	    				{
+		    				// Set the position to true //
+		    				int position = Integer.parseInt(lineContents[1]);
+		    				chrStart = position - marginSize;
+		    				chrStop = position + marginSize;
+	    				}
+	    				else if(fileType.equals("regions") && lineContents.length > 2)
+	    				{
+	    					chrStart = Integer.parseInt(lineContents[1]) - marginSize;
+	    					chrStop = Integer.parseInt(lineContents[2]) + marginSize;
+	    				}
+
+    					// Check that it won't be an infinite loop//
+    					if(chrStart <= chrStop)
+    					{
+
+----------------------------------------
+	    		if(lineContents.length >= 2)
+	    		{
+	    			// Try to parse chrom and position //
+	    			try
+	    			{
+	    				String refName = lineContents[0];
+
+	    				// Get or create BitSet for this refName //
+	    				BitSet refPositions;
+
+	    				if(positionsByChrom.containsKey(refName))
+	    				{
+	    					refPositions = positionsByChrom.get(refName);
+	    				}
+	    				else
+	    				{
+	    					refPositions = new BitSet();
+	    				}
+
+	    				// Mark position or regions, depending on what was provided //
+	    				int chrStart = 0;
+	    				int chrStop = 0;
+
+	    				if(fileType.equals("positions") && lineContents.length > 1)
+	    				{
+		    				// Set the position to true //
+		    				int position = Integer.parseInt(lineContents[1]);
+		    				chrStart = position - marginSize;
+		    				chrStop = position + marginSize;
+	    				}
+	    				else if(fileType.equals("regions") && lineContents.length > 2)
+	    				{
+	    					chrStart = Integer.parseInt(lineContents[1]) - marginSize;
+	    					chrStop = Integer.parseInt(lineContents[2]) + marginSize;
+	    				}
+
+    					// Check that it won't be an infinite loop//
+    					if(chrStart <= chrStop)
+    					{
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805463
+net/sf/varscan/LimitVariants.java 240 278
+net/sf/varscan/ProcessSomatic.java 361 399
+----------------------------------------
+	    		else if(lineContents.length >= 2)
+	    		{
+	    			// Try to parse chrom and position //
+	    			try
+	    			{
+	    				String refName = lineContents[0];
+
+	    				// Get or create BitSet for this refName //
+	    				BitSet refPositions;
+
+	    				if(positionsByChrom.containsKey(refName))
+	    				{
+	    					refPositions = positionsByChrom.get(refName);
+	    				}
+	    				else
+	    				{
+	    					refPositions = new BitSet();
+	    				}
+
+	    				// Mark position or regions, depending on what was provided //
+	    				int chrStart = 0;
+	    				int chrStop = 0;
+
+	    				if(fileType.equals("positions") && lineContents.length > 1)
+	    				{
+		    				// Set the position to true //
+		    				int position = Integer.parseInt(lineContents[1]);
+		    				chrStart = position - marginSize;
+		    				chrStop = position + marginSize;
+	    				}
+	    				else if(fileType.equals("regions") && lineContents.length > 2)
+	    				{
+	    					chrStart = Integer.parseInt(lineContents[1]) - marginSize;
+	    					chrStop = Integer.parseInt(lineContents[2]) + marginSize;
+	    				}
+
+    					// Check that it won't be an infinite loop//
+    					if(chrStart <= chrStop)
+    					{
+
+----------------------------------------
+	    		if(lineContents.length >= 2)
+	    		{
+	    			// Try to parse chrom and position //
+	    			try
+	    			{
+	    				String refName = lineContents[0];
+
+	    				// Get or create BitSet for this refName //
+	    				BitSet refPositions;
+
+	    				if(positionsByChrom.containsKey(refName))
+	    				{
+	    					refPositions = positionsByChrom.get(refName);
+	    				}
+	    				else
+	    				{
+	    					refPositions = new BitSet();
+	    				}
+
+	    				// Mark position or regions, depending on what was provided //
+	    				int chrStart = 0;
+	    				int chrStop = 0;
+
+	    				if(fileType.equals("positions") && lineContents.length > 1)
+	    				{
+		    				// Set the position to true //
+		    				int position = Integer.parseInt(lineContents[1]);
+		    				chrStart = position - marginSize;
+		    				chrStop = position + marginSize;
+	    				}
+	    				else if(fileType.equals("regions") && lineContents.length > 2)
+	    				{
+	    					chrStart = Integer.parseInt(lineContents[1]) - marginSize;
+	    					chrStop = Integer.parseInt(lineContents[2]) + marginSize;
+	    				}
+
+    					// Check that it won't be an infinite loop//
+    					if(chrStart <= chrStop)
+    					{
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805464
+net/sf/varscan/Coverage.java 394 416
+net/sf/varscan/LimitVariants.java 283 305
+----------------------------------------
+	    					}
+    					}
+
+	    				// Return it to the hash //
+	    				positionsByChrom.put(refName, refPositions);
+	    			}
+	    			catch(Exception e)
+	    			{
+	    				if(lineCounter > 1)
+	    					System.err.println("Warning: Unable to parse chrom/position from " + line);
+	    			}
+
+
+	    		}
+	    	}
+
+	    	infile.close();
+		}
+		catch(Exception e)
+		{
+			System.err.println("ERROR: File Parsing Exception: " + e.getLocalizedMessage());
+			e.printStackTrace(System.err);
+		}
+
+----------------------------------------
+	    					}
+    					}
+
+	    				// Return it to the hash //
+	    				positionsByChrom.put(refName, refPositions);
+	    			}
+	    			catch(Exception e)
+	    			{
+	    				if(lineCounter > 1)
+	    					System.err.println("Warning: Unable to parse chrom/position from " + line);
+	    			}
+
+
+	    		}
+	    	}
+
+	    	infile.close();
+		}
+		catch(Exception e)
+		{
+			System.err.println("ERROR: File Parsing Exception: " + e.getLocalizedMessage());
+			e.printStackTrace(System.err);
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805465
+net/sf/varscan/Coverage.java 394 416
+net/sf/varscan/ProcessSomatic.java 404 426
+----------------------------------------
+	    					}
+    					}
+
+	    				// Return it to the hash //
+	    				positionsByChrom.put(refName, refPositions);
+	    			}
+	    			catch(Exception e)
+	    			{
+	    				if(lineCounter > 1)
+	    					System.err.println("Warning: Unable to parse chrom/position from " + line);
+	    			}
+
+
+	    		}
+	    	}
+
+	    	infile.close();
+		}
+		catch(Exception e)
+		{
+			System.err.println("ERROR: File Parsing Exception: " + e.getLocalizedMessage());
+			e.printStackTrace(System.err);
+		}
+
+----------------------------------------
+	    					}
+    					}
+
+	    				// Return it to the hash //
+	    				positionsByChrom.put(refName, refPositions);
+	    			}
+	    			catch(Exception e)
+	    			{
+	    				if(lineCounter > 1)
+	    					System.err.println("Warning: Unable to parse chrom/position from " + line);
+	    			}
+
+
+	    		}
+	    	}
+
+	    	infile.close();
+		}
+		catch(Exception e)
+		{
+			System.err.println("ERROR: File Parsing Exception: " + e.getLocalizedMessage());
+			e.printStackTrace(System.err);
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805466
+net/sf/varscan/LimitVariants.java 283 305
+net/sf/varscan/ProcessSomatic.java 404 426
+----------------------------------------
+	    					}
+    					}
+
+	    				// Return it to the hash //
+	    				positionsByChrom.put(refName, refPositions);
+	    			}
+	    			catch(Exception e)
+	    			{
+	    				if(lineCounter > 1)
+	    					System.err.println("Warning: Unable to parse chrom/position from " + line);
+	    			}
+
+
+	    		}
+	    	}
+
+	    	infile.close();
+		}
+		catch(Exception e)
+		{
+			System.err.println("ERROR: File Parsing Exception: " + e.getLocalizedMessage());
+			e.printStackTrace(System.err);
+		}
+
+----------------------------------------
+	    					}
+    					}
+
+	    				// Return it to the hash //
+	    				positionsByChrom.put(refName, refPositions);
+	    			}
+	    			catch(Exception e)
+	    			{
+	    				if(lineCounter > 1)
+	    					System.err.println("Warning: Unable to parse chrom/position from " + line);
+	    			}
+
+
+	    		}
+	    	}
+
+	    	infile.close();
+		}
+		catch(Exception e)
+		{
+			System.err.println("ERROR: File Parsing Exception: " + e.getLocalizedMessage());
+			e.printStackTrace(System.err);
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805467
+net/sf/varscan/FilterVariants.java 96 119
+net/sf/varscan/ReadCounts.java 62 81
+----------------------------------------
+			System.err.println("P-value thresh:\t" + pValueThreshold);
+
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	System.exit(1);
+		}
+
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+		// Get the input file and parse it //
+
+	    // Define two-decimal-place format and statistics hash //
+
+	    HashMap<String, Integer> stats = new HashMap<String, Integer>();
+	    stats.put("numVariants", 0);
+
+----------------------------------------
+			 System.err.println("Min base qual:\t" + minBaseQual);
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	System.exit(1);
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+	    // Define the statistics hash and reset counters //
+
+	    HashMap<String, Integer> stats = new HashMap<String, Integer>();
+	    stats.put("numPositions", 0);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805468
+net/sf/varscan/CallMpileup.java 95 109
+net/sf/varscan/Somatic.java 141 155
+----------------------------------------
+				 minReads2 = Integer.parseInt(params.get("min-reads2"));
+
+			if(params.containsKey("min-var-freq"))
+				 minVarFreq = Double.parseDouble(params.get("min-var-freq"));
+
+			if(params.containsKey("min-freq-for-hom"))
+				 minFreqForHom = Double.parseDouble(params.get("min-freq-for-hom"));
+
+			if(params.containsKey("min-avg-qual"))
+				 minAvgQual = Integer.parseInt(params.get("min-avg-qual"));
+
+			if(params.containsKey("p-value"))
+				 pValueThreshold = Double.parseDouble(params.get("p-value"));
+
+			if(params.containsKey("strand-filter"))
+
+----------------------------------------
+				 minStrands2 = Integer.parseInt(params.get("min-strands2"));
+
+			if(params.containsKey("min-var-freq"))
+				 minVarFreq = Double.parseDouble(params.get("min-var-freq"));
+
+			if(params.containsKey("min-freq-for-hom"))
+				 minFreqForHom = Double.parseDouble(params.get("min-freq-for-hom"));
+
+			if(params.containsKey("min-avg-qual"))
+				 minAvgQual = Integer.parseInt(params.get("min-avg-qual"));
+
+			if(params.containsKey("p-value"))
+				 pValueThreshold = Double.parseDouble(params.get("p-value"));
+
+			if(params.containsKey("somatic-p-value"))
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805469
+net/sf/varscan/CallMpileup.java 95 109
+net/sf/varscan/Somatic.java 828 842
+----------------------------------------
+				 minReads2 = Integer.parseInt(params.get("min-reads2"));
+
+			if(params.containsKey("min-var-freq"))
+				 minVarFreq = Double.parseDouble(params.get("min-var-freq"));
+
+			if(params.containsKey("min-freq-for-hom"))
+				 minFreqForHom = Double.parseDouble(params.get("min-freq-for-hom"));
+
+			if(params.containsKey("min-avg-qual"))
+				 minAvgQual = Integer.parseInt(params.get("min-avg-qual"));
+
+			if(params.containsKey("p-value"))
+				 pValueThreshold = Double.parseDouble(params.get("p-value"));
+
+			if(params.containsKey("strand-filter"))
+
+----------------------------------------
+				 minStrands2 = Integer.parseInt(params.get("min-strands2"));
+
+			if(params.containsKey("min-var-freq"))
+				 minVarFreq = Double.parseDouble(params.get("min-var-freq"));
+
+			if(params.containsKey("min-freq-for-hom"))
+				 minFreqForHom = Double.parseDouble(params.get("min-freq-for-hom"));
+
+			if(params.containsKey("min-avg-qual"))
+				 minAvgQual = Integer.parseInt(params.get("min-avg-qual"));
+
+			if(params.containsKey("p-value"))
+				 pValueThreshold = Double.parseDouble(params.get("p-value"));
+
+			if(params.containsKey("somatic-p-value"))
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805470
+net/sf/varscan/Somatic.java 141 155
+net/sf/varscan/Somatic.java 828 842
+----------------------------------------
+				 minStrands2 = Integer.parseInt(params.get("min-strands2"));
+
+			if(params.containsKey("min-var-freq"))
+				 minVarFreq = Double.parseDouble(params.get("min-var-freq"));
+
+			if(params.containsKey("min-freq-for-hom"))
+				 minFreqForHom = Double.parseDouble(params.get("min-freq-for-hom"));
+
+			if(params.containsKey("min-avg-qual"))
+				 minAvgQual = Integer.parseInt(params.get("min-avg-qual"));
+
+			if(params.containsKey("p-value"))
+				 pValueThreshold = Double.parseDouble(params.get("p-value"));
+
+			if(params.containsKey("somatic-p-value"))
+
+----------------------------------------
+				 minStrands2 = Integer.parseInt(params.get("min-strands2"));
+
+			if(params.containsKey("min-var-freq"))
+				 minVarFreq = Double.parseDouble(params.get("min-var-freq"));
+
+			if(params.containsKey("min-freq-for-hom"))
+				 minFreqForHom = Double.parseDouble(params.get("min-freq-for-hom"));
+
+			if(params.containsKey("min-avg-qual"))
+				 minAvgQual = Integer.parseInt(params.get("min-avg-qual"));
+
+			if(params.containsKey("p-value"))
+				 pValueThreshold = Double.parseDouble(params.get("p-value"));
+
+			if(params.containsKey("somatic-p-value"))
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805471
+net/sf/varscan/CallMpileup.java 268 278
+net/sf/varscan/Somatic.java 64 73
+----------------------------------------
+	    				vcfHeader += "\n" + "##INFO=<ID=NC,Number=1,Type=Integer,Description=\"Number of samples not called\">";
+	    				vcfHeader += "\n" + "##FILTER=<ID=str10,Description=\"Less than 10% or more than 90% of variant supporting reads on one strand\">";
+	    				vcfHeader += "\n" + "##FILTER=<ID=indelError,Description=\"Likely artifact due to indel reads at this position\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=GT,Number=1,Type=String,Description=\"Genotype\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=GQ,Number=1,Type=Integer,Description=\"Genotype Quality\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=SDP,Number=1,Type=Integer,Description=\"Raw Read Depth as reported by SAMtools\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=DP,Number=1,Type=Integer,Description=\"Quality Read Depth of bases with Phred score >= " + minAvgQual + "\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=RD,Number=1,Type=Integer,Description=\"Depth of reference-supporting bases (reads1)\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=AD,Number=1,Type=Integer,Description=\"Depth of variant-supporting bases (reads2)\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=FREQ,Number=1,Type=String,Description=\"Variant allele frequency\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=PVAL,Number=1,Type=String,Description=\"P-value from Fisher's Exact Test\">";
+
+----------------------------------------
+		vcfHeader += "\n" + "##INFO=<ID=SPV,Number=1,Type=Float,Description=\"Fisher's Exact Test P-value of tumor versus normal for Somatic/LOH calls\">";
+		vcfHeader += "\n" + "##FILTER=<ID=str10,Description=\"Less than 10% or more than 90% of variant supporting reads on one strand\">";
+		vcfHeader += "\n" + "##FILTER=<ID=indelError,Description=\"Likely artifact due to indel reads at this position\">";
+		vcfHeader += "\n" + "##FORMAT=<ID=GT,Number=1,Type=String,Description=\"Genotype\">";
+		vcfHeader += "\n" + "##FORMAT=<ID=GQ,Number=1,Type=Integer,Description=\"Genotype Quality\">";
+		vcfHeader += "\n" + "##FORMAT=<ID=DP,Number=1,Type=Integer,Description=\"Read Depth\">";
+		vcfHeader += "\n" + "##FORMAT=<ID=RD,Number=1,Type=Integer,Description=\"Depth of reference-supporting bases (reads1)\">";
+		vcfHeader += "\n" + "##FORMAT=<ID=AD,Number=1,Type=Integer,Description=\"Depth of variant-supporting bases (reads2)\">";
+		vcfHeader += "\n" + "##FORMAT=<ID=FREQ,Number=1,Type=String,Description=\"Variant allele frequency\">";
+		vcfHeader += "\n" + "##FORMAT=<ID=DP4,Number=1,Type=String,Description=\"Strand read counts: ref/fwd, ref/rev, var/fwd, var/rev\">";
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805473
+net/sf/varscan/Somatic.java 64 73
+net/sf/varscan/Somatic.java 745 754
+----------------------------------------
+		vcfHeader += "\n" + "##INFO=<ID=SPV,Number=1,Type=Float,Description=\"Fisher's Exact Test P-value of tumor versus normal for Somatic/LOH calls\">";
+		vcfHeader += "\n" + "##FILTER=<ID=str10,Description=\"Less than 10% or more than 90% of variant supporting reads on one strand\">";
+		vcfHeader += "\n" + "##FILTER=<ID=indelError,Description=\"Likely artifact due to indel reads at this position\">";
+		vcfHeader += "\n" + "##FORMAT=<ID=GT,Number=1,Type=String,Description=\"Genotype\">";
+		vcfHeader += "\n" + "##FORMAT=<ID=GQ,Number=1,Type=Integer,Description=\"Genotype Quality\">";
+		vcfHeader += "\n" + "##FORMAT=<ID=DP,Number=1,Type=Integer,Description=\"Read Depth\">";
+		vcfHeader += "\n" + "##FORMAT=<ID=RD,Number=1,Type=Integer,Description=\"Depth of reference-supporting bases (reads1)\">";
+		vcfHeader += "\n" + "##FORMAT=<ID=AD,Number=1,Type=Integer,Description=\"Depth of variant-supporting bases (reads2)\">";
+		vcfHeader += "\n" + "##FORMAT=<ID=FREQ,Number=1,Type=String,Description=\"Variant allele frequency\">";
+		vcfHeader += "\n" + "##FORMAT=<ID=DP4,Number=1,Type=String,Description=\"Strand read counts: ref/fwd, ref/rev, var/fwd, var/rev\">";
+
+----------------------------------------
+		vcfHeader += "\n" + "##INFO=<ID=SPV,Number=1,Type=Float,Description=\"Fisher's Exact Test P-value of tumor versus normal for Somatic/LOH calls\">";
+		vcfHeader += "\n" + "##FILTER=<ID=str10,Description=\"Less than 10% or more than 90% of variant supporting reads on one strand\">";
+		vcfHeader += "\n" + "##FILTER=<ID=indelError,Description=\"Likely artifact due to indel reads at this position\">";
+		vcfHeader += "\n" + "##FORMAT=<ID=GT,Number=1,Type=String,Description=\"Genotype\">";
+		vcfHeader += "\n" + "##FORMAT=<ID=GQ,Number=1,Type=Integer,Description=\"Genotype Quality\">";
+		vcfHeader += "\n" + "##FORMAT=<ID=DP,Number=1,Type=Integer,Description=\"Read Depth\">";
+		vcfHeader += "\n" + "##FORMAT=<ID=RD,Number=1,Type=Integer,Description=\"Depth of reference-supporting bases (reads1)\">";
+		vcfHeader += "\n" + "##FORMAT=<ID=AD,Number=1,Type=Integer,Description=\"Depth of variant-supporting bases (reads2)\">";
+		vcfHeader += "\n" + "##FORMAT=<ID=FREQ,Number=1,Type=String,Description=\"Variant allele frequency\">";
+		vcfHeader += "\n" + "##FORMAT=<ID=DP4,Number=1,Type=String,Description=\"Strand read counts: ref/fwd, ref/rev, var/fwd, var/rev\">";
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805472
+net/sf/varscan/CallMpileup.java 268 278
+net/sf/varscan/Somatic.java 745 754
+----------------------------------------
+	    				vcfHeader += "\n" + "##INFO=<ID=NC,Number=1,Type=Integer,Description=\"Number of samples not called\">";
+	    				vcfHeader += "\n" + "##FILTER=<ID=str10,Description=\"Less than 10% or more than 90% of variant supporting reads on one strand\">";
+	    				vcfHeader += "\n" + "##FILTER=<ID=indelError,Description=\"Likely artifact due to indel reads at this position\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=GT,Number=1,Type=String,Description=\"Genotype\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=GQ,Number=1,Type=Integer,Description=\"Genotype Quality\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=SDP,Number=1,Type=Integer,Description=\"Raw Read Depth as reported by SAMtools\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=DP,Number=1,Type=Integer,Description=\"Quality Read Depth of bases with Phred score >= " + minAvgQual + "\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=RD,Number=1,Type=Integer,Description=\"Depth of reference-supporting bases (reads1)\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=AD,Number=1,Type=Integer,Description=\"Depth of variant-supporting bases (reads2)\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=FREQ,Number=1,Type=String,Description=\"Variant allele frequency\">";
+	    				vcfHeader += "\n" + "##FORMAT=<ID=PVAL,Number=1,Type=String,Description=\"P-value from Fisher's Exact Test\">";
+
+----------------------------------------
+		vcfHeader += "\n" + "##INFO=<ID=SPV,Number=1,Type=Float,Description=\"Fisher's Exact Test P-value of tumor versus normal for Somatic/LOH calls\">";
+		vcfHeader += "\n" + "##FILTER=<ID=str10,Description=\"Less than 10% or more than 90% of variant supporting reads on one strand\">";
+		vcfHeader += "\n" + "##FILTER=<ID=indelError,Description=\"Likely artifact due to indel reads at this position\">";
+		vcfHeader += "\n" + "##FORMAT=<ID=GT,Number=1,Type=String,Description=\"Genotype\">";
+		vcfHeader += "\n" + "##FORMAT=<ID=GQ,Number=1,Type=Integer,Description=\"Genotype Quality\">";
+		vcfHeader += "\n" + "##FORMAT=<ID=DP,Number=1,Type=Integer,Description=\"Read Depth\">";
+		vcfHeader += "\n" + "##FORMAT=<ID=RD,Number=1,Type=Integer,Description=\"Depth of reference-supporting bases (reads1)\">";
+		vcfHeader += "\n" + "##FORMAT=<ID=AD,Number=1,Type=Integer,Description=\"Depth of variant-supporting bases (reads2)\">";
+		vcfHeader += "\n" + "##FORMAT=<ID=FREQ,Number=1,Type=String,Description=\"Variant allele frequency\">";
+		vcfHeader += "\n" + "##FORMAT=<ID=DP4,Number=1,Type=String,Description=\"Strand read counts: ref/fwd, ref/rev, var/fwd, var/rev\">";
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805484
+net/sf/varscan/Somatic.java 874 889
+net/sf/varscan/CallMpileup.java 180 194
+----------------------------------------
+				System.err.println("Validation mode: on");
+
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	System.exit(1);
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+			 System.err.println("P-value thresh:\t" + pValueThreshold);
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	return;
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805476
+net/sf/varscan/Copynumber.java 514 529
+net/sf/varscan/CallMpileup.java 180 194
+----------------------------------------
+			System.err.println("P-value thresh:\t" + pValueThreshold);
+
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	System.exit(1);
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+			 System.err.println("P-value thresh:\t" + pValueThreshold);
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	return;
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805475
+net/sf/varscan/Copynumber.java 91 106
+net/sf/varscan/CallMpileup.java 180 194
+----------------------------------------
+			System.err.println("P-value thresh:\t" + pValueThreshold);
+
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	System.exit(1);
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+			 System.err.println("P-value thresh:\t" + pValueThreshold);
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	return;
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805479
+net/sf/varscan/FilterVariants.java 96 112
+net/sf/varscan/CallMpileup.java 180 194
+----------------------------------------
+			System.err.println("P-value thresh:\t" + pValueThreshold);
+
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	System.exit(1);
+		}
+
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+			 System.err.println("P-value thresh:\t" + pValueThreshold);
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	return;
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805478
+net/sf/varscan/FilterSomatic.java 105 120
+net/sf/varscan/CallMpileup.java 180 194
+----------------------------------------
+			System.err.println("Indel margin:\t" + indelMargin);
+
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	System.exit(1);
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+			 System.err.println("P-value thresh:\t" + pValueThreshold);
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	return;
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805482
+net/sf/varscan/ReadCounts.java 62 76
+net/sf/varscan/CallMpileup.java 180 194
+----------------------------------------
+			 System.err.println("Min base qual:\t" + minBaseQual);
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	System.exit(1);
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+			 System.err.println("P-value thresh:\t" + pValueThreshold);
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	return;
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805481
+net/sf/varscan/ProcessSomatic.java 46 60
+net/sf/varscan/CallMpileup.java 180 194
+----------------------------------------
+				 pValueForHC = Double.parseDouble(params.get("p-value"));
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	System.exit(1);
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+			 System.err.println("P-value thresh:\t" + pValueThreshold);
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	return;
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805480
+net/sf/varscan/FpFilter.java 133 147
+net/sf/varscan/CallMpileup.java 180 194
+----------------------------------------
+				 maxMapQualDiff = Integer.parseInt(params.get("max-mapqual-diff"));
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	System.exit(1);
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+			 System.err.println("P-value thresh:\t" + pValueThreshold);
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	return;
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805483
+net/sf/varscan/Somatic.java 196 211
+net/sf/varscan/CallMpileup.java 180 194
+----------------------------------------
+				System.err.println("Validation mode: on");
+
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	System.exit(1);
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+			 System.err.println("P-value thresh:\t" + pValueThreshold);
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	return;
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805486
+net/sf/varscan/Copynumber.java 91 106
+net/sf/varscan/CallPileup.java 85 99
+----------------------------------------
+			System.err.println("P-value thresh:\t" + pValueThreshold);
+
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	System.exit(1);
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+			 System.err.println("P-value thresh:\t" + pValueThreshold);
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	return;
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805495
+net/sf/varscan/Somatic.java 874 889
+net/sf/varscan/CallPileup.java 85 99
+----------------------------------------
+				System.err.println("Validation mode: on");
+
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	System.exit(1);
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+			 System.err.println("P-value thresh:\t" + pValueThreshold);
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	return;
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805492
+net/sf/varscan/ProcessSomatic.java 46 60
+net/sf/varscan/CallPileup.java 85 99
+----------------------------------------
+				 pValueForHC = Double.parseDouble(params.get("p-value"));
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	System.exit(1);
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+			 System.err.println("P-value thresh:\t" + pValueThreshold);
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	return;
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805490
+net/sf/varscan/FilterVariants.java 96 112
+net/sf/varscan/CallPileup.java 85 99
+----------------------------------------
+			System.err.println("P-value thresh:\t" + pValueThreshold);
+
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	System.exit(1);
+		}
+
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+			 System.err.println("P-value thresh:\t" + pValueThreshold);
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	return;
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805494
+net/sf/varscan/Somatic.java 196 211
+net/sf/varscan/CallPileup.java 85 99
+----------------------------------------
+				System.err.println("Validation mode: on");
+
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	System.exit(1);
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+			 System.err.println("P-value thresh:\t" + pValueThreshold);
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	return;
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805489
+net/sf/varscan/FilterSomatic.java 105 120
+net/sf/varscan/CallPileup.java 85 99
+----------------------------------------
+			System.err.println("Indel margin:\t" + indelMargin);
+
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	System.exit(1);
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+			 System.err.println("P-value thresh:\t" + pValueThreshold);
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	return;
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805487
+net/sf/varscan/Copynumber.java 514 529
+net/sf/varscan/CallPileup.java 85 99
+----------------------------------------
+			System.err.println("P-value thresh:\t" + pValueThreshold);
+
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	System.exit(1);
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+			 System.err.println("P-value thresh:\t" + pValueThreshold);
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	return;
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805474
+net/sf/varscan/CallMpileup.java 180 194
+net/sf/varscan/CallPileup.java 85 99
+----------------------------------------
+			 System.err.println("P-value thresh:\t" + pValueThreshold);
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	return;
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+			 System.err.println("P-value thresh:\t" + pValueThreshold);
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	return;
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805493
+net/sf/varscan/ReadCounts.java 62 76
+net/sf/varscan/CallPileup.java 85 99
+----------------------------------------
+			 System.err.println("Min base qual:\t" + minBaseQual);
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	System.exit(1);
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+			 System.err.println("P-value thresh:\t" + pValueThreshold);
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	return;
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805491
+net/sf/varscan/FpFilter.java 133 147
+net/sf/varscan/CallPileup.java 85 99
+----------------------------------------
+				 maxMapQualDiff = Integer.parseInt(params.get("max-mapqual-diff"));
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	System.exit(1);
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+			 System.err.println("P-value thresh:\t" + pValueThreshold);
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	return;
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805503
+net/sf/varscan/FpFilter.java 133 147
+net/sf/varscan/Coverage.java 63 78
+----------------------------------------
+				 maxMapQualDiff = Integer.parseInt(params.get("max-mapqual-diff"));
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	System.exit(1);
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+				minBaseQual = Integer.parseInt(params.get("min-base-qual"));
+
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	return;
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805497
+net/sf/varscan/Copynumber.java 91 106
+net/sf/varscan/Coverage.java 63 78
+----------------------------------------
+			System.err.println("P-value thresh:\t" + pValueThreshold);
+
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	System.exit(1);
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+				minBaseQual = Integer.parseInt(params.get("min-base-qual"));
+
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	return;
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805499
+net/sf/varscan/Copynumber.java 514 529
+net/sf/varscan/Coverage.java 63 78
+----------------------------------------
+			System.err.println("P-value thresh:\t" + pValueThreshold);
+
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	System.exit(1);
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+				minBaseQual = Integer.parseInt(params.get("min-base-qual"));
+
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	return;
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805501
+net/sf/varscan/FilterSomatic.java 105 120
+net/sf/varscan/Coverage.java 63 78
+----------------------------------------
+			System.err.println("Indel margin:\t" + indelMargin);
+
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	System.exit(1);
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+				minBaseQual = Integer.parseInt(params.get("min-base-qual"));
+
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	return;
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805506
+net/sf/varscan/Somatic.java 196 211
+net/sf/varscan/Coverage.java 63 78
+----------------------------------------
+				System.err.println("Validation mode: on");
+
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	System.exit(1);
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+				minBaseQual = Integer.parseInt(params.get("min-base-qual"));
+
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	return;
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805507
+net/sf/varscan/Somatic.java 874 889
+net/sf/varscan/Coverage.java 63 78
+----------------------------------------
+				System.err.println("Validation mode: on");
+
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	System.exit(1);
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+				minBaseQual = Integer.parseInt(params.get("min-base-qual"));
+
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	return;
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805502
+net/sf/varscan/FilterVariants.java 96 112
+net/sf/varscan/Coverage.java 63 78
+----------------------------------------
+			System.err.println("P-value thresh:\t" + pValueThreshold);
+
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	System.exit(1);
+		}
+
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+				minBaseQual = Integer.parseInt(params.get("min-base-qual"));
+
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	return;
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805488
+net/sf/varscan/CallPileup.java 85 99
+net/sf/varscan/Coverage.java 63 78
+----------------------------------------
+			 System.err.println("P-value thresh:\t" + pValueThreshold);
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	return;
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+				minBaseQual = Integer.parseInt(params.get("min-base-qual"));
+
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	return;
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805504
+net/sf/varscan/ProcessSomatic.java 46 60
+net/sf/varscan/Coverage.java 63 78
+----------------------------------------
+				 pValueForHC = Double.parseDouble(params.get("p-value"));
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	System.exit(1);
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+				minBaseQual = Integer.parseInt(params.get("min-base-qual"));
+
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	return;
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805477
+net/sf/varscan/CallMpileup.java 180 194
+net/sf/varscan/Coverage.java 63 78
+----------------------------------------
+			 System.err.println("P-value thresh:\t" + pValueThreshold);
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	return;
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+				minBaseQual = Integer.parseInt(params.get("min-base-qual"));
+
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	return;
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805505
+net/sf/varscan/ReadCounts.java 62 76
+net/sf/varscan/Coverage.java 63 78
+----------------------------------------
+			 System.err.println("Min base qual:\t" + minBaseQual);
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	System.exit(1);
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+				minBaseQual = Integer.parseInt(params.get("min-base-qual"));
+
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	return;
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805496
+net/sf/varscan/CallPileup.java 85 99
+net/sf/varscan/Trio.java 194 208
+----------------------------------------
+			 System.err.println("P-value thresh:\t" + pValueThreshold);
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	return;
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+			 System.err.println("Adj. p-value:\t" + adjustedpValueThreshold);
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	return;
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805513
+net/sf/varscan/ReadCounts.java 62 76
+net/sf/varscan/Trio.java 194 208
+----------------------------------------
+			 System.err.println("Min base qual:\t" + minBaseQual);
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	System.exit(1);
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+			 System.err.println("Adj. p-value:\t" + adjustedpValueThreshold);
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	return;
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805509
+net/sf/varscan/FilterSomatic.java 105 120
+net/sf/varscan/Trio.java 194 208
+----------------------------------------
+			System.err.println("Indel margin:\t" + indelMargin);
+
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	System.exit(1);
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+			 System.err.println("Adj. p-value:\t" + adjustedpValueThreshold);
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	return;
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805508
+net/sf/varscan/Coverage.java 63 78
+net/sf/varscan/Trio.java 194 208
+----------------------------------------
+				minBaseQual = Integer.parseInt(params.get("min-base-qual"));
+
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	return;
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+			 System.err.println("Adj. p-value:\t" + adjustedpValueThreshold);
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	return;
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805512
+net/sf/varscan/ProcessSomatic.java 46 60
+net/sf/varscan/Trio.java 194 208
+----------------------------------------
+				 pValueForHC = Double.parseDouble(params.get("p-value"));
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	System.exit(1);
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+			 System.err.println("Adj. p-value:\t" + adjustedpValueThreshold);
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	return;
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805510
+net/sf/varscan/FilterVariants.java 96 112
+net/sf/varscan/Trio.java 194 208
+----------------------------------------
+			System.err.println("P-value thresh:\t" + pValueThreshold);
+
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	System.exit(1);
+		}
+
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+			 System.err.println("Adj. p-value:\t" + adjustedpValueThreshold);
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	return;
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805498
+net/sf/varscan/Copynumber.java 91 106
+net/sf/varscan/Trio.java 194 208
+----------------------------------------
+			System.err.println("P-value thresh:\t" + pValueThreshold);
+
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	System.exit(1);
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+			 System.err.println("Adj. p-value:\t" + adjustedpValueThreshold);
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	return;
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------

@@ -1,0 +1,1384 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17994951
+src/de/joergjahnke/gameboy/swing/GameboyCanvas.java 128 162
+src/de/joergjahnke/gameboy/swing/GameboyCanvas.java 167 201
+----------------------------------------
+    public void keyPressed(final KeyEvent event) {
+        int pressedDirection = 0, pressedButton = 0;
+
+        switch (event.getKeyCode()) {
+            case KeyEvent.VK_LEFT:
+                pressedDirection = Joypad.LEFT;
+                break;
+            case KeyEvent.VK_RIGHT:
+                pressedDirection = Joypad.RIGHT;
+                break;
+            case KeyEvent.VK_UP:
+                pressedDirection = Joypad.UP;
+                break;
+            case KeyEvent.VK_DOWN:
+                pressedDirection = Joypad.DOWN;
+                break;
+            case KeyEvent.VK_A:
+                pressedButton = Joypad.A;
+                break;
+            case KeyEvent.VK_B:
+                pressedButton = Joypad.B;
+                break;
+            case KeyEvent.VK_ENTER:
+                pressedButton = Joypad.SELECT;
+                break;
+            case KeyEvent.VK_SPACE:
+                pressedButton = Joypad.START;
+                break;
+            default:
+                ;
+        }
+
+        this.gameboy.getJoypad().setDirections(this.gameboy.getJoypad().getDirections() | pressedDirection);
+        this.gameboy.getJoypad().setButtons(this.gameboy.getJoypad().getButtons() | pressedButton);
+    }
+
+----------------------------------------
+    public void keyReleased(final KeyEvent event) {
+        int pressedDirection = 0, pressedButton = 0;
+
+        switch (event.getKeyCode()) {
+            case KeyEvent.VK_LEFT:
+                pressedDirection = Joypad.LEFT;
+                break;
+            case KeyEvent.VK_RIGHT:
+                pressedDirection = Joypad.RIGHT;
+                break;
+            case KeyEvent.VK_UP:
+                pressedDirection = Joypad.UP;
+                break;
+            case KeyEvent.VK_DOWN:
+                pressedDirection = Joypad.DOWN;
+                break;
+            case KeyEvent.VK_A:
+                pressedButton = Joypad.A;
+                break;
+            case KeyEvent.VK_B:
+                pressedButton = Joypad.B;
+                break;
+            case KeyEvent.VK_ENTER:
+                pressedButton = Joypad.SELECT;
+                break;
+            case KeyEvent.VK_SPACE:
+                pressedButton = Joypad.START;
+                break;
+            default:
+                ;
+        }
+
+        this.gameboy.getJoypad().setDirections(this.gameboy.getJoypad().getDirections() & (0x0f - pressedDirection));
+        this.gameboy.getJoypad().setButtons(this.gameboy.getJoypad().getButtons() & (0x0f - pressedButton));
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17994952
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 489 494
+src/de/joergjahnke/gameboy/core/Gameboy.java 207 216
+----------------------------------------
+            } finally {
+                try {
+                    saveStream.close();
+                } catch (Exception e) {
+                }
+            }
+
+----------------------------------------
+        if (!isRunning()) {
+            this.logger.info("Gameboy starting");
+            super.run();
+            // we use this thread to run the CPU
+            try {
+                this.cpu.run();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17994953
+src/de/joergjahnke/gameboy/core/Gameboy.java 207 216
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 393 400
+----------------------------------------
+        if (!isRunning()) {
+            this.logger.info("Gameboy starting");
+            super.run();
+            // we use this thread to run the CPU
+            try {
+                this.cpu.run();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+----------------------------------------
+        if (status == STATUS_LOAD_OK || status == STATUS_LOAD_FAILED) {
+            try {
+                new File(SUSPENDFILE_NAME).delete();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Could not remove the suspend file! Please remove the suspend file '" + SUSPENDFILE_NAME + "' manually.", this.commonResources.getString("CouldNotRemoveSuspendData"), JOptionPane.ERROR_MESSAGE);
+                e.printStackTrace();
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995954
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 489 494
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 393 400
+----------------------------------------
+            } finally {
+                try {
+                    saveStream.close();
+                } catch (Exception e) {
+                }
+            }
+
+----------------------------------------
+        if (status == STATUS_LOAD_OK || status == STATUS_LOAD_FAILED) {
+            try {
+                new File(SUSPENDFILE_NAME).delete();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Could not remove the suspend file! Please remove the suspend file '" + SUSPENDFILE_NAME + "' manually.", this.commonResources.getString("CouldNotRemoveSuspendData"), JOptionPane.ERROR_MESSAGE);
+                e.printStackTrace();
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995960
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 393 400
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 510 515
+----------------------------------------
+        if (status == STATUS_LOAD_OK || status == STATUS_LOAD_FAILED) {
+            try {
+                new File(SUSPENDFILE_NAME).delete();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Could not remove the suspend file! Please remove the suspend file '" + SUSPENDFILE_NAME + "' manually.", this.commonResources.getString("CouldNotRemoveSuspendData"), JOptionPane.ERROR_MESSAGE);
+                e.printStackTrace();
+            }
+        }
+
+----------------------------------------
+        } finally {
+            try {
+                romStream.close();
+            } catch (Exception e) {
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995959
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 489 494
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 510 515
+----------------------------------------
+            } finally {
+                try {
+                    saveStream.close();
+                } catch (Exception e) {
+                }
+            }
+
+----------------------------------------
+        } finally {
+            try {
+                romStream.close();
+            } catch (Exception e) {
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17994954
+src/de/joergjahnke/gameboy/core/Gameboy.java 207 216
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 510 515
+----------------------------------------
+        if (!isRunning()) {
+            this.logger.info("Gameboy starting");
+            super.run();
+            // we use this thread to run the CPU
+            try {
+                this.cpu.run();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+----------------------------------------
+        } finally {
+            try {
+                romStream.close();
+            } catch (Exception e) {
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995962
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 510 515
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 296 301
+----------------------------------------
+        } finally {
+            try {
+                romStream.close();
+            } catch (Exception e) {
+            }
+        }
+
+----------------------------------------
+        } finally {
+            try {
+                out.close();
+            } catch (Exception e) {
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17994955
+src/de/joergjahnke/gameboy/core/Gameboy.java 207 216
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 296 301
+----------------------------------------
+        if (!isRunning()) {
+            this.logger.info("Gameboy starting");
+            super.run();
+            // we use this thread to run the CPU
+            try {
+                this.cpu.run();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+----------------------------------------
+        } finally {
+            try {
+                out.close();
+            } catch (Exception e) {
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995231
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 393 400
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 296 301
+----------------------------------------
+        if (status == STATUS_LOAD_OK || status == STATUS_LOAD_FAILED) {
+            try {
+                new File(SUSPENDFILE_NAME).delete();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Could not remove the suspend file! Please remove the suspend file '" + SUSPENDFILE_NAME + "' manually.", this.commonResources.getString("CouldNotRemoveSuspendData"), JOptionPane.ERROR_MESSAGE);
+                e.printStackTrace();
+            }
+        }
+
+----------------------------------------
+        } finally {
+            try {
+                out.close();
+            } catch (Exception e) {
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995956
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 489 494
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 296 301
+----------------------------------------
+            } finally {
+                try {
+                    saveStream.close();
+                } catch (Exception e) {
+                }
+            }
+
+----------------------------------------
+        } finally {
+            try {
+                out.close();
+            } catch (Exception e) {
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995957
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 489 494
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 375 380
+----------------------------------------
+            } finally {
+                try {
+                    saveStream.close();
+                } catch (Exception e) {
+                }
+            }
+
+----------------------------------------
+        } finally {
+            try {
+                in.close();
+            } catch (Exception e) {
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995963
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 510 515
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 375 380
+----------------------------------------
+        } finally {
+            try {
+                romStream.close();
+            } catch (Exception e) {
+            }
+        }
+
+----------------------------------------
+        } finally {
+            try {
+                in.close();
+            } catch (Exception e) {
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17994956
+src/de/joergjahnke/gameboy/core/Gameboy.java 207 216
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 375 380
+----------------------------------------
+        if (!isRunning()) {
+            this.logger.info("Gameboy starting");
+            super.run();
+            // we use this thread to run the CPU
+            try {
+                this.cpu.run();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+----------------------------------------
+        } finally {
+            try {
+                in.close();
+            } catch (Exception e) {
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995232
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 393 400
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 375 380
+----------------------------------------
+        if (status == STATUS_LOAD_OK || status == STATUS_LOAD_FAILED) {
+            try {
+                new File(SUSPENDFILE_NAME).delete();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Could not remove the suspend file! Please remove the suspend file '" + SUSPENDFILE_NAME + "' manually.", this.commonResources.getString("CouldNotRemoveSuspendData"), JOptionPane.ERROR_MESSAGE);
+                e.printStackTrace();
+            }
+        }
+
+----------------------------------------
+        } finally {
+            try {
+                in.close();
+            } catch (Exception e) {
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995189
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 296 301
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 375 380
+----------------------------------------
+        } finally {
+            try {
+                out.close();
+            } catch (Exception e) {
+            }
+        }
+
+----------------------------------------
+        } finally {
+            try {
+                in.close();
+            } catch (Exception e) {
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17994957
+src/de/joergjahnke/gameboy/core/Gameboy.java 222 228
+src/de/joergjahnke/gameboy/core/Gameboy.java 233 239
+----------------------------------------
+    public void stop() {
+        if (isRunning()) {
+            this.logger.info("Gameboy stopping");
+            this.cpu.stop();
+            super.stop();
+        }
+    }
+
+----------------------------------------
+    public void pause() {
+        if (isRunning() && !isPaused()) {
+            this.cpu.pause();
+            super.pause();
+            this.logger.info("Gameboy paused");
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17994959
+src/de/joergjahnke/gameboy/core/Gameboy.java 222 228
+src/de/joergjahnke/gameboy/core/Gameboy.java 244 251
+----------------------------------------
+    public void stop() {
+        if (isRunning()) {
+            this.logger.info("Gameboy stopping");
+            this.cpu.stop();
+            super.stop();
+        }
+    }
+
+----------------------------------------
+    public void resume() {
+        if (isRunning() && isPaused()) {
+            this.cpu.resume();
+            this.performanceMeter.setupNextMeasurement(this.cpu.getCycles());
+            super.resume();
+            this.logger.info("Gameboy resumed");
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17994958
+src/de/joergjahnke/gameboy/core/Gameboy.java 233 239
+src/de/joergjahnke/gameboy/core/Gameboy.java 244 251
+----------------------------------------
+    public void pause() {
+        if (isRunning() && !isPaused()) {
+            this.cpu.pause();
+            super.pause();
+            this.logger.info("Gameboy paused");
+        }
+    }
+
+----------------------------------------
+    public void resume() {
+        if (isRunning() && isPaused()) {
+            this.cpu.resume();
+            this.performanceMeter.setupNextMeasurement(this.cpu.getCycles());
+            super.resume();
+            this.logger.info("Gameboy resumed");
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17994960
+src/de/joergjahnke/gameboy/core/Gameboy.java 233 239
+src/de/joergjahnke/gameboy/core/Gameboy.java 245 250
+----------------------------------------
+    public void pause() {
+        if (isRunning() && !isPaused()) {
+            this.cpu.pause();
+            super.pause();
+            this.logger.info("Gameboy paused");
+        }
+    }
+
+----------------------------------------
+        if (isRunning() && isPaused()) {
+            this.cpu.resume();
+            this.performanceMeter.setupNextMeasurement(this.cpu.getCycles());
+            super.resume();
+            this.logger.info("Gameboy resumed");
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17994991
+src/de/joergjahnke/gameboy/core/Gameboy.java 222 228
+src/de/joergjahnke/gameboy/core/Gameboy.java 245 250
+----------------------------------------
+    public void stop() {
+        if (isRunning()) {
+            this.logger.info("Gameboy stopping");
+            this.cpu.stop();
+            super.stop();
+        }
+    }
+
+----------------------------------------
+        if (isRunning() && isPaused()) {
+            this.cpu.resume();
+            this.performanceMeter.setupNextMeasurement(this.cpu.getCycles());
+            super.resume();
+            this.logger.info("Gameboy resumed");
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17994961
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 489 494
+src/de/joergjahnke/gameboy/android/AndroidGB.java 476 484
+----------------------------------------
+            } finally {
+                try {
+                    saveStream.close();
+                } catch (Exception e) {
+                }
+            }
+
+----------------------------------------
+            if (this.gameboy.getSoundChip().countObservers() == 0) {
+                try {
+                    this.gameboy.getSoundChip().addObserver(new WavePlayer(this.gameboy.getSoundChip()));
+                } catch (Throwable t) {
+                    // we could not add a player, that's OK
+                    this.gameboy.getLogger().warning("Could not create sound player! Sound output remains deactivated.");
+                    t.printStackTrace();
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17994965
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 296 301
+src/de/joergjahnke/gameboy/android/AndroidGB.java 476 484
+----------------------------------------
+        } finally {
+            try {
+                out.close();
+            } catch (Exception e) {
+            }
+        }
+
+----------------------------------------
+            if (this.gameboy.getSoundChip().countObservers() == 0) {
+                try {
+                    this.gameboy.getSoundChip().addObserver(new WavePlayer(this.gameboy.getSoundChip()));
+                } catch (Throwable t) {
+                    // we could not add a player, that's OK
+                    this.gameboy.getLogger().warning("Could not create sound player! Sound output remains deactivated.");
+                    t.printStackTrace();
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17994966
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 375 380
+src/de/joergjahnke/gameboy/android/AndroidGB.java 476 484
+----------------------------------------
+        } finally {
+            try {
+                in.close();
+            } catch (Exception e) {
+            }
+        }
+
+----------------------------------------
+            if (this.gameboy.getSoundChip().countObservers() == 0) {
+                try {
+                    this.gameboy.getSoundChip().addObserver(new WavePlayer(this.gameboy.getSoundChip()));
+                } catch (Throwable t) {
+                    // we could not add a player, that's OK
+                    this.gameboy.getLogger().warning("Could not create sound player! Sound output remains deactivated.");
+                    t.printStackTrace();
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17994964
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 510 515
+src/de/joergjahnke/gameboy/android/AndroidGB.java 476 484
+----------------------------------------
+        } finally {
+            try {
+                romStream.close();
+            } catch (Exception e) {
+            }
+        }
+
+----------------------------------------
+            if (this.gameboy.getSoundChip().countObservers() == 0) {
+                try {
+                    this.gameboy.getSoundChip().addObserver(new WavePlayer(this.gameboy.getSoundChip()));
+                } catch (Throwable t) {
+                    // we could not add a player, that's OK
+                    this.gameboy.getLogger().warning("Could not create sound player! Sound output remains deactivated.");
+                    t.printStackTrace();
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17994963
+src/de/joergjahnke/gameboy/core/Gameboy.java 207 216
+src/de/joergjahnke/gameboy/android/AndroidGB.java 476 484
+----------------------------------------
+        if (!isRunning()) {
+            this.logger.info("Gameboy starting");
+            super.run();
+            // we use this thread to run the CPU
+            try {
+                this.cpu.run();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+----------------------------------------
+            if (this.gameboy.getSoundChip().countObservers() == 0) {
+                try {
+                    this.gameboy.getSoundChip().addObserver(new WavePlayer(this.gameboy.getSoundChip()));
+                } catch (Throwable t) {
+                    // we could not add a player, that's OK
+                    this.gameboy.getLogger().warning("Could not create sound player! Sound output remains deactivated.");
+                    t.printStackTrace();
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17994962
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 393 400
+src/de/joergjahnke/gameboy/android/AndroidGB.java 476 484
+----------------------------------------
+        if (status == STATUS_LOAD_OK || status == STATUS_LOAD_FAILED) {
+            try {
+                new File(SUSPENDFILE_NAME).delete();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Could not remove the suspend file! Please remove the suspend file '" + SUSPENDFILE_NAME + "' manually.", this.commonResources.getString("CouldNotRemoveSuspendData"), JOptionPane.ERROR_MESSAGE);
+                e.printStackTrace();
+            }
+        }
+
+----------------------------------------
+            if (this.gameboy.getSoundChip().countObservers() == 0) {
+                try {
+                    this.gameboy.getSoundChip().addObserver(new WavePlayer(this.gameboy.getSoundChip()));
+                } catch (Throwable t) {
+                    // we could not add a player, that's OK
+                    this.gameboy.getLogger().warning("Could not create sound player! Sound output remains deactivated.");
+                    t.printStackTrace();
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17994967
+src/de/joergjahnke/gameboy/core/Gameboy.java 207 216
+src/de/joergjahnke/gameboy/android/AndroidGB.java 499 507
+----------------------------------------
+        if (!isRunning()) {
+            this.logger.info("Gameboy starting");
+            super.run();
+            // we use this thread to run the CPU
+            try {
+                this.cpu.run();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+----------------------------------------
+			if(this.orientationSensorNotifier == null) {
+				try {
+					this.orientationSensorNotifier = new OrientationSensorNotifier();
+					this.orientationSensorNotifier.addListener(this.gameboyView);
+					this.orientationSensorNotifier.start();
+				} catch( Exception e ) {
+					// we could not attach the notifier, most probably no orientation sensor is available
+				}
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17994968
+src/de/joergjahnke/gameboy/core/VideoChip.java 562 568
+src/de/joergjahnke/gameboy/core/VideoChip.java 669 674
+----------------------------------------
+        if (vRAMBank != this.currentVRAMBank) {
+            if (DEBUG) {
+                System.out.println("Set VRAM bank to " + vRAMBank + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.currentVRAMBank = vRAMBank;
+            this.currentVRAMOffset = vRAMBank * GBCVRAM_BANK_SIZE;
+        }
+
+----------------------------------------
+    public final void setHaveSpritesPriority(final boolean haveSpritesPriority) {
+        if (DEBUG && haveSpritesPriority != this.haveSpritesPriority) {
+            System.out.println("Set sprite priority enable to " + haveSpritesPriority + " at line " + this.currentLine + " of frame " + this.frames);
+        }
+        this.haveSpritesPriority = haveSpritesPriority;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17994969
+src/de/joergjahnke/gameboy/core/VideoChip.java 453 463
+src/de/joergjahnke/gameboy/core/VideoChip.java 729 737
+----------------------------------------
+    public final void setLCDEnabled(final boolean isLCDEnabled) {
+        if (isLCDEnabled != this.isLCDEnabled) {
+            if (DEBUG) {
+                System.out.println("Set LCD enable to " + isLCDEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.isLCDEnabled = isLCDEnabled;
+            this.currentLine = 0;
+            setSpriteHeight(isLCDEnabled ? VideoChip.TILE_HEIGHT * 2 : VideoChip.TILE_HEIGHT);
+            invalidateLines();
+        }
+    }
+
+----------------------------------------
+    public final void setScrollX(final int scrollX) {
+        if (scrollX != this.scrollX) {
+            if (DEBUG) {
+                System.out.println("Set x-scroll to " + scrollX + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.scrollX = scrollX;
+            invalidateLines();
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+28734555
+src/de/joergjahnke/gameboy/core/VideoChip.java 562 568
+src/de/joergjahnke/gameboy/core/VideoChip.java 454 462
+----------------------------------------
+        if (vRAMBank != this.currentVRAMBank) {
+            if (DEBUG) {
+                System.out.println("Set VRAM bank to " + vRAMBank + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.currentVRAMBank = vRAMBank;
+            this.currentVRAMOffset = vRAMBank * GBCVRAM_BANK_SIZE;
+        }
+
+----------------------------------------
+        if (isLCDEnabled != this.isLCDEnabled) {
+            if (DEBUG) {
+                System.out.println("Set LCD enable to " + isLCDEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.isLCDEnabled = isLCDEnabled;
+            this.currentLine = 0;
+            setSpriteHeight(isLCDEnabled ? VideoChip.TILE_HEIGHT * 2 : VideoChip.TILE_HEIGHT);
+            invalidateLines();
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17994970
+src/de/joergjahnke/gameboy/core/VideoChip.java 729 737
+src/de/joergjahnke/gameboy/core/VideoChip.java 454 462
+----------------------------------------
+    public final void setScrollX(final int scrollX) {
+        if (scrollX != this.scrollX) {
+            if (DEBUG) {
+                System.out.println("Set x-scroll to " + scrollX + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.scrollX = scrollX;
+            invalidateLines();
+        }
+    }
+
+----------------------------------------
+        if (isLCDEnabled != this.isLCDEnabled) {
+            if (DEBUG) {
+                System.out.println("Set LCD enable to " + isLCDEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.isLCDEnabled = isLCDEnabled;
+            this.currentLine = 0;
+            setSpriteHeight(isLCDEnabled ? VideoChip.TILE_HEIGHT * 2 : VideoChip.TILE_HEIGHT);
+            invalidateLines();
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17994996
+src/de/joergjahnke/gameboy/core/VideoChip.java 453 463
+src/de/joergjahnke/gameboy/core/VideoChip.java 561 569
+----------------------------------------
+    public final void setLCDEnabled(final boolean isLCDEnabled) {
+        if (isLCDEnabled != this.isLCDEnabled) {
+            if (DEBUG) {
+                System.out.println("Set LCD enable to " + isLCDEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.isLCDEnabled = isLCDEnabled;
+            this.currentLine = 0;
+            setSpriteHeight(isLCDEnabled ? VideoChip.TILE_HEIGHT * 2 : VideoChip.TILE_HEIGHT);
+            invalidateLines();
+        }
+    }
+
+----------------------------------------
+    public void setGBCVRAMBank(final int vRAMBank) {
+        if (vRAMBank != this.currentVRAMBank) {
+            if (DEBUG) {
+                System.out.println("Set VRAM bank to " + vRAMBank + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.currentVRAMBank = vRAMBank;
+            this.currentVRAMOffset = vRAMBank * GBCVRAM_BANK_SIZE;
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17994971
+src/de/joergjahnke/gameboy/core/VideoChip.java 729 737
+src/de/joergjahnke/gameboy/core/VideoChip.java 561 569
+----------------------------------------
+    public final void setScrollX(final int scrollX) {
+        if (scrollX != this.scrollX) {
+            if (DEBUG) {
+                System.out.println("Set x-scroll to " + scrollX + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.scrollX = scrollX;
+            invalidateLines();
+        }
+    }
+
+----------------------------------------
+    public void setGBCVRAMBank(final int vRAMBank) {
+        if (vRAMBank != this.currentVRAMBank) {
+            if (DEBUG) {
+                System.out.println("Set VRAM bank to " + vRAMBank + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.currentVRAMBank = vRAMBank;
+            this.currentVRAMOffset = vRAMBank * GBCVRAM_BANK_SIZE;
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995121
+src/de/joergjahnke/gameboy/core/VideoChip.java 561 569
+src/de/joergjahnke/gameboy/core/VideoChip.java 645 653
+----------------------------------------
+    public void setGBCVRAMBank(final int vRAMBank) {
+        if (vRAMBank != this.currentVRAMBank) {
+            if (DEBUG) {
+                System.out.println("Set VRAM bank to " + vRAMBank + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.currentVRAMBank = vRAMBank;
+            this.currentVRAMOffset = vRAMBank * GBCVRAM_BANK_SIZE;
+        }
+    }
+
+----------------------------------------
+    public final void setBackgroundBlank(final boolean isBGBlank) {
+        if (isBGBlank != this.isBGBlank) {
+            if (DEBUG) {
+                System.out.println("Set background enable to " + !isBGBlank + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.isBGBlank = isBGBlank;
+            invalidateLines();
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995040
+src/de/joergjahnke/gameboy/core/VideoChip.java 453 463
+src/de/joergjahnke/gameboy/core/VideoChip.java 645 653
+----------------------------------------
+    public final void setLCDEnabled(final boolean isLCDEnabled) {
+        if (isLCDEnabled != this.isLCDEnabled) {
+            if (DEBUG) {
+                System.out.println("Set LCD enable to " + isLCDEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.isLCDEnabled = isLCDEnabled;
+            this.currentLine = 0;
+            setSpriteHeight(isLCDEnabled ? VideoChip.TILE_HEIGHT * 2 : VideoChip.TILE_HEIGHT);
+            invalidateLines();
+        }
+    }
+
+----------------------------------------
+    public final void setBackgroundBlank(final boolean isBGBlank) {
+        if (isBGBlank != this.isBGBlank) {
+            if (DEBUG) {
+                System.out.println("Set background enable to " + !isBGBlank + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.isBGBlank = isBGBlank;
+            invalidateLines();
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17994972
+src/de/joergjahnke/gameboy/core/VideoChip.java 729 737
+src/de/joergjahnke/gameboy/core/VideoChip.java 645 653
+----------------------------------------
+    public final void setScrollX(final int scrollX) {
+        if (scrollX != this.scrollX) {
+            if (DEBUG) {
+                System.out.println("Set x-scroll to " + scrollX + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.scrollX = scrollX;
+            invalidateLines();
+        }
+    }
+
+----------------------------------------
+    public final void setBackgroundBlank(final boolean isBGBlank) {
+        if (isBGBlank != this.isBGBlank) {
+            if (DEBUG) {
+                System.out.println("Set background enable to " + !isBGBlank + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.isBGBlank = isBGBlank;
+            invalidateLines();
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17994973
+src/de/joergjahnke/gameboy/core/VideoChip.java 729 737
+src/de/joergjahnke/gameboy/core/VideoChip.java 479 490
+----------------------------------------
+    public final void setScrollX(final int scrollX) {
+        if (scrollX != this.scrollX) {
+            if (DEBUG) {
+                System.out.println("Set x-scroll to " + scrollX + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.scrollX = scrollX;
+            invalidateLines();
+        }
+    }
+
+----------------------------------------
+    public final void setWindowEnabled(final boolean isWindowEnabled) {
+        if (isWindowEnabled != this.isWindowEnabled) {
+            if (DEBUG) {
+                System.out.println("Set window enable to " + isWindowEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.isWindowEnabled = isWindowEnabled;
+            if (isWindowEnabled && this.windowLine == 0 && this.currentLine > getWindowY()) {
+                this.windowLine = SCREEN_HEIGHT;
+            }
+            invalidateLines();
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+28734559
+src/de/joergjahnke/gameboy/core/VideoChip.java 645 653
+src/de/joergjahnke/gameboy/core/VideoChip.java 479 490
+----------------------------------------
+    public final void setBackgroundBlank(final boolean isBGBlank) {
+        if (isBGBlank != this.isBGBlank) {
+            if (DEBUG) {
+                System.out.println("Set background enable to " + !isBGBlank + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.isBGBlank = isBGBlank;
+            invalidateLines();
+        }
+    }
+
+----------------------------------------
+    public final void setWindowEnabled(final boolean isWindowEnabled) {
+        if (isWindowEnabled != this.isWindowEnabled) {
+            if (DEBUG) {
+                System.out.println("Set window enable to " + isWindowEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.isWindowEnabled = isWindowEnabled;
+            if (isWindowEnabled && this.windowLine == 0 && this.currentLine > getWindowY()) {
+                this.windowLine = SCREEN_HEIGHT;
+            }
+            invalidateLines();
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995168
+src/de/joergjahnke/gameboy/core/VideoChip.java 453 463
+src/de/joergjahnke/gameboy/core/VideoChip.java 479 490
+----------------------------------------
+    public final void setLCDEnabled(final boolean isLCDEnabled) {
+        if (isLCDEnabled != this.isLCDEnabled) {
+            if (DEBUG) {
+                System.out.println("Set LCD enable to " + isLCDEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.isLCDEnabled = isLCDEnabled;
+            this.currentLine = 0;
+            setSpriteHeight(isLCDEnabled ? VideoChip.TILE_HEIGHT * 2 : VideoChip.TILE_HEIGHT);
+            invalidateLines();
+        }
+    }
+
+----------------------------------------
+    public final void setWindowEnabled(final boolean isWindowEnabled) {
+        if (isWindowEnabled != this.isWindowEnabled) {
+            if (DEBUG) {
+                System.out.println("Set window enable to " + isWindowEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.isWindowEnabled = isWindowEnabled;
+            if (isWindowEnabled && this.windowLine == 0 && this.currentLine > getWindowY()) {
+                this.windowLine = SCREEN_HEIGHT;
+            }
+            invalidateLines();
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995122
+src/de/joergjahnke/gameboy/core/VideoChip.java 645 653
+src/de/joergjahnke/gameboy/core/VideoChip.java 480 489
+----------------------------------------
+    public final void setBackgroundBlank(final boolean isBGBlank) {
+        if (isBGBlank != this.isBGBlank) {
+            if (DEBUG) {
+                System.out.println("Set background enable to " + !isBGBlank + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.isBGBlank = isBGBlank;
+            invalidateLines();
+        }
+    }
+
+----------------------------------------
+        if (isWindowEnabled != this.isWindowEnabled) {
+            if (DEBUG) {
+                System.out.println("Set window enable to " + isWindowEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.isWindowEnabled = isWindowEnabled;
+            if (isWindowEnabled && this.windowLine == 0 && this.currentLine > getWindowY()) {
+                this.windowLine = SCREEN_HEIGHT;
+            }
+            invalidateLines();
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995170
+src/de/joergjahnke/gameboy/core/VideoChip.java 453 463
+src/de/joergjahnke/gameboy/core/VideoChip.java 480 489
+----------------------------------------
+    public final void setLCDEnabled(final boolean isLCDEnabled) {
+        if (isLCDEnabled != this.isLCDEnabled) {
+            if (DEBUG) {
+                System.out.println("Set LCD enable to " + isLCDEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.isLCDEnabled = isLCDEnabled;
+            this.currentLine = 0;
+            setSpriteHeight(isLCDEnabled ? VideoChip.TILE_HEIGHT * 2 : VideoChip.TILE_HEIGHT);
+            invalidateLines();
+        }
+    }
+
+----------------------------------------
+        if (isWindowEnabled != this.isWindowEnabled) {
+            if (DEBUG) {
+                System.out.println("Set window enable to " + isWindowEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.isWindowEnabled = isWindowEnabled;
+            if (isWindowEnabled && this.windowLine == 0 && this.currentLine > getWindowY()) {
+                this.windowLine = SCREEN_HEIGHT;
+            }
+            invalidateLines();
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17994974
+src/de/joergjahnke/gameboy/core/VideoChip.java 729 737
+src/de/joergjahnke/gameboy/core/VideoChip.java 480 489
+----------------------------------------
+    public final void setScrollX(final int scrollX) {
+        if (scrollX != this.scrollX) {
+            if (DEBUG) {
+                System.out.println("Set x-scroll to " + scrollX + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.scrollX = scrollX;
+            invalidateLines();
+        }
+    }
+
+----------------------------------------
+        if (isWindowEnabled != this.isWindowEnabled) {
+            if (DEBUG) {
+                System.out.println("Set window enable to " + isWindowEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.isWindowEnabled = isWindowEnabled;
+            if (isWindowEnabled && this.windowLine == 0 && this.currentLine > getWindowY()) {
+                this.windowLine = SCREEN_HEIGHT;
+            }
+            invalidateLines();
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995169
+src/de/joergjahnke/gameboy/core/VideoChip.java 454 462
+src/de/joergjahnke/gameboy/core/VideoChip.java 480 489
+----------------------------------------
+        if (isLCDEnabled != this.isLCDEnabled) {
+            if (DEBUG) {
+                System.out.println("Set LCD enable to " + isLCDEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.isLCDEnabled = isLCDEnabled;
+            this.currentLine = 0;
+            setSpriteHeight(isLCDEnabled ? VideoChip.TILE_HEIGHT * 2 : VideoChip.TILE_HEIGHT);
+            invalidateLines();
+        }
+
+----------------------------------------
+        if (isWindowEnabled != this.isWindowEnabled) {
+            if (DEBUG) {
+                System.out.println("Set window enable to " + isWindowEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.isWindowEnabled = isWindowEnabled;
+            if (isWindowEnabled && this.windowLine == 0 && this.currentLine > getWindowY()) {
+                this.windowLine = SCREEN_HEIGHT;
+            }
+            invalidateLines();
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17994997
+src/de/joergjahnke/gameboy/core/VideoChip.java 561 569
+src/de/joergjahnke/gameboy/core/VideoChip.java 480 489
+----------------------------------------
+    public void setGBCVRAMBank(final int vRAMBank) {
+        if (vRAMBank != this.currentVRAMBank) {
+            if (DEBUG) {
+                System.out.println("Set VRAM bank to " + vRAMBank + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.currentVRAMBank = vRAMBank;
+            this.currentVRAMOffset = vRAMBank * GBCVRAM_BANK_SIZE;
+        }
+    }
+
+----------------------------------------
+        if (isWindowEnabled != this.isWindowEnabled) {
+            if (DEBUG) {
+                System.out.println("Set window enable to " + isWindowEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.isWindowEnabled = isWindowEnabled;
+            if (isWindowEnabled && this.windowLine == 0 && this.currentLine > getWindowY()) {
+                this.windowLine = SCREEN_HEIGHT;
+            }
+            invalidateLines();
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995034
+src/de/joergjahnke/gameboy/core/VideoChip.java 479 490
+src/de/joergjahnke/gameboy/core/VideoChip.java 621 629
+----------------------------------------
+    public final void setWindowEnabled(final boolean isWindowEnabled) {
+        if (isWindowEnabled != this.isWindowEnabled) {
+            if (DEBUG) {
+                System.out.println("Set window enable to " + isWindowEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.isWindowEnabled = isWindowEnabled;
+            if (isWindowEnabled && this.windowLine == 0 && this.currentLine > getWindowY()) {
+                this.windowLine = SCREEN_HEIGHT;
+            }
+            invalidateLines();
+        }
+    }
+
+----------------------------------------
+    public final void setSpritesEnabled(final boolean areSpritesEnabled) {
+        if (areSpritesEnabled != this.areSpritesEnabled) {
+            if (DEBUG) {
+                System.out.println("Set sprite enable to " + areSpritesEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            invalidateLines();
+        }
+        this.areSpritesEnabled = areSpritesEnabled;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995033
+src/de/joergjahnke/gameboy/core/VideoChip.java 561 569
+src/de/joergjahnke/gameboy/core/VideoChip.java 621 629
+----------------------------------------
+    public void setGBCVRAMBank(final int vRAMBank) {
+        if (vRAMBank != this.currentVRAMBank) {
+            if (DEBUG) {
+                System.out.println("Set VRAM bank to " + vRAMBank + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.currentVRAMBank = vRAMBank;
+            this.currentVRAMOffset = vRAMBank * GBCVRAM_BANK_SIZE;
+        }
+    }
+
+----------------------------------------
+    public final void setSpritesEnabled(final boolean areSpritesEnabled) {
+        if (areSpritesEnabled != this.areSpritesEnabled) {
+            if (DEBUG) {
+                System.out.println("Set sprite enable to " + areSpritesEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            invalidateLines();
+        }
+        this.areSpritesEnabled = areSpritesEnabled;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995031
+src/de/joergjahnke/gameboy/core/VideoChip.java 453 463
+src/de/joergjahnke/gameboy/core/VideoChip.java 621 629
+----------------------------------------
+    public final void setLCDEnabled(final boolean isLCDEnabled) {
+        if (isLCDEnabled != this.isLCDEnabled) {
+            if (DEBUG) {
+                System.out.println("Set LCD enable to " + isLCDEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.isLCDEnabled = isLCDEnabled;
+            this.currentLine = 0;
+            setSpriteHeight(isLCDEnabled ? VideoChip.TILE_HEIGHT * 2 : VideoChip.TILE_HEIGHT);
+            invalidateLines();
+        }
+    }
+
+----------------------------------------
+    public final void setSpritesEnabled(final boolean areSpritesEnabled) {
+        if (areSpritesEnabled != this.areSpritesEnabled) {
+            if (DEBUG) {
+                System.out.println("Set sprite enable to " + areSpritesEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            invalidateLines();
+        }
+        this.areSpritesEnabled = areSpritesEnabled;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995032
+src/de/joergjahnke/gameboy/core/VideoChip.java 454 462
+src/de/joergjahnke/gameboy/core/VideoChip.java 621 629
+----------------------------------------
+        if (isLCDEnabled != this.isLCDEnabled) {
+            if (DEBUG) {
+                System.out.println("Set LCD enable to " + isLCDEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.isLCDEnabled = isLCDEnabled;
+            this.currentLine = 0;
+            setSpriteHeight(isLCDEnabled ? VideoChip.TILE_HEIGHT * 2 : VideoChip.TILE_HEIGHT);
+            invalidateLines();
+        }
+
+----------------------------------------
+    public final void setSpritesEnabled(final boolean areSpritesEnabled) {
+        if (areSpritesEnabled != this.areSpritesEnabled) {
+            if (DEBUG) {
+                System.out.println("Set sprite enable to " + areSpritesEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            invalidateLines();
+        }
+        this.areSpritesEnabled = areSpritesEnabled;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995035
+src/de/joergjahnke/gameboy/core/VideoChip.java 480 489
+src/de/joergjahnke/gameboy/core/VideoChip.java 621 629
+----------------------------------------
+        if (isWindowEnabled != this.isWindowEnabled) {
+            if (DEBUG) {
+                System.out.println("Set window enable to " + isWindowEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.isWindowEnabled = isWindowEnabled;
+            if (isWindowEnabled && this.windowLine == 0 && this.currentLine > getWindowY()) {
+                this.windowLine = SCREEN_HEIGHT;
+            }
+            invalidateLines();
+        }
+
+----------------------------------------
+    public final void setSpritesEnabled(final boolean areSpritesEnabled) {
+        if (areSpritesEnabled != this.areSpritesEnabled) {
+            if (DEBUG) {
+                System.out.println("Set sprite enable to " + areSpritesEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            invalidateLines();
+        }
+        this.areSpritesEnabled = areSpritesEnabled;
+    }
+
+----------------------------------------

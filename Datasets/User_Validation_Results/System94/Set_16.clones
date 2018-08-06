@@ -1,0 +1,1540 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917622
+source/net/filebot/web/SimpleDate.java 64 75
+source/net/filebot/ui/rename/ExpressionFormatter.java 92 102
+----------------------------------------
+	public int compareTo(Object other) {
+		if (other instanceof SimpleDate) {
+			return compareTo((SimpleDate) other);
+		} else if (other instanceof CharSequence) {
+			SimpleDate otherDate = parse(other.toString());
+			if (otherDate != null) {
+				return compareTo(otherDate);
+			}
+		}
+
+		throw new IllegalArgumentException(String.valueOf(other));
+	}
+
+----------------------------------------
+			if (structureRoot != null) {
+				for (File f : listPath(parent)) {
+					if (isVolumeRoot(structureRoot)) {
+						break;
+					}
+					if (isStructureRoot(f)) {
+						structureRoot = structureRoot.getParentFile();
+					}
+				}
+				return new File(structureRoot, destination).getAbsolutePath();
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917634
+source/net/filebot/format/ExpressionBindings.java 59 67
+source/net/filebot/ui/rename/ExpressionFormatter.java 92 102
+----------------------------------------
+			try {
+				Object value = method.invoke(bindingBean);
+				if (!isUndefined(value)) {
+					return value;
+				}
+				if (undefined != null) {
+					return undefined.invoke(bindingBean, key); // invoke fallback method
+				}
+			} catch (Exception e) {
+
+----------------------------------------
+			if (structureRoot != null) {
+				for (File f : listPath(parent)) {
+					if (isVolumeRoot(structureRoot)) {
+						break;
+					}
+					if (isStructureRoot(f)) {
+						structureRoot = structureRoot.getParentFile();
+					}
+				}
+				return new File(structureRoot, destination).getAbsolutePath();
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917597
+source/net/filebot/ui/sfv/ChecksumCell.java 155 170
+source/net/filebot/ui/rename/ExpressionFormatter.java 92 102
+----------------------------------------
+		protected void done(PropertyChangeEvent evt) {
+			try {
+				hashes.putAll(task.get());
+			} catch (Exception e) {
+				Throwable cause = ExceptionUtilities.getRootCause(e);
+
+				// ignore cancellation
+				if (cause instanceof CancellationException) {
+					return;
+				}
+
+				error = cause;
+			} finally {
+				task = null;
+			}
+		}
+
+----------------------------------------
+			if (structureRoot != null) {
+				for (File f : listPath(parent)) {
+					if (isVolumeRoot(structureRoot)) {
+						break;
+					}
+					if (isStructureRoot(f)) {
+						structureRoot = structureRoot.getParentFile();
+					}
+				}
+				return new File(structureRoot, destination).getAbsolutePath();
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917599
+source/net/filebot/format/PropertyBindings.java 46 63
+source/net/filebot/archive/ExtractCallback.java 33 55
+----------------------------------------
+	public Object get(Object key) {
+		Object value = properties.get(key);
+
+		// evaluate method
+		if (value instanceof Method) {
+			try {
+				value = ((Method) value).invoke(object);
+
+				if (value == null) {
+					value = defaultValue;
+				}
+			} catch (Exception e) {
+				throw new RuntimeException(e);
+			}
+		}
+
+		return value;
+	}
+
+----------------------------------------
+	public ISequentialOutStream getStream(int index, ExtractAskMode extractAskMode) throws SevenZipException {
+		if (extractAskMode != ExtractAskMode.EXTRACT) {
+			return null;
+		}
+
+		boolean isFolder = (Boolean) inArchive.getProperty(index, PropID.IS_FOLDER);
+		if (isFolder) {
+			return null;
+		}
+
+		String path = (String) inArchive.getProperty(index, PropID.PATH);
+		try {
+			OutputStream target = extractOut.getStream(new File(path));
+			if (target == null) {
+				return null;
+			}
+
+			output = new ExtractOutStream(target);
+			return output;
+		} catch (IOException e) {
+			throw new SevenZipException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917600
+source/net/filebot/archive/ExtractCallback.java 65 73
+source/net/filebot/archive/ExtractCallback.java 64 78
+----------------------------------------
+		if (output != null) {
+			try {
+				output.close();
+			} catch (IOException e) {
+				throw new SevenZipException(e);
+			} finally {
+				output = null;
+			}
+		}
+
+----------------------------------------
+	public void setOperationResult(ExtractOperationResult extractOperationResult) throws SevenZipException {
+		if (output != null) {
+			try {
+				output.close();
+			} catch (IOException e) {
+				throw new SevenZipException(e);
+			} finally {
+				output = null;
+			}
+		}
+
+		if (extractOperationResult != ExtractOperationResult.OK) {
+			throw new SevenZipException("Extraction Error: " + extractOperationResult);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917603
+source/net/filebot/similarity/Matcher.java 161 199
+source/net/filebot/web/OpenSubtitlesXmlRpc.java 244 261
+----------------------------------------
+	protected List<Match<V, C>> disjointMatches(Collection<Match<V, C>> collection) {
+		Map<V, List<Match<V, C>>> matchesByValue = new HashMap<V, List<Match<V, C>>>();
+		Map<C, List<Match<V, C>>> matchesByCandidate = new HashMap<C, List<Match<V, C>>>();
+
+		// map matches by value and candidate respectively
+		for (Match<V, C> match : collection) {
+			List<Match<V, C>> matchListForValue = matchesByValue.get(match.getValue());
+			List<Match<V, C>> matchListForCandidate = matchesByCandidate.get(match.getCandidate());
+
+			// create list if necessary
+			if (matchListForValue == null) {
+				matchListForValue = new ArrayList<Match<V, C>>();
+				matchesByValue.put(match.getValue(), matchListForValue);
+			}
+
+			// create list if necessary
+			if (matchListForCandidate == null) {
+				matchListForCandidate = new ArrayList<Match<V, C>>();
+				matchesByCandidate.put(match.getCandidate(), matchListForCandidate);
+			}
+
+			// add match to both lists
+			matchListForValue.add(match);
+			matchListForCandidate.add(match);
+		}
+
+		// collect disjoint matches
+		List<Match<V, C>> disjointMatches = new ArrayList<Match<V, C>>();
+
+		for (List<Match<V, C>> matchListForValue : matchesByValue.values()) {
+			// check if match is the only element in both lists
+			if (matchListForValue.size() == 1 && matchListForValue.equals(matchesByCandidate.get(matchListForValue.get(0).getCandidate()))) {
+				// match is disjoint :)
+				disjointMatches.add(matchListForValue.get(0));
+			}
+		}
+
+		return disjointMatches;
+	}
+
+----------------------------------------
+		if (payload instanceof Map) {
+			Map<String, Map<String, Map<String, ?>>> dataByTag = (Map<String, Map<String, Map<String, ?>>>) payload;
+			for (String tag : tags) {
+				List<SubtitleSearchResult> value = new ArrayList<SubtitleSearchResult>();
+				Map<String, Map<String, ?>> data = dataByTag.get(tag);
+				if (data != null) {
+					Map<String, ?> match = data.get("BestGuess");
+					if (match != null) {
+						String name = String.valueOf(match.get("MovieName"));
+						String kind = String.valueOf(match.get("MovieKind"));
+						int imdbid = Integer.parseInt(String.valueOf(match.get("IDMovieIMDB")));
+						int year = Integer.parseInt(String.valueOf(match.get("MovieYear")));
+						value.add(new SubtitleSearchResult(imdbid, name, year, kind, -1));
+					}
+				}
+				results.put(tag, value);
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917604
+source/net/filebot/ui/sfv/ChecksumTableExportHandler.java 48 56
+source/net/filebot/format/SecureCompiledScript.java 79 100
+----------------------------------------
+	public void export(File file, File column) throws IOException {
+		VerificationFileWriter writer = new VerificationFileWriter(file, model.getHashType().getFormat(), UTF_8);
+
+		try {
+			export(writer, column, model.getHashType());
+		} finally {
+			writer.close();
+		}
+	}
+
+----------------------------------------
+	public Object eval(final ScriptContext context) throws ScriptException {
+		try {
+			return AccessController.doPrivileged(new PrivilegedExceptionAction<Object>() {
+
+				@Override
+				public Object run() throws ScriptException {
+					return compiledScript.eval(context);
+				}
+			}, sandbox);
+		} catch (PrivilegedActionException e) {
+			AccessControlException accessException = ExceptionUtilities.findCause(e, AccessControlException.class);
+
+			// try to unwrap AccessControlException
+			if (accessException != null)
+				throw new ExpressionException(accessException);
+
+			// forward ScriptException
+			// e.getException() should be an instance of ScriptException,
+			// as only "checked" exceptions will be "wrapped" in a PrivilegedActionException
+			throw (ScriptException) e.getException();
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917605
+source/net/filebot/similarity/SeriesNameMatcher.java 92 102
+source/net/filebot/ui/subtitle/upload/SubtitleMappingTableModel.java 87 95
+----------------------------------------
+		for (int i = 0; i < focus.length; i++) {
+			String beforeSxE = seasonEpisodeMatcher.head(focus[i]);
+			if (beforeSxE != null && beforeSxE.length() > 0) {
+				focus[i] = beforeSxE;
+			} else {
+				int datePos = dateMatcher.find(focus[i], 0);
+				if (datePos >= 0) {
+					focus[i] = focus[i].substring(0, datePos);
+				}
+			}
+		}
+
+----------------------------------------
+	public void setValueAt(Object value, int row, int column) {
+		if (getColumnClass(column) == Language.class && value instanceof Language) {
+			data[row].setLanguage((Language) value);
+
+			if (data[row].getStatus() == Status.IdentificationRequired) {
+				data[row].setState(Status.CheckPending);
+			}
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917606
+source/net/filebot/similarity/SeriesNameMatcher.java 244 267
+source/net/filebot/similarity/CommonSequenceMatcher.java 100 120
+----------------------------------------
+	protected <T> T[] firstCommonSequence(T[] seq1, T[] seq2, int maxStartIndex, Comparator<T> equalsComparator) {
+		for (int i = 0; i < seq1.length && i <= maxStartIndex; i++) {
+			for (int j = 0; j < seq2.length && j <= maxStartIndex; j++) {
+				// common sequence length
+				int len = 0;
+
+				// iterate over common sequence
+				while ((i + len < seq1.length) && (j + len < seq2.length) && (equalsComparator.compare(seq1[i + len], seq2[j + len]) == 0)) {
+					len++;
+				}
+
+				// check if a common sequence was found
+				if (len > 0) {
+					if (i == 0 && len == seq1.length)
+						return seq1;
+
+					return Arrays.copyOfRange(seq1, i, i + len);
+				}
+			}
+		}
+
+		// no intersection at all
+		return null;
+	}
+
+----------------------------------------
+		for (int i = 0; i < seq1.length && i <= maxStartIndex; i++) {
+			for (int j = 0; j < seq2.length && j <= maxStartIndex; j++) {
+				// common sequence length
+				int len = 0;
+
+				// iterate over common sequence
+				while ((i + len < seq1.length) && (j + len < seq2.length) && (seq1[i + len].compareTo(seq2[j + len]) == 0)) {
+					len++;
+				}
+
+				// check if a common sequence was found
+				if (len > (matchSeq == null ? 0 : matchSeq.length)) {
+					matchSeq = copyOfRange(seq1, i, i + len);
+
+					// look for first match
+					if (returnFirstMatch) {
+						return matchSeq;
+					}
+				}
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917610
+source/net/filebot/MetaAttributeView.java 52 72
+source/net/filebot/MetaAttributeView.java 53 67
+----------------------------------------
+	public String get(Object key) {
+		try {
+			if (xattr instanceof UserDefinedFileAttributeView) {
+				UserDefinedFileAttributeView attributeView = (UserDefinedFileAttributeView) xattr;
+				ByteBuffer buffer = ByteBuffer.allocate(attributeView.size(key.toString()));
+				attributeView.read(key.toString(), buffer);
+				buffer.flip();
+
+				return encoding.decode(buffer).toString();
+			}
+
+			if (xattr instanceof MacXattrView) {
+				MacXattrView macXattr = (MacXattrView) xattr;
+				return macXattr.read(key.toString());
+			}
+		} catch (Exception e) {
+			// ignore
+		}
+
+		return null;
+	}
+
+----------------------------------------
+		try {
+			if (xattr instanceof UserDefinedFileAttributeView) {
+				UserDefinedFileAttributeView attributeView = (UserDefinedFileAttributeView) xattr;
+				ByteBuffer buffer = ByteBuffer.allocate(attributeView.size(key.toString()));
+				attributeView.read(key.toString(), buffer);
+				buffer.flip();
+
+				return encoding.decode(buffer).toString();
+			}
+
+			if (xattr instanceof MacXattrView) {
+				MacXattrView macXattr = (MacXattrView) xattr;
+				return macXattr.read(key.toString());
+			}
+		} catch (Exception e) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917611
+source/net/filebot/MetaAttributeView.java 75 99
+source/net/filebot/MetaAttributeView.java 76 94
+----------------------------------------
+	public String put(String key, String value) {
+		try {
+			if (xattr instanceof UserDefinedFileAttributeView) {
+				UserDefinedFileAttributeView attributeView = (UserDefinedFileAttributeView) xattr;
+				if (value == null || value.isEmpty()) {
+					attributeView.delete(key);
+				} else {
+					attributeView.write(key, encoding.encode(value));
+				}
+			}
+
+			if (xattr instanceof MacXattrView) {
+				MacXattrView macXattr = (MacXattrView) xattr;
+				if (value == null || value.isEmpty()) {
+					macXattr.delete(key);
+				} else {
+					macXattr.write(key, value);
+				}
+			}
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+
+		return null; // since we don't know the old value
+	}
+
+----------------------------------------
+		try {
+			if (xattr instanceof UserDefinedFileAttributeView) {
+				UserDefinedFileAttributeView attributeView = (UserDefinedFileAttributeView) xattr;
+				if (value == null || value.isEmpty()) {
+					attributeView.delete(key);
+				} else {
+					attributeView.write(key, encoding.encode(value));
+				}
+			}
+
+			if (xattr instanceof MacXattrView) {
+				MacXattrView macXattr = (MacXattrView) xattr;
+				if (value == null || value.isEmpty()) {
+					macXattr.delete(key);
+				} else {
+					macXattr.write(key, value);
+				}
+			}
+		} catch (Exception e) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917612
+source/net/filebot/similarity/FileNameMetric.java 26 33
+source/net/filebot/MetaAttributeView.java 101 113
+----------------------------------------
+	protected String getFileName(Object object) {
+		if (object instanceof File) {
+			// name without extension normalized to lower-case
+			return getName((File) object).trim().toLowerCase();
+		}
+
+		return null;
+	}
+
+----------------------------------------
+	public List<String> list() throws IOException {
+		if (xattr instanceof UserDefinedFileAttributeView) {
+			UserDefinedFileAttributeView attributeView = (UserDefinedFileAttributeView) xattr;
+			return attributeView.list();
+		}
+
+		if (xattr instanceof MacXattrView) {
+			MacXattrView macXattr = (MacXattrView) xattr;
+			return macXattr.list();
+		}
+
+		return null;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917613
+source/net/filebot/web/SimpleDate.java 64 75
+source/net/filebot/MetaAttributeView.java 101 113
+----------------------------------------
+	public int compareTo(Object other) {
+		if (other instanceof SimpleDate) {
+			return compareTo((SimpleDate) other);
+		} else if (other instanceof CharSequence) {
+			SimpleDate otherDate = parse(other.toString());
+			if (otherDate != null) {
+				return compareTo(otherDate);
+			}
+		}
+
+		throw new IllegalArgumentException(String.valueOf(other));
+	}
+
+----------------------------------------
+	public List<String> list() throws IOException {
+		if (xattr instanceof UserDefinedFileAttributeView) {
+			UserDefinedFileAttributeView attributeView = (UserDefinedFileAttributeView) xattr;
+			return attributeView.list();
+		}
+
+		if (xattr instanceof MacXattrView) {
+			MacXattrView macXattr = (MacXattrView) xattr;
+			return macXattr.list();
+		}
+
+		return null;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917616
+source/net/filebot/web/SearchResult.java 46 65
+source/net/filebot/similarity/Normalization.java 108 124
+----------------------------------------
+	public List<String> getEffectiveNames() {
+		if (name == null || name.length() == 0) {
+			return emptyList();
+		}
+		if (aliasNames == null || aliasNames.length == 0) {
+			return singletonList(name);
+		}
+		return new AbstractList<String>() {
+
+			@Override
+			public String get(int index) {
+				return index == 0 ? name : aliasNames[index - 1];
+			}
+
+			@Override
+			public int size() {
+				return 1 + aliasNames.length;
+			}
+		};
+	}
+
+----------------------------------------
+	public static String truncateText(String title, int limit) {
+		if (title == null || title.length() < limit) {
+			return title;
+		}
+
+		String[] words = SPACE.split(title);
+		StringBuilder s = new StringBuilder();
+
+		for (int i = 0; i < words.length && s.length() + words[i].length() < limit; i++) {
+			if (i > 0) {
+				s.append(' ');
+			}
+			s.append(words[i]);
+		}
+
+		return s.toString().trim();
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917617
+source/net/filebot/ui/sfv/ChecksumTableModel.java 151 207
+source/net/filebot/ui/rename/ExpressionFormatter.java 93 100
+----------------------------------------
+	public void addAll(Collection<ChecksumCell> values) {
+		List<ChecksumCell> replacements = new ArrayList<ChecksumCell>();
+
+		int rowCount = getRowCount();
+		int columnCount = getColumnCount();
+
+		for (ChecksumCell cell : values) {
+			int rowIndex = getRowIndex(cell);
+
+			ChecksumRow row;
+
+			if (rowIndex >= 0) {
+				// get existing row
+				row = rows.get(rowIndex);
+			} else {
+				// add new row
+				row = new ChecksumRow(cell.getName());
+				row.addPropertyChangeListener(stateListener);
+				rows.add(row);
+			}
+
+			// add cell to row
+			ChecksumCell old = row.put(cell);
+
+			// dispose of old cell
+			if (old != null) {
+				old.dispose();
+				replacements.add(cell);
+			}
+
+			// listen to changes (progress, state)
+			cell.addPropertyChangeListener(progressListener);
+
+			if (!checksumColumns.contains(cell.getRoot())) {
+				checksumColumns.add(new FastFile(cell.getRoot()));
+			}
+		}
+
+		// fire table events
+		if (columnCount != getColumnCount()) {
+			// number of columns has changed
+			fireTableStructureChanged();
+			return;
+		}
+
+		for (ChecksumCell replacement : replacements) {
+			int row = getRowIndex(replacement);
+
+			// update this row
+			fireTableRowsUpdated(row, row);
+		}
+
+		if (rowCount != getRowCount()) {
+			// some rows have been inserted
+			fireTableRowsInserted(rowCount, getRowCount() - 1);
+		}
+	}
+
+----------------------------------------
+				for (File f : listPath(parent)) {
+					if (isVolumeRoot(structureRoot)) {
+						break;
+					}
+					if (isStructureRoot(f)) {
+						structureRoot = structureRoot.getParentFile();
+					}
+				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917623
+source/net/filebot/web/SimpleDate.java 64 75
+source/net/filebot/ui/transfer/LoadAction.java 65 78
+----------------------------------------
+	public int compareTo(Object other) {
+		if (other instanceof SimpleDate) {
+			return compareTo((SimpleDate) other);
+		} else if (other instanceof CharSequence) {
+			SimpleDate otherDate = parse(other.toString());
+			if (otherDate != null) {
+				return compareTo(otherDate);
+			}
+		}
+
+		throw new IllegalArgumentException(String.valueOf(other));
+	}
+
+----------------------------------------
+	protected ExtensionFileFilter getFileFilter(TransferablePolicy transferablePolicy) {
+		if (transferablePolicy instanceof FileTransferablePolicy) {
+			final FileTransferablePolicy ftp = ((FileTransferablePolicy) transferablePolicy);
+			if (ftp.getFileFilterDescription() != null && ftp.getFileFilterExtensions() != null) {
+				return new ExtensionFileFilter(ftp.getFileFilterExtensions()) {
+					@Override
+					public String toString() {
+						return ftp.getFileFilterDescription();
+					};
+				};
+			}
+		}
+		return null;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917624
+source/net/filebot/web/SimpleDate.java 64 75
+source/net/filebot/ui/sfv/ChecksumTable.java 72 86
+----------------------------------------
+	public int compareTo(Object other) {
+		if (other instanceof SimpleDate) {
+			return compareTo((SimpleDate) other);
+		} else if (other instanceof CharSequence) {
+			SimpleDate otherDate = parse(other.toString());
+			if (otherDate != null) {
+				return compareTo(otherDate);
+			}
+		}
+
+		throw new IllegalArgumentException(String.valueOf(other));
+	}
+
+----------------------------------------
+	public void createDefaultColumnsFromModel() {
+		super.createDefaultColumnsFromModel();
+
+		for (int i = 0; i < getColumnCount(); i++) {
+			TableColumn column = getColumnModel().getColumn(i);
+
+			if (i == 0) {
+				column.setPreferredWidth(45);
+			} else if (i == 1) {
+				column.setPreferredWidth(400);
+			} else if (i >= 2) {
+				column.setPreferredWidth(150);
+			}
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917646
+source/net/filebot/ui/sfv/ChecksumComputationService.java 76 82
+source/net/filebot/ui/sfv/ChecksumTable.java 72 86
+----------------------------------------
+	public void purge() {
+		synchronized (executors) {
+			for (ThreadPoolExecutor executor : executors) {
+				executor.purge();
+			}
+		}
+	}
+
+----------------------------------------
+	public void createDefaultColumnsFromModel() {
+		super.createDefaultColumnsFromModel();
+
+		for (int i = 0; i < getColumnCount(); i++) {
+			TableColumn column = getColumnModel().getColumn(i);
+
+			if (i == 0) {
+				column.setPreferredWidth(45);
+			} else if (i == 1) {
+				column.setPreferredWidth(400);
+			} else if (i >= 2) {
+				column.setPreferredWidth(150);
+			}
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917625
+source/net/filebot/format/PropertyBindings.java 29 41
+source/net/filebot/format/PropertyBindings.java 30 40
+----------------------------------------
+		for (Method method : object.getClass().getMethods()) {
+			if (method.getReturnType() != void.class && method.getParameterTypes().length == 0 && !method.getDeclaringClass().getName().startsWith("java")) {
+				// normal properties
+				if (method.getName().length() > 3 && method.getName().substring(0, 3).equalsIgnoreCase("get")) {
+					properties.put(method.getName().substring(3), method);
+				}
+
+				// boolean properties
+				if (method.getName().length() > 2 && method.getName().substring(0, 3).equalsIgnoreCase("is")) {
+					properties.put(method.getName().substring(2), method);
+				}
+			}
+		}
+
+----------------------------------------
+			if (method.getReturnType() != void.class && method.getParameterTypes().length == 0 && !method.getDeclaringClass().getName().startsWith("java")) {
+				// normal properties
+				if (method.getName().length() > 3 && method.getName().substring(0, 3).equalsIgnoreCase("get")) {
+					properties.put(method.getName().substring(3), method);
+				}
+
+				// boolean properties
+				if (method.getName().length() > 2 && method.getName().substring(0, 3).equalsIgnoreCase("is")) {
+					properties.put(method.getName().substring(2), method);
+				}
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917626
+source/net/filebot/ui/transfer/ByteBufferTransferable.java 33 40
+source/net/filebot/format/PropertyBindings.java 51 57
+----------------------------------------
+			try {
+				// create file for transfer on demand
+				if (transferable == null) {
+					transferable = createFileTransferable();
+				}
+
+				return transferable.getTransferData(flavor);
+			} catch (IOException e) {
+
+----------------------------------------
+			try {
+				value = ((Method) value).invoke(object);
+
+				if (value == null) {
+					value = defaultValue;
+				}
+			} catch (Exception e) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917632
+source/net/filebot/ui/rename/ExpressionFormatter.java 90 103
+source/net/filebot/ui/sfv/ChecksumComputationService.java 108 122
+----------------------------------------
+		try {
+			File structureRoot = getStructureRoot(source);
+			if (structureRoot != null) {
+				for (File f : listPath(parent)) {
+					if (isVolumeRoot(structureRoot)) {
+						break;
+					}
+					if (isStructureRoot(f)) {
+						structureRoot = structureRoot.getParentFile();
+					}
+				}
+				return new File(structureRoot, destination).getAbsolutePath();
+			}
+		} catch (Exception e) {
+
+----------------------------------------
+		public void execute(Runnable command) {
+			int preferredPoolSize = getPreferredPoolSize();
+
+			if (getCorePoolSize() < preferredPoolSize) {
+				setCorePoolSize(preferredPoolSize);
+			}
+
+			synchronized (this) {
+				super.execute(command);
+			}
+
+			totalTaskCount.incrementAndGet();
+
+			pcs.firePropertyChange(TASK_COUNT_PROPERTY, getTaskCount() - 1, getTaskCount());
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917628
+source/net/filebot/ui/SelectButtonTextField.java 216 229
+source/net/filebot/ui/sfv/ChecksumComputationService.java 108 122
+----------------------------------------
+		protected FocusListener createFocusListener() {
+			return new FocusHandler() {
+
+				/**
+				 * Prevent action events from being fired on focusLost.
+				 */
+				@Override
+				public void focusLost(FocusEvent e) {
+					if (isPopupVisible(comboBox)) {
+						setPopupVisible(comboBox, false);
+					}
+				}
+			};
+		}
+
+----------------------------------------
+		public void execute(Runnable command) {
+			int preferredPoolSize = getPreferredPoolSize();
+
+			if (getCorePoolSize() < preferredPoolSize) {
+				setCorePoolSize(preferredPoolSize);
+			}
+
+			synchronized (this) {
+				super.execute(command);
+			}
+
+			totalTaskCount.incrementAndGet();
+
+			pcs.firePropertyChange(TASK_COUNT_PROPERTY, getTaskCount() - 1, getTaskCount());
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917638
+source/net/filebot/web/OpenSubtitlesXmlRpc.java 113 149
+source/net/filebot/web/OpenSubtitlesXmlRpc.java 114 145
+----------------------------------------
+	public List<SubtitleSearchResult> searchMoviesOnIMDB(String query) throws XmlRpcFault {
+		try {
+			// search for movies / series
+			Map<?, ?> response = invoke("SearchMoviesOnIMDB", token, query);
+
+			List<Map<String, String>> movieData = (List<Map<String, String>>) response.get("data");
+			List<SubtitleSearchResult> movies = new ArrayList<SubtitleSearchResult>();
+
+			// title pattern
+			Pattern pattern = Pattern.compile("(.+)[(](\\d{4})([/]I+)?[)]");
+
+			for (Map<String, String> movie : movieData) {
+				try {
+					String imdbid = movie.get("id");
+					if (!imdbid.matches("\\d{1,7}"))
+						throw new IllegalArgumentException("Illegal IMDb movie ID: Must be a 7-digit number");
+
+					// match movie name and movie year from search result
+					Matcher matcher = pattern.matcher(movie.get("title"));
+					if (!matcher.find())
+						throw new IllegalArgumentException("Illegal title: Must be in 'name (year)' format");
+
+					String name = matcher.group(1).replaceAll("\"", "").trim();
+					int year = Integer.parseInt(matcher.group(2));
+
+					movies.add(new SubtitleSearchResult(Integer.parseInt(imdbid), name, year, null, -1));
+				} catch (Exception e) {
+					debug.log(Level.FINE, String.format("Ignore movie [%s]: %s", movie, e.getMessage()));
+				}
+			}
+
+			return movies;
+		} catch (ClassCastException e) {
+			// unexpected xmlrpc responses (e.g. error messages instead of results) will trigger this
+			throw new XmlRpcException("Illegal XMLRPC response on searchMoviesOnIMDB");
+		}
+	}
+
+----------------------------------------
+		try {
+			// search for movies / series
+			Map<?, ?> response = invoke("SearchMoviesOnIMDB", token, query);
+
+			List<Map<String, String>> movieData = (List<Map<String, String>>) response.get("data");
+			List<SubtitleSearchResult> movies = new ArrayList<SubtitleSearchResult>();
+
+			// title pattern
+			Pattern pattern = Pattern.compile("(.+)[(](\\d{4})([/]I+)?[)]");
+
+			for (Map<String, String> movie : movieData) {
+				try {
+					String imdbid = movie.get("id");
+					if (!imdbid.matches("\\d{1,7}"))
+						throw new IllegalArgumentException("Illegal IMDb movie ID: Must be a 7-digit number");
+
+					// match movie name and movie year from search result
+					Matcher matcher = pattern.matcher(movie.get("title"));
+					if (!matcher.find())
+						throw new IllegalArgumentException("Illegal title: Must be in 'name (year)' format");
+
+					String name = matcher.group(1).replaceAll("\"", "").trim();
+					int year = Integer.parseInt(matcher.group(2));
+
+					movies.add(new SubtitleSearchResult(Integer.parseInt(imdbid), name, year, null, -1));
+				} catch (Exception e) {
+					debug.log(Level.FINE, String.format("Ignore movie [%s]: %s", movie, e.getMessage()));
+				}
+			}
+
+			return movies;
+		} catch (ClassCastException e) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917639
+source/net/filebot/web/OpenSubtitlesXmlRpc.java 244 261
+source/net/filebot/web/OpenSubtitlesXmlRpc.java 274 305
+----------------------------------------
+		if (payload instanceof Map) {
+			Map<String, Map<String, Map<String, ?>>> dataByTag = (Map<String, Map<String, Map<String, ?>>>) payload;
+			for (String tag : tags) {
+				List<SubtitleSearchResult> value = new ArrayList<SubtitleSearchResult>();
+				Map<String, Map<String, ?>> data = dataByTag.get(tag);
+				if (data != null) {
+					Map<String, ?> match = data.get("BestGuess");
+					if (match != null) {
+						String name = String.valueOf(match.get("MovieName"));
+						String kind = String.valueOf(match.get("MovieKind"));
+						int imdbid = Integer.parseInt(String.valueOf(match.get("IDMovieIMDB")));
+						int year = Integer.parseInt(String.valueOf(match.get("MovieYear")));
+						value.add(new SubtitleSearchResult(imdbid, name, year, kind, -1));
+					}
+				}
+				results.put(tag, value);
+			}
+		}
+
+----------------------------------------
+			for (Entry<String, ?> entry : movieHashData.entrySet()) {
+				// empty associative arrays are deserialized as array, not as map
+				if (entry.getValue() instanceof List) {
+					String hash = entry.getKey();
+					List<Movie> matches = new ArrayList<Movie>();
+
+					List<?> hashMatches = (List<?>) entry.getValue();
+					for (Object match : hashMatches) {
+						if (match instanceof Map) {
+							Map<String, String> info = (Map<String, String>) match;
+							int seenCount = Integer.parseInt(info.get("SeenCount"));
+
+							// require minimum SeenCount before this hash match is considered trusted
+							if (seenCount >= minSeenCount) {
+								String name = info.get("MovieName");
+								int year = Integer.parseInt(info.get("MovieYear"));
+								int imdb = Integer.parseInt(info.get("MovieImdbID"));
+
+								matches.add(new Movie(name, year, imdb));
+							}
+						}
+					}
+
+					if (matches.size() == 1) {
+						// perfect unambiguous match
+						movieHashMap.put(hash, matches.get(0));
+					} else if (matches.size() > 1) {
+						// multiple hash matches => ignore all
+						debug.log(Level.WARNING, "Ignore hash match due to hash collision: " + matches);
+					}
+				}
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917640
+source/net/filebot/web/OpenSubtitlesXmlRpc.java 266 309
+source/net/filebot/web/OpenSubtitlesXmlRpc.java 272 306
+----------------------------------------
+	public Map<String, Movie> checkMovieHash(Collection<String> hashes, int minSeenCount) throws XmlRpcFault {
+		Map<String, Movie> movieHashMap = new HashMap<String, Movie>();
+
+		Map<?, ?> response = invoke("CheckMovieHash2", token, hashes);
+		Object payload = response.get("data");
+
+		if (payload instanceof Map) {
+			Map<String, ?> movieHashData = (Map<String, ?>) payload;
+			for (Entry<String, ?> entry : movieHashData.entrySet()) {
+				// empty associative arrays are deserialized as array, not as map
+				if (entry.getValue() instanceof List) {
+					String hash = entry.getKey();
+					List<Movie> matches = new ArrayList<Movie>();
+
+					List<?> hashMatches = (List<?>) entry.getValue();
+					for (Object match : hashMatches) {
+						if (match instanceof Map) {
+							Map<String, String> info = (Map<String, String>) match;
+							int seenCount = Integer.parseInt(info.get("SeenCount"));
+
+							// require minimum SeenCount before this hash match is considered trusted
+							if (seenCount >= minSeenCount) {
+								String name = info.get("MovieName");
+								int year = Integer.parseInt(info.get("MovieYear"));
+								int imdb = Integer.parseInt(info.get("MovieImdbID"));
+
+								matches.add(new Movie(name, year, imdb));
+							}
+						}
+					}
+
+					if (matches.size() == 1) {
+						// perfect unambiguous match
+						movieHashMap.put(hash, matches.get(0));
+					} else if (matches.size() > 1) {
+						// multiple hash matches => ignore all
+						debug.log(Level.WARNING, "Ignore hash match due to hash collision: " + matches);
+					}
+				}
+			}
+		}
+
+		return movieHashMap;
+	}
+
+----------------------------------------
+		if (payload instanceof Map) {
+			Map<String, ?> movieHashData = (Map<String, ?>) payload;
+			for (Entry<String, ?> entry : movieHashData.entrySet()) {
+				// empty associative arrays are deserialized as array, not as map
+				if (entry.getValue() instanceof List) {
+					String hash = entry.getKey();
+					List<Movie> matches = new ArrayList<Movie>();
+
+					List<?> hashMatches = (List<?>) entry.getValue();
+					for (Object match : hashMatches) {
+						if (match instanceof Map) {
+							Map<String, String> info = (Map<String, String>) match;
+							int seenCount = Integer.parseInt(info.get("SeenCount"));
+
+							// require minimum SeenCount before this hash match is considered trusted
+							if (seenCount >= minSeenCount) {
+								String name = info.get("MovieName");
+								int year = Integer.parseInt(info.get("MovieYear"));
+								int imdb = Integer.parseInt(info.get("MovieImdbID"));
+
+								matches.add(new Movie(name, year, imdb));
+							}
+						}
+					}
+
+					if (matches.size() == 1) {
+						// perfect unambiguous match
+						movieHashMap.put(hash, matches.get(0));
+					} else if (matches.size() > 1) {
+						// multiple hash matches => ignore all
+						debug.log(Level.WARNING, "Ignore hash match due to hash collision: " + matches);
+					}
+				}
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917641
+source/net/filebot/web/OpenSubtitlesXmlRpc.java 272 306
+source/net/filebot/cli/FolderWatchService.java 71 101
+----------------------------------------
+		if (payload instanceof Map) {
+			Map<String, ?> movieHashData = (Map<String, ?>) payload;
+			for (Entry<String, ?> entry : movieHashData.entrySet()) {
+				// empty associative arrays are deserialized as array, not as map
+				if (entry.getValue() instanceof List) {
+					String hash = entry.getKey();
+					List<Movie> matches = new ArrayList<Movie>();
+
+					List<?> hashMatches = (List<?>) entry.getValue();
+					for (Object match : hashMatches) {
+						if (match instanceof Map) {
+							Map<String, String> info = (Map<String, String>) match;
+							int seenCount = Integer.parseInt(info.get("SeenCount"));
+
+							// require minimum SeenCount before this hash match is considered trusted
+							if (seenCount >= minSeenCount) {
+								String name = info.get("MovieName");
+								int year = Integer.parseInt(info.get("MovieYear"));
+								int imdb = Integer.parseInt(info.get("MovieImdbID"));
+
+								matches.add(new Movie(name, year, imdb));
+							}
+						}
+					}
+
+					if (matches.size() == 1) {
+						// perfect unambiguous match
+						movieHashMap.put(hash, matches.get(0));
+					} else if (matches.size() > 1) {
+						// multiple hash matches => ignore all
+						debug.log(Level.WARNING, "Ignore hash match due to hash collision: " + matches);
+					}
+				}
+			}
+		}
+
+----------------------------------------
+	public synchronized void commit() {
+		final SortedSet<File> files = new TreeSet<File>();
+
+		synchronized (commitSet) {
+			for (File it : commitSet) {
+				if (it.isFile()) {
+					files.add(it);
+				}
+			}
+			commitSet.clear();
+		}
+
+		if (files.isEmpty()) {
+			return;
+		}
+
+		// divide into commit batches per folder if required
+		final Map<File, ? extends Collection<File>> commitBatches = commitPerFolder ? mapByFolder(files) : singletonMap((File) null, files);
+
+		processor.submit(new Runnable() {
+
+			@Override
+			public void run() {
+				synchronized (processor) {
+					for (Entry<File, ? extends Collection<File>> it : commitBatches.entrySet()) {
+						processCommitSet(it.getValue().toArray(new File[0]), it.getKey());
+					}
+				}
+			}
+		});
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917642
+source/net/filebot/web/OpenSubtitlesXmlRpc.java 331 359
+source/net/filebot/web/OpenSubtitlesXmlRpc.java 332 349
+----------------------------------------
+	protected Map<?, ?> invoke(String method, Object... arguments) throws XmlRpcFault {
+		try {
+			XmlRpcClient rpc = new XmlRpcClient(getXmlRpcUrl(), false) {
+				@Override
+				public void parse(InputStream input) throws XmlRpcException {
+					try {
+						super.parse(new GZIPInputStream(input));
+					} catch (IOException e) {
+						throw new XmlRpcException(e.getMessage(), e);
+					}
+				};
+			};
+			rpc.setRequestProperty("Accept-Encoding", "gzip");
+
+			Map<?, ?> response = (Map<?, ?>) rpc.invoke(method, arguments);
+			checkResponse(response);
+
+			return response;
+		} catch (XmlRpcFault e) {
+			// invalidate session token if session has expired
+			if (e.getErrorCode() == 406)
+				token = null;
+
+			// rethrow exception
+			throw e;
+		} catch (ClassCastException e) {
+			throw new XmlRpcFault(500, "The remote server returned an unexpected response");
+		}
+	}
+
+----------------------------------------
+		try {
+			XmlRpcClient rpc = new XmlRpcClient(getXmlRpcUrl(), false) {
+				@Override
+				public void parse(InputStream input) throws XmlRpcException {
+					try {
+						super.parse(new GZIPInputStream(input));
+					} catch (IOException e) {
+						throw new XmlRpcException(e.getMessage(), e);
+					}
+				};
+			};
+			rpc.setRequestProperty("Accept-Encoding", "gzip");
+
+			Map<?, ?> response = (Map<?, ?>) rpc.invoke(method, arguments);
+			checkResponse(response);
+
+			return response;
+		} catch (XmlRpcFault e) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917643
+source/net/filebot/ui/transfer/LoadAction.java 43 63
+source/net/filebot/ui/transfer/LoadAction.java 44 60
+----------------------------------------
+	public void actionPerformed(ActionEvent evt) {
+		try {
+			// get transferable policy from action properties
+			TransferablePolicy transferablePolicy = handler.get();
+			if (transferablePolicy == null) {
+				return;
+			}
+
+			List<File> files = showLoadDialogSelectFiles(true, true, getDefaultFile(), getFileFilter(transferablePolicy), (String) getValue(Action.NAME), evt);
+			if (files.isEmpty()) {
+				return;
+			}
+
+			FileTransferable transferable = new FileTransferable(files);
+			if (transferablePolicy.accept(transferable)) {
+				transferablePolicy.handleTransferable(transferable, getTransferAction(evt));
+			}
+		} catch (Exception e) {
+			log.log(Level.WARNING, e.toString(), e);
+		}
+	}
+
+----------------------------------------
+		try {
+			// get transferable policy from action properties
+			TransferablePolicy transferablePolicy = handler.get();
+			if (transferablePolicy == null) {
+				return;
+			}
+
+			List<File> files = showLoadDialogSelectFiles(true, true, getDefaultFile(), getFileFilter(transferablePolicy), (String) getValue(Action.NAME), evt);
+			if (files.isEmpty()) {
+				return;
+			}
+
+			FileTransferable transferable = new FileTransferable(files);
+			if (transferablePolicy.accept(transferable)) {
+				transferablePolicy.handleTransferable(transferable, getTransferAction(evt));
+			}
+		} catch (Exception e) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917647
+source/net/filebot/ui/sfv/ChecksumTable.java 72 86
+source/net/filebot/ui/sfv/ChecksumRow.java 111 119
+----------------------------------------
+	public void createDefaultColumnsFromModel() {
+		super.createDefaultColumnsFromModel();
+
+		for (int i = 0; i < getColumnCount(); i++) {
+			TableColumn column = getColumnModel().getColumn(i);
+
+			if (i == 0) {
+				column.setPreferredWidth(45);
+			} else if (i == 1) {
+				column.setPreferredWidth(400);
+			} else if (i >= 2) {
+				column.setPreferredWidth(150);
+			}
+		}
+	}
+
+----------------------------------------
+		for (ChecksumCell cell : cells) {
+			if (cell.getState() == ChecksumCell.State.ERROR) {
+				// one error cell -> error state
+				return State.ERROR;
+			} else if (cell.getState() != ChecksumCell.State.READY) {
+				// one cell that is not ready yet -> unknown state
+				return State.UNKNOWN;
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917650
+source/net/filebot/cli/FolderWatchService.java 130 135
+source/net/filebot/ui/sfv/ChecksumRow.java 111 119
+----------------------------------------
+			protected void processEvents(List<WatchEvent<?>> events) {
+				synchronized (commitSet) {
+					resetCommitTimer();
+					super.processEvents(events);
+				}
+			}
+
+----------------------------------------
+		for (ChecksumCell cell : cells) {
+			if (cell.getState() == ChecksumCell.State.ERROR) {
+				// one error cell -> error state
+				return State.ERROR;
+			} else if (cell.getState() != ChecksumCell.State.READY) {
+				// one cell that is not ready yet -> unknown state
+				return State.UNKNOWN;
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917648
+source/net/filebot/format/ExpressionBindings.java 59 67
+source/net/filebot/cli/FolderWatchService.java 139 154
+----------------------------------------
+			try {
+				Object value = method.invoke(bindingBean);
+				if (!isUndefined(value)) {
+					return value;
+				}
+				if (undefined != null) {
+					return undefined.invoke(bindingBean, key); // invoke fallback method
+				}
+			} catch (Exception e) {
+
+----------------------------------------
+				synchronized (commitSet) {
+					if (!file.isDirectory()) {
+						commitSet.add(file);
+						return;
+					}
+
+					// start watching newly created folder
+					if (watchTree) {
+						try {
+							commitSet.addAll(listFiles(file, FILES));
+							watchFolder(file);
+						} catch (IOException e) {
+							debug.log(Level.SEVERE, e.getMessage(), e);
+						}
+					}
+				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917653
+source/net/filebot/cli/FolderWatchService.java 139 154
+source/net/filebot/util/TemporaryFolder.java 127 135
+----------------------------------------
+				synchronized (commitSet) {
+					if (!file.isDirectory()) {
+						commitSet.add(file);
+						return;
+					}
+
+					// start watching newly created folder
+					if (watchTree) {
+						try {
+							commitSet.addAll(listFiles(file, FILES));
+							watchFolder(file);
+						} catch (IOException e) {
+							debug.log(Level.SEVERE, e.getMessage(), e);
+						}
+					}
+				}
+
+----------------------------------------
+			for (File entry : getChildren(file)) {
+				if (entry.isDirectory()) {
+					if (recursive) {
+						list(entry, list, recursive);
+					}
+				} else {
+					list.add(entry);
+				}
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917651
+source/net/filebot/ui/transfer/ByteBufferTransferable.java 31 46
+source/net/filebot/util/TemporaryFolder.java 127 135
+----------------------------------------
+	public Object getTransferData(DataFlavor flavor) throws UnsupportedFlavorException {
+		if (FileTransferable.isFileListFlavor(flavor)) {
+			try {
+				// create file for transfer on demand
+				if (transferable == null) {
+					transferable = createFileTransferable();
+				}
+
+				return transferable.getTransferData(flavor);
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
+		}
+
+		throw new UnsupportedFlavorException(flavor);
+	}
+
+----------------------------------------
+			for (File entry : getChildren(file)) {
+				if (entry.isDirectory()) {
+					if (recursive) {
+						list(entry, list, recursive);
+					}
+				} else {
+					list.add(entry);
+				}
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917652
+source/net/filebot/cli/FolderWatchService.java 158 164
+source/net/filebot/cli/FolderWatchService.java 138 155
+----------------------------------------
+			protected void modified(File file) {
+				synchronized (commitSet) {
+					if (!file.isDirectory()) {
+						commitSet.add(file);
+					}
+				}
+			}
+
+----------------------------------------
+			protected void created(File file) {
+				synchronized (commitSet) {
+					if (!file.isDirectory()) {
+						commitSet.add(file);
+						return;
+					}
+
+					// start watching newly created folder
+					if (watchTree) {
+						try {
+							commitSet.addAll(listFiles(file, FILES));
+							watchFolder(file);
+						} catch (IOException e) {
+							debug.log(Level.SEVERE, e.getMessage(), e);
+						}
+					}
+				}
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917654
+source/net/filebot/similarity/MetricAvg.java 18 24
+source/net/filebot/History.java 155 161
+----------------------------------------
+	public float getSimilarity(Object o1, Object o2) {
+		float f = 0;
+		for (SimilarityMetric metric : metrics) {
+			f += metric.getSimilarity(o1, o2);
+		}
+		return f / metrics.length;
+	}
+
+----------------------------------------
+	public int totalSize() {
+		int i = 0;
+		for (Sequence it : sequences()) {
+			i += it.elements.size();
+		}
+		return i;
+	}
+
+----------------------------------------

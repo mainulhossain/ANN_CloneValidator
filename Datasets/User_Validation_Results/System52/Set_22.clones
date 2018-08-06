@@ -1,0 +1,2678 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+27223039
+src/core/org/luaj/vm2/lib/CoroutineLib.java 22 63
+src/core/org/luaj/vm2/lib/BaseLib.java 29 78
+----------------------------------------
+package org.luaj.vm2.lib;
+
+import org.luaj.vm2.Globals;
+import org.luaj.vm2.LuaTable;
+import org.luaj.vm2.LuaThread;
+import org.luaj.vm2.LuaValue;
+import org.luaj.vm2.Varargs;
+
+/** 
+ * Subclass of {@link LibFunction} which implements the lua standard {@code coroutine} 
+ * library. 
+ * <p> 
+ * The coroutine library in luaj has the same behavior as the
+ * coroutine library in C, but is implemented using Java Threads to maintain 
+ * the call state between invocations.  Therefore it can be yielded from anywhere, 
+ * similar to the "Coco" yield-from-anywhere patch available for C-based lua.
+ * However, coroutines that are yielded but never resumed to complete their execution
+ * may not be collected by the garbage collector. 
+ * <p> 
+ * Typically, this library is included as part of a call to either 
+ * {@link org.luaj.vm2.lib.jse.JsePlatform#standardGlobals()} or {@link org.luaj.vm2.lib.jme.JmePlatform#standardGlobals()}
+ * <pre> {@code
+ * Globals globals = JsePlatform.standardGlobals();
+ * System.out.println( globals.get("coroutine").get("running").call() );
+ * } </pre>
+ * <p>
+ * To instantiate and use it directly, 
+ * link it into your globals table via {@link LuaValue#load(LuaValue)} using code such as:
+ * <pre> {@code
+ * Globals globals = new Globals();
+ * globals.load(new JseBaseLib());
+ * globals.load(new PackageLib());
+ * globals.load(new CoroutineLib());
+ * System.out.println( globals.get("coroutine").get("running").call() );
+ * } </pre>
+ * <p>
+ * @see LibFunction
+ * @see org.luaj.vm2.lib.jse.JsePlatform
+ * @see org.luaj.vm2.lib.jme.JmePlatform
+ * @see <a href="http://www.lua.org/manual/5.2/manual.html#6.2">Lua 5.2 Coroutine Lib Reference</a>
+ */
+public class CoroutineLib extends TwoArgFunction {
+
+----------------------------------------
+import org.luaj.vm2.LuaError;
+import org.luaj.vm2.LuaString;
+import org.luaj.vm2.LuaTable;
+import org.luaj.vm2.LuaThread;
+import org.luaj.vm2.LuaValue;
+import org.luaj.vm2.Varargs;
+
+/** 
+ * Subclass of {@link LibFunction} which implements the lua basic library functions. 
+ * <p>
+ * This contains all library functions listed as "basic functions" in the lua documentation for JME. 
+ * The functions dofile and loadfile use the 
+ * {@link Globals#finder} instance to find resource files.
+ * Since JME has no file system by default, {@link BaseLib} implements 
+ * {@link ResourceFinder} using {@link Class#getResource(String)}, 
+ * which is the closest equivalent on JME.     
+ * The default loader chain in {@link PackageLib} will use these as well.
+ * <p>  
+ * To use basic library functions that include a {@link ResourceFinder} based on 
+ * directory lookup, use {@link org.luaj.vm2.lib.jse.JseBaseLib} instead. 
+ * <p>
+ * Typically, this library is included as part of a call to either 
+ * {@link org.luaj.vm2.lib.jse.JsePlatform#standardGlobals()} or
+ * {@link org.luaj.vm2.lib.jme.JmePlatform#standardGlobals()}
+ * <pre> {@code
+ * Globals globals = JsePlatform.standardGlobals();
+ * globals.get("print").call(LuaValue.valueOf("hello, world"));
+ * } </pre>
+ * <p>
+ * For special cases where the smallest possible footprint is desired, 
+ * a minimal set of libraries could be loaded
+ * directly via {@link Globals#load(LuaValue)} using code such as:
+ * <pre> {@code
+ * Globals globals = new Globals();
+ * globals.load(new JseBaseLib());
+ * globals.get("print").call(LuaValue.valueOf("hello, world"));
+ * } </pre>
+ * Doing so will ensure the library is properly initialized 
+ * and loaded into the globals table. 
+ * <p>
+ * This is a direct port of the corresponding library in C.
+ * @see org.luaj.vm2.lib.jse.JseBaseLib
+ * @see ResourceFinder
+ * @see Globals#finder
+ * @see LibFunction
+ * @see org.luaj.vm2.lib.jse.JsePlatform
+ * @see org.luaj.vm2.lib.jme.JmePlatform
+ * @see <a href="http://www.lua.org/manual/5.2/manual.html#6.1">Lua 5.2 Base Lib Reference</a>
+ */
+public class BaseLib extends TwoArgFunction implements ResourceFinder {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+27223040
+src/jse/org/luaj/vm2/luajc/JavaLoader.java 63 73
+src/jse/luajc.java 187 196
+----------------------------------------
+			include( jg.inners[i] );
+	}
+
+	public Class findClass(String classname) throws ClassNotFoundException {
+		byte[] bytes = (byte[]) unloaded.get(classname);
+		if ( bytes != null )
+			return defineClass(classname, bytes, 0, bytes.length);
+		return super.findClass(classname);
+	}
+
+}
+
+----------------------------------------
+			this.t = t;
+		}
+
+		public Class findClass(String classname) throws ClassNotFoundException {
+			 byte[] bytes = (byte[]) t.get(classname);
+			 if ( bytes != null )
+				 return defineClass(classname, bytes, 0, bytes.length);
+			 return super.findClass(classname);
+		 }
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+27223041
+src/jse/org/luaj/vm2/lib/jse/JavaMethod.java 96 115
+src/jse/org/luaj/vm2/lib/jse/JavaConstructor.java 72 90
+----------------------------------------
+			return CoerceJavaToLua.coerce( method.invoke(instance, a) );
+		} catch (InvocationTargetException e) {
+			throw new LuaError(e.getTargetException());
+		} catch (Exception e) {
+			return LuaValue.error("coercion error "+e);
+		}
+	}
+	
+	/**
+	 * LuaValue that represents an overloaded Java method.
+	 * <p>
+	 * On invocation, will pick the best method from the list, and invoke it.
+	 * <p>
+	 * This class is not used directly.  
+	 * It is returned by calls to calls to {@link JavaInstance#get(LuaValue key)} 
+	 * when an overloaded method is named.
+	 */
+	static class Overload extends LuaFunction {
+
+		final JavaMethod[] methods;
+
+----------------------------------------
+			return CoerceJavaToLua.coerce( constructor.newInstance(a) );
+		} catch (InvocationTargetException e) {
+			throw new LuaError(e.getTargetException());
+		} catch (Exception e) {
+			return LuaValue.error("coercion error "+e);
+		}
+	}
+
+	/**
+	 * LuaValue that represents an overloaded Java constructor.
+	 * <p>
+	 * On invocation, will pick the best method from the list, and invoke it.
+	 * <p>
+	 * This class is not used directly.  
+	 * It is returned by calls to calls to {@link JavaClass#get(LuaValue key)} 
+	 * when key is "new" and there is more than one public constructor.
+	 */
+	static class Overload extends VarArgFunction {
+		final JavaConstructor[] constructors; 
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+28678267
+src/core/org/luaj/vm2/LuaString.java 818 830
+src/core/org/luaj/vm2/LuaTable.java 502 513
+----------------------------------------
+		for ( int i=start; i<end; i++ ) {
+			switch ( m_bytes[i] ) {
+			case '-':
+			case '+':
+			case '.':
+			case 'e': case 'E':
+			case '0': case '1': case '2': case '3': case '4':
+			case '5': case '6': case '7': case '8': case '9':
+				break;
+			default:
+				return Double.NaN;
+			}
+		}
+
+----------------------------------------
+	public static int hashSlot( LuaValue key, int hashMask ) {
+		switch ( key.type() ) {
+		case TNUMBER:
+		case TTABLE:
+		case TTHREAD:
+		case TLIGHTUSERDATA:
+		case TUSERDATA:
+			return hashmod( key.hashCode(), hashMask );
+		default:
+			return hashpow2( key.hashCode(), hashMask );
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+28678268
+src/jse/org/luaj/vm2/lib/jse/JavaMethod.java 93 102
+src/jse/org/luaj/vm2/luajc/JavaLoader.java 48 58
+----------------------------------------
+	LuaValue invokeMethod(Object instance, Varargs args) {
+		Object[] a = convertArgs(args);
+		try {
+			return CoerceJavaToLua.coerce( method.invoke(instance, a) );
+		} catch (InvocationTargetException e) {
+			throw new LuaError(e.getTargetException());
+		} catch (Exception e) {
+			return LuaValue.error("coercion error "+e);
+		}
+	}
+
+----------------------------------------
+	public LuaFunction load(String classname, LuaValue env) {
+		try {
+			Class c = loadClass( classname );
+			LuaFunction v = (LuaFunction) c.newInstance();
+			v.initupvalue1(env);
+			return v;
+		} catch ( Exception e ) {
+			e.printStackTrace();
+			throw new IllegalStateException("bad class gen: "+e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+28678269
+src/jse/org/luaj/vm2/ast/Stat.java 266 272
+src/core/org/luaj/vm2/lib/DebugLib.java 492 498
+----------------------------------------
+				List<Block> elseifblocks, Block elseblock) {
+			this.ifexp = ifexp;
+			this.ifblock = ifblock;
+			this.elseifexps = elseifexps;
+			this.elseifblocks = elseifblocks;
+			this.elseblock = elseblock;
+		}
+
+----------------------------------------
+			} else {
+				this.source = "=[Java]";
+				this.linedefined = -1;
+				this.lastlinedefined = -1;
+				this.what = "Java";
+				this.short_src = f.name();
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+28678270
+src/core/org/luaj/vm2/LuaTable.java 251 258
+src/core/org/luaj/vm2/LuaTable.java 544 549
+----------------------------------------
+		if ( hashEntries > 0 ) {
+			for ( Slot slot = hash[ hashSlot(key) ]; slot != null; slot = slot.rest() ) {
+				StrongSlot foundSlot;
+				if ( ( foundSlot = slot.find(key) ) != null ) {
+					return foundSlot.value();
+				}
+			}
+		}
+
+----------------------------------------
+		for ( int i = 0; i < hash.length; ++i ) {
+			for ( Slot slot = hash[i]; slot != null; slot = slot.rest() ) {
+				if ( slot.first() != null )
+					keys++;
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+28678273
+src/jse/org/luaj/vm2/parser/LuaParser.java 868 877
+src/core/org/luaj/vm2/LuaTable.java 396 405
+----------------------------------------
+    while (true) {
+      if (jj_2_6(2)) {
+        ;
+      } else {
+        break label_9;
+      }
+      FieldSep();
+      f = Field();
+                                                                  l.add(f);
+    }
+
+----------------------------------------
+				for ( Slot slot = hash[i]; slot != null; slot = slot.rest() ) {
+					if ( found ) {
+						StrongSlot nextEntry = slot.first();
+						if ( nextEntry != null ) {
+							return nextEntry.toVarargs();
+						}
+					} else if ( slot.keyeq( key ) ) {
+						found = true;
+					}
+				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+28678272
+src/jse/org/luaj/vm2/lib/jse/JseIoLib.java 141 146
+src/core/org/luaj/vm2/LuaTable.java 396 405
+----------------------------------------
+		public void close() throws IOException  {
+			closed = true;
+			if ( file != null ) {
+				file.close();
+			}
+		}
+
+----------------------------------------
+				for ( Slot slot = hash[i]; slot != null; slot = slot.rest() ) {
+					if ( found ) {
+						StrongSlot nextEntry = slot.first();
+						if ( nextEntry != null ) {
+							return nextEntry.toVarargs();
+						}
+					} else if ( slot.keyeq( key ) ) {
+						found = true;
+					}
+				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+28678271
+src/jme/org/luaj/vm2/lib/jme/JmeIoLib.java 141 146
+src/core/org/luaj/vm2/LuaTable.java 396 405
+----------------------------------------
+		public void close() throws IOException  {
+			closed = true;
+			if ( conn != null ) {
+				conn.close();
+			}
+		}
+
+----------------------------------------
+				for ( Slot slot = hash[i]; slot != null; slot = slot.rest() ) {
+					if ( found ) {
+						StrongSlot nextEntry = slot.first();
+						if ( nextEntry != null ) {
+							return nextEntry.toVarargs();
+						}
+					} else if ( slot.keyeq( key ) ) {
+						found = true;
+					}
+				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+28678274
+src/core/org/luaj/vm2/LuaTable.java 397 402
+src/jse/org/luaj/vm2/lib/jse/JseProcess.java 77 87
+----------------------------------------
+					if ( found ) {
+						StrongSlot nextEntry = slot.first();
+						if ( nextEntry != null ) {
+							return nextEntry.toVarargs();
+						}
+					} else if ( slot.keyeq( key ) ) {
+
+----------------------------------------
+	public int waitFor() throws InterruptedException {
+		int r = process.waitFor();
+		if (input != null)
+			input.join();
+		if (output != null)
+			output.join();
+		if (error != null)
+			error.join();
+		process.destroy();
+		return r;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+28678277
+examples/android/src/android/LuajView.java 90 101
+src/core/org/luaj/vm2/LuaTable.java 1233 1241
+----------------------------------------
+	public boolean onTrackballEvent(MotionEvent event) {
+		LuaValue f = globals.get("onTrackballEvent");
+		if (!f.isnil())
+			try {
+				return f.call(CoerceJavaToLua.coerce(event)).toboolean();
+			} catch (Exception e) {
+				e.printStackTrace();
+				return true;
+			}
+		else
+			return super.onTrackballEvent(event);
+	}
+
+----------------------------------------
+		public Entry set(LuaValue value) {
+			LuaValue n = value.tonumber();
+			if ( !n.isnil() ) {
+				this.value = n.todouble();
+				return this;
+			} else {
+				return new NormalEntry( this.key, value );
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+28678278
+examples/android/src/android/LuajView.java 77 88
+src/core/org/luaj/vm2/LuaTable.java 1233 1241
+----------------------------------------
+	public boolean onTouchEvent(MotionEvent event) {
+		LuaValue f = globals.get("onTouchEvent");
+		if (!f.isnil())
+			try {
+				return f.call(CoerceJavaToLua.coerce(event)).toboolean();
+			} catch (Exception e) {
+				e.printStackTrace();
+				return true;
+			}
+		else
+			return super.onTouchEvent(event);
+	}
+
+----------------------------------------
+		public Entry set(LuaValue value) {
+			LuaValue n = value.tonumber();
+			if ( !n.isnil() ) {
+				this.value = n.todouble();
+				return this;
+			} else {
+				return new NormalEntry( this.key, value );
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+28678279
+src/core/org/luaj/vm2/LuaThread.java 237 257
+src/jse/org/luaj/vm2/luajc/JavaGen.java 377 384
+----------------------------------------
+		public synchronized Varargs lua_yield(Varargs args) {
+			try {
+				this.result = args;
+				this.status = STATUS_SUSPENDED;
+				this.notify();
+				do {
+					this.wait(thread_orphan_check_interval);
+					if (this.lua_thread.get() == null) {
+						this.status = STATUS_DEAD;
+						throw new OrphanedThread();
+					}
+				} while (this.status == STATUS_SUSPENDED);
+				return this.args;
+			} catch (InterruptedException ie) {
+				this.status = STATUS_DEAD;
+				throw new OrphanedThread();
+			} finally {
+				this.args = LuaValue.NONE;
+				this.result = LuaValue.NONE;
+			}
+		}
+
+----------------------------------------
+					if ( b == 0 ) {
+						int nstack = vresultbase - (a+1);
+						if ( nstack > 0 ) {
+							builder.setlistStack( pc, a+1, index0, nstack );
+							index0 += nstack;
+						}
+						builder.setlistVarargs( index0, vresultbase );
+					} else {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+28678281
+src/core/org/luaj/vm2/lib/IoLib.java 567 573
+src/core/org/luaj/vm2/Print.java 91 125
+----------------------------------------
+				loop: while ( (c = f.read()) > 0 ) { 
+					switch ( c ) {
+					case '\r': break;
+					case '\n': break loop;
+					default: baos.write(c); break;
+					}
+				}
+
+----------------------------------------
+			else {
+				switch (c) {
+					case '"':
+						ps.print("\\\"");
+						break;
+					case '\\':
+						ps.print("\\\\");
+						break;
+					case 0x0007: /* bell */
+						ps.print("\\a");
+						break;
+					case '\b': /* backspace */
+						ps.print("\\b");
+						break;
+					case '\f':  /* form feed */
+						ps.print("\\f");
+						break;
+					case '\t':  /* tab */
+						ps.print("\\t");
+						break;
+					case '\r': /* carriage return */
+						ps.print("\\r");
+						break;
+					case '\n': /* newline */
+						ps.print("\\n");
+						break;
+					case 0x000B: /* vertical tab */
+						ps.print("\\v");
+						break;
+					default:
+						ps.print('\\');
+						ps.print(Integer.toString(1000 + 0xff&c).substring(1));
+						break;
+				}
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+28678282
+src/core/org/luaj/vm2/Print.java 329 335
+src/core/org/luaj/vm2/Print.java 319 327
+----------------------------------------
+	static void printLocals(Prototype f) {
+		int i, n = f.locvars.length;
+		ps.print("locals (" + n + ") for " + id(f) + ":\n");
+		for (i = 0; i < n; i++) {
+			ps.println("  "+i+"  "+f.locvars[i].varname+" "+(f.locvars[i].startpc+1)+" "+(f.locvars[i].endpc+1));
+		}
+	}
+
+----------------------------------------
+	static void printConstants(Prototype f) {
+		int i, n = f.k.length;
+		ps.print("constants (" + n + ") for " + id(f) + ":\n");
+		for (i = 0; i < n; i++) {
+			ps.print("  " + (i + 1) + "  ");
+			printValue( ps, f.k[i] );
+			ps.print( "\n");
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+28678283
+src/jse/org/luaj/vm2/luajc/JavaBuilder.java 665 689
+src/core/org/luaj/vm2/compiler/LexState.java 1265 1281
+----------------------------------------
+	public void loadConstant(LuaValue value) {
+		switch ( value.type() ) {
+		case LuaValue.TNIL: 
+			loadNil();
+			break;
+		case LuaValue.TBOOLEAN:
+			loadBoolean( value.toboolean() );
+			break;
+		case LuaValue.TNUMBER:
+		case LuaValue.TSTRING:
+			String name = (String) constants.get(value);
+			if ( name == null ) {
+				name = value.type() == LuaValue.TNUMBER? 
+						value.isinttype()? 
+							createLuaIntegerField(value.checkint()):
+							createLuaDoubleField(value.checkdouble()):
+						createLuaStringField(value.checkstring());
+				constants.put(value, name);
+			}
+			append(factory.createGetStatic(classname, name, TYPE_LUAVALUE));
+			break;
+		default:
+			throw new IllegalArgumentException("bad constant type: "+value.type());
+		}
+	}
+
+----------------------------------------
+	  if (this.t.token != ')') {  /* is `parlist' not empty? */
+	    do {
+	      switch (this.t.token) {
+	        case TK_NAME: {  /* param . NAME */
+	          this.new_localvar(this.str_checkname());
+	          ++nparams;
+	          break;
+	        }
+	        case TK_DOTS: {  /* param . `...' */
+	          this.next();
+	          f.is_vararg = 1;
+	          break;
+	        }
+	        default: this.syntaxerror("<name> or " + LUA_QL("...") + " expected");
+	      }
+	    } while ((f.is_vararg==0) && this.testnext(','));
+	  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+28678284
+src/core/org/luaj/vm2/lib/PackageLib.java 292 319
+src/jse/luac.java 171 193
+----------------------------------------
+			while ( e < n ) {
+				
+				// find next template
+				int b = e+1;
+				e = path.indexOf(';',b);
+				if ( e < 0 )
+					e = path.length();
+				String template = path.substring(b,e);
+	
+				// create filename
+				int q = template.indexOf('?');
+				String filename = template;
+				if ( q >= 0 ) {
+					filename = template.substring(0,q) + name + template.substring(q+1);
+				}
+				
+				// try opening the file
+				InputStream is = globals.finder.findResource(filename);
+				if (is != null) {
+					try { is.close(); } catch ( java.io.IOException ioe ) {}
+					return valueOf(filename);
+				}
+				
+				// report error
+				if ( sb == null )
+					sb = new StringBuffer();
+				sb.append( "\n\t"+filename );
+			}
+
+----------------------------------------
+	private void processScript( Globals globals, InputStream script, String chunkname, OutputStream out ) throws IOException {
+		try {
+	        // create the chunk
+			script = new BufferedInputStream(script);
+	        Prototype chunk = encoding != null?
+	        		globals.compilePrototype(new InputStreamReader(script, encoding), chunkname):
+	        		globals.compilePrototype(script, chunkname);
+
+	        // list the chunk
+	        if (list)
+	            Print.printCode(chunk);
+
+	        // write out the chunk
+	        if (!parseonly) {
+	            DumpState.dump(chunk, out, stripdebug, numberformat, littleendian);
+	        }
+	        
+		} catch ( Exception e ) {
+			e.printStackTrace( System.err );
+		} finally {
+			script.close();
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+28678285
+src/core/org/luaj/vm2/lib/PackageLib.java 292 319
+src/core/org/luaj/vm2/compiler/LexState.java 690 716
+----------------------------------------
+			while ( e < n ) {
+				
+				// find next template
+				int b = e+1;
+				e = path.indexOf(';',b);
+				if ( e < 0 )
+					e = path.length();
+				String template = path.substring(b,e);
+	
+				// create filename
+				int q = template.indexOf('?');
+				String filename = template;
+				if ( q >= 0 ) {
+					filename = template.substring(0,q) + name + template.substring(q+1);
+				}
+				
+				// try opening the file
+				InputStream is = globals.finder.findResource(filename);
+				if (is != null) {
+					try { is.close(); } catch ( java.io.IOException ioe ) {}
+					return valueOf(filename);
+				}
+				
+				// report error
+				if ( sb == null )
+					sb = new StringBuffer();
+				sb.append( "\n\t"+filename );
+			}
+
+----------------------------------------
+			default: {
+				if (isspace(current)) {
+					_assert (!currIsNewline());
+					nextChar();
+					continue;
+				} else if (isdigit(current)) {
+					read_numeral(seminfo);
+					return TK_NUMBER;
+				} else if (isalpha(current) || current == '_') {
+					/* identifier or reserved word */
+					LuaString ts;
+					do {
+						save_and_next();
+					} while (isalnum(current) || current == '_');
+					ts = newstring(buff, 0, nbuff);
+					if ( RESERVED.containsKey(ts) )
+						return ((Integer)RESERVED.get(ts)).intValue();
+					else {
+						seminfo.ts = ts;
+						return TK_NAME;
+					}
+				} else {
+					int c = current;
+					nextChar();
+					return c; /* single-char tokens (+ - / ...) */
+				}
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+28678286
+src/jse/lua.java 89 131
+src/jse/org/luaj/vm2/parser/LuaParser.java 1875 1894
+----------------------------------------
+				} else {
+					switch ( args[i].charAt(1) ) {
+					case 'e':
+						if ( ++i >= args.length )
+							usageExit();
+						// input script - defer to last stage
+						break;
+					case 'b':
+						luajc = true;
+						break;
+					case 'l':
+						if ( ++i >= args.length )
+							usageExit();
+						libs = libs!=null? libs: new Vector();
+						libs.addElement( args[i] );
+						break;
+					case 'i':
+						interactive = true;
+						break;
+					case 'v':
+						versioninfo = true;
+						break;
+					case 'n':
+						nodebug = true;
+						break;
+					case 'p':
+						print = true;
+						break;
+					case 'c':
+						if ( ++i >= args.length )
+							usageExit();
+						encoding = args[i];
+						break;
+					case '-':
+						if ( args[i].length() > 2 )
+							usageExit();
+						processing = false;
+						break;
+					default:
+						usageExit();
+						break;
+					}
+				}
+
+----------------------------------------
+    for (int i = 0; i < 7; i++) {
+    try {
+      JJCalls p = jj_2_rtns[i];
+      do {
+        if (p.gen > jj_gen) {
+          jj_la = p.arg; jj_lastpos = jj_scanpos = p.first;
+          switch (i) {
+            case 0: jj_3_1(); break;
+            case 1: jj_3_2(); break;
+            case 2: jj_3_3(); break;
+            case 3: jj_3_4(); break;
+            case 4: jj_3_5(); break;
+            case 5: jj_3_6(); break;
+            case 6: jj_3_7(); break;
+          }
+        }
+        p = p.next;
+      } while (p != null);
+      } catch(LookaheadSuccess ls) { }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+28678287
+src/jse/lua.java 195 213
+src/jse/lua.java 196 210
+----------------------------------------
+	private static void processScript( InputStream script, String chunkname, String[] args, int firstarg ) throws IOException {
+		try {
+			LuaValue c;
+			try {
+				script = new BufferedInputStream(script);
+				c = encoding != null? 
+						globals.load(new InputStreamReader(script, encoding), chunkname):
+						globals.load(script, chunkname, "bt", globals);
+			} finally {
+				script.close();
+			}
+			if (print && c.isclosure())
+				Print.print(c.checkclosure().p);
+			Varargs scriptargs = setGlobalArg(chunkname, args, firstarg, globals);
+			c.invoke( scriptargs );
+		} catch ( Exception e ) {
+			e.printStackTrace( System.err );
+		}
+	}
+
+----------------------------------------
+		try {
+			LuaValue c;
+			try {
+				script = new BufferedInputStream(script);
+				c = encoding != null? 
+						globals.load(new InputStreamReader(script, encoding), chunkname):
+						globals.load(script, chunkname, "bt", globals);
+			} finally {
+				script.close();
+			}
+			if (print && c.isclosure())
+				Print.print(c.checkclosure().p);
+			Varargs scriptargs = setGlobalArg(chunkname, args, firstarg, globals);
+			c.invoke( scriptargs );
+		} catch ( Exception e ) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+28678289
+src/jse/org/luaj/vm2/ast/Exp.java 87 99
+src/core/org/luaj/vm2/lib/Bit32Lib.java 79 93
+----------------------------------------
+	static int precedence(int op) {
+		switch ( op ) {
+		case Lua.OP_OR: return 0;
+		case Lua.OP_AND: return 1;
+		case Lua.OP_LT: case Lua.OP_GT: case Lua.OP_LE: case Lua.OP_GE: case Lua.OP_NEQ: case Lua.OP_EQ: return 2;
+		case Lua.OP_CONCAT: return 3;
+		case Lua.OP_ADD: case Lua.OP_SUB: return 4;
+		case Lua.OP_MUL: case Lua.OP_DIV: case Lua.OP_MOD: return 5;
+		case Lua.OP_NOT: case Lua.OP_UNM: case Lua.OP_LEN: return 6;
+		case Lua.OP_POW: return 7;
+		default: throw new IllegalStateException("precedence of bad op "+op);
+		}
+	}	
+
+----------------------------------------
+		public Varargs invoke(Varargs args) {
+			switch ( opcode ) {
+			case 0: return Bit32Lib.band( args );
+			case 1: return Bit32Lib.bnot( args );
+			case 2: return Bit32Lib.bor( args );
+			case 3: return Bit32Lib.btest( args );
+			case 4: return Bit32Lib.bxor( args );
+			case 5:
+				return Bit32Lib.extract( args.checkint(1), args.checkint(2), args.optint(3, 1) );
+			case 6:
+				return Bit32Lib.replace( args.checkint(1), args.checkint(2),
+						args.checkint(3), args.optint(4, 1) );
+			}
+			return NIL;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+28678291
+src/jse/org/luaj/vm2/parser/LuaParser.java 1060 1065
+src/core/org/luaj/vm2/lib/StringLib.java 174 183
+----------------------------------------
+  private boolean jj_2_2(int xla) {
+    jj_la = xla; jj_lastpos = jj_scanpos = token;
+    try { return !jj_3_2(); }
+    catch(LookaheadSuccess ls) { return true; }
+    finally { jj_save(1, xla); }
+  }
+
+----------------------------------------
+		public LuaValue call(LuaValue arg) {
+			LuaValue f = arg.checkfunction();
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			try {
+				DumpState.dump( ((LuaClosure)f).p, baos, true );
+				return LuaString.valueUsing(baos.toByteArray());
+			} catch (IOException e) {
+				return error( e.getMessage() );
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+28678290
+src/jse/org/luaj/vm2/parser/LuaParser.java 1088 1093
+src/core/org/luaj/vm2/lib/StringLib.java 174 183
+----------------------------------------
+  private boolean jj_2_6(int xla) {
+    jj_la = xla; jj_lastpos = jj_scanpos = token;
+    try { return !jj_3_6(); }
+    catch(LookaheadSuccess ls) { return true; }
+    finally { jj_save(5, xla); }
+  }
+
+----------------------------------------
+		public LuaValue call(LuaValue arg) {
+			LuaValue f = arg.checkfunction();
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			try {
+				DumpState.dump( ((LuaClosure)f).p, baos, true );
+				return LuaString.valueUsing(baos.toByteArray());
+			} catch (IOException e) {
+				return error( e.getMessage() );
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+28678292
+src/core/org/luaj/vm2/lib/DebugLib.java 253 264
+src/core/org/luaj/vm2/lib/StringLib.java 708 725
+----------------------------------------
+		public Varargs invoke(Varargs args) {
+			LuaValue func = args.checkfunction(1);
+			int up = args.checkint(2);
+			if ( func instanceof LuaClosure ) {
+				LuaClosure c = (LuaClosure) func;
+				LuaString name = findupvalue(c, up);
+				if ( name != null ) {
+					return varargsOf(name, c.upValues[up-1].getValue() );
+				}
+			}
+			return NIL;
+		}
+
+----------------------------------------
+		public Varargs invoke(Varargs args) {
+			final LuaString s = args.checkstring( 1 );
+			final int l = s.length();
+			
+			int start = posrelat( args.checkint( 2 ), l );
+			int end = posrelat( args.optint( 3, -1 ), l );
+			
+			if ( start < 1 )
+				start = 1;
+			if ( end > l )
+				end = l;
+			
+			if ( start <= end ) {
+				return s.substring( start-1 , end );
+			} else {
+				return EMPTYSTRING;
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+28678293
+src/core/org/luaj/vm2/lib/StringLib.java 744 786
+src/core/org/luaj/vm2/lib/StringLib.java 757 762
+----------------------------------------
+	static Varargs str_find_aux( Varargs args, boolean find ) {
+		LuaString s = args.checkstring( 1 );
+		LuaString pat = args.checkstring( 2 );
+		int init = args.optint( 3, 1 );
+		
+		if ( init > 0 ) {
+			init = Math.min( init - 1, s.length() );
+		} else if ( init < 0 ) {
+			init = Math.max( 0, s.length() + init );
+		}
+		
+		boolean fastMatch = find && ( args.arg(4).toboolean() || pat.indexOfAny( SPECIALS ) == -1 );
+		
+		if ( fastMatch ) {
+			int result = s.indexOf( pat, init );
+			if ( result != -1 ) {
+				return varargsOf( valueOf(result+1), valueOf(result+pat.length()) );
+			}
+		} else {
+			MatchState ms = new MatchState( args, s, pat );
+			
+			boolean anchor = false;
+			int poff = 0;
+			if ( pat.luaByte( 0 ) == '^' ) {
+				anchor = true;
+				poff = 1;
+			}
+			
+			int soff = init;
+			do {
+				int res;
+				ms.reset();
+				if ( ( res = ms.match( soff, poff ) ) != -1 ) {
+					if ( find ) {
+						return varargsOf( valueOf(soff+1), valueOf(res), ms.push_captures( false, soff, res ));
+					} else {
+						return ms.push_captures( true, soff, res );
+					}
+				}
+			} while ( soff++ < s.length() && !anchor );
+		}
+		return NIL;
+	}
+
+----------------------------------------
+		if ( fastMatch ) {
+			int result = s.indexOf( pat, init );
+			if ( result != -1 ) {
+				return varargsOf( valueOf(result+1), valueOf(result+pat.length()) );
+			}
+		} else {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+28678294
+src/core/org/luaj/vm2/lib/DebugLib.java 336 343
+src/core/org/luaj/vm2/lib/StringLib.java 773 783
+----------------------------------------
+			if ( func instanceof LuaClosure ) {
+				LuaClosure c = (LuaClosure) func;
+				LuaString name = findupvalue(c, up);
+				if ( name != null ) {
+					c.upValues[up-1].setValue(value);
+					return name;
+				}
+			}
+
+----------------------------------------
+			do {
+				int res;
+				ms.reset();
+				if ( ( res = ms.match( soff, poff ) ) != -1 ) {
+					if ( find ) {
+						return varargsOf( valueOf(soff+1), valueOf(res), ms.push_captures( false, soff, res ));
+					} else {
+						return ms.push_captures( true, soff, res );
+					}
+				}
+			} while ( soff++ < s.length() && !anchor );
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+28678295
+src/core/org/luaj/vm2/lib/StringLib.java 773 783
+src/jse/org/luaj/vm2/parser/SimpleCharStream.java 113 122
+----------------------------------------
+			do {
+				int res;
+				ms.reset();
+				if ( ( res = ms.match( soff, poff ) ) != -1 ) {
+					if ( find ) {
+						return varargsOf( valueOf(soff+1), valueOf(res), ms.push_captures( false, soff, res ));
+					} else {
+						return ms.push_captures( true, soff, res );
+					}
+				}
+			} while ( soff++ < s.length() && !anchor );
+
+----------------------------------------
+    try {
+      if ((i = inputStream.read(buffer, maxNextCharInd, available - maxNextCharInd)) == -1)
+      {
+        inputStream.close();
+        throw new java.io.IOException();
+      }
+      else
+        maxNextCharInd += i;
+      return;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+28678296
+src/core/org/luaj/vm2/lib/StringLib.java 1039 1115
+src/core/org/luaj/vm2/lib/StringLib.java 1040 1114
+----------------------------------------
+		int match( int soffset, int poffset ) {
+			while ( true ) {
+				// Check if we are at the end of the pattern - 
+				// equivalent to the '\0' case in the C version, but our pattern
+				// string is not NUL-terminated.
+				if ( poffset == p.length() )
+					return soffset;
+				switch ( p.luaByte( poffset ) ) {
+				case '(':
+					if ( ++poffset < p.length() && p.luaByte( poffset ) == ')' )
+						return start_capture( soffset, poffset + 1, CAP_POSITION );
+					else
+						return start_capture( soffset, poffset, CAP_UNFINISHED );
+				case ')':
+					return end_capture( soffset, poffset + 1 );
+				case L_ESC:
+					if ( poffset + 1 == p.length() )
+						error("malformed pattern (ends with '%')");
+					switch ( p.luaByte( poffset + 1 ) ) {
+					case 'b':
+						soffset = matchbalance( soffset, poffset + 2 );
+						if ( soffset == -1 ) return -1;
+						poffset += 4;
+						continue;
+					case 'f': {
+						poffset += 2;
+						if ( p.luaByte( poffset ) != '[' ) {
+							error("Missing [ after %f in pattern");
+						}
+						int ep = classend( poffset );
+						int previous = ( soffset == 0 ) ? -1 : s.luaByte( soffset - 1 );
+						if ( matchbracketclass( previous, poffset, ep - 1 ) ||
+							 matchbracketclass( s.luaByte( soffset ), poffset, ep - 1 ) )
+							return -1;
+						poffset = ep;
+						continue;
+					}
+					default: {
+						int c = p.luaByte( poffset + 1 );
+						if ( Character.isDigit( (char) c ) ) {
+							soffset = match_capture( soffset, c );
+							if ( soffset == -1 )
+								return -1;
+							return match( soffset, poffset + 2 );
+						}
+					}
+					}
+				case '$':
+					if ( poffset + 1 == p.length() )
+						return ( soffset == s.length() ) ? soffset : -1;
+				}
+				int ep = classend( poffset );
+				boolean m = soffset < s.length() && singlematch( s.luaByte( soffset ), poffset, ep );
+				int pc = ( ep < p.length() ) ? p.luaByte( ep ) : '\0';
+				
+				switch ( pc ) {
+				case '?':
+					int res;
+					if ( m && ( ( res = match( soffset + 1, ep + 1 ) ) != -1 ) )
+						return res;
+					poffset = ep + 1;
+					continue;
+				case '*':
+					return max_expand( soffset, poffset, ep );
+				case '+':
+					return ( m ? max_expand( soffset + 1, poffset, ep ) : -1 );
+				case '-':
+					return min_expand( soffset, poffset, ep );
+				default:
+					if ( !m )
+						return -1;
+					soffset++;
+					poffset = ep;
+					continue;
+				}
+			}
+		}
+
+----------------------------------------
+			while ( true ) {
+				// Check if we are at the end of the pattern - 
+				// equivalent to the '\0' case in the C version, but our pattern
+				// string is not NUL-terminated.
+				if ( poffset == p.length() )
+					return soffset;
+				switch ( p.luaByte( poffset ) ) {
+				case '(':
+					if ( ++poffset < p.length() && p.luaByte( poffset ) == ')' )
+						return start_capture( soffset, poffset + 1, CAP_POSITION );
+					else
+						return start_capture( soffset, poffset, CAP_UNFINISHED );
+				case ')':
+					return end_capture( soffset, poffset + 1 );
+				case L_ESC:
+					if ( poffset + 1 == p.length() )
+						error("malformed pattern (ends with '%')");
+					switch ( p.luaByte( poffset + 1 ) ) {
+					case 'b':
+						soffset = matchbalance( soffset, poffset + 2 );
+						if ( soffset == -1 ) return -1;
+						poffset += 4;
+						continue;
+					case 'f': {
+						poffset += 2;
+						if ( p.luaByte( poffset ) != '[' ) {
+							error("Missing [ after %f in pattern");
+						}
+						int ep = classend( poffset );
+						int previous = ( soffset == 0 ) ? -1 : s.luaByte( soffset - 1 );
+						if ( matchbracketclass( previous, poffset, ep - 1 ) ||
+							 matchbracketclass( s.luaByte( soffset ), poffset, ep - 1 ) )
+							return -1;
+						poffset = ep;
+						continue;
+					}
+					default: {
+						int c = p.luaByte( poffset + 1 );
+						if ( Character.isDigit( (char) c ) ) {
+							soffset = match_capture( soffset, c );
+							if ( soffset == -1 )
+								return -1;
+							return match( soffset, poffset + 2 );
+						}
+					}
+					}
+				case '$':
+					if ( poffset + 1 == p.length() )
+						return ( soffset == s.length() ) ? soffset : -1;
+				}
+				int ep = classend( poffset );
+				boolean m = soffset < s.length() && singlematch( s.luaByte( soffset ), poffset, ep );
+				int pc = ( ep < p.length() ) ? p.luaByte( ep ) : '\0';
+				
+				switch ( pc ) {
+				case '?':
+					int res;
+					if ( m && ( ( res = match( soffset + 1, ep + 1 ) ) != -1 ) )
+						return res;
+					poffset = ep + 1;
+					continue;
+				case '*':
+					return max_expand( soffset, poffset, ep );
+				case '+':
+					return ( m ? max_expand( soffset + 1, poffset, ep ) : -1 );
+				case '-':
+					return min_expand( soffset, poffset, ep );
+				default:
+					if ( !m )
+						return -1;
+					soffset++;
+					poffset = ep;
+					continue;
+				}
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+28678297
+src/core/org/luaj/vm2/lib/StringLib.java 1131 1140
+src/core/org/luaj/vm2/lib/StringLib.java 1132 1139
+----------------------------------------
+		int min_expand( int soff, int poff, int ep ) {
+			for ( ;; ) {
+				int res = match( soff, ep + 1 );
+				if ( res != -1 )
+					return res;
+				else if ( soff < s.length() && singlematch( s.luaByte( soff ), poff, ep ) )
+					soff++;
+				else return -1;
+			}
+		}
+
+----------------------------------------
+			for ( ;; ) {
+				int res = match( soff, ep + 1 );
+				if ( res != -1 )
+					return res;
+				else if ( soff < s.length() && singlematch( s.luaByte( soff ), poff, ep ) )
+					soff++;
+				else return -1;
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+28678299
+src/jse/org/luaj/vm2/parser/LuaParserTokenManager.java 1328 1433
+src/jse/org/luaj/vm2/parser/LuaParserTokenManager.java 1339 1381
+----------------------------------------
+{
+   int startsAt = 0;
+   jjnewStateCnt = 4;
+   int i = 1;
+   jjstateSet[0] = startState;
+   int kind = 0x7fffffff;
+   for (;;)
+   {
+      if (++jjround == 0x7fffffff)
+         ReInitRounds();
+      if (curChar < 64)
+      {
+         long l = 1L << curChar;
+         do
+         {
+            switch(jjstateSet[--i])
+            {
+               case 4:
+                  if ((0xffffffffffffdbffL & l) != 0L)
+                  {
+                     if (kind > 17)
+                        kind = 17;
+                     jjCheckNAddStates(42, 44);
+                  }
+                  else if ((0x2400L & l) != 0L)
+                  {
+                     if (kind > 17)
+                        kind = 17;
+                  }
+                  if (curChar == 13)
+                     jjstateSet[jjnewStateCnt++] = 2;
+                  break;
+               case 0:
+                  if ((0xffffffffffffdbffL & l) == 0L)
+                     break;
+                  kind = 17;
+                  jjCheckNAddStates(42, 44);
+                  break;
+               case 1:
+                  if ((0x2400L & l) != 0L && kind > 17)
+                     kind = 17;
+                  break;
+               case 2:
+                  if (curChar == 10 && kind > 17)
+                     kind = 17;
+                  break;
+               case 3:
+                  if (curChar == 13)
+                     jjstateSet[jjnewStateCnt++] = 2;
+                  break;
+               default : break;
+            }
+         } while(i != startsAt);
+      }
+      else if (curChar < 128)
+      {
+         long l = 1L << (curChar & 077);
+         do
+         {
+            switch(jjstateSet[--i])
+            {
+               case 4:
+               case 0:
+                  kind = 17;
+                  jjCheckNAddStates(42, 44);
+                  break;
+               default : break;
+            }
+         } while(i != startsAt);
+      }
+      else
+      {
+         int hiByte = (int)(curChar >> 8);
+         int i1 = hiByte >> 6;
+         long l1 = 1L << (hiByte & 077);
+         int i2 = (curChar & 0xff) >> 6;
+         long l2 = 1L << (curChar & 077);
+         do
+         {
+            switch(jjstateSet[--i])
+            {
+               case 4:
+               case 0:
+                  if (!jjCanMove_0(hiByte, i1, i2, l1, l2))
+                     break;
+                  if (kind > 17)
+                     kind = 17;
+                  jjCheckNAddStates(42, 44);
+                  break;
+               default : break;
+            }
+         } while(i != startsAt);
+      }
+      if (kind != 0x7fffffff)
+      {
+         jjmatchedKind = kind;
+         jjmatchedPos = curPos;
+         kind = 0x7fffffff;
+      }
+      ++curPos;
+      if ((i = jjnewStateCnt) == (startsAt = 4 - (jjnewStateCnt = startsAt)))
+         return curPos;
+      try { curChar = input_stream.readChar(); }
+      catch(java.io.IOException e) { return curPos; }
+   }
+}
+
+----------------------------------------
+      {
+         long l = 1L << curChar;
+         do
+         {
+            switch(jjstateSet[--i])
+            {
+               case 4:
+                  if ((0xffffffffffffdbffL & l) != 0L)
+                  {
+                     if (kind > 17)
+                        kind = 17;
+                     jjCheckNAddStates(42, 44);
+                  }
+                  else if ((0x2400L & l) != 0L)
+                  {
+                     if (kind > 17)
+                        kind = 17;
+                  }
+                  if (curChar == 13)
+                     jjstateSet[jjnewStateCnt++] = 2;
+                  break;
+               case 0:
+                  if ((0xffffffffffffdbffL & l) == 0L)
+                     break;
+                  kind = 17;
+                  jjCheckNAddStates(42, 44);
+                  break;
+               case 1:
+                  if ((0x2400L & l) != 0L && kind > 17)
+                     kind = 17;
+                  break;
+               case 2:
+                  if (curChar == 10 && kind > 17)
+                     kind = 17;
+                  break;
+               case 3:
+                  if (curChar == 13)
+                     jjstateSet[jjnewStateCnt++] = 2;
+                  break;
+               default : break;
+            }
+         } while(i != startsAt);
+      }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+28678300
+examples/android/src/android/LuajView.java 37 47
+src/jse/org/luaj/vm2/lib/jse/JavaClass.java 79 89
+----------------------------------------
+	public void draw(Canvas canvas) {
+		LuaValue f = globals.get("draw");
+		if (!f.isnil())
+			try {
+				f.call(CoerceJavaToLua.coerce(canvas));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		else
+			super.draw(canvas);
+	}
+
+----------------------------------------
+			for ( int i=0; i<f.length; i++ ) {
+				Field fi = f[i];
+				if ( Modifier.isPublic(fi.getModifiers()) ) {
+					m.put(LuaValue.valueOf(fi.getName()), fi);
+					try {
+						if (!fi.isAccessible())
+							fi.setAccessible(true);
+					} catch (SecurityException s) {
+					}
+				}
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+28678301
+examples/android/src/android/LuajView.java 49 61
+src/core/org/luaj/vm2/compiler/LexState.java 668 681
+----------------------------------------
+	public boolean f(int keyCode, KeyEvent event) {
+		LuaValue f = globals.get("onKeyDown");
+		if (!f.isnil())
+			try {
+				return f.call(CoerceJavaToLua.coerce(keyCode),
+						CoerceJavaToLua.coerce(event)).toboolean();
+			} catch (Exception e) {
+				e.printStackTrace();
+				return true;
+			}
+		else
+			return super.onKeyDown(keyCode, event);
+	}
+
+----------------------------------------
+			case '.': {
+				save_and_next();
+				if (check_next(".")) {
+					if (check_next("."))
+						return TK_DOTS; /* ... */
+					else
+						return TK_CONCAT; /* .. */
+				} else if (!isdigit(current))
+					return '.';
+				else {
+					read_numeral(seminfo);
+					return TK_NUMBER;
+				}
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+28678310
+src/jse/org/luaj/vm2/parser/LuaParser.java 792 822
+src/jse/org/luaj/vm2/parser/LuaParser.java 341 357
+----------------------------------------
+  final public ParList ParList() throws ParseException {
+        List<Name> l=null;
+        boolean v=false;
+        ParList p;
+        long i = LineInfo();
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case NAME:
+      l = NameList();
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case 72:
+        jj_consume_token(72);
+        jj_consume_token(79);
+                                   v=true;
+        break;
+      default:
+        jj_la1[25] = jj_gen;
+        ;
+      }
+                                                  p=new ParList(l,v); L(p,i); {if (true) return p;}
+      break;
+    case 79:
+      jj_consume_token(79);
+                 p=new ParList(null,true); L(p,i); {if (true) return p;}
+      break;
+    default:
+      jj_la1[26] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+    throw new Error("Missing return statement in function");
+  }
+
+----------------------------------------
+  final public Stat ExprStat() throws ParseException {
+        Exp.PrimaryExp p;
+        Stat s=null;
+        long i = LineInfo();
+    p = PrimaryExp();
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case 71:
+    case 72:
+      s = Assign(assertvarexp(p));
+      break;
+    default:
+      jj_la1[12] = jj_gen;
+      ;
+    }
+          if (s==null) { s=Stat.functioncall(assertfunccall(p)); } L(s,i); {if (true) return s;}
+    throw new Error("Missing return statement in function");
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+28678302
+src/jse/org/luaj/vm2/parser/LuaParser.java 52 69
+src/jse/org/luaj/vm2/parser/LuaParser.java 341 357
+----------------------------------------
+  final public Chunk Chunk() throws ParseException {
+        Block b;
+        Chunk c;
+        long i = LineInfo();
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case 69:
+      jj_consume_token(69);
+                token_source.SwitchTo(IN_COMMENT);
+      break;
+    default:
+      jj_la1[0] = jj_gen;
+      ;
+    }
+    b = Block();
+    jj_consume_token(0);
+                                                                          c=new Chunk(b); L(c,i); {if (true) return c;}
+    throw new Error("Missing return statement in function");
+  }
+
+----------------------------------------
+  final public Stat ExprStat() throws ParseException {
+        Exp.PrimaryExp p;
+        Stat s=null;
+        long i = LineInfo();
+    p = PrimaryExp();
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case 71:
+    case 72:
+      s = Assign(assertvarexp(p));
+      break;
+    default:
+      jj_la1[12] = jj_gen;
+      ;
+    }
+          if (s==null) { s=Stat.functioncall(assertfunccall(p)); } L(s,i); {if (true) return s;}
+    throw new Error("Missing return statement in function");
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+28678312
+src/jse/org/luaj/vm2/parser/LuaParser.java 770 790
+src/jse/org/luaj/vm2/parser/LuaParser.java 426 448
+----------------------------------------
+  final public FuncBody FuncBody() throws ParseException {
+        ParList pl=null;
+        Block b;
+        FuncBody f;
+        long i = LineInfo();
+    jj_consume_token(75);
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case NAME:
+    case 79:
+      pl = ParList();
+      break;
+    default:
+      jj_la1[24] = jj_gen;
+      ;
+    }
+    jj_consume_token(76);
+    b = Block();
+    jj_consume_token(END);
+                                                    f=new FuncBody(pl,b); L(f,i); {if (true) return f;}
+    throw new Error("Missing return statement in function");
+  }
+
+----------------------------------------
+  final public Exp.PrimaryExp PrefixExp() throws ParseException {
+        Token n;
+        Exp e;
+        Exp.PrimaryExp p;
+        long i = LineInfo();
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case NAME:
+      n = jj_consume_token(NAME);
+                                          p=Exp.nameprefix(n.image); L(p,i); {if (true) return p;}
+      break;
+    case 75:
+      jj_consume_token(75);
+      e = Exp();
+      jj_consume_token(76);
+                                  p=Exp.parensprefix(e); L(p,i); {if (true) return p;}
+      break;
+    default:
+      jj_la1[16] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+    throw new Error("Missing return statement in function");
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+28678303
+src/jse/org/luaj/vm2/parser/LuaParser.java 52 69
+src/jse/org/luaj/vm2/parser/LuaParser.java 426 448
+----------------------------------------
+  final public Chunk Chunk() throws ParseException {
+        Block b;
+        Chunk c;
+        long i = LineInfo();
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case 69:
+      jj_consume_token(69);
+                token_source.SwitchTo(IN_COMMENT);
+      break;
+    default:
+      jj_la1[0] = jj_gen;
+      ;
+    }
+    b = Block();
+    jj_consume_token(0);
+                                                                          c=new Chunk(b); L(c,i); {if (true) return c;}
+    throw new Error("Missing return statement in function");
+  }
+
+----------------------------------------
+  final public Exp.PrimaryExp PrefixExp() throws ParseException {
+        Token n;
+        Exp e;
+        Exp.PrimaryExp p;
+        long i = LineInfo();
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case NAME:
+      n = jj_consume_token(NAME);
+                                          p=Exp.nameprefix(n.image); L(p,i); {if (true) return p;}
+      break;
+    case 75:
+      jj_consume_token(75);
+      e = Exp();
+      jj_consume_token(76);
+                                  p=Exp.parensprefix(e); L(p,i); {if (true) return p;}
+      break;
+    default:
+      jj_la1[16] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+    throw new Error("Missing return statement in function");
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+28678314
+src/jse/org/luaj/vm2/parser/LuaParser.java 792 822
+src/jse/org/luaj/vm2/parser/LuaParser.java 426 448
+----------------------------------------
+  final public ParList ParList() throws ParseException {
+        List<Name> l=null;
+        boolean v=false;
+        ParList p;
+        long i = LineInfo();
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case NAME:
+      l = NameList();
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case 72:
+        jj_consume_token(72);
+        jj_consume_token(79);
+                                   v=true;
+        break;
+      default:
+        jj_la1[25] = jj_gen;
+        ;
+      }
+                                                  p=new ParList(l,v); L(p,i); {if (true) return p;}
+      break;
+    case 79:
+      jj_consume_token(79);
+                 p=new ParList(null,true); L(p,i); {if (true) return p;}
+      break;
+    default:
+      jj_la1[26] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+    throw new Error("Missing return statement in function");
+  }
+
+----------------------------------------
+  final public Exp.PrimaryExp PrefixExp() throws ParseException {
+        Token n;
+        Exp e;
+        Exp.PrimaryExp p;
+        long i = LineInfo();
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case NAME:
+      n = jj_consume_token(NAME);
+                                          p=Exp.nameprefix(n.image); L(p,i); {if (true) return p;}
+      break;
+    case 75:
+      jj_consume_token(75);
+      e = Exp();
+      jj_consume_token(76);
+                                  p=Exp.parensprefix(e); L(p,i); {if (true) return p;}
+      break;
+    default:
+      jj_la1[16] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+    throw new Error("Missing return statement in function");
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+28678309
+src/jse/org/luaj/vm2/parser/LuaParser.java 341 357
+src/jse/org/luaj/vm2/parser/LuaParser.java 426 448
+----------------------------------------
+  final public Stat ExprStat() throws ParseException {
+        Exp.PrimaryExp p;
+        Stat s=null;
+        long i = LineInfo();
+    p = PrimaryExp();
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case 71:
+    case 72:
+      s = Assign(assertvarexp(p));
+      break;
+    default:
+      jj_la1[12] = jj_gen;
+      ;
+    }
+          if (s==null) { s=Stat.functioncall(assertfunccall(p)); } L(s,i); {if (true) return s;}
+    throw new Error("Missing return statement in function");
+  }
+
+----------------------------------------
+  final public Exp.PrimaryExp PrefixExp() throws ParseException {
+        Token n;
+        Exp e;
+        Exp.PrimaryExp p;
+        long i = LineInfo();
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case NAME:
+      n = jj_consume_token(NAME);
+                                          p=Exp.nameprefix(n.image); L(p,i); {if (true) return p;}
+      break;
+    case 75:
+      jj_consume_token(75);
+      e = Exp();
+      jj_consume_token(76);
+                                  p=Exp.parensprefix(e); L(p,i); {if (true) return p;}
+      break;
+    default:
+      jj_la1[16] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+    throw new Error("Missing return statement in function");
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+28678311
+src/jse/org/luaj/vm2/parser/LuaParser.java 761 768
+src/jse/org/luaj/vm2/parser/LuaParser.java 426 448
+----------------------------------------
+  final public FuncBody FunctionCall() throws ParseException {
+        FuncBody b;
+        long i = LineInfo();
+    jj_consume_token(FUNCTION);
+    b = FuncBody();
+                                  L(b,i); {if (true) return b;}
+    throw new Error("Missing return statement in function");
+  }
+
+----------------------------------------
+  final public Exp.PrimaryExp PrefixExp() throws ParseException {
+        Token n;
+        Exp e;
+        Exp.PrimaryExp p;
+        long i = LineInfo();
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case NAME:
+      n = jj_consume_token(NAME);
+                                          p=Exp.nameprefix(n.image); L(p,i); {if (true) return p;}
+      break;
+    case 75:
+      jj_consume_token(75);
+      e = Exp();
+      jj_consume_token(76);
+                                  p=Exp.parensprefix(e); L(p,i); {if (true) return p;}
+      break;
+    default:
+      jj_la1[16] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+    throw new Error("Missing return statement in function");
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+28678315
+src/jse/org/luaj/vm2/parser/LuaParser.java 824 860
+src/jse/org/luaj/vm2/parser/LuaParser.java 426 448
+----------------------------------------
+  final public TableConstructor TableConstructor() throws ParseException {
+        TableConstructor c = new TableConstructor();
+        List<TableField> l = null;
+        long i = LineInfo();
+    jj_consume_token(80);
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case LONGSTRING0:
+    case LONGSTRING1:
+    case LONGSTRING2:
+    case LONGSTRING3:
+    case LONGSTRINGN:
+    case FALSE:
+    case FUNCTION:
+    case NIL:
+    case NOT:
+    case TRUE:
+    case NAME:
+    case NUMBER:
+    case STRING:
+    case CHARSTRING:
+    case 69:
+    case 75:
+    case 77:
+    case 79:
+    case 80:
+    case 83:
+      l = FieldList();
+                             c.fields=l;
+      break;
+    default:
+      jj_la1[27] = jj_gen;
+      ;
+    }
+    jj_consume_token(81);
+                                                   L(c,i); {if (true) return c;}
+    throw new Error("Missing return statement in function");
+  }
+
+----------------------------------------
+  final public Exp.PrimaryExp PrefixExp() throws ParseException {
+        Token n;
+        Exp e;
+        Exp.PrimaryExp p;
+        long i = LineInfo();
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case NAME:
+      n = jj_consume_token(NAME);
+                                          p=Exp.nameprefix(n.image); L(p,i); {if (true) return p;}
+      break;
+    case 75:
+      jj_consume_token(75);
+      e = Exp();
+      jj_consume_token(76);
+                                  p=Exp.parensprefix(e); L(p,i); {if (true) return p;}
+      break;
+    default:
+      jj_la1[16] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+    throw new Error("Missing return statement in function");
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+28678304
+src/jse/org/luaj/vm2/parser/LuaParser.java 597 609
+src/jse/org/luaj/vm2/parser/LuaParser.java 76 99
+----------------------------------------
+    while (true) {
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case 72:
+        ;
+        break;
+      default:
+        jj_la1[20] = jj_gen;
+        break label_7;
+      }
+      jj_consume_token(72);
+      e = Exp();
+                                           l.add(e);
+    }
+
+----------------------------------------
+    while (true) {
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case BREAK:
+      case DO:
+      case FOR:
+      case FUNCTION:
+      case GOTO:
+      case IF:
+      case LOCAL:
+      case REPEAT:
+      case WHILE:
+      case NAME:
+      case DBCOLON:
+      case 70:
+      case 75:
+        ;
+        break;
+      default:
+        jj_la1[1] = jj_gen;
+        break label_1;
+      }
+      s = Stat();
+                   b.add(s);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+28678305
+src/jse/org/luaj/vm2/parser/LuaParser.java 188 242
+src/core/org/luaj/vm2/compiler/FuncState.java 279 300
+----------------------------------------
+      } else {
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case FOR:
+          jj_consume_token(FOR);
+          nl = NameList();
+          jj_consume_token(IN);
+          el = ExpList();
+          jj_consume_token(DO);
+          b = Block();
+          jj_consume_token(END);
+                                                                     s=Stat.forgeneric(nl,el,b); L(s,i); {if (true) return s;}
+          break;
+        case FUNCTION:
+          jj_consume_token(FUNCTION);
+          fn = FuncName();
+          fb = FuncBody();
+                                                 s=Stat.functiondef(fn,fb); L(s,i); {if (true) return s;}
+          break;
+        default:
+          jj_la1[6] = jj_gen;
+          if (jj_2_2(2)) {
+            jj_consume_token(LOCAL);
+            jj_consume_token(FUNCTION);
+            n = jj_consume_token(NAME);
+            fb = FuncBody();
+                                                                 s=Stat.localfunctiondef(n.image,fb); L(s,i); {if (true) return s;}
+          } else {
+            switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+            case LOCAL:
+              jj_consume_token(LOCAL);
+              nl = NameList();
+              switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+              case 71:
+                jj_consume_token(71);
+                el = ExpList();
+                break;
+              default:
+                jj_la1[4] = jj_gen;
+                ;
+              }
+                                                       s=Stat.localassignment(nl,el); L(s,i); {if (true) return s;}
+              break;
+            case NAME:
+            case 75:
+              s = ExprStat();
+                       L(s,i); {if (true) return s;}
+              break;
+            default:
+              jj_la1[7] = jj_gen;
+              jj_consume_token(-1);
+              throw new ParseException();
+            }
+          }
+        }
+      }
+
+----------------------------------------
+	void nil(int from, int n) {
+		int l = from + n - 1;  /* last register to set nil */
+		if (this.pc > this.lasttarget && pc > 0) {  /* no jumps to current position? */
+			final int previous_code = f.code[pc - 1];
+			if (GET_OPCODE(previous_code) == OP_LOADNIL) {
+				int pfrom = GETARG_A(previous_code);
+				int pl = pfrom + GETARG_B(previous_code);
+				if ((pfrom <= from && from <= pl + 1)
+						|| (from <= pfrom && pfrom <= l + 1)) { /* can connect both? */
+					if (pfrom < from)
+						from = pfrom; /* from = min(from, pfrom) */
+					if (pl > l)
+						l = pl; /* l = max(l, pl) */
+					InstructionPtr previous = new InstructionPtr(this.f.code, this.pc - 1);
+					SETARG_A(previous, from);
+					SETARG_B(previous, l - from);
+					return;
+				}
+			}  /* else go through */
+		}
+		this.codeABC(OP_LOADNIL, from, n - 1, 0); 
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+28678375
+src/core/org/luaj/vm2/compiler/FuncState.java 817 856
+src/core/org/luaj/vm2/compiler/FuncState.java 674 704
+----------------------------------------
+	void codenot(expdesc e) {
+		this.dischargevars(e);
+		switch (e.k) {
+		case LexState.VNIL:
+		case LexState.VFALSE: {
+			e.k = LexState.VTRUE;
+			break;
+		}
+		case LexState.VK:
+		case LexState.VKNUM:
+		case LexState.VTRUE: {
+			e.k = LexState.VFALSE;
+			break;
+		}
+		case LexState.VJMP: {
+			this.invertjump(e);
+			break;
+		}
+		case LexState.VRELOCABLE:
+		case LexState.VNONRELOC: {
+			this.discharge2anyreg(e);
+			this.freeexp(e);
+			e.u.info = this.codeABC(OP_NOT, 0, e.u.info, 0);
+			e.k = LexState.VRELOCABLE;
+			break;
+		}
+		default: {
+			_assert (false); /* cannot happen */
+			break;
+		}
+		}
+		/* interchange true and false lists */
+		{
+			int temp = e.f.i;
+			e.f.i = e.t.i;
+			e.t.i = temp;
+		}
+		this.removevalues(e.f.i);
+		this.removevalues(e.t.i);
+	}
+
+----------------------------------------
+	int exp2RK(expdesc e) {
+		this.exp2val(e);
+		switch (e.k) {
+		case LexState.VTRUE:
+		case LexState.VFALSE:
+		case LexState.VNIL: {
+			if (this.nk <= MAXINDEXRK) { /* constant fit in RK operand? */
+				e.u.info = (e.k == LexState.VNIL) ? this.nilK()
+								: this.boolK((e.k == LexState.VTRUE));
+				e.k = LexState.VK;
+				return RKASK(e.u.info);
+			} else
+				break;
+		}
+		case LexState.VKNUM: {
+		      e.u.info = this.numberK(e.u.nval());
+		      e.k = LexState.VK;
+		      /* go through */			
+		}
+		case LexState.VK: {
+			if (e.u.info <= MAXINDEXRK) /* constant fit in argC? */
+				return RKASK(e.u.info);
+			else
+				break;
+		}
+		default:
+			break;
+		}
+		/* not a constant in the right range: put it in a register */
+		return this.exp2anyreg(e);
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+28678307
+src/jse/org/luaj/vm2/parser/LuaParser.java 214 240
+src/core/org/luaj/vm2/compiler/FuncState.java 674 704
+----------------------------------------
+          } else {
+            switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+            case LOCAL:
+              jj_consume_token(LOCAL);
+              nl = NameList();
+              switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+              case 71:
+                jj_consume_token(71);
+                el = ExpList();
+                break;
+              default:
+                jj_la1[4] = jj_gen;
+                ;
+              }
+                                                       s=Stat.localassignment(nl,el); L(s,i); {if (true) return s;}
+              break;
+            case NAME:
+            case 75:
+              s = ExprStat();
+                       L(s,i); {if (true) return s;}
+              break;
+            default:
+              jj_la1[7] = jj_gen;
+              jj_consume_token(-1);
+              throw new ParseException();
+            }
+          }
+
+----------------------------------------
+	int exp2RK(expdesc e) {
+		this.exp2val(e);
+		switch (e.k) {
+		case LexState.VTRUE:
+		case LexState.VFALSE:
+		case LexState.VNIL: {
+			if (this.nk <= MAXINDEXRK) { /* constant fit in RK operand? */
+				e.u.info = (e.k == LexState.VNIL) ? this.nilK()
+								: this.boolK((e.k == LexState.VTRUE));
+				e.k = LexState.VK;
+				return RKASK(e.u.info);
+			} else
+				break;
+		}
+		case LexState.VKNUM: {
+		      e.u.info = this.numberK(e.u.nval());
+		      e.k = LexState.VK;
+		      /* go through */			
+		}
+		case LexState.VK: {
+			if (e.u.info <= MAXINDEXRK) /* constant fit in argC? */
+				return RKASK(e.u.info);
+			else
+				break;
+		}
+		default:
+			break;
+		}
+		/* not a constant in the right range: put it in a register */
+		return this.exp2anyreg(e);
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+28678308
+src/jse/org/luaj/vm2/parser/LuaParser.java 341 357
+src/jse/org/luaj/vm2/parser/LuaParser.java 247 287
+----------------------------------------
+  final public Stat ExprStat() throws ParseException {
+        Exp.PrimaryExp p;
+        Stat s=null;
+        long i = LineInfo();
+    p = PrimaryExp();
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case 71:
+    case 72:
+      s = Assign(assertvarexp(p));
+      break;
+    default:
+      jj_la1[12] = jj_gen;
+      ;
+    }
+          if (s==null) { s=Stat.functioncall(assertfunccall(p)); } L(s,i); {if (true) return s;}
+    throw new Error("Missing return statement in function");
+  }
+
+----------------------------------------
+  final public Stat IfThenElse() throws ParseException {
+        Block b,b2,b3=null;
+        Exp e,e2;
+        List<Exp> el=null;
+        List<Block> bl=null;
+    jj_consume_token(IF);
+    e = Exp();
+    jj_consume_token(THEN);
+    b = Block();
+    label_2:
+    while (true) {
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case ELSEIF:
+        ;
+        break;
+      default:
+        jj_la1[8] = jj_gen;
+        break label_2;
+      }
+      jj_consume_token(ELSEIF);
+      e2 = Exp();
+      jj_consume_token(THEN);
+      b2 = Block();
+                        if (el==null) el=new ArrayList<Exp>();
+                        if (bl==null) bl=new ArrayList<Block>();
+                        el.add(e2);
+                        bl.add(b2);
+    }
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case ELSE:
+      jj_consume_token(ELSE);
+      b3 = Block();
+      break;
+    default:
+      jj_la1[9] = jj_gen;
+      ;
+    }
+    jj_consume_token(END);
+                          {if (true) return Stat.ifthenelse(e,b,el,bl,b3);}
+    throw new Error("Missing return statement in function");
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+28678313
+src/jse/org/luaj/vm2/parser/LuaParser.java 426 448
+src/jse/luac.java 140 161
+----------------------------------------
+  final public Exp.PrimaryExp PrefixExp() throws ParseException {
+        Token n;
+        Exp e;
+        Exp.PrimaryExp p;
+        long i = LineInfo();
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case NAME:
+      n = jj_consume_token(NAME);
+                                          p=Exp.nameprefix(n.image); L(p,i); {if (true) return p;}
+      break;
+    case 75:
+      jj_consume_token(75);
+      e = Exp();
+      jj_consume_token(76);
+                                  p=Exp.parensprefix(e); L(p,i); {if (true) return p;}
+      break;
+    default:
+      jj_la1[16] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+    throw new Error("Missing return statement in function");
+  }
+
+----------------------------------------
+			try {
+				Globals globals = JsePlatform.standardGlobals();
+				processing = true;
+				for ( int i=0; i<args.length; i++ ) {
+					if ( ! processing || ! args[i].startsWith("-") ) {
+						String chunkname = args[i].substring(0,args[i].length()-4);
+						processScript( globals, new FileInputStream(args[i]), chunkname, fos );
+					} else if ( args[i].length() <= 1 ) {
+						processScript( globals, System.in, "=stdin", fos );
+					} else {
+						switch ( args[i].charAt(1) ) {
+						case 'o':
+						case 'c':
+							++i;
+							break;
+						case '-':
+							processing = false;
+							break;
+						}
+					}
+				}
+			} finally {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+28678316
+src/jse/org/luaj/vm2/parser/LuaParser.java 770 790
+src/jse/org/luaj/vm2/parser/LuaParser.java 614 671
+----------------------------------------
+  final public FuncBody FuncBody() throws ParseException {
+        ParList pl=null;
+        Block b;
+        FuncBody f;
+        long i = LineInfo();
+    jj_consume_token(75);
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case NAME:
+    case 79:
+      pl = ParList();
+      break;
+    default:
+      jj_la1[24] = jj_gen;
+      ;
+    }
+    jj_consume_token(76);
+    b = Block();
+    jj_consume_token(END);
+                                                    f=new FuncBody(pl,b); L(f,i); {if (true) return f;}
+    throw new Error("Missing return statement in function");
+  }
+
+----------------------------------------
+  final public Exp SimpleExp() throws ParseException {
+        Token n;
+        LuaString s;
+        Exp e;
+        TableConstructor c;
+        FuncBody b;
+        long i = LineInfo();
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case NIL:
+      jj_consume_token(NIL);
+                                                  e=Exp.constant(LuaValue.NIL); L(e,i); {if (true) return e;}
+      break;
+    case TRUE:
+      jj_consume_token(TRUE);
+                                                  e=Exp.constant(LuaValue.TRUE); L(e,i); {if (true) return e;}
+      break;
+    case FALSE:
+      jj_consume_token(FALSE);
+                                                  e=Exp.constant(LuaValue.FALSE); L(e,i); {if (true) return e;}
+      break;
+    case NUMBER:
+      n = jj_consume_token(NUMBER);
+                                                  e=Exp.numberconstant(n.image); L(e,i); {if (true) return e;}
+      break;
+    case LONGSTRING0:
+    case LONGSTRING1:
+    case LONGSTRING2:
+    case LONGSTRING3:
+    case LONGSTRINGN:
+    case STRING:
+    case CHARSTRING:
+      s = Str();
+                                                  e=Exp.constant(s); L(e,i); {if (true) return e;}
+      break;
+    case 79:
+      jj_consume_token(79);
+                                                  e=Exp.varargs(); L(e,i); {if (true) return e;}
+      break;
+    case 80:
+      c = TableConstructor();
+                                  e=Exp.tableconstructor(c); L(e,i); {if (true) return e;}
+      break;
+    case FUNCTION:
+      b = FunctionCall();
+                                          e=Exp.anonymousfunction(b); L(e,i); {if (true) return e;}
+      break;
+    case NAME:
+    case 75:
+      e = PrimaryExp();
+                                          {if (true) return e;}
+      break;
+    default:
+      jj_la1[21] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+    throw new Error("Missing return statement in function");
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+28678319
+src/jse/org/luaj/vm2/parser/LuaParser.java 824 860
+src/jse/org/luaj/vm2/parser/LuaParser.java 614 671
+----------------------------------------
+  final public TableConstructor TableConstructor() throws ParseException {
+        TableConstructor c = new TableConstructor();
+        List<TableField> l = null;
+        long i = LineInfo();
+    jj_consume_token(80);
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case LONGSTRING0:
+    case LONGSTRING1:
+    case LONGSTRING2:
+    case LONGSTRING3:
+    case LONGSTRINGN:
+    case FALSE:
+    case FUNCTION:
+    case NIL:
+    case NOT:
+    case TRUE:
+    case NAME:
+    case NUMBER:
+    case STRING:
+    case CHARSTRING:
+    case 69:
+    case 75:
+    case 77:
+    case 79:
+    case 80:
+    case 83:
+      l = FieldList();
+                             c.fields=l;
+      break;
+    default:
+      jj_la1[27] = jj_gen;
+      ;
+    }
+    jj_consume_token(81);
+                                                   L(c,i); {if (true) return c;}
+    throw new Error("Missing return statement in function");
+  }
+
+----------------------------------------
+  final public Exp SimpleExp() throws ParseException {
+        Token n;
+        LuaString s;
+        Exp e;
+        TableConstructor c;
+        FuncBody b;
+        long i = LineInfo();
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case NIL:
+      jj_consume_token(NIL);
+                                                  e=Exp.constant(LuaValue.NIL); L(e,i); {if (true) return e;}
+      break;
+    case TRUE:
+      jj_consume_token(TRUE);
+                                                  e=Exp.constant(LuaValue.TRUE); L(e,i); {if (true) return e;}
+      break;
+    case FALSE:
+      jj_consume_token(FALSE);
+                                                  e=Exp.constant(LuaValue.FALSE); L(e,i); {if (true) return e;}
+      break;
+    case NUMBER:
+      n = jj_consume_token(NUMBER);
+                                                  e=Exp.numberconstant(n.image); L(e,i); {if (true) return e;}
+      break;
+    case LONGSTRING0:
+    case LONGSTRING1:
+    case LONGSTRING2:
+    case LONGSTRING3:
+    case LONGSTRINGN:
+    case STRING:
+    case CHARSTRING:
+      s = Str();
+                                                  e=Exp.constant(s); L(e,i); {if (true) return e;}
+      break;
+    case 79:
+      jj_consume_token(79);
+                                                  e=Exp.varargs(); L(e,i); {if (true) return e;}
+      break;
+    case 80:
+      c = TableConstructor();
+                                  e=Exp.tableconstructor(c); L(e,i); {if (true) return e;}
+      break;
+    case FUNCTION:
+      b = FunctionCall();
+                                          e=Exp.anonymousfunction(b); L(e,i); {if (true) return e;}
+      break;
+    case NAME:
+    case 75:
+      e = PrimaryExp();
+                                          {if (true) return e;}
+      break;
+    default:
+      jj_la1[21] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+    throw new Error("Missing return statement in function");
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+28678318
+src/jse/org/luaj/vm2/parser/LuaParser.java 792 822
+src/jse/org/luaj/vm2/parser/LuaParser.java 614 671
+----------------------------------------
+  final public ParList ParList() throws ParseException {
+        List<Name> l=null;
+        boolean v=false;
+        ParList p;
+        long i = LineInfo();
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case NAME:
+      l = NameList();
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case 72:
+        jj_consume_token(72);
+        jj_consume_token(79);
+                                   v=true;
+        break;
+      default:
+        jj_la1[25] = jj_gen;
+        ;
+      }
+                                                  p=new ParList(l,v); L(p,i); {if (true) return p;}
+      break;
+    case 79:
+      jj_consume_token(79);
+                 p=new ParList(null,true); L(p,i); {if (true) return p;}
+      break;
+    default:
+      jj_la1[26] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+    throw new Error("Missing return statement in function");
+  }
+
+----------------------------------------
+  final public Exp SimpleExp() throws ParseException {
+        Token n;
+        LuaString s;
+        Exp e;
+        TableConstructor c;
+        FuncBody b;
+        long i = LineInfo();
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case NIL:
+      jj_consume_token(NIL);
+                                                  e=Exp.constant(LuaValue.NIL); L(e,i); {if (true) return e;}
+      break;
+    case TRUE:
+      jj_consume_token(TRUE);
+                                                  e=Exp.constant(LuaValue.TRUE); L(e,i); {if (true) return e;}
+      break;
+    case FALSE:
+      jj_consume_token(FALSE);
+                                                  e=Exp.constant(LuaValue.FALSE); L(e,i); {if (true) return e;}
+      break;
+    case NUMBER:
+      n = jj_consume_token(NUMBER);
+                                                  e=Exp.numberconstant(n.image); L(e,i); {if (true) return e;}
+      break;
+    case LONGSTRING0:
+    case LONGSTRING1:
+    case LONGSTRING2:
+    case LONGSTRING3:
+    case LONGSTRINGN:
+    case STRING:
+    case CHARSTRING:
+      s = Str();
+                                                  e=Exp.constant(s); L(e,i); {if (true) return e;}
+      break;
+    case 79:
+      jj_consume_token(79);
+                                                  e=Exp.varargs(); L(e,i); {if (true) return e;}
+      break;
+    case 80:
+      c = TableConstructor();
+                                  e=Exp.tableconstructor(c); L(e,i); {if (true) return e;}
+      break;
+    case FUNCTION:
+      b = FunctionCall();
+                                          e=Exp.anonymousfunction(b); L(e,i); {if (true) return e;}
+      break;
+    case NAME:
+    case 75:
+      e = PrimaryExp();
+                                          {if (true) return e;}
+      break;
+    default:
+      jj_la1[21] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+    throw new Error("Missing return statement in function");
+  }
+
+----------------------------------------

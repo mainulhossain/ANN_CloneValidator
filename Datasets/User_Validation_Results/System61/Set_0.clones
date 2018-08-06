@@ -1,0 +1,1701 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977192
+src/com/_17od/upm/transport/EasySSLProtocolSocketFactory.java 144 152
+src/com/_17od/upm/transport/EasySSLProtocolSocketFactory.java 218 225
+----------------------------------------
+        throws IOException, UnknownHostException {
+
+        return getSSLContext().getSocketFactory().createSocket(
+            host,
+            port,
+            clientHost,
+            clientPort
+        );
+    }
+
+----------------------------------------
+        throws IOException, UnknownHostException {
+        return getSSLContext().getSocketFactory().createSocket(
+            socket,
+            host,
+            port,
+            autoClose
+        );
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977193
+src/com/_17od/upm/transport/HTTPTransport.java 99 154
+src/com/_17od/upm/transport/HTTPTransport.java 240 279
+----------------------------------------
+    public void put(String targetLocation, File file, String username, String password) throws TransportException {
+
+        targetLocation = addTrailingSlash(targetLocation) + "upload.php";
+        
+        PostMethod post = new PostMethod(targetLocation);
+
+        //This part is wrapped in a try/finally so that we can ensure
+        //the connection to the HTTP server is always closed cleanly 
+        try {
+            
+            Part[] parts = {
+                    new FilePart("userfile", file)
+            };
+            post.setRequestEntity(
+                    new MultipartRequestEntity(parts, post.getParams())
+            );
+
+            //Set the HTTP authentication details
+            if (username != null) {
+                Credentials creds = new UsernamePasswordCredentials(new String(username), new String(password));
+                URL url = new URL(targetLocation);
+                AuthScope authScope = new AuthScope(url.getHost(), url.getPort());
+                client.getState().setCredentials(authScope, creds);
+                client.getParams().setAuthenticationPreemptive(true);
+            }
+
+            // This line makes the HTTP call
+            int status = client.executeMethod(post);
+            
+            // I've noticed on Windows (at least) that PHP seems to fail when moving files on the first attempt
+            // The second attempt works so lets just do that
+            if (status == HttpStatus.SC_OK && post.getResponseBodyAsString().equals("FILE_WASNT_MOVED")) {
+                status = client.executeMethod(post);                
+            }
+
+            if (status != HttpStatus.SC_OK) {
+                throw new TransportException("There's been some kind of problem uploading a file to the HTTP server.\n\nThe HTTP error message is [" + HttpStatus.getStatusText(status) + "]");
+            }
+            
+            if (!post.getResponseBodyAsString().equals("OK") ) {
+                throw new TransportException("There's been some kind of problem uploading a file to the HTTP server.\n\nThe error message is [" + post.getResponseBodyAsString() + "]");
+            }
+            
+        } catch (FileNotFoundException e) {
+            throw new TransportException(e);
+        } catch (MalformedURLException e) {
+            throw new TransportException(e);
+        } catch (HttpException e) {
+            throw new TransportException(e);
+        } catch (IOException e) {
+            throw new TransportException(e);
+        } finally {
+            post.releaseConnection();
+        }
+        
+    }
+
+----------------------------------------
+    public void delete(String targetLocation, String name, String username, String password) throws TransportException {
+
+        targetLocation = addTrailingSlash(targetLocation) + "deletefile.php";
+
+        PostMethod post = new PostMethod(targetLocation);
+        post.addParameter("fileToDelete", name);
+
+        //This part is wrapped in a try/finally so that we can ensure
+        //the connection to the HTTP server is always closed cleanly 
+        try {
+
+            //Set the authentication details
+            if (username != null) {
+                Credentials creds = new UsernamePasswordCredentials(new String(username), new String(password));
+                URL url = new URL(targetLocation);
+                AuthScope authScope = new AuthScope(url.getHost(), url.getPort());
+                client.getState().setCredentials(authScope, creds);
+                client.getParams().setAuthenticationPreemptive(true);
+            }
+
+            int status = client.executeMethod(post);
+            if (status != HttpStatus.SC_OK) {
+                throw new TransportException("There's been some kind of problem deleting a file on the HTTP server.\n\nThe HTTP error message is [" + HttpStatus.getStatusText(status) + "]");
+            }
+            
+            if (!post.getResponseBodyAsString().equals("OK") ) {
+                throw new TransportException("There's been some kind of problem deleting a file to the HTTP server.\n\nThe error message is [" + post.getResponseBodyAsString() + "]");
+            }
+
+        } catch (MalformedURLException e) {
+            throw new TransportException(e);
+        } catch (HttpException e) {
+            throw new TransportException(e);
+        } catch (IOException e) {
+            throw new TransportException(e);
+        } finally {
+            post.releaseConnection();
+        }
+
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977194
+src/com/_17od/upm/transport/HTTPTransport.java 240 279
+src/com/_17od/upm/transport/HTTPTransport.java 168 207
+----------------------------------------
+    public void delete(String targetLocation, String name, String username, String password) throws TransportException {
+
+        targetLocation = addTrailingSlash(targetLocation) + "deletefile.php";
+
+        PostMethod post = new PostMethod(targetLocation);
+        post.addParameter("fileToDelete", name);
+
+        //This part is wrapped in a try/finally so that we can ensure
+        //the connection to the HTTP server is always closed cleanly 
+        try {
+
+            //Set the authentication details
+            if (username != null) {
+                Credentials creds = new UsernamePasswordCredentials(new String(username), new String(password));
+                URL url = new URL(targetLocation);
+                AuthScope authScope = new AuthScope(url.getHost(), url.getPort());
+                client.getState().setCredentials(authScope, creds);
+                client.getParams().setAuthenticationPreemptive(true);
+            }
+
+            int status = client.executeMethod(post);
+            if (status != HttpStatus.SC_OK) {
+                throw new TransportException("There's been some kind of problem deleting a file on the HTTP server.\n\nThe HTTP error message is [" + HttpStatus.getStatusText(status) + "]");
+            }
+            
+            if (!post.getResponseBodyAsString().equals("OK") ) {
+                throw new TransportException("There's been some kind of problem deleting a file to the HTTP server.\n\nThe error message is [" + post.getResponseBodyAsString() + "]");
+            }
+
+        } catch (MalformedURLException e) {
+            throw new TransportException(e);
+        } catch (HttpException e) {
+            throw new TransportException(e);
+        } catch (IOException e) {
+            throw new TransportException(e);
+        } finally {
+            post.releaseConnection();
+        }
+
+    }
+
+----------------------------------------
+    public byte[] get(String url, String username, String password) throws TransportException {
+
+        byte[] retVal = null;
+
+        GetMethod method = new GetMethod(url);
+        
+        //This part is wrapped in a try/finally so that we can ensure
+        //the connection to the HTTP server is always closed cleanly 
+        try {
+
+            //Set the authentication details
+            if (username != null) {
+                Credentials creds = new UsernamePasswordCredentials(new String(username), new String(password));
+                URL urlObj = new URL(url);
+                AuthScope authScope = new AuthScope(urlObj.getHost(), urlObj.getPort());
+                client.getState().setCredentials(authScope, creds);
+                client.getParams().setAuthenticationPreemptive(true);
+            }
+
+            int statusCode = client.executeMethod(method);
+
+            if (statusCode != HttpStatus.SC_OK) {
+                throw new TransportException("There's been some kind of problem getting the URL [" + url + "].\n\nThe HTTP error message is [" + HttpStatus.getStatusText(statusCode) + "]");
+            }
+
+            retVal = method.getResponseBody();
+
+        } catch (MalformedURLException e) {
+            throw new TransportException(e);
+        } catch (HttpException e) {
+            throw new TransportException(e);
+        } catch (IOException e) {
+            throw new TransportException(e);
+        } finally {
+            method.releaseConnection();
+        }
+        
+        return retVal;
+
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977195
+src/com/_17od/upm/transport/HTTPTransport.java 107 142
+src/com/_17od/upm/transport/HTTPTransport.java 249 269
+----------------------------------------
+        try {
+            
+            Part[] parts = {
+                    new FilePart("userfile", file)
+            };
+            post.setRequestEntity(
+                    new MultipartRequestEntity(parts, post.getParams())
+            );
+
+            //Set the HTTP authentication details
+            if (username != null) {
+                Credentials creds = new UsernamePasswordCredentials(new String(username), new String(password));
+                URL url = new URL(targetLocation);
+                AuthScope authScope = new AuthScope(url.getHost(), url.getPort());
+                client.getState().setCredentials(authScope, creds);
+                client.getParams().setAuthenticationPreemptive(true);
+            }
+
+            // This line makes the HTTP call
+            int status = client.executeMethod(post);
+            
+            // I've noticed on Windows (at least) that PHP seems to fail when moving files on the first attempt
+            // The second attempt works so lets just do that
+            if (status == HttpStatus.SC_OK && post.getResponseBodyAsString().equals("FILE_WASNT_MOVED")) {
+                status = client.executeMethod(post);                
+            }
+
+            if (status != HttpStatus.SC_OK) {
+                throw new TransportException("There's been some kind of problem uploading a file to the HTTP server.\n\nThe HTTP error message is [" + HttpStatus.getStatusText(status) + "]");
+            }
+            
+            if (!post.getResponseBodyAsString().equals("OK") ) {
+                throw new TransportException("There's been some kind of problem uploading a file to the HTTP server.\n\nThe error message is [" + post.getResponseBodyAsString() + "]");
+            }
+            
+        } catch (FileNotFoundException e) {
+
+----------------------------------------
+        try {
+
+            //Set the authentication details
+            if (username != null) {
+                Credentials creds = new UsernamePasswordCredentials(new String(username), new String(password));
+                URL url = new URL(targetLocation);
+                AuthScope authScope = new AuthScope(url.getHost(), url.getPort());
+                client.getState().setCredentials(authScope, creds);
+                client.getParams().setAuthenticationPreemptive(true);
+            }
+
+            int status = client.executeMethod(post);
+            if (status != HttpStatus.SC_OK) {
+                throw new TransportException("There's been some kind of problem deleting a file on the HTTP server.\n\nThe HTTP error message is [" + HttpStatus.getStatusText(status) + "]");
+            }
+            
+            if (!post.getResponseBodyAsString().equals("OK") ) {
+                throw new TransportException("There's been some kind of problem deleting a file to the HTTP server.\n\nThe error message is [" + post.getResponseBodyAsString() + "]");
+            }
+
+        } catch (MalformedURLException e) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977196
+src/com/_17od/upm/transport/HTTPTransport.java 249 269
+src/com/_17od/upm/transport/HTTPTransport.java 176 195
+----------------------------------------
+        try {
+
+            //Set the authentication details
+            if (username != null) {
+                Credentials creds = new UsernamePasswordCredentials(new String(username), new String(password));
+                URL url = new URL(targetLocation);
+                AuthScope authScope = new AuthScope(url.getHost(), url.getPort());
+                client.getState().setCredentials(authScope, creds);
+                client.getParams().setAuthenticationPreemptive(true);
+            }
+
+            int status = client.executeMethod(post);
+            if (status != HttpStatus.SC_OK) {
+                throw new TransportException("There's been some kind of problem deleting a file on the HTTP server.\n\nThe HTTP error message is [" + HttpStatus.getStatusText(status) + "]");
+            }
+            
+            if (!post.getResponseBodyAsString().equals("OK") ) {
+                throw new TransportException("There's been some kind of problem deleting a file to the HTTP server.\n\nThe error message is [" + post.getResponseBodyAsString() + "]");
+            }
+
+        } catch (MalformedURLException e) {
+
+----------------------------------------
+        try {
+
+            //Set the authentication details
+            if (username != null) {
+                Credentials creds = new UsernamePasswordCredentials(new String(username), new String(password));
+                URL urlObj = new URL(url);
+                AuthScope authScope = new AuthScope(urlObj.getHost(), urlObj.getPort());
+                client.getState().setCredentials(authScope, creds);
+                client.getParams().setAuthenticationPreemptive(true);
+            }
+
+            int statusCode = client.executeMethod(method);
+
+            if (statusCode != HttpStatus.SC_OK) {
+                throw new TransportException("There's been some kind of problem getting the URL [" + url + "].\n\nThe HTTP error message is [" + HttpStatus.getStatusText(statusCode) + "]");
+            }
+
+            retVal = method.getResponseBody();
+
+        } catch (MalformedURLException e) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977197
+src/com/_17od/upm/transport/HTTPTransport.java 117 123
+src/com/_17od/upm/transport/HTTPTransport.java 252 258
+----------------------------------------
+            if (username != null) {
+                Credentials creds = new UsernamePasswordCredentials(new String(username), new String(password));
+                URL url = new URL(targetLocation);
+                AuthScope authScope = new AuthScope(url.getHost(), url.getPort());
+                client.getState().setCredentials(authScope, creds);
+                client.getParams().setAuthenticationPreemptive(true);
+            }
+
+----------------------------------------
+            if (username != null) {
+                Credentials creds = new UsernamePasswordCredentials(new String(username), new String(password));
+                URL url = new URL(targetLocation);
+                AuthScope authScope = new AuthScope(url.getHost(), url.getPort());
+                client.getState().setCredentials(authScope, creds);
+                client.getParams().setAuthenticationPreemptive(true);
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977234
+src/com/_17od/upm/transport/HTTPTransport.java 117 123
+src/com/_17od/upm/transport/HTTPTransport.java 179 185
+----------------------------------------
+            if (username != null) {
+                Credentials creds = new UsernamePasswordCredentials(new String(username), new String(password));
+                URL url = new URL(targetLocation);
+                AuthScope authScope = new AuthScope(url.getHost(), url.getPort());
+                client.getState().setCredentials(authScope, creds);
+                client.getParams().setAuthenticationPreemptive(true);
+            }
+
+----------------------------------------
+            if (username != null) {
+                Credentials creds = new UsernamePasswordCredentials(new String(username), new String(password));
+                URL urlObj = new URL(url);
+                AuthScope authScope = new AuthScope(urlObj.getHost(), urlObj.getPort());
+                client.getState().setCredentials(authScope, creds);
+                client.getParams().setAuthenticationPreemptive(true);
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977198
+src/com/_17od/upm/transport/HTTPTransport.java 252 258
+src/com/_17od/upm/transport/HTTPTransport.java 179 185
+----------------------------------------
+            if (username != null) {
+                Credentials creds = new UsernamePasswordCredentials(new String(username), new String(password));
+                URL url = new URL(targetLocation);
+                AuthScope authScope = new AuthScope(url.getHost(), url.getPort());
+                client.getState().setCredentials(authScope, creds);
+                client.getParams().setAuthenticationPreemptive(true);
+            }
+
+----------------------------------------
+            if (username != null) {
+                Credentials creds = new UsernamePasswordCredentials(new String(username), new String(password));
+                URL urlObj = new URL(url);
+                AuthScope authScope = new AuthScope(urlObj.getHost(), urlObj.getPort());
+                client.getState().setCredentials(authScope, creds);
+                client.getParams().setAuthenticationPreemptive(true);
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977199
+src/com/_17od/upm/gui/AccountDialog.java 863 868
+src/com/_17od/upm/gui/AccountDialog.java 888 893
+----------------------------------------
+			for (int j = 0; j < UPPERCASE_CHARS.length; j++) {
+				if (PassWordArray[i] == UPPERCASE_CHARS[j]) {
+					find = true;
+					break outerloop;
+				}
+			}
+
+----------------------------------------
+			for (int j = 0; j < LOWERCASE_CHARS.length; j++) {
+				if (PassWordArray[i] == LOWERCASE_CHARS[j]) {
+					find = true;
+					break outerloop;
+				}
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977200
+src/com/_17od/upm/gui/AccountDialog.java 859 875
+src/com/_17od/upm/gui/AccountDialog.java 909 925
+----------------------------------------
+	private static boolean InclUpperCase(String GeneratedPass) {
+		char[] PassWordArray = GeneratedPass.toCharArray();
+		boolean find = false;
+		outerloop: for (int i = 0; i < PassWordArray.length; i++) {
+			for (int j = 0; j < UPPERCASE_CHARS.length; j++) {
+				if (PassWordArray[i] == UPPERCASE_CHARS[j]) {
+					find = true;
+					break outerloop;
+				}
+			}
+		}
+		if (find) {
+			return true;
+		} else {
+			return false;
+		}
+	} // End InclUpperCase()
+
+----------------------------------------
+	private static boolean InclNumber(String GeneratedPass) {
+		char[] PassWordArray = GeneratedPass.toCharArray();
+		boolean find = false;
+		outerloop: for (int i = 0; i < PassWordArray.length; i++) {
+			for (int j = 0; j < NUMBER_CHARS.length; j++) {
+				if (PassWordArray[i] == NUMBER_CHARS[j]) {
+					find = true;
+					break outerloop;
+				}
+			}
+		}
+		if (find) {
+			return true;
+		} else {
+			return false;
+		}
+	} // End InclNumber()
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977334
+src/com/_17od/upm/gui/AccountDialog.java 859 875
+src/com/_17od/upm/gui/AccountDialog.java 884 900
+----------------------------------------
+	private static boolean InclUpperCase(String GeneratedPass) {
+		char[] PassWordArray = GeneratedPass.toCharArray();
+		boolean find = false;
+		outerloop: for (int i = 0; i < PassWordArray.length; i++) {
+			for (int j = 0; j < UPPERCASE_CHARS.length; j++) {
+				if (PassWordArray[i] == UPPERCASE_CHARS[j]) {
+					find = true;
+					break outerloop;
+				}
+			}
+		}
+		if (find) {
+			return true;
+		} else {
+			return false;
+		}
+	} // End InclUpperCase()
+
+----------------------------------------
+	private static boolean InclLowerCase(String GeneratedPass) {
+		char[] PassWordArray = GeneratedPass.toCharArray();
+		boolean find = false;
+		outerloop: for (int i = 0; i < PassWordArray.length; i++) {
+			for (int j = 0; j < LOWERCASE_CHARS.length; j++) {
+				if (PassWordArray[i] == LOWERCASE_CHARS[j]) {
+					find = true;
+					break outerloop;
+				}
+			}
+		}
+		if (find) {
+			return true;
+		} else {
+			return false;
+		}
+	} // End InclLowerCase()
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977201
+src/com/_17od/upm/gui/AccountDialog.java 909 925
+src/com/_17od/upm/gui/AccountDialog.java 884 900
+----------------------------------------
+	private static boolean InclNumber(String GeneratedPass) {
+		char[] PassWordArray = GeneratedPass.toCharArray();
+		boolean find = false;
+		outerloop: for (int i = 0; i < PassWordArray.length; i++) {
+			for (int j = 0; j < NUMBER_CHARS.length; j++) {
+				if (PassWordArray[i] == NUMBER_CHARS[j]) {
+					find = true;
+					break outerloop;
+				}
+			}
+		}
+		if (find) {
+			return true;
+		} else {
+			return false;
+		}
+	} // End InclNumber()
+
+----------------------------------------
+	private static boolean InclLowerCase(String GeneratedPass) {
+		char[] PassWordArray = GeneratedPass.toCharArray();
+		boolean find = false;
+		outerloop: for (int i = 0; i < PassWordArray.length; i++) {
+			for (int j = 0; j < LOWERCASE_CHARS.length; j++) {
+				if (PassWordArray[i] == LOWERCASE_CHARS[j]) {
+					find = true;
+					break outerloop;
+				}
+			}
+		}
+		if (find) {
+			return true;
+		} else {
+			return false;
+		}
+	} // End InclLowerCase()
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977202
+src/com/_17od/upm/gui/AccountDialog.java 887 894
+src/com/_17od/upm/gui/AccountDialog.java 912 919
+----------------------------------------
+		outerloop: for (int i = 0; i < PassWordArray.length; i++) {
+			for (int j = 0; j < LOWERCASE_CHARS.length; j++) {
+				if (PassWordArray[i] == LOWERCASE_CHARS[j]) {
+					find = true;
+					break outerloop;
+				}
+			}
+		}
+
+----------------------------------------
+		outerloop: for (int i = 0; i < PassWordArray.length; i++) {
+			for (int j = 0; j < NUMBER_CHARS.length; j++) {
+				if (PassWordArray[i] == NUMBER_CHARS[j]) {
+					find = true;
+					break outerloop;
+				}
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977203
+src/com/_17od/upm/gui/AccountDialog.java 912 919
+src/com/_17od/upm/gui/AccountDialog.java 862 869
+----------------------------------------
+		outerloop: for (int i = 0; i < PassWordArray.length; i++) {
+			for (int j = 0; j < NUMBER_CHARS.length; j++) {
+				if (PassWordArray[i] == NUMBER_CHARS[j]) {
+					find = true;
+					break outerloop;
+				}
+			}
+		}
+
+----------------------------------------
+		outerloop: for (int i = 0; i < PassWordArray.length; i++) {
+			for (int j = 0; j < UPPERCASE_CHARS.length; j++) {
+				if (PassWordArray[i] == UPPERCASE_CHARS[j]) {
+					find = true;
+					break outerloop;
+				}
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977335
+src/com/_17od/upm/gui/AccountDialog.java 887 894
+src/com/_17od/upm/gui/AccountDialog.java 862 869
+----------------------------------------
+		outerloop: for (int i = 0; i < PassWordArray.length; i++) {
+			for (int j = 0; j < LOWERCASE_CHARS.length; j++) {
+				if (PassWordArray[i] == LOWERCASE_CHARS[j]) {
+					find = true;
+					break outerloop;
+				}
+			}
+		}
+
+----------------------------------------
+		outerloop: for (int i = 0; i < PassWordArray.length; i++) {
+			for (int j = 0; j < UPPERCASE_CHARS.length; j++) {
+				if (PassWordArray[i] == UPPERCASE_CHARS[j]) {
+					find = true;
+					break outerloop;
+				}
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977204
+src/com/_17od/upm/gui/AccountDialog.java 888 893
+src/com/_17od/upm/gui/AccountDialog.java 913 918
+----------------------------------------
+			for (int j = 0; j < LOWERCASE_CHARS.length; j++) {
+				if (PassWordArray[i] == LOWERCASE_CHARS[j]) {
+					find = true;
+					break outerloop;
+				}
+			}
+
+----------------------------------------
+			for (int j = 0; j < NUMBER_CHARS.length; j++) {
+				if (PassWordArray[i] == NUMBER_CHARS[j]) {
+					find = true;
+					break outerloop;
+				}
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977205
+src/com/_17od/upm/gui/AccountDialog.java 863 868
+src/com/_17od/upm/gui/AccountDialog.java 913 918
+----------------------------------------
+			for (int j = 0; j < UPPERCASE_CHARS.length; j++) {
+				if (PassWordArray[i] == UPPERCASE_CHARS[j]) {
+					find = true;
+					break outerloop;
+				}
+			}
+
+----------------------------------------
+			for (int j = 0; j < NUMBER_CHARS.length; j++) {
+				if (PassWordArray[i] == NUMBER_CHARS[j]) {
+					find = true;
+					break outerloop;
+				}
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977206
+src/com/_17od/upm/gui/AccountDialog.java 859 875
+src/com/_17od/upm/gui/AccountDialog.java 934 950
+----------------------------------------
+	private static boolean InclUpperCase(String GeneratedPass) {
+		char[] PassWordArray = GeneratedPass.toCharArray();
+		boolean find = false;
+		outerloop: for (int i = 0; i < PassWordArray.length; i++) {
+			for (int j = 0; j < UPPERCASE_CHARS.length; j++) {
+				if (PassWordArray[i] == UPPERCASE_CHARS[j]) {
+					find = true;
+					break outerloop;
+				}
+			}
+		}
+		if (find) {
+			return true;
+		} else {
+			return false;
+		}
+	} // End InclUpperCase()
+
+----------------------------------------
+	private static boolean InclEscape(String GeneratedPass) {
+		char[] PassWordArray = GeneratedPass.toCharArray();
+		boolean find = false;
+		outerloop: for (int i = 0; i < PassWordArray.length; i++) {
+			for (int j = 0; j < PUNCTUATION_CHARS.length; j++) {
+				if (PassWordArray[i] == PUNCTUATION_CHARS[j]) {
+					find = true;
+					break outerloop;
+				}
+			}
+		}
+		if (find) {
+			return true;
+		} else {
+			return false;
+		}
+	} // End InclEscape()
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977208
+src/com/_17od/upm/gui/AccountDialog.java 884 900
+src/com/_17od/upm/gui/AccountDialog.java 934 950
+----------------------------------------
+	private static boolean InclLowerCase(String GeneratedPass) {
+		char[] PassWordArray = GeneratedPass.toCharArray();
+		boolean find = false;
+		outerloop: for (int i = 0; i < PassWordArray.length; i++) {
+			for (int j = 0; j < LOWERCASE_CHARS.length; j++) {
+				if (PassWordArray[i] == LOWERCASE_CHARS[j]) {
+					find = true;
+					break outerloop;
+				}
+			}
+		}
+		if (find) {
+			return true;
+		} else {
+			return false;
+		}
+	} // End InclLowerCase()
+
+----------------------------------------
+	private static boolean InclEscape(String GeneratedPass) {
+		char[] PassWordArray = GeneratedPass.toCharArray();
+		boolean find = false;
+		outerloop: for (int i = 0; i < PassWordArray.length; i++) {
+			for (int j = 0; j < PUNCTUATION_CHARS.length; j++) {
+				if (PassWordArray[i] == PUNCTUATION_CHARS[j]) {
+					find = true;
+					break outerloop;
+				}
+			}
+		}
+		if (find) {
+			return true;
+		} else {
+			return false;
+		}
+	} // End InclEscape()
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977207
+src/com/_17od/upm/gui/AccountDialog.java 909 925
+src/com/_17od/upm/gui/AccountDialog.java 934 950
+----------------------------------------
+	private static boolean InclNumber(String GeneratedPass) {
+		char[] PassWordArray = GeneratedPass.toCharArray();
+		boolean find = false;
+		outerloop: for (int i = 0; i < PassWordArray.length; i++) {
+			for (int j = 0; j < NUMBER_CHARS.length; j++) {
+				if (PassWordArray[i] == NUMBER_CHARS[j]) {
+					find = true;
+					break outerloop;
+				}
+			}
+		}
+		if (find) {
+			return true;
+		} else {
+			return false;
+		}
+	} // End InclNumber()
+
+----------------------------------------
+	private static boolean InclEscape(String GeneratedPass) {
+		char[] PassWordArray = GeneratedPass.toCharArray();
+		boolean find = false;
+		outerloop: for (int i = 0; i < PassWordArray.length; i++) {
+			for (int j = 0; j < PUNCTUATION_CHARS.length; j++) {
+				if (PassWordArray[i] == PUNCTUATION_CHARS[j]) {
+					find = true;
+					break outerloop;
+				}
+			}
+		}
+		if (find) {
+			return true;
+		} else {
+			return false;
+		}
+	} // End InclEscape()
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977210
+src/com/_17od/upm/gui/AccountDialog.java 912 919
+src/com/_17od/upm/gui/AccountDialog.java 937 944
+----------------------------------------
+		outerloop: for (int i = 0; i < PassWordArray.length; i++) {
+			for (int j = 0; j < NUMBER_CHARS.length; j++) {
+				if (PassWordArray[i] == NUMBER_CHARS[j]) {
+					find = true;
+					break outerloop;
+				}
+			}
+		}
+
+----------------------------------------
+		outerloop: for (int i = 0; i < PassWordArray.length; i++) {
+			for (int j = 0; j < PUNCTUATION_CHARS.length; j++) {
+				if (PassWordArray[i] == PUNCTUATION_CHARS[j]) {
+					find = true;
+					break outerloop;
+				}
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977209
+src/com/_17od/upm/gui/AccountDialog.java 887 894
+src/com/_17od/upm/gui/AccountDialog.java 937 944
+----------------------------------------
+		outerloop: for (int i = 0; i < PassWordArray.length; i++) {
+			for (int j = 0; j < LOWERCASE_CHARS.length; j++) {
+				if (PassWordArray[i] == LOWERCASE_CHARS[j]) {
+					find = true;
+					break outerloop;
+				}
+			}
+		}
+
+----------------------------------------
+		outerloop: for (int i = 0; i < PassWordArray.length; i++) {
+			for (int j = 0; j < PUNCTUATION_CHARS.length; j++) {
+				if (PassWordArray[i] == PUNCTUATION_CHARS[j]) {
+					find = true;
+					break outerloop;
+				}
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977211
+src/com/_17od/upm/gui/AccountDialog.java 862 869
+src/com/_17od/upm/gui/AccountDialog.java 937 944
+----------------------------------------
+		outerloop: for (int i = 0; i < PassWordArray.length; i++) {
+			for (int j = 0; j < UPPERCASE_CHARS.length; j++) {
+				if (PassWordArray[i] == UPPERCASE_CHARS[j]) {
+					find = true;
+					break outerloop;
+				}
+			}
+		}
+
+----------------------------------------
+		outerloop: for (int i = 0; i < PassWordArray.length; i++) {
+			for (int j = 0; j < PUNCTUATION_CHARS.length; j++) {
+				if (PassWordArray[i] == PUNCTUATION_CHARS[j]) {
+					find = true;
+					break outerloop;
+				}
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977212
+src/com/_17od/upm/crypto/EncryptionService.java 79 91
+src/com/_17od/upm/crypto/EncryptionService.java 93 105
+----------------------------------------
+    public byte[] encrypt(byte[] plainText) throws CryptoException {
+        byte[] encryptedBytes = new byte[encryptCipher.getOutputSize(plainText.length)];
+        int outputLength = encryptCipher.processBytes(plainText, 0, plainText.length, encryptedBytes, 0);
+        try {
+            outputLength += encryptCipher.doFinal(encryptedBytes, outputLength);
+        } catch (InvalidCipherTextException e) {
+            throw new CryptoException(e);
+        }
+
+        byte[] results = new byte[outputLength];
+        System.arraycopy(encryptedBytes, 0, results, 0, outputLength);
+        return results;
+    }
+
+----------------------------------------
+    public byte[] decrypt(byte[] encryptedBytes) throws CryptoException {
+        byte[] decryptedBytes = new byte[decryptCipher.getOutputSize(encryptedBytes.length)];
+        int outputLength = decryptCipher.processBytes(encryptedBytes, 0, encryptedBytes.length, decryptedBytes, 0);
+        try {
+            outputLength += decryptCipher.doFinal(decryptedBytes, outputLength);
+        } catch (InvalidCipherTextException e) {
+            throw new CryptoException(e);
+        }
+
+        byte[] results = new byte[outputLength];
+        System.arraycopy(decryptedBytes, 0, results, 0, outputLength);
+        return results;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977213
+src/com/_17od/upm/gui/AccountDialog.java 1047 1057
+src/com/_17od/upm/gui/MainWindow.java 409 424
+----------------------------------------
+		if (Desktop.isDesktopSupported()) {
+			Desktop desktop = Desktop.getDesktop();
+
+			try {
+				desktop.browse(new URI(url));
+			} catch (IOException e) {
+				e.printStackTrace();
+			} catch (URISyntaxException e) {
+				e.printStackTrace();
+			}
+		} else { // Linux and Mac specific code in order to launch url
+
+----------------------------------------
+				if (e.getKeyCode() == KeyEvent.VK_DELETE) {
+
+					try {
+						dbActions.reloadDatabaseBefore(new DeleteAccountAction());
+					} catch (InvalidPasswordException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (ProblemReadingDatabaseFile e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+
+				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977214
+src/com/_17od/upm/gui/MainWindow.java 409 424
+src/com/_17od/upm/gui/AccountDialog.java 986 994
+----------------------------------------
+				if (e.getKeyCode() == KeyEvent.VK_DELETE) {
+
+					try {
+						dbActions.reloadDatabaseBefore(new DeleteAccountAction());
+					} catch (InvalidPasswordException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (ProblemReadingDatabaseFile e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+
+				}
+
+----------------------------------------
+		if ((clipText != null) && clipText.isDataFlavorSupported(DataFlavor.stringFlavor)) {
+			try {
+				text = (String) clipText.getTransferData(DataFlavor.stringFlavor);
+			} catch (UnsupportedFlavorException ex) {
+				ex.printStackTrace();
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977307
+src/com/_17od/upm/gui/AccountDialog.java 1047 1057
+src/com/_17od/upm/gui/AccountDialog.java 986 994
+----------------------------------------
+		if (Desktop.isDesktopSupported()) {
+			Desktop desktop = Desktop.getDesktop();
+
+			try {
+				desktop.browse(new URI(url));
+			} catch (IOException e) {
+				e.printStackTrace();
+			} catch (URISyntaxException e) {
+				e.printStackTrace();
+			}
+		} else { // Linux and Mac specific code in order to launch url
+
+----------------------------------------
+		if ((clipText != null) && clipText.isDataFlavorSupported(DataFlavor.stringFlavor)) {
+			try {
+				text = (String) clipText.getTransferData(DataFlavor.stringFlavor);
+			} catch (UnsupportedFlavorException ex) {
+				ex.printStackTrace();
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977304
+src/com/_17od/upm/gui/AccountDialog.java 986 994
+src/com/_17od/upm/gui/AccountDialog.java 1008 1016
+----------------------------------------
+		if ((clipText != null) && clipText.isDataFlavorSupported(DataFlavor.stringFlavor)) {
+			try {
+				text = (String) clipText.getTransferData(DataFlavor.stringFlavor);
+			} catch (UnsupportedFlavorException ex) {
+				ex.printStackTrace();
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
+		}
+
+----------------------------------------
+		if ((clipText != null) && clipText.isDataFlavorSupported(DataFlavor.stringFlavor)) {
+			try {
+				text = (String) clipText.getTransferData(DataFlavor.stringFlavor);
+			} catch (UnsupportedFlavorException ex) {
+				ex.printStackTrace();
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977308
+src/com/_17od/upm/gui/AccountDialog.java 1047 1057
+src/com/_17od/upm/gui/AccountDialog.java 1008 1016
+----------------------------------------
+		if (Desktop.isDesktopSupported()) {
+			Desktop desktop = Desktop.getDesktop();
+
+			try {
+				desktop.browse(new URI(url));
+			} catch (IOException e) {
+				e.printStackTrace();
+			} catch (URISyntaxException e) {
+				e.printStackTrace();
+			}
+		} else { // Linux and Mac specific code in order to launch url
+
+----------------------------------------
+		if ((clipText != null) && clipText.isDataFlavorSupported(DataFlavor.stringFlavor)) {
+			try {
+				text = (String) clipText.getTransferData(DataFlavor.stringFlavor);
+			} catch (UnsupportedFlavorException ex) {
+				ex.printStackTrace();
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977215
+src/com/_17od/upm/gui/MainWindow.java 409 424
+src/com/_17od/upm/gui/AccountDialog.java 1008 1016
+----------------------------------------
+				if (e.getKeyCode() == KeyEvent.VK_DELETE) {
+
+					try {
+						dbActions.reloadDatabaseBefore(new DeleteAccountAction());
+					} catch (InvalidPasswordException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (ProblemReadingDatabaseFile e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+
+				}
+
+----------------------------------------
+		if ((clipText != null) && clipText.isDataFlavorSupported(DataFlavor.stringFlavor)) {
+			try {
+				text = (String) clipText.getTransferData(DataFlavor.stringFlavor);
+			} catch (UnsupportedFlavorException ex) {
+				ex.printStackTrace();
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+28730856
+src/com/_17od/upm/gui/MainWindow.java 409 424
+src/com/_17od/upm/gui/AccountDialog.java 1057 1065
+----------------------------------------
+				if (e.getKeyCode() == KeyEvent.VK_DELETE) {
+
+					try {
+						dbActions.reloadDatabaseBefore(new DeleteAccountAction());
+					} catch (InvalidPasswordException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (ProblemReadingDatabaseFile e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+
+				}
+
+----------------------------------------
+		} else { // Linux and Mac specific code in order to launch url
+			Runtime runtime = Runtime.getRuntime();
+
+			try {
+				runtime.exec("xdg-open " + url);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977216
+src/com/_17od/upm/gui/AccountDialog.java 1057 1065
+src/com/_17od/upm/gui/MainWindow.java 459 465
+----------------------------------------
+		} else { // Linux and Mac specific code in order to launch url
+			Runtime runtime = Runtime.getRuntime();
+
+			try {
+				runtime.exec("xdg-open " + url);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+----------------------------------------
+			public void actionPerformed(ActionEvent e) {
+				try {
+					dbActions.reloadDatabaseFromDisk();
+				} catch (Exception ex) {
+					dbActions.errorHandler(ex);
+				}
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977217
+src/com/_17od/upm/gui/MainWindow.java 459 465
+src/com/_17od/upm/util/Util.java 84 91
+----------------------------------------
+			public void actionPerformed(ActionEvent e) {
+				try {
+					dbActions.reloadDatabaseFromDisk();
+				} catch (Exception ex) {
+					dbActions.errorHandler(ex);
+				}
+			}
+
+----------------------------------------
+    public static boolean isNumeric(String s) {
+        try {
+            Integer.parseInt(s);
+        } catch(NumberFormatException e) {
+            return false;
+        }
+        return true;
+      }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977218
+src/com/_17od/upm/gui/MainWindow.java 459 465
+src/com/_17od/upm/gui/MainWindow.java 175 183
+----------------------------------------
+			public void actionPerformed(ActionEvent e) {
+				try {
+					dbActions.reloadDatabaseFromDisk();
+				} catch (Exception ex) {
+					dbActions.errorHandler(ex);
+				}
+			}
+
+----------------------------------------
+			public void windowClosing(WindowEvent e) {
+				storeWindowBounds();
+				try {
+					Preferences.save();
+				} catch (IOException ex) {
+					// Not much we can do at this point
+					ex.printStackTrace();
+				}
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+28730855
+src/com/_17od/upm/gui/MainWindow.java 409 424
+src/com/_17od/upm/gui/MainWindow.java 175 183
+----------------------------------------
+				if (e.getKeyCode() == KeyEvent.VK_DELETE) {
+
+					try {
+						dbActions.reloadDatabaseBefore(new DeleteAccountAction());
+					} catch (InvalidPasswordException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (ProblemReadingDatabaseFile e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+
+				}
+
+----------------------------------------
+			public void windowClosing(WindowEvent e) {
+				storeWindowBounds();
+				try {
+					Preferences.save();
+				} catch (IOException ex) {
+					// Not much we can do at this point
+					ex.printStackTrace();
+				}
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977245
+src/com/_17od/upm/gui/AccountDialog.java 986 994
+src/com/_17od/upm/gui/MainWindow.java 175 183
+----------------------------------------
+		if ((clipText != null) && clipText.isDataFlavorSupported(DataFlavor.stringFlavor)) {
+			try {
+				text = (String) clipText.getTransferData(DataFlavor.stringFlavor);
+			} catch (UnsupportedFlavorException ex) {
+				ex.printStackTrace();
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
+		}
+
+----------------------------------------
+			public void windowClosing(WindowEvent e) {
+				storeWindowBounds();
+				try {
+					Preferences.save();
+				} catch (IOException ex) {
+					// Not much we can do at this point
+					ex.printStackTrace();
+				}
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977246
+src/com/_17od/upm/gui/AccountDialog.java 1008 1016
+src/com/_17od/upm/gui/MainWindow.java 175 183
+----------------------------------------
+		if ((clipText != null) && clipText.isDataFlavorSupported(DataFlavor.stringFlavor)) {
+			try {
+				text = (String) clipText.getTransferData(DataFlavor.stringFlavor);
+			} catch (UnsupportedFlavorException ex) {
+				ex.printStackTrace();
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
+		}
+
+----------------------------------------
+			public void windowClosing(WindowEvent e) {
+				storeWindowBounds();
+				try {
+					Preferences.save();
+				} catch (IOException ex) {
+					// Not much we can do at this point
+					ex.printStackTrace();
+				}
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977244
+src/com/_17od/upm/gui/AccountDialog.java 1057 1065
+src/com/_17od/upm/gui/MainWindow.java 175 183
+----------------------------------------
+		} else { // Linux and Mac specific code in order to launch url
+			Runtime runtime = Runtime.getRuntime();
+
+			try {
+				runtime.exec("xdg-open " + url);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+----------------------------------------
+			public void windowClosing(WindowEvent e) {
+				storeWindowBounds();
+				try {
+					Preferences.save();
+				} catch (IOException ex) {
+					// Not much we can do at this point
+					ex.printStackTrace();
+				}
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977219
+src/com/_17od/upm/gui/AccountDialog.java 528 549
+src/com/_17od/upm/gui/MainWindow.java 565 591
+----------------------------------------
+			public void actionPerformed(ActionEvent ae) {
+				String urlText = url.getText();
+
+				// Check if the selected url is null or emty and inform the user
+				// via JoptioPane message
+				if ((urlText == null) || (urlText.length() == 0)) {
+					JOptionPane.showMessageDialog(urlLaunchButton.getParent(),
+							Translator.translate("EmptyUrlJoptionpaneMsg"),
+							Translator.translate("UrlErrorJoptionpaneTitle"), JOptionPane.WARNING_MESSAGE);
+					// Check if the selected url is a valid formated url(via
+					// urlIsValid() method) and inform the user via JoptioPane
+					// message
+				} else if (!(urlIsValid(urlText))) {
+					JOptionPane.showMessageDialog(urlLaunchButton.getParent(),
+							Translator.translate("InvalidUrlJoptionpaneMsg"),
+							Translator.translate("UrlErrorJoptionpaneTitle"), JOptionPane.WARNING_MESSAGE);
+					// Call the method LaunchSelectedURL() using the selected
+					// url as input
+				} else {
+					LaunchSelectedURL(urlText);
+				}
+			}
+
+----------------------------------------
+			public void actionPerformed(ActionEvent e) {
+
+				AccountInformation accInfo = dbActions.getSelectedAccount();
+				String uRl = accInfo.getUrl();
+
+				// Check if the selected url is null or emty and inform the user
+				// via JoptioPane message
+				if ((uRl == null) || (uRl.length() == 0)) {
+					JOptionPane.showMessageDialog(launchURLButton.getParent(),
+							Translator.translate("EmptyUrlJoptionpaneMsg"),
+							Translator.translate("UrlErrorJoptionpaneTitle"), JOptionPane.WARNING_MESSAGE);
+
+					// Check if the selected url is a valid formated url(via
+					// urlIsValid() method) and inform the user via JoptioPane
+					// message
+				} else if (!(urlIsValid(uRl))) {
+					JOptionPane.showMessageDialog(launchURLButton.getParent(),
+							Translator.translate("InvalidUrlJoptionpaneMsg"),
+							Translator.translate("UrlErrorJoptionpaneTitle"), JOptionPane.WARNING_MESSAGE);
+
+					// Call the method LaunchSelectedURL() using the selected
+					// url as input
+				} else {
+					LaunchSelectedURL(uRl);
+
+				}
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977220
+src/com/_17od/upm/gui/AccountDialog.java 533 540
+src/com/_17od/upm/gui/MainWindow.java 572 580
+----------------------------------------
+				if ((urlText == null) || (urlText.length() == 0)) {
+					JOptionPane.showMessageDialog(urlLaunchButton.getParent(),
+							Translator.translate("EmptyUrlJoptionpaneMsg"),
+							Translator.translate("UrlErrorJoptionpaneTitle"), JOptionPane.WARNING_MESSAGE);
+					// Check if the selected url is a valid formated url(via
+					// urlIsValid() method) and inform the user via JoptioPane
+					// message
+				} else if (!(urlIsValid(urlText))) {
+
+----------------------------------------
+				if ((uRl == null) || (uRl.length() == 0)) {
+					JOptionPane.showMessageDialog(launchURLButton.getParent(),
+							Translator.translate("EmptyUrlJoptionpaneMsg"),
+							Translator.translate("UrlErrorJoptionpaneTitle"), JOptionPane.WARNING_MESSAGE);
+
+					// Check if the selected url is a valid formated url(via
+					// urlIsValid() method) and inform the user via JoptioPane
+					// message
+				} else if (!(urlIsValid(uRl))) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977221
+src/com/_17od/upm/gui/MainWindow.java 572 580
+src/com/_17od/upm/gui/AccountDialog.java 540 546
+----------------------------------------
+				if ((uRl == null) || (uRl.length() == 0)) {
+					JOptionPane.showMessageDialog(launchURLButton.getParent(),
+							Translator.translate("EmptyUrlJoptionpaneMsg"),
+							Translator.translate("UrlErrorJoptionpaneTitle"), JOptionPane.WARNING_MESSAGE);
+
+					// Check if the selected url is a valid formated url(via
+					// urlIsValid() method) and inform the user via JoptioPane
+					// message
+				} else if (!(urlIsValid(uRl))) {
+
+----------------------------------------
+				} else if (!(urlIsValid(urlText))) {
+					JOptionPane.showMessageDialog(urlLaunchButton.getParent(),
+							Translator.translate("InvalidUrlJoptionpaneMsg"),
+							Translator.translate("UrlErrorJoptionpaneTitle"), JOptionPane.WARNING_MESSAGE);
+					// Call the method LaunchSelectedURL() using the selected
+					// url as input
+				} else {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977224
+src/com/_17od/upm/gui/AccountDialog.java 863 868
+src/com/_17od/upm/gui/AccountDialog.java 938 943
+----------------------------------------
+			for (int j = 0; j < UPPERCASE_CHARS.length; j++) {
+				if (PassWordArray[i] == UPPERCASE_CHARS[j]) {
+					find = true;
+					break outerloop;
+				}
+			}
+
+----------------------------------------
+			for (int j = 0; j < PUNCTUATION_CHARS.length; j++) {
+				if (PassWordArray[i] == PUNCTUATION_CHARS[j]) {
+					find = true;
+					break outerloop;
+				}
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977223
+src/com/_17od/upm/gui/AccountDialog.java 913 918
+src/com/_17od/upm/gui/AccountDialog.java 938 943
+----------------------------------------
+			for (int j = 0; j < NUMBER_CHARS.length; j++) {
+				if (PassWordArray[i] == NUMBER_CHARS[j]) {
+					find = true;
+					break outerloop;
+				}
+			}
+
+----------------------------------------
+			for (int j = 0; j < PUNCTUATION_CHARS.length; j++) {
+				if (PassWordArray[i] == PUNCTUATION_CHARS[j]) {
+					find = true;
+					break outerloop;
+				}
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977222
+src/com/_17od/upm/gui/AccountDialog.java 888 893
+src/com/_17od/upm/gui/AccountDialog.java 938 943
+----------------------------------------
+			for (int j = 0; j < LOWERCASE_CHARS.length; j++) {
+				if (PassWordArray[i] == LOWERCASE_CHARS[j]) {
+					find = true;
+					break outerloop;
+				}
+			}
+
+----------------------------------------
+			for (int j = 0; j < PUNCTUATION_CHARS.length; j++) {
+				if (PassWordArray[i] == PUNCTUATION_CHARS[j]) {
+					find = true;
+					break outerloop;
+				}
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977225
+src/com/_17od/upm/gui/AccountDialog.java 1028 1037
+src/com/_17od/upm/gui/MainWindow.java 843 852
+----------------------------------------
+	private boolean urlIsValid(String urL) {
+
+		UrlValidator urlValidator = new UrlValidator();
+		if (urlValidator.isValid(urL)) {
+			return true;
+		} else {
+			return false;
+		}
+
+	}
+
+----------------------------------------
+	private boolean urlIsValid(String urL) {
+
+		UrlValidator urlValidator = new UrlValidator();
+		if (urlValidator.isValid(urL)) {
+			return true;
+		} else {
+			return false;
+		}
+
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977305
+src/com/_17od/upm/gui/AccountDialog.java 1028 1037
+src/com/_17od/upm/gui/AccountDialog.java 837 843
+----------------------------------------
+	private boolean urlIsValid(String urL) {
+
+		UrlValidator urlValidator = new UrlValidator();
+		if (urlValidator.isValid(urL)) {
+			return true;
+		} else {
+			return false;
+		}
+
+	}
+
+----------------------------------------
+		if (InclEscChars) {
+			if ((InclUpperCase(Pass)) && (InclLowerCase(Pass)) && (InclNumber(Pass)) && (InclEscape(Pass))) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977226
+src/com/_17od/upm/gui/MainWindow.java 843 852
+src/com/_17od/upm/gui/AccountDialog.java 837 843
+----------------------------------------
+	private boolean urlIsValid(String urL) {
+
+		UrlValidator urlValidator = new UrlValidator();
+		if (urlValidator.isValid(urL)) {
+			return true;
+		} else {
+			return false;
+		}
+
+	}
+
+----------------------------------------
+		if (InclEscChars) {
+			if ((InclUpperCase(Pass)) && (InclLowerCase(Pass)) && (InclNumber(Pass)) && (InclEscape(Pass))) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977227
+src/com/_17od/upm/gui/MainWindow.java 843 852
+src/com/_17od/upm/gui/AccountDialog.java 843 849
+----------------------------------------
+	private boolean urlIsValid(String urL) {
+
+		UrlValidator urlValidator = new UrlValidator();
+		if (urlValidator.isValid(urL)) {
+			return true;
+		} else {
+			return false;
+		}
+
+	}
+
+----------------------------------------
+		} else {
+			if ((InclUpperCase(Pass)) && (InclLowerCase(Pass)) && (InclNumber(Pass))) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977306
+src/com/_17od/upm/gui/AccountDialog.java 1028 1037
+src/com/_17od/upm/gui/AccountDialog.java 843 849
+----------------------------------------
+	private boolean urlIsValid(String urL) {
+
+		UrlValidator urlValidator = new UrlValidator();
+		if (urlValidator.isValid(urL)) {
+			return true;
+		} else {
+			return false;
+		}
+
+	}
+
+----------------------------------------
+		} else {
+			if ((InclUpperCase(Pass)) && (InclLowerCase(Pass)) && (InclNumber(Pass))) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+27135774
+src/com/_17od/upm/gui/AccountDialog.java 837 843
+src/com/_17od/upm/gui/AccountDialog.java 843 849
+----------------------------------------
+		if (InclEscChars) {
+			if ((InclUpperCase(Pass)) && (InclLowerCase(Pass)) && (InclNumber(Pass)) && (InclEscape(Pass))) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+
+----------------------------------------
+		} else {
+			if ((InclUpperCase(Pass)) && (InclLowerCase(Pass)) && (InclNumber(Pass))) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+----------------------------------------

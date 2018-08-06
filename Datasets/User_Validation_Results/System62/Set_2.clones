@@ -1,0 +1,1225 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977493
+src/net/azib/ipscan/util/IOUtils.java 31 37
+src/net/azib/ipscan/core/net/ICMPPinger.java 124 131
+----------------------------------------
+  public static void closeQuietly(Closeable closeable) {
+    if (closeable != null) try {
+      closeable.close();
+    }
+    catch (IOException ignore) {
+    }
+  }
+
+----------------------------------------
+			for (int i = 0; i < count && !Thread.currentThread().isInterrupted(); i++) {
+				try {
+					sendReceiveEchoPacket(socket, subject.getAddress(), i, result);
+				}
+				catch (InterruptedIOException e) {
+					// ignore timeouts
+				}
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977492
+src/net/azib/ipscan/util/IOUtils.java 23 29
+src/net/azib/ipscan/core/net/ICMPPinger.java 124 131
+----------------------------------------
+  public static void closeQuietly(RawSocket socket) {
+    if (socket != null) try {
+      socket.close();
+    }
+    catch (IOException ignore) {
+    }
+  }
+
+----------------------------------------
+			for (int i = 0; i < count && !Thread.currentThread().isInterrupted(); i++) {
+				try {
+					sendReceiveEchoPacket(socket, subject.getAddress(), i, result);
+				}
+				catch (InterruptedIOException e) {
+					// ignore timeouts
+				}
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977491
+src/net/azib/ipscan/gui/actions/BrowserLauncher.java 24 31
+src/net/azib/ipscan/core/net/ICMPPinger.java 124 131
+----------------------------------------
+	public static void openURL(String url) {
+		try {
+      Desktop.getDesktop().browse(new URI(url));
+		}
+		catch (Exception e) {
+			throw new UserErrorException("openURL.failed", url);
+		}
+	}
+
+----------------------------------------
+			for (int i = 0; i < count && !Thread.currentThread().isInterrupted(); i++) {
+				try {
+					sendReceiveEchoPacket(socket, subject.getAddress(), i, result);
+				}
+				catch (InterruptedIOException e) {
+					// ignore timeouts
+				}
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977430
+src/net/azib/ipscan/util/IOUtils.java 11 17
+src/net/azib/ipscan/core/net/ICMPSharedPinger.java 130 136
+----------------------------------------
+  public static void closeQuietly(Socket socket) {
+    if (socket != null) try {
+      socket.close();
+    }
+    catch (IOException ignore) {
+    }
+  }
+
+----------------------------------------
+				synchronized (result) {
+					// wait until we have an answer
+					try {
+						result.wait(timeout);
+					}
+					catch (InterruptedException ignore) {}
+				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977431
+src/net/azib/ipscan/gui/actions/BrowserLauncher.java 24 31
+src/net/azib/ipscan/core/net/ICMPSharedPinger.java 130 136
+----------------------------------------
+	public static void openURL(String url) {
+		try {
+      Desktop.getDesktop().browse(new URI(url));
+		}
+		catch (Exception e) {
+			throw new UserErrorException("openURL.failed", url);
+		}
+	}
+
+----------------------------------------
+				synchronized (result) {
+					// wait until we have an answer
+					try {
+						result.wait(timeout);
+					}
+					catch (InterruptedException ignore) {}
+				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977429
+src/net/azib/ipscan/core/PortIterator.java 94 101
+src/net/azib/ipscan/core/net/ICMPSharedPinger.java 130 136
+----------------------------------------
+	public PortIterator copy() {
+		try {
+			return (PortIterator) super.clone();
+		}
+		catch (CloneNotSupportedException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+				synchronized (result) {
+					// wait until we have an answer
+					try {
+						result.wait(timeout);
+					}
+					catch (InterruptedException ignore) {}
+				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977424
+src/net/azib/ipscan/exporters/AbstractExporter.java 48 55
+src/net/azib/ipscan/core/net/ICMPSharedPinger.java 130 136
+----------------------------------------
+	public Exporter clone() {
+		try {
+			return (Exporter) super.clone();
+		}
+		catch (CloneNotSupportedException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+				synchronized (result) {
+					// wait until we have an answer
+					try {
+						result.wait(timeout);
+					}
+					catch (InterruptedException ignore) {}
+				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977433
+src/net/azib/ipscan/core/net/WinIpHlpDll.java 20 27
+src/net/azib/ipscan/core/net/ICMPSharedPinger.java 130 136
+----------------------------------------
+		public static WinIpHlpDll load() {
+			try {
+				return (WinIpHlpDll) Native.loadLibrary("iphlpapi", WinIpHlpDll.class);
+			}
+			catch (UnsatisfiedLinkError e) {
+				return (WinIpHlpDll) Native.loadLibrary("icmp", WinIpHlpDll.class);
+			}
+		}
+
+----------------------------------------
+				synchronized (result) {
+					// wait until we have an answer
+					try {
+						result.wait(timeout);
+					}
+					catch (InterruptedException ignore) {}
+				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977425
+src/net/azib/ipscan/util/IOUtils.java 23 29
+src/net/azib/ipscan/core/net/ICMPSharedPinger.java 130 136
+----------------------------------------
+  public static void closeQuietly(RawSocket socket) {
+    if (socket != null) try {
+      socket.close();
+    }
+    catch (IOException ignore) {
+    }
+  }
+
+----------------------------------------
+				synchronized (result) {
+					// wait until we have an answer
+					try {
+						result.wait(timeout);
+					}
+					catch (InterruptedException ignore) {}
+				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977420
+src/net/azib/ipscan/config/ComponentRegistry.java 93 101
+src/net/azib/ipscan/core/net/ICMPSharedPinger.java 130 136
+----------------------------------------
+		for (Class clazz: classes) {
+			try {
+				if (type.isAssignableFrom(clazz))
+					result.add((T)clazz.newInstance());
+			}
+			catch (Exception e) {
+				throw new RuntimeException("Cannot instantiate plugin with default constructor: " + clazz.getName());
+			}
+		}
+
+----------------------------------------
+				synchronized (result) {
+					// wait until we have an answer
+					try {
+						result.wait(timeout);
+					}
+					catch (InterruptedException ignore) {}
+				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977498
+src/net/azib/ipscan/core/net/ICMPPinger.java 124 131
+src/net/azib/ipscan/core/net/ICMPSharedPinger.java 130 136
+----------------------------------------
+			for (int i = 0; i < count && !Thread.currentThread().isInterrupted(); i++) {
+				try {
+					sendReceiveEchoPacket(socket, subject.getAddress(), i, result);
+				}
+				catch (InterruptedIOException e) {
+					// ignore timeouts
+				}
+			}
+
+----------------------------------------
+				synchronized (result) {
+					// wait until we have an answer
+					try {
+						result.wait(timeout);
+					}
+					catch (InterruptedException ignore) {}
+				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977427
+src/net/azib/ipscan/exporters/ExportProcessor.java 74 79
+src/net/azib/ipscan/core/net/ICMPSharedPinger.java 130 136
+----------------------------------------
+			if (outputStream != null) {
+				try {
+					outputStream.close();
+				}
+				catch (Exception ignore) {}
+			}
+
+----------------------------------------
+				synchronized (result) {
+					// wait until we have an answer
+					try {
+						result.wait(timeout);
+					}
+					catch (InterruptedException ignore) {}
+				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977428
+src/net/azib/ipscan/fetchers/AbstractFetcher.java 29 36
+src/net/azib/ipscan/core/net/ICMPSharedPinger.java 130 136
+----------------------------------------
+	public String getInfo() {
+		try {
+			return Labels.getLabel(getId() + ".info");
+		}
+		catch (MissingResourceException e) {
+			return null;
+		}
+	}
+
+----------------------------------------
+				synchronized (result) {
+					// wait until we have an answer
+					try {
+						result.wait(timeout);
+					}
+					catch (InterruptedException ignore) {}
+				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977426
+src/net/azib/ipscan/util/IOUtils.java 31 37
+src/net/azib/ipscan/core/net/ICMPSharedPinger.java 130 136
+----------------------------------------
+  public static void closeQuietly(Closeable closeable) {
+    if (closeable != null) try {
+      closeable.close();
+    }
+    catch (IOException ignore) {
+    }
+  }
+
+----------------------------------------
+				synchronized (result) {
+					// wait until we have an answer
+					try {
+						result.wait(timeout);
+					}
+					catch (InterruptedException ignore) {}
+				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977421
+src/net/azib/ipscan/Main.java 170 175
+src/net/azib/ipscan/fetchers/PingFetcher.java 65 70
+----------------------------------------
+		catch (Exception e2) {
+			// fallback to default text
+			localizedMessage = e.toString();
+			// output stack trace to the console
+			LOG.log(Level.SEVERE, "unexpected error", e);
+		}
+
+----------------------------------------
+    catch (IOException e) {
+      // if this is not a timeout
+      LOG.log(Level.WARNING, "Pinging failed", e);
+      // return an empty ping result
+      result = new PingResult(subject.getAddress());
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977422
+src/net/azib/ipscan/gui/DetailsWindow.java 116 122
+src/net/azib/ipscan/core/net/ICMPSharedPinger.java 73 78
+----------------------------------------
+		public void handleEvent(Event e) {
+			if (e.detail == SWT.TRAVERSE_RETURN) {
+				guiConfig.detailsWindowSize = shell.getSize();				
+				shell.close();
+				shell.dispose();
+			}
+		}
+
+----------------------------------------
+	public void close() throws IOException {
+		synchronized (sendingSocket) {
+			sendingSocket.close();			
+		}
+		receiverThread.interrupt();
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977423
+src/net/azib/ipscan/gui/DetailsWindow.java 116 122
+src/net/azib/ipscan/core/Scanner.java 76 81
+----------------------------------------
+		public void handleEvent(Event e) {
+			if (e.detail == SWT.TRAVERSE_RETURN) {
+				guiConfig.detailsWindowSize = shell.getSize();				
+				shell.close();
+				shell.dispose();
+			}
+		}
+
+----------------------------------------
+	public void cleanup() {
+    currentFetchers.clear();
+		for (Fetcher fetcher : fetcherRegistry.getSelectedFetchers()) {
+			fetcher.cleanup();
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977482
+src/net/azib/ipscan/core/net/ICMPSharedPinger.java 73 78
+src/net/azib/ipscan/core/Scanner.java 76 81
+----------------------------------------
+	public void close() throws IOException {
+		synchronized (sendingSocket) {
+			sendingSocket.close();			
+		}
+		receiverThread.interrupt();
+	}
+
+----------------------------------------
+	public void cleanup() {
+    currentFetchers.clear();
+		for (Fetcher fetcher : fetcherRegistry.getSelectedFetchers()) {
+			fetcher.cleanup();
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977432
+src/net/azib/ipscan/core/net/ICMPSharedPinger.java 130 136
+src/net/azib/ipscan/Main.java 124 133
+----------------------------------------
+				synchronized (result) {
+					// wait until we have an answer
+					try {
+						result.wait(timeout);
+					}
+					catch (InterruptedException ignore) {}
+				}
+
+----------------------------------------
+		if (args.length != 0) {
+			CommandLineProcessor cli = mainComponent.createCommandLineProcessor();
+			try {
+				cli.parse(args);
+			}
+			catch (Exception e) {
+				showMessageToConsole(e.getMessage() + "\n\n" + cli);
+				System.exit(1);
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977434
+src/net/azib/ipscan/core/values/NotScanned.java 27 32
+src/net/azib/ipscan/fetchers/PortTextFetcher.java 65 70
+----------------------------------------
+	public int compareTo(Object that) {
+		// n/s > n/a
+		if (that == NotAvailable.VALUE)
+			return sortDirection;
+		return super.compareTo(that);
+	}
+
+----------------------------------------
+					if (matcher.find()) {
+						// mark that additional info is available
+						subject.setResultType(ResultType.WITH_PORTS);
+						// return the required contents
+						return matcher.group(extractGroup);
+					}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977524
+src/net/azib/ipscan/core/values/NotScanned.java 27 32
+src/net/azib/ipscan/core/values/NotAvailable.java 27 32
+----------------------------------------
+	public int compareTo(Object that) {
+		// n/s > n/a
+		if (that == NotAvailable.VALUE)
+			return sortDirection;
+		return super.compareTo(that);
+	}
+
+----------------------------------------
+	public int compareTo(Object that) {
+		// n/a < n/s
+		if (that == NotScanned.VALUE)
+			return -sortDirection;
+		return super.compareTo(that);
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977435
+src/net/azib/ipscan/fetchers/PortTextFetcher.java 65 70
+src/net/azib/ipscan/core/values/NotAvailable.java 27 32
+----------------------------------------
+					if (matcher.find()) {
+						// mark that additional info is available
+						subject.setResultType(ResultType.WITH_PORTS);
+						// return the required contents
+						return matcher.group(extractGroup);
+					}
+
+----------------------------------------
+	public int compareTo(Object that) {
+		// n/a < n/s
+		if (that == NotScanned.VALUE)
+			return -sortDirection;
+		return super.compareTo(that);
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977439
+src/net/azib/ipscan/exporters/ExportProcessor.java 73 80
+src/net/azib/ipscan/fetchers/PortTextFetcher.java 85 90
+----------------------------------------
+		finally {
+			if (outputStream != null) {
+				try {
+					outputStream.close();
+				}
+				catch (Exception ignore) {}
+			}
+		}
+
+----------------------------------------
+			finally {
+				try {
+					socket.close();
+				}
+				catch (IOException e) {}
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977444
+src/net/azib/ipscan/core/net/ICMPSharedPinger.java 130 136
+src/net/azib/ipscan/fetchers/PortTextFetcher.java 85 90
+----------------------------------------
+				synchronized (result) {
+					// wait until we have an answer
+					try {
+						result.wait(timeout);
+					}
+					catch (InterruptedException ignore) {}
+				}
+
+----------------------------------------
+			finally {
+				try {
+					socket.close();
+				}
+				catch (IOException e) {}
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977436
+src/net/azib/ipscan/exporters/AbstractExporter.java 48 55
+src/net/azib/ipscan/fetchers/PortTextFetcher.java 85 90
+----------------------------------------
+	public Exporter clone() {
+		try {
+			return (Exporter) super.clone();
+		}
+		catch (CloneNotSupportedException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+			finally {
+				try {
+					socket.close();
+				}
+				catch (IOException e) {}
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977441
+src/net/azib/ipscan/exporters/ExportProcessor.java 74 79
+src/net/azib/ipscan/fetchers/PortTextFetcher.java 85 90
+----------------------------------------
+			if (outputStream != null) {
+				try {
+					outputStream.close();
+				}
+				catch (Exception ignore) {}
+			}
+
+----------------------------------------
+			finally {
+				try {
+					socket.close();
+				}
+				catch (IOException e) {}
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977446
+src/net/azib/ipscan/gui/actions/BrowserLauncher.java 24 31
+src/net/azib/ipscan/fetchers/PortTextFetcher.java 85 90
+----------------------------------------
+	public static void openURL(String url) {
+		try {
+      Desktop.getDesktop().browse(new URI(url));
+		}
+		catch (Exception e) {
+			throw new UserErrorException("openURL.failed", url);
+		}
+	}
+
+----------------------------------------
+			finally {
+				try {
+					socket.close();
+				}
+				catch (IOException e) {}
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977448
+src/net/azib/ipscan/core/net/ICMPPinger.java 124 131
+src/net/azib/ipscan/fetchers/PortTextFetcher.java 85 90
+----------------------------------------
+			for (int i = 0; i < count && !Thread.currentThread().isInterrupted(); i++) {
+				try {
+					sendReceiveEchoPacket(socket, subject.getAddress(), i, result);
+				}
+				catch (InterruptedIOException e) {
+					// ignore timeouts
+				}
+			}
+
+----------------------------------------
+			finally {
+				try {
+					socket.close();
+				}
+				catch (IOException e) {}
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977443
+src/net/azib/ipscan/core/PortIterator.java 94 101
+src/net/azib/ipscan/fetchers/PortTextFetcher.java 85 90
+----------------------------------------
+	public PortIterator copy() {
+		try {
+			return (PortIterator) super.clone();
+		}
+		catch (CloneNotSupportedException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+			finally {
+				try {
+					socket.close();
+				}
+				catch (IOException e) {}
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977450
+src/net/azib/ipscan/core/net/WinIpHlpDll.java 20 27
+src/net/azib/ipscan/fetchers/PortTextFetcher.java 85 90
+----------------------------------------
+		public static WinIpHlpDll load() {
+			try {
+				return (WinIpHlpDll) Native.loadLibrary("iphlpapi", WinIpHlpDll.class);
+			}
+			catch (UnsatisfiedLinkError e) {
+				return (WinIpHlpDll) Native.loadLibrary("icmp", WinIpHlpDll.class);
+			}
+		}
+
+----------------------------------------
+			finally {
+				try {
+					socket.close();
+				}
+				catch (IOException e) {}
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977445
+src/net/azib/ipscan/util/IOUtils.java 11 17
+src/net/azib/ipscan/fetchers/PortTextFetcher.java 85 90
+----------------------------------------
+  public static void closeQuietly(Socket socket) {
+    if (socket != null) try {
+      socket.close();
+    }
+    catch (IOException ignore) {
+    }
+  }
+
+----------------------------------------
+			finally {
+				try {
+					socket.close();
+				}
+				catch (IOException e) {}
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977440
+src/net/azib/ipscan/util/IOUtils.java 31 37
+src/net/azib/ipscan/fetchers/PortTextFetcher.java 85 90
+----------------------------------------
+  public static void closeQuietly(Closeable closeable) {
+    if (closeable != null) try {
+      closeable.close();
+    }
+    catch (IOException ignore) {
+    }
+  }
+
+----------------------------------------
+			finally {
+				try {
+					socket.close();
+				}
+				catch (IOException e) {}
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977438
+src/net/azib/ipscan/util/IOUtils.java 23 29
+src/net/azib/ipscan/fetchers/PortTextFetcher.java 85 90
+----------------------------------------
+  public static void closeQuietly(RawSocket socket) {
+    if (socket != null) try {
+      socket.close();
+    }
+    catch (IOException ignore) {
+    }
+  }
+
+----------------------------------------
+			finally {
+				try {
+					socket.close();
+				}
+				catch (IOException e) {}
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977447
+src/net/azib/ipscan/config/ComponentRegistry.java 93 101
+src/net/azib/ipscan/fetchers/PortTextFetcher.java 85 90
+----------------------------------------
+		for (Class clazz: classes) {
+			try {
+				if (type.isAssignableFrom(clazz))
+					result.add((T)clazz.newInstance());
+			}
+			catch (Exception e) {
+				throw new RuntimeException("Cannot instantiate plugin with default constructor: " + clazz.getName());
+			}
+		}
+
+----------------------------------------
+			finally {
+				try {
+					socket.close();
+				}
+				catch (IOException e) {}
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977442
+src/net/azib/ipscan/fetchers/AbstractFetcher.java 29 36
+src/net/azib/ipscan/fetchers/PortTextFetcher.java 85 90
+----------------------------------------
+	public String getInfo() {
+		try {
+			return Labels.getLabel(getId() + ".info");
+		}
+		catch (MissingResourceException e) {
+			return null;
+		}
+	}
+
+----------------------------------------
+			finally {
+				try {
+					socket.close();
+				}
+				catch (IOException e) {}
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977437
+src/net/azib/ipscan/gui/PreferencesDialog.java 454 462
+src/net/azib/ipscan/fetchers/PortTextFetcher.java 85 90
+----------------------------------------
+	private static int parseIntValue(Text text) {
+		try {
+			return Integer.parseInt(text.getText());
+		}
+		catch (NumberFormatException e) {
+			text.forceFocus();
+			throw e;
+		}
+	}
+
+----------------------------------------
+			finally {
+				try {
+					socket.close();
+				}
+				catch (IOException e) {}
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977458
+src/net/azib/ipscan/gui/actions/BrowserLauncher.java 24 31
+src/net/azib/ipscan/feeders/FileFeeder.java 50 57
+----------------------------------------
+	public static void openURL(String url) {
+		try {
+      Desktop.getDesktop().browse(new URI(url));
+		}
+		catch (Exception e) {
+			throw new UserErrorException("openURL.failed", url);
+		}
+	}
+
+----------------------------------------
+	public FileFeeder(String fileName) {
+		try {
+			readAddresses(new FileReader(fileName));
+		}
+		catch (FileNotFoundException e) {
+			throw new FeederException("file.notExists");
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977453
+src/net/azib/ipscan/exporters/AbstractExporter.java 48 55
+src/net/azib/ipscan/feeders/FileFeeder.java 50 57
+----------------------------------------
+	public Exporter clone() {
+		try {
+			return (Exporter) super.clone();
+		}
+		catch (CloneNotSupportedException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+	public FileFeeder(String fileName) {
+		try {
+			readAddresses(new FileReader(fileName));
+		}
+		catch (FileNotFoundException e) {
+			throw new FeederException("file.notExists");
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977460
+src/net/azib/ipscan/core/net/ICMPPinger.java 124 131
+src/net/azib/ipscan/feeders/FileFeeder.java 50 57
+----------------------------------------
+			for (int i = 0; i < count && !Thread.currentThread().isInterrupted(); i++) {
+				try {
+					sendReceiveEchoPacket(socket, subject.getAddress(), i, result);
+				}
+				catch (InterruptedIOException e) {
+					// ignore timeouts
+				}
+			}
+
+----------------------------------------
+	public FileFeeder(String fileName) {
+		try {
+			readAddresses(new FileReader(fileName));
+		}
+		catch (FileNotFoundException e) {
+			throw new FeederException("file.notExists");
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977459
+src/net/azib/ipscan/config/ComponentRegistry.java 93 101
+src/net/azib/ipscan/feeders/FileFeeder.java 50 57
+----------------------------------------
+		for (Class clazz: classes) {
+			try {
+				if (type.isAssignableFrom(clazz))
+					result.add((T)clazz.newInstance());
+			}
+			catch (Exception e) {
+				throw new RuntimeException("Cannot instantiate plugin with default constructor: " + clazz.getName());
+			}
+		}
+
+----------------------------------------
+	public FileFeeder(String fileName) {
+		try {
+			readAddresses(new FileReader(fileName));
+		}
+		catch (FileNotFoundException e) {
+			throw new FeederException("file.notExists");
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977456
+src/net/azib/ipscan/core/PortIterator.java 94 101
+src/net/azib/ipscan/feeders/FileFeeder.java 50 57
+----------------------------------------
+	public PortIterator copy() {
+		try {
+			return (PortIterator) super.clone();
+		}
+		catch (CloneNotSupportedException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+	public FileFeeder(String fileName) {
+		try {
+			readAddresses(new FileReader(fileName));
+		}
+		catch (FileNotFoundException e) {
+			throw new FeederException("file.notExists");
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977461
+src/net/azib/ipscan/core/net/WinIpHlpDll.java 20 27
+src/net/azib/ipscan/feeders/FileFeeder.java 50 57
+----------------------------------------
+		public static WinIpHlpDll load() {
+			try {
+				return (WinIpHlpDll) Native.loadLibrary("iphlpapi", WinIpHlpDll.class);
+			}
+			catch (UnsatisfiedLinkError e) {
+				return (WinIpHlpDll) Native.loadLibrary("icmp", WinIpHlpDll.class);
+			}
+		}
+
+----------------------------------------
+	public FileFeeder(String fileName) {
+		try {
+			readAddresses(new FileReader(fileName));
+		}
+		catch (FileNotFoundException e) {
+			throw new FeederException("file.notExists");
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977457
+src/net/azib/ipscan/core/net/ICMPSharedPinger.java 130 136
+src/net/azib/ipscan/feeders/FileFeeder.java 50 57
+----------------------------------------
+				synchronized (result) {
+					// wait until we have an answer
+					try {
+						result.wait(timeout);
+					}
+					catch (InterruptedException ignore) {}
+				}
+
+----------------------------------------
+	public FileFeeder(String fileName) {
+		try {
+			readAddresses(new FileReader(fileName));
+		}
+		catch (FileNotFoundException e) {
+			throw new FeederException("file.notExists");
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977454
+src/net/azib/ipscan/exporters/ExportProcessor.java 74 79
+src/net/azib/ipscan/feeders/FileFeeder.java 50 57
+----------------------------------------
+			if (outputStream != null) {
+				try {
+					outputStream.close();
+				}
+				catch (Exception ignore) {}
+			}
+
+----------------------------------------
+	public FileFeeder(String fileName) {
+		try {
+			readAddresses(new FileReader(fileName));
+		}
+		catch (FileNotFoundException e) {
+			throw new FeederException("file.notExists");
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977455
+src/net/azib/ipscan/fetchers/AbstractFetcher.java 29 36
+src/net/azib/ipscan/feeders/FileFeeder.java 50 57
+----------------------------------------
+	public String getInfo() {
+		try {
+			return Labels.getLabel(getId() + ".info");
+		}
+		catch (MissingResourceException e) {
+			return null;
+		}
+	}
+
+----------------------------------------
+	public FileFeeder(String fileName) {
+		try {
+			readAddresses(new FileReader(fileName));
+		}
+		catch (FileNotFoundException e) {
+			throw new FeederException("file.notExists");
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977449
+src/net/azib/ipscan/fetchers/PortTextFetcher.java 85 90
+src/net/azib/ipscan/feeders/FileFeeder.java 50 57
+----------------------------------------
+			finally {
+				try {
+					socket.close();
+				}
+				catch (IOException e) {}
+			}
+
+----------------------------------------
+	public FileFeeder(String fileName) {
+		try {
+			readAddresses(new FileReader(fileName));
+		}
+		catch (FileNotFoundException e) {
+			throw new FeederException("file.notExists");
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977451
+src/net/azib/ipscan/Main.java 124 133
+src/net/azib/ipscan/fetchers/HostnameFetcher.java 57 70
+----------------------------------------
+		if (args.length != 0) {
+			CommandLineProcessor cli = mainComponent.createCommandLineProcessor();
+			try {
+				cli.parse(args);
+			}
+			catch (Exception e) {
+				showMessageToConsole(e.getMessage() + "\n\n" + cli);
+				System.exit(1);
+			}
+		}
+
+----------------------------------------
+	private String resolveWithRegularDNS(InetAddress ip) {
+		try {
+			// faster way to do lookup - getCanonicalHostName() actually does both reverse and forward lookups inside
+			return (String) getHostByAddr.invoke(inetAddressImpl, ip.getAddress());
+		}
+		catch (Exception e) {
+			if (e instanceof InvocationTargetException && e.getCause() instanceof UnknownHostException)
+				return null;
+
+			// return the returned hostname only if it is not the same as the IP address (this is how the above method works)
+			String hostname = ip.getCanonicalHostName();
+			return ip.getHostAddress().equals(hostname) ? null : hostname;
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977452
+src/net/azib/ipscan/fetchers/AbstractFetcher.java 29 36
+src/net/azib/ipscan/feeders/RandomFeeder.java 87 95
+----------------------------------------
+	public String getInfo() {
+		try {
+			return Labels.getLabel(getId() + ".info");
+		}
+		catch (MissingResourceException e) {
+			return null;
+		}
+	}
+
+----------------------------------------
+	public String getInfo() {
+		try {
+			return addressCount + ": " + InetAddress.getByAddress(prototypeBytes).getHostAddress() + " / " + InetAddress.getByAddress(maskBytes).getHostAddress();
+		}
+		catch (UnknownHostException e) {
+			assert false : e;
+			return null;
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977462
+src/net/azib/ipscan/gui/ResultTable.java 188 193
+src/net/azib/ipscan/gui/feeders/RandomFeederGUI.java 98 104
+----------------------------------------
+	public void removeAll() {
+		// remove all items from the real storage first
+		scanningResults.clear();
+		super.removeAll();
+		setSortColumn(null);
+	}
+
+----------------------------------------
+			public void keyTraversed(TraverseEvent e) {
+				// this due to a bug either in SWT or GTK:
+				// spinner getText() returns the new value only if
+				// it has lost the focus first
+				ipPrototypeText.forceFocus();
+				countSpinner.forceFocus();
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977463
+src/net/azib/ipscan/gui/feeders/RandomFeederGUI.java 98 104
+src/net/azib/ipscan/core/ScannerDispatcherThread.java 64 69
+----------------------------------------
+			public void keyTraversed(TraverseEvent e) {
+				// this due to a bug either in SWT or GTK:
+				// spinner getText() returns the new value only if
+				// it has lost the focus first
+				ipPrototypeText.forceFocus();
+				countSpinner.forceFocus();
+			}
+
+----------------------------------------
+		try {
+			this.scanningResultList.initNewScan(feeder);
+		
+			// initialize in the main thread in order to catch exceptions gracefully
+			scanner.init();
+		}
+
+----------------------------------------

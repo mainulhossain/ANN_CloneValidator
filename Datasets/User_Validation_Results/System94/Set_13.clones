@@ -1,0 +1,1584 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418404
+source/net/filebot/cli/ScriptShellBaseClass.java 1 7
+source/net/filebot/cli/CmdlineOperations.java 3 8
+----------------------------------------
+package net.filebot.cli;
+
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.Logging.*;
+import static net.filebot.media.XattrMetaInfo.*;
+
+----------------------------------------
+import static java.nio.charset.StandardCharsets.*;
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.Logging.*;
+import static net.filebot.MediaTypes.*;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418370
+source/net/filebot/subtitle/SubtitleMetrics.java 91 104
+source/net/filebot/similarity/EpisodeMetrics.java 259 272
+----------------------------------------
+			return match.length() > 0 ? 1 : 0;
+		}
+
+		@Override
+		protected String normalize(Object object) {
+			return object.toString();
+		}
+
+		protected String[] getNormalizedEffectiveIdentifiers(Object object) {
+			List<?> identifiers = getEffectiveIdentifiers(object);
+			String[] names = new String[identifiers.size()];
+
+			for (int i = 0; i < names.length; i++) {
+				names[i] = EpisodeMetrics.normalizeObject(identifiers.get(i));
+
+----------------------------------------
+			return (float) (Math.floor(max * 4) / 4);
+		}
+
+		@Override
+		protected String normalize(Object object) {
+			return object.toString();
+		}
+
+		protected String[] getNormalizedEffectiveIdentifiers(Object object) {
+			List<?> identifiers = getEffectiveIdentifiers(object);
+			String[] names = new String[identifiers.size()];
+
+			for (int i = 0; i < names.length; i++) {
+				names[i] = normalizeObject(identifiers.get(i));
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418371
+source/net/filebot/WebServices.java 1 9
+source/net/filebot/UserFiles.java 1 9
+----------------------------------------
+package net.filebot;
+
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.Logging.*;
+import static net.filebot.Settings.*;
+import static net.filebot.media.MediaDetection.*;
+import static net.filebot.util.FileUtilities.*;
+
+----------------------------------------
+package net.filebot;
+
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.Logging.*;
+import static net.filebot.Settings.*;
+import static net.filebot.similarity.Normalization.*;
+import static net.filebot.util.ui.SwingUI.*;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418372
+source/net/filebot/WebServices.java 1 9
+source/net/filebot/cli/ScriptShellMethods.java 3 11
+----------------------------------------
+package net.filebot;
+
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.Logging.*;
+import static net.filebot.Settings.*;
+import static net.filebot.media.MediaDetection.*;
+import static net.filebot.util.FileUtilities.*;
+
+----------------------------------------
+import static java.nio.charset.StandardCharsets.*;
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.Logging.*;
+import static net.filebot.MediaTypes.*;
+import static net.filebot.util.FileUtilities.*;
+
+import java.io.File;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418377
+source/net/filebot/UserFiles.java 1 9
+source/net/filebot/cli/ScriptShellMethods.java 3 11
+----------------------------------------
+package net.filebot;
+
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.Logging.*;
+import static net.filebot.Settings.*;
+import static net.filebot.similarity.Normalization.*;
+import static net.filebot.util.ui.SwingUI.*;
+
+----------------------------------------
+import static java.nio.charset.StandardCharsets.*;
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.Logging.*;
+import static net.filebot.MediaTypes.*;
+import static net.filebot.util.FileUtilities.*;
+
+import java.io.File;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418373
+source/net/filebot/cli/CmdlineOperations.java 3 9
+source/net/filebot/WebServices.java 1 8
+----------------------------------------
+import static java.nio.charset.StandardCharsets.*;
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.Logging.*;
+import static net.filebot.MediaTypes.*;
+import static net.filebot.Settings.*;
+
+----------------------------------------
+package net.filebot;
+
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.Logging.*;
+import static net.filebot.Settings.*;
+import static net.filebot.media.MediaDetection.*;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418375
+source/net/filebot/mac/DropToUnlock.java 1 7
+source/net/filebot/ui/rename/PresetEditor.java 3 8
+----------------------------------------
+package net.filebot.mac;
+
+import static java.util.Collections.*;
+import static javax.swing.BorderFactory.*;
+import static net.filebot.Logging.*;
+import static net.filebot.UserFiles.*;
+import static net.filebot.mac.MacAppUtilities.*;
+
+----------------------------------------
+import static java.awt.Font.*;
+import static java.util.Collections.*;
+import static javax.swing.BorderFactory.*;
+import static net.filebot.Logging.*;
+import static net.filebot.Settings.*;
+import static net.filebot.util.ui.SwingUI.*;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418376
+source/net/filebot/Main.java 5 10
+source/net/filebot/ui/filter/FileTreeTransferablePolicy.java 1 7
+----------------------------------------
+import static java.util.stream.Collectors.*;
+import static net.filebot.Logging.*;
+import static net.filebot.Settings.*;
+import static net.filebot.util.ExceptionUtilities.*;
+import static net.filebot.util.FileUtilities.*;
+import static net.filebot.util.XPathUtilities.*;
+
+----------------------------------------
+package net.filebot.ui.filter;
+
+import static net.filebot.Logging.*;
+import static net.filebot.Settings.*;
+import static net.filebot.util.ExceptionUtilities.*;
+import static net.filebot.util.FileUtilities.*;
+import static net.filebot.util.ui.SwingUI.*;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418378
+source/net/filebot/cli/CmdlineOperations.java 3 9
+source/net/filebot/UserFiles.java 1 8
+----------------------------------------
+import static java.nio.charset.StandardCharsets.*;
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.Logging.*;
+import static net.filebot.MediaTypes.*;
+import static net.filebot.Settings.*;
+
+----------------------------------------
+package net.filebot;
+
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.Logging.*;
+import static net.filebot.Settings.*;
+import static net.filebot.similarity.Normalization.*;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418380
+source/net/filebot/hash/MessageDigestHash.java 26 38
+source/net/filebot/hash/Ed2kHash.java 22 33
+----------------------------------------
+	}
+
+
+	@Override
+	public void update(byte[] bytes, int off, int len) {
+		md.update(bytes, off, len);
+	}
+
+
+	@Override
+	public String digest() {
+		// e.g. %032x (format for MD-5)
+		return String.format("%0" + (md.getDigestLength() * 2) + "x", new BigInteger(1, md.digest()));
+
+----------------------------------------
+	}
+
+
+	@Override
+	public void update(byte[] bytes, int off, int len) {
+		ed2k.update(bytes, off, len);
+	}
+
+
+	@Override
+	public String digest() {
+		return String.format("%0" + (ed2k.getByteArray().length * 2) + "x", new BigInteger(1, ed2k.getByteArray()));
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418381
+source/net/filebot/media/NamingStandard.java 9 15
+source/net/filebot/format/MediaBindingBean.java 58 63
+----------------------------------------
+import java.util.Objects;
+
+import net.filebot.web.AudioTrack;
+import net.filebot.web.Episode;
+import net.filebot.web.EpisodeFormat;
+import net.filebot.web.Movie;
+import net.filebot.web.MoviePart;
+
+----------------------------------------
+import net.filebot.util.WeakValueHashMap;
+import net.filebot.web.AudioTrack;
+import net.filebot.web.Episode;
+import net.filebot.web.EpisodeFormat;
+import net.filebot.web.Movie;
+import net.filebot.web.MoviePart;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418382
+source/net/filebot/media/MediaDetection.java 1051 1058
+source/net/filebot/similarity/SeriesNameMatcher.java 273 283
+----------------------------------------
+			File folder = guessMediaFolder(f);
+			List<File> value = mediaFolders.get(folder);
+			if (value == null) {
+				value = new ArrayList<File>();
+				mediaFolders.put(folder, value);
+			}
+			value.add(f);
+		}
+
+----------------------------------------
+			File folder = file.getParentFile();
+
+			List<File> list = filesByFolder.get(folder);
+
+			if (list == null) {
+				list = new ArrayList<File>();
+				filesByFolder.put(folder, list);
+			}
+
+			list.add(file);
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418383
+source/net/filebot/media/MediaDetection.java 1 9
+source/net/filebot/media/AutoDetection.java 1 9
+----------------------------------------
+package net.filebot.media;
+
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+import static java.util.regex.Pattern.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.Logging.*;
+import static net.filebot.MediaTypes.*;
+import static net.filebot.media.XattrMetaInfo.*;
+
+----------------------------------------
+package net.filebot.media;
+
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+import static java.util.regex.Pattern.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.Logging.*;
+import static net.filebot.MediaTypes.*;
+import static net.filebot.Settings.*;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418384
+source/net/filebot/media/MediaDetection.java 1 7
+source/net/filebot/similarity/SeasonEpisodeMatcher.java 1 7
+----------------------------------------
+package net.filebot.media;
+
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+import static java.util.regex.Pattern.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.Logging.*;
+
+----------------------------------------
+package net.filebot.similarity;
+
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+import static java.util.regex.Pattern.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.util.FileUtilities.*;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418385
+source/net/filebot/media/ReleaseInfo.java 6 11
+source/net/filebot/format/ExpressionFormatMethods.java 1 7
+----------------------------------------
+import static java.util.Collections.*;
+import static java.util.ResourceBundle.*;
+import static java.util.regex.Pattern.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.Settings.*;
+import static net.filebot.similarity.Normalization.*;
+
+----------------------------------------
+package net.filebot.format;
+
+import static java.util.Arrays.*;
+import static java.util.regex.Pattern.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.MediaTypes.*;
+import static net.filebot.WebServices.*;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418386
+source/net/filebot/similarity/SeasonEpisodeMatcher.java 1 7
+source/net/filebot/media/ReleaseInfo.java 5 10
+----------------------------------------
+package net.filebot.similarity;
+
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+import static java.util.regex.Pattern.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.util.FileUtilities.*;
+
+----------------------------------------
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+import static java.util.ResourceBundle.*;
+import static java.util.regex.Pattern.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.Settings.*;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418387
+source/net/filebot/media/AutoDetection.java 6 11
+source/net/filebot/ui/subtitle/SubtitleDropTarget.java 1 7
+----------------------------------------
+import static java.util.stream.Collectors.*;
+import static net.filebot.Logging.*;
+import static net.filebot.MediaTypes.*;
+import static net.filebot.Settings.*;
+import static net.filebot.WebServices.*;
+import static net.filebot.format.ExpressionFormatMethods.*;
+
+----------------------------------------
+package net.filebot.ui.subtitle;
+
+import static net.filebot.Logging.*;
+import static net.filebot.MediaTypes.*;
+import static net.filebot.Settings.*;
+import static net.filebot.UserFiles.*;
+import static net.filebot.ui.transfer.FileTransferable.*;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418388
+source/net/filebot/media/AutoDetection.java 5 10
+source/net/filebot/ui/rename/BindingDialog.java 1 7
+----------------------------------------
+import static java.util.regex.Pattern.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.Logging.*;
+import static net.filebot.MediaTypes.*;
+import static net.filebot.Settings.*;
+import static net.filebot.WebServices.*;
+
+----------------------------------------
+package net.filebot.ui.rename;
+
+import static java.util.stream.Collectors.*;
+import static net.filebot.Logging.*;
+import static net.filebot.MediaTypes.*;
+import static net.filebot.UserFiles.*;
+import static net.filebot.media.XattrMetaInfo.*;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418389
+source/net/filebot/media/AutoDetection.java 1 9
+source/net/filebot/similarity/EpisodeMetrics.java 1 9
+----------------------------------------
+package net.filebot.media;
+
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+import static java.util.regex.Pattern.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.Logging.*;
+import static net.filebot.MediaTypes.*;
+import static net.filebot.Settings.*;
+
+----------------------------------------
+package net.filebot.similarity;
+
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+import static java.util.regex.Pattern.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.Logging.*;
+import static net.filebot.MediaTypes.*;
+import static net.filebot.media.MediaDetection.*;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418390
+source/net/filebot/similarity/SeasonEpisodeMatcher.java 1 7
+source/net/filebot/media/AutoDetection.java 1 7
+----------------------------------------
+package net.filebot.similarity;
+
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+import static java.util.regex.Pattern.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.util.FileUtilities.*;
+
+----------------------------------------
+package net.filebot.media;
+
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+import static java.util.regex.Pattern.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.Logging.*;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418391
+source/net/filebot/similarity/FileNameMetric.java 12 22
+source/net/filebot/similarity/SubstringMetric.java 19 29
+----------------------------------------
+	@Override
+	public float getSimilarity(Object o1, Object o2) {
+		String s1 = getFileName(o1);
+		if (s1 == null || s1.isEmpty())
+			return 0;
+
+		String s2 = getFileName(o2);
+		if (s2 == null || s2.isEmpty())
+			return 0;
+
+		return s1.startsWith(s2) || s2.startsWith(s1) ? 1 : 0;
+
+----------------------------------------
+	@Override
+	public float getSimilarity(Object o1, Object o2) {
+		String s1 = normalize(o1);
+		if (s1 == null || s1.isEmpty())
+			return 0;
+
+		String s2 = normalize(o2);
+		if (s2 == null || s2.isEmpty())
+			return 0;
+
+		return (o1c2 && matches(s1, s2) || (o2c1 && matches(s2, s1))) ? 1 : 0;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418392
+source/net/filebot/similarity/SeasonEpisodeMatcher.java 1 7
+source/net/filebot/similarity/EpisodeMetrics.java 1 7
+----------------------------------------
+package net.filebot.similarity;
+
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+import static java.util.regex.Pattern.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.util.FileUtilities.*;
+
+----------------------------------------
+package net.filebot.similarity;
+
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+import static java.util.regex.Pattern.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.Logging.*;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418393
+source/net/filebot/similarity/SeasonEpisodeMatcher.java 186 201
+source/net/filebot/similarity/DateMatcher.java 118 133
+----------------------------------------
+					return match;
+				}
+			}
+		}
+		return null;
+	}
+
+	protected List<String> tokenizeTail(File file) {
+		List<String> tail = new ArrayList<String>(2);
+		for (File f : listPathTail(file, 2, true)) {
+			tail.add(getName(f));
+		}
+		return tail;
+	}
+
+	public int find(CharSequence name, int fromIndex) {
+
+----------------------------------------
+					return match;
+				}
+			}
+		}
+		return null;
+	}
+
+	protected List<String> tokenizeTail(File file) {
+		List<String> tail = new ArrayList<String>(2);
+		for (File f : listPathTail(file, 2, true)) {
+			tail.add(getName(f));
+		}
+		return tail;
+	}
+
+	public static interface DatePattern {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418394
+source/net/filebot/similarity/SeasonEpisodeMatcher.java 1 7
+source/net/filebot/ui/rename/HistoryDialog.java 3 8
+----------------------------------------
+package net.filebot.similarity;
+
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+import static java.util.regex.Pattern.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.util.FileUtilities.*;
+
+----------------------------------------
+import static java.awt.Font.*;
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+import static java.util.regex.Pattern.*;
+import static java.util.stream.Collectors.*;
+import static javax.swing.JOptionPane.*;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418395
+source/net/filebot/similarity/SeriesNameMatcher.java 245 251
+source/net/filebot/similarity/CommonSequenceMatcher.java 100 106
+----------------------------------------
+		for (int i = 0; i < seq1.length && i <= maxStartIndex; i++) {
+			for (int j = 0; j < seq2.length && j <= maxStartIndex; j++) {
+				// common sequence length
+				int len = 0;
+
+				// iterate over common sequence
+				while ((i + len < seq1.length) && (j + len < seq2.length) && (equalsComparator.compare(seq1[i + len], seq2[j + len]) == 0)) {
+
+----------------------------------------
+		for (int i = 0; i < seq1.length && i <= maxStartIndex; i++) {
+			for (int j = 0; j < seq2.length && j <= maxStartIndex; j++) {
+				// common sequence length
+				int len = 0;
+
+				// iterate over common sequence
+				while ((i + len < seq1.length) && (j + len < seq2.length) && (seq1[i + len].compareTo(seq2[j + len]) == 0)) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418396
+source/net/filebot/format/ExpressionBindings.java 101 132
+source/net/filebot/format/PropertyBindings.java 97 131
+----------------------------------------
+	public boolean isEmpty() {
+		return bindings.isEmpty();
+	}
+
+	@Override
+	public Set<Entry<String, Object>> entrySet() {
+		Set<Entry<String, Object>> entrySet = new HashSet<Entry<String, Object>>();
+
+		for (final String key : keySet()) {
+			entrySet.add(new Entry<String, Object>() {
+
+				@Override
+				public String getKey() {
+					return key;
+				}
+
+				@Override
+				public Object getValue() {
+					return get(key);
+				}
+
+				@Override
+				public Object setValue(Object value) {
+					return put(key, value);
+				}
+			});
+		}
+
+		return entrySet;
+	}
+
+}
+
+----------------------------------------
+	public String toString() {
+		return properties.toString();
+	}
+
+
+	@Override
+	public Set<Entry<String, Object>> entrySet() {
+		Set<Entry<String, Object>> entrySet = new HashSet<Entry<String, Object>>();
+
+		for (final String key : keySet()) {
+			entrySet.add(new Entry<String, Object>() {
+
+				@Override
+				public String getKey() {
+					return key;
+				}
+
+
+				@Override
+				public Object getValue() {
+					return get(key);
+				}
+
+
+				@Override
+				public Object setValue(Object value) {
+					return put(key, value);
+				}
+			});
+		}
+
+		return entrySet;
+	}
+
+}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418397
+source/net/filebot/format/ExpressionBindings.java 87 106
+source/net/filebot/format/PropertyBindings.java 74 97
+----------------------------------------
+		return null;
+	}
+
+	@Override
+	public boolean containsKey(Object key) {
+		return bindings.containsKey(key);
+	}
+
+	@Override
+	public Set<String> keySet() {
+		return bindings.keySet();
+	}
+
+	@Override
+	public boolean isEmpty() {
+		return bindings.isEmpty();
+	}
+
+	@Override
+	public Set<Entry<String, Object>> entrySet() {
+
+----------------------------------------
+		return properties.remove(key);
+	}
+
+
+	@Override
+	public boolean containsKey(Object key) {
+		return properties.containsKey(key);
+	}
+
+
+	@Override
+	public Set<String> keySet() {
+		return properties.keySet();
+	}
+
+
+	@Override
+	public boolean isEmpty() {
+		return properties.isEmpty();
+	}
+
+
+	@Override
+	public String toString() {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418398
+source/net/filebot/format/ExpressionFormat.java 1 8
+source/net/filebot/format/MediaBindingBean.java 13 18
+----------------------------------------
+package net.filebot.format;
+
+import static net.filebot.similarity.Normalization.*;
+import static net.filebot.util.ExceptionUtilities.*;
+import static net.filebot.util.FileUtilities.*;
+import static net.filebot.util.RegularExpressions.*;
+
+import java.security.AccessController;
+
+----------------------------------------
+import static net.filebot.media.XattrMetaInfo.*;
+import static net.filebot.similarity.Normalization.*;
+import static net.filebot.subtitle.SubtitleUtilities.*;
+import static net.filebot.util.FileUtilities.*;
+import static net.filebot.util.RegularExpressions.*;
+import static net.filebot.util.StringUtilities.*;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418399
+source/net/filebot/format/MediaBindingBean.java 1 9
+source/net/filebot/cli/CmdlineOperations.java 3 10
+----------------------------------------
+package net.filebot.format;
+
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.Logging.*;
+import static net.filebot.MediaTypes.*;
+import static net.filebot.WebServices.*;
+import static net.filebot.format.Define.*;
+
+----------------------------------------
+import static java.nio.charset.StandardCharsets.*;
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.Logging.*;
+import static net.filebot.MediaTypes.*;
+import static net.filebot.Settings.*;
+import static net.filebot.WebServices.*;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418400
+source/net/filebot/format/MediaBindingBean.java 1 8
+source/net/filebot/cli/ScriptShellMethods.java 3 9
+----------------------------------------
+package net.filebot.format;
+
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.Logging.*;
+import static net.filebot.MediaTypes.*;
+import static net.filebot.WebServices.*;
+
+----------------------------------------
+import static java.nio.charset.StandardCharsets.*;
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.Logging.*;
+import static net.filebot.MediaTypes.*;
+import static net.filebot.util.FileUtilities.*;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418402
+source/net/filebot/cli/CmdlineInterface.java 12 21
+source/net/filebot/cli/ArgumentBean.java 31 40
+----------------------------------------
+import net.filebot.RenameAction;
+import net.filebot.format.ExpressionFilter;
+import net.filebot.format.ExpressionFormat;
+import net.filebot.hash.HashType;
+import net.filebot.subtitle.SubtitleFormat;
+import net.filebot.subtitle.SubtitleNaming;
+import net.filebot.web.Datasource;
+import net.filebot.web.SortOrder;
+
+public interface CmdlineInterface {
+
+----------------------------------------
+import net.filebot.format.ExpressionFileFilter;
+import net.filebot.format.ExpressionFilter;
+import net.filebot.format.ExpressionFormat;
+import net.filebot.hash.HashType;
+import net.filebot.subtitle.SubtitleFormat;
+import net.filebot.subtitle.SubtitleNaming;
+import net.filebot.web.Datasource;
+import net.filebot.web.SortOrder;
+
+public class ArgumentBean {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418405
+source/net/filebot/cli/ArgumentProcessor.java 1 10
+source/net/filebot/ui/filter/Tool.java 4 12
+----------------------------------------
+package net.filebot.cli;
+
+import static net.filebot.Logging.*;
+import static net.filebot.util.ExceptionUtilities.*;
+import static net.filebot.util.FileUtilities.*;
+
+import java.io.File;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
+
+----------------------------------------
+import static java.util.stream.Collectors.*;
+import static net.filebot.Logging.*;
+import static net.filebot.util.ExceptionUtilities.*;
+import static net.filebot.util.FileUtilities.*;
+
+import java.io.File;
+import java.util.Collection;
+import java.util.List;
+import java.util.concurrent.CancellationException;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418406
+source/net/filebot/cli/CmdlineOperations.java 1072 1095
+source/net/filebot/ui/filter/ExtractTool.java 222 246
+----------------------------------------
+				Set<FileInfo> selection = new TreeSet<FileInfo>();
+				for (FileInfo future : outputMapping) {
+					if (filter == null || filter.accept(future.toFile())) {
+						selection.add(future);
+					}
+				}
+
+				// check if there is anything to extract at all
+				if (selection.isEmpty()) {
+					continue;
+				}
+
+				boolean skip = true;
+				for (FileInfo future : filter == null || forceExtractAll ? outputMapping : selection) {
+					if (conflict == ConflictAction.AUTO) {
+						skip &= (future.toFile().exists() && future.getLength() == future.toFile().length());
+					} else {
+						skip &= (future.toFile().exists());
+					}
+				}
+
+				if (!skip || conflict == ConflictAction.OVERRIDE) {
+					if (filter == null || forceExtractAll) {
+						log.finest("Extracting files " + outputMapping);
+
+----------------------------------------
+						final Set<FileInfo> selection = new TreeSet<FileInfo>();
+						for (FileInfo future : outputMapping) {
+							if (filter == null || filter.accept(future.toFile())) {
+								selection.add(future);
+							}
+						}
+
+						// check if there is anything to extract at all
+						if (selection.isEmpty()) {
+							continue;
+						}
+
+						boolean skip = true;
+						for (FileInfo future : filter == null || forceExtractAll ? outputMapping : selection) {
+							if (conflictAction == ConflictAction.AUTO) {
+								skip &= (future.toFile().exists() && future.getLength() == future.toFile().length());
+							} else {
+								skip &= (future.toFile().exists());
+							}
+						}
+
+						if (!skip || conflictAction == ConflictAction.OVERRIDE) {
+							if (filter == null || forceExtractAll) {
+								// extract all files
+								archive.extract(outputMapper.getOutputDir());
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418407
+source/net/filebot/cli/CmdlineOperations.java 1066 1070
+source/net/filebot/ui/filter/ExtractTool.java 216 220
+----------------------------------------
+				List<FileInfo> outputMapping = new ArrayList<FileInfo>();
+				for (FileInfo it : archive.listFiles()) {
+					File outputPath = outputMapper.getOutputFile(it.toFile());
+					outputMapping.add(new SimpleFileInfo(outputPath.getPath(), it.getLength()));
+				}
+
+----------------------------------------
+						final List<FileInfo> outputMapping = new ArrayList<FileInfo>();
+						for (FileInfo it : archive.listFiles()) {
+							File outputPath = outputMapper.getOutputFile(it.toFile());
+							outputMapping.add(new SimpleFileInfo(outputPath.getPath(), it.getLength()));
+						}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418408
+source/net/filebot/cli/CmdlineOperations.java 846 849
+source/net/filebot/cli/CmdlineOperationsTextUI.java 98 101
+----------------------------------------
+	protected List<SearchResult> selectSearchResult(String query, Collection<? extends SearchResult> options, boolean alias, boolean strict) throws Exception {
+		List<SearchResult> probableMatches = getProbableMatches(query, options, alias, strict);
+
+		if (probableMatches.isEmpty() || (strict && probableMatches.size() != 1)) {
+
+----------------------------------------
+	protected List<SearchResult> selectSearchResult(String query, Collection<? extends SearchResult> options, boolean alias, boolean strict) throws Exception {
+		List<SearchResult> matches = getProbableMatches(query, options, alias, false);
+
+		if (matches.size() < 2) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418409
+source/net/filebot/cli/CmdlineOperations.java 506 512
+source/net/filebot/ui/rename/MusicMatcher.java 34 40
+----------------------------------------
+			services[i].lookup(remaining).forEach((file, music) -> {
+				if (music != null) {
+					matches.add(new Match<File, AudioTrack>(file, music.clone()));
+					remaining.remove(file);
+				}
+			});
+		}
+
+----------------------------------------
+			services[i].lookup(remaining).forEach((k, v) -> {
+				if (v != null) {
+					matches.add(new Match<File, AudioTrack>(k, v.clone()));
+					remaining.remove(k);
+				}
+			});
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418410
+source/net/filebot/cli/CmdlineOperations.java 461 482
+source/net/filebot/ui/rename/MovieMatcher.java 201 222
+----------------------------------------
+		List<Match<File, ?>> matches = new ArrayList<Match<File, ?>>();
+
+		filesByMovie.forEach((movie, fs) -> {
+			groupByMediaCharacteristics(fs).forEach(moviePartFiles -> {
+				// resolve movie parts
+				for (int i = 0; i < moviePartFiles.size(); i++) {
+					Movie moviePart = moviePartFiles.size() == 1 ? movie : new MoviePart(movie, i + 1, moviePartFiles.size());
+					matches.add(new Match<File, Movie>(moviePartFiles.get(i), moviePart.clone()));
+
+					// automatically add matches for derived files
+					List<File> derivates = derivatesByMovieFile.get(moviePartFiles.get(i));
+					if (derivates != null) {
+						for (File derivate : derivates) {
+							matches.add(new Match<File, Movie>(derivate, moviePart.clone()));
+						}
+					}
+				}
+			});
+		});
+
+		// map old files to new paths by applying formatting and validating filenames
+		Map<File, File> renameMap = new LinkedHashMap<File, File>();
+
+----------------------------------------
+		List<Match<File, ?>> matches = new ArrayList<Match<File, ?>>();
+
+		filesByMovie.forEach((movie, fs) -> {
+			groupByMediaCharacteristics(fs).forEach(moviePartFiles -> {
+				// resolve movie parts
+				for (int i = 0; i < moviePartFiles.size(); i++) {
+					Movie moviePart = moviePartFiles.size() == 1 ? movie : new MoviePart(movie, i + 1, moviePartFiles.size());
+					matches.add(new Match<File, Movie>(moviePartFiles.get(i), moviePart.clone()));
+
+					// automatically add matches for derived files
+					List<File> derivates = derivatesByMovieFile.get(moviePartFiles.get(i));
+					if (derivates != null) {
+						for (File derivate : derivates) {
+							matches.add(new Match<File, Movie>(derivate, moviePart.clone()));
+						}
+					}
+				}
+			});
+		});
+
+		// restore original order
+		matches.sort(comparing(Match::getValue, OriginalOrder.of(files)));
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418411
+source/net/filebot/cli/CmdlineOperations.java 342 384
+source/net/filebot/ui/rename/MovieMatcher.java 105 147
+----------------------------------------
+			Set<File> effectiveNfoFileSet = new TreeSet<File>(nfoFiles);
+			for (File dir : mapByFolder(movieFiles).keySet()) {
+				effectiveNfoFileSet.addAll(getChildren(dir, NFO_FILES));
+			}
+			for (File dir : filter(fileset, FOLDERS)) {
+				effectiveNfoFileSet.addAll(getChildren(dir, NFO_FILES));
+			}
+
+			for (File nfo : effectiveNfoFileSet) {
+				try {
+					Movie movie = grepMovie(nfo, service, locale);
+
+					// ignore illegal nfos
+					if (movie == null) {
+						continue;
+					}
+
+					if (nfoFiles.contains(nfo)) {
+						movieByFile.put(nfo, movie);
+					}
+
+					if (isDiskFolder(nfo.getParentFile())) {
+						// special handling for disk folders
+						for (File folder : fileset) {
+							if (nfo.getParentFile().equals(folder)) {
+								movieByFile.put(folder, movie);
+							}
+						}
+					} else {
+						// match movie info to movie files that match the nfo file name
+						SortedSet<File> siblingMovieFiles = new TreeSet<File>(filter(movieFiles, new ParentFilter(nfo.getParentFile())));
+						String baseName = stripReleaseInfo(getName(nfo)).toLowerCase();
+
+						for (File movieFile : siblingMovieFiles) {
+							if (!baseName.isEmpty() && stripReleaseInfo(getName(movieFile)).toLowerCase().startsWith(baseName)) {
+								movieByFile.put(movieFile, movie);
+							}
+						}
+					}
+				} catch (Exception e) {
+					log.log(Level.WARNING, "Failed to grep IMDbID: " + nfo.getName(), e);
+				}
+			}
+
+----------------------------------------
+		Set<File> effectiveNfoFileSet = new TreeSet<File>(nfoFiles);
+		for (File dir : mapByFolder(movieFiles).keySet()) {
+			effectiveNfoFileSet.addAll(getChildren(dir, NFO_FILES));
+		}
+		for (File dir : filter(fileset, FOLDERS)) {
+			effectiveNfoFileSet.addAll(getChildren(dir, NFO_FILES));
+		}
+
+		for (File nfo : effectiveNfoFileSet) {
+			try {
+				Movie movie = grepMovie(nfo, service, locale);
+
+				// ignore illegal nfos
+				if (movie == null) {
+					continue;
+				}
+
+				if (nfoFiles.contains(nfo)) {
+					movieByFile.put(nfo, movie);
+				}
+
+				if (isDiskFolder(nfo.getParentFile())) {
+					// special handling for disk folders
+					for (File folder : fileset) {
+						if (nfo.getParentFile().equals(folder)) {
+							movieByFile.put(folder, movie);
+						}
+					}
+				} else {
+					// match movie info to movie files that match the nfo file name
+					SortedSet<File> siblingMovieFiles = new TreeSet<File>(filter(movieFiles, new ParentFilter(nfo.getParentFile())));
+					String baseName = stripReleaseInfo(getName(nfo)).toLowerCase();
+
+					for (File movieFile : siblingMovieFiles) {
+						if (!baseName.isEmpty() && stripReleaseInfo(getName(movieFile)).toLowerCase().startsWith(baseName)) {
+							movieByFile.put(movieFile, movie);
+						}
+					}
+				}
+			} catch (Exception e) {
+				debug.log(Level.WARNING, "Failed to grep IMDbID: " + nfo.getName(), e);
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418412
+source/net/filebot/cli/CmdlineOperations.java 311 339
+source/net/filebot/ui/rename/MovieMatcher.java 74 102
+----------------------------------------
+		List<File> fileset = sortByUniquePath(filter(files, not(getClutterFileFilter())));
+
+		// handle movie files
+		Set<File> movieFiles = new TreeSet<File>(filter(fileset, VIDEO_FILES));
+		Set<File> nfoFiles = new TreeSet<File>(filter(fileset, NFO_FILES));
+
+		List<File> orphanedFiles = new ArrayList<File>(filter(fileset, FILES));
+		orphanedFiles.removeAll(movieFiles);
+		orphanedFiles.removeAll(nfoFiles);
+
+		Map<File, List<File>> derivatesByMovieFile = new HashMap<File, List<File>>();
+		for (File movieFile : movieFiles) {
+			derivatesByMovieFile.put(movieFile, new ArrayList<File>());
+		}
+		for (File file : orphanedFiles) {
+			List<File> orphanParent = listPath(file);
+			for (File movieFile : movieFiles) {
+				if (orphanParent.contains(movieFile.getParentFile()) && isDerived(file, movieFile)) {
+					derivatesByMovieFile.get(movieFile).add(file);
+					break;
+				}
+			}
+		}
+		for (List<File> derivates : derivatesByMovieFile.values()) {
+			orphanedFiles.removeAll(derivates);
+		}
+
+		// match movie hashes online
+		Map<File, Movie> movieByFile = new TreeMap<File, Movie>();
+
+----------------------------------------
+		List<File> fileset = autodetect ? filter(files, not(getClutterFileFilter())) : new ArrayList<File>(files);
+
+		// handle movie files
+		Set<File> movieFiles = new TreeSet<File>(filter(fileset, VIDEO_FILES));
+		Set<File> nfoFiles = new TreeSet<File>(filter(fileset, NFO_FILES));
+
+		List<File> orphanedFiles = new ArrayList<File>(filter(fileset, FILES));
+		orphanedFiles.removeAll(movieFiles);
+		orphanedFiles.removeAll(nfoFiles);
+
+		Map<File, List<File>> derivatesByMovieFile = new HashMap<File, List<File>>();
+		for (File movieFile : movieFiles) {
+			derivatesByMovieFile.put(movieFile, new ArrayList<File>());
+		}
+		for (File file : orphanedFiles) {
+			List<File> orphanParent = listPath(file);
+			for (File movieFile : movieFiles) {
+				if (orphanParent.contains(movieFile.getParentFile()) && isDerived(file, movieFile)) {
+					derivatesByMovieFile.get(movieFile).add(file);
+					break;
+				}
+			}
+		}
+		for (List<File> derivates : derivatesByMovieFile.values()) {
+			orphanedFiles.removeAll(derivates);
+		}
+
+		// match movie hashes online
+		Map<File, Movie> movieByFile = new TreeMap<File, Movie>();
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418413
+source/net/filebot/cli/CmdlineOperations.java 218 239
+source/net/filebot/ui/rename/EpisodeListMatcher.java 119 140
+----------------------------------------
+			throw new CmdlineException("Failed to match files to episode data");
+		}
+
+		// handle derived files
+		List<Match<File, ?>> derivateMatches = new ArrayList<Match<File, ?>>();
+		SortedSet<File> derivateFiles = new TreeSet<File>(fileset);
+		derivateFiles.removeAll(mediaFiles);
+
+		for (File file : derivateFiles) {
+			for (Match<File, ?> match : matches) {
+				if (file.getPath().startsWith(match.getValue().getParentFile().getPath()) && isDerived(file, match.getValue()) && match.getCandidate() instanceof Episode) {
+					derivateMatches.add(new Match<File, Object>(file, ((Episode) match.getCandidate()).clone()));
+					break;
+				}
+			}
+		}
+
+		// add matches from other files that are linked via filenames
+		matches.addAll(derivateMatches);
+
+		// map old files to new paths by applying formatting and validating filenames
+		Map<File, File> renameMap = new LinkedHashMap<File, File>();
+
+----------------------------------------
+			workerThreadPool.shutdownNow();
+		}
+
+		// handle derived files
+		List<Match<File, ?>> derivateMatches = new ArrayList<Match<File, ?>>();
+		Set<File> derivateFiles = new TreeSet<File>(fileset);
+		derivateFiles.removeAll(mediaFiles);
+
+		for (File file : derivateFiles) {
+			for (Match<File, ?> match : matches) {
+				if (file.getPath().startsWith(match.getValue().getParentFile().getPath()) && isDerived(file, match.getValue()) && match.getCandidate() instanceof Episode) {
+					derivateMatches.add(new Match<File, Object>(file, ((Episode) match.getCandidate()).clone()));
+					break;
+				}
+			}
+		}
+
+		// add matches from other files that are linked via filenames
+		matches.addAll(derivateMatches);
+
+		// restore original order
+		matches.sort(comparing(Match::getValue, OriginalOrder.of(files)));
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418414
+source/net/filebot/ui/subtitle/SubtitleDropTarget.java 1 7
+source/net/filebot/cli/CmdlineOperations.java 6 11
+----------------------------------------
+package net.filebot.ui.subtitle;
+
+import static net.filebot.Logging.*;
+import static net.filebot.MediaTypes.*;
+import static net.filebot.Settings.*;
+import static net.filebot.UserFiles.*;
+import static net.filebot.ui.transfer.FileTransferable.*;
+
+----------------------------------------
+import static java.util.stream.Collectors.*;
+import static net.filebot.Logging.*;
+import static net.filebot.MediaTypes.*;
+import static net.filebot.Settings.*;
+import static net.filebot.WebServices.*;
+import static net.filebot.hash.VerificationUtilities.*;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418415
+source/net/filebot/ui/rename/BindingDialog.java 1 7
+source/net/filebot/cli/CmdlineOperations.java 5 10
+----------------------------------------
+package net.filebot.ui.rename;
+
+import static java.util.stream.Collectors.*;
+import static net.filebot.Logging.*;
+import static net.filebot.MediaTypes.*;
+import static net.filebot.UserFiles.*;
+import static net.filebot.media.XattrMetaInfo.*;
+
+----------------------------------------
+import static java.util.Collections.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.Logging.*;
+import static net.filebot.MediaTypes.*;
+import static net.filebot.Settings.*;
+import static net.filebot.WebServices.*;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418416
+source/net/filebot/cli/CmdlineOperations.java 1 9
+source/net/filebot/cli/ScriptShellMethods.java 1 9
+----------------------------------------
+package net.filebot.cli;
+
+import static java.nio.charset.StandardCharsets.*;
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.Logging.*;
+import static net.filebot.MediaTypes.*;
+import static net.filebot.Settings.*;
+
+----------------------------------------
+package net.filebot.cli;
+
+import static java.nio.charset.StandardCharsets.*;
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.Logging.*;
+import static net.filebot.MediaTypes.*;
+import static net.filebot.util.FileUtilities.*;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418417
+source/net/filebot/cli/CmdlineOperations.java 3 9
+source/net/filebot/ui/rename/RenameAction.java 1 8
+----------------------------------------
+import static java.nio.charset.StandardCharsets.*;
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.Logging.*;
+import static net.filebot.MediaTypes.*;
+import static net.filebot.Settings.*;
+
+----------------------------------------
+package net.filebot.ui.rename;
+
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.Logging.*;
+import static net.filebot.Settings.*;
+import static net.filebot.media.MediaDetection.*;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418418
+source/net/filebot/cli/CmdlineOperations.java 3 8
+source/net/filebot/ui/list/FileListTransferablePolicy.java 1 7
+----------------------------------------
+import static java.nio.charset.StandardCharsets.*;
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.Logging.*;
+import static net.filebot.MediaTypes.*;
+
+----------------------------------------
+package net.filebot.ui.list;
+
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.MediaTypes.*;
+import static net.filebot.ui.transfer.FileTransferable.*;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418422
+source/net/filebot/cli/ScriptShellMethods.java 3 8
+source/net/filebot/ui/list/FileListTransferablePolicy.java 1 7
+----------------------------------------
+import static java.nio.charset.StandardCharsets.*;
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.Logging.*;
+import static net.filebot.MediaTypes.*;
+
+----------------------------------------
+package net.filebot.ui.list;
+
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.MediaTypes.*;
+import static net.filebot.ui.transfer.FileTransferable.*;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418419
+source/net/filebot/cli/CmdlineOperationsTextUI.java 6 15
+source/net/filebot/ui/rename/RenameAction.java 15 23
+----------------------------------------
+import static net.filebot.media.MediaDetection.*;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.function.Function;
+
+----------------------------------------
+import java.awt.event.ActionEvent;
+import java.io.File;
+import java.util.AbstractList;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418420
+source/net/filebot/cli/ScriptShellMethods.java 5 11
+source/net/filebot/ui/rename/FilesListTransferablePolicy.java 1 8
+----------------------------------------
+import static java.util.Collections.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.Logging.*;
+import static net.filebot.MediaTypes.*;
+import static net.filebot.util.FileUtilities.*;
+
+import java.io.File;
+
+----------------------------------------
+package net.filebot.ui.rename;
+
+import static java.util.stream.Collectors.*;
+import static net.filebot.Logging.*;
+import static net.filebot.MediaTypes.*;
+import static net.filebot.util.FileUtilities.*;
+
+import java.awt.datatransfer.Transferable;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418421
+source/net/filebot/cli/ScriptShellMethods.java 3 11
+source/net/filebot/ui/rename/RenameAction.java 1 9
+----------------------------------------
+import static java.nio.charset.StandardCharsets.*;
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.Logging.*;
+import static net.filebot.MediaTypes.*;
+import static net.filebot.util.FileUtilities.*;
+
+import java.io.File;
+
+----------------------------------------
+package net.filebot.ui.rename;
+
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.Logging.*;
+import static net.filebot.Settings.*;
+import static net.filebot.media.MediaDetection.*;
+import static net.filebot.media.XattrMetaInfo.*;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418423
+source/net/filebot/ui/transfer/FileTransferablePolicy.java 1 10
+source/net/filebot/ui/list/FileListTransferablePolicy.java 6 14
+----------------------------------------
+package net.filebot.ui.transfer;
+
+import static net.filebot.ui.transfer.FileTransferable.*;
+import static net.filebot.util.FileUtilities.*;
+
+import java.awt.datatransfer.Transferable;
+import java.awt.datatransfer.UnsupportedFlavorException;
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+
+----------------------------------------
+import static net.filebot.MediaTypes.*;
+import static net.filebot.ui.transfer.FileTransferable.*;
+import static net.filebot.util.FileUtilities.*;
+
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.Transferable;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+
+----------------------------------------

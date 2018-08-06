@@ -1,0 +1,2302 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805661
+net/sf/varscan/CallMpileup.java 576 587
+net/sf/varscan/CallPileup.java 236 248
+----------------------------------------
+		    	        		String positionCall = VarScan.callPosition(refBase, readCounts, "CNS", minReads2, minVarFreq, minAvgQual, pValueThreshold, minFreqForHom);
+
+		    	        		if(positionCall.length() > 0)
+		    	        		{
+		    	        			String[] callLines = positionCall.split("\n");
+
+		    	        			// Go thru each line in resulting call list //
+		    	        			for(int lineCounter = 0; lineCounter < callLines.length; lineCounter++)
+		    	        			{
+		    	        				// Determine type of call that was made //
+		    	        				String[] callContents = callLines[lineCounter].split("\t");
+		    	        				String consBase = callContents[0];
+
+----------------------------------------
+		    	        		String positionCall = VarScan.callPosition(refBase, readCounts, callType, minReads2, minVarFreq, minAvgQual, pValueThreshold, minFreqForHom);
+
+		    	        		if(positionCall.length() > 0)
+		    	        		{
+	    	        				numCalled++;
+		    	        			String[] callLines = positionCall.split("\n");
+
+		    	        			// Go thru each line in resulting call list //
+		    	        			for(int lineCounter = 0; lineCounter < callLines.length; lineCounter++)
+		    	        			{
+		    	        				// Determine type of call that was made //
+		    	        				String[] callContents = callLines[lineCounter].split("\t");
+		    	        				String consBase = callContents[0];
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805662
+net/sf/varscan/CallPileup.java 291 311
+net/sf/varscan/CallMpileup.java 917 937
+----------------------------------------
+	    				}
+	    			}
+	    			catch(Exception e)
+	    		    {
+	    		    	System.err.println("Parsing Exception on line:\n" + line + "\n" + e.getLocalizedMessage());
+	    				numParsingExceptions++;
+	    				if(numParsingExceptions >= 5)
+	    				{
+	    					System.err.println("Too many parsing exceptions encountered; exiting");
+	    					return;
+	    				}
+	    		    	return;
+	    		    }
+
+
+	    		}
+
+				in.close();
+
+				System.err.println(numBases + " bases in pileup file");
+				System.err.println(numCovered + " met minimum coverage of " + minCoverage + "x");
+
+----------------------------------------
+	    				}
+	    			}
+	    			catch(Exception e)
+	    		    {
+	    		    	System.err.println("Parsing Exception on line:\n" + line + "\n" + e.getLocalizedMessage());
+	    				numParsingExceptions++;
+	    				if(numParsingExceptions >= 5)
+	    				{
+	    					System.err.println("Too many parsing exceptions encountered; exiting");
+	    					return;
+	    				}
+	    		    	return;
+	    		    }
+
+
+	    		}
+
+				in.close();
+
+				System.err.println(numBases + " bases in pileup file");
+				System.err.println(numVariantPositions + " variant positions (" + numSNPpositions + " SNP, " + numIndelPositions + " indel)");
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805663
+net/sf/varscan/FilterVariants.java 60 80
+net/sf/varscan/Trio.java 94 114
+----------------------------------------
+		try
+		{
+			if(params.containsKey("min-coverage"))
+				 minCoverage = Integer.parseInt(params.get("min-coverage"));
+
+			if(params.containsKey("min-reads2"))
+				 minReads2 = Integer.parseInt(params.get("min-reads2"));
+
+			if(params.containsKey("min-strands2"))
+				 minStrands2 = Integer.parseInt(params.get("min-strands2"));
+
+			if(params.containsKey("min-var-freq"))
+				 minVarFreq = Double.parseDouble(params.get("min-var-freq"));
+
+			if(params.containsKey("min-avg-qual"))
+				 minAvgQual = Integer.parseInt(params.get("min-avg-qual"));
+
+			if(params.containsKey("p-value"))
+				 pValueThreshold = Double.parseDouble(params.get("p-value"));
+
+			if(params.containsKey("indel-file"))
+
+----------------------------------------
+		try
+		{
+			if(params.containsKey("min-coverage"))
+				 minCoverage = Integer.parseInt(params.get("min-coverage"));
+
+			if(params.containsKey("min-reads2"))
+				 minReads2 = Integer.parseInt(params.get("min-reads2"));
+
+			if(params.containsKey("adj-min-reads2"))
+				 adjustedMinReads2 = Integer.parseInt(params.get("adj-min-reads2"));
+
+			if(params.containsKey("min-var-freq"))
+				 minVarFreq = Double.parseDouble(params.get("min-var-freq"));
+
+			if(params.containsKey("adj-var-freq"))
+				 adjustedMinVarFreq = Double.parseDouble(params.get("adj-var-freq"));
+
+			if(params.containsKey("p-value"))
+				 pValueThreshold = Double.parseDouble(params.get("p-value"));
+
+			if(params.containsKey("adj-p-value"))
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805664
+net/sf/varscan/Copynumber.java 196 235
+net/sf/varscan/Somatic.java 329 365
+----------------------------------------
+			    DecimalFormat threeDigits = new DecimalFormat("#0.000");
+
+	    		// Parse the infile line by line //
+
+	    		while ((line = in.readLine()) != null)
+	    		{
+
+	    			// Begin try-catch for line parsing //
+
+	    			try
+	    			{
+	    				String[] lineContents = line.split("\t");
+
+	    				// Verify expected pileup format //
+
+	    				if(lineContents.length > 5 && lineContents[0].length() > 0 && lineContents[1].length() > 0 && lineContents[2].length() > 0 && lineContents[3].length() > 0)
+	    				{
+	    					sharedPositions++;
+
+	    					// Parse common fields from line //
+	    					String refName = lineContents[0];
+	    					int position = Integer.parseInt(lineContents[1]);
+	    					refBase = lineContents[2].toUpperCase();
+
+	    					chromNormal = refName;
+	    					chromTumor = refName;
+	    					posNormal = position;
+	    					posTumor = position;
+
+	    					// Parse normal, which should be first sample //
+	    					int normalOffset = 3;
+	    					int pileupDepthNormal = Integer.parseInt(lineContents[normalOffset]);
+		    	        	//String normalBases = lineContents[normalOffset + 1];
+		    	        	String normalQualities = lineContents[normalOffset + 2];
+
+	    					// Parse tumor, which should be second sample //
+	    					int tumorOffset = 6;
+	    					int pileupDepthTumor = Integer.parseInt(lineContents[tumorOffset]);
+		    	        	//String tumorBases = lineContents[tumorOffset + 1];
+		    	        	String tumorQualities = lineContents[tumorOffset + 2];
+
+----------------------------------------
+	    		int numParsingExceptions = 0;
+
+	    		while ((line = in.readLine()) != null)
+	    		{
+
+	    			// Begin try-catch for line parsing //
+
+	    			try
+	    			{
+	    				String[] lineContents = line.split("\t", -1);
+
+	    				// Verify expected pileup format //
+
+	    				if(lineContents.length > 5 && lineContents[0].length() > 0 && lineContents[1].length() > 0 && lineContents[2].length() > 0 && lineContents[3].length() > 0)
+	    				{
+	    					sharedPositions++;
+
+	    					// Parse common fields from line //
+	    					String refName = lineContents[0];
+	    					int position = Integer.parseInt(lineContents[1]);
+	    					refBase = lineContents[2].toUpperCase();
+
+	    					chromNormal = refName;
+	    					chromTumor = refName;
+	    					posNormal = position;
+	    					posTumor = position;
+
+	    					// Parse normal, which should be first sample //
+	    					int normalOffset = 3;
+	    					int pileupDepthNormal = Integer.parseInt(lineContents[normalOffset]);
+		    	        	String normalBases = lineContents[normalOffset + 1];
+		    	        	String normalQualities = lineContents[normalOffset + 2];
+
+	    					// Parse tumor, which should be second sample //
+	    					int tumorOffset = 6;
+	    					int pileupDepthTumor = Integer.parseInt(lineContents[tumorOffset]);
+		    	        	String tumorBases = lineContents[tumorOffset + 1];
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805665
+net/sf/varscan/Copynumber.java 374 394
+net/sf/varscan/Somatic.java 660 678
+----------------------------------------
+	    				}
+	    				else
+	    				{
+	    					System.err.println("Error: Invalid format or not enough samples in mpileup: " + line + "\n");
+	    					return;
+	    				}
+	    			}
+	    			catch(Exception e)
+	    		    {
+	    		    	System.err.println("Parsing Exception on line:\n" + line + "\n" + e.getLocalizedMessage());
+	    				numParsingExceptions++;
+	    				if(numParsingExceptions >= 5)
+	    				{
+	    					System.err.println("Too many parsing exceptions encountered; exiting");
+	    					return;
+	    				}
+	    		    	return;
+	    		    }
+
+
+	    		}
+
+----------------------------------------
+	    				}
+	    				else
+	    				{
+	    					System.err.println("Error: Invalid format or not enough samples in mpileup: " + line + "\n");
+	    					return;
+	    				}
+	    			}
+	    			catch(Exception e)
+	    		    {
+	    		    	System.err.println("Parsing Exception on line:\n" + line + "\n" + e.getLocalizedMessage());
+	    				numParsingExceptions++;
+	    				if(numParsingExceptions >= 5)
+	    				{
+	    					System.err.println("Too many parsing exceptions encountered; exiting");
+	    					return;
+	    				}
+	    		    	return;
+	    		    }
+	    		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805666
+net/sf/varscan/Copynumber.java 415 433
+net/sf/varscan/Somatic.java 695 710
+----------------------------------------
+			    System.err.println(goodCopySegments + " good copynumber segments with depth > " + minCoverage);
+
+	    	}
+	    	else
+	    	{
+	    		System.err.println("Input file never ready for parsing (maybe due to file I/O)...");
+	    		System.exit(10);
+	    	}
+	    }
+		catch (IOException e)
+		{
+			System.err.println("File Parsing Exception: " + e.getLocalizedMessage());
+			e.printStackTrace(System.err);
+			System.exit(11);
+		}
+
+
+
+	}
+
+----------------------------------------
+			    System.err.println(calledVariant + " were called Variant");
+	    	}
+	    	else
+	    	{
+	    		System.err.println("Input file never ready for parsing (maybe due to file I/O)...");
+	    		System.exit(10);
+	    	}
+		}
+		catch (IOException e)
+		{
+			System.err.println("File Parsing Exception: " + e.getLocalizedMessage());
+			e.printStackTrace(System.err);
+			System.exit(11);
+		}
+
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805667
+net/sf/varscan/Copynumber.java 514 545
+net/sf/varscan/Somatic.java 196 226
+----------------------------------------
+			System.err.println("P-value thresh:\t" + pValueThreshold);
+
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	System.exit(1);
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+		// Check for correct input //
+
+		if(args.length < 3)
+		{
+			System.err.println("Please provide an output file basename!");
+			System.err.println(usage);
+			System.exit(1);
+		}
+
+
+		// Statistics counters //
+		long tumorPositions = 0;
+		long sharedPositions = 0;
+		long comparedPositions = 0;
+		long rawCopySegments = 0;
+
+----------------------------------------
+				System.err.println("Validation mode: on");
+
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	System.exit(1);
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+		// Check for correct input //
+
+		if(outputSnp.length() == 0 || outputIndel.length() == 0)
+		{
+			System.err.println("Please provide an output basename or SNP/indel output files!");
+			 System.err.println(usage);
+			 System.exit(1);
+		}
+
+		// Statistics counters //
+		long tumorPositions = 0;
+		long sharedPositions = 0;
+		long comparedPositions = 0;
+		long calledReference = 0;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805668
+net/sf/varscan/Copynumber.java 514 545
+net/sf/varscan/Somatic.java 874 905
+----------------------------------------
+			System.err.println("P-value thresh:\t" + pValueThreshold);
+
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	System.exit(1);
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+		// Check for correct input //
+
+		if(args.length < 3)
+		{
+			System.err.println("Please provide an output file basename!");
+			System.err.println(usage);
+			System.exit(1);
+		}
+
+
+		// Statistics counters //
+		long tumorPositions = 0;
+		long sharedPositions = 0;
+		long comparedPositions = 0;
+		long rawCopySegments = 0;
+
+----------------------------------------
+				System.err.println("Validation mode: on");
+
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	System.exit(1);
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+		// Check for correct input //
+
+		if(args.length < 3 && (outputSnp.length() == 0 || outputIndel.length() == 0))
+		{
+			System.err.println("Please provide SNP and Indel output files!");
+			 System.err.println(usage);
+			 System.exit(1);
+		}
+
+
+		// Statistics counters //
+		long tumorPositions = 0;
+		long sharedPositions = 0;
+		long comparedPositions = 0;
+		long calledReference = 0;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805669
+net/sf/varscan/Copynumber.java 558 565
+net/sf/varscan/Somatic.java 957 966
+----------------------------------------
+	 		BufferedReader normal = new BufferedReader(new FileReader(normalPileupFile));
+		    BufferedReader tumor = new BufferedReader(new FileReader(tumorPileupFile));
+
+		    if(!(normal.ready() && tumor.ready()))
+		    {
+		    	// Delay a few seconds to let SAMtools pileup start outputting //
+		    	try {
+			    	Thread.sleep(5000);
+
+----------------------------------------
+	 		BufferedReader normal = new BufferedReader(new FileReader(normalPileupFile));
+		    BufferedReader tumor = new BufferedReader(new FileReader(tumorPileupFile));
+
+	    	// If input file not ready, give it a few seconds //
+	    	int numNaps = 0;
+
+	    	while(!(normal.ready() && tumor.ready()))
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805670
+net/sf/varscan/Copynumber.java 575 627
+net/sf/varscan/Somatic.java 974 1047
+----------------------------------------
+		    	}
+		    	catch(Exception e)
+		    	{
+
+		    	}
+
+		    }
+
+		    // Exit if files not ready after waiting //
+
+		    if(!(normal.ready() && tumor.ready()))
+		    {
+		    	System.err.println("ERROR: Invalid input file(s)");
+		    	System.exit(10);
+		    }
+
+		    String lineNormal;
+		    String lineTumor;
+		    String chromNormal = "";
+		    String chromTumor = "";
+		    String prevChromNormal = "";
+		    String prevChromTumor = "";
+		    String refBase = "";
+		    int posNormal = 0;
+		    int posTumor = 0;
+
+		    // Parameters for copy number calling //
+		    String copyChrom = "";
+		    int copyStart = 0;
+		    int copyStop = 0;
+		    int copyDepthNormal = 0;
+		    int copyDepthTumor = 0;
+		    long copySumNormal = 0;
+		    long copySumTumor = 0;
+		    long copyPositions = 0;
+		    long copyPositionsGC = 0;
+
+		    DecimalFormat oneDigit = new DecimalFormat("#0.0");
+		    DecimalFormat threeDigits = new DecimalFormat("#0.000");
+
+
+		    // Get first line of Normal //
+
+		    if((lineNormal = normal.readLine()) != null)
+		    {
+		    	String[] normalContents = lineNormal.split("\t");
+
+		    	if(normalContents.length > 1)
+		    	{
+			    	chromNormal = normalContents[0];
+			    	posNormal = Integer.parseInt(normalContents[1]);
+		    	}
+		    }
+
+----------------------------------------
+		    	}
+		    	catch(Exception e)
+		    	{
+
+		    	}
+	    	}
+
+
+		    if(!(normal.ready() && tumor.ready()))
+		    {
+		    	System.err.println("ERROR: Input file(s) not ready for parsing! Pileup output may be invalid or too slow.");
+		    	System.exit(10);
+		    }
+
+		    String lineNormal;
+		    String lineTumor;
+		    String chromNormal = "";
+		    String chromTumor = "";
+		    String prevChromNormal = "";
+		    String prevChromTumor = "";
+		    String refBase = "";
+		    int posNormal = 0;
+		    int posTumor = 0;
+
+
+		    DecimalFormat oneDigit = new DecimalFormat("#0.0");
+		    DecimalFormat threeDigits = new DecimalFormat("#0.000");
+
+
+		    // Get first line of Normal //
+
+		    if((lineNormal = normal.readLine()) != null)
+		    {
+		    	String[] normalContents = lineNormal.split("\t");
+
+		    	if(normalContents.length > 1)
+		    	{
+			    	chromNormal = normalContents[0];
+			    	posNormal = Integer.parseInt(normalContents[1]);
+		    	}
+		    }
+
+		    // Loop through lines in tumor //
+
+	    	while ((lineTumor = tumor.readLine()) != null)
+	    	{
+	    		tumorPositions++;
+	    		String[] tumorContents = lineTumor.split("\t");
+
+		    	if(tumorContents.length > 1)
+		    	{
+			    	chromTumor = tumorContents[0];
+			    	posTumor = Integer.parseInt(tumorContents[1]);
+		    	}
+
+		    	// Parse normal lines until we get the same chromosome //
+		    	boolean flagEOF = false;
+		    	boolean normalWasReset = false;
+
+		    	//	Advance in normal file if tumor is changed but normal is not, or if tumor is higher //
+		    	while(!chromNormal.equals(chromTumor) && !chromTumor.equals(prevChromTumor) && !flagEOF && (chromNormal.equals(prevChromTumor) || inSortOrder(chromNormal, chromTumor)))
+		    	{
+		    		//System.err.println("Normal (" + chromNormal + ") catching up to " + chromTumor);
+		    		// Get next line from normal pileup //
+		    		if((lineNormal = normal.readLine()) != null)
+		    		{
+		    			String[] normalContents = lineNormal.split("\t");
+
+				    	if(normalContents.length > 1)
+				    	{
+					    	chromNormal = normalContents[0];
+					    	posNormal = Integer.parseInt(normalContents[1]);
+				    	}
+		    		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805671
+net/sf/varscan/Copynumber.java 610 681
+net/sf/varscan/Somatic.java 996 1068
+----------------------------------------
+		    long copyPositionsGC = 0;
+
+		    DecimalFormat oneDigit = new DecimalFormat("#0.0");
+		    DecimalFormat threeDigits = new DecimalFormat("#0.000");
+
+
+		    // Get first line of Normal //
+
+		    if((lineNormal = normal.readLine()) != null)
+		    {
+		    	String[] normalContents = lineNormal.split("\t");
+
+		    	if(normalContents.length > 1)
+		    	{
+			    	chromNormal = normalContents[0];
+			    	posNormal = Integer.parseInt(normalContents[1]);
+		    	}
+		    }
+
+		    // Loop through lines in tumor //
+
+	    	while ((lineTumor = tumor.readLine()) != null)
+	    	{
+	    		tumorPositions++;
+	    		String[] tumorContents = lineTumor.split("\t");
+
+		    	if(tumorContents.length > 1)
+		    	{
+			    	chromTumor = tumorContents[0];
+			    	posTumor = Integer.parseInt(tumorContents[1]);
+		    	}
+
+		    	// Parse normal lines until we get the same chromosome //
+		    	boolean flagEOF = false;
+		    	boolean normalWasReset = false;
+
+		    	//	Advance in normal file if tumor is changed but normal is not, or if tumor is higher //
+		    	while(!chromNormal.equals(chromTumor) && !chromTumor.equals(prevChromTumor) && !flagEOF && (chromNormal.equals(prevChromTumor) || inSortOrder(chromNormal, chromTumor)))
+		    	{
+		    		//System.err.println("Normal (" + chromNormal + ") catching up to " + chromTumor);
+		    		// Get next line from normal pileup //
+		    		if((lineNormal = normal.readLine()) != null)
+		    		{
+		    			String[] normalContents = lineNormal.split("\t");
+
+				    	if(normalContents.length > 1)
+				    	{
+					    	chromNormal = normalContents[0];
+					    	posNormal = Integer.parseInt(normalContents[1]);
+				    	}
+		    		}
+		    		else
+		    		{
+		    			flagEOF = true;
+		    		}
+
+
+		    	}
+
+		    	// If chromosomes match and are non-blank, attempt to get matching positions //
+		    	if(chromNormal.equals(chromTumor) && !chromNormal.equals(""))
+		    	{
+		    		normalWasReset = false;
+		    		// Seek to matching Normal Position //
+
+		    		while(chromNormal.equals(chromTumor) && posNormal < posTumor && ((lineNormal = normal.readLine()) != null))
+		    		{
+		    			String[] normalContents = lineNormal.split("\t");
+				    	if(normalContents.length > 1)
+				    	{
+					    	chromNormal = normalContents[0];
+					    	posNormal = Integer.parseInt(normalContents[1]);
+
+----------------------------------------
+		    int posTumor = 0;
+
+
+		    DecimalFormat oneDigit = new DecimalFormat("#0.0");
+		    DecimalFormat threeDigits = new DecimalFormat("#0.000");
+
+
+		    // Get first line of Normal //
+
+		    if((lineNormal = normal.readLine()) != null)
+		    {
+		    	String[] normalContents = lineNormal.split("\t");
+
+		    	if(normalContents.length > 1)
+		    	{
+			    	chromNormal = normalContents[0];
+			    	posNormal = Integer.parseInt(normalContents[1]);
+		    	}
+		    }
+
+		    // Loop through lines in tumor //
+
+	    	while ((lineTumor = tumor.readLine()) != null)
+	    	{
+	    		tumorPositions++;
+	    		String[] tumorContents = lineTumor.split("\t");
+
+		    	if(tumorContents.length > 1)
+		    	{
+			    	chromTumor = tumorContents[0];
+			    	posTumor = Integer.parseInt(tumorContents[1]);
+		    	}
+
+		    	// Parse normal lines until we get the same chromosome //
+		    	boolean flagEOF = false;
+		    	boolean normalWasReset = false;
+
+		    	//	Advance in normal file if tumor is changed but normal is not, or if tumor is higher //
+		    	while(!chromNormal.equals(chromTumor) && !chromTumor.equals(prevChromTumor) && !flagEOF && (chromNormal.equals(prevChromTumor) || inSortOrder(chromNormal, chromTumor)))
+		    	{
+		    		//System.err.println("Normal (" + chromNormal + ") catching up to " + chromTumor);
+		    		// Get next line from normal pileup //
+		    		if((lineNormal = normal.readLine()) != null)
+		    		{
+		    			String[] normalContents = lineNormal.split("\t");
+
+				    	if(normalContents.length > 1)
+				    	{
+					    	chromNormal = normalContents[0];
+					    	posNormal = Integer.parseInt(normalContents[1]);
+				    	}
+		    		}
+		    		else
+		    		{
+		    			flagEOF = true;
+		    		}
+
+
+		    	}
+
+		    	// If chromosomes match and are non-blank, attempt to get matching positions //
+		    	if(chromNormal.equals(chromTumor) && !chromNormal.equals(""))
+		    	{
+		    		normalWasReset = false;
+		    		// Seek to matching Normal Position //
+
+		    		while(chromNormal.equals(chromTumor) && posNormal < posTumor && ((lineNormal = normal.readLine()) != null))
+		    		{
+		    			String[] normalContents = lineNormal.split("\t");
+				    	if(normalContents.length > 1)
+				    	{
+					    	chromNormal = normalContents[0];
+					    	posNormal = Integer.parseInt(normalContents[1]);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805672
+net/sf/varscan/Copynumber.java 707 727
+net/sf/varscan/Somatic.java 1069 1089
+----------------------------------------
+				    	}
+		    		}
+
+		    		// Seek to matching Tumor Position //
+
+		    		while(chromNormal.equals(chromTumor) && posTumor < posNormal && ((lineTumor = tumor.readLine()) != null))
+		    		{
+		    			tumorContents = lineTumor.split("\t");
+				    	if(tumorContents.length > 1)
+				    	{
+					    	chromTumor = tumorContents[0];
+					    	posTumor = Integer.parseInt(tumorContents[1]);
+				    	}
+		    		}
+
+		    		// Proceed if normal and tumor positions match //
+
+		    		if(chromNormal.equals(chromTumor) && chromNormal.equals(chromTumor) && posNormal == posTumor)
+		    		{
+		    			//stats.put("sharedPositions", (stats.get("sharedPositions") + 1));
+		    			sharedPositions++;
+
+----------------------------------------
+				    	}
+		    		}
+
+		    		// Seek to matching Tumor Position //
+
+		    		while(chromNormal.equals(chromTumor) && posTumor < posNormal && ((lineTumor = tumor.readLine()) != null))
+		    		{
+		    			tumorContents = lineTumor.split("\t");
+				    	if(tumorContents.length > 1)
+				    	{
+					    	chromTumor = tumorContents[0];
+					    	posTumor = Integer.parseInt(tumorContents[1]);
+				    	}
+		    		}
+
+		    		// Proceed if normal and tumor positions match //
+
+		    		if(chromNormal.equals(chromTumor) && chromNormal.equals(chromTumor) && posNormal == posTumor)
+		    		{
+		    			//stats.put("sharedPositions", (stats.get("sharedPositions") + 1));
+		    			sharedPositions++;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805673
+net/sf/varscan/Copynumber.java 1078 1106
+net/sf/varscan/Somatic.java 1937 1965
+----------------------------------------
+	static Boolean chromSorted(String chrom1, String chrom2)
+	{
+		Boolean answer = false;
+
+		chrom1.replace("X", "23");
+		chrom1.replace("Y", "24");
+		chrom1.replace("M", "25");
+
+		chrom2.replace("X", "23");
+		chrom2.replace("Y", "24");
+		chrom2.replace("M", "25");
+
+		String[] unsorted = {chrom1, chrom2};
+		String[] sorted = {chrom1, chrom2};
+		Arrays.sort(sorted);
+		System.err.println("Sorted order is " + sorted[0] + " " + sorted[1]);
+		try{
+			if(sorted[0].equals(unsorted[0]))
+			{
+				answer = true;
+			}
+		}
+		catch(Exception e)
+		{
+
+		}
+
+		return(answer);
+	}
+
+----------------------------------------
+	static Boolean chromSorted(String chrom1, String chrom2)
+	{
+		Boolean answer = false;
+
+		chrom1.replace("X", "23");
+		chrom1.replace("Y", "24");
+		chrom1.replace("M", "25");
+
+		chrom2.replace("X", "23");
+		chrom2.replace("Y", "24");
+		chrom2.replace("M", "25");
+
+		String[] unsorted = {chrom1, chrom2};
+		String[] sorted = {chrom1, chrom2};
+		Arrays.sort(sorted);
+		System.err.println("Sorted order is " + sorted[0] + " " + sorted[1]);
+		try{
+			if(sorted[0].equals(unsorted[0]))
+			{
+				answer = true;
+			}
+		}
+		catch(Exception e)
+		{
+
+		}
+
+		return(answer);
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805674
+net/sf/varscan/FilterSomatic.java 147 202
+net/sf/varscan/FilterVariants.java 143 198
+----------------------------------------
+				outFile = new PrintStream( new FileOutputStream(outFileName) );
+
+	    	// Declare file-parsing variables //
+
+	    	BufferedReader in = VarScan.getInfile(args);
+
+	    	// If no input, print usage //
+
+	    	if(in == null)
+	    	{
+	    		System.out.println(usage);
+				return;
+	    	}
+
+	    	// If input file not ready, give it a few seconds //
+	    	int numNaps = 0;
+
+	    	while(!in.ready())
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.err.println("Exception while trying to get input" + e.getMessage());
+		    		System.exit(1);
+		    	}
+	    	}
+
+	    	String line;
+	    	int lineCounter = 0;
+	    	boolean isVCF = false;
+
+	    	// Proceed if input stream is ready //
+
+	    	if(in != null && in.ready())
+	    	{
+	    		// Parse the infile line by line //
+
+	    		while ((line = in.readLine()) != null)
+	    		{
+	    			lineCounter++;
+
+	    			try
+	    			{
+		    			String[] lineContents = line.split("\t");
+		    			String chrom = lineContents[0];
+
+	    				if(line.startsWith("#"))
+
+----------------------------------------
+				notFile = new PrintStream( new FileOutputStream(notFileName) );
+
+	    	// Declare file-parsing variables //
+
+	    	BufferedReader in = VarScan.getInfile(args);
+
+	    	// If no input, print usage //
+
+	    	if(in == null)
+	    	{
+	    		System.out.println(usage);
+				return;
+	    	}
+
+	    	// If input file not ready, give it a few seconds //
+	    	int numNaps = 0;
+
+	    	while(!in.ready())
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.err.println("Exception while trying to get input" + e.getMessage());
+		    		System.exit(1);
+		    	}
+	    	}
+
+	    	String line;
+	    	int lineCounter = 0;
+	    	boolean isVCF = false;
+
+	    	// Proceed if input stream is ready //
+
+	    	if(in != null && in.ready())
+	    	{
+	    		// Parse the infile line by line //
+
+	    		while ((line = in.readLine()) != null)
+	    		{
+	    			try
+	    			{
+		    			lineCounter++;
+
+	    				String[] lineContents = line.split("\t");
+		    			String chrom = lineContents[0];
+
+		    			if(line.startsWith("#"))
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805675
+net/sf/varscan/FilterSomatic.java 355 375
+net/sf/varscan/FilterVariants.java 480 499
+----------------------------------------
+	    					if(params.containsKey("output-file"))
+	    						outFile.println(line);
+	    				}
+	    				else
+	    				{
+		    				System.err.println("Parsing Exception on line:\n" + line + "\n" + e.getLocalizedMessage());
+		    				stats.put("numParsingExceptions", (stats.get("numParsingExceptions") + 1));
+		    				if(stats.get("numParsingExceptions") >= 5)
+		    				{
+		    					System.err.println("Too many parsing exceptions encountered; exiting");
+		    					return;
+		    				}
+	    				}
+
+	    			}
+
+	    		}
+
+	    		// Report summary of results //
+
+	    		System.err.println(stats.get("numVariants") + " variants in input stream");
+
+----------------------------------------
+							if(params.containsKey("output-file"))
+	    						outFile.println(line);
+	    				}
+	    				else
+	    				{
+		    				System.err.println("Parsing Exception on line:\n" + line + "\n" + e.getLocalizedMessage());
+		    				stats.put("numParsingExceptions", (stats.get("numParsingExceptions") + 1));
+		    				if(stats.get("numParsingExceptions") >= 5)
+		    				{
+		    					System.err.println("Too many parsing exceptions encountered; exiting");
+		    					return;
+		    				}
+	    				}
+	    			}
+
+	    		}
+
+	    		// Report summary of results //
+
+	    		System.err.println(stats.get("numVariants") + " entries in input stream");
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805676
+net/sf/varscan/FilterSomatic.java 380 398
+net/sf/varscan/FilterVariants.java 507 525
+----------------------------------------
+	    		System.err.println(stats.get("numSNPcluster") + " in SNP clusters were removed");
+	    		System.err.println(stats.get("numNearIndel") + " were removed near indels");
+	    		System.err.println(stats.get("numPassFilter") + " passed filters");
+
+	    		in.close();
+	    	}
+	    	else
+	    	{
+	    		System.err.println("Input file not found!");
+	    		System.err.println(usage);
+	    	}
+	    }
+	    catch(Exception e)
+	    {
+	    	System.err.println("Error Parsing Input File: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	return;
+	    }
+	}
+
+----------------------------------------
+	    		System.err.println(stats.get("numFailPvalue") + " failed P-value > " + pValueThreshold);
+	    		System.err.println(stats.get("numNearIndel") + " were removed near indels");
+	    		System.err.println(stats.get("numPassFilter") + " passed filters");
+
+	    		in.close();
+	    	}
+	    	else
+	    	{
+	    		System.err.println("Input file not found!");
+	    		System.err.println(usage);
+	    	}
+	    }
+	    catch(Exception e)
+	    {
+	    	System.err.println("Error Parsing Input File: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	return;
+	    }
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805677
+net/sf/varscan/FilterSomatic.java 407 455
+net/sf/varscan/FilterVariants.java 534 582
+----------------------------------------
+	static HashMap<String, Boolean> loadIndels(String filename)
+	{
+    	HashMap<String, Boolean> indels = new HashMap<String, Boolean>();
+
+	    try
+	    {
+	    	// Declare file-parsing variables //
+
+	    	String line;
+
+    		File infile = new File(filename);
+    		if(infile.exists())
+    		{
+    			BufferedReader in = new BufferedReader(new FileReader(infile));
+
+    			if(in.ready())
+    			{
+    				while ((line = in.readLine()) != null)
+    				{
+    					String[] lineContents = line.split("\t");
+    					String chrom = lineContents[0];
+    					if(chrom.equals("Chrom") || line.startsWith("#"))
+    					{
+    						// Ignore headers //
+    					}
+    					else
+    					{
+	    					String position = lineContents[1];
+	    					String indelKey = chrom + "\t" + position;
+	    					indels.put(indelKey, Boolean.TRUE);
+    					}
+
+    				}
+    			}
+    			else
+    			{
+    				System.err.println("Unable to open indels file for reading");
+    			}
+
+    			in.close();
+    		}
+	    }
+	    catch(Exception e)
+	    {
+	    	System.err.println("Error Parsing Indel File: " + e.getLocalizedMessage());
+	    }
+
+	    return(indels);
+	}
+
+----------------------------------------
+	static HashMap<String, Boolean> loadIndels(String filename)
+	{
+    	HashMap<String, Boolean> indels = new HashMap<String, Boolean>();
+
+	    try
+	    {
+	    	// Declare file-parsing variables //
+
+	    	String line;
+
+    		File infile = new File(filename);
+    		if(infile.exists())
+    		{
+    			BufferedReader in = new BufferedReader(new FileReader(infile));
+
+    			if(in.ready())
+    			{
+    				while ((line = in.readLine()) != null)
+    				{
+    					if(line.startsWith("#"))
+    					{
+    						// Ignore //
+    					}
+    					else
+    					{
+        					String[] lineContents = line.split("\t");
+        					String chrom = lineContents[0];
+        					String position = lineContents[1];
+        					String indelKey = chrom + "\t" + position;
+        					indels.put(indelKey, Boolean.TRUE);
+    					}
+
+    				}
+    			}
+    			else
+    			{
+    				System.err.println("Unable to open indels file for reading");
+    			}
+
+    			in.close();
+    		}
+	    }
+	    catch(Exception e)
+	    {
+	    	System.err.println("Error Parsing Indel File: " + e.getLocalizedMessage());
+	    }
+
+	    return(indels);
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805678
+net/sf/varscan/FilterSomatic.java 478 492
+net/sf/varscan/FilterVariants.java 185 198
+----------------------------------------
+	    	if(in != null && in.ready())
+	    	{
+	    		// Parse the infile line by line //
+
+	    		while ((line = in.readLine()) != null)
+	    		{
+	    			lineCounter++;
+
+	    			try
+	    			{
+		    			String[] lineContents = line.split("\t");
+		    			String chrom = lineContents[0];
+
+
+		    			if(chrom.equals("Chrom") || line.startsWith("#"))
+
+----------------------------------------
+	    	if(in != null && in.ready())
+	    	{
+	    		// Parse the infile line by line //
+
+	    		while ((line = in.readLine()) != null)
+	    		{
+	    			try
+	    			{
+		    			lineCounter++;
+
+	    				String[] lineContents = line.split("\t");
+		    			String chrom = lineContents[0];
+
+		    			if(line.startsWith("#"))
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805679
+net/sf/varscan/CallMpileup.java 177 194
+net/sf/varscan/CallPileup.java 82 99
+----------------------------------------
+			 System.err.println("Min reads2:\t" + minReads2);
+			 System.err.println("Min var freq:\t" + minVarFreq);
+			 System.err.println("Min avg qual:\t" + minAvgQual);
+			 System.err.println("P-value thresh:\t" + pValueThreshold);
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	return;
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+			 System.err.println("Min reads2:\t" + minReads2);
+			 System.err.println("Min var freq:\t" + minVarFreq);
+			 System.err.println("Min avg qual:\t" + minAvgQual);
+			 System.err.println("P-value thresh:\t" + pValueThreshold);
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	return;
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805681
+net/sf/varscan/CallPileup.java 82 99
+net/sf/varscan/FilterVariants.java 93 112
+----------------------------------------
+			 System.err.println("Min reads2:\t" + minReads2);
+			 System.err.println("Min var freq:\t" + minVarFreq);
+			 System.err.println("Min avg qual:\t" + minAvgQual);
+			 System.err.println("P-value thresh:\t" + pValueThreshold);
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	return;
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+			System.err.println("Min strands2:\t" + minStrands2);
+			System.err.println("Min var freq:\t" + minVarFreq);
+			System.err.println("Min avg qual:\t" + minAvgQual);
+			System.err.println("P-value thresh:\t" + pValueThreshold);
+
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	System.exit(1);
+		}
+
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805680
+net/sf/varscan/CallMpileup.java 177 194
+net/sf/varscan/FilterVariants.java 93 112
+----------------------------------------
+			 System.err.println("Min reads2:\t" + minReads2);
+			 System.err.println("Min var freq:\t" + minVarFreq);
+			 System.err.println("Min avg qual:\t" + minAvgQual);
+			 System.err.println("P-value thresh:\t" + pValueThreshold);
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	return;
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+			System.err.println("Min strands2:\t" + minStrands2);
+			System.err.println("Min var freq:\t" + minVarFreq);
+			System.err.println("Min avg qual:\t" + minAvgQual);
+			System.err.println("P-value thresh:\t" + pValueThreshold);
+
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	System.exit(1);
+		}
+
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805682
+net/sf/varscan/Copynumber.java 317 327
+net/sf/varscan/Copynumber.java 350 360
+----------------------------------------
+	    	    					if(copyPositions >= minSegmentSize)
+	    	    					{
+	    	    						rawCopySegments++;
+	    	    						String regionResults = processCopyRegion(copyChrom, copyStart, copyStop, copyPositions, copyPositionsGC, copySumNormal, copySumTumor, minCoverage, dataRatio);
+
+	    	    						if(regionResults.length() > 0)
+	    	    						{
+	    	    							outCopySegments.println(regionResults);
+	    	    							goodCopySegments++;
+	    	    						}
+	    	    					}
+
+----------------------------------------
+		    					if(copyPositions >= minSegmentSize)
+		    					{
+		    						rawCopySegments++;
+		    						String regionResults = processCopyRegion(copyChrom, copyStart, copyStop, copyPositions, copyPositionsGC, copySumNormal, copySumTumor, minCoverage, dataRatio);
+
+		    						if(regionResults.length() > 0)
+		    						{
+		    							outCopySegments.println(regionResults);
+		    							goodCopySegments++;
+		    						}
+		    					}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805683
+net/sf/varscan/Copynumber.java 317 327
+net/sf/varscan/Copynumber.java 398 408
+----------------------------------------
+	    	    					if(copyPositions >= minSegmentSize)
+	    	    					{
+	    	    						rawCopySegments++;
+	    	    						String regionResults = processCopyRegion(copyChrom, copyStart, copyStop, copyPositions, copyPositionsGC, copySumNormal, copySumTumor, minCoverage, dataRatio);
+
+	    	    						if(regionResults.length() > 0)
+	    	    						{
+	    	    							outCopySegments.println(regionResults);
+	    	    							goodCopySegments++;
+	    	    						}
+	    	    					}
+
+----------------------------------------
+				if(copyPositions > minSegmentSize)
+				{
+					rawCopySegments++;
+					String regionResults = processCopyRegion(copyChrom, copyStart, copyStop, copyPositions, copyPositionsGC, copySumNormal, copySumTumor, minCoverage, dataRatio);
+
+					if(regionResults.length() > 0)
+					{
+						outCopySegments.println(regionResults);
+						goodCopySegments++;
+					}
+				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805687
+net/sf/varscan/Copynumber.java 350 360
+net/sf/varscan/Copynumber.java 398 408
+----------------------------------------
+		    					if(copyPositions >= minSegmentSize)
+		    					{
+		    						rawCopySegments++;
+		    						String regionResults = processCopyRegion(copyChrom, copyStart, copyStop, copyPositions, copyPositionsGC, copySumNormal, copySumTumor, minCoverage, dataRatio);
+
+		    						if(regionResults.length() > 0)
+		    						{
+		    							outCopySegments.println(regionResults);
+		    							goodCopySegments++;
+		    						}
+		    					}
+
+----------------------------------------
+				if(copyPositions > minSegmentSize)
+				{
+					rawCopySegments++;
+					String regionResults = processCopyRegion(copyChrom, copyStart, copyStop, copyPositions, copyPositionsGC, copySumNormal, copySumTumor, minCoverage, dataRatio);
+
+					if(regionResults.length() > 0)
+					{
+						outCopySegments.println(regionResults);
+						goodCopySegments++;
+					}
+				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805684
+net/sf/varscan/Copynumber.java 317 327
+net/sf/varscan/Copynumber.java 840 850
+----------------------------------------
+	    	    					if(copyPositions >= minSegmentSize)
+	    	    					{
+	    	    						rawCopySegments++;
+	    	    						String regionResults = processCopyRegion(copyChrom, copyStart, copyStop, copyPositions, copyPositionsGC, copySumNormal, copySumTumor, minCoverage, dataRatio);
+
+	    	    						if(regionResults.length() > 0)
+	    	    						{
+	    	    							outCopySegments.println(regionResults);
+	    	    							goodCopySegments++;
+	    	    						}
+	    	    					}
+
+----------------------------------------
+    	    					if(copyPositions >= minSegmentSize)
+    	    					{
+    	    						rawCopySegments++;
+    	    						String regionResults = processCopyRegion(copyChrom, copyStart, copyStop, copyPositions, copyPositionsGC, copySumNormal, copySumTumor, minCoverage, dataRatio);
+
+    	    						if(regionResults.length() > 0)
+    	    						{
+    	    							outCopySegments.println(regionResults);
+    	    							goodCopySegments++;
+    	    						}
+    	    					}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805691
+net/sf/varscan/Copynumber.java 398 408
+net/sf/varscan/Copynumber.java 840 850
+----------------------------------------
+				if(copyPositions > minSegmentSize)
+				{
+					rawCopySegments++;
+					String regionResults = processCopyRegion(copyChrom, copyStart, copyStop, copyPositions, copyPositionsGC, copySumNormal, copySumTumor, minCoverage, dataRatio);
+
+					if(regionResults.length() > 0)
+					{
+						outCopySegments.println(regionResults);
+						goodCopySegments++;
+					}
+				}
+
+----------------------------------------
+    	    					if(copyPositions >= minSegmentSize)
+    	    					{
+    	    						rawCopySegments++;
+    	    						String regionResults = processCopyRegion(copyChrom, copyStart, copyStop, copyPositions, copyPositionsGC, copySumNormal, copySumTumor, minCoverage, dataRatio);
+
+    	    						if(regionResults.length() > 0)
+    	    						{
+    	    							outCopySegments.println(regionResults);
+    	    							goodCopySegments++;
+    	    						}
+    	    					}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805688
+net/sf/varscan/Copynumber.java 350 360
+net/sf/varscan/Copynumber.java 840 850
+----------------------------------------
+		    					if(copyPositions >= minSegmentSize)
+		    					{
+		    						rawCopySegments++;
+		    						String regionResults = processCopyRegion(copyChrom, copyStart, copyStop, copyPositions, copyPositionsGC, copySumNormal, copySumTumor, minCoverage, dataRatio);
+
+		    						if(regionResults.length() > 0)
+		    						{
+		    							outCopySegments.println(regionResults);
+		    							goodCopySegments++;
+		    						}
+		    					}
+
+----------------------------------------
+    	    					if(copyPositions >= minSegmentSize)
+    	    					{
+    	    						rawCopySegments++;
+    	    						String regionResults = processCopyRegion(copyChrom, copyStart, copyStop, copyPositions, copyPositionsGC, copySumNormal, copySumTumor, minCoverage, dataRatio);
+
+    	    						if(regionResults.length() > 0)
+    	    						{
+    	    							outCopySegments.println(regionResults);
+    	    							goodCopySegments++;
+    	    						}
+    	    					}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805694
+net/sf/varscan/Copynumber.java 840 850
+net/sf/varscan/Copynumber.java 873 883
+----------------------------------------
+    	    					if(copyPositions >= minSegmentSize)
+    	    					{
+    	    						rawCopySegments++;
+    	    						String regionResults = processCopyRegion(copyChrom, copyStart, copyStop, copyPositions, copyPositionsGC, copySumNormal, copySumTumor, minCoverage, dataRatio);
+
+    	    						if(regionResults.length() > 0)
+    	    						{
+    	    							outCopySegments.println(regionResults);
+    	    							goodCopySegments++;
+    	    						}
+    	    					}
+
+----------------------------------------
+	    					if(copyPositions >= minSegmentSize)
+	    					{
+	    						rawCopySegments++;
+	    						String regionResults = processCopyRegion(copyChrom, copyStart, copyStop, copyPositions, copyPositionsGC, copySumNormal, copySumTumor, minCoverage, dataRatio);
+
+	    						if(regionResults.length() > 0)
+	    						{
+	    							outCopySegments.println(regionResults);
+	    							goodCopySegments++;
+	    						}
+	    					}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805685
+net/sf/varscan/Copynumber.java 317 327
+net/sf/varscan/Copynumber.java 873 883
+----------------------------------------
+	    	    					if(copyPositions >= minSegmentSize)
+	    	    					{
+	    	    						rawCopySegments++;
+	    	    						String regionResults = processCopyRegion(copyChrom, copyStart, copyStop, copyPositions, copyPositionsGC, copySumNormal, copySumTumor, minCoverage, dataRatio);
+
+	    	    						if(regionResults.length() > 0)
+	    	    						{
+	    	    							outCopySegments.println(regionResults);
+	    	    							goodCopySegments++;
+	    	    						}
+	    	    					}
+
+----------------------------------------
+	    					if(copyPositions >= minSegmentSize)
+	    					{
+	    						rawCopySegments++;
+	    						String regionResults = processCopyRegion(copyChrom, copyStart, copyStop, copyPositions, copyPositionsGC, copySumNormal, copySumTumor, minCoverage, dataRatio);
+
+	    						if(regionResults.length() > 0)
+	    						{
+	    							outCopySegments.println(regionResults);
+	    							goodCopySegments++;
+	    						}
+	    					}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805692
+net/sf/varscan/Copynumber.java 398 408
+net/sf/varscan/Copynumber.java 873 883
+----------------------------------------
+				if(copyPositions > minSegmentSize)
+				{
+					rawCopySegments++;
+					String regionResults = processCopyRegion(copyChrom, copyStart, copyStop, copyPositions, copyPositionsGC, copySumNormal, copySumTumor, minCoverage, dataRatio);
+
+					if(regionResults.length() > 0)
+					{
+						outCopySegments.println(regionResults);
+						goodCopySegments++;
+					}
+				}
+
+----------------------------------------
+	    					if(copyPositions >= minSegmentSize)
+	    					{
+	    						rawCopySegments++;
+	    						String regionResults = processCopyRegion(copyChrom, copyStart, copyStop, copyPositions, copyPositionsGC, copySumNormal, copySumTumor, minCoverage, dataRatio);
+
+	    						if(regionResults.length() > 0)
+	    						{
+	    							outCopySegments.println(regionResults);
+	    							goodCopySegments++;
+	    						}
+	    					}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805689
+net/sf/varscan/Copynumber.java 350 360
+net/sf/varscan/Copynumber.java 873 883
+----------------------------------------
+		    					if(copyPositions >= minSegmentSize)
+		    					{
+		    						rawCopySegments++;
+		    						String regionResults = processCopyRegion(copyChrom, copyStart, copyStop, copyPositions, copyPositionsGC, copySumNormal, copySumTumor, minCoverage, dataRatio);
+
+		    						if(regionResults.length() > 0)
+		    						{
+		    							outCopySegments.println(regionResults);
+		    							goodCopySegments++;
+		    						}
+		    					}
+
+----------------------------------------
+	    					if(copyPositions >= minSegmentSize)
+	    					{
+	    						rawCopySegments++;
+	    						String regionResults = processCopyRegion(copyChrom, copyStart, copyStop, copyPositions, copyPositionsGC, copySumNormal, copySumTumor, minCoverage, dataRatio);
+
+	    						if(regionResults.length() > 0)
+	    						{
+	    							outCopySegments.println(regionResults);
+	    							goodCopySegments++;
+	    						}
+	    					}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805696
+net/sf/varscan/Copynumber.java 873 883
+net/sf/varscan/Copynumber.java 962 972
+----------------------------------------
+	    					if(copyPositions >= minSegmentSize)
+	    					{
+	    						rawCopySegments++;
+	    						String regionResults = processCopyRegion(copyChrom, copyStart, copyStop, copyPositions, copyPositionsGC, copySumNormal, copySumTumor, minCoverage, dataRatio);
+
+	    						if(regionResults.length() > 0)
+	    						{
+	    							outCopySegments.println(regionResults);
+	    							goodCopySegments++;
+	    						}
+	    					}
+
+----------------------------------------
+			if(copyPositions > minSegmentSize)
+			{
+				rawCopySegments++;
+				String regionResults = processCopyRegion(copyChrom, copyStart, copyStop, copyPositions, copyPositionsGC, copySumNormal, copySumTumor, minCoverage, dataRatio);
+
+				if(regionResults.length() > 0)
+				{
+					outCopySegments.println(regionResults);
+					goodCopySegments++;
+				}
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805686
+net/sf/varscan/Copynumber.java 317 327
+net/sf/varscan/Copynumber.java 962 972
+----------------------------------------
+	    	    					if(copyPositions >= minSegmentSize)
+	    	    					{
+	    	    						rawCopySegments++;
+	    	    						String regionResults = processCopyRegion(copyChrom, copyStart, copyStop, copyPositions, copyPositionsGC, copySumNormal, copySumTumor, minCoverage, dataRatio);
+
+	    	    						if(regionResults.length() > 0)
+	    	    						{
+	    	    							outCopySegments.println(regionResults);
+	    	    							goodCopySegments++;
+	    	    						}
+	    	    					}
+
+----------------------------------------
+			if(copyPositions > minSegmentSize)
+			{
+				rawCopySegments++;
+				String regionResults = processCopyRegion(copyChrom, copyStart, copyStop, copyPositions, copyPositionsGC, copySumNormal, copySumTumor, minCoverage, dataRatio);
+
+				if(regionResults.length() > 0)
+				{
+					outCopySegments.println(regionResults);
+					goodCopySegments++;
+				}
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805695
+net/sf/varscan/Copynumber.java 840 850
+net/sf/varscan/Copynumber.java 962 972
+----------------------------------------
+    	    					if(copyPositions >= minSegmentSize)
+    	    					{
+    	    						rawCopySegments++;
+    	    						String regionResults = processCopyRegion(copyChrom, copyStart, copyStop, copyPositions, copyPositionsGC, copySumNormal, copySumTumor, minCoverage, dataRatio);
+
+    	    						if(regionResults.length() > 0)
+    	    						{
+    	    							outCopySegments.println(regionResults);
+    	    							goodCopySegments++;
+    	    						}
+    	    					}
+
+----------------------------------------
+			if(copyPositions > minSegmentSize)
+			{
+				rawCopySegments++;
+				String regionResults = processCopyRegion(copyChrom, copyStart, copyStop, copyPositions, copyPositionsGC, copySumNormal, copySumTumor, minCoverage, dataRatio);
+
+				if(regionResults.length() > 0)
+				{
+					outCopySegments.println(regionResults);
+					goodCopySegments++;
+				}
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805693
+net/sf/varscan/Copynumber.java 398 408
+net/sf/varscan/Copynumber.java 962 972
+----------------------------------------
+				if(copyPositions > minSegmentSize)
+				{
+					rawCopySegments++;
+					String regionResults = processCopyRegion(copyChrom, copyStart, copyStop, copyPositions, copyPositionsGC, copySumNormal, copySumTumor, minCoverage, dataRatio);
+
+					if(regionResults.length() > 0)
+					{
+						outCopySegments.println(regionResults);
+						goodCopySegments++;
+					}
+				}
+
+----------------------------------------
+			if(copyPositions > minSegmentSize)
+			{
+				rawCopySegments++;
+				String regionResults = processCopyRegion(copyChrom, copyStart, copyStop, copyPositions, copyPositionsGC, copySumNormal, copySumTumor, minCoverage, dataRatio);
+
+				if(regionResults.length() > 0)
+				{
+					outCopySegments.println(regionResults);
+					goodCopySegments++;
+				}
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805690
+net/sf/varscan/Copynumber.java 350 360
+net/sf/varscan/Copynumber.java 962 972
+----------------------------------------
+		    					if(copyPositions >= minSegmentSize)
+		    					{
+		    						rawCopySegments++;
+		    						String regionResults = processCopyRegion(copyChrom, copyStart, copyStop, copyPositions, copyPositionsGC, copySumNormal, copySumTumor, minCoverage, dataRatio);
+
+		    						if(regionResults.length() > 0)
+		    						{
+		    							outCopySegments.println(regionResults);
+		    							goodCopySegments++;
+		    						}
+		    					}
+
+----------------------------------------
+			if(copyPositions > minSegmentSize)
+			{
+				rawCopySegments++;
+				String regionResults = processCopyRegion(copyChrom, copyStart, copyStop, copyPositions, copyPositionsGC, copySumNormal, copySumTumor, minCoverage, dataRatio);
+
+				if(regionResults.length() > 0)
+				{
+					outCopySegments.println(regionResults);
+					goodCopySegments++;
+				}
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805697
+net/sf/varscan/FishersExact.java 96 98
+net/sf/varscan/FishersExact.java 138 140
+----------------------------------------
+            if (DEBUG) {System.out.println("doing R-tail: a=" + a + " b=" + b + " c=" + c + " d=" + d);}
+            min = (c < b) ? c : b;
+            for (i = 0; i < min; i++) {
+
+----------------------------------------
+        if (DEBUG) {System.out.println("doing R-tail: a=" + a + " b=" + b + " c=" + c + " d=" + d);}
+        min = (c < b) ? c : b;
+        for (i = 0; i < min; i++) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805698
+net/sf/varscan/FishersExact.java 96 99
+net/sf/varscan/FishersExact.java 217 220
+----------------------------------------
+            if (DEBUG) {System.out.println("doing R-tail: a=" + a + " b=" + b + " c=" + c + " d=" + d);}
+            min = (c < b) ? c : b;
+            for (i = 0; i < min; i++) {
+                if (DEBUG) {System.out.print("doing round " + i);}
+
+----------------------------------------
+        if (DEBUG) {System.out.println("Starting with R-tail: a=" + a + " b=" + b + " c=" + c + " d=" + d);}
+        min = (c < b) ? c : b;
+        for (i = 0; i < min; i++) {
+            if (DEBUG) {System.out.print("doing round " + i);}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805699
+net/sf/varscan/FishersExact.java 106 110
+net/sf/varscan/FishersExact.java 217 221
+----------------------------------------
+            if (DEBUG) {System.out.println("doing L-tail: a=" + a + " b=" + b + " c=" + c + " d=" + d);}
+            min = (a < d) ? a : d;
+            for (i = 0; i < min; i++) {
+                if (DEBUG) {System.out.print("doing round " + i);}
+                double pTemp = getP(--a, ++b, ++c, --d);
+
+----------------------------------------
+        if (DEBUG) {System.out.println("Starting with R-tail: a=" + a + " b=" + b + " c=" + c + " d=" + d);}
+        min = (c < b) ? c : b;
+        for (i = 0; i < min; i++) {
+            if (DEBUG) {System.out.print("doing round " + i);}
+            double tempP = getP(++a, --b, --c, ++d);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805700
+net/sf/varscan/FishersExact.java 106 114
+net/sf/varscan/FishersExact.java 166 174
+----------------------------------------
+            if (DEBUG) {System.out.println("doing L-tail: a=" + a + " b=" + b + " c=" + c + " d=" + d);}
+            min = (a < d) ? a : d;
+            for (i = 0; i < min; i++) {
+                if (DEBUG) {System.out.print("doing round " + i);}
+                double pTemp = getP(--a, ++b, ++c, --d);
+                if (DEBUG) {System.out.print("\tpTemp = " + pTemp);}
+                p += pTemp;
+                if (DEBUG) {System.out.println("\ta=" + a + " b=" + b + " c=" + c + " d=" + d);}
+            }
+
+----------------------------------------
+        if (DEBUG) {System.out.println("doing L-tail: a=" + a + " b=" + b + " c=" + c + " d=" + d);}
+        min = (a < d) ? a : d;
+        for (i = 0; i < min; i++) {
+            if (DEBUG) {System.out.print("doing round " + i);}
+            double pTemp = getP(--a, ++b, ++c, --d);
+            if (DEBUG) {System.out.print("\tpTemp = " + pTemp);}
+            p += pTemp;
+            if (DEBUG) {System.out.println("\ta=" + a + " b=" + b + " c=" + c + " d=" + d);}
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805701
+net/sf/varscan/FishersExact.java 128 139
+net/sf/varscan/FishersExact.java 156 167
+----------------------------------------
+    public final double getRightTailedP(int a, int b, int c, int d) {
+        int min, i;
+        int n = a + b + c + d;
+        if (n > maxSize) {
+            return Double.NaN;
+        }
+        double p = 0;
+
+        p += getP(a, b, c, d);
+        if (DEBUG) {System.out.println("p = " + p);}
+        if (DEBUG) {System.out.println("doing R-tail: a=" + a + " b=" + b + " c=" + c + " d=" + d);}
+        min = (c < b) ? c : b;
+
+----------------------------------------
+    public final double getLeftTailedP(int a, int b, int c, int d) {
+        int min, i;
+        int n = a + b + c + d;
+        if (n > maxSize) {
+            return Double.NaN;
+        }
+        double p = 0;
+
+        p += getP(a, b, c, d);
+        if (DEBUG) {System.out.println("p = " + p);}
+        if (DEBUG) {System.out.println("doing L-tail: a=" + a + " b=" + b + " c=" + c + " d=" + d);}
+        min = (a < d) ? a : d;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805702
+net/sf/varscan/FishersExact.java 136 140
+net/sf/varscan/FishersExact.java 215 219
+----------------------------------------
+        p += getP(a, b, c, d);
+        if (DEBUG) {System.out.println("p = " + p);}
+        if (DEBUG) {System.out.println("doing R-tail: a=" + a + " b=" + b + " c=" + c + " d=" + d);}
+        min = (c < b) ? c : b;
+        for (i = 0; i < min; i++) {
+
+----------------------------------------
+        p += baseP;
+        if (DEBUG) {System.out.println("p = " + p);}
+        if (DEBUG) {System.out.println("Starting with R-tail: a=" + a + " b=" + b + " c=" + c + " d=" + d);}
+        min = (c < b) ? c : b;
+        for (i = 0; i < min; i++) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805703
+net/sf/varscan/FishersExact.java 164 170
+net/sf/varscan/FishersExact.java 215 221
+----------------------------------------
+        p += getP(a, b, c, d);
+        if (DEBUG) {System.out.println("p = " + p);}
+        if (DEBUG) {System.out.println("doing L-tail: a=" + a + " b=" + b + " c=" + c + " d=" + d);}
+        min = (a < d) ? a : d;
+        for (i = 0; i < min; i++) {
+            if (DEBUG) {System.out.print("doing round " + i);}
+            double pTemp = getP(--a, ++b, ++c, --d);
+
+----------------------------------------
+        p += baseP;
+        if (DEBUG) {System.out.println("p = " + p);}
+        if (DEBUG) {System.out.println("Starting with R-tail: a=" + a + " b=" + b + " c=" + c + " d=" + d);}
+        min = (c < b) ? c : b;
+        for (i = 0; i < min; i++) {
+            if (DEBUG) {System.out.print("doing round " + i);}
+            double tempP = getP(++a, --b, --c, ++d);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805704
+net/sf/varscan/CopyCaller.java 116 131
+net/sf/varscan/FilterVariants.java 101 119
+----------------------------------------
+	    	System.err.println("Parsing " + params.get("del-threshold"));
+	    	e.printStackTrace(System.err);
+	    	System.exit(1);
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+	    // Define the statistics hash and reset counters //
+
+	    HashMap<String, Integer> stats = new HashMap<String, Integer>();
+	    stats.put("numRegions", 0);
+
+----------------------------------------
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	System.exit(1);
+		}
+
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+		// Get the input file and parse it //
+
+	    // Define two-decimal-place format and statistics hash //
+
+	    HashMap<String, Integer> stats = new HashMap<String, Integer>();
+	    stats.put("numVariants", 0);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805706
+net/sf/varscan/FilterVariants.java 101 119
+net/sf/varscan/ReadCounts.java 66 81
+----------------------------------------
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	System.exit(1);
+		}
+
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+		// Get the input file and parse it //
+
+	    // Define two-decimal-place format and statistics hash //
+
+	    HashMap<String, Integer> stats = new HashMap<String, Integer>();
+	    stats.put("numVariants", 0);
+
+----------------------------------------
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	System.exit(1);
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+	    // Define the statistics hash and reset counters //
+
+	    HashMap<String, Integer> stats = new HashMap<String, Integer>();
+	    stats.put("numPositions", 0);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805705
+net/sf/varscan/CopyCaller.java 116 131
+net/sf/varscan/ReadCounts.java 66 81
+----------------------------------------
+	    	System.err.println("Parsing " + params.get("del-threshold"));
+	    	e.printStackTrace(System.err);
+	    	System.exit(1);
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+	    // Define the statistics hash and reset counters //
+
+	    HashMap<String, Integer> stats = new HashMap<String, Integer>();
+	    stats.put("numRegions", 0);
+
+----------------------------------------
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	System.exit(1);
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+	    // Define the statistics hash and reset counters //
+
+	    HashMap<String, Integer> stats = new HashMap<String, Integer>();
+	    stats.put("numPositions", 0);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805707
+net/sf/varscan/CallMpileup.java 101 109
+net/sf/varscan/FilterVariants.java 72 80
+----------------------------------------
+				 minFreqForHom = Double.parseDouble(params.get("min-freq-for-hom"));
+
+			if(params.containsKey("min-avg-qual"))
+				 minAvgQual = Integer.parseInt(params.get("min-avg-qual"));
+
+			if(params.containsKey("p-value"))
+				 pValueThreshold = Double.parseDouble(params.get("p-value"));
+
+			if(params.containsKey("strand-filter"))
+
+----------------------------------------
+				 minVarFreq = Double.parseDouble(params.get("min-var-freq"));
+
+			if(params.containsKey("min-avg-qual"))
+				 minAvgQual = Integer.parseInt(params.get("min-avg-qual"));
+
+			if(params.containsKey("p-value"))
+				 pValueThreshold = Double.parseDouble(params.get("p-value"));
+
+			if(params.containsKey("indel-file"))
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805710
+net/sf/varscan/FilterVariants.java 72 80
+net/sf/varscan/Somatic.java 147 155
+----------------------------------------
+				 minVarFreq = Double.parseDouble(params.get("min-var-freq"));
+
+			if(params.containsKey("min-avg-qual"))
+				 minAvgQual = Integer.parseInt(params.get("min-avg-qual"));
+
+			if(params.containsKey("p-value"))
+				 pValueThreshold = Double.parseDouble(params.get("p-value"));
+
+			if(params.containsKey("indel-file"))
+
+----------------------------------------
+				 minFreqForHom = Double.parseDouble(params.get("min-freq-for-hom"));
+
+			if(params.containsKey("min-avg-qual"))
+				 minAvgQual = Integer.parseInt(params.get("min-avg-qual"));
+
+			if(params.containsKey("p-value"))
+				 pValueThreshold = Double.parseDouble(params.get("p-value"));
+
+			if(params.containsKey("somatic-p-value"))
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805708
+net/sf/varscan/CallMpileup.java 101 109
+net/sf/varscan/Somatic.java 147 155
+----------------------------------------
+				 minFreqForHom = Double.parseDouble(params.get("min-freq-for-hom"));
+
+			if(params.containsKey("min-avg-qual"))
+				 minAvgQual = Integer.parseInt(params.get("min-avg-qual"));
+
+			if(params.containsKey("p-value"))
+				 pValueThreshold = Double.parseDouble(params.get("p-value"));
+
+			if(params.containsKey("strand-filter"))
+
+----------------------------------------
+				 minFreqForHom = Double.parseDouble(params.get("min-freq-for-hom"));
+
+			if(params.containsKey("min-avg-qual"))
+				 minAvgQual = Integer.parseInt(params.get("min-avg-qual"));
+
+			if(params.containsKey("p-value"))
+				 pValueThreshold = Double.parseDouble(params.get("p-value"));
+
+			if(params.containsKey("somatic-p-value"))
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805711
+net/sf/varscan/FilterVariants.java 72 80
+net/sf/varscan/Somatic.java 834 842
+----------------------------------------
+				 minVarFreq = Double.parseDouble(params.get("min-var-freq"));
+
+			if(params.containsKey("min-avg-qual"))
+				 minAvgQual = Integer.parseInt(params.get("min-avg-qual"));
+
+			if(params.containsKey("p-value"))
+				 pValueThreshold = Double.parseDouble(params.get("p-value"));
+
+			if(params.containsKey("indel-file"))
+
+----------------------------------------
+				 minFreqForHom = Double.parseDouble(params.get("min-freq-for-hom"));
+
+			if(params.containsKey("min-avg-qual"))
+				 minAvgQual = Integer.parseInt(params.get("min-avg-qual"));
+
+			if(params.containsKey("p-value"))
+				 pValueThreshold = Double.parseDouble(params.get("p-value"));
+
+			if(params.containsKey("somatic-p-value"))
+
+----------------------------------------

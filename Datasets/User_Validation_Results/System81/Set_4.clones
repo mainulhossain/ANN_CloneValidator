@@ -1,0 +1,1445 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513525
+src/org/jfm/views/list/detailview/DetailView.java 138 143
+src/org/jfm/po/copy/CopyProgressDialog.java 154 160
+----------------------------------------
+				if(selectedRow>=0 && selectedRow<model.getRowCount()){
+					try {
+						table.getSelectionModel().setSelectionInterval(selectedRow,selectedRow);
+					}
+					catch (Exception ignored) { }
+				}
+
+----------------------------------------
+      }finally{
+        try {
+          in.close();
+          out.close();
+        }
+        catch (Exception ignored) {}
+      }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513528
+src/org/jfm/po/FilePropertiesDialog.java 36 45
+src/org/jfm/po/copy/CopyProgressDialog.java 154 160
+----------------------------------------
+  public FilePropertiesDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+      }finally{
+        try {
+          in.close();
+          out.close();
+        }
+        catch (Exception ignored) {}
+      }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513523
+src/org/jfm/filesystems/local/JFMLocalFile.java 170 176
+src/org/jfm/po/copy/CopyProgressDialog.java 154 160
+----------------------------------------
+	public String getCanonicalPath() throws FSException {
+		try{
+			return theFile.getCanonicalPath();
+		}catch(IOException ex){
+			throw new FSException(ex.getMessage());
+		}
+	}
+
+----------------------------------------
+      }finally{
+        try {
+          in.close();
+          out.close();
+        }
+        catch (Exception ignored) {}
+      }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513518
+src/org/jfm/filesystems/JFMFileSystem.java 153 162
+src/org/jfm/po/copy/CopyProgressDialog.java 154 160
+----------------------------------------
+		if(fs==null){
+			name=null;
+			try {
+				Class fsClass=Class.forName(DEFAULT_FILESYSTEM);
+				fs=(JFMFileSystem)fsClass.newInstance();
+			} catch (Exception e) {
+				e.printStackTrace();
+				//ignore the exception
+			}
+		}
+
+----------------------------------------
+      }finally{
+        try {
+          in.close();
+          out.close();
+        }
+        catch (Exception ignored) {}
+      }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513519
+src/org/jfm/po/CommandOutputViewDialog.java 81 91
+src/org/jfm/po/copy/CopyProgressDialog.java 154 160
+----------------------------------------
+    public void run(){
+      try {
+          //i'm not interested in the return value of the process 
+          //i just want to know when it's over
+          process.waitFor();
+      }
+      catch (InterruptedException ex) {}
+      finally {
+        CommandOutputViewDialog.this.dispose();
+      }
+    }
+
+----------------------------------------
+      }finally{
+        try {
+          in.close();
+          out.close();
+        }
+        catch (Exception ignored) {}
+      }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513413
+src/org/jfm/po/copy/CopyProgressDialog.java 179 188
+src/org/jfm/po/copy/CopyProgressDialog.java 154 160
+----------------------------------------
+  public CopyProgressDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+      }finally{
+        try {
+          in.close();
+          out.close();
+        }
+        catch (Exception ignored) {}
+      }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513526
+src/org/jfm/views/list/detailview/DetailView.java 54 62
+src/org/jfm/po/copy/CopyProgressDialog.java 154 160
+----------------------------------------
+	public DetailView(String fs) {
+		super(fs);
+	    try {
+	      init();
+	    }
+	    catch(Exception ex) {
+	      ex.printStackTrace();
+	    }	    
+	}
+
+----------------------------------------
+      }finally{
+        try {
+          in.close();
+          out.close();
+        }
+        catch (Exception ignored) {}
+      }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513521
+src/org/jfm/filesystems/local/JFMLocalFilesystem.java 51 57
+src/org/jfm/po/copy/CopyProgressDialog.java 154 160
+----------------------------------------
+		for(int i=0;i<files.length;i++){
+			try{
+				jfmFiles[i]=new JFMLocalFile(files[i].getAbsolutePath());
+			}catch(Exception ignored){
+				ignored.printStackTrace();
+			}
+		}
+
+----------------------------------------
+      }finally{
+        try {
+          in.close();
+          out.close();
+        }
+        catch (Exception ignored) {}
+      }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513142
+src/org/jfm/views/list/ListView.java 32 40
+src/org/jfm/po/copy/CopyProgressDialog.java 154 160
+----------------------------------------
+  public ListView(String fs) {
+  	super(fs);
+    try {
+      jbInit();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }  	
+  }
+
+----------------------------------------
+      }finally{
+        try {
+          in.close();
+          out.close();
+        }
+        catch (Exception ignored) {}
+      }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513516
+src/org/jfm/po/CommandOutputViewDialog.java 23 32
+src/org/jfm/po/copy/CopyProgressDialog.java 154 160
+----------------------------------------
+  public CommandOutputViewDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+      //pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+      }finally{
+        try {
+          in.close();
+          out.close();
+        }
+        catch (Exception ignored) {}
+      }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513474
+src/org/jfm/filesystems/JFMFileSystem.java 89 97
+src/org/jfm/po/copy/CopyConfirmDialog.java 34 43
+----------------------------------------
+		  {
+			  if(!files[i].isFile() || !files[i].getName().endsWith("jar")) continue;
+			  try{
+				  registerFilesystem(files[i]);
+			  }catch(Exception ignored)
+			  {
+				  ignored.printStackTrace();
+			  }
+		  }
+
+----------------------------------------
+  public CopyConfirmDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513509
+src/org/jfm/filesystems/local/JFMLocalFile.java 75 83
+src/org/jfm/po/copy/CopyConfirmDialog.java 34 43
+----------------------------------------
+	public OutputStream getOutputStream(){
+		java.io.FileOutputStream out=null;
+		try{
+			out=new java.io.FileOutputStream(theFile);
+		}catch(IOException exc){
+			exc.printStackTrace();
+		}
+		return out;
+	}
+
+----------------------------------------
+  public CopyConfirmDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513471
+src/org/jfm/po/copy/CopyProgressDialog.java 179 188
+src/org/jfm/po/copy/CopyConfirmDialog.java 34 43
+----------------------------------------
+  public CopyProgressDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+  public CopyConfirmDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513507
+src/org/jfm/po/FilePropertiesDialog.java 36 45
+src/org/jfm/po/copy/CopyConfirmDialog.java 34 43
+----------------------------------------
+  public FilePropertiesDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+  public CopyConfirmDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513510
+src/org/jfm/po/copy/CopyProgressDialog.java 154 160
+src/org/jfm/po/copy/CopyConfirmDialog.java 34 43
+----------------------------------------
+      }finally{
+        try {
+          in.close();
+          out.close();
+        }
+        catch (Exception ignored) {}
+      }
+
+----------------------------------------
+  public CopyConfirmDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513505
+src/org/jfm/views/list/detailview/DetailsTableModel.java 82 90
+src/org/jfm/po/copy/CopyConfirmDialog.java 34 43
+----------------------------------------
+    public JFMFile getFileAt(int index){
+      JFMFile file=null;
+      try {
+       file=(JFMFile)getValueAt(index, 0);
+      }catch (Exception ex){
+        ex.printStackTrace();
+      }
+      return file;
+    }
+
+----------------------------------------
+  public CopyConfirmDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513511
+src/org/jfm/filesystems/JFMFileSystem.java 153 162
+src/org/jfm/po/copy/CopyConfirmDialog.java 34 43
+----------------------------------------
+		if(fs==null){
+			name=null;
+			try {
+				Class fsClass=Class.forName(DEFAULT_FILESYSTEM);
+				fs=(JFMFileSystem)fsClass.newInstance();
+			} catch (Exception e) {
+				e.printStackTrace();
+				//ignore the exception
+			}
+		}
+
+----------------------------------------
+  public CopyConfirmDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513205
+src/org/jfm/views/list/ListView.java 32 40
+src/org/jfm/po/copy/CopyConfirmDialog.java 34 43
+----------------------------------------
+  public ListView(String fs) {
+  	super(fs);
+    try {
+      jbInit();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }  	
+  }
+
+----------------------------------------
+  public CopyConfirmDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513506
+src/org/jfm/views/list/detailview/DetailView.java 54 62
+src/org/jfm/po/copy/CopyConfirmDialog.java 34 43
+----------------------------------------
+	public DetailView(String fs) {
+		super(fs);
+	    try {
+	      init();
+	    }
+	    catch(Exception ex) {
+	      ex.printStackTrace();
+	    }	    
+	}
+
+----------------------------------------
+  public CopyConfirmDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21512973
+src/org/jfm/views/JFMView.java 133 143
+src/org/jfm/po/copy/CopyConfirmDialog.java 34 43
+----------------------------------------
+                  if(representation.equals(viewClassName)){
+                          try {
+                                  Class viewClass=Class.forName(viewClassName.getClassName());
+                                  view=(JFMView)viewClass.getConstructor(new Class[]{String.class}).newInstance(new Object[]{filesystem});
+                                  //viewClass.newInstance();
+                                  return view;
+                          } catch (Exception e) {
+                                  e.printStackTrace();
+                                  //ignore the exception
+                          }
+                  }
+
+----------------------------------------
+  public CopyConfirmDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513473
+src/org/jfm/po/ProgressActionDialog.java 57 66
+src/org/jfm/po/copy/CopyConfirmDialog.java 34 43
+----------------------------------------
+  public ProgressActionDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+  public CopyConfirmDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513472
+src/org/jfm/po/CommandOutputViewDialog.java 81 91
+src/org/jfm/po/copy/CopyConfirmDialog.java 34 43
+----------------------------------------
+    public void run(){
+      try {
+          //i'm not interested in the return value of the process 
+          //i just want to know when it's over
+          process.waitFor();
+      }
+      catch (InterruptedException ex) {}
+      finally {
+        CommandOutputViewDialog.this.dispose();
+      }
+    }
+
+----------------------------------------
+  public CopyConfirmDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513469
+src/org/jfm/views/list/briefview/BriefView.java 48 56
+src/org/jfm/po/copy/CopyConfirmDialog.java 34 43
+----------------------------------------
+	public BriefView(String fs){
+		super(fs);
+	    try {
+	      init();
+	    }
+	    catch(Exception ex) {
+	      ex.printStackTrace();
+	    }	    
+	}
+
+----------------------------------------
+  public CopyConfirmDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513512
+src/org/jfm/filesystems/local/JFMLocalFilesystem.java 51 57
+src/org/jfm/po/copy/CopyConfirmDialog.java 34 43
+----------------------------------------
+		for(int i=0;i<files.length;i++){
+			try{
+				jfmFiles[i]=new JFMLocalFile(files[i].getAbsolutePath());
+			}catch(Exception ignored){
+				ignored.printStackTrace();
+			}
+		}
+
+----------------------------------------
+  public CopyConfirmDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513508
+src/org/jfm/filesystems/JFMFileSystem.java 141 150
+src/org/jfm/po/copy/CopyConfirmDialog.java 34 43
+----------------------------------------
+			if(name.equals(fsClassName)){
+				try {
+					Class fsClass=Class.forName(fsClassName,true,JFMClassLoader.getLoader());
+					fs=(JFMFileSystem)fsClass.newInstance();
+					return fs;
+				} catch (Exception e) {
+					e.printStackTrace();
+					//ignore the exception
+				}
+			}
+
+----------------------------------------
+  public CopyConfirmDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513470
+src/org/jfm/po/CommandOutputViewDialog.java 23 32
+src/org/jfm/po/copy/CopyConfirmDialog.java 34 43
+----------------------------------------
+  public CommandOutputViewDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+      //pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+  public CopyConfirmDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513468
+src/org/jfm/filesystems/local/JFMLocalFile.java 44 52
+src/org/jfm/po/copy/CopyConfirmDialog.java 34 43
+----------------------------------------
+	public InputStream getInputStream(){
+		java.io.FileInputStream in=null;
+		try{
+			in=new java.io.FileInputStream(theFile);
+		}catch(IOException exc){
+			exc.printStackTrace();
+		}
+		return in;
+	}
+
+----------------------------------------
+  public CopyConfirmDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21512985
+src/org/jfm/views/list/briefview/BriefView.java 48 56
+src/org/jfm/views/JFMView.java 146 154
+----------------------------------------
+	public BriefView(String fs){
+		super(fs);
+	    try {
+	      init();
+	    }
+	    catch(Exception ex) {
+	      ex.printStackTrace();
+	    }	    
+	}
+
+----------------------------------------
+          if(view==null){
+                  try {
+                          Class viewClass=Class.forName(DEFAULT_VIEW.getClassName());
+                          view=(JFMView)viewClass.newInstance();
+                  } catch (Exception e) {
+                          e.printStackTrace();
+                          //ignore the exception
+                  }
+          }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513098
+src/org/jfm/po/copy/CopyProgressDialog.java 154 160
+src/org/jfm/views/JFMView.java 146 154
+----------------------------------------
+      }finally{
+        try {
+          in.close();
+          out.close();
+        }
+        catch (Exception ignored) {}
+      }
+
+----------------------------------------
+          if(view==null){
+                  try {
+                          Class viewClass=Class.forName(DEFAULT_VIEW.getClassName());
+                          view=(JFMView)viewClass.newInstance();
+                  } catch (Exception e) {
+                          e.printStackTrace();
+                          //ignore the exception
+                  }
+          }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513097
+src/org/jfm/filesystems/local/JFMLocalFile.java 75 83
+src/org/jfm/views/JFMView.java 146 154
+----------------------------------------
+	public OutputStream getOutputStream(){
+		java.io.FileOutputStream out=null;
+		try{
+			out=new java.io.FileOutputStream(theFile);
+		}catch(IOException exc){
+			exc.printStackTrace();
+		}
+		return out;
+	}
+
+----------------------------------------
+          if(view==null){
+                  try {
+                          Class viewClass=Class.forName(DEFAULT_VIEW.getClassName());
+                          view=(JFMView)viewClass.newInstance();
+                  } catch (Exception e) {
+                          e.printStackTrace();
+                          //ignore the exception
+                  }
+          }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21512987
+src/org/jfm/po/copy/CopyProgressDialog.java 179 188
+src/org/jfm/views/JFMView.java 146 154
+----------------------------------------
+  public CopyProgressDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+          if(view==null){
+                  try {
+                          Class viewClass=Class.forName(DEFAULT_VIEW.getClassName());
+                          view=(JFMView)viewClass.newInstance();
+                  } catch (Exception e) {
+                          e.printStackTrace();
+                          //ignore the exception
+                  }
+          }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21512992
+src/org/jfm/views/list/detailview/DetailsTableModel.java 82 90
+src/org/jfm/views/JFMView.java 146 154
+----------------------------------------
+    public JFMFile getFileAt(int index){
+      JFMFile file=null;
+      try {
+       file=(JFMFile)getValueAt(index, 0);
+      }catch (Exception ex){
+        ex.printStackTrace();
+      }
+      return file;
+    }
+
+----------------------------------------
+          if(view==null){
+                  try {
+                          Class viewClass=Class.forName(DEFAULT_VIEW.getClassName());
+                          view=(JFMView)viewClass.newInstance();
+                  } catch (Exception e) {
+                          e.printStackTrace();
+                          //ignore the exception
+                  }
+          }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513100
+src/org/jfm/filesystems/local/JFMLocalFilesystem.java 51 57
+src/org/jfm/views/JFMView.java 146 154
+----------------------------------------
+		for(int i=0;i<files.length;i++){
+			try{
+				jfmFiles[i]=new JFMLocalFile(files[i].getAbsolutePath());
+			}catch(Exception ignored){
+				ignored.printStackTrace();
+			}
+		}
+
+----------------------------------------
+          if(view==null){
+                  try {
+                          Class viewClass=Class.forName(DEFAULT_VIEW.getClassName());
+                          view=(JFMView)viewClass.newInstance();
+                  } catch (Exception e) {
+                          e.printStackTrace();
+                          //ignore the exception
+                  }
+          }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21512990
+src/org/jfm/filesystems/JFMFileSystem.java 89 97
+src/org/jfm/views/JFMView.java 146 154
+----------------------------------------
+		  {
+			  if(!files[i].isFile() || !files[i].getName().endsWith("jar")) continue;
+			  try{
+				  registerFilesystem(files[i]);
+			  }catch(Exception ignored)
+			  {
+				  ignored.printStackTrace();
+			  }
+		  }
+
+----------------------------------------
+          if(view==null){
+                  try {
+                          Class viewClass=Class.forName(DEFAULT_VIEW.getClassName());
+                          view=(JFMView)viewClass.newInstance();
+                  } catch (Exception e) {
+                          e.printStackTrace();
+                          //ignore the exception
+                  }
+          }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21512994
+src/org/jfm/filesystems/JFMFileSystem.java 141 150
+src/org/jfm/views/JFMView.java 146 154
+----------------------------------------
+			if(name.equals(fsClassName)){
+				try {
+					Class fsClass=Class.forName(fsClassName,true,JFMClassLoader.getLoader());
+					fs=(JFMFileSystem)fsClass.newInstance();
+					return fs;
+				} catch (Exception e) {
+					e.printStackTrace();
+					//ignore the exception
+				}
+			}
+
+----------------------------------------
+          if(view==null){
+                  try {
+                          Class viewClass=Class.forName(DEFAULT_VIEW.getClassName());
+                          view=(JFMView)viewClass.newInstance();
+                  } catch (Exception e) {
+                          e.printStackTrace();
+                          //ignore the exception
+                  }
+          }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513095
+src/org/jfm/po/FilePropertiesDialog.java 36 45
+src/org/jfm/views/JFMView.java 146 154
+----------------------------------------
+  public FilePropertiesDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+          if(view==null){
+                  try {
+                          Class viewClass=Class.forName(DEFAULT_VIEW.getClassName());
+                          view=(JFMView)viewClass.newInstance();
+                  } catch (Exception e) {
+                          e.printStackTrace();
+                          //ignore the exception
+                  }
+          }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21512989
+src/org/jfm/po/ProgressActionDialog.java 57 66
+src/org/jfm/views/JFMView.java 146 154
+----------------------------------------
+  public ProgressActionDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+          if(view==null){
+                  try {
+                          Class viewClass=Class.forName(DEFAULT_VIEW.getClassName());
+                          view=(JFMView)viewClass.newInstance();
+                  } catch (Exception e) {
+                          e.printStackTrace();
+                          //ignore the exception
+                  }
+          }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513096
+src/org/jfm/views/JFMView.java 133 143
+src/org/jfm/views/JFMView.java 146 154
+----------------------------------------
+                  if(representation.equals(viewClassName)){
+                          try {
+                                  Class viewClass=Class.forName(viewClassName.getClassName());
+                                  view=(JFMView)viewClass.getConstructor(new Class[]{String.class}).newInstance(new Object[]{filesystem});
+                                  //viewClass.newInstance();
+                                  return view;
+                          } catch (Exception e) {
+                                  e.printStackTrace();
+                                  //ignore the exception
+                          }
+                  }
+
+----------------------------------------
+          if(view==null){
+                  try {
+                          Class viewClass=Class.forName(DEFAULT_VIEW.getClassName());
+                          view=(JFMView)viewClass.newInstance();
+                  } catch (Exception e) {
+                          e.printStackTrace();
+                          //ignore the exception
+                  }
+          }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513101
+src/org/jfm/po/copy/CopyConfirmDialog.java 34 43
+src/org/jfm/views/JFMView.java 146 154
+----------------------------------------
+  public CopyConfirmDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+          if(view==null){
+                  try {
+                          Class viewClass=Class.forName(DEFAULT_VIEW.getClassName());
+                          view=(JFMView)viewClass.newInstance();
+                  } catch (Exception e) {
+                          e.printStackTrace();
+                          //ignore the exception
+                  }
+          }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21512974
+src/org/jfm/filesystems/local/JFMLocalFile.java 44 52
+src/org/jfm/views/JFMView.java 146 154
+----------------------------------------
+	public InputStream getInputStream(){
+		java.io.FileInputStream in=null;
+		try{
+			in=new java.io.FileInputStream(theFile);
+		}catch(IOException exc){
+			exc.printStackTrace();
+		}
+		return in;
+	}
+
+----------------------------------------
+          if(view==null){
+                  try {
+                          Class viewClass=Class.forName(DEFAULT_VIEW.getClassName());
+                          view=(JFMView)viewClass.newInstance();
+                  } catch (Exception e) {
+                          e.printStackTrace();
+                          //ignore the exception
+                  }
+          }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21512988
+src/org/jfm/po/CommandOutputViewDialog.java 81 91
+src/org/jfm/views/JFMView.java 146 154
+----------------------------------------
+    public void run(){
+      try {
+          //i'm not interested in the return value of the process 
+          //i just want to know when it's over
+          process.waitFor();
+      }
+      catch (InterruptedException ex) {}
+      finally {
+        CommandOutputViewDialog.this.dispose();
+      }
+    }
+
+----------------------------------------
+          if(view==null){
+                  try {
+                          Class viewClass=Class.forName(DEFAULT_VIEW.getClassName());
+                          view=(JFMView)viewClass.newInstance();
+                  } catch (Exception e) {
+                          e.printStackTrace();
+                          //ignore the exception
+                  }
+          }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21512993
+src/org/jfm/views/list/detailview/DetailView.java 54 62
+src/org/jfm/views/JFMView.java 146 154
+----------------------------------------
+	public DetailView(String fs) {
+		super(fs);
+	    try {
+	      init();
+	    }
+	    catch(Exception ex) {
+	      ex.printStackTrace();
+	    }	    
+	}
+
+----------------------------------------
+          if(view==null){
+                  try {
+                          Class viewClass=Class.forName(DEFAULT_VIEW.getClassName());
+                          view=(JFMView)viewClass.newInstance();
+                  } catch (Exception e) {
+                          e.printStackTrace();
+                          //ignore the exception
+                  }
+          }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513099
+src/org/jfm/filesystems/JFMFileSystem.java 153 162
+src/org/jfm/views/JFMView.java 146 154
+----------------------------------------
+		if(fs==null){
+			name=null;
+			try {
+				Class fsClass=Class.forName(DEFAULT_FILESYSTEM);
+				fs=(JFMFileSystem)fsClass.newInstance();
+			} catch (Exception e) {
+				e.printStackTrace();
+				//ignore the exception
+			}
+		}
+
+----------------------------------------
+          if(view==null){
+                  try {
+                          Class viewClass=Class.forName(DEFAULT_VIEW.getClassName());
+                          view=(JFMView)viewClass.newInstance();
+                  } catch (Exception e) {
+                          e.printStackTrace();
+                          //ignore the exception
+                  }
+          }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21512986
+src/org/jfm/po/CommandOutputViewDialog.java 23 32
+src/org/jfm/views/JFMView.java 146 154
+----------------------------------------
+  public CommandOutputViewDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+      //pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+          if(view==null){
+                  try {
+                          Class viewClass=Class.forName(DEFAULT_VIEW.getClassName());
+                          view=(JFMView)viewClass.newInstance();
+                  } catch (Exception e) {
+                          e.printStackTrace();
+                          //ignore the exception
+                  }
+          }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21512991
+src/org/jfm/views/list/ListView.java 32 40
+src/org/jfm/views/JFMView.java 146 154
+----------------------------------------
+  public ListView(String fs) {
+  	super(fs);
+    try {
+      jbInit();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }  	
+  }
+
+----------------------------------------
+          if(view==null){
+                  try {
+                          Class viewClass=Class.forName(DEFAULT_VIEW.getClassName());
+                          view=(JFMView)viewClass.newInstance();
+                  } catch (Exception e) {
+                          e.printStackTrace();
+                          //ignore the exception
+                  }
+          }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21512995
+src/org/jfm/main/Options.java 142 158
+src/org/jfm/main/Options.java 168 184
+----------------------------------------
+  public static Color getBackgroundColor(){
+  	int red=255;
+  	int green=255;
+  	int blue=255;
+  	int alpha=255;
+  	String colorSpecs=getPreferences().get("JFM.backgroundcolor","255,255,255,255");
+  	StringTokenizer tokenizer=new StringTokenizer(colorSpecs,",");
+	try {
+		red=Integer.parseInt(tokenizer.nextToken());
+		green=Integer.parseInt(tokenizer.nextToken());
+		blue=Integer.parseInt(tokenizer.nextToken());
+		alpha=Integer.parseInt(tokenizer.nextToken());
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+  	return new Color(red,green,blue,alpha);
+  }
+
+----------------------------------------
+  public static Color getForegroundColor(){
+  	int red=0;
+  	int green=0;
+  	int blue=0;
+  	int alpha=255;
+  	String colorSpecs=getPreferences().get("JFM.foregroundcolor","0,0,0,255");
+  	StringTokenizer tokenizer=new StringTokenizer(colorSpecs,",");
+	try {
+		red=Integer.parseInt(tokenizer.nextToken());
+		green=Integer.parseInt(tokenizer.nextToken());
+		blue=Integer.parseInt(tokenizer.nextToken());
+		alpha=Integer.parseInt(tokenizer.nextToken());
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+  	return new Color(red,green,blue,alpha);
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21512996
+src/org/jfm/main/Options.java 149 154
+src/org/jfm/main/Options.java 175 180
+----------------------------------------
+	try {
+		red=Integer.parseInt(tokenizer.nextToken());
+		green=Integer.parseInt(tokenizer.nextToken());
+		blue=Integer.parseInt(tokenizer.nextToken());
+		alpha=Integer.parseInt(tokenizer.nextToken());
+	} catch (Exception e) {
+
+----------------------------------------
+	try {
+		red=Integer.parseInt(tokenizer.nextToken());
+		green=Integer.parseInt(tokenizer.nextToken());
+		blue=Integer.parseInt(tokenizer.nextToken());
+		alpha=Integer.parseInt(tokenizer.nextToken());
+	} catch (Exception e) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21512997
+src/org/jfm/main/Options.java 168 184
+src/org/jfm/main/Options.java 198 214
+----------------------------------------
+  public static Color getForegroundColor(){
+  	int red=0;
+  	int green=0;
+  	int blue=0;
+  	int alpha=255;
+  	String colorSpecs=getPreferences().get("JFM.foregroundcolor","0,0,0,255");
+  	StringTokenizer tokenizer=new StringTokenizer(colorSpecs,",");
+	try {
+		red=Integer.parseInt(tokenizer.nextToken());
+		green=Integer.parseInt(tokenizer.nextToken());
+		blue=Integer.parseInt(tokenizer.nextToken());
+		alpha=Integer.parseInt(tokenizer.nextToken());
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+  	return new Color(red,green,blue,alpha);
+  }
+
+----------------------------------------
+  public static Color getMarkedColor(){
+  	int red=255;
+  	int green=0;
+  	int blue=0;
+  	int alpha=255;
+  	String colorSpecs=getPreferences().get("JFM.markedcolor","255,0,0,255");
+  	StringTokenizer tokenizer=new StringTokenizer(colorSpecs,",");
+	try {
+		red=Integer.parseInt(tokenizer.nextToken());
+		green=Integer.parseInt(tokenizer.nextToken());
+		blue=Integer.parseInt(tokenizer.nextToken());
+		alpha=Integer.parseInt(tokenizer.nextToken());
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+  	return new Color(red,green,blue,alpha);
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21512998
+src/org/jfm/main/Options.java 142 158
+src/org/jfm/main/Options.java 198 214
+----------------------------------------
+  public static Color getBackgroundColor(){
+  	int red=255;
+  	int green=255;
+  	int blue=255;
+  	int alpha=255;
+  	String colorSpecs=getPreferences().get("JFM.backgroundcolor","255,255,255,255");
+  	StringTokenizer tokenizer=new StringTokenizer(colorSpecs,",");
+	try {
+		red=Integer.parseInt(tokenizer.nextToken());
+		green=Integer.parseInt(tokenizer.nextToken());
+		blue=Integer.parseInt(tokenizer.nextToken());
+		alpha=Integer.parseInt(tokenizer.nextToken());
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+  	return new Color(red,green,blue,alpha);
+  }
+
+----------------------------------------
+  public static Color getMarkedColor(){
+  	int red=255;
+  	int green=0;
+  	int blue=0;
+  	int alpha=255;
+  	String colorSpecs=getPreferences().get("JFM.markedcolor","255,0,0,255");
+  	StringTokenizer tokenizer=new StringTokenizer(colorSpecs,",");
+	try {
+		red=Integer.parseInt(tokenizer.nextToken());
+		green=Integer.parseInt(tokenizer.nextToken());
+		blue=Integer.parseInt(tokenizer.nextToken());
+		alpha=Integer.parseInt(tokenizer.nextToken());
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+  	return new Color(red,green,blue,alpha);
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513000
+src/org/jfm/main/Options.java 175 180
+src/org/jfm/main/Options.java 205 210
+----------------------------------------
+	try {
+		red=Integer.parseInt(tokenizer.nextToken());
+		green=Integer.parseInt(tokenizer.nextToken());
+		blue=Integer.parseInt(tokenizer.nextToken());
+		alpha=Integer.parseInt(tokenizer.nextToken());
+	} catch (Exception e) {
+
+----------------------------------------
+	try {
+		red=Integer.parseInt(tokenizer.nextToken());
+		green=Integer.parseInt(tokenizer.nextToken());
+		blue=Integer.parseInt(tokenizer.nextToken());
+		alpha=Integer.parseInt(tokenizer.nextToken());
+	} catch (Exception e) {
+
+----------------------------------------

@@ -1,0 +1,1673 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513086
+src/org/jfm/views/list/detailview/DetailsTableModel.java 82 90
+src/org/jfm/filesystems/JFMFileSystem.java 153 162
+----------------------------------------
+    public JFMFile getFileAt(int index){
+      JFMFile file=null;
+      try {
+       file=(JFMFile)getValueAt(index, 0);
+      }catch (Exception ex){
+        ex.printStackTrace();
+      }
+      return file;
+    }
+
+----------------------------------------
+		if(fs==null){
+			name=null;
+			try {
+				Class fsClass=Class.forName(DEFAULT_FILESYSTEM);
+				fs=(JFMFileSystem)fsClass.newInstance();
+			} catch (Exception e) {
+				e.printStackTrace();
+				//ignore the exception
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21512874
+src/org/jfm/filesystems/local/JFMLocalFile.java 44 52
+src/org/jfm/filesystems/JFMFileSystem.java 153 162
+----------------------------------------
+	public InputStream getInputStream(){
+		java.io.FileInputStream in=null;
+		try{
+			in=new java.io.FileInputStream(theFile);
+		}catch(IOException exc){
+			exc.printStackTrace();
+		}
+		return in;
+	}
+
+----------------------------------------
+		if(fs==null){
+			name=null;
+			try {
+				Class fsClass=Class.forName(DEFAULT_FILESYSTEM);
+				fs=(JFMFileSystem)fsClass.newInstance();
+			} catch (Exception e) {
+				e.printStackTrace();
+				//ignore the exception
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21512982
+src/org/jfm/po/ProgressActionDialog.java 57 66
+src/org/jfm/filesystems/JFMFileSystem.java 153 162
+----------------------------------------
+  public ProgressActionDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+		if(fs==null){
+			name=null;
+			try {
+				Class fsClass=Class.forName(DEFAULT_FILESYSTEM);
+				fs=(JFMFileSystem)fsClass.newInstance();
+			} catch (Exception e) {
+				e.printStackTrace();
+				//ignore the exception
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513052
+src/org/jfm/po/CommandOutputViewDialog.java 23 32
+src/org/jfm/filesystems/JFMFileSystem.java 153 162
+----------------------------------------
+  public CommandOutputViewDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+      //pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+		if(fs==null){
+			name=null;
+			try {
+				Class fsClass=Class.forName(DEFAULT_FILESYSTEM);
+				fs=(JFMFileSystem)fsClass.newInstance();
+			} catch (Exception e) {
+				e.printStackTrace();
+				//ignore the exception
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21512867
+src/org/jfm/filesystems/JFMFileSystem.java 141 150
+src/org/jfm/filesystems/JFMFileSystem.java 153 162
+----------------------------------------
+			if(name.equals(fsClassName)){
+				try {
+					Class fsClass=Class.forName(fsClassName,true,JFMClassLoader.getLoader());
+					fs=(JFMFileSystem)fsClass.newInstance();
+					return fs;
+				} catch (Exception e) {
+					e.printStackTrace();
+					//ignore the exception
+				}
+			}
+
+----------------------------------------
+		if(fs==null){
+			name=null;
+			try {
+				Class fsClass=Class.forName(DEFAULT_FILESYSTEM);
+				fs=(JFMFileSystem)fsClass.newInstance();
+			} catch (Exception e) {
+				e.printStackTrace();
+				//ignore the exception
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513094
+src/org/jfm/views/list/detailview/DetailView.java 54 62
+src/org/jfm/filesystems/JFMFileSystem.java 153 162
+----------------------------------------
+	public DetailView(String fs) {
+		super(fs);
+	    try {
+	      init();
+	    }
+	    catch(Exception ex) {
+	      ex.printStackTrace();
+	    }	    
+	}
+
+----------------------------------------
+		if(fs==null){
+			name=null;
+			try {
+				Class fsClass=Class.forName(DEFAULT_FILESYSTEM);
+				fs=(JFMFileSystem)fsClass.newInstance();
+			} catch (Exception e) {
+				e.printStackTrace();
+				//ignore the exception
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513434
+src/org/jfm/po/CommandOutputViewDialog.java 81 91
+src/org/jfm/filesystems/JFMFileSystem.java 153 162
+----------------------------------------
+    public void run(){
+      try {
+          //i'm not interested in the return value of the process 
+          //i just want to know when it's over
+          process.waitFor();
+      }
+      catch (InterruptedException ex) {}
+      finally {
+        CommandOutputViewDialog.this.dispose();
+      }
+    }
+
+----------------------------------------
+		if(fs==null){
+			name=null;
+			try {
+				Class fsClass=Class.forName(DEFAULT_FILESYSTEM);
+				fs=(JFMFileSystem)fsClass.newInstance();
+			} catch (Exception e) {
+				e.printStackTrace();
+				//ignore the exception
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513390
+src/org/jfm/po/FilePropertiesDialog.java 36 45
+src/org/jfm/filesystems/JFMFileSystem.java 153 162
+----------------------------------------
+  public FilePropertiesDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+		if(fs==null){
+			name=null;
+			try {
+				Class fsClass=Class.forName(DEFAULT_FILESYSTEM);
+				fs=(JFMFileSystem)fsClass.newInstance();
+			} catch (Exception e) {
+				e.printStackTrace();
+				//ignore the exception
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21512868
+src/org/jfm/filesystems/JFMFileSystem.java 153 162
+src/org/jfm/filesystems/local/JFMLocalFilesystem.java 51 57
+----------------------------------------
+		if(fs==null){
+			name=null;
+			try {
+				Class fsClass=Class.forName(DEFAULT_FILESYSTEM);
+				fs=(JFMFileSystem)fsClass.newInstance();
+			} catch (Exception e) {
+				e.printStackTrace();
+				//ignore the exception
+			}
+		}
+
+----------------------------------------
+		for(int i=0;i<files.length;i++){
+			try{
+				jfmFiles[i]=new JFMLocalFile(files[i].getAbsolutePath());
+			}catch(Exception ignored){
+				ignored.printStackTrace();
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21512983
+src/org/jfm/po/ProgressActionDialog.java 57 66
+src/org/jfm/filesystems/local/JFMLocalFilesystem.java 51 57
+----------------------------------------
+  public ProgressActionDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+		for(int i=0;i<files.length;i++){
+			try{
+				jfmFiles[i]=new JFMLocalFile(files[i].getAbsolutePath());
+			}catch(Exception ignored){
+				ignored.printStackTrace();
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513145
+src/org/jfm/views/list/detailview/DetailView.java 54 62
+src/org/jfm/filesystems/local/JFMLocalFilesystem.java 51 57
+----------------------------------------
+	public DetailView(String fs) {
+		super(fs);
+	    try {
+	      init();
+	    }
+	    catch(Exception ex) {
+	      ex.printStackTrace();
+	    }	    
+	}
+
+----------------------------------------
+		for(int i=0;i<files.length;i++){
+			try{
+				jfmFiles[i]=new JFMLocalFile(files[i].getAbsolutePath());
+			}catch(Exception ignored){
+				ignored.printStackTrace();
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21512878
+src/org/jfm/views/list/briefview/BriefView.java 48 56
+src/org/jfm/filesystems/local/JFMLocalFilesystem.java 51 57
+----------------------------------------
+	public BriefView(String fs){
+		super(fs);
+	    try {
+	      init();
+	    }
+	    catch(Exception ex) {
+	      ex.printStackTrace();
+	    }	    
+	}
+
+----------------------------------------
+		for(int i=0;i<files.length;i++){
+			try{
+				jfmFiles[i]=new JFMLocalFile(files[i].getAbsolutePath());
+			}catch(Exception ignored){
+				ignored.printStackTrace();
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513087
+src/org/jfm/views/list/detailview/DetailsTableModel.java 82 90
+src/org/jfm/filesystems/local/JFMLocalFilesystem.java 51 57
+----------------------------------------
+    public JFMFile getFileAt(int index){
+      JFMFile file=null;
+      try {
+       file=(JFMFile)getValueAt(index, 0);
+      }catch (Exception ex){
+        ex.printStackTrace();
+      }
+      return file;
+    }
+
+----------------------------------------
+		for(int i=0;i<files.length;i++){
+			try{
+				jfmFiles[i]=new JFMLocalFile(files[i].getAbsolutePath());
+			}catch(Exception ignored){
+				ignored.printStackTrace();
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21512895
+src/org/jfm/filesystems/local/JFMLocalFile.java 44 52
+src/org/jfm/filesystems/local/JFMLocalFilesystem.java 51 57
+----------------------------------------
+	public InputStream getInputStream(){
+		java.io.FileInputStream in=null;
+		try{
+			in=new java.io.FileInputStream(theFile);
+		}catch(IOException exc){
+			exc.printStackTrace();
+		}
+		return in;
+	}
+
+----------------------------------------
+		for(int i=0;i<files.length;i++){
+			try{
+				jfmFiles[i]=new JFMLocalFile(files[i].getAbsolutePath());
+			}catch(Exception ignored){
+				ignored.printStackTrace();
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513435
+src/org/jfm/po/CommandOutputViewDialog.java 81 91
+src/org/jfm/filesystems/local/JFMLocalFilesystem.java 51 57
+----------------------------------------
+    public void run(){
+      try {
+          //i'm not interested in the return value of the process 
+          //i just want to know when it's over
+          process.waitFor();
+      }
+      catch (InterruptedException ex) {}
+      finally {
+        CommandOutputViewDialog.this.dispose();
+      }
+    }
+
+----------------------------------------
+		for(int i=0;i<files.length;i++){
+			try{
+				jfmFiles[i]=new JFMLocalFile(files[i].getAbsolutePath());
+			}catch(Exception ignored){
+				ignored.printStackTrace();
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21512869
+src/org/jfm/filesystems/JFMFileSystem.java 89 97
+src/org/jfm/filesystems/local/JFMLocalFilesystem.java 51 57
+----------------------------------------
+		  {
+			  if(!files[i].isFile() || !files[i].getName().endsWith("jar")) continue;
+			  try{
+				  registerFilesystem(files[i]);
+			  }catch(Exception ignored)
+			  {
+				  ignored.printStackTrace();
+			  }
+		  }
+
+----------------------------------------
+		for(int i=0;i<files.length;i++){
+			try{
+				jfmFiles[i]=new JFMLocalFile(files[i].getAbsolutePath());
+			}catch(Exception ignored){
+				ignored.printStackTrace();
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513053
+src/org/jfm/po/CommandOutputViewDialog.java 23 32
+src/org/jfm/filesystems/local/JFMLocalFilesystem.java 51 57
+----------------------------------------
+  public CommandOutputViewDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+      //pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+		for(int i=0;i<files.length;i++){
+			try{
+				jfmFiles[i]=new JFMLocalFile(files[i].getAbsolutePath());
+			}catch(Exception ignored){
+				ignored.printStackTrace();
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21512870
+src/org/jfm/filesystems/JFMFileSystem.java 141 150
+src/org/jfm/filesystems/local/JFMLocalFilesystem.java 51 57
+----------------------------------------
+			if(name.equals(fsClassName)){
+				try {
+					Class fsClass=Class.forName(fsClassName,true,JFMClassLoader.getLoader());
+					fs=(JFMFileSystem)fsClass.newInstance();
+					return fs;
+				} catch (Exception e) {
+					e.printStackTrace();
+					//ignore the exception
+				}
+			}
+
+----------------------------------------
+		for(int i=0;i<files.length;i++){
+			try{
+				jfmFiles[i]=new JFMLocalFile(files[i].getAbsolutePath());
+			}catch(Exception ignored){
+				ignored.printStackTrace();
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513391
+src/org/jfm/po/FilePropertiesDialog.java 36 45
+src/org/jfm/filesystems/local/JFMLocalFilesystem.java 51 57
+----------------------------------------
+  public FilePropertiesDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+		for(int i=0;i<files.length;i++){
+			try{
+				jfmFiles[i]=new JFMLocalFile(files[i].getAbsolutePath());
+			}catch(Exception ignored){
+				ignored.printStackTrace();
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21512871
+src/org/jfm/filesystems/local/JFMLocalFilesystem.java 126 133
+src/org/jfm/filesystems/local/JFMLocalFilesystem.java 196 203
+----------------------------------------
+	public boolean createNewFile(JFMFile file) throws FSException {
+		File f=new File(file.getAbsolutePath());
+		try{
+			return f.createNewFile();
+		}catch(IOException ex){
+			throw new FSException(ex.getMessage());
+		}
+	}
+
+----------------------------------------
+		public boolean createNewFile(JFMFile parent, String name) throws FSException {
+			File f=new File(parent.getAbsolutePath(),name);
+			try{
+				return f.createNewFile();
+			}catch(IOException ex){
+				throw new FSException(ex.getMessage());
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21512900
+src/org/jfm/filesystems/JFMFileSystem.java 141 150
+src/org/jfm/filesystems/local/JFMLocalFile.java 75 83
+----------------------------------------
+			if(name.equals(fsClassName)){
+				try {
+					Class fsClass=Class.forName(fsClassName,true,JFMClassLoader.getLoader());
+					fs=(JFMFileSystem)fsClass.newInstance();
+					return fs;
+				} catch (Exception e) {
+					e.printStackTrace();
+					//ignore the exception
+				}
+			}
+
+----------------------------------------
+	public OutputStream getOutputStream(){
+		java.io.FileOutputStream out=null;
+		try{
+			out=new java.io.FileOutputStream(theFile);
+		}catch(IOException exc){
+			exc.printStackTrace();
+		}
+		return out;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21512981
+src/org/jfm/po/ProgressActionDialog.java 57 66
+src/org/jfm/filesystems/local/JFMLocalFile.java 75 83
+----------------------------------------
+  public ProgressActionDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+	public OutputStream getOutputStream(){
+		java.io.FileOutputStream out=null;
+		try{
+			out=new java.io.FileOutputStream(theFile);
+		}catch(IOException exc){
+			exc.printStackTrace();
+		}
+		return out;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21512896
+src/org/jfm/filesystems/local/JFMLocalFile.java 44 52
+src/org/jfm/filesystems/local/JFMLocalFile.java 75 83
+----------------------------------------
+	public InputStream getInputStream(){
+		java.io.FileInputStream in=null;
+		try{
+			in=new java.io.FileInputStream(theFile);
+		}catch(IOException exc){
+			exc.printStackTrace();
+		}
+		return in;
+	}
+
+----------------------------------------
+	public OutputStream getOutputStream(){
+		java.io.FileOutputStream out=null;
+		try{
+			out=new java.io.FileOutputStream(theFile);
+		}catch(IOException exc){
+			exc.printStackTrace();
+		}
+		return out;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21512901
+src/org/jfm/filesystems/JFMFileSystem.java 153 162
+src/org/jfm/filesystems/local/JFMLocalFile.java 75 83
+----------------------------------------
+		if(fs==null){
+			name=null;
+			try {
+				Class fsClass=Class.forName(DEFAULT_FILESYSTEM);
+				fs=(JFMFileSystem)fsClass.newInstance();
+			} catch (Exception e) {
+				e.printStackTrace();
+				//ignore the exception
+			}
+		}
+
+----------------------------------------
+	public OutputStream getOutputStream(){
+		java.io.FileOutputStream out=null;
+		try{
+			out=new java.io.FileOutputStream(theFile);
+		}catch(IOException exc){
+			exc.printStackTrace();
+		}
+		return out;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21512902
+src/org/jfm/filesystems/local/JFMLocalFilesystem.java 51 57
+src/org/jfm/filesystems/local/JFMLocalFile.java 75 83
+----------------------------------------
+		for(int i=0;i<files.length;i++){
+			try{
+				jfmFiles[i]=new JFMLocalFile(files[i].getAbsolutePath());
+			}catch(Exception ignored){
+				ignored.printStackTrace();
+			}
+		}
+
+----------------------------------------
+	public OutputStream getOutputStream(){
+		java.io.FileOutputStream out=null;
+		try{
+			out=new java.io.FileOutputStream(theFile);
+		}catch(IOException exc){
+			exc.printStackTrace();
+		}
+		return out;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21512897
+src/org/jfm/filesystems/JFMFileSystem.java 89 97
+src/org/jfm/filesystems/local/JFMLocalFile.java 75 83
+----------------------------------------
+		  {
+			  if(!files[i].isFile() || !files[i].getName().endsWith("jar")) continue;
+			  try{
+				  registerFilesystem(files[i]);
+			  }catch(Exception ignored)
+			  {
+				  ignored.printStackTrace();
+			  }
+		  }
+
+----------------------------------------
+	public OutputStream getOutputStream(){
+		java.io.FileOutputStream out=null;
+		try{
+			out=new java.io.FileOutputStream(theFile);
+		}catch(IOException exc){
+			exc.printStackTrace();
+		}
+		return out;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513389
+src/org/jfm/po/FilePropertiesDialog.java 36 45
+src/org/jfm/filesystems/local/JFMLocalFile.java 75 83
+----------------------------------------
+  public FilePropertiesDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+	public OutputStream getOutputStream(){
+		java.io.FileOutputStream out=null;
+		try{
+			out=new java.io.FileOutputStream(theFile);
+		}catch(IOException exc){
+			exc.printStackTrace();
+		}
+		return out;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513051
+src/org/jfm/po/CommandOutputViewDialog.java 23 32
+src/org/jfm/filesystems/local/JFMLocalFile.java 75 83
+----------------------------------------
+  public CommandOutputViewDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+      //pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+	public OutputStream getOutputStream(){
+		java.io.FileOutputStream out=null;
+		try{
+			out=new java.io.FileOutputStream(theFile);
+		}catch(IOException exc){
+			exc.printStackTrace();
+		}
+		return out;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21512944
+src/org/jfm/po/CommandOutputViewDialog.java 81 91
+src/org/jfm/filesystems/local/JFMLocalFile.java 75 83
+----------------------------------------
+    public void run(){
+      try {
+          //i'm not interested in the return value of the process 
+          //i just want to know when it's over
+          process.waitFor();
+      }
+      catch (InterruptedException ex) {}
+      finally {
+        CommandOutputViewDialog.this.dispose();
+      }
+    }
+
+----------------------------------------
+	public OutputStream getOutputStream(){
+		java.io.FileOutputStream out=null;
+		try{
+			out=new java.io.FileOutputStream(theFile);
+		}catch(IOException exc){
+			exc.printStackTrace();
+		}
+		return out;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21512876
+src/org/jfm/views/list/briefview/BriefView.java 48 56
+src/org/jfm/filesystems/local/JFMLocalFile.java 75 83
+----------------------------------------
+	public BriefView(String fs){
+		super(fs);
+	    try {
+	      init();
+	    }
+	    catch(Exception ex) {
+	      ex.printStackTrace();
+	    }	    
+	}
+
+----------------------------------------
+	public OutputStream getOutputStream(){
+		java.io.FileOutputStream out=null;
+		try{
+			out=new java.io.FileOutputStream(theFile);
+		}catch(IOException exc){
+			exc.printStackTrace();
+		}
+		return out;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21512898
+src/org/jfm/views/list/detailview/DetailsTableModel.java 82 90
+src/org/jfm/filesystems/local/JFMLocalFile.java 75 83
+----------------------------------------
+    public JFMFile getFileAt(int index){
+      JFMFile file=null;
+      try {
+       file=(JFMFile)getValueAt(index, 0);
+      }catch (Exception ex){
+        ex.printStackTrace();
+      }
+      return file;
+    }
+
+----------------------------------------
+	public OutputStream getOutputStream(){
+		java.io.FileOutputStream out=null;
+		try{
+			out=new java.io.FileOutputStream(theFile);
+		}catch(IOException exc){
+			exc.printStackTrace();
+		}
+		return out;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21512899
+src/org/jfm/views/list/detailview/DetailView.java 54 62
+src/org/jfm/filesystems/local/JFMLocalFile.java 75 83
+----------------------------------------
+	public DetailView(String fs) {
+		super(fs);
+	    try {
+	      init();
+	    }
+	    catch(Exception ex) {
+	      ex.printStackTrace();
+	    }	    
+	}
+
+----------------------------------------
+	public OutputStream getOutputStream(){
+		java.io.FileOutputStream out=null;
+		try{
+			out=new java.io.FileOutputStream(theFile);
+		}catch(IOException exc){
+			exc.printStackTrace();
+		}
+		return out;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21512879
+src/org/jfm/views/list/detailview/DetailView.java 71 183
+src/org/jfm/views/list/briefview/BriefView.java 62 161
+----------------------------------------
+	private void init() throws Exception{		
+		model=new DetailsTableModel(filesystem);
+		table.setModel(model);
+		this.setLayout(new BorderLayout());
+		scroll = new JScrollPane(table);
+		scroll.getViewport().setBackground(Options.getBackgroundColor());
+		table.setBackground(Options.getBackgroundColor());
+		table.setForeground(Options.getForegroundColor());
+		table.setFont(Options.getPanelsFont());
+		
+		add(scroll,BorderLayout.CENTER);
+		add(topPanel,BorderLayout.NORTH);
+		Broadcaster.addFontChangeListener(new FontChangeListener(){
+			public void fontChanged(FontChangeEvent ev){
+				table.setFont(Options.getPanelsFont());
+			}
+		});	
+		
+		Broadcaster.addColorChangeListener(new ColorChangeListener(){
+			public void colorChanged(ColorChangeEvent event){
+				if(event.getColorType()==ColorChangeEvent.BACKGROUND){
+					scroll.getViewport().setBackground(Options.getBackgroundColor());
+					table.setBackground(Options.getBackgroundColor());
+				}
+				if(event.getColorType()==ColorChangeEvent.FOREGROUND){
+					table.setForeground(Options.getForegroundColor());
+				}
+			}
+		});
+
+		Broadcaster.addChangeDirectoryListener(new ChangeDirectoryListener(){
+			public void changeDirectory(ChangeDirectoryEvent e){
+				if(e.getSource().equals(model)){
+					statusLabel.setText(e.getDirectory().getAbsolutePath());
+					return;
+				}
+				/*System.out.println("changedir -----");
+				System.out.println(filesystem);
+				System.out.println(e.getSource());
+				System.out.println((e.getSource() instanceof MkdirAction)+" bool1");
+				System.out.println((isActive)+" bool2");*/
+				if((e.getSource() instanceof javax.swing.Action) && isActive){	
+					final DetailsTableModel model=(DetailsTableModel)table.getModel();
+					model.browseDirectory(getCurrentWorkingDirectory());
+					table.getMarkedFiles().clear();
+				}
+				
+				//if we were the target of a Copyaction or Move action, then we're not active, but we still should update ourselves
+				if(((e.getSource() instanceof CopyAction)  || (e.getSource() instanceof MoveAction)) && !isActive){	
+					final DetailsTableModel model=(DetailsTableModel)table.getModel();
+					model.browseDirectory(getCurrentWorkingDirectory());
+					table.getMarkedFiles().clear();
+				}
+				
+			}
+		});		
+		table.addFocusListener(new FocusListener(){
+			public void focusGained(FocusEvent e){
+				statusLabel.setForeground(UIManager.getColor("Label.foreground"));
+				if(e.getOppositeComponent()!=null ) 
+				{
+					Options.setActivePanel(DetailView.this);
+				}
+				ChangeDirectoryEvent event=new ChangeDirectoryEvent();
+				event.setDirectory(getCurrentWorkingDirectory());
+				event.setSource(DetailView.this);
+				Broadcaster.notifyChangeDirectoryListeners(event);
+				if(selectedRow>=0 && selectedRow<model.getRowCount()){
+					try {
+						table.getSelectionModel().setSelectionInterval(selectedRow,selectedRow);
+					}
+					catch (Exception ignored) { }
+				}
+				table.repaint();
+			}			
+			public void focusLost(FocusEvent e){
+				statusLabel.setForeground(UIManager.getColor("Label.disabledForeground"));
+				selectedRow=table.getSelectedRow();
+				table.repaint();
+				// table.getSelectionModel().clearSelection();
+			}
+		});		
+		table.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+			public void valueChanged(ListSelectionEvent e){
+				if(e.getValueIsAdjusting()) return;
+				if(table.getSelectionModel().isSelectionEmpty()) return;				
+				int[] selections=new int[2];
+				int firstIndex = table.getSelectionModel().getMinSelectionIndex();
+				int lastIndex = table.getSelectionModel().getMaxSelectionIndex();				
+				selections[0]=firstIndex;
+				selections[1]=lastIndex;
+			}
+		});		
+		table.addMouseListener(new MouseAdapter(){
+			public void mouseClicked(MouseEvent event){
+				if(SwingUtilities.isRightMouseButton(event)){
+					if(table.rowAtPoint(event.getPoint())<0){
+						return;
+					}
+					Options.getPopupMenu().show(table,event.getX(),event.getY());
+				}
+			}
+		});
+		table.setPanelChangeRequestListener(new PanelChangeRequestListener(){
+			public void requestPanelChange() {
+				ChangePanelEvent ev=new ChangePanelEvent();
+				ev.setSource(DetailView.this);
+				Broadcaster.notifyChangePanelListeners(ev);		
+			}
+		});
+		
+		changeDirectory(filesystem.getStartDirectory());
+	}
+
+----------------------------------------
+	private void init() throws Exception{
+		model=new BriefViewListComponentModel(filesystem);
+		list.setModel(model);
+		
+		this.setLayout(new BorderLayout());
+		scroll = new JScrollPane(list);
+		scroll.getViewport().setBackground(Options.getBackgroundColor());
+		list.setBackground(Options.getBackgroundColor());
+		list.setForeground(Options.getForegroundColor());
+		list.setFont(Options.getPanelsFont());
+		
+		add(scroll,BorderLayout.CENTER);
+		add(topPanel,BorderLayout.NORTH);
+
+		Broadcaster.addFontChangeListener(new FontChangeListener(){
+			public void fontChanged(FontChangeEvent ev){
+				list.setFont(Options.getPanelsFont());
+			}
+		});	
+		Broadcaster.addChangeDirectoryListener(new ChangeDirectoryListener(){
+			public void changeDirectory(ChangeDirectoryEvent e){
+				if(e.getSource().equals(list.getModel())){
+					statusLabel.setText(e.getDirectory().getAbsolutePath());
+					return;
+				}
+
+				if((e.getSource() instanceof javax.swing.Action) && isActive){						
+					model.browseDirectory(getCurrentWorkingDirectory());
+					list.getMarkedFiles().clear();
+				}
+				
+				//if we were the target of a Copyaction or Move action, then we're not active, but we still should update ourselves
+				if(((e.getSource() instanceof CopyAction)  || (e.getSource() instanceof MoveAction)) && !isActive){						
+					model.browseDirectory(getCurrentWorkingDirectory());
+					list.getMarkedFiles().clear();
+				}
+				
+			}
+		});	
+		Broadcaster.addColorChangeListener(new ColorChangeListener(){
+			public void colorChanged(ColorChangeEvent event){
+				if(event.getColorType()==ColorChangeEvent.BACKGROUND){
+					scroll.getViewport().setBackground(Options.getBackgroundColor());
+					list.setBackground(Options.getBackgroundColor());
+				}
+				if(event.getColorType()==ColorChangeEvent.FOREGROUND){
+					list.setForeground(Options.getForegroundColor());
+				}
+			}
+		});
+		list.addFocusListener(new FocusListener(){
+			public void focusGained(FocusEvent e){
+				statusLabel.setForeground(UIManager.getColor("Label.foreground"));
+				if(selectedRow>=0){
+					list.setSelectedIndex(selectedRow);
+				}
+				if(e.getOppositeComponent()!=null ) 
+				{
+					Options.setActivePanel(BriefView.this);
+				}				
+				ChangeDirectoryEvent event=new ChangeDirectoryEvent();
+				event.setDirectory(getCurrentWorkingDirectory());
+				event.setSource(BriefView.this);
+				Broadcaster.notifyChangeDirectoryListeners(event);				
+			}			
+			public void focusLost(FocusEvent e){
+				statusLabel.setForeground(UIManager.getColor("Label.disabledForeground"));
+				selectedRow=list.getSelectedIndex();
+			}
+		});		
+		list.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+			public void valueChanged(ListSelectionEvent e){
+				if(e.getValueIsAdjusting()) return;
+				if(list.getSelectionModel().isSelectionEmpty()) return;				
+				int[] selections=new int[2];
+				int firstIndex = list.getSelectionModel().getMinSelectionIndex();
+				int lastIndex = list.getSelectionModel().getMaxSelectionIndex();				
+				selections[0]=firstIndex;
+				selections[1]=lastIndex;
+			}
+		});		
+		list.addMouseListener(new MouseAdapter(){
+			public void mouseClicked(MouseEvent event){
+				if(SwingUtilities.isRightMouseButton(event)){
+					if(list.locationToIndex(event.getPoint())<0){
+						return;
+					}
+					Options.getPopupMenu().show(list,event.getX(),event.getY());
+				}
+			}
+		});
+		list.setPanelChangeRequestListener(new PanelChangeRequestListener(){
+			public void requestPanelChange() {
+				ChangePanelEvent ev=new ChangePanelEvent();
+				ev.setSource(BriefView.this);
+				Broadcaster.notifyChangePanelListeners(ev);		}
+		});
+		
+		changeDirectory(filesystem.getStartDirectory());
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21512880
+src/org/jfm/views/list/detailview/DetailView.java 102 125
+src/org/jfm/views/list/briefview/BriefView.java 82 99
+----------------------------------------
+			public void changeDirectory(ChangeDirectoryEvent e){
+				if(e.getSource().equals(model)){
+					statusLabel.setText(e.getDirectory().getAbsolutePath());
+					return;
+				}
+				/*System.out.println("changedir -----");
+				System.out.println(filesystem);
+				System.out.println(e.getSource());
+				System.out.println((e.getSource() instanceof MkdirAction)+" bool1");
+				System.out.println((isActive)+" bool2");*/
+				if((e.getSource() instanceof javax.swing.Action) && isActive){	
+					final DetailsTableModel model=(DetailsTableModel)table.getModel();
+					model.browseDirectory(getCurrentWorkingDirectory());
+					table.getMarkedFiles().clear();
+				}
+				
+				//if we were the target of a Copyaction or Move action, then we're not active, but we still should update ourselves
+				if(((e.getSource() instanceof CopyAction)  || (e.getSource() instanceof MoveAction)) && !isActive){	
+					final DetailsTableModel model=(DetailsTableModel)table.getModel();
+					model.browseDirectory(getCurrentWorkingDirectory());
+					table.getMarkedFiles().clear();
+				}
+				
+			}
+
+----------------------------------------
+			public void changeDirectory(ChangeDirectoryEvent e){
+				if(e.getSource().equals(list.getModel())){
+					statusLabel.setText(e.getDirectory().getAbsolutePath());
+					return;
+				}
+
+				if((e.getSource() instanceof javax.swing.Action) && isActive){						
+					model.browseDirectory(getCurrentWorkingDirectory());
+					list.getMarkedFiles().clear();
+				}
+				
+				//if we were the target of a Copyaction or Move action, then we're not active, but we still should update ourselves
+				if(((e.getSource() instanceof CopyAction)  || (e.getSource() instanceof MoveAction)) && !isActive){						
+					model.browseDirectory(getCurrentWorkingDirectory());
+					list.getMarkedFiles().clear();
+				}
+				
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21512881
+src/org/jfm/views/list/detailview/DetailView.java 90 98
+src/org/jfm/views/list/briefview/BriefView.java 102 110
+----------------------------------------
+			public void colorChanged(ColorChangeEvent event){
+				if(event.getColorType()==ColorChangeEvent.BACKGROUND){
+					scroll.getViewport().setBackground(Options.getBackgroundColor());
+					table.setBackground(Options.getBackgroundColor());
+				}
+				if(event.getColorType()==ColorChangeEvent.FOREGROUND){
+					table.setForeground(Options.getForegroundColor());
+				}
+			}
+
+----------------------------------------
+			public void colorChanged(ColorChangeEvent event){
+				if(event.getColorType()==ColorChangeEvent.BACKGROUND){
+					scroll.getViewport().setBackground(Options.getBackgroundColor());
+					list.setBackground(Options.getBackgroundColor());
+				}
+				if(event.getColorType()==ColorChangeEvent.FOREGROUND){
+					list.setForeground(Options.getForegroundColor());
+				}
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21512882
+src/org/jfm/views/list/detailview/DetailView.java 154 162
+src/org/jfm/views/list/briefview/BriefView.java 133 141
+----------------------------------------
+			public void valueChanged(ListSelectionEvent e){
+				if(e.getValueIsAdjusting()) return;
+				if(table.getSelectionModel().isSelectionEmpty()) return;				
+				int[] selections=new int[2];
+				int firstIndex = table.getSelectionModel().getMinSelectionIndex();
+				int lastIndex = table.getSelectionModel().getMaxSelectionIndex();				
+				selections[0]=firstIndex;
+				selections[1]=lastIndex;
+			}
+
+----------------------------------------
+			public void valueChanged(ListSelectionEvent e){
+				if(e.getValueIsAdjusting()) return;
+				if(list.getSelectionModel().isSelectionEmpty()) return;				
+				int[] selections=new int[2];
+				int firstIndex = list.getSelectionModel().getMinSelectionIndex();
+				int lastIndex = list.getSelectionModel().getMaxSelectionIndex();				
+				selections[0]=firstIndex;
+				selections[1]=lastIndex;
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21512883
+src/org/jfm/views/list/detailview/DetailView.java 166 171
+src/org/jfm/views/list/briefview/BriefView.java 144 151
+----------------------------------------
+				if(SwingUtilities.isRightMouseButton(event)){
+					if(table.rowAtPoint(event.getPoint())<0){
+						return;
+					}
+					Options.getPopupMenu().show(table,event.getX(),event.getY());
+				}
+
+----------------------------------------
+			public void mouseClicked(MouseEvent event){
+				if(SwingUtilities.isRightMouseButton(event)){
+					if(list.locationToIndex(event.getPoint())<0){
+						return;
+					}
+					Options.getPopupMenu().show(list,event.getX(),event.getY());
+				}
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21512884
+src/org/jfm/views/list/briefview/BriefView.java 144 151
+src/org/jfm/views/list/detailview/DetailView.java 165 172
+----------------------------------------
+			public void mouseClicked(MouseEvent event){
+				if(SwingUtilities.isRightMouseButton(event)){
+					if(list.locationToIndex(event.getPoint())<0){
+						return;
+					}
+					Options.getPopupMenu().show(list,event.getX(),event.getY());
+				}
+			}
+
+----------------------------------------
+			public void mouseClicked(MouseEvent event){
+				if(SwingUtilities.isRightMouseButton(event)){
+					if(table.rowAtPoint(event.getPoint())<0){
+						return;
+					}
+					Options.getPopupMenu().show(table,event.getX(),event.getY());
+				}
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21512885
+src/org/jfm/filesystems/local/JFMLocalFilesystem.java 51 57
+src/org/jfm/views/list/detailview/DetailView.java 138 143
+----------------------------------------
+		for(int i=0;i<files.length;i++){
+			try{
+				jfmFiles[i]=new JFMLocalFile(files[i].getAbsolutePath());
+			}catch(Exception ignored){
+				ignored.printStackTrace();
+			}
+		}
+
+----------------------------------------
+				if(selectedRow>=0 && selectedRow<model.getRowCount()){
+					try {
+						table.getSelectionModel().setSelectionInterval(selectedRow,selectedRow);
+					}
+					catch (Exception ignored) { }
+				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21512886
+src/org/jfm/views/list/detailview/DetailsTable.java 162 185
+src/org/jfm/views/list/briefview/BriefViewListComponent.java 173 195
+----------------------------------------
+      public void actionPerformed(java.awt.event.ActionEvent e){
+      	if(true)return;
+      	//for the moment, disable this, since we don't have an expression parser
+      	//that would parse expressions that are common for file names (*.*,a?.txt, etc.)
+      	
+      	String filter=JOptionPane.showInputDialog(Options.getMainFrame(),"Files type (regular expression accepted):","*");
+      	if(filter==null || filter.length()<=0) return;
+      	DetailsTableModel model=((DetailsTableModel)DetailsTable.this.getModel());
+      	Pattern pattern=Pattern.compile(filter);      	
+          for(int row=1;row<model.getRowCount();row++){
+              JFMFile el=model.getFileAt(row);
+              Matcher matcher=pattern.matcher(el.getName());
+              if(matcher.matches() && (el.isFile() || Options.getDirectoriesSelectedOnPlus())){
+              	el.setMarked(!el.isMarked());
+                  if(el.isMarked()){
+                	  markedRows.add(new Integer(row));
+                  }else{
+                	  markedRows.remove(new Integer(row));
+                  }
+              	
+              }
+          }
+          DetailsTable.this.repaint();
+      }
+
+----------------------------------------
+      public void actionPerformed(java.awt.event.ActionEvent e){
+      	if(true)return;
+      	//for the moment, disable this, since we don't have an expression parser
+      	//that would parse expressions that are common for file names (*.*,a?.txt, etc.)
+      	
+      	String filter=JOptionPane.showInputDialog(Options.getMainFrame(),"Files type (regular expression accepted):","*");
+      	if(filter==null || filter.length()<=0) return;
+      	Pattern pattern=Pattern.compile(filter,Pattern.CASE_INSENSITIVE);
+        for(int row=1;row<BriefViewListComponent.this.getModel().getSize();row++){
+          JFMFile el=(JFMFile)BriefViewListComponent.this.getModel().getElementAt(row);          
+          Matcher matcher=pattern.matcher(el.getName());
+          if(matcher.matches() && (el.isFile() || Options.getDirectoriesSelectedOnPlus())){
+          	el.setMarked(!el.isMarked());
+                  if(el.isMarked()){
+                	  markedRows.add(new Integer(row));
+                  }else{
+                	  markedRows.remove(new Integer(row));
+                  }
+          	
+          }
+        }
+          BriefViewListComponent.this.repaint();                    
+      }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21512887
+src/org/jfm/views/list/detailview/DetailsTable.java 199 209
+src/org/jfm/views/list/briefview/BriefViewListComponent.java 181 193
+----------------------------------------
+          for(int row=1;row<model.getRowCount();row++){
+                  JFMFile el=model.getFileAt(row);
+                  if(el.isFile() || Options.getDirectoriesSelectedOnAsterisk()){
+                  	el.setMarked(!el.isMarked());
+	                  if(el.isMarked()){
+	                	  markedRows.add(new Integer(row));
+	                  }else{
+	                	  markedRows.remove(new Integer(row));
+	                  }
+                  }
+          }
+
+----------------------------------------
+        for(int row=1;row<BriefViewListComponent.this.getModel().getSize();row++){
+          JFMFile el=(JFMFile)BriefViewListComponent.this.getModel().getElementAt(row);          
+          Matcher matcher=pattern.matcher(el.getName());
+          if(matcher.matches() && (el.isFile() || Options.getDirectoriesSelectedOnPlus())){
+          	el.setMarked(!el.isMarked());
+                  if(el.isMarked()){
+                	  markedRows.add(new Integer(row));
+                  }else{
+                	  markedRows.remove(new Integer(row));
+                  }
+          	
+          }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21512927
+src/org/jfm/views/list/detailview/DetailsTable.java 199 209
+src/org/jfm/views/list/detailview/DetailsTable.java 171 183
+----------------------------------------
+          for(int row=1;row<model.getRowCount();row++){
+                  JFMFile el=model.getFileAt(row);
+                  if(el.isFile() || Options.getDirectoriesSelectedOnAsterisk()){
+                  	el.setMarked(!el.isMarked());
+	                  if(el.isMarked()){
+	                	  markedRows.add(new Integer(row));
+	                  }else{
+	                	  markedRows.remove(new Integer(row));
+	                  }
+                  }
+          }
+
+----------------------------------------
+          for(int row=1;row<model.getRowCount();row++){
+              JFMFile el=model.getFileAt(row);
+              Matcher matcher=pattern.matcher(el.getName());
+              if(matcher.matches() && (el.isFile() || Options.getDirectoriesSelectedOnPlus())){
+              	el.setMarked(!el.isMarked());
+                  if(el.isMarked()){
+                	  markedRows.add(new Integer(row));
+                  }else{
+                	  markedRows.remove(new Integer(row));
+                  }
+              	
+              }
+          }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21512888
+src/org/jfm/views/list/briefview/BriefViewListComponent.java 181 193
+src/org/jfm/views/list/detailview/DetailsTable.java 171 183
+----------------------------------------
+        for(int row=1;row<BriefViewListComponent.this.getModel().getSize();row++){
+          JFMFile el=(JFMFile)BriefViewListComponent.this.getModel().getElementAt(row);          
+          Matcher matcher=pattern.matcher(el.getName());
+          if(matcher.matches() && (el.isFile() || Options.getDirectoriesSelectedOnPlus())){
+          	el.setMarked(!el.isMarked());
+                  if(el.isMarked()){
+                	  markedRows.add(new Integer(row));
+                  }else{
+                	  markedRows.remove(new Integer(row));
+                  }
+          	
+          }
+        }
+
+----------------------------------------
+          for(int row=1;row<model.getRowCount();row++){
+              JFMFile el=model.getFileAt(row);
+              Matcher matcher=pattern.matcher(el.getName());
+              if(matcher.matches() && (el.isFile() || Options.getDirectoriesSelectedOnPlus())){
+              	el.setMarked(!el.isMarked());
+                  if(el.isMarked()){
+                	  markedRows.add(new Integer(row));
+                  }else{
+                	  markedRows.remove(new Integer(row));
+                  }
+              	
+              }
+          }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21512926
+src/org/jfm/views/list/detailview/DetailsTable.java 199 209
+src/org/jfm/views/list/detailview/DetailsTable.java 174 182
+----------------------------------------
+          for(int row=1;row<model.getRowCount();row++){
+                  JFMFile el=model.getFileAt(row);
+                  if(el.isFile() || Options.getDirectoriesSelectedOnAsterisk()){
+                  	el.setMarked(!el.isMarked());
+	                  if(el.isMarked()){
+	                	  markedRows.add(new Integer(row));
+	                  }else{
+	                	  markedRows.remove(new Integer(row));
+	                  }
+                  }
+          }
+
+----------------------------------------
+              if(matcher.matches() && (el.isFile() || Options.getDirectoriesSelectedOnPlus())){
+              	el.setMarked(!el.isMarked());
+                  if(el.isMarked()){
+                	  markedRows.add(new Integer(row));
+                  }else{
+                	  markedRows.remove(new Integer(row));
+                  }
+              	
+              }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21512889
+src/org/jfm/views/list/detailview/DetailsTable.java 174 182
+src/org/jfm/views/list/briefview/BriefViewListComponent.java 184 192
+----------------------------------------
+              if(matcher.matches() && (el.isFile() || Options.getDirectoriesSelectedOnPlus())){
+              	el.setMarked(!el.isMarked());
+                  if(el.isMarked()){
+                	  markedRows.add(new Integer(row));
+                  }else{
+                	  markedRows.remove(new Integer(row));
+                  }
+              	
+              }
+
+----------------------------------------
+          if(matcher.matches() && (el.isFile() || Options.getDirectoriesSelectedOnPlus())){
+          	el.setMarked(!el.isMarked());
+                  if(el.isMarked()){
+                	  markedRows.add(new Integer(row));
+                  }else{
+                	  markedRows.remove(new Integer(row));
+                  }
+          	
+          }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21512890
+src/org/jfm/views/list/detailview/DetailsTable.java 199 209
+src/org/jfm/views/list/briefview/BriefViewListComponent.java 184 192
+----------------------------------------
+          for(int row=1;row<model.getRowCount();row++){
+                  JFMFile el=model.getFileAt(row);
+                  if(el.isFile() || Options.getDirectoriesSelectedOnAsterisk()){
+                  	el.setMarked(!el.isMarked());
+	                  if(el.isMarked()){
+	                	  markedRows.add(new Integer(row));
+	                  }else{
+	                	  markedRows.remove(new Integer(row));
+	                  }
+                  }
+          }
+
+----------------------------------------
+          if(matcher.matches() && (el.isFile() || Options.getDirectoriesSelectedOnPlus())){
+          	el.setMarked(!el.isMarked());
+                  if(el.isMarked()){
+                	  markedRows.add(new Integer(row));
+                  }else{
+                	  markedRows.remove(new Integer(row));
+                  }
+          	
+          }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21512933
+src/org/jfm/views/list/detailview/DetailsTable.java 171 183
+src/org/jfm/views/list/detailview/DetailsTable.java 226 235
+----------------------------------------
+          for(int row=1;row<model.getRowCount();row++){
+              JFMFile el=model.getFileAt(row);
+              Matcher matcher=pattern.matcher(el.getName());
+              if(matcher.matches() && (el.isFile() || Options.getDirectoriesSelectedOnPlus())){
+              	el.setMarked(!el.isMarked());
+                  if(el.isMarked()){
+                	  markedRows.add(new Integer(row));
+                  }else{
+                	  markedRows.remove(new Integer(row));
+                  }
+              	
+              }
+          }
+
+----------------------------------------
+          if(row>=1 && row<model.getRowCount()){
+                  JFMFile el=model.getFileAt(row);
+                  el.setMarked(!el.isMarked());
+                  if(el.isMarked()){
+                	  markedRows.add(new Integer(row));
+                  }else{
+                	  markedRows.remove(new Integer(row));
+                  }
+                	  
+          }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21512891
+src/org/jfm/views/list/briefview/BriefViewListComponent.java 184 192
+src/org/jfm/views/list/detailview/DetailsTable.java 226 235
+----------------------------------------
+          if(matcher.matches() && (el.isFile() || Options.getDirectoriesSelectedOnPlus())){
+          	el.setMarked(!el.isMarked());
+                  if(el.isMarked()){
+                	  markedRows.add(new Integer(row));
+                  }else{
+                	  markedRows.remove(new Integer(row));
+                  }
+          	
+          }
+
+----------------------------------------
+          if(row>=1 && row<model.getRowCount()){
+                  JFMFile el=model.getFileAt(row);
+                  el.setMarked(!el.isMarked());
+                  if(el.isMarked()){
+                	  markedRows.add(new Integer(row));
+                  }else{
+                	  markedRows.remove(new Integer(row));
+                  }
+                	  
+          }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21512930
+src/org/jfm/views/list/detailview/DetailsTable.java 174 182
+src/org/jfm/views/list/detailview/DetailsTable.java 226 235
+----------------------------------------
+              if(matcher.matches() && (el.isFile() || Options.getDirectoriesSelectedOnPlus())){
+              	el.setMarked(!el.isMarked());
+                  if(el.isMarked()){
+                	  markedRows.add(new Integer(row));
+                  }else{
+                	  markedRows.remove(new Integer(row));
+                  }
+              	
+              }
+
+----------------------------------------
+          if(row>=1 && row<model.getRowCount()){
+                  JFMFile el=model.getFileAt(row);
+                  el.setMarked(!el.isMarked());
+                  if(el.isMarked()){
+                	  markedRows.add(new Integer(row));
+                  }else{
+                	  markedRows.remove(new Integer(row));
+                  }
+                	  
+          }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21512932
+src/org/jfm/views/list/detailview/DetailsTable.java 199 209
+src/org/jfm/views/list/detailview/DetailsTable.java 226 235
+----------------------------------------
+          for(int row=1;row<model.getRowCount();row++){
+                  JFMFile el=model.getFileAt(row);
+                  if(el.isFile() || Options.getDirectoriesSelectedOnAsterisk()){
+                  	el.setMarked(!el.isMarked());
+	                  if(el.isMarked()){
+	                	  markedRows.add(new Integer(row));
+	                  }else{
+	                	  markedRows.remove(new Integer(row));
+	                  }
+                  }
+          }
+
+----------------------------------------
+          if(row>=1 && row<model.getRowCount()){
+                  JFMFile el=model.getFileAt(row);
+                  el.setMarked(!el.isMarked());
+                  if(el.isMarked()){
+                	  markedRows.add(new Integer(row));
+                  }else{
+                	  markedRows.remove(new Integer(row));
+                  }
+                	  
+          }
+
+----------------------------------------

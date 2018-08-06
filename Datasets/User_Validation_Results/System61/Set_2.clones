@@ -1,0 +1,1557 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977279
+src/com/_17od/upm/gui/MainWindow.java 874 885
+src/com/_17od/upm/gui/MainWindow.java 1183 1189
+----------------------------------------
+		} else {
+			Runtime runtime = Runtime.getRuntime();
+
+			try {
+				runtime.exec("xdg-open " + url);
+
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
+
+----------------------------------------
+		public void doAction() {
+			try {
+				dbActions.deleteAccount();
+			} catch (Exception e) {
+				dbActions.errorHandler(e);
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977274
+src/com/_17od/upm/gui/AccountDialog.java 1057 1065
+src/com/_17od/upm/gui/MainWindow.java 1183 1189
+----------------------------------------
+		} else { // Linux and Mac specific code in order to launch url
+			Runtime runtime = Runtime.getRuntime();
+
+			try {
+				runtime.exec("xdg-open " + url);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+----------------------------------------
+		public void doAction() {
+			try {
+				dbActions.deleteAccount();
+			} catch (Exception e) {
+				dbActions.errorHandler(e);
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977273
+src/com/_17od/upm/gui/MainWindow.java 1163 1169
+src/com/_17od/upm/gui/MainWindow.java 1183 1189
+----------------------------------------
+		public void doAction() {
+			try {
+				dbActions.editAccount(accountToEdit);
+			} catch (Exception e) {
+				dbActions.errorHandler(e);
+			}
+		}
+
+----------------------------------------
+		public void doAction() {
+			try {
+				dbActions.deleteAccount();
+			} catch (Exception e) {
+				dbActions.errorHandler(e);
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977283
+src/com/_17od/upm/util/Util.java 84 91
+src/com/_17od/upm/gui/MainWindow.java 1193 1199
+----------------------------------------
+    public static boolean isNumeric(String s) {
+        try {
+            Integer.parseInt(s);
+        } catch(NumberFormatException e) {
+            return false;
+        }
+        return true;
+      }
+
+----------------------------------------
+		public void doAction() {
+			try {
+				dbActions.addAccount();
+			} catch (Exception e) {
+				dbActions.errorHandler(e);
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977295
+src/com/_17od/upm/gui/MainWindow.java 874 885
+src/com/_17od/upm/gui/MainWindow.java 1193 1199
+----------------------------------------
+		} else {
+			Runtime runtime = Runtime.getRuntime();
+
+			try {
+				runtime.exec("xdg-open " + url);
+
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
+
+----------------------------------------
+		public void doAction() {
+			try {
+				dbActions.addAccount();
+			} catch (Exception e) {
+				dbActions.errorHandler(e);
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977294
+src/com/_17od/upm/gui/MainWindow.java 175 183
+src/com/_17od/upm/gui/MainWindow.java 1193 1199
+----------------------------------------
+			public void windowClosing(WindowEvent e) {
+				storeWindowBounds();
+				try {
+					Preferences.save();
+				} catch (IOException ex) {
+					// Not much we can do at this point
+					ex.printStackTrace();
+				}
+			}
+
+----------------------------------------
+		public void doAction() {
+			try {
+				dbActions.addAccount();
+			} catch (Exception e) {
+				dbActions.errorHandler(e);
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977282
+src/com/_17od/upm/gui/AccountDialog.java 1057 1065
+src/com/_17od/upm/gui/MainWindow.java 1193 1199
+----------------------------------------
+		} else { // Linux and Mac specific code in order to launch url
+			Runtime runtime = Runtime.getRuntime();
+
+			try {
+				runtime.exec("xdg-open " + url);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+----------------------------------------
+		public void doAction() {
+			try {
+				dbActions.addAccount();
+			} catch (Exception e) {
+				dbActions.errorHandler(e);
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977284
+src/com/_17od/upm/gui/MainWindow.java 459 465
+src/com/_17od/upm/gui/MainWindow.java 1193 1199
+----------------------------------------
+			public void actionPerformed(ActionEvent e) {
+				try {
+					dbActions.reloadDatabaseFromDisk();
+				} catch (Exception ex) {
+					dbActions.errorHandler(ex);
+				}
+			}
+
+----------------------------------------
+		public void doAction() {
+			try {
+				dbActions.addAccount();
+			} catch (Exception e) {
+				dbActions.errorHandler(e);
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977281
+src/com/_17od/upm/gui/MainWindow.java 1163 1169
+src/com/_17od/upm/gui/MainWindow.java 1193 1199
+----------------------------------------
+		public void doAction() {
+			try {
+				dbActions.editAccount(accountToEdit);
+			} catch (Exception e) {
+				dbActions.errorHandler(e);
+			}
+		}
+
+----------------------------------------
+		public void doAction() {
+			try {
+				dbActions.addAccount();
+			} catch (Exception e) {
+				dbActions.errorHandler(e);
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977293
+src/com/_17od/upm/gui/MainWindow.java 1173 1179
+src/com/_17od/upm/gui/MainWindow.java 1193 1199
+----------------------------------------
+		public void doAction() {
+			try {
+				dbActions.changeMasterPassword();
+			} catch (Exception e) {
+				dbActions.errorHandler(e);
+			}
+		}
+
+----------------------------------------
+		public void doAction() {
+			try {
+				dbActions.addAccount();
+			} catch (Exception e) {
+				dbActions.errorHandler(e);
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977280
+src/com/_17od/upm/gui/MainWindow.java 1183 1189
+src/com/_17od/upm/gui/MainWindow.java 1193 1199
+----------------------------------------
+		public void doAction() {
+			try {
+				dbActions.deleteAccount();
+			} catch (Exception e) {
+				dbActions.errorHandler(e);
+			}
+		}
+
+----------------------------------------
+		public void doAction() {
+			try {
+				dbActions.addAccount();
+			} catch (Exception e) {
+				dbActions.errorHandler(e);
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977285
+src/com/_17od/upm/gui/DatabaseActions.java 778 795
+src/com/_17od/upm/gui/DatabaseActions.java 719 738
+----------------------------------------
+            do {
+                char[] password = askUserForPassword(Translator
+                        .translate("enterDatabasePassword"));
+                if (password == null) {
+                    okClicked = false;
+                } else {
+                    okClicked = true;
+                    try {
+                        reloadedDb = dbPers.load(database.getDatabaseFile(),
+                                password);
+                    } catch (InvalidPasswordException invalidPassword) {
+                        JOptionPane.showMessageDialog(mainWindow,
+                                Translator.translate("incorrectPassword"));
+                    } catch (CryptoException e1) {
+                        errorHandler(e);
+                    }
+                }
+            } while (okClicked && reloadedDb == null);
+
+----------------------------------------
+        } catch (InvalidPasswordException e) {
+            // The password for the reloaded database is different to that of
+            // the open database
+            boolean okClicked = false;
+            do {
+                char[] password = askUserForPassword(Translator.translate("enterDatabasePassword"));
+                if (password == null) {
+                    okClicked = false;
+                } else {
+                    okClicked = true;
+                    try {
+                        reloadedDb = dbPers.load(database.getDatabaseFile(), password);
+                    } catch (InvalidPasswordException invalidPassword) {
+                        JOptionPane.showMessageDialog(mainWindow, Translator.translate("incorrectPassword"));
+                    } catch (CryptoException e1) {
+                        errorHandler(e);
+                    }
+                }
+            } while (okClicked && reloadedDb == null);
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977287
+src/com/_17od/upm/gui/DatabaseActions.java 727 736
+src/com/_17od/upm/gui/DatabaseActions.java 783 794
+----------------------------------------
+                } else {
+                    okClicked = true;
+                    try {
+                        reloadedDb = dbPers.load(database.getDatabaseFile(), password);
+                    } catch (InvalidPasswordException invalidPassword) {
+                        JOptionPane.showMessageDialog(mainWindow, Translator.translate("incorrectPassword"));
+                    } catch (CryptoException e1) {
+                        errorHandler(e);
+                    }
+                }
+
+----------------------------------------
+                } else {
+                    okClicked = true;
+                    try {
+                        reloadedDb = dbPers.load(database.getDatabaseFile(),
+                                password);
+                    } catch (InvalidPasswordException invalidPassword) {
+                        JOptionPane.showMessageDialog(mainWindow,
+                                Translator.translate("incorrectPassword"));
+                    } catch (CryptoException e1) {
+                        errorHandler(e);
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977290
+src/com/_17od/upm/gui/DatabaseActions.java 778 795
+src/com/_17od/upm/gui/DatabaseActions.java 837 855
+----------------------------------------
+            do {
+                char[] password = askUserForPassword(Translator
+                        .translate("enterDatabasePassword"));
+                if (password == null) {
+                    okClicked = false;
+                } else {
+                    okClicked = true;
+                    try {
+                        reloadedDb = dbPers.load(database.getDatabaseFile(),
+                                password);
+                    } catch (InvalidPasswordException invalidPassword) {
+                        JOptionPane.showMessageDialog(mainWindow,
+                                Translator.translate("incorrectPassword"));
+                    } catch (CryptoException e1) {
+                        errorHandler(e);
+                    }
+                }
+            } while (okClicked && reloadedDb == null);
+
+----------------------------------------
+            } catch (InvalidPasswordException e) {
+                // The password for the downloaded database is different to that of the open database
+                // (most likely the user changed the local database's master password)
+                boolean okClicked = false;
+                do {
+                    password = askUserForPassword(Translator.translate("enterPaswordForRemoteDB"));
+                    if (password == null) {
+                        okClicked = false;
+                    } else {
+                        okClicked = true;
+                        try {
+                            remoteDatabase = dbPers.load(remoteDatabaseFile, password);
+                            successfullyDecryptedDb = true;
+                        } catch (InvalidPasswordException invalidPassword) {
+                            JOptionPane.showMessageDialog(mainWindow, Translator.translate("incorrectPassword"));
+                        }
+                    }
+                } while (okClicked && !successfullyDecryptedDb);
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977288
+src/com/_17od/upm/gui/DatabaseActions.java 723 737
+src/com/_17od/upm/gui/DatabaseActions.java 837 855
+----------------------------------------
+            do {
+                char[] password = askUserForPassword(Translator.translate("enterDatabasePassword"));
+                if (password == null) {
+                    okClicked = false;
+                } else {
+                    okClicked = true;
+                    try {
+                        reloadedDb = dbPers.load(database.getDatabaseFile(), password);
+                    } catch (InvalidPasswordException invalidPassword) {
+                        JOptionPane.showMessageDialog(mainWindow, Translator.translate("incorrectPassword"));
+                    } catch (CryptoException e1) {
+                        errorHandler(e);
+                    }
+                }
+            } while (okClicked && reloadedDb == null);
+
+----------------------------------------
+            } catch (InvalidPasswordException e) {
+                // The password for the downloaded database is different to that of the open database
+                // (most likely the user changed the local database's master password)
+                boolean okClicked = false;
+                do {
+                    password = askUserForPassword(Translator.translate("enterPaswordForRemoteDB"));
+                    if (password == null) {
+                        okClicked = false;
+                    } else {
+                        okClicked = true;
+                        try {
+                            remoteDatabase = dbPers.load(remoteDatabaseFile, password);
+                            successfullyDecryptedDb = true;
+                        } catch (InvalidPasswordException invalidPassword) {
+                            JOptionPane.showMessageDialog(mainWindow, Translator.translate("incorrectPassword"));
+                        }
+                    }
+                } while (okClicked && !successfullyDecryptedDb);
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977289
+src/com/_17od/upm/gui/DatabaseActions.java 719 738
+src/com/_17od/upm/gui/DatabaseActions.java 837 855
+----------------------------------------
+        } catch (InvalidPasswordException e) {
+            // The password for the reloaded database is different to that of
+            // the open database
+            boolean okClicked = false;
+            do {
+                char[] password = askUserForPassword(Translator.translate("enterDatabasePassword"));
+                if (password == null) {
+                    okClicked = false;
+                } else {
+                    okClicked = true;
+                    try {
+                        reloadedDb = dbPers.load(database.getDatabaseFile(), password);
+                    } catch (InvalidPasswordException invalidPassword) {
+                        JOptionPane.showMessageDialog(mainWindow, Translator.translate("incorrectPassword"));
+                    } catch (CryptoException e1) {
+                        errorHandler(e);
+                    }
+                }
+            } while (okClicked && reloadedDb == null);
+        }
+
+----------------------------------------
+            } catch (InvalidPasswordException e) {
+                // The password for the downloaded database is different to that of the open database
+                // (most likely the user changed the local database's master password)
+                boolean okClicked = false;
+                do {
+                    password = askUserForPassword(Translator.translate("enterPaswordForRemoteDB"));
+                    if (password == null) {
+                        okClicked = false;
+                    } else {
+                        okClicked = true;
+                        try {
+                            remoteDatabase = dbPers.load(remoteDatabaseFile, password);
+                            successfullyDecryptedDb = true;
+                        } catch (InvalidPasswordException invalidPassword) {
+                            JOptionPane.showMessageDialog(mainWindow, Translator.translate("incorrectPassword"));
+                        }
+                    }
+                } while (okClicked && !successfullyDecryptedDb);
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977332
+src/com/_17od/upm/gui/DatabaseActions.java 723 737
+src/com/_17od/upm/gui/DatabaseActions.java 774 796
+----------------------------------------
+            do {
+                char[] password = askUserForPassword(Translator.translate("enterDatabasePassword"));
+                if (password == null) {
+                    okClicked = false;
+                } else {
+                    okClicked = true;
+                    try {
+                        reloadedDb = dbPers.load(database.getDatabaseFile(), password);
+                    } catch (InvalidPasswordException invalidPassword) {
+                        JOptionPane.showMessageDialog(mainWindow, Translator.translate("incorrectPassword"));
+                    } catch (CryptoException e1) {
+                        errorHandler(e);
+                    }
+                }
+            } while (okClicked && reloadedDb == null);
+
+----------------------------------------
+        } catch (InvalidPasswordException e) {
+            // The password for the reloaded database is different to that of
+            // the open database
+            boolean okClicked = false;
+            do {
+                char[] password = askUserForPassword(Translator
+                        .translate("enterDatabasePassword"));
+                if (password == null) {
+                    okClicked = false;
+                } else {
+                    okClicked = true;
+                    try {
+                        reloadedDb = dbPers.load(database.getDatabaseFile(),
+                                password);
+                    } catch (InvalidPasswordException invalidPassword) {
+                        JOptionPane.showMessageDialog(mainWindow,
+                                Translator.translate("incorrectPassword"));
+                    } catch (CryptoException e1) {
+                        errorHandler(e);
+                    }
+                }
+            } while (okClicked && reloadedDb == null);
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977333
+src/com/_17od/upm/gui/DatabaseActions.java 719 738
+src/com/_17od/upm/gui/DatabaseActions.java 774 796
+----------------------------------------
+        } catch (InvalidPasswordException e) {
+            // The password for the reloaded database is different to that of
+            // the open database
+            boolean okClicked = false;
+            do {
+                char[] password = askUserForPassword(Translator.translate("enterDatabasePassword"));
+                if (password == null) {
+                    okClicked = false;
+                } else {
+                    okClicked = true;
+                    try {
+                        reloadedDb = dbPers.load(database.getDatabaseFile(), password);
+                    } catch (InvalidPasswordException invalidPassword) {
+                        JOptionPane.showMessageDialog(mainWindow, Translator.translate("incorrectPassword"));
+                    } catch (CryptoException e1) {
+                        errorHandler(e);
+                    }
+                }
+            } while (okClicked && reloadedDb == null);
+        }
+
+----------------------------------------
+        } catch (InvalidPasswordException e) {
+            // The password for the reloaded database is different to that of
+            // the open database
+            boolean okClicked = false;
+            do {
+                char[] password = askUserForPassword(Translator
+                        .translate("enterDatabasePassword"));
+                if (password == null) {
+                    okClicked = false;
+                } else {
+                    okClicked = true;
+                    try {
+                        reloadedDb = dbPers.load(database.getDatabaseFile(),
+                                password);
+                    } catch (InvalidPasswordException invalidPassword) {
+                        JOptionPane.showMessageDialog(mainWindow,
+                                Translator.translate("incorrectPassword"));
+                    } catch (CryptoException e1) {
+                        errorHandler(e);
+                    }
+                }
+            } while (okClicked && reloadedDb == null);
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977291
+src/com/_17od/upm/gui/DatabaseActions.java 837 855
+src/com/_17od/upm/gui/DatabaseActions.java 774 796
+----------------------------------------
+            } catch (InvalidPasswordException e) {
+                // The password for the downloaded database is different to that of the open database
+                // (most likely the user changed the local database's master password)
+                boolean okClicked = false;
+                do {
+                    password = askUserForPassword(Translator.translate("enterPaswordForRemoteDB"));
+                    if (password == null) {
+                        okClicked = false;
+                    } else {
+                        okClicked = true;
+                        try {
+                            remoteDatabase = dbPers.load(remoteDatabaseFile, password);
+                            successfullyDecryptedDb = true;
+                        } catch (InvalidPasswordException invalidPassword) {
+                            JOptionPane.showMessageDialog(mainWindow, Translator.translate("incorrectPassword"));
+                        }
+                    }
+                } while (okClicked && !successfullyDecryptedDb);
+            }
+
+----------------------------------------
+        } catch (InvalidPasswordException e) {
+            // The password for the reloaded database is different to that of
+            // the open database
+            boolean okClicked = false;
+            do {
+                char[] password = askUserForPassword(Translator
+                        .translate("enterDatabasePassword"));
+                if (password == null) {
+                    okClicked = false;
+                } else {
+                    okClicked = true;
+                    try {
+                        reloadedDb = dbPers.load(database.getDatabaseFile(),
+                                password);
+                    } catch (InvalidPasswordException invalidPassword) {
+                        JOptionPane.showMessageDialog(mainWindow,
+                                Translator.translate("incorrectPassword"));
+                    } catch (CryptoException e1) {
+                        errorHandler(e);
+                    }
+                }
+            } while (okClicked && reloadedDb == null);
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977292
+src/com/_17od/upm/gui/DatabaseActions.java 837 855
+src/com/_17od/upm/gui/DatabaseActions.java 377 398
+----------------------------------------
+            } catch (InvalidPasswordException e) {
+                // The password for the downloaded database is different to that of the open database
+                // (most likely the user changed the local database's master password)
+                boolean okClicked = false;
+                do {
+                    password = askUserForPassword(Translator.translate("enterPaswordForRemoteDB"));
+                    if (password == null) {
+                        okClicked = false;
+                    } else {
+                        okClicked = true;
+                        try {
+                            remoteDatabase = dbPers.load(remoteDatabaseFile, password);
+                            successfullyDecryptedDb = true;
+                        } catch (InvalidPasswordException invalidPassword) {
+                            JOptionPane.showMessageDialog(mainWindow, Translator.translate("incorrectPassword"));
+                        }
+                    }
+                } while (okClicked && !successfullyDecryptedDb);
+            }
+
+----------------------------------------
+        while (!passwordCorrect && okClicked) {
+            // If we weren't given a password then ask the user to enter one
+            if (password == null) {
+                password = askUserForPassword(Translator.translate("enterDatabasePassword"));
+                if (password == null) {
+                    okClicked = false;
+                }
+            } else {
+                okClicked = true;
+            }
+
+            if (okClicked) {
+                try {
+                    dbPers = new PasswordDatabasePersistence();
+                    database = dbPers.load(new File(databaseFilename), password);
+                    passwordCorrect = true;
+                } catch (InvalidPasswordException e) {
+                    JOptionPane.showMessageDialog(mainWindow, Translator.translate("incorrectPassword"));
+                    password = null;
+                }
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977302
+src/com/_17od/upm/gui/MainWindow.java 1173 1179
+src/com/_17od/upm/gui/MainWindow.java 1203 1209
+----------------------------------------
+		public void doAction() {
+			try {
+				dbActions.changeMasterPassword();
+			} catch (Exception e) {
+				dbActions.errorHandler(e);
+			}
+		}
+
+----------------------------------------
+		public void doAction() {
+			try {
+				dbActions.showDatabaseProperties();
+			} catch (Exception e) {
+				dbActions.errorHandler(e);
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977301
+src/com/_17od/upm/gui/MainWindow.java 459 465
+src/com/_17od/upm/gui/MainWindow.java 1203 1209
+----------------------------------------
+			public void actionPerformed(ActionEvent e) {
+				try {
+					dbActions.reloadDatabaseFromDisk();
+				} catch (Exception ex) {
+					dbActions.errorHandler(ex);
+				}
+			}
+
+----------------------------------------
+		public void doAction() {
+			try {
+				dbActions.showDatabaseProperties();
+			} catch (Exception e) {
+				dbActions.errorHandler(e);
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977310
+src/com/_17od/upm/gui/MainWindow.java 175 183
+src/com/_17od/upm/gui/MainWindow.java 1203 1209
+----------------------------------------
+			public void windowClosing(WindowEvent e) {
+				storeWindowBounds();
+				try {
+					Preferences.save();
+				} catch (IOException ex) {
+					// Not much we can do at this point
+					ex.printStackTrace();
+				}
+			}
+
+----------------------------------------
+		public void doAction() {
+			try {
+				dbActions.showDatabaseProperties();
+			} catch (Exception e) {
+				dbActions.errorHandler(e);
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977297
+src/com/_17od/upm/gui/MainWindow.java 1163 1169
+src/com/_17od/upm/gui/MainWindow.java 1203 1209
+----------------------------------------
+		public void doAction() {
+			try {
+				dbActions.editAccount(accountToEdit);
+			} catch (Exception e) {
+				dbActions.errorHandler(e);
+			}
+		}
+
+----------------------------------------
+		public void doAction() {
+			try {
+				dbActions.showDatabaseProperties();
+			} catch (Exception e) {
+				dbActions.errorHandler(e);
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977298
+src/com/_17od/upm/gui/MainWindow.java 1193 1199
+src/com/_17od/upm/gui/MainWindow.java 1203 1209
+----------------------------------------
+		public void doAction() {
+			try {
+				dbActions.addAccount();
+			} catch (Exception e) {
+				dbActions.errorHandler(e);
+			}
+		}
+
+----------------------------------------
+		public void doAction() {
+			try {
+				dbActions.showDatabaseProperties();
+			} catch (Exception e) {
+				dbActions.errorHandler(e);
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977300
+src/com/_17od/upm/util/Util.java 84 91
+src/com/_17od/upm/gui/MainWindow.java 1203 1209
+----------------------------------------
+    public static boolean isNumeric(String s) {
+        try {
+            Integer.parseInt(s);
+        } catch(NumberFormatException e) {
+            return false;
+        }
+        return true;
+      }
+
+----------------------------------------
+		public void doAction() {
+			try {
+				dbActions.showDatabaseProperties();
+			} catch (Exception e) {
+				dbActions.errorHandler(e);
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977299
+src/com/_17od/upm/gui/AccountDialog.java 1057 1065
+src/com/_17od/upm/gui/MainWindow.java 1203 1209
+----------------------------------------
+		} else { // Linux and Mac specific code in order to launch url
+			Runtime runtime = Runtime.getRuntime();
+
+			try {
+				runtime.exec("xdg-open " + url);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+----------------------------------------
+		public void doAction() {
+			try {
+				dbActions.showDatabaseProperties();
+			} catch (Exception e) {
+				dbActions.errorHandler(e);
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977311
+src/com/_17od/upm/gui/MainWindow.java 874 885
+src/com/_17od/upm/gui/MainWindow.java 1203 1209
+----------------------------------------
+		} else {
+			Runtime runtime = Runtime.getRuntime();
+
+			try {
+				runtime.exec("xdg-open " + url);
+
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
+
+----------------------------------------
+		public void doAction() {
+			try {
+				dbActions.showDatabaseProperties();
+			} catch (Exception e) {
+				dbActions.errorHandler(e);
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977296
+src/com/_17od/upm/gui/MainWindow.java 1183 1189
+src/com/_17od/upm/gui/MainWindow.java 1203 1209
+----------------------------------------
+		public void doAction() {
+			try {
+				dbActions.deleteAccount();
+			} catch (Exception e) {
+				dbActions.errorHandler(e);
+			}
+		}
+
+----------------------------------------
+		public void doAction() {
+			try {
+				dbActions.showDatabaseProperties();
+			} catch (Exception e) {
+				dbActions.errorHandler(e);
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+28730858
+src/com/_17od/upm/gui/MainWindow.java 409 424
+src/com/_17od/upm/gui/AccountDialog.java 982 996
+----------------------------------------
+				if (e.getKeyCode() == KeyEvent.VK_DELETE) {
+
+					try {
+						dbActions.reloadDatabaseBefore(new DeleteAccountAction());
+					} catch (InvalidPasswordException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (ProblemReadingDatabaseFile e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+
+				}
+
+----------------------------------------
+	public void pasteToTextField(JTextField textField) {
+		String text = "";
+		Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+		Transferable clipText = clipboard.getContents(null);
+		if ((clipText != null) && clipText.isDataFlavorSupported(DataFlavor.stringFlavor)) {
+			try {
+				text = (String) clipText.getTransferData(DataFlavor.stringFlavor);
+			} catch (UnsupportedFlavorException ex) {
+				ex.printStackTrace();
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
+		}
+		textField.setText(text);
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977303
+src/com/_17od/upm/gui/AccountDialog.java 982 996
+src/com/_17od/upm/gui/AccountDialog.java 1004 1019
+----------------------------------------
+	public void pasteToTextField(JTextField textField) {
+		String text = "";
+		Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+		Transferable clipText = clipboard.getContents(null);
+		if ((clipText != null) && clipText.isDataFlavorSupported(DataFlavor.stringFlavor)) {
+			try {
+				text = (String) clipText.getTransferData(DataFlavor.stringFlavor);
+			} catch (UnsupportedFlavorException ex) {
+				ex.printStackTrace();
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
+		}
+		textField.setText(text);
+	}
+
+----------------------------------------
+	public void pasteToTextArea(JTextArea textArea) {
+		String text = "";
+		Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+		Transferable clipText = clipboard.getContents(null);
+		if ((clipText != null) && clipText.isDataFlavorSupported(DataFlavor.stringFlavor)) {
+			try {
+				text = (String) clipText.getTransferData(DataFlavor.stringFlavor);
+			} catch (UnsupportedFlavorException ex) {
+				ex.printStackTrace();
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
+		}
+		textArea.insert(text, textArea.getCaretPosition());
+		textArea.requestFocus();
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977309
+src/com/_17od/upm/gui/DatabaseActions.java 141 152
+src/com/_17od/upm/gui/DatabaseActions.java 485 490
+----------------------------------------
+                Preferences.get(Preferences.ApplicationOptions.DB_TO_LOAD_ON_STARTUP).equals("")) {
+            int option = JOptionPane.showConfirmDialog(mainWindow,
+                    Translator.translate("setNewLoadOnStartupDatabase"),
+                    Translator.translate("newPasswordDatabase"),
+                    JOptionPane.YES_NO_OPTION);
+            if (option == JOptionPane.YES_OPTION) {
+                Preferences.set(
+                        Preferences.ApplicationOptions.DB_TO_LOAD_ON_STARTUP,
+                        newDatabaseFile.getAbsolutePath());
+                Preferences.save();
+            }
+        }
+
+----------------------------------------
+        if (databaseHasRemoteInstance() && localDatabaseDirty) {
+            int answer = JOptionPane.showConfirmDialog(mainWindow, Translator.translate("askSyncWithRemoteDB"), Translator.translate("syncDatabase"), JOptionPane.YES_NO_OPTION);
+            if (answer == JOptionPane.YES_OPTION) {
+                latestVersionDownloaded = syncWithRemoteDatabase();
+            }
+        } else {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977319
+src/com/_17od/upm/gui/MainWindow.java 1173 1179
+src/com/_17od/upm/gui/MainWindow.java 1213 1219
+----------------------------------------
+		public void doAction() {
+			try {
+				dbActions.changeMasterPassword();
+			} catch (Exception e) {
+				dbActions.errorHandler(e);
+			}
+		}
+
+----------------------------------------
+		public void doAction() {
+			try {
+				dbActions.importAccounts();
+			} catch (Exception e) {
+				dbActions.errorHandler(e);
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977321
+src/com/_17od/upm/gui/MainWindow.java 874 885
+src/com/_17od/upm/gui/MainWindow.java 1213 1219
+----------------------------------------
+		} else {
+			Runtime runtime = Runtime.getRuntime();
+
+			try {
+				runtime.exec("xdg-open " + url);
+
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
+
+----------------------------------------
+		public void doAction() {
+			try {
+				dbActions.importAccounts();
+			} catch (Exception e) {
+				dbActions.errorHandler(e);
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977316
+src/com/_17od/upm/gui/AccountDialog.java 1057 1065
+src/com/_17od/upm/gui/MainWindow.java 1213 1219
+----------------------------------------
+		} else { // Linux and Mac specific code in order to launch url
+			Runtime runtime = Runtime.getRuntime();
+
+			try {
+				runtime.exec("xdg-open " + url);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+----------------------------------------
+		public void doAction() {
+			try {
+				dbActions.importAccounts();
+			} catch (Exception e) {
+				dbActions.errorHandler(e);
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977318
+src/com/_17od/upm/gui/MainWindow.java 459 465
+src/com/_17od/upm/gui/MainWindow.java 1213 1219
+----------------------------------------
+			public void actionPerformed(ActionEvent e) {
+				try {
+					dbActions.reloadDatabaseFromDisk();
+				} catch (Exception ex) {
+					dbActions.errorHandler(ex);
+				}
+			}
+
+----------------------------------------
+		public void doAction() {
+			try {
+				dbActions.importAccounts();
+			} catch (Exception e) {
+				dbActions.errorHandler(e);
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977314
+src/com/_17od/upm/gui/MainWindow.java 1203 1209
+src/com/_17od/upm/gui/MainWindow.java 1213 1219
+----------------------------------------
+		public void doAction() {
+			try {
+				dbActions.showDatabaseProperties();
+			} catch (Exception e) {
+				dbActions.errorHandler(e);
+			}
+		}
+
+----------------------------------------
+		public void doAction() {
+			try {
+				dbActions.importAccounts();
+			} catch (Exception e) {
+				dbActions.errorHandler(e);
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977313
+src/com/_17od/upm/gui/MainWindow.java 1163 1169
+src/com/_17od/upm/gui/MainWindow.java 1213 1219
+----------------------------------------
+		public void doAction() {
+			try {
+				dbActions.editAccount(accountToEdit);
+			} catch (Exception e) {
+				dbActions.errorHandler(e);
+			}
+		}
+
+----------------------------------------
+		public void doAction() {
+			try {
+				dbActions.importAccounts();
+			} catch (Exception e) {
+				dbActions.errorHandler(e);
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977317
+src/com/_17od/upm/util/Util.java 84 91
+src/com/_17od/upm/gui/MainWindow.java 1213 1219
+----------------------------------------
+    public static boolean isNumeric(String s) {
+        try {
+            Integer.parseInt(s);
+        } catch(NumberFormatException e) {
+            return false;
+        }
+        return true;
+      }
+
+----------------------------------------
+		public void doAction() {
+			try {
+				dbActions.importAccounts();
+			} catch (Exception e) {
+				dbActions.errorHandler(e);
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977312
+src/com/_17od/upm/gui/MainWindow.java 1183 1189
+src/com/_17od/upm/gui/MainWindow.java 1213 1219
+----------------------------------------
+		public void doAction() {
+			try {
+				dbActions.deleteAccount();
+			} catch (Exception e) {
+				dbActions.errorHandler(e);
+			}
+		}
+
+----------------------------------------
+		public void doAction() {
+			try {
+				dbActions.importAccounts();
+			} catch (Exception e) {
+				dbActions.errorHandler(e);
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977320
+src/com/_17od/upm/gui/MainWindow.java 175 183
+src/com/_17od/upm/gui/MainWindow.java 1213 1219
+----------------------------------------
+			public void windowClosing(WindowEvent e) {
+				storeWindowBounds();
+				try {
+					Preferences.save();
+				} catch (IOException ex) {
+					// Not much we can do at this point
+					ex.printStackTrace();
+				}
+			}
+
+----------------------------------------
+		public void doAction() {
+			try {
+				dbActions.importAccounts();
+			} catch (Exception e) {
+				dbActions.errorHandler(e);
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977315
+src/com/_17od/upm/gui/MainWindow.java 1193 1199
+src/com/_17od/upm/gui/MainWindow.java 1213 1219
+----------------------------------------
+		public void doAction() {
+			try {
+				dbActions.addAccount();
+			} catch (Exception e) {
+				dbActions.errorHandler(e);
+			}
+		}
+
+----------------------------------------
+		public void doAction() {
+			try {
+				dbActions.importAccounts();
+			} catch (Exception e) {
+				dbActions.errorHandler(e);
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977322
+src/com/_17od/upm/database/DatabaseOptions.java 45 50
+src/com/_17od/upm/database/DatabaseOptions.java 69 74
+----------------------------------------
+    public void setRemoteLocation(String remoteLocation) {
+        if (remoteLocation == null) {
+            remoteLocation = "";
+        }
+        this.remoteLocation = remoteLocation;
+    }
+
+----------------------------------------
+    public void setAuthDBEntry(String authDBEntry) {
+        if (authDBEntry == null) {
+            authDBEntry = "";
+        }
+        this.authDBEntry = authDBEntry;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977323
+src/com/_17od/upm/transport/EasyX509TrustManager.java 98 103
+src/com/_17od/upm/gui/DatabaseActions.java 321 327
+----------------------------------------
+        if ((certificates != null) && LOG.isDebugEnabled()) {
+            LOG.debug("Server certificate chain:");
+            for (int i = 0; i < certificates.length; i++) {
+                LOG.debug("X509Certificate[" + i + "]=" + certificates[i]);
+            }
+        }
+
+----------------------------------------
+        } else {
+            LOG.debug("Disabling autoclose when focus lost");
+            for (int i=0; i<mainWindow.getWindowFocusListeners().length; i++) {
+                mainWindow.removeWindowFocusListener(
+                        mainWindow.getWindowFocusListeners()[i]);
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977324
+src/com/_17od/upm/database/DatabaseOptions.java 45 50
+src/com/_17od/upm/gui/DatabaseActions.java 379 384
+----------------------------------------
+    public void setRemoteLocation(String remoteLocation) {
+        if (remoteLocation == null) {
+            remoteLocation = "";
+        }
+        this.remoteLocation = remoteLocation;
+    }
+
+----------------------------------------
+            if (password == null) {
+                password = askUserForPassword(Translator.translate("enterDatabasePassword"));
+                if (password == null) {
+                    okClicked = false;
+                }
+            } else {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977325
+src/com/_17od/upm/database/DatabaseOptions.java 69 74
+src/com/_17od/upm/gui/DatabaseActions.java 379 384
+----------------------------------------
+    public void setAuthDBEntry(String authDBEntry) {
+        if (authDBEntry == null) {
+            authDBEntry = "";
+        }
+        this.authDBEntry = authDBEntry;
+    }
+
+----------------------------------------
+            if (password == null) {
+                password = askUserForPassword(Translator.translate("enterDatabasePassword"));
+                if (password == null) {
+                    okClicked = false;
+                }
+            } else {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977328
+src/com/_17od/upm/gui/DatabaseActions.java 481 495
+src/com/_17od/upm/gui/DatabaseActions.java 748 765
+----------------------------------------
+    private boolean getLatestVersionOfDatabase() throws TransportException, ProblemReadingDatabaseFile, IOException, CryptoException, PasswordDatabaseException {
+        boolean latestVersionDownloaded = false;
+
+        // Ensure we're working with the latest version of the database
+        if (databaseHasRemoteInstance() && localDatabaseDirty) {
+            int answer = JOptionPane.showConfirmDialog(mainWindow, Translator.translate("askSyncWithRemoteDB"), Translator.translate("syncDatabase"), JOptionPane.YES_NO_OPTION);
+            if (answer == JOptionPane.YES_OPTION) {
+                latestVersionDownloaded = syncWithRemoteDatabase();
+            }
+        } else {
+            latestVersionDownloaded = true;
+        }
+
+        return latestVersionDownloaded;
+    }
+
+----------------------------------------
+            IOException {
+        boolean proceedWithAction = false;
+        if (this.databaseNeedsReload) {
+            int answer = JOptionPane.showConfirmDialog(mainWindow,
+                    Translator.translate("askReloadDatabase"),
+                    Translator.translate("reloadDatabase"),
+                    JOptionPane.YES_NO_OPTION);
+            if (answer == JOptionPane.YES_OPTION) {
+                proceedWithAction = reloadDatabaseFromDisk();
+            }
+        } else {
+            proceedWithAction = true;
+        }
+
+        if (proceedWithAction) {
+            editAction.doAction();
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977329
+src/com/_17od/upm/gui/DatabaseActions.java 141 152
+src/com/_17od/upm/gui/DatabaseActions.java 750 758
+----------------------------------------
+                Preferences.get(Preferences.ApplicationOptions.DB_TO_LOAD_ON_STARTUP).equals("")) {
+            int option = JOptionPane.showConfirmDialog(mainWindow,
+                    Translator.translate("setNewLoadOnStartupDatabase"),
+                    Translator.translate("newPasswordDatabase"),
+                    JOptionPane.YES_NO_OPTION);
+            if (option == JOptionPane.YES_OPTION) {
+                Preferences.set(
+                        Preferences.ApplicationOptions.DB_TO_LOAD_ON_STARTUP,
+                        newDatabaseFile.getAbsolutePath());
+                Preferences.save();
+            }
+        }
+
+----------------------------------------
+        if (this.databaseNeedsReload) {
+            int answer = JOptionPane.showConfirmDialog(mainWindow,
+                    Translator.translate("askReloadDatabase"),
+                    Translator.translate("reloadDatabase"),
+                    JOptionPane.YES_NO_OPTION);
+            if (answer == JOptionPane.YES_OPTION) {
+                proceedWithAction = reloadDatabaseFromDisk();
+            }
+        } else {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977330
+src/com/_17od/upm/gui/DatabaseActions.java 485 490
+src/com/_17od/upm/gui/DatabaseActions.java 750 758
+----------------------------------------
+        if (databaseHasRemoteInstance() && localDatabaseDirty) {
+            int answer = JOptionPane.showConfirmDialog(mainWindow, Translator.translate("askSyncWithRemoteDB"), Translator.translate("syncDatabase"), JOptionPane.YES_NO_OPTION);
+            if (answer == JOptionPane.YES_OPTION) {
+                latestVersionDownloaded = syncWithRemoteDatabase();
+            }
+        } else {
+
+----------------------------------------
+        if (this.databaseNeedsReload) {
+            int answer = JOptionPane.showConfirmDialog(mainWindow,
+                    Translator.translate("askReloadDatabase"),
+                    Translator.translate("reloadDatabase"),
+                    JOptionPane.YES_NO_OPTION);
+            if (answer == JOptionPane.YES_OPTION) {
+                proceedWithAction = reloadDatabaseFromDisk();
+            }
+        } else {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+17977331
+src/com/_17od/upm/gui/DatabaseActions.java 715 744
+src/com/_17od/upm/gui/DatabaseActions.java 768 805
+----------------------------------------
+            throws InvalidPasswordException, ProblemReadingDatabaseFile, IOException {
+        PasswordDatabase reloadedDb = null;
+        try {
+            reloadedDb = dbPers.load(database.getDatabaseFile());
+        } catch (InvalidPasswordException e) {
+            // The password for the reloaded database is different to that of
+            // the open database
+            boolean okClicked = false;
+            do {
+                char[] password = askUserForPassword(Translator.translate("enterDatabasePassword"));
+                if (password == null) {
+                    okClicked = false;
+                } else {
+                    okClicked = true;
+                    try {
+                        reloadedDb = dbPers.load(database.getDatabaseFile(), password);
+                    } catch (InvalidPasswordException invalidPassword) {
+                        JOptionPane.showMessageDialog(mainWindow, Translator.translate("incorrectPassword"));
+                    } catch (CryptoException e1) {
+                        errorHandler(e);
+                    }
+                }
+            } while (okClicked && reloadedDb == null);
+        }
+
+        if (reloadedDb != null) {
+            database = reloadedDb;
+            doOpenDatabaseActions();
+        }
+    }
+
+----------------------------------------
+            ProblemReadingDatabaseFile, IOException {
+        boolean reloadSuccessful = false;
+
+        PasswordDatabase reloadedDb = null;
+        try {
+            reloadedDb = dbPers.load(database.getDatabaseFile());
+        } catch (InvalidPasswordException e) {
+            // The password for the reloaded database is different to that of
+            // the open database
+            boolean okClicked = false;
+            do {
+                char[] password = askUserForPassword(Translator
+                        .translate("enterDatabasePassword"));
+                if (password == null) {
+                    okClicked = false;
+                } else {
+                    okClicked = true;
+                    try {
+                        reloadedDb = dbPers.load(database.getDatabaseFile(),
+                                password);
+                    } catch (InvalidPasswordException invalidPassword) {
+                        JOptionPane.showMessageDialog(mainWindow,
+                                Translator.translate("incorrectPassword"));
+                    } catch (CryptoException e1) {
+                        errorHandler(e);
+                    }
+                }
+            } while (okClicked && reloadedDb == null);
+        }
+
+        if (reloadedDb != null) {
+            database = reloadedDb;
+            doOpenDatabaseActions();
+            reloadSuccessful = true;
+        }
+
+        return reloadSuccessful;
+    }
+
+----------------------------------------

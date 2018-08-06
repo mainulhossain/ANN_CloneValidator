@@ -1,0 +1,1270 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995454
+src/de/joergjahnke/gameboy/core/Cartridge.java 427 432
+src/de/joergjahnke/gameboy/core/ColorPalette.java 57 63
+----------------------------------------
+    public void deserialize(final DataInputStream in) throws IOException {
+        this.cartridgeImpl.deserialize(in);
+        for (int i = 0; i < this.ramBanks.length; ++i) {
+            SerializationUtils.deserialize(in, this.ramBanks[i]);
+        }
+    }
+
+----------------------------------------
+    public ColorPalette(final VideoChip video, final int color) {
+        this.video = video;
+        // initialize all colors with the given color
+        for (int i = 0; i < this.colors.length; ++i) {
+            this.colors[i] = color;
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995453
+src/de/joergjahnke/gameboy/core/ColorPalette.java 57 63
+src/de/joergjahnke/gameboy/core/VideoChip.java 375 383
+----------------------------------------
+    public ColorPalette(final VideoChip video, final int color) {
+        this.video = video;
+        // initialize all colors with the given color
+        for (int i = 0; i < this.colors.length; ++i) {
+            this.colors[i] = color;
+        }
+    }
+
+----------------------------------------
+    public VideoChip(final Gameboy gameboy) {
+        this.gameboy = gameboy;
+        // initialize allLinesModified array
+        for (int i = 0; i < this.allLinesModified.length; ++i) {
+            this.allLinesModified[i] = true;
+        }
+        // default scaling is x1
+        setScaling(SCALING_MULTIPLIER);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995455
+src/de/joergjahnke/gameboy/core/CPU.java 3346 3353
+src/de/joergjahnke/gameboy/core/SoundChannel.java 162 172
+----------------------------------------
+        public void serialize(final DataOutputStream out) throws IOException {
+            out.writeLong(this.divCycle);
+            out.writeInt(this.instructionsPerTima);
+            out.writeLong(this.lastStartedCycle);
+            out.writeInt(this.tma);
+            out.writeInt(this.tac);
+            out.writeLong(this.nextTimerIRQRequest);
+        }
+
+----------------------------------------
+    public void serialize(final DataOutputStream out) throws IOException {
+        SerializationUtils.serialize(out, this.active);
+        out.writeInt(this.audioIndex);
+        out.writeInt(this.volume);
+        out.writeInt(this.startVolume);
+        out.writeInt(this.frequency);
+        out.writeInt(this.startFrequency);
+        out.writeInt(this.length);
+        out.writeInt(this.samples);
+        out.writeBoolean(this.isRepeat);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995950
+src/de/joergjahnke/gameboy/core/WhiteNoiseChannel.java 137 142
+src/de/joergjahnke/gameboy/core/Sprite.java 274 281
+----------------------------------------
+    public void serialize(final DataOutputStream out) throws IOException {
+        out.writeInt(this.envelopeSweeps);
+        out.writeInt(this.envelopeSweepsLeft);
+        out.writeInt(this.envelopeDirection);
+        out.writeBoolean(this.isSmallStepWidth);
+    }
+
+----------------------------------------
+    public void serialize(final DataOutputStream out) throws IOException {
+        out.writeInt(this.tileId);
+        out.writeInt(this.attributes);
+        out.writeBoolean(this.hasPriority);
+        out.writeInt(this.x);
+        out.writeInt(this.y);
+        out.writeBoolean(this.isVisible);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995952
+src/de/joergjahnke/gameboy/core/Cartridge.java 496 501
+src/de/joergjahnke/gameboy/core/Sprite.java 274 281
+----------------------------------------
+        public void serialize(final DataOutputStream out) throws IOException {
+            out.writeBoolean(this.areRAMWritesEnabled);
+            out.writeBoolean(this.isROMBankingMode);
+            out.writeInt(this.currentROMBank);
+            out.writeInt(this.currentRAMBank);
+        }
+
+----------------------------------------
+    public void serialize(final DataOutputStream out) throws IOException {
+        out.writeInt(this.tileId);
+        out.writeInt(this.attributes);
+        out.writeBoolean(this.hasPriority);
+        out.writeInt(this.x);
+        out.writeInt(this.y);
+        out.writeBoolean(this.isVisible);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995951
+src/de/joergjahnke/gameboy/core/CPU.java 3346 3353
+src/de/joergjahnke/gameboy/core/Sprite.java 274 281
+----------------------------------------
+        public void serialize(final DataOutputStream out) throws IOException {
+            out.writeLong(this.divCycle);
+            out.writeInt(this.instructionsPerTima);
+            out.writeLong(this.lastStartedCycle);
+            out.writeInt(this.tma);
+            out.writeInt(this.tac);
+            out.writeLong(this.nextTimerIRQRequest);
+        }
+
+----------------------------------------
+    public void serialize(final DataOutputStream out) throws IOException {
+        out.writeInt(this.tileId);
+        out.writeInt(this.attributes);
+        out.writeBoolean(this.hasPriority);
+        out.writeInt(this.x);
+        out.writeInt(this.y);
+        out.writeBoolean(this.isVisible);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995456
+src/de/joergjahnke/gameboy/core/SoundChannel.java 162 172
+src/de/joergjahnke/gameboy/core/Sprite.java 274 281
+----------------------------------------
+    public void serialize(final DataOutputStream out) throws IOException {
+        SerializationUtils.serialize(out, this.active);
+        out.writeInt(this.audioIndex);
+        out.writeInt(this.volume);
+        out.writeInt(this.startVolume);
+        out.writeInt(this.frequency);
+        out.writeInt(this.startFrequency);
+        out.writeInt(this.length);
+        out.writeInt(this.samples);
+        out.writeBoolean(this.isRepeat);
+    }
+
+----------------------------------------
+    public void serialize(final DataOutputStream out) throws IOException {
+        out.writeInt(this.tileId);
+        out.writeInt(this.attributes);
+        out.writeBoolean(this.hasPriority);
+        out.writeInt(this.x);
+        out.writeInt(this.y);
+        out.writeBoolean(this.isVisible);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995937
+src/de/joergjahnke/gameboy/core/CPU.java 3346 3353
+src/de/joergjahnke/gameboy/core/SquareWaveChannel.java 172 182
+----------------------------------------
+        public void serialize(final DataOutputStream out) throws IOException {
+            out.writeLong(this.divCycle);
+            out.writeInt(this.instructionsPerTima);
+            out.writeLong(this.lastStartedCycle);
+            out.writeInt(this.tma);
+            out.writeInt(this.tac);
+            out.writeLong(this.nextTimerIRQRequest);
+        }
+
+----------------------------------------
+    public void serialize(final DataOutputStream out) throws IOException {
+        out.writeInt(this.dutyPercent);
+        out.writeInt(this.frequencyGB);
+        out.writeInt(this.envelopeSweeps);
+        out.writeInt(this.envelopeSweepsLeft);
+        out.writeInt(this.envelopeDirection);
+        out.writeInt(this.sweepTime);
+        out.writeInt(this.sweepTimeLeft);
+        out.writeInt(this.sweepShift);
+        out.writeInt(this.sweepDirection);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995953
+src/de/joergjahnke/gameboy/core/Sprite.java 274 281
+src/de/joergjahnke/gameboy/core/SquareWaveChannel.java 172 182
+----------------------------------------
+    public void serialize(final DataOutputStream out) throws IOException {
+        out.writeInt(this.tileId);
+        out.writeInt(this.attributes);
+        out.writeBoolean(this.hasPriority);
+        out.writeInt(this.x);
+        out.writeInt(this.y);
+        out.writeBoolean(this.isVisible);
+    }
+
+----------------------------------------
+    public void serialize(final DataOutputStream out) throws IOException {
+        out.writeInt(this.dutyPercent);
+        out.writeInt(this.frequencyGB);
+        out.writeInt(this.envelopeSweeps);
+        out.writeInt(this.envelopeSweepsLeft);
+        out.writeInt(this.envelopeDirection);
+        out.writeInt(this.sweepTime);
+        out.writeInt(this.sweepTimeLeft);
+        out.writeInt(this.sweepShift);
+        out.writeInt(this.sweepDirection);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+28734589
+src/de/joergjahnke/gameboy/core/WhiteNoiseChannel.java 137 142
+src/de/joergjahnke/gameboy/core/SquareWaveChannel.java 172 182
+----------------------------------------
+    public void serialize(final DataOutputStream out) throws IOException {
+        out.writeInt(this.envelopeSweeps);
+        out.writeInt(this.envelopeSweepsLeft);
+        out.writeInt(this.envelopeDirection);
+        out.writeBoolean(this.isSmallStepWidth);
+    }
+
+----------------------------------------
+    public void serialize(final DataOutputStream out) throws IOException {
+        out.writeInt(this.dutyPercent);
+        out.writeInt(this.frequencyGB);
+        out.writeInt(this.envelopeSweeps);
+        out.writeInt(this.envelopeSweepsLeft);
+        out.writeInt(this.envelopeDirection);
+        out.writeInt(this.sweepTime);
+        out.writeInt(this.sweepTimeLeft);
+        out.writeInt(this.sweepShift);
+        out.writeInt(this.sweepDirection);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+28734588
+src/de/joergjahnke/gameboy/core/Cartridge.java 496 501
+src/de/joergjahnke/gameboy/core/SquareWaveChannel.java 172 182
+----------------------------------------
+        public void serialize(final DataOutputStream out) throws IOException {
+            out.writeBoolean(this.areRAMWritesEnabled);
+            out.writeBoolean(this.isROMBankingMode);
+            out.writeInt(this.currentROMBank);
+            out.writeInt(this.currentRAMBank);
+        }
+
+----------------------------------------
+    public void serialize(final DataOutputStream out) throws IOException {
+        out.writeInt(this.dutyPercent);
+        out.writeInt(this.frequencyGB);
+        out.writeInt(this.envelopeSweeps);
+        out.writeInt(this.envelopeSweepsLeft);
+        out.writeInt(this.envelopeDirection);
+        out.writeInt(this.sweepTime);
+        out.writeInt(this.sweepTimeLeft);
+        out.writeInt(this.sweepShift);
+        out.writeInt(this.sweepDirection);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995457
+src/de/joergjahnke/gameboy/core/SoundChannel.java 162 172
+src/de/joergjahnke/gameboy/core/SquareWaveChannel.java 172 182
+----------------------------------------
+    public void serialize(final DataOutputStream out) throws IOException {
+        SerializationUtils.serialize(out, this.active);
+        out.writeInt(this.audioIndex);
+        out.writeInt(this.volume);
+        out.writeInt(this.startVolume);
+        out.writeInt(this.frequency);
+        out.writeInt(this.startFrequency);
+        out.writeInt(this.length);
+        out.writeInt(this.samples);
+        out.writeBoolean(this.isRepeat);
+    }
+
+----------------------------------------
+    public void serialize(final DataOutputStream out) throws IOException {
+        out.writeInt(this.dutyPercent);
+        out.writeInt(this.frequencyGB);
+        out.writeInt(this.envelopeSweeps);
+        out.writeInt(this.envelopeSweepsLeft);
+        out.writeInt(this.envelopeDirection);
+        out.writeInt(this.sweepTime);
+        out.writeInt(this.sweepTimeLeft);
+        out.writeInt(this.sweepShift);
+        out.writeInt(this.sweepDirection);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995458
+src/de/joergjahnke/gameboy/core/CPU.java 3355 3362
+src/de/joergjahnke/gameboy/core/SoundChannel.java 174 184
+----------------------------------------
+        public void deserialize(final DataInputStream in) throws IOException {
+            this.divCycle = in.readLong();
+            this.instructionsPerTima = in.readInt();
+            this.lastStartedCycle = in.readLong();
+            this.tma = in.readInt();
+            this.tac = in.readInt();
+            this.nextTimerIRQRequest = in.readLong();
+        }
+
+----------------------------------------
+    public void deserialize(final DataInputStream in) throws IOException {
+        SerializationUtils.deserialize(in, this.active);
+        this.audioIndex = in.readInt();
+        this.volume = in.readInt();
+        this.startVolume = in.readInt();
+        this.frequency = in.readInt();
+        this.startVolume = in.readInt();
+        this.length = in.readInt();
+        this.samples = in.readInt();
+        this.isRepeat = in.readBoolean();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995938
+src/de/joergjahnke/gameboy/core/CPU.java 3355 3362
+src/de/joergjahnke/gameboy/core/SquareWaveChannel.java 184 194
+----------------------------------------
+        public void deserialize(final DataInputStream in) throws IOException {
+            this.divCycle = in.readLong();
+            this.instructionsPerTima = in.readInt();
+            this.lastStartedCycle = in.readLong();
+            this.tma = in.readInt();
+            this.tac = in.readInt();
+            this.nextTimerIRQRequest = in.readLong();
+        }
+
+----------------------------------------
+    public void deserialize(final DataInputStream in) throws IOException {
+        this.dutyPercent = in.readInt();
+        this.frequencyGB = in.readInt();
+        this.envelopeSweeps = in.readInt();
+        this.envelopeSweepsLeft = in.readInt();
+        this.envelopeDirection = in.readInt();
+        this.sweepTime = in.readInt();
+        this.sweepTimeLeft = in.readInt();
+        this.sweepShift = in.readInt();
+        this.sweepDirection = in.readInt();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+28734590
+src/de/joergjahnke/gameboy/core/Cartridge.java 503 508
+src/de/joergjahnke/gameboy/core/SquareWaveChannel.java 184 194
+----------------------------------------
+        public void deserialize(final DataInputStream in) throws IOException {
+            this.areRAMWritesEnabled = in.readBoolean();
+            this.isROMBankingMode = in.readBoolean();
+            this.currentROMBank = in.readInt();
+            this.currentRAMBank = in.readInt();
+        }
+
+----------------------------------------
+    public void deserialize(final DataInputStream in) throws IOException {
+        this.dutyPercent = in.readInt();
+        this.frequencyGB = in.readInt();
+        this.envelopeSweeps = in.readInt();
+        this.envelopeSweepsLeft = in.readInt();
+        this.envelopeDirection = in.readInt();
+        this.sweepTime = in.readInt();
+        this.sweepTimeLeft = in.readInt();
+        this.sweepShift = in.readInt();
+        this.sweepDirection = in.readInt();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995459
+src/de/joergjahnke/gameboy/core/SoundChannel.java 174 184
+src/de/joergjahnke/gameboy/core/SquareWaveChannel.java 184 194
+----------------------------------------
+    public void deserialize(final DataInputStream in) throws IOException {
+        SerializationUtils.deserialize(in, this.active);
+        this.audioIndex = in.readInt();
+        this.volume = in.readInt();
+        this.startVolume = in.readInt();
+        this.frequency = in.readInt();
+        this.startVolume = in.readInt();
+        this.length = in.readInt();
+        this.samples = in.readInt();
+        this.isRepeat = in.readBoolean();
+    }
+
+----------------------------------------
+    public void deserialize(final DataInputStream in) throws IOException {
+        this.dutyPercent = in.readInt();
+        this.frequencyGB = in.readInt();
+        this.envelopeSweeps = in.readInt();
+        this.envelopeSweepsLeft = in.readInt();
+        this.envelopeDirection = in.readInt();
+        this.sweepTime = in.readInt();
+        this.sweepTimeLeft = in.readInt();
+        this.sweepShift = in.readInt();
+        this.sweepDirection = in.readInt();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+28734591
+src/de/joergjahnke/gameboy/core/WhiteNoiseChannel.java 144 149
+src/de/joergjahnke/gameboy/core/SquareWaveChannel.java 184 194
+----------------------------------------
+    public void deserialize(final DataInputStream in) throws IOException {
+        this.envelopeSweeps = in.readInt();
+        this.envelopeSweepsLeft = in.readInt();
+        this.envelopeDirection = in.readInt();
+        this.isSmallStepWidth = in.readBoolean();
+    }
+
+----------------------------------------
+    public void deserialize(final DataInputStream in) throws IOException {
+        this.dutyPercent = in.readInt();
+        this.frequencyGB = in.readInt();
+        this.envelopeSweeps = in.readInt();
+        this.envelopeSweepsLeft = in.readInt();
+        this.envelopeDirection = in.readInt();
+        this.sweepTime = in.readInt();
+        this.sweepTimeLeft = in.readInt();
+        this.sweepShift = in.readInt();
+        this.sweepDirection = in.readInt();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17996000
+src/de/joergjahnke/common/io/SerializationUtils.java 223 228
+src/de/joergjahnke/gameboy/core/WhiteNoiseChannel.java 25 31
+----------------------------------------
+    public static void serialize(final DataOutputStream out, final Serializable[] data) throws IOException {
+        out.writeInt(data.length);
+        for (int i = 0; i < data.length; ++i) {
+            data[i].serialize(out);
+        }
+    }
+
+----------------------------------------
+    static {
+        final Random rand = new Random();
+        
+        for(int i = 0 ; i < randoms.length;++i) {
+            randoms[i] = (rand.nextInt() & 1) == 1;
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995996
+src/de/joergjahnke/common/io/SerializationUtils.java 194 199
+src/de/joergjahnke/gameboy/core/WhiteNoiseChannel.java 25 31
+----------------------------------------
+    public static void serialize(final DataOutputStream out, final String[] data) throws IOException {
+        out.writeInt(data.length);
+        for (int i = 0; i < data.length; ++i) {
+            out.writeUTF(data[i]);
+        }
+    }
+
+----------------------------------------
+    static {
+        final Random rand = new Random();
+        
+        for(int i = 0 ; i < randoms.length;++i) {
+            randoms[i] = (rand.nextInt() & 1) == 1;
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995460
+src/de/joergjahnke/common/io/SerializationUtils.java 78 83
+src/de/joergjahnke/gameboy/core/WhiteNoiseChannel.java 25 31
+----------------------------------------
+    public static void serialize(final DataOutputStream out, final short[] data) throws IOException {
+        out.writeInt(data.length);
+        for (int i = 0; i < data.length; ++i) {
+            out.writeShort(data[i]);
+        }
+    }
+
+----------------------------------------
+    static {
+        final Random rand = new Random();
+        
+        for(int i = 0 ; i < randoms.length;++i) {
+            randoms[i] = (rand.nextInt() & 1) == 1;
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17996001
+src/de/joergjahnke/common/io/SerializationUtils.java 136 141
+src/de/joergjahnke/gameboy/core/WhiteNoiseChannel.java 25 31
+----------------------------------------
+    public static void serialize(final DataOutputStream out, final long[] data) throws IOException {
+        out.writeInt(data.length);
+        for (int i = 0; i < data.length; ++i) {
+            out.writeLong(data[i]);
+        }
+    }
+
+----------------------------------------
+    static {
+        final Random rand = new Random();
+        
+        for(int i = 0 ; i < randoms.length;++i) {
+            randoms[i] = (rand.nextInt() & 1) == 1;
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995999
+src/de/joergjahnke/common/io/SerializationUtils.java 165 170
+src/de/joergjahnke/gameboy/core/WhiteNoiseChannel.java 25 31
+----------------------------------------
+    public static void serialize(final DataOutputStream out, final boolean[] data) throws IOException {
+        out.writeInt(data.length);
+        for (int i = 0; i < data.length; ++i) {
+            out.writeBoolean(data[i]);
+        }
+    }
+
+----------------------------------------
+    static {
+        final Random rand = new Random();
+        
+        for(int i = 0 ; i < randoms.length;++i) {
+            randoms[i] = (rand.nextInt() & 1) == 1;
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995997
+src/de/joergjahnke/common/io/SerializationUtils.java 49 54
+src/de/joergjahnke/gameboy/core/WhiteNoiseChannel.java 25 31
+----------------------------------------
+    public static void serialize(final DataOutputStream out, final byte[] data) throws IOException {
+        out.writeInt(data.length);
+        for (int i = 0; i < data.length; ++i) {
+            out.writeByte(data[i]);
+        }
+    }
+
+----------------------------------------
+    static {
+        final Random rand = new Random();
+        
+        for(int i = 0 ; i < randoms.length;++i) {
+            randoms[i] = (rand.nextInt() & 1) == 1;
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995998
+src/de/joergjahnke/common/io/SerializationUtils.java 107 112
+src/de/joergjahnke/gameboy/core/WhiteNoiseChannel.java 25 31
+----------------------------------------
+    public static void serialize(final DataOutputStream out, final int[] data) throws IOException {
+        out.writeInt(data.length);
+        for (int i = 0; i < data.length; ++i) {
+            out.writeInt(data[i]);
+        }
+    }
+
+----------------------------------------
+    static {
+        final Random rand = new Random();
+        
+        for(int i = 0 ; i < randoms.length;++i) {
+            randoms[i] = (rand.nextInt() & 1) == 1;
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995464
+src/de/joergjahnke/gameboy/core/WhiteNoiseChannel.java 90 96
+src/de/joergjahnke/gameboy/core/SquareWaveChannel.java 116 122
+----------------------------------------
+        if (this.envelopeSweeps > 0) {
+            --this.envelopeSweepsLeft;
+            if (this.envelopeSweepsLeft <= 0) {
+                this.volume = Math.min(MAX_VOLUME, Math.max(0, this.volume + this.envelopeDirection));
+                this.envelopeSweepsLeft = this.envelopeSweeps;
+            }
+        }
+
+----------------------------------------
+        if (this.sweepTime > 0) {
+            --this.sweepTimeLeft;
+            if (this.sweepTimeLeft <= 0) {
+                setFrequency((this.frequencyGB + this.sweepDirection * (this.frequencyGB >> this.sweepShift)) & 0x7ff);
+                this.sweepTimeLeft = this.sweepTime;
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995466
+src/de/joergjahnke/gameboy/core/WhiteNoiseChannel.java 90 96
+src/de/joergjahnke/gameboy/core/SquareWaveChannel.java 125 131
+----------------------------------------
+        if (this.envelopeSweeps > 0) {
+            --this.envelopeSweepsLeft;
+            if (this.envelopeSweepsLeft <= 0) {
+                this.volume = Math.min(MAX_VOLUME, Math.max(0, this.volume + this.envelopeDirection));
+                this.envelopeSweepsLeft = this.envelopeSweeps;
+            }
+        }
+
+----------------------------------------
+        if (this.envelopeSweeps > 0) {
+            --this.envelopeSweepsLeft;
+            if (this.envelopeSweepsLeft <= 0) {
+                this.volume = Math.min(MAX_VOLUME, Math.max(0, this.volume + this.envelopeDirection));
+                this.envelopeSweepsLeft = this.envelopeSweeps;
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995465
+src/de/joergjahnke/gameboy/core/SquareWaveChannel.java 116 122
+src/de/joergjahnke/gameboy/core/SquareWaveChannel.java 125 131
+----------------------------------------
+        if (this.sweepTime > 0) {
+            --this.sweepTimeLeft;
+            if (this.sweepTimeLeft <= 0) {
+                setFrequency((this.frequencyGB + this.sweepDirection * (this.frequencyGB >> this.sweepShift)) & 0x7ff);
+                this.sweepTimeLeft = this.sweepTime;
+            }
+        }
+
+----------------------------------------
+        if (this.envelopeSweeps > 0) {
+            --this.envelopeSweepsLeft;
+            if (this.envelopeSweepsLeft <= 0) {
+                this.volume = Math.min(MAX_VOLUME, Math.max(0, this.volume + this.envelopeDirection));
+                this.envelopeSweepsLeft = this.envelopeSweeps;
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995467
+src/de/joergjahnke/gameboy/core/SquareWaveChannel.java 125 131
+src/de/joergjahnke/gameboy/core/WhiteNoiseChannel.java 86 97
+----------------------------------------
+        if (this.envelopeSweeps > 0) {
+            --this.envelopeSweepsLeft;
+            if (this.envelopeSweepsLeft <= 0) {
+                this.volume = Math.min(MAX_VOLUME, Math.max(0, this.volume + this.envelopeDirection));
+                this.envelopeSweepsLeft = this.envelopeSweeps;
+            }
+        }
+
+----------------------------------------
+    public void update() {
+        --this.length;
+
+        // modify amplitude if envelope sweep time has passed
+        if (this.envelopeSweeps > 0) {
+            --this.envelopeSweepsLeft;
+            if (this.envelopeSweepsLeft <= 0) {
+                this.volume = Math.min(MAX_VOLUME, Math.max(0, this.volume + this.envelopeDirection));
+                this.envelopeSweepsLeft = this.envelopeSweeps;
+            }
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995483
+src/de/joergjahnke/gameboy/core/CPU.java 1294 1301
+src/de/joergjahnke/gameboy/core/CPU.java 1745 1752
+----------------------------------------
+                    case 0xf8: {
+                        final int value = this.sp + memory_[this.pc++];
+
+                        this.hl = value & 0xffff;
+                        this.f = (value >= 0x10000 ? CARRY : 0);
+                        this.cycles += 12;
+                        break;
+                    }
+
+----------------------------------------
+                    case 0xe8: {
+                        final int value = this.sp + memory_[this.pc++];
+
+                        this.f = (value >= 0x10000 ? CARRY : 0);
+                        this.sp = value & 0xffff;
+                        this.cycles += 16;
+                        break;
+                    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995485
+src/de/joergjahnke/gameboy/core/CPU.java 730 736
+src/de/joergjahnke/gameboy/core/CPU.java 744 750
+----------------------------------------
+    private int operationSRL(final int data) {
+        final int value = data >> 1;
+
+        this.f = ((value == 0 ? ZERO : 0) + ((data & 0x01) != 0 ? CARRY : 0));
+
+        return value;
+    }
+
+----------------------------------------
+    private int operationSRA(final int data) {
+        final int value = (data >> 1) | (data & 0x80);
+
+        this.f = ((value == 0 ? ZERO : 0) + ((data & 0x01) != 0 ? CARRY : 0));
+
+        return value;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995487
+src/de/joergjahnke/gameboy/core/CPU.java 730 736
+src/de/joergjahnke/gameboy/core/CPU.java 758 764
+----------------------------------------
+    private int operationSRL(final int data) {
+        final int value = data >> 1;
+
+        this.f = ((value == 0 ? ZERO : 0) + ((data & 0x01) != 0 ? CARRY : 0));
+
+        return value;
+    }
+
+----------------------------------------
+    private int operationRRC(final int data) {
+        final int value = (data >> 1) + ((data & 1) != 0 ? 0x80 : 0);
+
+        this.f = ((value == 0 ? ZERO : 0) + ((data & 0x01) != 0 ? CARRY : 0));
+
+        return value;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995486
+src/de/joergjahnke/gameboy/core/CPU.java 744 750
+src/de/joergjahnke/gameboy/core/CPU.java 758 764
+----------------------------------------
+    private int operationSRA(final int data) {
+        final int value = (data >> 1) | (data & 0x80);
+
+        this.f = ((value == 0 ? ZERO : 0) + ((data & 0x01) != 0 ? CARRY : 0));
+
+        return value;
+    }
+
+----------------------------------------
+    private int operationRRC(final int data) {
+        final int value = (data >> 1) + ((data & 1) != 0 ? 0x80 : 0);
+
+        this.f = ((value == 0 ? ZERO : 0) + ((data & 0x01) != 0 ? CARRY : 0));
+
+        return value;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995490
+src/de/joergjahnke/gameboy/core/CPU.java 758 764
+src/de/joergjahnke/gameboy/core/CPU.java 772 778
+----------------------------------------
+    private int operationRRC(final int data) {
+        final int value = (data >> 1) + ((data & 1) != 0 ? 0x80 : 0);
+
+        this.f = ((value == 0 ? ZERO : 0) + ((data & 0x01) != 0 ? CARRY : 0));
+
+        return value;
+    }
+
+----------------------------------------
+    private int operationRR(final int data) {
+        final int value = (data >> 1) + ((this.f & CARRY) != 0 ? 0x80 : 0);
+
+        this.f = ((value == 0 ? ZERO : 0) + ((data & 0x01) != 0 ? CARRY : 0));
+
+        return value;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995489
+src/de/joergjahnke/gameboy/core/CPU.java 730 736
+src/de/joergjahnke/gameboy/core/CPU.java 772 778
+----------------------------------------
+    private int operationSRL(final int data) {
+        final int value = data >> 1;
+
+        this.f = ((value == 0 ? ZERO : 0) + ((data & 0x01) != 0 ? CARRY : 0));
+
+        return value;
+    }
+
+----------------------------------------
+    private int operationRR(final int data) {
+        final int value = (data >> 1) + ((this.f & CARRY) != 0 ? 0x80 : 0);
+
+        this.f = ((value == 0 ? ZERO : 0) + ((data & 0x01) != 0 ? CARRY : 0));
+
+        return value;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995488
+src/de/joergjahnke/gameboy/core/CPU.java 744 750
+src/de/joergjahnke/gameboy/core/CPU.java 772 778
+----------------------------------------
+    private int operationSRA(final int data) {
+        final int value = (data >> 1) | (data & 0x80);
+
+        this.f = ((value == 0 ? ZERO : 0) + ((data & 0x01) != 0 ? CARRY : 0));
+
+        return value;
+    }
+
+----------------------------------------
+    private int operationRR(final int data) {
+        final int value = (data >> 1) + ((this.f & CARRY) != 0 ? 0x80 : 0);
+
+        this.f = ((value == 0 ? ZERO : 0) + ((data & 0x01) != 0 ? CARRY : 0));
+
+        return value;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995496
+src/de/joergjahnke/gameboy/core/CPU.java 2520 2527
+src/de/joergjahnke/gameboy/core/CPU.java 2528 2535
+----------------------------------------
+                    case 0x84: {
+                        final int bits = 1 << bit;
+                        final int value = ((this.hl >> 8) | bits);
+
+                        setH((value ^ bits));
+                        this.cycles += 8;
+                        break;
+                    }
+
+----------------------------------------
+                    case 0x85: {
+                        final int bits = 1 << bit;
+                        final int value = ((this.hl & 0xff) | bits);
+
+                        setL((value ^ bits));
+                        this.cycles += 8;
+                        break;
+                    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995498
+src/de/joergjahnke/gameboy/core/CPU.java 2520 2527
+src/de/joergjahnke/gameboy/core/CPU.java 2536 2543
+----------------------------------------
+                    case 0x84: {
+                        final int bits = 1 << bit;
+                        final int value = ((this.hl >> 8) | bits);
+
+                        setH((value ^ bits));
+                        this.cycles += 8;
+                        break;
+                    }
+
+----------------------------------------
+                    case 0x86: {
+                        final int bits = 1 << bit;
+                        final int value = (readByte(this.hl) | bits);
+
+                        writeByte(this.hl, (byte) (value ^ bits));
+                        this.cycles += 16;
+                        break;
+                    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995497
+src/de/joergjahnke/gameboy/core/CPU.java 2528 2535
+src/de/joergjahnke/gameboy/core/CPU.java 2536 2543
+----------------------------------------
+                    case 0x85: {
+                        final int bits = 1 << bit;
+                        final int value = ((this.hl & 0xff) | bits);
+
+                        setL((value ^ bits));
+                        this.cycles += 8;
+                        break;
+                    }
+
+----------------------------------------
+                    case 0x86: {
+                        final int bits = 1 << bit;
+                        final int value = (readByte(this.hl) | bits);
+
+                        writeByte(this.hl, (byte) (value ^ bits));
+                        this.cycles += 16;
+                        break;
+                    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17996010
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 260 266
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 407 413
+----------------------------------------
+    private ImageIcon getMenuIcon(final String filename) {
+        try {
+            return new ImageIcon(new ImageIcon(getClass().getResource("/res/drawable/" + filename)).getImage().getScaledInstance(16, 16, Image.SCALE_SMOOTH));
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+----------------------------------------
+        if (null == cartridgeImage) {
+            try {
+                cartridgeImage = Image.createImage("/res/drawable/cartridge.png");
+            } catch (Exception e) {
+                // we can work without the image
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17996022
+src/de/joergjahnke/common/bluetooth/BluetoothClient.java 149 158
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 407 413
+----------------------------------------
+        synchronized (this.agent) {
+            this.agent.searchServices(null, uuids, btDevice, this);
+
+            // wait until the discovery agents notifies us that he is finished or one minute has passed
+            try {
+                this.agent.wait(getTimeout(), 0);
+            } catch (InterruptedException e) {
+                // we got interrupted, no problem
+            }
+        }
+
+----------------------------------------
+        if (null == cartridgeImage) {
+            try {
+                cartridgeImage = Image.createImage("/res/drawable/cartridge.png");
+            } catch (Exception e) {
+                // we can work without the image
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17996017
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 241 248
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 407 413
+----------------------------------------
+                    public void windowClosing(final WindowEvent evt) {
+                        try {
+                            settings.storeToXML(new FileOutputStream(new File(PROPERTIES_NAME)), "Properties for JSwingBoy");
+                            stopGame();
+                        } catch (Exception e) {
+                            // we can't save the settings, that's a pity, but we'll just use defaults on next startup
+                        }
+                    }
+
+----------------------------------------
+        if (null == cartridgeImage) {
+            try {
+                cartridgeImage = Image.createImage("/res/drawable/cartridge.png");
+            } catch (Exception e) {
+                // we can work without the image
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17996020
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 998 1004
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 407 413
+----------------------------------------
+    private void jMenuItemContentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemContentsActionPerformed
+        try {
+            java.awt.Desktop.getDesktop().browse(new URI(URL_ONLINE_HELP));
+        } catch (Throwable t) {
+            JOptionPane.showMessageDialog(this, this.commonResources.getString("CouldNotDisplayOnlineHelp") + " '" + URL_ONLINE_HELP + "'", this.commonResources.getString("CouldNotStartBrowser"), JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jMenuItemContentsActionPerformed
+
+----------------------------------------
+        if (null == cartridgeImage) {
+            try {
+                cartridgeImage = Image.createImage("/res/drawable/cartridge.png");
+            } catch (Exception e) {
+                // we can work without the image
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17996015
+src/de/joergjahnke/common/jme/OrientationSensitiveCanvasHelper.java 113 119
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 407 413
+----------------------------------------
+    public void deactivateAccelerometer() {
+        try {
+            ((javax.microedition.sensor.SensorConnection) this.con).removeDataListener();
+            this.con.close();
+        } catch (Throwable t) {
+        }
+    }
+
+----------------------------------------
+        if (null == cartridgeImage) {
+            try {
+                cartridgeImage = Image.createImage("/res/drawable/cartridge.png");
+            } catch (Exception e) {
+                // we can work without the image
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17996024
+src/de/joergjahnke/common/bluetooth/BluetoothClient.java 174 180
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 407 413
+----------------------------------------
+    public void servicesDiscovered(final int transID, final ServiceRecord[] servRecord) {
+        try {
+            this.serviceRecord = servRecord[0];
+        } catch (Exception e) {
+            // it may happen that no service record can be retrieved, in this case serviceRecord remains null
+        }
+    }
+
+----------------------------------------
+        if (null == cartridgeImage) {
+            try {
+                cartridgeImage = Image.createImage("/res/drawable/cartridge.png");
+            } catch (Exception e) {
+                // we can work without the image
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17996005
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 489 494
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 407 413
+----------------------------------------
+            } finally {
+                try {
+                    saveStream.close();
+                } catch (Exception e) {
+                }
+            }
+
+----------------------------------------
+        if (null == cartridgeImage) {
+            try {
+                cartridgeImage = Image.createImage("/res/drawable/cartridge.png");
+            } catch (Exception e) {
+                // we can work without the image
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17996023
+src/de/joergjahnke/common/jme/Settings.java 84 90
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 407 413
+----------------------------------------
+    public int getInteger(final String key, final int defaultValue) {
+        try {
+            return getInteger(key);
+        } catch (Exception e) {
+            return defaultValue;
+        }
+    }
+
+----------------------------------------
+        if (null == cartridgeImage) {
+            try {
+                cartridgeImage = Image.createImage("/res/drawable/cartridge.png");
+            } catch (Exception e) {
+                // we can work without the image
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17996007
+src/de/joergjahnke/common/jme/FormattedTextForm.java 159 165
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 407 413
+----------------------------------------
+                public void commandAction(final Command c, final Item item) {
+                    try {
+                        midlet.platformRequest(((StringItem)item).getText());
+                    } catch (Exception e) {
+                        // we could not invoke the browser, that's a pity but we can live with it
+                    }
+                }
+
+----------------------------------------
+        if (null == cartridgeImage) {
+            try {
+                cartridgeImage = Image.createImage("/res/drawable/cartridge.png");
+            } catch (Exception e) {
+                // we can work without the image
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17996012
+src/de/joergjahnke/common/bluetooth/BluetoothDevice.java 158 164
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 407 413
+----------------------------------------
+    public static String getRemoteDeviceName(final RemoteDevice dev) {
+        try {
+            return dev.getFriendlyName(false) == null ? dev.getBluetoothAddress() : dev.getFriendlyName(false);
+        } catch (IOException e) {
+            return "unknown";
+        }
+    }
+
+----------------------------------------
+        if (null == cartridgeImage) {
+            try {
+                cartridgeImage = Image.createImage("/res/drawable/cartridge.png");
+            } catch (Exception e) {
+                // we can work without the image
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17996018
+src/de/joergjahnke/common/extendeddevices/WavePlayer.java 64 70
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 407 413
+----------------------------------------
+                        synchronized (buffer) {
+                            buffer.reset();
+                            try {
+                                buffer.wait();
+                            } catch (InterruptedException e) {
+                            }
+                        }
+
+----------------------------------------
+        if (null == cartridgeImage) {
+            try {
+                cartridgeImage = Image.createImage("/res/drawable/cartridge.png");
+            } catch (Exception e) {
+                // we can work without the image
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17996013
+src/de/joergjahnke/common/jme/FileSystemHandler.java 189 195
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 407 413
+----------------------------------------
+                if (prgsString.length() > 0) {
+                    try {
+                        settings.setString(SETTING_PROGRAMS, prgsString.toString());
+                    } catch (Exception e) {
+                    // we could not save the list of programs on the phone, that's OK
+                    }
+                }
+
+----------------------------------------
+        if (null == cartridgeImage) {
+            try {
+                cartridgeImage = Image.createImage("/res/drawable/cartridge.png");
+            } catch (Exception e) {
+                // we can work without the image
+            }
+        }
+
+----------------------------------------

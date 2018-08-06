@@ -1,0 +1,1191 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513717
+src/jmemorize/gui/swing/actions/LearnAction.java 47 52
+src/jmemorize/gui/swing/actions/edit/PasteAction.java 45 50
+----------------------------------------
+    {
+        setValues();
+        
+        m_selectionProvider = selectionProvider;
+        selectionProvider.addSelectionObserver(this);
+    }
+
+----------------------------------------
+    {
+        m_selectionProvider = selectionProvider;
+        
+        setValues();
+        updateEnablement();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513690
+src/jmemorize/gui/swing/actions/edit/CopyAction.java 44 49
+src/jmemorize/gui/swing/actions/edit/PasteAction.java 45 50
+----------------------------------------
+    {
+        m_selectionProvider = selectionProvider;
+        m_selectionProvider.addSelectionObserver(this);
+        
+        setValues();
+    }
+
+----------------------------------------
+    {
+        m_selectionProvider = selectionProvider;
+        
+        setValues();
+        updateEnablement();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513695
+src/jmemorize/gui/swing/actions/RenameCategoryAction.java 46 54
+src/jmemorize/gui/swing/actions/edit/PasteAction.java 45 50
+----------------------------------------
+    {
+        Main.getInstance().addLearnSessionObserver(this);
+        
+        m_selectionProvider = selectionProvider;
+        m_selectionProvider.addSelectionObserver(this);
+        
+        setValues();
+        updateEnablement();
+    }
+
+----------------------------------------
+    {
+        m_selectionProvider = selectionProvider;
+        
+        setValues();
+        updateEnablement();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513692
+src/jmemorize/gui/swing/actions/edit/ResetCardAction.java 43 49
+src/jmemorize/gui/swing/actions/edit/PasteAction.java 45 50
+----------------------------------------
+    {
+        m_selectionProvider = selectionProvider;
+        m_selectionProvider.addSelectionObserver(this);
+        
+        setValues();
+        updateEnablement();
+    }
+
+----------------------------------------
+    {
+        m_selectionProvider = selectionProvider;
+        
+        setValues();
+        updateEnablement();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513688
+src/jmemorize/util/RecentItems.java 47 52
+src/jmemorize/gui/swing/actions/edit/PasteAction.java 45 50
+----------------------------------------
+    {
+        m_maxItems = maxItems;
+        m_prefNode = prefNode;
+        
+        loadFromPreferences();
+    }
+
+----------------------------------------
+    {
+        m_selectionProvider = selectionProvider;
+        
+        setValues();
+        updateEnablement();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513694
+src/jmemorize/gui/swing/widgets/CardTable.java 551 559
+src/jmemorize/gui/swing/actions/edit/PasteAction.java 45 50
+----------------------------------------
+    {
+        m_statusBar = statusBar;
+        
+        if (m_statusBar != null)
+        {
+            updateCardCountStatusBar();
+            updateSelectedCardCountStatusBar();
+        }
+    }
+
+----------------------------------------
+    {
+        m_selectionProvider = selectionProvider;
+        
+        setValues();
+        updateEnablement();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513663
+src/jmemorize/gui/swing/actions/file/SaveLessonAction.java 39 44
+src/jmemorize/gui/swing/actions/edit/PasteAction.java 45 50
+----------------------------------------
+    {
+        setValues();
+        
+        Main.getInstance().addLessonObserver(this);
+        updateEnablement();
+    }
+
+----------------------------------------
+    {
+        m_selectionProvider = selectionProvider;
+        
+        setValues();
+        updateEnablement();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513689
+src/jmemorize/gui/swing/widgets/CardTable.java 283 289
+src/jmemorize/gui/swing/actions/edit/PasteAction.java 45 50
+----------------------------------------
+        {
+            m_cards = cards;
+            m_category = category;
+            resort();
+            
+            updateCardCountStatusBar();
+        }
+
+----------------------------------------
+    {
+        m_selectionProvider = selectionProvider;
+        
+        setValues();
+        updateEnablement();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513691
+src/jmemorize/gui/swing/panels/DeckTablePanel.java 120 133
+src/jmemorize/gui/swing/actions/edit/PasteAction.java 45 50
+----------------------------------------
+    {
+        m_frame = mainFrame;
+        
+        m_cardTable = new CardTable(m_frame, 
+            Main.USER_PREFS.node("main.table"), //$NON-NLS-1$ 
+            new int[]{ 
+                CardTable.COLUMN_FRONTSIDE, 
+                CardTable.COLUMN_DECK, 
+                CardTable.COLUMN_CATEGORY, 
+                CardTable.COLUMN_TESTED, 
+                CardTable.COLUMN_EXPIRES});
+        
+        initComponents();
+    }
+
+----------------------------------------
+    {
+        m_selectionProvider = selectionProvider;
+        
+        setValues();
+        updateEnablement();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513716
+src/jmemorize/gui/swing/widgets/CardTable.java 299 304
+src/jmemorize/gui/swing/actions/edit/PasteAction.java 45 50
+----------------------------------------
+        {
+            m_orderModelIndex = modelIndex;
+            m_orderDir = direction;
+            
+            resort();
+        }
+
+----------------------------------------
+    {
+        m_selectionProvider = selectionProvider;
+        
+        setValues();
+        updateEnablement();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513664
+src/jmemorize/gui/swing/actions/file/SaveLessonAction.java 39 44
+src/jmemorize/gui/swing/frames/FindFrame.java 370 375
+----------------------------------------
+    {
+        setValues();
+        
+        Main.getInstance().addLessonObserver(this);
+        updateEnablement();
+    }
+
+----------------------------------------
+    {
+        initComponents();
+
+        Main.getInstance().addProgramEndObserver(this);
+        Settings.loadFrameState(this, FRAME_ID);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513719
+src/jmemorize/gui/swing/actions/edit/PasteAction.java 45 50
+src/jmemorize/gui/swing/panels/CardPanel.java 484 489
+----------------------------------------
+    {
+        m_selectionProvider = selectionProvider;
+        
+        setValues();
+        updateEnablement();
+    }
+
+----------------------------------------
+    {
+        m_cardSidesPanel.getComponent(index).setVisible(visible);
+        
+        updateCardSideBorders();
+        updateCardSideButtons();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513665
+src/jmemorize/gui/swing/actions/file/SaveLessonAction.java 39 44
+src/jmemorize/gui/swing/panels/CardPanel.java 484 489
+----------------------------------------
+    {
+        setValues();
+        
+        Main.getInstance().addLessonObserver(this);
+        updateEnablement();
+    }
+
+----------------------------------------
+    {
+        m_cardSidesPanel.getComponent(index).setVisible(visible);
+        
+        updateCardSideBorders();
+        updateCardSideButtons();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513670
+src/jmemorize/util/EquivalenceClassSet.java 336 343
+src/jmemorize/util/EquivalenceClassSet.java 474 482
+----------------------------------------
+            {
+                iterIdx = m_loopEqvClassIter.nextIndex();
+                addIdx = eqvPosition.eqvClassIter.nextIndex();
+                if (addIdx < iterIdx) 
+                {
+                    iterIdx += 1;
+                }
+            } 
+
+----------------------------------------
+                {
+                    // we may have to replace the item loop iterator for this class, so get the position
+                    replaceLoopItemIter = true;
+                    loopNextItemIdx = m_loopItemIter.nextIndex();
+                    if (itemLocationIdx < loopNextItemIdx) 
+                    {
+                        loopNextItemIdx -= 1;
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513671
+src/jmemorize/util/EquivalenceClassSet.java 474 482
+src/jmemorize/util/EquivalenceClassSet.java 502 509
+----------------------------------------
+                {
+                    // we may have to replace the item loop iterator for this class, so get the position
+                    replaceLoopItemIter = true;
+                    loopNextItemIdx = m_loopItemIter.nextIndex();
+                    if (itemLocationIdx < loopNextItemIdx) 
+                    {
+                        loopNextItemIdx -= 1;
+                    }
+                }
+
+----------------------------------------
+                    {                        
+                        m_loopEqvClassIter = m_equivalenceClasses.listIterator(loopNextClassIdx);
+                        if (eqvPosition.matchingEqvClass == m_loopCurrentEqvClass) 
+                        {
+                            m_loopCurrentEqvClass = null;
+                            m_loopItemIter = m_emptyList.listIterator(); 
+                        }                        
+                    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513672
+src/jmemorize/gui/swing/actions/edit/RemoveAction.java 46 52
+src/jmemorize/gui/swing/panels/CardPanel.java 349 361
+----------------------------------------
+    {
+        m_selectionProvider = selectionProvider;
+        m_selectionProvider.addSelectionObserver(this);
+        selectionChanged(m_selectionProvider);
+        
+        setValues();
+    }
+
+----------------------------------------
+        {
+            m_text = text;
+            m_sides = sides;
+            m_showSideButtons.add(this);
+            
+            setBackground(ColorConstants.CARD_SIDE_BAR_COLOR);
+            addActionListener(this);
+            
+//            Character character = new Character(Integer.toString(index).charAt(0));
+//            String actionName = "show-card-side-action-"+index;
+//            getInputMap().put(KeyStroke.getKeyStroke(character, InputEvent.CTRL_MASK), actionName);
+//            getActionMap().put(actionName, this);
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513674
+src/jmemorize/gui/swing/GeneralTransferHandler.java 244 253
+src/jmemorize/gui/swing/panels/CardPanel.java 372 380
+----------------------------------------
+        {
+            for (int i = 0; i < transferFlavors.length; i++)
+            {
+                if (transferFlavors[i] == FORMATTED_TEXT_FLAVOR || 
+                    transferFlavors[i] == DataFlavor.stringFlavor)
+                {
+                    return true;
+                }
+            }
+        }
+
+----------------------------------------
+        {
+            for (int i = 0; i < m_sides.length; i++)
+            {
+                if (m_sides[i] == index)
+                    return true;
+            }
+            
+            return false;
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513673
+src/jmemorize/gui/swing/GeneralTransferHandler.java 232 241
+src/jmemorize/gui/swing/panels/CardPanel.java 372 380
+----------------------------------------
+        {
+            for (int i = 0; i < transferFlavors.length; i++)
+            {
+                if (transferFlavors[i] == CARDS_FLAVOR || 
+                    transferFlavors[i] == CATEGORY_FLAVOR)
+                {
+                    return true;
+                }
+            }
+        }
+
+----------------------------------------
+        {
+            for (int i = 0; i < m_sides.length; i++)
+            {
+                if (m_sides[i] == index)
+                    return true;
+            }
+            
+            return false;
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513675
+src/jmemorize/gui/swing/dialogs/AboutDialog.java 137 145
+src/jmemorize/gui/swing/dialogs/AboutDialog.java 230 239
+----------------------------------------
+    {
+        m_licenseTextPane = new JEditorPane();
+        
+        JPanel panel = new JPanel();
+        panel.setLayout(new BorderLayout());
+        panel.add(new JScrollPane(m_licenseTextPane), BorderLayout.CENTER);
+        
+        return panel;
+    }
+
+----------------------------------------
+    {
+        JTable table = new JTable();
+        table.setModel(createPropertiesTableModel());
+        
+        JPanel panel = new JPanel();
+        panel.setLayout(new BorderLayout());
+        panel.add(new JScrollPane(table), BorderLayout.CENTER);
+        
+        return panel;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513677
+src/jmemorize/gui/swing/actions/LearnAction.java 58 63
+src/jmemorize/gui/swing/actions/file/SaveLessonAction.java 93 98
+----------------------------------------
+    {
+        Main main = Main.getInstance();
+        MainFrame frame = main.getFrame();
+        
+        new LearnSettingsDialog(frame, main.getLearnSettings(), m_selectionProvider);
+    }
+
+----------------------------------------
+    {
+        Main main = Main.getInstance();
+        Lesson lesson = main.getLesson();
+        
+        setEnabled(!main.isSessionRunning() && lesson.canSave());
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513685
+src/jmemorize/gui/swing/actions/file/SaveLessonAsAction.java 50 56
+src/jmemorize/gui/swing/actions/file/SaveLessonAction.java 101 107
+----------------------------------------
+    {
+        setName(Localization.get("MainFrame.SAVE_AS")); //$NON-NLS-1$
+        setDescription(Localization.get("MainFrame.SAVE_AS_DESC")); //$NON-NLS-1$
+        setIcon("/resource/icons/file_saveas.gif"); //$NON-NLS-1$
+        setAccelerator(KeyEvent.VK_S, SHORTCUT_KEY + InputEvent.SHIFT_MASK);
+        setMnemonic(2);
+    }
+
+----------------------------------------
+    {
+        setName(Localization.get("MainFrame.SAVE")); //$NON-NLS-1$
+        setDescription(Localization.get("MainFrame.SAVE_DESC")); //$NON-NLS-1$
+        setIcon("/resource/icons/file_save.gif"); //$NON-NLS-1$
+        setAccelerator(KeyEvent.VK_S, SHORTCUT_KEY);
+        setMnemonic(1);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513684
+src/jmemorize/gui/swing/actions/edit/ResetCardAction.java 90 96
+src/jmemorize/gui/swing/actions/file/SaveLessonAction.java 101 107
+----------------------------------------
+    {
+        setName(Localization.get(LC.RESET));
+        setDescription(Localization.get(LC.RESET_DESC));
+        setIcon("/resource/icons/card_reset.gif"); //$NON-NLS-1$
+        setMnemonic(1);
+        setAccelerator(KeyEvent.VK_R, SHORTCUT_KEY);
+    }
+
+----------------------------------------
+    {
+        setName(Localization.get("MainFrame.SAVE")); //$NON-NLS-1$
+        setDescription(Localization.get("MainFrame.SAVE_DESC")); //$NON-NLS-1$
+        setIcon("/resource/icons/file_save.gif"); //$NON-NLS-1$
+        setAccelerator(KeyEvent.VK_S, SHORTCUT_KEY);
+        setMnemonic(1);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513726
+src/jmemorize/gui/swing/actions/ShowCategoryTreeAction.java 51 56
+src/jmemorize/gui/swing/actions/file/SaveLessonAction.java 101 107
+----------------------------------------
+    {
+        setName(Localization.get("MainFrame.CATEGORY_TREE")); //$NON-NLS-1$
+        setDescription(Localization.get("MainFrame.CATEGORY_TREE_DESC")); //$NON-NLS-1$
+        setIcon("/resource/icons/tree.gif"); //$NON-NLS-1$
+        setAccelerator(KeyEvent.VK_T, 0);
+    }
+
+----------------------------------------
+    {
+        setName(Localization.get("MainFrame.SAVE")); //$NON-NLS-1$
+        setDescription(Localization.get("MainFrame.SAVE_DESC")); //$NON-NLS-1$
+        setIcon("/resource/icons/file_save.gif"); //$NON-NLS-1$
+        setAccelerator(KeyEvent.VK_S, SHORTCUT_KEY);
+        setMnemonic(1);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513679
+src/jmemorize/gui/swing/actions/edit/RemoveAction.java 130 135
+src/jmemorize/gui/swing/actions/file/SaveLessonAction.java 101 107
+----------------------------------------
+    {
+        setName(Localization.get("MainFrame.DELETE")); //$NON-NLS-1$
+        setIcon("/resource/icons/remove.gif"); //$NON-NLS-1$
+        setAccelerator(KeyEvent.VK_DELETE, 0);
+        setMnemonic(1);
+    }
+
+----------------------------------------
+    {
+        setName(Localization.get("MainFrame.SAVE")); //$NON-NLS-1$
+        setDescription(Localization.get("MainFrame.SAVE_DESC")); //$NON-NLS-1$
+        setIcon("/resource/icons/file_save.gif"); //$NON-NLS-1$
+        setAccelerator(KeyEvent.VK_S, SHORTCUT_KEY);
+        setMnemonic(1);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513727
+src/jmemorize/gui/swing/actions/file/PreferencesAction.java 51 57
+src/jmemorize/gui/swing/actions/file/SaveLessonAction.java 101 107
+----------------------------------------
+    {
+        setName(Localization.get("MainFrame.PREFERENCES") + ".."); //$NON-NLS-1$ //$NON-NLS-2$ 
+        setDescription(Localization.get("MainFrame.PREFERENCES_DESC")); //$NON-NLS-1$ 
+        setIcon("/resource/icons/settings.gif"); //$NON-NLS-1$ 
+        setAccelerator(KeyEvent.VK_P, SHORTCUT_KEY);
+        setMnemonic(1);
+    }
+
+----------------------------------------
+    {
+        setName(Localization.get("MainFrame.SAVE")); //$NON-NLS-1$
+        setDescription(Localization.get("MainFrame.SAVE_DESC")); //$NON-NLS-1$
+        setIcon("/resource/icons/file_save.gif"); //$NON-NLS-1$
+        setAccelerator(KeyEvent.VK_S, SHORTCUT_KEY);
+        setMnemonic(1);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513678
+src/jmemorize/gui/swing/actions/edit/EditCardAction.java 79 85
+src/jmemorize/gui/swing/actions/file/SaveLessonAction.java 101 107
+----------------------------------------
+    {
+        setName(Localization.get("MainFrame.EDIT_CARD")); //$NON-NLS-1$
+        setDescription(Localization.get("MainFrame.EDIT_CARD_DESC")); //$NON-NLS-1$
+        setIcon("/resource/icons/card_edit.gif"); //$NON-NLS-1$
+        setMnemonic(1);
+        setAccelerator(KeyEvent.VK_ENTER, 0);
+    }
+
+----------------------------------------
+    {
+        setName(Localization.get("MainFrame.SAVE")); //$NON-NLS-1$
+        setDescription(Localization.get("MainFrame.SAVE_DESC")); //$NON-NLS-1$
+        setIcon("/resource/icons/file_save.gif"); //$NON-NLS-1$
+        setAccelerator(KeyEvent.VK_S, SHORTCUT_KEY);
+        setMnemonic(1);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513680
+src/jmemorize/gui/swing/actions/file/SaveLessonAction.java 101 107
+src/jmemorize/gui/swing/actions/LearnAction.java 120 126
+----------------------------------------
+    {
+        setName(Localization.get("MainFrame.SAVE")); //$NON-NLS-1$
+        setDescription(Localization.get("MainFrame.SAVE_DESC")); //$NON-NLS-1$
+        setIcon("/resource/icons/file_save.gif"); //$NON-NLS-1$
+        setAccelerator(KeyEvent.VK_S, SHORTCUT_KEY);
+        setMnemonic(1);
+    }
+
+----------------------------------------
+    {
+        setName(Localization.get(LC.LEARN));
+        setDescription(Localization.get(LC.LEARN_DESC));
+        setIcon("/resource/icons/learn.gif"); //$NON-NLS-1$
+        setAccelerator(KeyEvent.VK_L, SHORTCUT_KEY);
+        setMnemonic(1);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513984
+src/jmemorize/gui/swing/frames/NewCardFrame.java 82 88
+src/jmemorize/gui/swing/actions/LearnAction.java 120 126
+----------------------------------------
+        {
+            setName(Localization.get(LC.NEW_CARD_EDIT_RECENTLY));
+            setDescription(Localization.get(LC.NEW_CARD_EDIT_RECENTLY_DESC));
+            setIcon("/resource/icons/card_edit.gif"); //$NON-NLS-1$
+            setAccelerator(KeyEvent.VK_ENTER, 0);
+            setMnemonic(1);
+        }
+
+----------------------------------------
+    {
+        setName(Localization.get(LC.LEARN));
+        setDescription(Localization.get(LC.LEARN_DESC));
+        setIcon("/resource/icons/learn.gif"); //$NON-NLS-1$
+        setAccelerator(KeyEvent.VK_L, SHORTCUT_KEY);
+        setMnemonic(1);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513985
+src/jmemorize/gui/swing/actions/file/PreferencesAction.java 51 57
+src/jmemorize/gui/swing/actions/LearnAction.java 120 126
+----------------------------------------
+    {
+        setName(Localization.get("MainFrame.PREFERENCES") + ".."); //$NON-NLS-1$ //$NON-NLS-2$ 
+        setDescription(Localization.get("MainFrame.PREFERENCES_DESC")); //$NON-NLS-1$ 
+        setIcon("/resource/icons/settings.gif"); //$NON-NLS-1$ 
+        setAccelerator(KeyEvent.VK_P, SHORTCUT_KEY);
+        setMnemonic(1);
+    }
+
+----------------------------------------
+    {
+        setName(Localization.get(LC.LEARN));
+        setDescription(Localization.get(LC.LEARN_DESC));
+        setIcon("/resource/icons/learn.gif"); //$NON-NLS-1$
+        setAccelerator(KeyEvent.VK_L, SHORTCUT_KEY);
+        setMnemonic(1);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513983
+src/jmemorize/gui/swing/actions/edit/ResetCardAction.java 90 96
+src/jmemorize/gui/swing/actions/LearnAction.java 120 126
+----------------------------------------
+    {
+        setName(Localization.get(LC.RESET));
+        setDescription(Localization.get(LC.RESET_DESC));
+        setIcon("/resource/icons/card_reset.gif"); //$NON-NLS-1$
+        setMnemonic(1);
+        setAccelerator(KeyEvent.VK_R, SHORTCUT_KEY);
+    }
+
+----------------------------------------
+    {
+        setName(Localization.get(LC.LEARN));
+        setDescription(Localization.get(LC.LEARN_DESC));
+        setIcon("/resource/icons/learn.gif"); //$NON-NLS-1$
+        setAccelerator(KeyEvent.VK_L, SHORTCUT_KEY);
+        setMnemonic(1);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513982
+src/jmemorize/gui/swing/frames/NewCardFrame.java 64 70
+src/jmemorize/gui/swing/actions/LearnAction.java 120 126
+----------------------------------------
+        {
+            setName(Localization.get(LC.NEW_CARD_NEW_WINDOW));
+            setDescription(Localization.get(LC.NEW_CARD_NEW_WINDOW_DESC));
+            setIcon("/resource/icons/card_add.gif"); //$NON-NLS-1$
+            setAccelerator(KeyEvent.VK_N, InputEvent.CTRL_MASK);
+            setMnemonic(7);
+        }
+
+----------------------------------------
+    {
+        setName(Localization.get(LC.LEARN));
+        setDescription(Localization.get(LC.LEARN_DESC));
+        setIcon("/resource/icons/learn.gif"); //$NON-NLS-1$
+        setAccelerator(KeyEvent.VK_L, SHORTCUT_KEY);
+        setMnemonic(1);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513724
+src/jmemorize/gui/swing/actions/edit/ResetCardAction.java 90 96
+src/jmemorize/gui/swing/actions/edit/PasteAction.java 87 92
+----------------------------------------
+    {
+        setName(Localization.get(LC.RESET));
+        setDescription(Localization.get(LC.RESET_DESC));
+        setIcon("/resource/icons/card_reset.gif"); //$NON-NLS-1$
+        setMnemonic(1);
+        setAccelerator(KeyEvent.VK_R, SHORTCUT_KEY);
+    }
+
+----------------------------------------
+    {
+        setName(Localization.get(LC.PASTE));
+        setIcon("/resource/icons/edit_paste.gif"); //$NON-NLS-1$
+        setAccelerator(KeyEvent.VK_V, SHORTCUT_KEY);
+        setMnemonic(1);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513721
+src/jmemorize/gui/swing/actions/LearnAction.java 120 126
+src/jmemorize/gui/swing/actions/edit/PasteAction.java 87 92
+----------------------------------------
+    {
+        setName(Localization.get(LC.LEARN));
+        setDescription(Localization.get(LC.LEARN_DESC));
+        setIcon("/resource/icons/learn.gif"); //$NON-NLS-1$
+        setAccelerator(KeyEvent.VK_L, SHORTCUT_KEY);
+        setMnemonic(1);
+    }
+
+----------------------------------------
+    {
+        setName(Localization.get(LC.PASTE));
+        setIcon("/resource/icons/edit_paste.gif"); //$NON-NLS-1$
+        setAccelerator(KeyEvent.VK_V, SHORTCUT_KEY);
+        setMnemonic(1);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513681
+src/jmemorize/gui/swing/actions/file/SaveLessonAction.java 101 107
+src/jmemorize/gui/swing/actions/edit/PasteAction.java 87 92
+----------------------------------------
+    {
+        setName(Localization.get("MainFrame.SAVE")); //$NON-NLS-1$
+        setDescription(Localization.get("MainFrame.SAVE_DESC")); //$NON-NLS-1$
+        setIcon("/resource/icons/file_save.gif"); //$NON-NLS-1$
+        setAccelerator(KeyEvent.VK_S, SHORTCUT_KEY);
+        setMnemonic(1);
+    }
+
+----------------------------------------
+    {
+        setName(Localization.get(LC.PASTE));
+        setIcon("/resource/icons/edit_paste.gif"); //$NON-NLS-1$
+        setAccelerator(KeyEvent.VK_V, SHORTCUT_KEY);
+        setMnemonic(1);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513720
+src/jmemorize/gui/swing/frames/NewCardFrame.java 64 70
+src/jmemorize/gui/swing/actions/edit/PasteAction.java 87 92
+----------------------------------------
+        {
+            setName(Localization.get(LC.NEW_CARD_NEW_WINDOW));
+            setDescription(Localization.get(LC.NEW_CARD_NEW_WINDOW_DESC));
+            setIcon("/resource/icons/card_add.gif"); //$NON-NLS-1$
+            setAccelerator(KeyEvent.VK_N, InputEvent.CTRL_MASK);
+            setMnemonic(7);
+        }
+
+----------------------------------------
+    {
+        setName(Localization.get(LC.PASTE));
+        setIcon("/resource/icons/edit_paste.gif"); //$NON-NLS-1$
+        setAccelerator(KeyEvent.VK_V, SHORTCUT_KEY);
+        setMnemonic(1);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513725
+src/jmemorize/gui/swing/frames/NewCardFrame.java 82 88
+src/jmemorize/gui/swing/actions/edit/PasteAction.java 87 92
+----------------------------------------
+        {
+            setName(Localization.get(LC.NEW_CARD_EDIT_RECENTLY));
+            setDescription(Localization.get(LC.NEW_CARD_EDIT_RECENTLY_DESC));
+            setIcon("/resource/icons/card_edit.gif"); //$NON-NLS-1$
+            setAccelerator(KeyEvent.VK_ENTER, 0);
+            setMnemonic(1);
+        }
+
+----------------------------------------
+    {
+        setName(Localization.get(LC.PASTE));
+        setIcon("/resource/icons/edit_paste.gif"); //$NON-NLS-1$
+        setAccelerator(KeyEvent.VK_V, SHORTCUT_KEY);
+        setMnemonic(1);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513786
+src/jmemorize/gui/swing/actions/file/PreferencesAction.java 51 57
+src/jmemorize/gui/swing/actions/edit/PasteAction.java 87 92
+----------------------------------------
+    {
+        setName(Localization.get("MainFrame.PREFERENCES") + ".."); //$NON-NLS-1$ //$NON-NLS-2$ 
+        setDescription(Localization.get("MainFrame.PREFERENCES_DESC")); //$NON-NLS-1$ 
+        setIcon("/resource/icons/settings.gif"); //$NON-NLS-1$ 
+        setAccelerator(KeyEvent.VK_P, SHORTCUT_KEY);
+        setMnemonic(1);
+    }
+
+----------------------------------------
+    {
+        setName(Localization.get(LC.PASTE));
+        setIcon("/resource/icons/edit_paste.gif"); //$NON-NLS-1$
+        setAccelerator(KeyEvent.VK_V, SHORTCUT_KEY);
+        setMnemonic(1);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513722
+src/jmemorize/gui/swing/actions/edit/PasteAction.java 87 92
+src/jmemorize/gui/swing/actions/edit/CutAction.java 83 88
+----------------------------------------
+    {
+        setName(Localization.get(LC.PASTE));
+        setIcon("/resource/icons/edit_paste.gif"); //$NON-NLS-1$
+        setAccelerator(KeyEvent.VK_V, SHORTCUT_KEY);
+        setMnemonic(1);
+    }
+
+----------------------------------------
+    {
+        setName(Localization.get(LC.CUT));
+        setIcon("/resource/icons/edit_cut.gif"); //$NON-NLS-1$
+        setAccelerator(KeyEvent.VK_X, SHORTCUT_KEY);
+        setMnemonic(2);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513711
+src/jmemorize/gui/swing/frames/NewCardFrame.java 82 88
+src/jmemorize/gui/swing/actions/edit/CutAction.java 83 88
+----------------------------------------
+        {
+            setName(Localization.get(LC.NEW_CARD_EDIT_RECENTLY));
+            setDescription(Localization.get(LC.NEW_CARD_EDIT_RECENTLY_DESC));
+            setIcon("/resource/icons/card_edit.gif"); //$NON-NLS-1$
+            setAccelerator(KeyEvent.VK_ENTER, 0);
+            setMnemonic(1);
+        }
+
+----------------------------------------
+    {
+        setName(Localization.get(LC.CUT));
+        setIcon("/resource/icons/edit_cut.gif"); //$NON-NLS-1$
+        setAccelerator(KeyEvent.VK_X, SHORTCUT_KEY);
+        setMnemonic(2);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513708
+src/jmemorize/gui/swing/frames/NewCardFrame.java 64 70
+src/jmemorize/gui/swing/actions/edit/CutAction.java 83 88
+----------------------------------------
+        {
+            setName(Localization.get(LC.NEW_CARD_NEW_WINDOW));
+            setDescription(Localization.get(LC.NEW_CARD_NEW_WINDOW_DESC));
+            setIcon("/resource/icons/card_add.gif"); //$NON-NLS-1$
+            setAccelerator(KeyEvent.VK_N, InputEvent.CTRL_MASK);
+            setMnemonic(7);
+        }
+
+----------------------------------------
+    {
+        setName(Localization.get(LC.CUT));
+        setIcon("/resource/icons/edit_cut.gif"); //$NON-NLS-1$
+        setAccelerator(KeyEvent.VK_X, SHORTCUT_KEY);
+        setMnemonic(2);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513709
+src/jmemorize/gui/swing/actions/LearnAction.java 120 126
+src/jmemorize/gui/swing/actions/edit/CutAction.java 83 88
+----------------------------------------
+    {
+        setName(Localization.get(LC.LEARN));
+        setDescription(Localization.get(LC.LEARN_DESC));
+        setIcon("/resource/icons/learn.gif"); //$NON-NLS-1$
+        setAccelerator(KeyEvent.VK_L, SHORTCUT_KEY);
+        setMnemonic(1);
+    }
+
+----------------------------------------
+    {
+        setName(Localization.get(LC.CUT));
+        setIcon("/resource/icons/edit_cut.gif"); //$NON-NLS-1$
+        setAccelerator(KeyEvent.VK_X, SHORTCUT_KEY);
+        setMnemonic(2);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513710
+src/jmemorize/gui/swing/actions/edit/ResetCardAction.java 90 96
+src/jmemorize/gui/swing/actions/edit/CutAction.java 83 88
+----------------------------------------
+    {
+        setName(Localization.get(LC.RESET));
+        setDescription(Localization.get(LC.RESET_DESC));
+        setIcon("/resource/icons/card_reset.gif"); //$NON-NLS-1$
+        setMnemonic(1);
+        setAccelerator(KeyEvent.VK_R, SHORTCUT_KEY);
+    }
+
+----------------------------------------
+    {
+        setName(Localization.get(LC.CUT));
+        setIcon("/resource/icons/edit_cut.gif"); //$NON-NLS-1$
+        setAccelerator(KeyEvent.VK_X, SHORTCUT_KEY);
+        setMnemonic(2);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513682
+src/jmemorize/gui/swing/actions/file/SaveLessonAction.java 101 107
+src/jmemorize/gui/swing/actions/edit/CutAction.java 83 88
+----------------------------------------
+    {
+        setName(Localization.get("MainFrame.SAVE")); //$NON-NLS-1$
+        setDescription(Localization.get("MainFrame.SAVE_DESC")); //$NON-NLS-1$
+        setIcon("/resource/icons/file_save.gif"); //$NON-NLS-1$
+        setAccelerator(KeyEvent.VK_S, SHORTCUT_KEY);
+        setMnemonic(1);
+    }
+
+----------------------------------------
+    {
+        setName(Localization.get(LC.CUT));
+        setIcon("/resource/icons/edit_cut.gif"); //$NON-NLS-1$
+        setAccelerator(KeyEvent.VK_X, SHORTCUT_KEY);
+        setMnemonic(2);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513712
+src/jmemorize/gui/swing/actions/file/PreferencesAction.java 51 57
+src/jmemorize/gui/swing/actions/edit/CutAction.java 83 88
+----------------------------------------
+    {
+        setName(Localization.get("MainFrame.PREFERENCES") + ".."); //$NON-NLS-1$ //$NON-NLS-2$ 
+        setDescription(Localization.get("MainFrame.PREFERENCES_DESC")); //$NON-NLS-1$ 
+        setIcon("/resource/icons/settings.gif"); //$NON-NLS-1$ 
+        setAccelerator(KeyEvent.VK_P, SHORTCUT_KEY);
+        setMnemonic(1);
+    }
+
+----------------------------------------
+    {
+        setName(Localization.get(LC.CUT));
+        setIcon("/resource/icons/edit_cut.gif"); //$NON-NLS-1$
+        setAccelerator(KeyEvent.VK_X, SHORTCUT_KEY);
+        setMnemonic(2);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513683
+src/jmemorize/gui/swing/actions/file/SaveLessonAction.java 101 107
+src/jmemorize/gui/swing/actions/edit/CopyAction.java 84 89
+----------------------------------------
+    {
+        setName(Localization.get("MainFrame.SAVE")); //$NON-NLS-1$
+        setDescription(Localization.get("MainFrame.SAVE_DESC")); //$NON-NLS-1$
+        setIcon("/resource/icons/file_save.gif"); //$NON-NLS-1$
+        setAccelerator(KeyEvent.VK_S, SHORTCUT_KEY);
+        setMnemonic(1);
+    }
+
+----------------------------------------
+    {
+        setName(Localization.get(LC.COPY));
+        setIcon("/resource/icons/edit_copy.gif"); //$NON-NLS-1$
+        setMnemonic(1);
+        setAccelerator(KeyEvent.VK_C, SHORTCUT_KEY);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513799
+src/jmemorize/gui/swing/frames/NewCardFrame.java 82 88
+src/jmemorize/gui/swing/actions/edit/CopyAction.java 84 89
+----------------------------------------
+        {
+            setName(Localization.get(LC.NEW_CARD_EDIT_RECENTLY));
+            setDescription(Localization.get(LC.NEW_CARD_EDIT_RECENTLY_DESC));
+            setIcon("/resource/icons/card_edit.gif"); //$NON-NLS-1$
+            setAccelerator(KeyEvent.VK_ENTER, 0);
+            setMnemonic(1);
+        }
+
+----------------------------------------
+    {
+        setName(Localization.get(LC.COPY));
+        setIcon("/resource/icons/edit_copy.gif"); //$NON-NLS-1$
+        setMnemonic(1);
+        setAccelerator(KeyEvent.VK_C, SHORTCUT_KEY);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513723
+src/jmemorize/gui/swing/actions/edit/PasteAction.java 87 92
+src/jmemorize/gui/swing/actions/edit/CopyAction.java 84 89
+----------------------------------------
+    {
+        setName(Localization.get(LC.PASTE));
+        setIcon("/resource/icons/edit_paste.gif"); //$NON-NLS-1$
+        setAccelerator(KeyEvent.VK_V, SHORTCUT_KEY);
+        setMnemonic(1);
+    }
+
+----------------------------------------
+    {
+        setName(Localization.get(LC.COPY));
+        setIcon("/resource/icons/edit_copy.gif"); //$NON-NLS-1$
+        setMnemonic(1);
+        setAccelerator(KeyEvent.VK_C, SHORTCUT_KEY);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513796
+src/jmemorize/gui/swing/actions/LearnAction.java 120 126
+src/jmemorize/gui/swing/actions/edit/CopyAction.java 84 89
+----------------------------------------
+    {
+        setName(Localization.get(LC.LEARN));
+        setDescription(Localization.get(LC.LEARN_DESC));
+        setIcon("/resource/icons/learn.gif"); //$NON-NLS-1$
+        setAccelerator(KeyEvent.VK_L, SHORTCUT_KEY);
+        setMnemonic(1);
+    }
+
+----------------------------------------
+    {
+        setName(Localization.get(LC.COPY));
+        setIcon("/resource/icons/edit_copy.gif"); //$NON-NLS-1$
+        setMnemonic(1);
+        setAccelerator(KeyEvent.VK_C, SHORTCUT_KEY);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513797
+src/jmemorize/gui/swing/actions/edit/CutAction.java 83 88
+src/jmemorize/gui/swing/actions/edit/CopyAction.java 84 89
+----------------------------------------
+    {
+        setName(Localization.get(LC.CUT));
+        setIcon("/resource/icons/edit_cut.gif"); //$NON-NLS-1$
+        setAccelerator(KeyEvent.VK_X, SHORTCUT_KEY);
+        setMnemonic(2);
+    }
+
+----------------------------------------
+    {
+        setName(Localization.get(LC.COPY));
+        setIcon("/resource/icons/edit_copy.gif"); //$NON-NLS-1$
+        setMnemonic(1);
+        setAccelerator(KeyEvent.VK_C, SHORTCUT_KEY);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513798
+src/jmemorize/gui/swing/actions/edit/ResetCardAction.java 90 96
+src/jmemorize/gui/swing/actions/edit/CopyAction.java 84 89
+----------------------------------------
+    {
+        setName(Localization.get(LC.RESET));
+        setDescription(Localization.get(LC.RESET_DESC));
+        setIcon("/resource/icons/card_reset.gif"); //$NON-NLS-1$
+        setMnemonic(1);
+        setAccelerator(KeyEvent.VK_R, SHORTCUT_KEY);
+    }
+
+----------------------------------------
+    {
+        setName(Localization.get(LC.COPY));
+        setIcon("/resource/icons/edit_copy.gif"); //$NON-NLS-1$
+        setMnemonic(1);
+        setAccelerator(KeyEvent.VK_C, SHORTCUT_KEY);
+    }
+
+----------------------------------------

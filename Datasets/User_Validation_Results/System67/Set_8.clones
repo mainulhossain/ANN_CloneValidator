@@ -1,0 +1,1193 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995286
+src/de/joergjahnke/common/android/OrientationSensorNotifier.java 52 61
+src/de/joergjahnke/common/util/LRUCache.java 44 49
+----------------------------------------
+	public OrientationSensorNotifier(final long delay) {
+		// verify whether we have an orientation sensor available
+		if(!isSupported()) {
+			throw new IllegalStateException("No orientation sensor available!");
+		}
+		
+		Sensors.enableSensor(Sensors.SENSOR_ORIENTATION);
+		
+		this.delay = delay;
+	}
+
+----------------------------------------
+    public LRUCache(final int capacity) {
+        if (capacity < 2) {
+            throw new IllegalArgumentException("LRUCache capacity needs to be > 1!");
+        }
+        this.capacity = capacity;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995285
+src/de/joergjahnke/gameboy/core/VideoChip.java 826 831
+src/de/joergjahnke/common/util/LRUCache.java 44 49
+----------------------------------------
+    public void setFrameSkip(final int frameSkip) {
+        if (frameSkip < 1) {
+            throw new IllegalArgumentException("Frameskip value must be > 0!");
+        }
+        this.frameSkip = frameSkip;
+    }
+
+----------------------------------------
+    public LRUCache(final int capacity) {
+        if (capacity < 2) {
+            throw new IllegalArgumentException("LRUCache capacity needs to be > 1!");
+        }
+        this.capacity = capacity;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995292
+src/de/joergjahnke/common/bluetooth/BluetoothDevice.java 158 164
+src/de/joergjahnke/common/jme/Settings.java 84 90
+----------------------------------------
+    public static String getRemoteDeviceName(final RemoteDevice dev) {
+        try {
+            return dev.getFriendlyName(false) == null ? dev.getBluetoothAddress() : dev.getFriendlyName(false);
+        } catch (IOException e) {
+            return "unknown";
+        }
+    }
+
+----------------------------------------
+    public int getInteger(final String key, final int defaultValue) {
+        try {
+            return getInteger(key);
+        } catch (Exception e) {
+            return defaultValue;
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995297
+src/de/joergjahnke/common/extendeddevices/WavePlayer.java 64 70
+src/de/joergjahnke/common/jme/Settings.java 84 90
+----------------------------------------
+                        synchronized (buffer) {
+                            buffer.reset();
+                            try {
+                                buffer.wait();
+                            } catch (InterruptedException e) {
+                            }
+                        }
+
+----------------------------------------
+    public int getInteger(final String key, final int defaultValue) {
+        try {
+            return getInteger(key);
+        } catch (Exception e) {
+            return defaultValue;
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995290
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 260 266
+src/de/joergjahnke/common/jme/Settings.java 84 90
+----------------------------------------
+    private ImageIcon getMenuIcon(final String filename) {
+        try {
+            return new ImageIcon(new ImageIcon(getClass().getResource("/res/drawable/" + filename)).getImage().getScaledInstance(16, 16, Image.SCALE_SMOOTH));
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+----------------------------------------
+    public int getInteger(final String key, final int defaultValue) {
+        try {
+            return getInteger(key);
+        } catch (Exception e) {
+            return defaultValue;
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995311
+src/de/joergjahnke/common/bluetooth/BluetoothClient.java 174 180
+src/de/joergjahnke/common/jme/Settings.java 84 90
+----------------------------------------
+    public void servicesDiscovered(final int transID, final ServiceRecord[] servRecord) {
+        try {
+            this.serviceRecord = servRecord[0];
+        } catch (Exception e) {
+            // it may happen that no service record can be retrieved, in this case serviceRecord remains null
+        }
+    }
+
+----------------------------------------
+    public int getInteger(final String key, final int defaultValue) {
+        try {
+            return getInteger(key);
+        } catch (Exception e) {
+            return defaultValue;
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995296
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 241 248
+src/de/joergjahnke/common/jme/Settings.java 84 90
+----------------------------------------
+                    public void windowClosing(final WindowEvent evt) {
+                        try {
+                            settings.storeToXML(new FileOutputStream(new File(PROPERTIES_NAME)), "Properties for JSwingBoy");
+                            stopGame();
+                        } catch (Exception e) {
+                            // we can't save the settings, that's a pity, but we'll just use defaults on next startup
+                        }
+                    }
+
+----------------------------------------
+    public int getInteger(final String key, final int defaultValue) {
+        try {
+            return getInteger(key);
+        } catch (Exception e) {
+            return defaultValue;
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995295
+src/de/joergjahnke/common/jme/OrientationSensitiveCanvasHelper.java 113 119
+src/de/joergjahnke/common/jme/Settings.java 84 90
+----------------------------------------
+    public void deactivateAccelerometer() {
+        try {
+            ((javax.microedition.sensor.SensorConnection) this.con).removeDataListener();
+            this.con.close();
+        } catch (Throwable t) {
+        }
+    }
+
+----------------------------------------
+    public int getInteger(final String key, final int defaultValue) {
+        try {
+            return getInteger(key);
+        } catch (Exception e) {
+            return defaultValue;
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995291
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 296 301
+src/de/joergjahnke/common/jme/Settings.java 84 90
+----------------------------------------
+        } finally {
+            try {
+                out.close();
+            } catch (Exception e) {
+            }
+        }
+
+----------------------------------------
+    public int getInteger(final String key, final int defaultValue) {
+        try {
+            return getInteger(key);
+        } catch (Exception e) {
+            return defaultValue;
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995300
+src/de/joergjahnke/common/bluetooth/BluetoothClient.java 149 158
+src/de/joergjahnke/common/jme/Settings.java 84 90
+----------------------------------------
+        synchronized (this.agent) {
+            this.agent.searchServices(null, uuids, btDevice, this);
+
+            // wait until the discovery agents notifies us that he is finished or one minute has passed
+            try {
+                this.agent.wait(getTimeout(), 0);
+            } catch (InterruptedException e) {
+                // we got interrupted, no problem
+            }
+        }
+
+----------------------------------------
+    public int getInteger(final String key, final int defaultValue) {
+        try {
+            return getInteger(key);
+        } catch (Exception e) {
+            return defaultValue;
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995298
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 998 1004
+src/de/joergjahnke/common/jme/Settings.java 84 90
+----------------------------------------
+    private void jMenuItemContentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemContentsActionPerformed
+        try {
+            java.awt.Desktop.getDesktop().browse(new URI(URL_ONLINE_HELP));
+        } catch (Throwable t) {
+            JOptionPane.showMessageDialog(this, this.commonResources.getString("CouldNotDisplayOnlineHelp") + " '" + URL_ONLINE_HELP + "'", this.commonResources.getString("CouldNotStartBrowser"), JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jMenuItemContentsActionPerformed
+
+----------------------------------------
+    public int getInteger(final String key, final int defaultValue) {
+        try {
+            return getInteger(key);
+        } catch (Exception e) {
+            return defaultValue;
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995299
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 984 991
+src/de/joergjahnke/common/jme/Settings.java 84 90
+----------------------------------------
+                if (evt.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
+                    try {
+                        Desktop.getDesktop().browse(evt.getURL().toURI());
+                    } catch (Throwable t) {
+                        // could not display the web page, what to do now???
+                        System.err.println("Could not browse to page " + evt.getURL());
+                    }
+                }
+
+----------------------------------------
+    public int getInteger(final String key, final int defaultValue) {
+        try {
+            return getInteger(key);
+        } catch (Exception e) {
+            return defaultValue;
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995293
+src/de/joergjahnke/common/jme/FileSystemHandler.java 189 195
+src/de/joergjahnke/common/jme/Settings.java 84 90
+----------------------------------------
+                if (prgsString.length() > 0) {
+                    try {
+                        settings.setString(SETTING_PROGRAMS, prgsString.toString());
+                    } catch (Exception e) {
+                    // we could not save the list of programs on the phone, that's OK
+                    }
+                }
+
+----------------------------------------
+    public int getInteger(final String key, final int defaultValue) {
+        try {
+            return getInteger(key);
+        } catch (Exception e) {
+            return defaultValue;
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995289
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 510 515
+src/de/joergjahnke/common/jme/Settings.java 84 90
+----------------------------------------
+        } finally {
+            try {
+                romStream.close();
+            } catch (Exception e) {
+            }
+        }
+
+----------------------------------------
+    public int getInteger(final String key, final int defaultValue) {
+        try {
+            return getInteger(key);
+        } catch (Exception e) {
+            return defaultValue;
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995294
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 375 380
+src/de/joergjahnke/common/jme/Settings.java 84 90
+----------------------------------------
+        } finally {
+            try {
+                in.close();
+            } catch (Exception e) {
+            }
+        }
+
+----------------------------------------
+    public int getInteger(final String key, final int defaultValue) {
+        try {
+            return getInteger(key);
+        } catch (Exception e) {
+            return defaultValue;
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995287
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 489 494
+src/de/joergjahnke/common/jme/Settings.java 84 90
+----------------------------------------
+            } finally {
+                try {
+                    saveStream.close();
+                } catch (Exception e) {
+                }
+            }
+
+----------------------------------------
+    public int getInteger(final String key, final int defaultValue) {
+        try {
+            return getInteger(key);
+        } catch (Exception e) {
+            return defaultValue;
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995899
+src/de/joergjahnke/common/bluetooth/BluetoothClient.java 149 158
+src/de/joergjahnke/common/jme/FormattedTextForm.java 159 165
+----------------------------------------
+        synchronized (this.agent) {
+            this.agent.searchServices(null, uuids, btDevice, this);
+
+            // wait until the discovery agents notifies us that he is finished or one minute has passed
+            try {
+                this.agent.wait(getTimeout(), 0);
+            } catch (InterruptedException e) {
+                // we got interrupted, no problem
+            }
+        }
+
+----------------------------------------
+                public void commandAction(final Command c, final Item item) {
+                    try {
+                        midlet.platformRequest(((StringItem)item).getText());
+                    } catch (Exception e) {
+                        // we could not invoke the browser, that's a pity but we can live with it
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995896
+src/de/joergjahnke/common/extendeddevices/WavePlayer.java 64 70
+src/de/joergjahnke/common/jme/FormattedTextForm.java 159 165
+----------------------------------------
+                        synchronized (buffer) {
+                            buffer.reset();
+                            try {
+                                buffer.wait();
+                            } catch (InterruptedException e) {
+                            }
+                        }
+
+----------------------------------------
+                public void commandAction(final Command c, final Item item) {
+                    try {
+                        midlet.platformRequest(((StringItem)item).getText());
+                    } catch (Exception e) {
+                        // we could not invoke the browser, that's a pity but we can live with it
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995891
+src/de/joergjahnke/common/bluetooth/BluetoothDevice.java 158 164
+src/de/joergjahnke/common/jme/FormattedTextForm.java 159 165
+----------------------------------------
+    public static String getRemoteDeviceName(final RemoteDevice dev) {
+        try {
+            return dev.getFriendlyName(false) == null ? dev.getBluetoothAddress() : dev.getFriendlyName(false);
+        } catch (IOException e) {
+            return "unknown";
+        }
+    }
+
+----------------------------------------
+                public void commandAction(final Command c, final Item item) {
+                    try {
+                        midlet.platformRequest(((StringItem)item).getText());
+                    } catch (Exception e) {
+                        // we could not invoke the browser, that's a pity but we can live with it
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995898
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 984 991
+src/de/joergjahnke/common/jme/FormattedTextForm.java 159 165
+----------------------------------------
+                if (evt.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
+                    try {
+                        Desktop.getDesktop().browse(evt.getURL().toURI());
+                    } catch (Throwable t) {
+                        // could not display the web page, what to do now???
+                        System.err.println("Could not browse to page " + evt.getURL());
+                    }
+                }
+
+----------------------------------------
+                public void commandAction(final Command c, final Item item) {
+                    try {
+                        midlet.platformRequest(((StringItem)item).getText());
+                    } catch (Exception e) {
+                        // we could not invoke the browser, that's a pity but we can live with it
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995893
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 375 380
+src/de/joergjahnke/common/jme/FormattedTextForm.java 159 165
+----------------------------------------
+        } finally {
+            try {
+                in.close();
+            } catch (Exception e) {
+            }
+        }
+
+----------------------------------------
+                public void commandAction(final Command c, final Item item) {
+                    try {
+                        midlet.platformRequest(((StringItem)item).getText());
+                    } catch (Exception e) {
+                        // we could not invoke the browser, that's a pity but we can live with it
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995868
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 510 515
+src/de/joergjahnke/common/jme/FormattedTextForm.java 159 165
+----------------------------------------
+        } finally {
+            try {
+                romStream.close();
+            } catch (Exception e) {
+            }
+        }
+
+----------------------------------------
+                public void commandAction(final Command c, final Item item) {
+                    try {
+                        midlet.platformRequest(((StringItem)item).getText());
+                    } catch (Exception e) {
+                        // we could not invoke the browser, that's a pity but we can live with it
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995895
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 241 248
+src/de/joergjahnke/common/jme/FormattedTextForm.java 159 165
+----------------------------------------
+                    public void windowClosing(final WindowEvent evt) {
+                        try {
+                            settings.storeToXML(new FileOutputStream(new File(PROPERTIES_NAME)), "Properties for JSwingBoy");
+                            stopGame();
+                        } catch (Exception e) {
+                            // we can't save the settings, that's a pity, but we'll just use defaults on next startup
+                        }
+                    }
+
+----------------------------------------
+                public void commandAction(final Command c, final Item item) {
+                    try {
+                        midlet.platformRequest(((StringItem)item).getText());
+                    } catch (Exception e) {
+                        // we could not invoke the browser, that's a pity but we can live with it
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995900
+src/de/joergjahnke/common/bluetooth/BluetoothClient.java 174 180
+src/de/joergjahnke/common/jme/FormattedTextForm.java 159 165
+----------------------------------------
+    public void servicesDiscovered(final int transID, final ServiceRecord[] servRecord) {
+        try {
+            this.serviceRecord = servRecord[0];
+        } catch (Exception e) {
+            // it may happen that no service record can be retrieved, in this case serviceRecord remains null
+        }
+    }
+
+----------------------------------------
+                public void commandAction(final Command c, final Item item) {
+                    try {
+                        midlet.platformRequest(((StringItem)item).getText());
+                    } catch (Exception e) {
+                        // we could not invoke the browser, that's a pity but we can live with it
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995869
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 260 266
+src/de/joergjahnke/common/jme/FormattedTextForm.java 159 165
+----------------------------------------
+    private ImageIcon getMenuIcon(final String filename) {
+        try {
+            return new ImageIcon(new ImageIcon(getClass().getResource("/res/drawable/" + filename)).getImage().getScaledInstance(16, 16, Image.SCALE_SMOOTH));
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+----------------------------------------
+                public void commandAction(final Command c, final Item item) {
+                    try {
+                        midlet.platformRequest(((StringItem)item).getText());
+                    } catch (Exception e) {
+                        // we could not invoke the browser, that's a pity but we can live with it
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995867
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 489 494
+src/de/joergjahnke/common/jme/FormattedTextForm.java 159 165
+----------------------------------------
+            } finally {
+                try {
+                    saveStream.close();
+                } catch (Exception e) {
+                }
+            }
+
+----------------------------------------
+                public void commandAction(final Command c, final Item item) {
+                    try {
+                        midlet.platformRequest(((StringItem)item).getText());
+                    } catch (Exception e) {
+                        // we could not invoke the browser, that's a pity but we can live with it
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995870
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 296 301
+src/de/joergjahnke/common/jme/FormattedTextForm.java 159 165
+----------------------------------------
+        } finally {
+            try {
+                out.close();
+            } catch (Exception e) {
+            }
+        }
+
+----------------------------------------
+                public void commandAction(final Command c, final Item item) {
+                    try {
+                        midlet.platformRequest(((StringItem)item).getText());
+                    } catch (Exception e) {
+                        // we could not invoke the browser, that's a pity but we can live with it
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995288
+src/de/joergjahnke/common/jme/Settings.java 84 90
+src/de/joergjahnke/common/jme/FormattedTextForm.java 159 165
+----------------------------------------
+    public int getInteger(final String key, final int defaultValue) {
+        try {
+            return getInteger(key);
+        } catch (Exception e) {
+            return defaultValue;
+        }
+    }
+
+----------------------------------------
+                public void commandAction(final Command c, final Item item) {
+                    try {
+                        midlet.platformRequest(((StringItem)item).getText());
+                    } catch (Exception e) {
+                        // we could not invoke the browser, that's a pity but we can live with it
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995892
+src/de/joergjahnke/common/jme/FileSystemHandler.java 189 195
+src/de/joergjahnke/common/jme/FormattedTextForm.java 159 165
+----------------------------------------
+                if (prgsString.length() > 0) {
+                    try {
+                        settings.setString(SETTING_PROGRAMS, prgsString.toString());
+                    } catch (Exception e) {
+                    // we could not save the list of programs on the phone, that's OK
+                    }
+                }
+
+----------------------------------------
+                public void commandAction(final Command c, final Item item) {
+                    try {
+                        midlet.platformRequest(((StringItem)item).getText());
+                    } catch (Exception e) {
+                        // we could not invoke the browser, that's a pity but we can live with it
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995897
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 998 1004
+src/de/joergjahnke/common/jme/FormattedTextForm.java 159 165
+----------------------------------------
+    private void jMenuItemContentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemContentsActionPerformed
+        try {
+            java.awt.Desktop.getDesktop().browse(new URI(URL_ONLINE_HELP));
+        } catch (Throwable t) {
+            JOptionPane.showMessageDialog(this, this.commonResources.getString("CouldNotDisplayOnlineHelp") + " '" + URL_ONLINE_HELP + "'", this.commonResources.getString("CouldNotStartBrowser"), JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jMenuItemContentsActionPerformed
+
+----------------------------------------
+                public void commandAction(final Command c, final Item item) {
+                    try {
+                        midlet.platformRequest(((StringItem)item).getText());
+                    } catch (Exception e) {
+                        // we could not invoke the browser, that's a pity but we can live with it
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995894
+src/de/joergjahnke/common/jme/OrientationSensitiveCanvasHelper.java 113 119
+src/de/joergjahnke/common/jme/FormattedTextForm.java 159 165
+----------------------------------------
+    public void deactivateAccelerometer() {
+        try {
+            ((javax.microedition.sensor.SensorConnection) this.con).removeDataListener();
+            this.con.close();
+        } catch (Throwable t) {
+        }
+    }
+
+----------------------------------------
+                public void commandAction(final Command c, final Item item) {
+                    try {
+                        midlet.platformRequest(((StringItem)item).getText());
+                    } catch (Exception e) {
+                        // we could not invoke the browser, that's a pity but we can live with it
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995352
+src/de/joergjahnke/gameboy/core/VideoChip.java 669 674
+src/de/joergjahnke/gameboy/core/CPU.java 452 457
+----------------------------------------
+    public final void setHaveSpritesPriority(final boolean haveSpritesPriority) {
+        if (DEBUG && haveSpritesPriority != this.haveSpritesPriority) {
+            System.out.println("Set sprite priority enable to " + haveSpritesPriority + " at line " + this.currentLine + " of frame " + this.frames);
+        }
+        this.haveSpritesPriority = haveSpritesPriority;
+    }
+
+----------------------------------------
+    private void setInterruptEnabled(final boolean isInterruptEnabled) {
+        if (DEBUG_INTERRUPTS && isInterruptEnabled != this.isInterruptEnabled) {
+            System.out.println((isInterruptEnabled ? "Enable" : "Disable") + " interrupts at cycle " + this.cycles);
+        }
+        this.isInterruptEnabled = isInterruptEnabled;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995310
+src/de/joergjahnke/gameboy/core/VideoChip.java 868 873
+src/de/joergjahnke/gameboy/core/CPU.java 452 457
+----------------------------------------
+    public final void setVBlankIRQEnabled(final boolean isVBlankIRQEnabled) {
+        if (DEBUG && isVBlankIRQEnabled != this.isVBlankIRQEnabled) {
+            System.out.println("Set VBlank IRQ enable to " + isVBlankIRQEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+        }
+        this.isVBlankIRQEnabled = isVBlankIRQEnabled;
+    }
+
+----------------------------------------
+    private void setInterruptEnabled(final boolean isInterruptEnabled) {
+        if (DEBUG_INTERRUPTS && isInterruptEnabled != this.isInterruptEnabled) {
+            System.out.println((isInterruptEnabled ? "Enable" : "Disable") + " interrupts at cycle " + this.cycles);
+        }
+        this.isInterruptEnabled = isInterruptEnabled;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995354
+src/de/joergjahnke/gameboy/core/VideoChip.java 889 894
+src/de/joergjahnke/gameboy/core/CPU.java 452 457
+----------------------------------------
+    public final void setOAMIRQEnabled(final boolean isOAMIRQEnabled) {
+        if (DEBUG && isOAMIRQEnabled != this.isOAMIRQEnabled) {
+            System.out.println("Set OAM IRQ enable to " + isOAMIRQEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+        }
+        this.isOAMIRQEnabled = isOAMIRQEnabled;
+    }
+
+----------------------------------------
+    private void setInterruptEnabled(final boolean isInterruptEnabled) {
+        if (DEBUG_INTERRUPTS && isInterruptEnabled != this.isInterruptEnabled) {
+            System.out.println((isInterruptEnabled ? "Enable" : "Disable") + " interrupts at cycle " + this.cycles);
+        }
+        this.isInterruptEnabled = isInterruptEnabled;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995353
+src/de/joergjahnke/gameboy/core/VideoChip.java 847 852
+src/de/joergjahnke/gameboy/core/CPU.java 452 457
+----------------------------------------
+    public final void setHBlankIRQEnabled(final boolean isHBlankIRQEnabled) {
+        if (DEBUG && isHBlankIRQEnabled != this.isHBlankIRQEnabled) {
+            System.out.println("Set HBlank IRQ enable to " + isHBlankIRQEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+        }
+        this.isHBlankIRQEnabled = isHBlankIRQEnabled;
+    }
+
+----------------------------------------
+    private void setInterruptEnabled(final boolean isInterruptEnabled) {
+        if (DEBUG_INTERRUPTS && isInterruptEnabled != this.isInterruptEnabled) {
+            System.out.println((isInterruptEnabled ? "Enable" : "Disable") + " interrupts at cycle " + this.cycles);
+        }
+        this.isInterruptEnabled = isInterruptEnabled;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995351
+src/de/joergjahnke/gameboy/core/VideoChip.java 910 915
+src/de/joergjahnke/gameboy/core/CPU.java 452 457
+----------------------------------------
+    public final void setCoincidenceIRQEnabled(final boolean isCoincidenceIRQEnabled) {
+        if (DEBUG && isCoincidenceIRQEnabled != this.isCoincidenceIRQEnabled) {
+            System.out.println("Set Coincidence IRQ enable to " + isCoincidenceIRQEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+        }
+        this.isCoincidenceIRQEnabled = isCoincidenceIRQEnabled;
+    }
+
+----------------------------------------
+    private void setInterruptEnabled(final boolean isInterruptEnabled) {
+        if (DEBUG_INTERRUPTS && isInterruptEnabled != this.isInterruptEnabled) {
+            System.out.println((isInterruptEnabled ? "Enable" : "Disable") + " interrupts at cycle " + this.cycles);
+        }
+        this.isInterruptEnabled = isInterruptEnabled;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995327
+src/de/joergjahnke/common/bluetooth/BluetoothClient.java 174 180
+src/de/joergjahnke/common/jme/Settings.java 121 127
+----------------------------------------
+    public void servicesDiscovered(final int transID, final ServiceRecord[] servRecord) {
+        try {
+            this.serviceRecord = servRecord[0];
+        } catch (Exception e) {
+            // it may happen that no service record can be retrieved, in this case serviceRecord remains null
+        }
+    }
+
+----------------------------------------
+    public boolean getBoolean(final String key, final boolean defaultValue) {
+        try {
+            return getBoolean(key);
+        } catch (Exception e) {
+            return defaultValue;
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995312
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 489 494
+src/de/joergjahnke/common/jme/Settings.java 121 127
+----------------------------------------
+            } finally {
+                try {
+                    saveStream.close();
+                } catch (Exception e) {
+                }
+            }
+
+----------------------------------------
+    public boolean getBoolean(final String key, final boolean defaultValue) {
+        try {
+            return getBoolean(key);
+        } catch (Exception e) {
+            return defaultValue;
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995317
+src/de/joergjahnke/common/bluetooth/BluetoothDevice.java 158 164
+src/de/joergjahnke/common/jme/Settings.java 121 127
+----------------------------------------
+    public static String getRemoteDeviceName(final RemoteDevice dev) {
+        try {
+            return dev.getFriendlyName(false) == null ? dev.getBluetoothAddress() : dev.getFriendlyName(false);
+        } catch (IOException e) {
+            return "unknown";
+        }
+    }
+
+----------------------------------------
+    public boolean getBoolean(final String key, final boolean defaultValue) {
+        try {
+            return getBoolean(key);
+        } catch (Exception e) {
+            return defaultValue;
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995322
+src/de/joergjahnke/common/extendeddevices/WavePlayer.java 64 70
+src/de/joergjahnke/common/jme/Settings.java 121 127
+----------------------------------------
+                        synchronized (buffer) {
+                            buffer.reset();
+                            try {
+                                buffer.wait();
+                            } catch (InterruptedException e) {
+                            }
+                        }
+
+----------------------------------------
+    public boolean getBoolean(final String key, final boolean defaultValue) {
+        try {
+            return getBoolean(key);
+        } catch (Exception e) {
+            return defaultValue;
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995321
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 241 248
+src/de/joergjahnke/common/jme/Settings.java 121 127
+----------------------------------------
+                    public void windowClosing(final WindowEvent evt) {
+                        try {
+                            settings.storeToXML(new FileOutputStream(new File(PROPERTIES_NAME)), "Properties for JSwingBoy");
+                            stopGame();
+                        } catch (Exception e) {
+                            // we can't save the settings, that's a pity, but we'll just use defaults on next startup
+                        }
+                    }
+
+----------------------------------------
+    public boolean getBoolean(final String key, final boolean defaultValue) {
+        try {
+            return getBoolean(key);
+        } catch (Exception e) {
+            return defaultValue;
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995316
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 296 301
+src/de/joergjahnke/common/jme/Settings.java 121 127
+----------------------------------------
+        } finally {
+            try {
+                out.close();
+            } catch (Exception e) {
+            }
+        }
+
+----------------------------------------
+    public boolean getBoolean(final String key, final boolean defaultValue) {
+        try {
+            return getBoolean(key);
+        } catch (Exception e) {
+            return defaultValue;
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995323
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 998 1004
+src/de/joergjahnke/common/jme/Settings.java 121 127
+----------------------------------------
+    private void jMenuItemContentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemContentsActionPerformed
+        try {
+            java.awt.Desktop.getDesktop().browse(new URI(URL_ONLINE_HELP));
+        } catch (Throwable t) {
+            JOptionPane.showMessageDialog(this, this.commonResources.getString("CouldNotDisplayOnlineHelp") + " '" + URL_ONLINE_HELP + "'", this.commonResources.getString("CouldNotStartBrowser"), JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jMenuItemContentsActionPerformed
+
+----------------------------------------
+    public boolean getBoolean(final String key, final boolean defaultValue) {
+        try {
+            return getBoolean(key);
+        } catch (Exception e) {
+            return defaultValue;
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995318
+src/de/joergjahnke/common/jme/FileSystemHandler.java 189 195
+src/de/joergjahnke/common/jme/Settings.java 121 127
+----------------------------------------
+                if (prgsString.length() > 0) {
+                    try {
+                        settings.setString(SETTING_PROGRAMS, prgsString.toString());
+                    } catch (Exception e) {
+                    // we could not save the list of programs on the phone, that's OK
+                    }
+                }
+
+----------------------------------------
+    public boolean getBoolean(final String key, final boolean defaultValue) {
+        try {
+            return getBoolean(key);
+        } catch (Exception e) {
+            return defaultValue;
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995313
+src/de/joergjahnke/common/jme/FormattedTextForm.java 159 165
+src/de/joergjahnke/common/jme/Settings.java 121 127
+----------------------------------------
+                public void commandAction(final Command c, final Item item) {
+                    try {
+                        midlet.platformRequest(((StringItem)item).getText());
+                    } catch (Exception e) {
+                        // we could not invoke the browser, that's a pity but we can live with it
+                    }
+                }
+
+----------------------------------------
+    public boolean getBoolean(final String key, final boolean defaultValue) {
+        try {
+            return getBoolean(key);
+        } catch (Exception e) {
+            return defaultValue;
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995314
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 510 515
+src/de/joergjahnke/common/jme/Settings.java 121 127
+----------------------------------------
+        } finally {
+            try {
+                romStream.close();
+            } catch (Exception e) {
+            }
+        }
+
+----------------------------------------
+    public boolean getBoolean(final String key, final boolean defaultValue) {
+        try {
+            return getBoolean(key);
+        } catch (Exception e) {
+            return defaultValue;
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995319
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 375 380
+src/de/joergjahnke/common/jme/Settings.java 121 127
+----------------------------------------
+        } finally {
+            try {
+                in.close();
+            } catch (Exception e) {
+            }
+        }
+
+----------------------------------------
+    public boolean getBoolean(final String key, final boolean defaultValue) {
+        try {
+            return getBoolean(key);
+        } catch (Exception e) {
+            return defaultValue;
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995324
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 984 991
+src/de/joergjahnke/common/jme/Settings.java 121 127
+----------------------------------------
+                if (evt.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
+                    try {
+                        Desktop.getDesktop().browse(evt.getURL().toURI());
+                    } catch (Throwable t) {
+                        // could not display the web page, what to do now???
+                        System.err.println("Could not browse to page " + evt.getURL());
+                    }
+                }
+
+----------------------------------------
+    public boolean getBoolean(final String key, final boolean defaultValue) {
+        try {
+            return getBoolean(key);
+        } catch (Exception e) {
+            return defaultValue;
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995325
+src/de/joergjahnke/common/bluetooth/BluetoothClient.java 149 158
+src/de/joergjahnke/common/jme/Settings.java 121 127
+----------------------------------------
+        synchronized (this.agent) {
+            this.agent.searchServices(null, uuids, btDevice, this);
+
+            // wait until the discovery agents notifies us that he is finished or one minute has passed
+            try {
+                this.agent.wait(getTimeout(), 0);
+            } catch (InterruptedException e) {
+                // we got interrupted, no problem
+            }
+        }
+
+----------------------------------------
+    public boolean getBoolean(final String key, final boolean defaultValue) {
+        try {
+            return getBoolean(key);
+        } catch (Exception e) {
+            return defaultValue;
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995320
+src/de/joergjahnke/common/jme/OrientationSensitiveCanvasHelper.java 113 119
+src/de/joergjahnke/common/jme/Settings.java 121 127
+----------------------------------------
+    public void deactivateAccelerometer() {
+        try {
+            ((javax.microedition.sensor.SensorConnection) this.con).removeDataListener();
+            this.con.close();
+        } catch (Throwable t) {
+        }
+    }
+
+----------------------------------------
+    public boolean getBoolean(final String key, final boolean defaultValue) {
+        try {
+            return getBoolean(key);
+        } catch (Exception e) {
+            return defaultValue;
+        }
+    }
+
+----------------------------------------

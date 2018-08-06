@@ -1,0 +1,2453 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805811
+net/sf/varscan/Copynumber.java 337 363
+net/sf/varscan/Copynumber.java 860 886
+----------------------------------------
+	    	    					copyPositions = 1;
+	    	    					if(refBase.equals("G") || refBase.equals("C") || refBase.equals("g") || refBase.equals("c"))
+	    	    						copyPositionsGC = 1;
+	    	    					else
+	    	    						copyPositionsGC = 0;
+	    	    				}
+
+
+	    					}
+	    					else
+	    					{
+	    						// If minimum coverage was not met, print region //
+		    					// If we had a copyNumber region that met minimum coverage, report it //
+		    					if(copyPositions >= minSegmentSize)
+		    					{
+		    						rawCopySegments++;
+		    						String regionResults = processCopyRegion(copyChrom, copyStart, copyStop, copyPositions, copyPositionsGC, copySumNormal, copySumTumor, minCoverage, dataRatio);
+
+		    						if(regionResults.length() > 0)
+		    						{
+		    							outCopySegments.println(regionResults);
+		    							goodCopySegments++;
+		    						}
+		    					}
+
+		    					// Reset the copyNumber region //
+		    					copyChrom = "";
+
+----------------------------------------
+    	    					copyPositions = 1;
+    	    					if(refBase.equals("G") || refBase.equals("C") || refBase.equals("g") || refBase.equals("c"))
+    	    						copyPositionsGC = 1;
+    	    					else
+    	    						copyPositionsGC = 0;
+    	    				}
+
+
+    					}
+    					else
+    					{
+    						// If minimum coverage was not met, print region //
+	    					// If we had a copyNumber region that met minimum coverage, report it //
+	    					if(copyPositions >= minSegmentSize)
+	    					{
+	    						rawCopySegments++;
+	    						String regionResults = processCopyRegion(copyChrom, copyStart, copyStop, copyPositions, copyPositionsGC, copySumNormal, copySumTumor, minCoverage, dataRatio);
+
+	    						if(regionResults.length() > 0)
+	    						{
+	    							outCopySegments.println(regionResults);
+	    							goodCopySegments++;
+	    						}
+	    					}
+
+	    					// Reset the copyNumber region //
+	    					copyChrom = "";
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805812
+net/sf/varscan/Copynumber.java 830 853
+net/sf/varscan/Copynumber.java 860 886
+----------------------------------------
+    	    					copyPositions++;
+    	    					if(refBase.equals("G") || refBase.equals("C") || refBase.equals("g") || refBase.equals("c"))
+    	    						copyPositionsGC++;
+    	    					copyStop = posTumor;
+    	    				}
+
+    	    				// Otherwise, process this region (if it qualifies) and start a new one //
+
+    	    				else
+    	    				{
+    	    					if(copyPositions >= minSegmentSize)
+    	    					{
+    	    						rawCopySegments++;
+    	    						String regionResults = processCopyRegion(copyChrom, copyStart, copyStop, copyPositions, copyPositionsGC, copySumNormal, copySumTumor, minCoverage, dataRatio);
+
+    	    						if(regionResults.length() > 0)
+    	    						{
+    	    							outCopySegments.println(regionResults);
+    	    							goodCopySegments++;
+    	    						}
+    	    					}
+
+    	    					// Start a new copyNumber region //
+    	    					copyChrom = chromTumor;
+
+----------------------------------------
+    	    					copyPositions = 1;
+    	    					if(refBase.equals("G") || refBase.equals("C") || refBase.equals("g") || refBase.equals("c"))
+    	    						copyPositionsGC = 1;
+    	    					else
+    	    						copyPositionsGC = 0;
+    	    				}
+
+
+    					}
+    					else
+    					{
+    						// If minimum coverage was not met, print region //
+	    					// If we had a copyNumber region that met minimum coverage, report it //
+	    					if(copyPositions >= minSegmentSize)
+	    					{
+	    						rawCopySegments++;
+	    						String regionResults = processCopyRegion(copyChrom, copyStart, copyStop, copyPositions, copyPositionsGC, copySumNormal, copySumTumor, minCoverage, dataRatio);
+
+	    						if(regionResults.length() > 0)
+	    						{
+	    							outCopySegments.println(regionResults);
+	    							goodCopySegments++;
+	    						}
+	    					}
+
+	    					// Reset the copyNumber region //
+	    					copyChrom = "";
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805813
+net/sf/varscan/CallMpileup.java 392 409
+net/sf/varscan/CallMpileup.java 573 590
+----------------------------------------
+			    	        	if(readDepth >= minCoverage && qualityDepth >= minCoverage)
+			    	        	{
+			    	        		HashMap<String, String> readCounts = VarScan.getReadCounts(refBase, readBases, readQualities, minAvgQual, mapQualities);
+			    	        		String positionCall = VarScan.callPosition(refBase, readCounts, "CNS", minReads2, minVarFreq, minAvgQual, pValueThreshold, minFreqForHom);
+
+			    	        		if(positionCall.length() > 0)
+			    	        		{
+			    	        			String[] callLines = positionCall.split("\n");
+
+			    	        			// Go thru each line in resulting call list //
+			    	        			for(int lineCounter = 0; lineCounter < callLines.length; lineCounter++)
+			    	        			{
+			    	        				// Determine type of call that was made //
+			    	        				String[] callContents = callLines[lineCounter].split("\t");
+			    	        				String consBase = callContents[0];
+			    	        				int reads1 = Integer.parseInt(callContents[1]);
+			    	        				int reads2 = Integer.parseInt(callContents[2]);
+			    	        				String varFreq = callContents[3];
+
+----------------------------------------
+		    	        	else if(allReadDepth >= minCoverage && qualityDepth >= minCoverage)
+		    	        	{
+		    	        		HashMap<String, String> readCounts = VarScan.getReadCounts(refBase, allReadBases, allReadQualities, minAvgQual, allMapQualities);
+		    	        		String positionCall = VarScan.callPosition(refBase, readCounts, "CNS", minReads2, minVarFreq, minAvgQual, pValueThreshold, minFreqForHom);
+
+		    	        		if(positionCall.length() > 0)
+		    	        		{
+		    	        			String[] callLines = positionCall.split("\n");
+
+		    	        			// Go thru each line in resulting call list //
+		    	        			for(int lineCounter = 0; lineCounter < callLines.length; lineCounter++)
+		    	        			{
+		    	        				// Determine type of call that was made //
+		    	        				String[] callContents = callLines[lineCounter].split("\t");
+		    	        				String consBase = callContents[0];
+		    	        				int reads1 = Integer.parseInt(callContents[1]);
+		    	        				int reads2 = Integer.parseInt(callContents[2]);
+		    	        				String varFreq = callContents[3];
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805814
+net/sf/varscan/CallMpileup.java 467 471
+net/sf/varscan/CallMpileup.java 487 492
+----------------------------------------
+			    	        					thisVCF += ":" + (int) logP + ":" + readDepth + ":" + qualityDepth;
+		    	        						thisVCF += ":" + reads1 + ":" + reads2 + ":" + varFreq + ":" + pvalueFormat.format(pValue);
+		    	        						thisVCF += ":" + qual1 + ":" + qual2;
+		    	        						thisVCF += ":" + reads1plus + ":" + reads1minus + ":" + reads2plus + ":" + reads2minus;
+			    	        				}
+
+----------------------------------------
+			    	        					thisVCF += ":" + (int) newLogP + ":" + readDepth + ":" + qualityDepth;
+		    	        						thisVCF += ":" + reads1 + ":" + reads2 + ":" + varFreq + ":" + pvalueFormat.format(pValue);
+		    	        						thisVCF += ":" + qual1 + ":" + qual2;
+		    	        						thisVCF += ":" + reads1plus + ":" + reads1minus + ":" + reads2plus + ":" + reads2minus;
+
+			    	        				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805815
+net/sf/varscan/CallMpileup.java 496 506
+net/sf/varscan/CallMpileup.java 614 624
+----------------------------------------
+			    	        				thisCall += ":" + pvalueFormat.format(pValue);
+
+			    	        				if(!consBase.equals(refBase) && !consBase.equals("N"))
+			    	        				{
+			    	        					variantFlag = true;
+
+			    	        					// Flag what type of variant was observed //
+			    	        					if(consBase.length() > 1)
+			    	        						indelFlag = true;
+			    	        					else
+			    	        						snpFlag = true;
+
+----------------------------------------
+		    	        				allConsensusCall += ":" + pvalueFormat.format(pValue);
+
+		    	        				if(!consBase.equals(refBase) && !consBase.equals("N"))
+		    	        				{
+		    	        					variantFlag = true;
+
+		    	        					// Flag what type of variant was observed //
+		    	        					if(consBase.length() > 1)
+		    	        						indelFlag = true;
+		    	        					else
+		    	        						snpFlag = true;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805816
+net/sf/varscan/FilterSomatic.java 359 366
+net/sf/varscan/FilterVariants.java 484 491
+----------------------------------------
+	    				{
+		    				System.err.println("Parsing Exception on line:\n" + line + "\n" + e.getLocalizedMessage());
+		    				stats.put("numParsingExceptions", (stats.get("numParsingExceptions") + 1));
+		    				if(stats.get("numParsingExceptions") >= 5)
+		    				{
+		    					System.err.println("Too many parsing exceptions encountered; exiting");
+		    					return;
+		    				}
+
+----------------------------------------
+	    				{
+		    				System.err.println("Parsing Exception on line:\n" + line + "\n" + e.getLocalizedMessage());
+		    				stats.put("numParsingExceptions", (stats.get("numParsingExceptions") + 1));
+		    				if(stats.get("numParsingExceptions") >= 5)
+		    				{
+		    					System.err.println("Too many parsing exceptions encountered; exiting");
+		    					return;
+		    				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805818
+net/sf/varscan/FilterVariants.java 484 491
+net/sf/varscan/ReadCounts.java 303 310
+----------------------------------------
+	    				{
+		    				System.err.println("Parsing Exception on line:\n" + line + "\n" + e.getLocalizedMessage());
+		    				stats.put("numParsingExceptions", (stats.get("numParsingExceptions") + 1));
+		    				if(stats.get("numParsingExceptions") >= 5)
+		    				{
+		    					System.err.println("Too many parsing exceptions encountered; exiting");
+		    					return;
+		    				}
+
+----------------------------------------
+	    		    {
+	    		    	System.err.println("Parsing Exception on line:\n" + line + "\n" + e.getLocalizedMessage());
+	    				stats.put("numParsingExceptions", (stats.get("numParsingExceptions") + 1));
+	    				if(stats.get("numParsingExceptions") >= 5)
+	    				{
+	    					System.err.println("Too many parsing exceptions encountered; exiting");
+	    					return;
+	    				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805817
+net/sf/varscan/FilterSomatic.java 359 366
+net/sf/varscan/ReadCounts.java 303 310
+----------------------------------------
+	    				{
+		    				System.err.println("Parsing Exception on line:\n" + line + "\n" + e.getLocalizedMessage());
+		    				stats.put("numParsingExceptions", (stats.get("numParsingExceptions") + 1));
+		    				if(stats.get("numParsingExceptions") >= 5)
+		    				{
+		    					System.err.println("Too many parsing exceptions encountered; exiting");
+		    					return;
+		    				}
+
+----------------------------------------
+	    		    {
+	    		    	System.err.println("Parsing Exception on line:\n" + line + "\n" + e.getLocalizedMessage());
+	    				stats.put("numParsingExceptions", (stats.get("numParsingExceptions") + 1));
+	    				if(stats.get("numParsingExceptions") >= 5)
+	    				{
+	    					System.err.println("Too many parsing exceptions encountered; exiting");
+	    					return;
+	    				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805819
+net/sf/varscan/CallMpileup.java 219 249
+net/sf/varscan/CallPileup.java 127 157
+----------------------------------------
+	    	String line;
+
+	    	// If no input, print usage //
+
+	    	if(in == null)
+	    	{
+	    		System.out.println(usage);
+				return;
+	    	}
+
+	    	// If input file not ready, give it a few seconds //
+	    	int numNaps = 0;
+
+	    	while(!in.ready())
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.err.println("Exception while trying to get input" + e.getMessage());
+		    		System.exit(1);
+		    	}
+	    	}
+
+----------------------------------------
+	    	String line;
+
+	    	// If no input, print usage //
+
+	    	if(in == null)
+	    	{
+	    		System.out.println(usage);
+				return;
+	    	}
+
+	    	// If input file not ready, give it a few seconds //
+	    	int numNaps = 0;
+
+	    	while(!in.ready())
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.err.println("Exception while trying to get input" + e.getMessage());
+		    		System.exit(1);
+		    	}
+	    	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805825
+net/sf/varscan/CallPileup.java 127 157
+net/sf/varscan/Copynumber.java 125 155
+----------------------------------------
+	    	String line;
+
+	    	// If no input, print usage //
+
+	    	if(in == null)
+	    	{
+	    		System.out.println(usage);
+				return;
+	    	}
+
+	    	// If input file not ready, give it a few seconds //
+	    	int numNaps = 0;
+
+	    	while(!in.ready())
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.err.println("Exception while trying to get input" + e.getMessage());
+		    		System.exit(1);
+		    	}
+	    	}
+
+----------------------------------------
+	    	String line;
+
+	    	// If no input, print usage //
+
+	    	if(in == null)
+	    	{
+	    		System.out.println(usage);
+				return;
+	    	}
+
+	    	// If input file not ready, give it a few seconds //
+	    	int numNaps = 0;
+
+	    	while(!in.ready())
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.err.println("Exception while trying to get input" + e.getMessage());
+		    		System.exit(1);
+		    	}
+	    	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805820
+net/sf/varscan/CallMpileup.java 219 249
+net/sf/varscan/Copynumber.java 125 155
+----------------------------------------
+	    	String line;
+
+	    	// If no input, print usage //
+
+	    	if(in == null)
+	    	{
+	    		System.out.println(usage);
+				return;
+	    	}
+
+	    	// If input file not ready, give it a few seconds //
+	    	int numNaps = 0;
+
+	    	while(!in.ready())
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.err.println("Exception while trying to get input" + e.getMessage());
+		    		System.exit(1);
+		    	}
+	    	}
+
+----------------------------------------
+	    	String line;
+
+	    	// If no input, print usage //
+
+	    	if(in == null)
+	    	{
+	    		System.out.println(usage);
+				return;
+	    	}
+
+	    	// If input file not ready, give it a few seconds //
+	    	int numNaps = 0;
+
+	    	while(!in.ready())
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.err.println("Exception while trying to get input" + e.getMessage());
+		    		System.exit(1);
+		    	}
+	    	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805821
+net/sf/varscan/CallMpileup.java 219 249
+net/sf/varscan/FilterSomatic.java 151 181
+----------------------------------------
+	    	String line;
+
+	    	// If no input, print usage //
+
+	    	if(in == null)
+	    	{
+	    		System.out.println(usage);
+				return;
+	    	}
+
+	    	// If input file not ready, give it a few seconds //
+	    	int numNaps = 0;
+
+	    	while(!in.ready())
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.err.println("Exception while trying to get input" + e.getMessage());
+		    		System.exit(1);
+		    	}
+	    	}
+
+----------------------------------------
+	    	BufferedReader in = VarScan.getInfile(args);
+
+	    	// If no input, print usage //
+
+	    	if(in == null)
+	    	{
+	    		System.out.println(usage);
+				return;
+	    	}
+
+	    	// If input file not ready, give it a few seconds //
+	    	int numNaps = 0;
+
+	    	while(!in.ready())
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.err.println("Exception while trying to get input" + e.getMessage());
+		    		System.exit(1);
+		    	}
+	    	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805830
+net/sf/varscan/Copynumber.java 125 155
+net/sf/varscan/FilterSomatic.java 151 181
+----------------------------------------
+	    	String line;
+
+	    	// If no input, print usage //
+
+	    	if(in == null)
+	    	{
+	    		System.out.println(usage);
+				return;
+	    	}
+
+	    	// If input file not ready, give it a few seconds //
+	    	int numNaps = 0;
+
+	    	while(!in.ready())
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.err.println("Exception while trying to get input" + e.getMessage());
+		    		System.exit(1);
+		    	}
+	    	}
+
+----------------------------------------
+	    	BufferedReader in = VarScan.getInfile(args);
+
+	    	// If no input, print usage //
+
+	    	if(in == null)
+	    	{
+	    		System.out.println(usage);
+				return;
+	    	}
+
+	    	// If input file not ready, give it a few seconds //
+	    	int numNaps = 0;
+
+	    	while(!in.ready())
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.err.println("Exception while trying to get input" + e.getMessage());
+		    		System.exit(1);
+		    	}
+	    	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805826
+net/sf/varscan/CallPileup.java 127 157
+net/sf/varscan/FilterSomatic.java 151 181
+----------------------------------------
+	    	String line;
+
+	    	// If no input, print usage //
+
+	    	if(in == null)
+	    	{
+	    		System.out.println(usage);
+				return;
+	    	}
+
+	    	// If input file not ready, give it a few seconds //
+	    	int numNaps = 0;
+
+	    	while(!in.ready())
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.err.println("Exception while trying to get input" + e.getMessage());
+		    		System.exit(1);
+		    	}
+	    	}
+
+----------------------------------------
+	    	BufferedReader in = VarScan.getInfile(args);
+
+	    	// If no input, print usage //
+
+	    	if(in == null)
+	    	{
+	    		System.out.println(usage);
+				return;
+	    	}
+
+	    	// If input file not ready, give it a few seconds //
+	    	int numNaps = 0;
+
+	    	while(!in.ready())
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.err.println("Exception while trying to get input" + e.getMessage());
+		    		System.exit(1);
+		    	}
+	    	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805822
+net/sf/varscan/CallMpileup.java 219 249
+net/sf/varscan/FilterVariants.java 147 177
+----------------------------------------
+	    	String line;
+
+	    	// If no input, print usage //
+
+	    	if(in == null)
+	    	{
+	    		System.out.println(usage);
+				return;
+	    	}
+
+	    	// If input file not ready, give it a few seconds //
+	    	int numNaps = 0;
+
+	    	while(!in.ready())
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.err.println("Exception while trying to get input" + e.getMessage());
+		    		System.exit(1);
+		    	}
+	    	}
+
+----------------------------------------
+	    	BufferedReader in = VarScan.getInfile(args);
+
+	    	// If no input, print usage //
+
+	    	if(in == null)
+	    	{
+	    		System.out.println(usage);
+				return;
+	    	}
+
+	    	// If input file not ready, give it a few seconds //
+	    	int numNaps = 0;
+
+	    	while(!in.ready())
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.err.println("Exception while trying to get input" + e.getMessage());
+		    		System.exit(1);
+		    	}
+	    	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805827
+net/sf/varscan/CallPileup.java 127 157
+net/sf/varscan/FilterVariants.java 147 177
+----------------------------------------
+	    	String line;
+
+	    	// If no input, print usage //
+
+	    	if(in == null)
+	    	{
+	    		System.out.println(usage);
+				return;
+	    	}
+
+	    	// If input file not ready, give it a few seconds //
+	    	int numNaps = 0;
+
+	    	while(!in.ready())
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.err.println("Exception while trying to get input" + e.getMessage());
+		    		System.exit(1);
+		    	}
+	    	}
+
+----------------------------------------
+	    	BufferedReader in = VarScan.getInfile(args);
+
+	    	// If no input, print usage //
+
+	    	if(in == null)
+	    	{
+	    		System.out.println(usage);
+				return;
+	    	}
+
+	    	// If input file not ready, give it a few seconds //
+	    	int numNaps = 0;
+
+	    	while(!in.ready())
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.err.println("Exception while trying to get input" + e.getMessage());
+		    		System.exit(1);
+		    	}
+	    	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805831
+net/sf/varscan/Copynumber.java 125 155
+net/sf/varscan/FilterVariants.java 147 177
+----------------------------------------
+	    	String line;
+
+	    	// If no input, print usage //
+
+	    	if(in == null)
+	    	{
+	    		System.out.println(usage);
+				return;
+	    	}
+
+	    	// If input file not ready, give it a few seconds //
+	    	int numNaps = 0;
+
+	    	while(!in.ready())
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.err.println("Exception while trying to get input" + e.getMessage());
+		    		System.exit(1);
+		    	}
+	    	}
+
+----------------------------------------
+	    	BufferedReader in = VarScan.getInfile(args);
+
+	    	// If no input, print usage //
+
+	    	if(in == null)
+	    	{
+	    		System.out.println(usage);
+				return;
+	    	}
+
+	    	// If input file not ready, give it a few seconds //
+	    	int numNaps = 0;
+
+	    	while(!in.ready())
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.err.println("Exception while trying to get input" + e.getMessage());
+		    		System.exit(1);
+		    	}
+	    	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805834
+net/sf/varscan/FilterSomatic.java 151 181
+net/sf/varscan/FilterVariants.java 147 177
+----------------------------------------
+	    	BufferedReader in = VarScan.getInfile(args);
+
+	    	// If no input, print usage //
+
+	    	if(in == null)
+	    	{
+	    		System.out.println(usage);
+				return;
+	    	}
+
+	    	// If input file not ready, give it a few seconds //
+	    	int numNaps = 0;
+
+	    	while(!in.ready())
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.err.println("Exception while trying to get input" + e.getMessage());
+		    		System.exit(1);
+		    	}
+	    	}
+
+----------------------------------------
+	    	BufferedReader in = VarScan.getInfile(args);
+
+	    	// If no input, print usage //
+
+	    	if(in == null)
+	    	{
+	    		System.out.println(usage);
+				return;
+	    	}
+
+	    	// If input file not ready, give it a few seconds //
+	    	int numNaps = 0;
+
+	    	while(!in.ready())
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.err.println("Exception while trying to get input" + e.getMessage());
+		    		System.exit(1);
+		    	}
+	    	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805828
+net/sf/varscan/CallPileup.java 127 157
+net/sf/varscan/Somatic.java 241 271
+----------------------------------------
+	    	String line;
+
+	    	// If no input, print usage //
+
+	    	if(in == null)
+	    	{
+	    		System.out.println(usage);
+				return;
+	    	}
+
+	    	// If input file not ready, give it a few seconds //
+	    	int numNaps = 0;
+
+	    	while(!in.ready())
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.err.println("Exception while trying to get input" + e.getMessage());
+		    		System.exit(1);
+		    	}
+	    	}
+
+----------------------------------------
+	    	String line;
+
+	    	// If no input, print usage //
+
+	    	if(in == null)
+	    	{
+	    		System.out.println(usage);
+				return;
+	    	}
+
+	    	// If input file not ready, give it a few seconds //
+	    	int numNaps = 0;
+
+	    	while(!in.ready())
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.err.println("Exception while trying to get input" + e.getMessage());
+		    		System.exit(1);
+		    	}
+	    	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805835
+net/sf/varscan/FilterSomatic.java 151 181
+net/sf/varscan/Somatic.java 241 271
+----------------------------------------
+	    	BufferedReader in = VarScan.getInfile(args);
+
+	    	// If no input, print usage //
+
+	    	if(in == null)
+	    	{
+	    		System.out.println(usage);
+				return;
+	    	}
+
+	    	// If input file not ready, give it a few seconds //
+	    	int numNaps = 0;
+
+	    	while(!in.ready())
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.err.println("Exception while trying to get input" + e.getMessage());
+		    		System.exit(1);
+		    	}
+	    	}
+
+----------------------------------------
+	    	String line;
+
+	    	// If no input, print usage //
+
+	    	if(in == null)
+	    	{
+	    		System.out.println(usage);
+				return;
+	    	}
+
+	    	// If input file not ready, give it a few seconds //
+	    	int numNaps = 0;
+
+	    	while(!in.ready())
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.err.println("Exception while trying to get input" + e.getMessage());
+		    		System.exit(1);
+		    	}
+	    	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805832
+net/sf/varscan/Copynumber.java 125 155
+net/sf/varscan/Somatic.java 241 271
+----------------------------------------
+	    	String line;
+
+	    	// If no input, print usage //
+
+	    	if(in == null)
+	    	{
+	    		System.out.println(usage);
+				return;
+	    	}
+
+	    	// If input file not ready, give it a few seconds //
+	    	int numNaps = 0;
+
+	    	while(!in.ready())
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.err.println("Exception while trying to get input" + e.getMessage());
+		    		System.exit(1);
+		    	}
+	    	}
+
+----------------------------------------
+	    	String line;
+
+	    	// If no input, print usage //
+
+	    	if(in == null)
+	    	{
+	    		System.out.println(usage);
+				return;
+	    	}
+
+	    	// If input file not ready, give it a few seconds //
+	    	int numNaps = 0;
+
+	    	while(!in.ready())
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.err.println("Exception while trying to get input" + e.getMessage());
+		    		System.exit(1);
+		    	}
+	    	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805837
+net/sf/varscan/FilterVariants.java 147 177
+net/sf/varscan/Somatic.java 241 271
+----------------------------------------
+	    	BufferedReader in = VarScan.getInfile(args);
+
+	    	// If no input, print usage //
+
+	    	if(in == null)
+	    	{
+	    		System.out.println(usage);
+				return;
+	    	}
+
+	    	// If input file not ready, give it a few seconds //
+	    	int numNaps = 0;
+
+	    	while(!in.ready())
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.err.println("Exception while trying to get input" + e.getMessage());
+		    		System.exit(1);
+		    	}
+	    	}
+
+----------------------------------------
+	    	String line;
+
+	    	// If no input, print usage //
+
+	    	if(in == null)
+	    	{
+	    		System.out.println(usage);
+				return;
+	    	}
+
+	    	// If input file not ready, give it a few seconds //
+	    	int numNaps = 0;
+
+	    	while(!in.ready())
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.err.println("Exception while trying to get input" + e.getMessage());
+		    		System.exit(1);
+		    	}
+	    	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805823
+net/sf/varscan/CallMpileup.java 219 249
+net/sf/varscan/Somatic.java 241 271
+----------------------------------------
+	    	String line;
+
+	    	// If no input, print usage //
+
+	    	if(in == null)
+	    	{
+	    		System.out.println(usage);
+				return;
+	    	}
+
+	    	// If input file not ready, give it a few seconds //
+	    	int numNaps = 0;
+
+	    	while(!in.ready())
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.err.println("Exception while trying to get input" + e.getMessage());
+		    		System.exit(1);
+		    	}
+	    	}
+
+----------------------------------------
+	    	String line;
+
+	    	// If no input, print usage //
+
+	    	if(in == null)
+	    	{
+	    		System.out.println(usage);
+				return;
+	    	}
+
+	    	// If input file not ready, give it a few seconds //
+	    	int numNaps = 0;
+
+	    	while(!in.ready())
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.err.println("Exception while trying to get input" + e.getMessage());
+		    		System.exit(1);
+		    	}
+	    	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805824
+net/sf/varscan/CallMpileup.java 219 249
+net/sf/varscan/Trio.java 239 269
+----------------------------------------
+	    	String line;
+
+	    	// If no input, print usage //
+
+	    	if(in == null)
+	    	{
+	    		System.out.println(usage);
+				return;
+	    	}
+
+	    	// If input file not ready, give it a few seconds //
+	    	int numNaps = 0;
+
+	    	while(!in.ready())
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.err.println("Exception while trying to get input" + e.getMessage());
+		    		System.exit(1);
+		    	}
+	    	}
+
+----------------------------------------
+	    	String line;
+
+	    	// If no input, print usage //
+
+	    	if(in == null)
+	    	{
+	    		System.out.println(usage);
+				return;
+	    	}
+
+	    	// If input file not ready, give it a few seconds //
+	    	int numNaps = 0;
+
+	    	while(!in.ready())
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.err.println("Exception while trying to get input" + e.getMessage());
+		    		System.exit(1);
+		    	}
+	    	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805836
+net/sf/varscan/FilterSomatic.java 151 181
+net/sf/varscan/Trio.java 239 269
+----------------------------------------
+	    	BufferedReader in = VarScan.getInfile(args);
+
+	    	// If no input, print usage //
+
+	    	if(in == null)
+	    	{
+	    		System.out.println(usage);
+				return;
+	    	}
+
+	    	// If input file not ready, give it a few seconds //
+	    	int numNaps = 0;
+
+	    	while(!in.ready())
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.err.println("Exception while trying to get input" + e.getMessage());
+		    		System.exit(1);
+		    	}
+	    	}
+
+----------------------------------------
+	    	String line;
+
+	    	// If no input, print usage //
+
+	    	if(in == null)
+	    	{
+	    		System.out.println(usage);
+				return;
+	    	}
+
+	    	// If input file not ready, give it a few seconds //
+	    	int numNaps = 0;
+
+	    	while(!in.ready())
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.err.println("Exception while trying to get input" + e.getMessage());
+		    		System.exit(1);
+		    	}
+	    	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805833
+net/sf/varscan/Copynumber.java 125 155
+net/sf/varscan/Trio.java 239 269
+----------------------------------------
+	    	String line;
+
+	    	// If no input, print usage //
+
+	    	if(in == null)
+	    	{
+	    		System.out.println(usage);
+				return;
+	    	}
+
+	    	// If input file not ready, give it a few seconds //
+	    	int numNaps = 0;
+
+	    	while(!in.ready())
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.err.println("Exception while trying to get input" + e.getMessage());
+		    		System.exit(1);
+		    	}
+	    	}
+
+----------------------------------------
+	    	String line;
+
+	    	// If no input, print usage //
+
+	    	if(in == null)
+	    	{
+	    		System.out.println(usage);
+				return;
+	    	}
+
+	    	// If input file not ready, give it a few seconds //
+	    	int numNaps = 0;
+
+	    	while(!in.ready())
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.err.println("Exception while trying to get input" + e.getMessage());
+		    		System.exit(1);
+		    	}
+	    	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805839
+net/sf/varscan/Somatic.java 241 271
+net/sf/varscan/Trio.java 239 269
+----------------------------------------
+	    	String line;
+
+	    	// If no input, print usage //
+
+	    	if(in == null)
+	    	{
+	    		System.out.println(usage);
+				return;
+	    	}
+
+	    	// If input file not ready, give it a few seconds //
+	    	int numNaps = 0;
+
+	    	while(!in.ready())
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.err.println("Exception while trying to get input" + e.getMessage());
+		    		System.exit(1);
+		    	}
+	    	}
+
+----------------------------------------
+	    	String line;
+
+	    	// If no input, print usage //
+
+	    	if(in == null)
+	    	{
+	    		System.out.println(usage);
+				return;
+	    	}
+
+	    	// If input file not ready, give it a few seconds //
+	    	int numNaps = 0;
+
+	    	while(!in.ready())
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.err.println("Exception while trying to get input" + e.getMessage());
+		    		System.exit(1);
+		    	}
+	    	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805829
+net/sf/varscan/CallPileup.java 127 157
+net/sf/varscan/Trio.java 239 269
+----------------------------------------
+	    	String line;
+
+	    	// If no input, print usage //
+
+	    	if(in == null)
+	    	{
+	    		System.out.println(usage);
+				return;
+	    	}
+
+	    	// If input file not ready, give it a few seconds //
+	    	int numNaps = 0;
+
+	    	while(!in.ready())
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.err.println("Exception while trying to get input" + e.getMessage());
+		    		System.exit(1);
+		    	}
+	    	}
+
+----------------------------------------
+	    	String line;
+
+	    	// If no input, print usage //
+
+	    	if(in == null)
+	    	{
+	    		System.out.println(usage);
+				return;
+	    	}
+
+	    	// If input file not ready, give it a few seconds //
+	    	int numNaps = 0;
+
+	    	while(!in.ready())
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.err.println("Exception while trying to get input" + e.getMessage());
+		    		System.exit(1);
+		    	}
+	    	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805838
+net/sf/varscan/FilterVariants.java 147 177
+net/sf/varscan/Trio.java 239 269
+----------------------------------------
+	    	BufferedReader in = VarScan.getInfile(args);
+
+	    	// If no input, print usage //
+
+	    	if(in == null)
+	    	{
+	    		System.out.println(usage);
+				return;
+	    	}
+
+	    	// If input file not ready, give it a few seconds //
+	    	int numNaps = 0;
+
+	    	while(!in.ready())
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.err.println("Exception while trying to get input" + e.getMessage());
+		    		System.exit(1);
+		    	}
+	    	}
+
+----------------------------------------
+	    	String line;
+
+	    	// If no input, print usage //
+
+	    	if(in == null)
+	    	{
+	    		System.out.println(usage);
+				return;
+	    	}
+
+	    	// If input file not ready, give it a few seconds //
+	    	int numNaps = 0;
+
+	    	while(!in.ready())
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.err.println("Exception while trying to get input" + e.getMessage());
+		    		System.exit(1);
+		    	}
+	    	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805840
+net/sf/varscan/VarScan.java 1314 1317
+net/sf/varscan/VarScan.java 1344 1347
+----------------------------------------
+										callResult += genotypeToCode(genotype) + "\t" + thisReads1 + "\t" + reads2 + "\t" + df.format(thisVarFreq) + "%\t" + strands1 + "\t" + strands2 + "\t" + avgQual1 + "\t" + avgQual2 + "\t" + pValue;
+										callResult += "\t" + avgMap1 + "\t" + avgMap2;
+										callResult += "\t" + reads1plus + "\t" + reads1minus + "\t" + reads2plus + "\t" + reads2minus + "\t" + varAllele;
+									}
+
+----------------------------------------
+									callResult = genotypeToCode(genotype) + "\t" + thisReads1 + "\t" + reads2 + "\t" + df.format(thisVarFreq) + "%\t" + strands1 + "\t" + strands2 + "\t" + avgQual1 + "\t" + avgQual2 + "\t" + pValue;
+									callResult += "\t" + avgMap1 + "\t" + avgMap2;
+									callResult += "\t" + reads1plus + "\t" + reads1minus + "\t" + reads2plus + "\t" + reads2minus + "\t" + varAllele;
+								}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805841
+net/sf/varscan/VarScan.java 1314 1317
+net/sf/varscan/VarScan.java 1381 1384
+----------------------------------------
+										callResult += genotypeToCode(genotype) + "\t" + thisReads1 + "\t" + reads2 + "\t" + df.format(thisVarFreq) + "%\t" + strands1 + "\t" + strands2 + "\t" + avgQual1 + "\t" + avgQual2 + "\t" + pValue;
+										callResult += "\t" + avgMap1 + "\t" + avgMap2;
+										callResult += "\t" + reads1plus + "\t" + reads1minus + "\t" + reads2plus + "\t" + reads2minus + "\t" + varAllele;
+									}
+
+----------------------------------------
+				callResult = refBase + "\t" + reads1 + "\t" + reads2 + "\t" + df.format(varFreq) + "%\t" + strands1 + "\t" + strands2 + "\t" + avgQual1 + "\t" + avgQual2 + "\t" + pValue;
+				callResult += "\t" + avgMap1 + "\t" + avgMap2;
+				callResult += "\t" + reads1plus + "\t" + reads1minus + "\t" + reads2plus + "\t" + reads2minus + "\t" + varAllele;
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805843
+net/sf/varscan/VarScan.java 1344 1347
+net/sf/varscan/VarScan.java 1381 1384
+----------------------------------------
+									callResult = genotypeToCode(genotype) + "\t" + thisReads1 + "\t" + reads2 + "\t" + df.format(thisVarFreq) + "%\t" + strands1 + "\t" + strands2 + "\t" + avgQual1 + "\t" + avgQual2 + "\t" + pValue;
+									callResult += "\t" + avgMap1 + "\t" + avgMap2;
+									callResult += "\t" + reads1plus + "\t" + reads1minus + "\t" + reads2plus + "\t" + reads2minus + "\t" + varAllele;
+								}
+
+----------------------------------------
+				callResult = refBase + "\t" + reads1 + "\t" + reads2 + "\t" + df.format(varFreq) + "%\t" + strands1 + "\t" + strands2 + "\t" + avgQual1 + "\t" + avgQual2 + "\t" + pValue;
+				callResult += "\t" + avgMap1 + "\t" + avgMap2;
+				callResult += "\t" + reads1plus + "\t" + reads1minus + "\t" + reads2plus + "\t" + reads2minus + "\t" + varAllele;
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805845
+net/sf/varscan/VarScan.java 1381 1384
+net/sf/varscan/VarScan.java 1387 1390
+----------------------------------------
+				callResult = refBase + "\t" + reads1 + "\t" + reads2 + "\t" + df.format(varFreq) + "%\t" + strands1 + "\t" + strands2 + "\t" + avgQual1 + "\t" + avgQual2 + "\t" + pValue;
+				callResult += "\t" + avgMap1 + "\t" + avgMap2;
+				callResult += "\t" + reads1plus + "\t" + reads1minus + "\t" + reads2plus + "\t" + reads2minus + "\t" + varAllele;
+			}
+
+----------------------------------------
+				callResult = "N" + "\t" + reads1 + "\t" + reads2 + "\t" + df.format(varFreq) + "%\t" + strands1 + "\t" + strands2 + "\t" + avgQual1 + "\t" + avgQual2 + "\t" + pValue;
+				callResult += "\t" + avgMap1 + "\t" + avgMap2;
+				callResult += "\t" + reads1plus + "\t" + reads1minus + "\t" + reads2plus + "\t" + reads2minus + "\t" + varAllele;
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805842
+net/sf/varscan/VarScan.java 1314 1317
+net/sf/varscan/VarScan.java 1387 1390
+----------------------------------------
+										callResult += genotypeToCode(genotype) + "\t" + thisReads1 + "\t" + reads2 + "\t" + df.format(thisVarFreq) + "%\t" + strands1 + "\t" + strands2 + "\t" + avgQual1 + "\t" + avgQual2 + "\t" + pValue;
+										callResult += "\t" + avgMap1 + "\t" + avgMap2;
+										callResult += "\t" + reads1plus + "\t" + reads1minus + "\t" + reads2plus + "\t" + reads2minus + "\t" + varAllele;
+									}
+
+----------------------------------------
+				callResult = "N" + "\t" + reads1 + "\t" + reads2 + "\t" + df.format(varFreq) + "%\t" + strands1 + "\t" + strands2 + "\t" + avgQual1 + "\t" + avgQual2 + "\t" + pValue;
+				callResult += "\t" + avgMap1 + "\t" + avgMap2;
+				callResult += "\t" + reads1plus + "\t" + reads1minus + "\t" + reads2plus + "\t" + reads2minus + "\t" + varAllele;
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805844
+net/sf/varscan/VarScan.java 1344 1347
+net/sf/varscan/VarScan.java 1387 1390
+----------------------------------------
+									callResult = genotypeToCode(genotype) + "\t" + thisReads1 + "\t" + reads2 + "\t" + df.format(thisVarFreq) + "%\t" + strands1 + "\t" + strands2 + "\t" + avgQual1 + "\t" + avgQual2 + "\t" + pValue;
+									callResult += "\t" + avgMap1 + "\t" + avgMap2;
+									callResult += "\t" + reads1plus + "\t" + reads1minus + "\t" + reads2plus + "\t" + reads2minus + "\t" + varAllele;
+								}
+
+----------------------------------------
+				callResult = "N" + "\t" + reads1 + "\t" + reads2 + "\t" + df.format(varFreq) + "%\t" + strands1 + "\t" + strands2 + "\t" + avgQual1 + "\t" + avgQual2 + "\t" + pValue;
+				callResult += "\t" + avgMap1 + "\t" + avgMap2;
+				callResult += "\t" + reads1plus + "\t" + reads1minus + "\t" + reads2plus + "\t" + reads2minus + "\t" + varAllele;
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805846
+net/sf/varscan/CallPileup.java 59 77
+net/sf/varscan/FilterVariants.java 60 78
+----------------------------------------
+		try
+		{
+			if(params.containsKey("min-coverage"))
+				 minCoverage = Integer.parseInt(params.get("min-coverage"));
+
+			if(params.containsKey("min-reads2"))
+				 minReads2 = Integer.parseInt(params.get("min-reads2"));
+
+			if(params.containsKey("min-var-freq"))
+				 minVarFreq = Double.parseDouble(params.get("min-var-freq"));
+
+			if(params.containsKey("min-freq-for-hom"))
+				 minFreqForHom = Double.parseDouble(params.get("min-freq-for-hom"));
+
+			if(params.containsKey("min-avg-qual"))
+				 minAvgQual = Integer.parseInt(params.get("min-avg-qual"));
+
+			if(params.containsKey("p-value"))
+				 pValueThreshold = Double.parseDouble(params.get("p-value"));
+
+----------------------------------------
+		try
+		{
+			if(params.containsKey("min-coverage"))
+				 minCoverage = Integer.parseInt(params.get("min-coverage"));
+
+			if(params.containsKey("min-reads2"))
+				 minReads2 = Integer.parseInt(params.get("min-reads2"));
+
+			if(params.containsKey("min-strands2"))
+				 minStrands2 = Integer.parseInt(params.get("min-strands2"));
+
+			if(params.containsKey("min-var-freq"))
+				 minVarFreq = Double.parseDouble(params.get("min-var-freq"));
+
+			if(params.containsKey("min-avg-qual"))
+				 minAvgQual = Integer.parseInt(params.get("min-avg-qual"));
+
+			if(params.containsKey("p-value"))
+				 pValueThreshold = Double.parseDouble(params.get("p-value"));
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805847
+net/sf/varscan/Coverage.java 156 163
+net/sf/varscan/Somatic.java 338 348
+----------------------------------------
+	    				String[] lineContents = line.split("\t");
+
+	    				// Verify expected pileup format //
+
+	    				if(lineContents.length > 5 && lineContents[0].length() > 0 && lineContents[1].length() > 0 && lineContents[2].length() > 0 && lineContents[3].length() > 0)
+	    				{
+	    					String refName = lineContents[0];
+		    	        	int position = Integer.parseInt(lineContents[1]);
+
+----------------------------------------
+	    				String[] lineContents = line.split("\t", -1);
+
+	    				// Verify expected pileup format //
+
+	    				if(lineContents.length > 5 && lineContents[0].length() > 0 && lineContents[1].length() > 0 && lineContents[2].length() > 0 && lineContents[3].length() > 0)
+	    				{
+	    					sharedPositions++;
+
+	    					// Parse common fields from line //
+	    					String refName = lineContents[0];
+	    					int position = Integer.parseInt(lineContents[1]);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805848
+net/sf/varscan/VarScan.java 1273 1320
+net/sf/varscan/VarScan.java 1320 1350
+----------------------------------------
+								if(callType.equals("SNP") || callType.equals("INDEL"))
+								{
+									reads2 = thisReads2;
+									strands2 = thisStrands2;
+									avgQual2 = thisAvgQual2;
+									avgMap2 = thisAvgMap2;
+									reads2plus = thisReads2plus;
+									reads2minus = thisReads2minus;
+									pValue = thisPvalue;
+
+									// Convert to consensus-like genotype //
+
+									String genotype = "";
+									if(thisVarFreq >= (minFreqForHom * 100))
+									{
+										genotype = allele + allele;
+										if(thisVarType.equals("INDEL"))
+											genotype = allele + "/" + allele;
+									}
+									else
+									{
+										genotype = refBase + allele;
+										if(thisVarType.equals("INDEL"))
+											genotype = "*/" + allele;
+									}
+
+									// Only report the desired variant type //
+
+									if(thisVarType.equals(callType))
+									{
+										// Report the variant regardless //
+										if(callResult.length() > 0)
+											callResult += "\n";
+
+										if(thisReads1 < 0)
+											thisReads1 = 0;
+
+										if(reads2 < 0)
+											reads2 = 0;
+
+										//callResult += allele + "\t" + reads1 + "\t" + reads2 + "\t" + df.format(thisVarFreq) + "%\t" + strands1 + "\t" + strands2 + "\t" + avgQual1 + "\t" + avgQual2 + "\t" + pValue;
+										callResult += genotypeToCode(genotype) + "\t" + thisReads1 + "\t" + reads2 + "\t" + df.format(thisVarFreq) + "%\t" + strands1 + "\t" + strands2 + "\t" + avgQual1 + "\t" + avgQual2 + "\t" + pValue;
+										callResult += "\t" + avgMap1 + "\t" + avgMap2;
+										callResult += "\t" + reads1plus + "\t" + reads1minus + "\t" + reads2plus + "\t" + reads2minus + "\t" + varAllele;
+									}
+
+								}
+								else if(callType.equals("CNS") && thisReads2 >= reads2)
+
+----------------------------------------
+								else if(callType.equals("CNS") && thisReads2 >= reads2)
+								{
+									reads2 = thisReads2;
+									strands2 = thisStrands2;
+									avgQual2 = thisAvgQual2;
+									avgMap2 = thisAvgMap2;
+									reads2plus = thisReads2plus;
+									reads2minus = thisReads2minus;
+									pValue = thisPvalue;
+
+									String genotype = "";
+									if(thisVarFreq >= (minFreqForHom * 100))
+									{
+										genotype = allele + allele;
+										if(thisVarType.equals("INDEL"))
+											genotype = allele + "/" + allele;
+									}
+									else
+									{
+										genotype = refBase + allele;
+										if(thisVarType.equals("INDEL"))
+											genotype = "*/" + allele;
+									}
+
+									callResult = genotypeToCode(genotype) + "\t" + thisReads1 + "\t" + reads2 + "\t" + df.format(thisVarFreq) + "%\t" + strands1 + "\t" + strands2 + "\t" + avgQual1 + "\t" + avgQual2 + "\t" + pValue;
+									callResult += "\t" + avgMap1 + "\t" + avgMap2;
+									callResult += "\t" + reads1plus + "\t" + reads1minus + "\t" + reads2plus + "\t" + reads2minus + "\t" + varAllele;
+								}
+
+							}
+							else
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805849
+net/sf/varscan/VarScan.java 1703 1713
+net/sf/varscan/VarScan.java 1726 1736
+----------------------------------------
+	 static boolean isHeterozygous(String genotype)
+	 {
+		 if(genotype.contains("/"))
+		 {
+			 String[] alleles = genotype.split("/");
+			 if(!alleles[0].equals(alleles[1]))
+				 return(true);
+		 }
+		 else
+		 {
+			 if(genotype.equals("M") || genotype.equals("R") || genotype.equals("W") || genotype.equals("S") || genotype.equals("Y") || genotype.equals("K"))
+
+----------------------------------------
+	 static boolean isHomozygous(String genotype)
+	 {
+		 if(genotype.contains("/"))
+		 {
+			 String[] alleles = genotype.split("/");
+			 if(alleles[0].equals(alleles[1]))
+				 return(true);
+		 }
+		 else
+		 {
+			 if(genotype.equals("A") || genotype.equals("C") || genotype.equals("G") || genotype.equals("T"))
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805850
+net/sf/varscan/Copynumber.java 205 212
+net/sf/varscan/Coverage.java 154 161
+----------------------------------------
+	    			try
+	    			{
+	    				String[] lineContents = line.split("\t");
+
+	    				// Verify expected pileup format //
+
+	    				if(lineContents.length > 5 && lineContents[0].length() > 0 && lineContents[1].length() > 0 && lineContents[2].length() > 0 && lineContents[3].length() > 0)
+	    				{
+
+----------------------------------------
+	    			try
+	    			{
+	    				String[] lineContents = line.split("\t");
+
+	    				// Verify expected pileup format //
+
+	    				if(lineContents.length > 5 && lineContents[0].length() > 0 && lineContents[1].length() > 0 && lineContents[2].length() > 0 && lineContents[3].length() > 0)
+	    				{
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805853
+net/sf/varscan/Coverage.java 154 161
+net/sf/varscan/ReadCounts.java 155 162
+----------------------------------------
+	    			try
+	    			{
+	    				String[] lineContents = line.split("\t");
+
+	    				// Verify expected pileup format //
+
+	    				if(lineContents.length > 5 && lineContents[0].length() > 0 && lineContents[1].length() > 0 && lineContents[2].length() > 0 && lineContents[3].length() > 0)
+	    				{
+
+----------------------------------------
+	    			try
+	    			{
+	    				String[] lineContents = line.split("\t");
+
+	    				// Verify expected pileup format //
+
+	    				if(lineContents.length > 5 && lineContents[0].length() > 0 && lineContents[1].length() > 0 && lineContents[2].length() > 0 && lineContents[3].length() > 0)
+	    				{
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805851
+net/sf/varscan/Copynumber.java 205 212
+net/sf/varscan/ReadCounts.java 155 162
+----------------------------------------
+	    			try
+	    			{
+	    				String[] lineContents = line.split("\t");
+
+	    				// Verify expected pileup format //
+
+	    				if(lineContents.length > 5 && lineContents[0].length() > 0 && lineContents[1].length() > 0 && lineContents[2].length() > 0 && lineContents[3].length() > 0)
+	    				{
+
+----------------------------------------
+	    			try
+	    			{
+	    				String[] lineContents = line.split("\t");
+
+	    				// Verify expected pileup format //
+
+	    				if(lineContents.length > 5 && lineContents[0].length() > 0 && lineContents[1].length() > 0 && lineContents[2].length() > 0 && lineContents[3].length() > 0)
+	    				{
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805852
+net/sf/varscan/Copynumber.java 205 212
+net/sf/varscan/Trio.java 336 343
+----------------------------------------
+	    			try
+	    			{
+	    				String[] lineContents = line.split("\t");
+
+	    				// Verify expected pileup format //
+
+	    				if(lineContents.length > 5 && lineContents[0].length() > 0 && lineContents[1].length() > 0 && lineContents[2].length() > 0 && lineContents[3].length() > 0)
+	    				{
+
+----------------------------------------
+	    			try
+	    			{
+	    				String[] lineContents = line.split("\t");
+
+	    				// Verify expected pileup format //
+
+	    				if(lineContents.length > 5 && lineContents[0].length() > 0 && lineContents[1].length() > 0 && lineContents[2].length() > 0 && lineContents[3].length() > 0)
+	    				{
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805854
+net/sf/varscan/Coverage.java 154 161
+net/sf/varscan/Trio.java 336 343
+----------------------------------------
+	    			try
+	    			{
+	    				String[] lineContents = line.split("\t");
+
+	    				// Verify expected pileup format //
+
+	    				if(lineContents.length > 5 && lineContents[0].length() > 0 && lineContents[1].length() > 0 && lineContents[2].length() > 0 && lineContents[3].length() > 0)
+	    				{
+
+----------------------------------------
+	    			try
+	    			{
+	    				String[] lineContents = line.split("\t");
+
+	    				// Verify expected pileup format //
+
+	    				if(lineContents.length > 5 && lineContents[0].length() > 0 && lineContents[1].length() > 0 && lineContents[2].length() > 0 && lineContents[3].length() > 0)
+	    				{
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805855
+net/sf/varscan/ReadCounts.java 155 162
+net/sf/varscan/Trio.java 336 343
+----------------------------------------
+	    			try
+	    			{
+	    				String[] lineContents = line.split("\t");
+
+	    				// Verify expected pileup format //
+
+	    				if(lineContents.length > 5 && lineContents[0].length() > 0 && lineContents[1].length() > 0 && lineContents[2].length() > 0 && lineContents[3].length() > 0)
+	    				{
+
+----------------------------------------
+	    			try
+	    			{
+	    				String[] lineContents = line.split("\t");
+
+	    				// Verify expected pileup format //
+
+	    				if(lineContents.length > 5 && lineContents[0].length() > 0 && lineContents[1].length() > 0 && lineContents[2].length() > 0 && lineContents[3].length() > 0)
+	    				{
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805857
+net/sf/varscan/Copynumber.java 205 212
+net/sf/varscan/CopyCaller.java 216 223
+----------------------------------------
+	    			try
+	    			{
+	    				String[] lineContents = line.split("\t");
+
+	    				// Verify expected pileup format //
+
+	    				if(lineContents.length > 5 && lineContents[0].length() > 0 && lineContents[1].length() > 0 && lineContents[2].length() > 0 && lineContents[3].length() > 0)
+	    				{
+
+----------------------------------------
+	    			try
+	    			{
+	    				String[] lineContents = line.split("\t");
+
+	    				// Verify expected copynumber regions format //
+
+	    				if(lineContents.length > 4 && lineContents[0].length() > 0 && lineContents[1].length() > 0 && lineContents[2].length() > 0 && lineContents[3].length() > 0)
+	    				{
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805858
+net/sf/varscan/Copynumber.java 205 212
+net/sf/varscan/CopyCaller.java 380 387
+----------------------------------------
+	    			try
+	    			{
+	    				String[] lineContents = line.split("\t");
+
+	    				// Verify expected pileup format //
+
+	    				if(lineContents.length > 5 && lineContents[0].length() > 0 && lineContents[1].length() > 0 && lineContents[2].length() > 0 && lineContents[3].length() > 0)
+	    				{
+
+----------------------------------------
+	    			try
+	    			{
+	    				String[] lineContents = line.split("\t");
+
+	    				// Verify expected copynumber regions format //
+
+	    				if(lineContents.length > 4 && lineContents[0].length() > 0 && lineContents[1].length() > 0 && lineContents[2].length() > 0 && lineContents[3].length() > 0)
+	    				{
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805856
+net/sf/varscan/CopyCaller.java 216 223
+net/sf/varscan/CopyCaller.java 380 387
+----------------------------------------
+	    			try
+	    			{
+	    				String[] lineContents = line.split("\t");
+
+	    				// Verify expected copynumber regions format //
+
+	    				if(lineContents.length > 4 && lineContents[0].length() > 0 && lineContents[1].length() > 0 && lineContents[2].length() > 0 && lineContents[3].length() > 0)
+	    				{
+
+----------------------------------------
+	    			try
+	    			{
+	    				String[] lineContents = line.split("\t");
+
+	    				// Verify expected copynumber regions format //
+
+	    				if(lineContents.length > 4 && lineContents[0].length() > 0 && lineContents[1].length() > 0 && lineContents[2].length() > 0 && lineContents[3].length() > 0)
+	    				{
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805859
+net/sf/varscan/CallPileup.java 289 308
+net/sf/varscan/Coverage.java 222 241
+----------------------------------------
+	    					System.err.println("Error: Invalid format for pileup at line " + numBases + "\n" + line + "\n");
+	    					return;
+	    				}
+	    			}
+	    			catch(Exception e)
+	    		    {
+	    		    	System.err.println("Parsing Exception on line:\n" + line + "\n" + e.getLocalizedMessage());
+	    				numParsingExceptions++;
+	    				if(numParsingExceptions >= 5)
+	    				{
+	    					System.err.println("Too many parsing exceptions encountered; exiting");
+	    					return;
+	    				}
+	    		    	return;
+	    		    }
+
+
+	    		}
+
+				in.close();
+
+----------------------------------------
+	    					System.err.println("Error: Invalid format for pileup at line " + lineCounter + ":" + line + "\n");
+	    					return;
+	    				}
+	    			}
+	    			catch(Exception e)
+	    		    {
+	    		    	System.err.println("Parsing Exception on line:\n" + line + "\n" + e.getLocalizedMessage());
+	    				numParsingExceptions++;
+	    				if(numParsingExceptions >= 5)
+	    				{
+	    					System.err.println("Too many parsing exceptions encountered; exiting");
+	    					return;
+	    				}
+	    		    	return;
+	    		    }
+
+
+	    		}
+
+				in.close();
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+26805861
+net/sf/varscan/Coverage.java 222 241
+net/sf/varscan/Somatic.java 663 681
+----------------------------------------
+	    					System.err.println("Error: Invalid format for pileup at line " + lineCounter + ":" + line + "\n");
+	    					return;
+	    				}
+	    			}
+	    			catch(Exception e)
+	    		    {
+	    		    	System.err.println("Parsing Exception on line:\n" + line + "\n" + e.getLocalizedMessage());
+	    				numParsingExceptions++;
+	    				if(numParsingExceptions >= 5)
+	    				{
+	    					System.err.println("Too many parsing exceptions encountered; exiting");
+	    					return;
+	    				}
+	    		    	return;
+	    		    }
+
+
+	    		}
+
+				in.close();
+
+----------------------------------------
+	    					System.err.println("Error: Invalid format or not enough samples in mpileup: " + line + "\n");
+	    					return;
+	    				}
+	    			}
+	    			catch(Exception e)
+	    		    {
+	    		    	System.err.println("Parsing Exception on line:\n" + line + "\n" + e.getLocalizedMessage());
+	    				numParsingExceptions++;
+	    				if(numParsingExceptions >= 5)
+	    				{
+	    					System.err.println("Too many parsing exceptions encountered; exiting");
+	    					return;
+	    				}
+	    		    	return;
+	    		    }
+	    		}
+
+	    		// Close input/output files //
+	    		in.close();
+
+----------------------------------------

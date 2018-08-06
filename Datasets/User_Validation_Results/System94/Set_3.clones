@@ -1,0 +1,1291 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830537
+source/net/filebot/hash/VerificationFileReader.java 69 76
+source/net/filebot/hash/MessageDigestHash.java 15 21
+----------------------------------------
+			if (!isComment(line)) {
+				try {
+					entry = format.parseObject(line);
+				} catch (ParseException e) {
+					// log and ignore
+					debug.warning(format("Illegal format on line %d: %s", lineNumber, line));
+				}
+			}
+
+----------------------------------------
+	public MessageDigestHash(String algorithm) {
+		try {
+			this.md = MessageDigest.getInstance(algorithm);
+		} catch (NoSuchAlgorithmException e) {
+			throw new IllegalArgumentException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830702
+source/net/filebot/similarity/CrossPropertyMetric.java 45 51
+source/net/filebot/hash/MessageDigestHash.java 15 21
+----------------------------------------
+		for (String k : keys) {
+			try {
+				feedback += metric.getSimilarity(m1.get(k), m2.get(k));
+			} catch (Exception e) {
+				// ignore
+			}
+		}
+
+----------------------------------------
+	public MessageDigestHash(String algorithm) {
+		try {
+			this.md = MessageDigest.getInstance(algorithm);
+		} catch (NoSuchAlgorithmException e) {
+			throw new IllegalArgumentException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830539
+source/net/filebot/Settings.java 44 50
+source/net/filebot/hash/MessageDigestHash.java 15 21
+----------------------------------------
+		if (isAppStore()) {
+			try {
+				return bundle.getString("apikey.appstore." + name);
+			} catch (MissingResourceException e) {
+				// use default value
+			}
+		}
+
+----------------------------------------
+	public MessageDigestHash(String algorithm) {
+		try {
+			this.md = MessageDigest.getInstance(algorithm);
+		} catch (NoSuchAlgorithmException e) {
+			throw new IllegalArgumentException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830399
+source/net/filebot/win/WinAppUtilities.java 13 19
+source/net/filebot/web/OpenSubtitlesXmlRpc.java 361 367
+----------------------------------------
+	public static void setAppUserModelID(String appID) {
+		try {
+			Shell32.INSTANCE.SetCurrentProcessExplicitAppUserModelID(new WString(appID));
+		} catch (Throwable t) {
+			debug.log(Level.WARNING, t.getMessage(), t);
+		}
+	}
+
+----------------------------------------
+	protected URL getXmlRpcUrl() {
+		try {
+			return new URL(System.getProperty("net.filebot.OpenSubtitlesXmlRpc.url", "https://api.opensubtitles.org/xml-rpc"));
+		} catch (MalformedURLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830416
+source/net/filebot/Settings.java 44 50
+source/net/filebot/web/OpenSubtitlesXmlRpc.java 361 367
+----------------------------------------
+		if (isAppStore()) {
+			try {
+				return bundle.getString("apikey.appstore." + name);
+			} catch (MissingResourceException e) {
+				// use default value
+			}
+		}
+
+----------------------------------------
+	protected URL getXmlRpcUrl() {
+		try {
+			return new URL(System.getProperty("net.filebot.OpenSubtitlesXmlRpc.url", "https://api.opensubtitles.org/xml-rpc"));
+		} catch (MalformedURLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830743
+source/net/filebot/ui/list/ListItem.java 27 33
+source/net/filebot/web/OpenSubtitlesXmlRpc.java 361 367
+----------------------------------------
+		if (value == null) {
+			try {
+				value = format.format(bindings);
+			} catch (Exception e) {
+				value = e;
+			}
+		}
+
+----------------------------------------
+	protected URL getXmlRpcUrl() {
+		try {
+			return new URL(System.getProperty("net.filebot.OpenSubtitlesXmlRpc.url", "https://api.opensubtitles.org/xml-rpc"));
+		} catch (MalformedURLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830417
+source/net/filebot/hash/MessageDigestHash.java 15 21
+source/net/filebot/web/OpenSubtitlesXmlRpc.java 361 367
+----------------------------------------
+	public MessageDigestHash(String algorithm) {
+		try {
+			this.md = MessageDigest.getInstance(algorithm);
+		} catch (NoSuchAlgorithmException e) {
+			throw new IllegalArgumentException(e);
+		}
+	}
+
+----------------------------------------
+	protected URL getXmlRpcUrl() {
+		try {
+			return new URL(System.getProperty("net.filebot.OpenSubtitlesXmlRpc.url", "https://api.opensubtitles.org/xml-rpc"));
+		} catch (MalformedURLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830418
+source/net/filebot/Settings.java 30 36
+source/net/filebot/web/OpenSubtitlesXmlRpc.java 361 367
+----------------------------------------
+	public static int getApplicationRevisionNumber() {
+		try {
+			return Integer.parseInt(getApplicationProperty("application.revision"));
+		} catch (Exception e) {
+			return 0;
+		}
+	}
+
+----------------------------------------
+	protected URL getXmlRpcUrl() {
+		try {
+			return new URL(System.getProperty("net.filebot.OpenSubtitlesXmlRpc.url", "https://api.opensubtitles.org/xml-rpc"));
+		} catch (MalformedURLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830419
+source/net/filebot/similarity/CrossPropertyMetric.java 45 51
+source/net/filebot/web/OpenSubtitlesXmlRpc.java 361 367
+----------------------------------------
+		for (String k : keys) {
+			try {
+				feedback += metric.getSimilarity(m1.get(k), m2.get(k));
+			} catch (Exception e) {
+				// ignore
+			}
+		}
+
+----------------------------------------
+	protected URL getXmlRpcUrl() {
+		try {
+			return new URL(System.getProperty("net.filebot.OpenSubtitlesXmlRpc.url", "https://api.opensubtitles.org/xml-rpc"));
+		} catch (MalformedURLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830413
+source/net/filebot/ui/rename/HighlightListCellRenderer.java 61 68
+source/net/filebot/web/OpenSubtitlesXmlRpc.java 361 367
+----------------------------------------
+		while (matcher.find()) {
+			try {
+				textComponent.getHighlighter().addHighlight(matcher.start(0), matcher.end(0), highlightPainter);
+			} catch (BadLocationException e) {
+				// should not happen
+				debug.log(Level.SEVERE, e.getMessage(), e);
+			}
+		}
+
+----------------------------------------
+	protected URL getXmlRpcUrl() {
+		try {
+			return new URL(System.getProperty("net.filebot.OpenSubtitlesXmlRpc.url", "https://api.opensubtitles.org/xml-rpc"));
+		} catch (MalformedURLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830415
+source/net/filebot/subtitle/SubtitleReader.java 27 33
+source/net/filebot/web/OpenSubtitlesXmlRpc.java 361 367
+----------------------------------------
+		while (current == null && scanner.hasNextLine()) {
+			try {
+				current = readNext();
+			} catch (Exception e) {
+				debug.warning(format("%s: %s", getFormatName(), e.getMessage())); // log and ignore
+			}
+		}
+
+----------------------------------------
+	protected URL getXmlRpcUrl() {
+		try {
+			return new URL(System.getProperty("net.filebot.OpenSubtitlesXmlRpc.url", "https://api.opensubtitles.org/xml-rpc"));
+		} catch (MalformedURLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830414
+source/net/filebot/hash/VerificationFileReader.java 69 76
+source/net/filebot/web/OpenSubtitlesXmlRpc.java 361 367
+----------------------------------------
+			if (!isComment(line)) {
+				try {
+					entry = format.parseObject(line);
+				} catch (ParseException e) {
+					// log and ignore
+					debug.warning(format("Illegal format on line %d: %s", lineNumber, line));
+				}
+			}
+
+----------------------------------------
+	protected URL getXmlRpcUrl() {
+		try {
+			return new URL(System.getProperty("net.filebot.OpenSubtitlesXmlRpc.url", "https://api.opensubtitles.org/xml-rpc"));
+		} catch (MalformedURLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830745
+source/net/filebot/MetaAttributeView.java 129 137
+source/net/filebot/web/OpenSubtitlesXmlRpc.java 361 367
+----------------------------------------
+	public void clear() {
+		try {
+			for (String key : this.list()) {
+				this.put(key, null);
+			}
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+	protected URL getXmlRpcUrl() {
+		try {
+			return new URL(System.getProperty("net.filebot.OpenSubtitlesXmlRpc.url", "https://api.opensubtitles.org/xml-rpc"));
+		} catch (MalformedURLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830599
+source/net/filebot/hash/VerificationFileReader.java 69 76
+source/net/filebot/hash/Ed2kHash.java 16 22
+----------------------------------------
+			if (!isComment(line)) {
+				try {
+					entry = format.parseObject(line);
+				} catch (ParseException e) {
+					// log and ignore
+					debug.warning(format("Illegal format on line %d: %s", lineNumber, line));
+				}
+			}
+
+----------------------------------------
+	public Ed2kHash() {
+		try {
+			this.ed2k = new Edonkey();
+		} catch (NoSuchAlgorithmException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830703
+source/net/filebot/hash/MessageDigestHash.java 15 21
+source/net/filebot/hash/Ed2kHash.java 16 22
+----------------------------------------
+	public MessageDigestHash(String algorithm) {
+		try {
+			this.md = MessageDigest.getInstance(algorithm);
+		} catch (NoSuchAlgorithmException e) {
+			throw new IllegalArgumentException(e);
+		}
+	}
+
+----------------------------------------
+	public Ed2kHash() {
+		try {
+			this.ed2k = new Edonkey();
+		} catch (NoSuchAlgorithmException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830420
+source/net/filebot/web/OpenSubtitlesXmlRpc.java 361 367
+source/net/filebot/hash/Ed2kHash.java 16 22
+----------------------------------------
+	protected URL getXmlRpcUrl() {
+		try {
+			return new URL(System.getProperty("net.filebot.OpenSubtitlesXmlRpc.url", "https://api.opensubtitles.org/xml-rpc"));
+		} catch (MalformedURLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+	public Ed2kHash() {
+		try {
+			this.ed2k = new Edonkey();
+		} catch (NoSuchAlgorithmException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830598
+source/net/filebot/ui/rename/HighlightListCellRenderer.java 61 68
+source/net/filebot/hash/Ed2kHash.java 16 22
+----------------------------------------
+		while (matcher.find()) {
+			try {
+				textComponent.getHighlighter().addHighlight(matcher.start(0), matcher.end(0), highlightPainter);
+			} catch (BadLocationException e) {
+				// should not happen
+				debug.log(Level.SEVERE, e.getMessage(), e);
+			}
+		}
+
+----------------------------------------
+	public Ed2kHash() {
+		try {
+			this.ed2k = new Edonkey();
+		} catch (NoSuchAlgorithmException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830723
+source/net/filebot/ui/list/ListItem.java 27 33
+source/net/filebot/hash/Ed2kHash.java 16 22
+----------------------------------------
+		if (value == null) {
+			try {
+				value = format.format(bindings);
+			} catch (Exception e) {
+				value = e;
+			}
+		}
+
+----------------------------------------
+	public Ed2kHash() {
+		try {
+			this.ed2k = new Edonkey();
+		} catch (NoSuchAlgorithmException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830720
+source/net/filebot/Settings.java 44 50
+source/net/filebot/hash/Ed2kHash.java 16 22
+----------------------------------------
+		if (isAppStore()) {
+			try {
+				return bundle.getString("apikey.appstore." + name);
+			} catch (MissingResourceException e) {
+				// use default value
+			}
+		}
+
+----------------------------------------
+	public Ed2kHash() {
+		try {
+			this.ed2k = new Edonkey();
+		} catch (NoSuchAlgorithmException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830400
+source/net/filebot/win/WinAppUtilities.java 13 19
+source/net/filebot/hash/Ed2kHash.java 16 22
+----------------------------------------
+	public static void setAppUserModelID(String appID) {
+		try {
+			Shell32.INSTANCE.SetCurrentProcessExplicitAppUserModelID(new WString(appID));
+		} catch (Throwable t) {
+			debug.log(Level.WARNING, t.getMessage(), t);
+		}
+	}
+
+----------------------------------------
+	public Ed2kHash() {
+		try {
+			this.ed2k = new Edonkey();
+		} catch (NoSuchAlgorithmException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830724
+source/net/filebot/MetaAttributeView.java 129 137
+source/net/filebot/hash/Ed2kHash.java 16 22
+----------------------------------------
+	public void clear() {
+		try {
+			for (String key : this.list()) {
+				this.put(key, null);
+			}
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+	public Ed2kHash() {
+		try {
+			this.ed2k = new Edonkey();
+		} catch (NoSuchAlgorithmException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830600
+source/net/filebot/subtitle/SubtitleReader.java 27 33
+source/net/filebot/hash/Ed2kHash.java 16 22
+----------------------------------------
+		while (current == null && scanner.hasNextLine()) {
+			try {
+				current = readNext();
+			} catch (Exception e) {
+				debug.warning(format("%s: %s", getFormatName(), e.getMessage())); // log and ignore
+			}
+		}
+
+----------------------------------------
+	public Ed2kHash() {
+		try {
+			this.ed2k = new Edonkey();
+		} catch (NoSuchAlgorithmException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830721
+source/net/filebot/Settings.java 30 36
+source/net/filebot/hash/Ed2kHash.java 16 22
+----------------------------------------
+	public static int getApplicationRevisionNumber() {
+		try {
+			return Integer.parseInt(getApplicationProperty("application.revision"));
+		} catch (Exception e) {
+			return 0;
+		}
+	}
+
+----------------------------------------
+	public Ed2kHash() {
+		try {
+			this.ed2k = new Edonkey();
+		} catch (NoSuchAlgorithmException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830722
+source/net/filebot/similarity/CrossPropertyMetric.java 45 51
+source/net/filebot/hash/Ed2kHash.java 16 22
+----------------------------------------
+		for (String k : keys) {
+			try {
+				feedback += metric.getSimilarity(m1.get(k), m2.get(k));
+			} catch (Exception e) {
+				// ignore
+			}
+		}
+
+----------------------------------------
+	public Ed2kHash() {
+		try {
+			this.ed2k = new Edonkey();
+		} catch (NoSuchAlgorithmException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830401
+source/net/filebot/MetaAttributeView.java 129 137
+source/net/filebot/MetaAttributeView.java 116 126
+----------------------------------------
+	public void clear() {
+		try {
+			for (String key : this.list()) {
+				this.put(key, null);
+			}
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+	public Set<Entry<String, String>> entrySet() {
+		try {
+			Set<Entry<String, String>> entries = new LinkedHashSet<Entry<String, String>>();
+			for (String name : this.list()) {
+				entries.add(new AttributeEntry(name));
+			}
+			return entries;
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830403
+source/net/filebot/ui/filter/AttributeTool.java 96 101
+source/net/filebot/format/ExpressionFilter.java 49 55
+----------------------------------------
+		public boolean addRow(Object... row) {
+			if (row.length != getColumnCount())
+				return false;
+
+			return rows.add(row);
+		}
+
+----------------------------------------
+		try {
+			// evaluate user script
+			Object value = compiledExpression.eval(context);
+
+			// value as boolean
+			return DefaultTypeTransformation.castToBoolean(value);
+		} catch (Throwable e) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830462
+source/net/filebot/win/WinAppUtilities.java 13 19
+source/net/filebot/web/OpenSubtitlesXmlRpc.java 335 341
+----------------------------------------
+	public static void setAppUserModelID(String appID) {
+		try {
+			Shell32.INSTANCE.SetCurrentProcessExplicitAppUserModelID(new WString(appID));
+		} catch (Throwable t) {
+			debug.log(Level.WARNING, t.getMessage(), t);
+		}
+	}
+
+----------------------------------------
+				public void parse(InputStream input) throws XmlRpcException {
+					try {
+						super.parse(new GZIPInputStream(input));
+					} catch (IOException e) {
+						throw new XmlRpcException(e.getMessage(), e);
+					}
+				};
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830744
+source/net/filebot/web/OpenSubtitlesXmlRpc.java 361 367
+source/net/filebot/web/OpenSubtitlesXmlRpc.java 335 341
+----------------------------------------
+	protected URL getXmlRpcUrl() {
+		try {
+			return new URL(System.getProperty("net.filebot.OpenSubtitlesXmlRpc.url", "https://api.opensubtitles.org/xml-rpc"));
+		} catch (MalformedURLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+				public void parse(InputStream input) throws XmlRpcException {
+					try {
+						super.parse(new GZIPInputStream(input));
+					} catch (IOException e) {
+						throw new XmlRpcException(e.getMessage(), e);
+					}
+				};
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830412
+source/net/filebot/ui/list/ListItem.java 27 33
+source/net/filebot/web/OpenSubtitlesXmlRpc.java 335 341
+----------------------------------------
+		if (value == null) {
+			try {
+				value = format.format(bindings);
+			} catch (Exception e) {
+				value = e;
+			}
+		}
+
+----------------------------------------
+				public void parse(InputStream input) throws XmlRpcException {
+					try {
+						super.parse(new GZIPInputStream(input));
+					} catch (IOException e) {
+						throw new XmlRpcException(e.getMessage(), e);
+					}
+				};
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830408
+source/net/filebot/hash/MessageDigestHash.java 15 21
+source/net/filebot/web/OpenSubtitlesXmlRpc.java 335 341
+----------------------------------------
+	public MessageDigestHash(String algorithm) {
+		try {
+			this.md = MessageDigest.getInstance(algorithm);
+		} catch (NoSuchAlgorithmException e) {
+			throw new IllegalArgumentException(e);
+		}
+	}
+
+----------------------------------------
+				public void parse(InputStream input) throws XmlRpcException {
+					try {
+						super.parse(new GZIPInputStream(input));
+					} catch (IOException e) {
+						throw new XmlRpcException(e.getMessage(), e);
+					}
+				};
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830409
+source/net/filebot/Settings.java 30 36
+source/net/filebot/web/OpenSubtitlesXmlRpc.java 335 341
+----------------------------------------
+	public static int getApplicationRevisionNumber() {
+		try {
+			return Integer.parseInt(getApplicationProperty("application.revision"));
+		} catch (Exception e) {
+			return 0;
+		}
+	}
+
+----------------------------------------
+				public void parse(InputStream input) throws XmlRpcException {
+					try {
+						super.parse(new GZIPInputStream(input));
+					} catch (IOException e) {
+						throw new XmlRpcException(e.getMessage(), e);
+					}
+				};
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830404
+source/net/filebot/ui/rename/HighlightListCellRenderer.java 61 68
+source/net/filebot/web/OpenSubtitlesXmlRpc.java 335 341
+----------------------------------------
+		while (matcher.find()) {
+			try {
+				textComponent.getHighlighter().addHighlight(matcher.start(0), matcher.end(0), highlightPainter);
+			} catch (BadLocationException e) {
+				// should not happen
+				debug.log(Level.SEVERE, e.getMessage(), e);
+			}
+		}
+
+----------------------------------------
+				public void parse(InputStream input) throws XmlRpcException {
+					try {
+						super.parse(new GZIPInputStream(input));
+					} catch (IOException e) {
+						throw new XmlRpcException(e.getMessage(), e);
+					}
+				};
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830407
+source/net/filebot/Settings.java 44 50
+source/net/filebot/web/OpenSubtitlesXmlRpc.java 335 341
+----------------------------------------
+		if (isAppStore()) {
+			try {
+				return bundle.getString("apikey.appstore." + name);
+			} catch (MissingResourceException e) {
+				// use default value
+			}
+		}
+
+----------------------------------------
+				public void parse(InputStream input) throws XmlRpcException {
+					try {
+						super.parse(new GZIPInputStream(input));
+					} catch (IOException e) {
+						throw new XmlRpcException(e.getMessage(), e);
+					}
+				};
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830411
+source/net/filebot/hash/Ed2kHash.java 16 22
+source/net/filebot/web/OpenSubtitlesXmlRpc.java 335 341
+----------------------------------------
+	public Ed2kHash() {
+		try {
+			this.ed2k = new Edonkey();
+		} catch (NoSuchAlgorithmException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+				public void parse(InputStream input) throws XmlRpcException {
+					try {
+						super.parse(new GZIPInputStream(input));
+					} catch (IOException e) {
+						throw new XmlRpcException(e.getMessage(), e);
+					}
+				};
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830406
+source/net/filebot/subtitle/SubtitleReader.java 27 33
+source/net/filebot/web/OpenSubtitlesXmlRpc.java 335 341
+----------------------------------------
+		while (current == null && scanner.hasNextLine()) {
+			try {
+				current = readNext();
+			} catch (Exception e) {
+				debug.warning(format("%s: %s", getFormatName(), e.getMessage())); // log and ignore
+			}
+		}
+
+----------------------------------------
+				public void parse(InputStream input) throws XmlRpcException {
+					try {
+						super.parse(new GZIPInputStream(input));
+					} catch (IOException e) {
+						throw new XmlRpcException(e.getMessage(), e);
+					}
+				};
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830405
+source/net/filebot/hash/VerificationFileReader.java 69 76
+source/net/filebot/web/OpenSubtitlesXmlRpc.java 335 341
+----------------------------------------
+			if (!isComment(line)) {
+				try {
+					entry = format.parseObject(line);
+				} catch (ParseException e) {
+					// log and ignore
+					debug.warning(format("Illegal format on line %d: %s", lineNumber, line));
+				}
+			}
+
+----------------------------------------
+				public void parse(InputStream input) throws XmlRpcException {
+					try {
+						super.parse(new GZIPInputStream(input));
+					} catch (IOException e) {
+						throw new XmlRpcException(e.getMessage(), e);
+					}
+				};
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830410
+source/net/filebot/similarity/CrossPropertyMetric.java 45 51
+source/net/filebot/web/OpenSubtitlesXmlRpc.java 335 341
+----------------------------------------
+		for (String k : keys) {
+			try {
+				feedback += metric.getSimilarity(m1.get(k), m2.get(k));
+			} catch (Exception e) {
+				// ignore
+			}
+		}
+
+----------------------------------------
+				public void parse(InputStream input) throws XmlRpcException {
+					try {
+						super.parse(new GZIPInputStream(input));
+					} catch (IOException e) {
+						throw new XmlRpcException(e.getMessage(), e);
+					}
+				};
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830422
+source/net/filebot/MetaAttributeView.java 129 137
+source/net/filebot/Settings.java 247 259
+----------------------------------------
+	public void clear() {
+		try {
+			for (String key : this.list()) {
+				this.put(key, null);
+			}
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+	public void clear() {
+		try {
+			// remove child nodes
+			for (String nodeName : prefs.childrenNames()) {
+				prefs.node(nodeName).removeNode();
+			}
+
+			// remove entries
+			prefs.clear();
+		} catch (BackingStoreException e) {
+			debug.warning(e.getMessage());
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830424
+source/net/filebot/ui/AbstractSearchPanel.java 92 102
+source/net/filebot/Settings.java 247 259
+----------------------------------------
+					protected void done() {
+						if (engine == searchTextField.getSelectButton().getSelectedValue()) {
+							try {
+								searchHistory.clear();
+								searchHistory.addAll(get());
+							} catch (Exception e) {
+								debug.log(Level.WARNING, e.getMessage(), e);
+							}
+						}
+
+					};
+
+----------------------------------------
+	public void clear() {
+		try {
+			// remove child nodes
+			for (String nodeName : prefs.childrenNames()) {
+				prefs.node(nodeName).removeNode();
+			}
+
+			// remove entries
+			prefs.clear();
+		} catch (BackingStoreException e) {
+			debug.warning(e.getMessage());
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830423
+source/net/filebot/archive/ExtractCallback.java 65 73
+source/net/filebot/Settings.java 247 259
+----------------------------------------
+		if (output != null) {
+			try {
+				output.close();
+			} catch (IOException e) {
+				throw new SevenZipException(e);
+			} finally {
+				output = null;
+			}
+		}
+
+----------------------------------------
+	public void clear() {
+		try {
+			// remove child nodes
+			for (String nodeName : prefs.childrenNames()) {
+				prefs.node(nodeName).removeNode();
+			}
+
+			// remove entries
+			prefs.clear();
+		} catch (BackingStoreException e) {
+			debug.warning(e.getMessage());
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830425
+source/net/filebot/similarity/SeasonEpisodeMetric.java 48 54
+source/net/filebot/similarity/DateMetric.java 28 33
+----------------------------------------
+	protected Collection<SxE> parse(Object object) {
+		if (object instanceof File) {
+			return seasonEpisodeMatcher.match((File) object);
+		}
+
+		return seasonEpisodeMatcher.match(object.toString());
+	}
+
+----------------------------------------
+	public SimpleDate parse(Object object) {
+		if (object instanceof File) {
+			return matcher.match((File) object);
+		}
+		return matcher.match(object.toString());
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830426
+source/net/filebot/similarity/SubstringMetric.java 20 30
+source/net/filebot/similarity/FileNameMetric.java 13 23
+----------------------------------------
+	public float getSimilarity(Object o1, Object o2) {
+		String s1 = normalize(o1);
+		if (s1 == null || s1.isEmpty())
+			return 0;
+
+		String s2 = normalize(o2);
+		if (s2 == null || s2.isEmpty())
+			return 0;
+
+		return (o1c2 && matches(s1, s2) || (o2c1 && matches(s2, s1))) ? 1 : 0;
+	}
+
+----------------------------------------
+	public float getSimilarity(Object o1, Object o2) {
+		String s1 = getFileName(o1);
+		if (s1 == null || s1.isEmpty())
+			return 0;
+
+		String s2 = getFileName(o2);
+		if (s2 == null || s2.isEmpty())
+			return 0;
+
+		return s1.startsWith(s2) || s2.startsWith(s1) ? 1 : 0;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830431
+source/net/filebot/similarity/SubstringMetric.java 20 30
+source/net/filebot/similarity/SequenceMatchSimilarity.java 21 31
+----------------------------------------
+	public float getSimilarity(Object o1, Object o2) {
+		String s1 = normalize(o1);
+		if (s1 == null || s1.isEmpty())
+			return 0;
+
+		String s2 = normalize(o2);
+		if (s2 == null || s2.isEmpty())
+			return 0;
+
+		return (o1c2 && matches(s1, s2) || (o2c1 && matches(s2, s1))) ? 1 : 0;
+	}
+
+----------------------------------------
+	public float getSimilarity(Object o1, Object o2) {
+		String s1 = normalize(o1);
+		String s2 = normalize(o2);
+
+		// match common word sequence
+		String match = match(s1, s2);
+		if (match == null || match.isEmpty())
+			return 0;
+
+		return similarity(match, s1, s2);
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830427
+source/net/filebot/similarity/FileNameMetric.java 13 23
+source/net/filebot/similarity/SequenceMatchSimilarity.java 21 31
+----------------------------------------
+	public float getSimilarity(Object o1, Object o2) {
+		String s1 = getFileName(o1);
+		if (s1 == null || s1.isEmpty())
+			return 0;
+
+		String s2 = getFileName(o2);
+		if (s2 == null || s2.isEmpty())
+			return 0;
+
+		return s1.startsWith(s2) || s2.startsWith(s1) ? 1 : 0;
+	}
+
+----------------------------------------
+	public float getSimilarity(Object o1, Object o2) {
+		String s1 = normalize(o1);
+		String s2 = normalize(o2);
+
+		// match common word sequence
+		String match = match(s1, s2);
+		if (match == null || match.isEmpty())
+			return 0;
+
+		return similarity(match, s1, s2);
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830428
+source/net/filebot/similarity/Match.java 25 32
+source/net/filebot/similarity/FileNameMetric.java 26 33
+----------------------------------------
+	public boolean equals(Object obj) {
+		if (obj instanceof Match) {
+			Match<?, ?> other = (Match<?, ?>) obj;
+			return value == other.value && candidate == other.candidate;
+		}
+
+		return false;
+	}
+
+----------------------------------------
+	protected String getFileName(Object object) {
+		if (object instanceof File) {
+			// name without extension normalized to lower-case
+			return getName((File) object).trim().toLowerCase();
+		}
+
+		return null;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830452
+source/net/filebot/similarity/Match.java 25 32
+source/net/filebot/web/SeriesInfo.java 183 189
+----------------------------------------
+	public boolean equals(Object obj) {
+		if (obj instanceof Match) {
+			Match<?, ?> other = (Match<?, ?>) obj;
+			return value == other.value && candidate == other.candidate;
+		}
+
+		return false;
+	}
+
+----------------------------------------
+	public boolean equals(Object object) {
+		if (object instanceof SeriesInfo) {
+			SeriesInfo other = (SeriesInfo) object;
+			return Objects.equals(id, other.id) && Objects.equals(database, other.database);
+		}
+		return false;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830429
+source/net/filebot/similarity/FileNameMetric.java 26 33
+source/net/filebot/web/SeriesInfo.java 183 189
+----------------------------------------
+	protected String getFileName(Object object) {
+		if (object instanceof File) {
+			// name without extension normalized to lower-case
+			return getName((File) object).trim().toLowerCase();
+		}
+
+		return null;
+	}
+
+----------------------------------------
+	public boolean equals(Object object) {
+		if (object instanceof SeriesInfo) {
+			SeriesInfo other = (SeriesInfo) object;
+			return Objects.equals(id, other.id) && Objects.equals(database, other.database);
+		}
+		return false;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830430
+source/net/filebot/archive/SevenZipNativeBindings.java 62 71
+source/net/filebot/archive/SevenZipNativeBindings.java 93 101
+----------------------------------------
+		for (int i = 0; i < inArchive.getNumberOfItems(); i++) {
+			boolean isFolder = (Boolean) inArchive.getProperty(i, PropID.IS_FOLDER);
+			if (!isFolder) {
+				String path = (String) inArchive.getProperty(i, PropID.PATH);
+				Long length = (Long) inArchive.getProperty(i, PropID.SIZE);
+				if (path != null) {
+					paths.add(new SimpleFileInfo(path, length != null ? length : -1));
+				}
+			}
+		}
+
+----------------------------------------
+		for (int i = 0; i < inArchive.getNumberOfItems(); i++) {
+			boolean isFolder = (Boolean) inArchive.getProperty(i, PropID.IS_FOLDER);
+			if (!isFolder) {
+				String path = (String) inArchive.getProperty(i, PropID.PATH);
+				if (path != null && filter.accept(new File(path))) {
+					selection.add(i);
+				}
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830432
+source/net/filebot/similarity/SubstringMetric.java 47 59
+source/net/filebot/similarity/SequenceMatchSimilarity.java 37 46
+----------------------------------------
+	protected String normalize(Object object) {
+		if (object == null)
+			return null;
+
+		// use string representation
+		String name = object.toString();
+
+		// normalize separators
+		name = normalizePunctuation(name);
+
+		// normalize case and trim
+		return name.trim().toLowerCase();
+	}
+
+----------------------------------------
+	protected String normalize(Object object) {
+		// use string representation
+		String name = object.toString();
+
+		// normalize separators
+		name = normalizePunctuation(name);
+
+		// normalize case and trim
+		return name.trim().toLowerCase();
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830433
+source/net/filebot/similarity/NumericSimilarityMetric.java 39 49
+source/net/filebot/hash/VerificationUtilities.java 20 30
+----------------------------------------
+		public ArrayList<String> tokenizeToArrayList(String s) {
+			ArrayList<String> tokens = new ArrayList<String>();
+
+			Matcher m = DIGIT.matcher(s);
+			while (m.find()) {
+				// remove leading zeros
+				tokens.add(new Integer(m.group()).toString());
+			}
+
+			return tokens;
+		}
+
+----------------------------------------
+	public static String getEmbeddedChecksum(CharSequence string) {
+		Matcher matcher = EMBEDDED_CHECKSUM.matcher(string);
+		String embeddedChecksum = null;
+
+		// get last match
+		while (matcher.find()) {
+			embeddedChecksum = matcher.group();
+		}
+
+		return embeddedChecksum;
+	}
+
+----------------------------------------

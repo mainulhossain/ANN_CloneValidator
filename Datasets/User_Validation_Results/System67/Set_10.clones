@@ -1,0 +1,1236 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995428
+src/de/joergjahnke/gameboy/core/CPU.java 1280 1287
+src/de/joergjahnke/gameboy/core/CPU.java 1272 1279
+----------------------------------------
+                    case 0x31: {
+                        final int pc_ = this.pc;
+
+                        this.sp = (memory_[pc_] & 0xff) + ((memory_[pc_ + 1] & 0xff) << 8);
+                        this.pc += 2;
+                        this.cycles += 12;
+                        break;
+                    }
+
+----------------------------------------
+                    case 0x21: {
+                        final int pc_ = this.pc;
+
+                        this.hl = (memory_[pc_] & 0xff) + ((memory_[pc_ + 1] & 0xff) << 8);
+                        this.pc += 2;
+                        this.cycles += 12;
+                        break;
+                    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995482
+src/de/joergjahnke/gameboy/core/CPU.java 1303 1310
+src/de/joergjahnke/gameboy/core/CPU.java 1272 1279
+----------------------------------------
+                    case 0x08: {
+                        final int pc_ = this.pc;
+
+                        writeWord((memory_[pc_] & 0xff) + ((memory_[pc_ + 1] & 0xff) << 8), this.sp);
+                        this.pc += 2;
+                        this.cycles += 20;
+                        break;
+                    }
+
+----------------------------------------
+                    case 0x21: {
+                        final int pc_ = this.pc;
+
+                        this.hl = (memory_[pc_] & 0xff) + ((memory_[pc_ + 1] & 0xff) << 8);
+                        this.pc += 2;
+                        this.cycles += 12;
+                        break;
+                    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995424
+src/de/joergjahnke/gameboy/core/CPU.java 1193 1200
+src/de/joergjahnke/gameboy/core/CPU.java 1272 1279
+----------------------------------------
+                    case 0xfa: {
+                        final int pc_ = this.pc;
+
+                        this.a = readByte((memory_[pc_] & 0xff) + ((memory_[pc_ + 1] & 0xff) << 8));
+                        this.pc += 2;
+                        this.cycles += 16;
+                        break;
+                    }
+
+----------------------------------------
+                    case 0x21: {
+                        final int pc_ = this.pc;
+
+                        this.hl = (memory_[pc_] & 0xff) + ((memory_[pc_ + 1] & 0xff) << 8);
+                        this.pc += 2;
+                        this.cycles += 12;
+                        break;
+                    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995370
+src/de/joergjahnke/gameboy/core/CPU.java 1925 1931
+src/de/joergjahnke/gameboy/core/CPU.java 1272 1279
+----------------------------------------
+                    case 0xc3: {
+                        final int pc_ = this.pc;
+
+                        this.pc = (memory_[pc_] & 0xff) + ((memory_[pc_ + 1] & 0xff) << 8);
+                        this.cycles += 16;
+                        break;
+                    }
+
+----------------------------------------
+                    case 0x21: {
+                        final int pc_ = this.pc;
+
+                        this.hl = (memory_[pc_] & 0xff) + ((memory_[pc_ + 1] & 0xff) << 8);
+                        this.pc += 2;
+                        this.cycles += 12;
+                        break;
+                    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995425
+src/de/joergjahnke/gameboy/core/CPU.java 1210 1217
+src/de/joergjahnke/gameboy/core/CPU.java 1272 1279
+----------------------------------------
+                    case 0xea: {
+                        final int pc_ = this.pc;
+
+                        writeByte((memory_[pc_] & 0xff) + ((memory_[pc_ + 1] & 0xff) << 8), (byte) this.a);
+                        this.pc += 2;
+                        this.cycles += 16;
+                        break;
+                    }
+
+----------------------------------------
+                    case 0x21: {
+                        final int pc_ = this.pc;
+
+                        this.hl = (memory_[pc_] & 0xff) + ((memory_[pc_ + 1] & 0xff) << 8);
+                        this.pc += 2;
+                        this.cycles += 12;
+                        break;
+                    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995371
+src/de/joergjahnke/gameboy/core/CPU.java 1925 1931
+src/de/joergjahnke/gameboy/core/CPU.java 1945 1950
+----------------------------------------
+                    case 0xc3: {
+                        final int pc_ = this.pc;
+
+                        this.pc = (memory_[pc_] & 0xff) + ((memory_[pc_ + 1] & 0xff) << 8);
+                        this.cycles += 16;
+                        break;
+                    }
+
+----------------------------------------
+                        if ((this.f & ZERO) == 0) {
+                            final int pc_ = this.pc;
+
+                            this.pc = (memory_[pc_] & 0xff) + ((memory_[pc_ + 1] & 0xff) << 8);
+                            this.cycles += 16;
+                        } else {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995372
+src/de/joergjahnke/gameboy/core/CPU.java 1280 1287
+src/de/joergjahnke/gameboy/core/CPU.java 1945 1950
+----------------------------------------
+                    case 0x31: {
+                        final int pc_ = this.pc;
+
+                        this.sp = (memory_[pc_] & 0xff) + ((memory_[pc_ + 1] & 0xff) << 8);
+                        this.pc += 2;
+                        this.cycles += 12;
+                        break;
+                    }
+
+----------------------------------------
+                        if ((this.f & ZERO) == 0) {
+                            final int pc_ = this.pc;
+
+                            this.pc = (memory_[pc_] & 0xff) + ((memory_[pc_ + 1] & 0xff) << 8);
+                            this.cycles += 16;
+                        } else {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995373
+src/de/joergjahnke/gameboy/core/CPU.java 1272 1279
+src/de/joergjahnke/gameboy/core/CPU.java 1945 1950
+----------------------------------------
+                    case 0x21: {
+                        final int pc_ = this.pc;
+
+                        this.hl = (memory_[pc_] & 0xff) + ((memory_[pc_ + 1] & 0xff) << 8);
+                        this.pc += 2;
+                        this.cycles += 12;
+                        break;
+                    }
+
+----------------------------------------
+                        if ((this.f & ZERO) == 0) {
+                            final int pc_ = this.pc;
+
+                            this.pc = (memory_[pc_] & 0xff) + ((memory_[pc_ + 1] & 0xff) << 8);
+                            this.cycles += 16;
+                        } else {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995377
+src/de/joergjahnke/gameboy/core/CPU.java 1945 1950
+src/de/joergjahnke/gameboy/core/CPU.java 1956 1961
+----------------------------------------
+                        if ((this.f & ZERO) == 0) {
+                            final int pc_ = this.pc;
+
+                            this.pc = (memory_[pc_] & 0xff) + ((memory_[pc_ + 1] & 0xff) << 8);
+                            this.cycles += 16;
+                        } else {
+
+----------------------------------------
+                        if ((this.f & ZERO) != 0) {
+                            final int pc_ = this.pc;
+
+                            this.pc = (memory_[pc_] & 0xff) + ((memory_[pc_ + 1] & 0xff) << 8);
+                            this.cycles += 16;
+                        } else {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995374
+src/de/joergjahnke/gameboy/core/CPU.java 1925 1931
+src/de/joergjahnke/gameboy/core/CPU.java 1956 1961
+----------------------------------------
+                    case 0xc3: {
+                        final int pc_ = this.pc;
+
+                        this.pc = (memory_[pc_] & 0xff) + ((memory_[pc_ + 1] & 0xff) << 8);
+                        this.cycles += 16;
+                        break;
+                    }
+
+----------------------------------------
+                        if ((this.f & ZERO) != 0) {
+                            final int pc_ = this.pc;
+
+                            this.pc = (memory_[pc_] & 0xff) + ((memory_[pc_ + 1] & 0xff) << 8);
+                            this.cycles += 16;
+                        } else {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995375
+src/de/joergjahnke/gameboy/core/CPU.java 1280 1287
+src/de/joergjahnke/gameboy/core/CPU.java 1956 1961
+----------------------------------------
+                    case 0x31: {
+                        final int pc_ = this.pc;
+
+                        this.sp = (memory_[pc_] & 0xff) + ((memory_[pc_ + 1] & 0xff) << 8);
+                        this.pc += 2;
+                        this.cycles += 12;
+                        break;
+                    }
+
+----------------------------------------
+                        if ((this.f & ZERO) != 0) {
+                            final int pc_ = this.pc;
+
+                            this.pc = (memory_[pc_] & 0xff) + ((memory_[pc_ + 1] & 0xff) << 8);
+                            this.cycles += 16;
+                        } else {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995376
+src/de/joergjahnke/gameboy/core/CPU.java 1272 1279
+src/de/joergjahnke/gameboy/core/CPU.java 1956 1961
+----------------------------------------
+                    case 0x21: {
+                        final int pc_ = this.pc;
+
+                        this.hl = (memory_[pc_] & 0xff) + ((memory_[pc_ + 1] & 0xff) << 8);
+                        this.pc += 2;
+                        this.cycles += 12;
+                        break;
+                    }
+
+----------------------------------------
+                        if ((this.f & ZERO) != 0) {
+                            final int pc_ = this.pc;
+
+                            this.pc = (memory_[pc_] & 0xff) + ((memory_[pc_ + 1] & 0xff) << 8);
+                            this.cycles += 16;
+                        } else {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995378
+src/de/joergjahnke/gameboy/core/CPU.java 1925 1931
+src/de/joergjahnke/gameboy/core/CPU.java 1967 1972
+----------------------------------------
+                    case 0xc3: {
+                        final int pc_ = this.pc;
+
+                        this.pc = (memory_[pc_] & 0xff) + ((memory_[pc_ + 1] & 0xff) << 8);
+                        this.cycles += 16;
+                        break;
+                    }
+
+----------------------------------------
+                        if ((this.f & CARRY) == 0) {
+                            final int pc_ = this.pc;
+
+                            this.pc = (memory_[pc_] & 0xff) + ((memory_[pc_ + 1] & 0xff) << 8);
+                            this.cycles += 16;
+                        } else {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995382
+src/de/joergjahnke/gameboy/core/CPU.java 1945 1950
+src/de/joergjahnke/gameboy/core/CPU.java 1967 1972
+----------------------------------------
+                        if ((this.f & ZERO) == 0) {
+                            final int pc_ = this.pc;
+
+                            this.pc = (memory_[pc_] & 0xff) + ((memory_[pc_ + 1] & 0xff) << 8);
+                            this.cycles += 16;
+                        } else {
+
+----------------------------------------
+                        if ((this.f & CARRY) == 0) {
+                            final int pc_ = this.pc;
+
+                            this.pc = (memory_[pc_] & 0xff) + ((memory_[pc_ + 1] & 0xff) << 8);
+                            this.cycles += 16;
+                        } else {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995379
+src/de/joergjahnke/gameboy/core/CPU.java 1956 1961
+src/de/joergjahnke/gameboy/core/CPU.java 1967 1972
+----------------------------------------
+                        if ((this.f & ZERO) != 0) {
+                            final int pc_ = this.pc;
+
+                            this.pc = (memory_[pc_] & 0xff) + ((memory_[pc_ + 1] & 0xff) << 8);
+                            this.cycles += 16;
+                        } else {
+
+----------------------------------------
+                        if ((this.f & CARRY) == 0) {
+                            final int pc_ = this.pc;
+
+                            this.pc = (memory_[pc_] & 0xff) + ((memory_[pc_ + 1] & 0xff) << 8);
+                            this.cycles += 16;
+                        } else {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995381
+src/de/joergjahnke/gameboy/core/CPU.java 1272 1279
+src/de/joergjahnke/gameboy/core/CPU.java 1967 1972
+----------------------------------------
+                    case 0x21: {
+                        final int pc_ = this.pc;
+
+                        this.hl = (memory_[pc_] & 0xff) + ((memory_[pc_ + 1] & 0xff) << 8);
+                        this.pc += 2;
+                        this.cycles += 12;
+                        break;
+                    }
+
+----------------------------------------
+                        if ((this.f & CARRY) == 0) {
+                            final int pc_ = this.pc;
+
+                            this.pc = (memory_[pc_] & 0xff) + ((memory_[pc_ + 1] & 0xff) << 8);
+                            this.cycles += 16;
+                        } else {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995380
+src/de/joergjahnke/gameboy/core/CPU.java 1280 1287
+src/de/joergjahnke/gameboy/core/CPU.java 1967 1972
+----------------------------------------
+                    case 0x31: {
+                        final int pc_ = this.pc;
+
+                        this.sp = (memory_[pc_] & 0xff) + ((memory_[pc_ + 1] & 0xff) << 8);
+                        this.pc += 2;
+                        this.cycles += 12;
+                        break;
+                    }
+
+----------------------------------------
+                        if ((this.f & CARRY) == 0) {
+                            final int pc_ = this.pc;
+
+                            this.pc = (memory_[pc_] & 0xff) + ((memory_[pc_ + 1] & 0xff) << 8);
+                            this.cycles += 16;
+                        } else {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995387
+src/de/joergjahnke/gameboy/core/CPU.java 1272 1279
+src/de/joergjahnke/gameboy/core/CPU.java 1978 1983
+----------------------------------------
+                    case 0x21: {
+                        final int pc_ = this.pc;
+
+                        this.hl = (memory_[pc_] & 0xff) + ((memory_[pc_ + 1] & 0xff) << 8);
+                        this.pc += 2;
+                        this.cycles += 12;
+                        break;
+                    }
+
+----------------------------------------
+                        if ((this.f & CARRY) != 0) {
+                            final int pc_ = this.pc;
+
+                            this.pc = (memory_[pc_] & 0xff) + ((memory_[pc_ + 1] & 0xff) << 8);
+                            this.cycles += 16;
+                        } else {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995385
+src/de/joergjahnke/gameboy/core/CPU.java 1280 1287
+src/de/joergjahnke/gameboy/core/CPU.java 1978 1983
+----------------------------------------
+                    case 0x31: {
+                        final int pc_ = this.pc;
+
+                        this.sp = (memory_[pc_] & 0xff) + ((memory_[pc_ + 1] & 0xff) << 8);
+                        this.pc += 2;
+                        this.cycles += 12;
+                        break;
+                    }
+
+----------------------------------------
+                        if ((this.f & CARRY) != 0) {
+                            final int pc_ = this.pc;
+
+                            this.pc = (memory_[pc_] & 0xff) + ((memory_[pc_ + 1] & 0xff) << 8);
+                            this.cycles += 16;
+                        } else {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995384
+src/de/joergjahnke/gameboy/core/CPU.java 1956 1961
+src/de/joergjahnke/gameboy/core/CPU.java 1978 1983
+----------------------------------------
+                        if ((this.f & ZERO) != 0) {
+                            final int pc_ = this.pc;
+
+                            this.pc = (memory_[pc_] & 0xff) + ((memory_[pc_ + 1] & 0xff) << 8);
+                            this.cycles += 16;
+                        } else {
+
+----------------------------------------
+                        if ((this.f & CARRY) != 0) {
+                            final int pc_ = this.pc;
+
+                            this.pc = (memory_[pc_] & 0xff) + ((memory_[pc_ + 1] & 0xff) << 8);
+                            this.cycles += 16;
+                        } else {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995386
+src/de/joergjahnke/gameboy/core/CPU.java 1967 1972
+src/de/joergjahnke/gameboy/core/CPU.java 1978 1983
+----------------------------------------
+                        if ((this.f & CARRY) == 0) {
+                            final int pc_ = this.pc;
+
+                            this.pc = (memory_[pc_] & 0xff) + ((memory_[pc_ + 1] & 0xff) << 8);
+                            this.cycles += 16;
+                        } else {
+
+----------------------------------------
+                        if ((this.f & CARRY) != 0) {
+                            final int pc_ = this.pc;
+
+                            this.pc = (memory_[pc_] & 0xff) + ((memory_[pc_ + 1] & 0xff) << 8);
+                            this.cycles += 16;
+                        } else {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995383
+src/de/joergjahnke/gameboy/core/CPU.java 1925 1931
+src/de/joergjahnke/gameboy/core/CPU.java 1978 1983
+----------------------------------------
+                    case 0xc3: {
+                        final int pc_ = this.pc;
+
+                        this.pc = (memory_[pc_] & 0xff) + ((memory_[pc_ + 1] & 0xff) << 8);
+                        this.cycles += 16;
+                        break;
+                    }
+
+----------------------------------------
+                        if ((this.f & CARRY) != 0) {
+                            final int pc_ = this.pc;
+
+                            this.pc = (memory_[pc_] & 0xff) + ((memory_[pc_ + 1] & 0xff) << 8);
+                            this.cycles += 16;
+                        } else {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995388
+src/de/joergjahnke/gameboy/core/CPU.java 1945 1950
+src/de/joergjahnke/gameboy/core/CPU.java 1978 1983
+----------------------------------------
+                        if ((this.f & ZERO) == 0) {
+                            final int pc_ = this.pc;
+
+                            this.pc = (memory_[pc_] & 0xff) + ((memory_[pc_ + 1] & 0xff) << 8);
+                            this.cycles += 16;
+                        } else {
+
+----------------------------------------
+                        if ((this.f & CARRY) != 0) {
+                            final int pc_ = this.pc;
+
+                            this.pc = (memory_[pc_] & 0xff) + ((memory_[pc_ + 1] & 0xff) << 8);
+                            this.cycles += 16;
+                        } else {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995389
+src/de/joergjahnke/gameboy/core/CPU.java 2828 2841
+src/de/joergjahnke/gameboy/core/CPU.java 2877 2890
+----------------------------------------
+            case 0xff14: {
+                this.memory[adr] = data;
+
+                final int frequencyGB = (this.memory[0xff13] & 0xff) + ((this.memory[0xff14] & 0x07) << 8);
+
+                ((SquareWaveChannel) this.sound.getSoundChannels()[0]).setFrequency(frequencyGB);
+                if (adr == 0xff14) {
+                    if ((data & 0x80) != 0) {
+                        this.sound.getSoundChannels()[0].setRepeat((data & 0x40) == 0);
+                        this.sound.getSoundChannels()[0].setLength(0x40 - (this.memory[0xff11] & 0x3f));
+                    }
+                }
+                break;
+            }
+
+----------------------------------------
+            case 0xff1e: {
+                this.memory[adr] = data;
+
+                final int frequencyGB = (this.memory[0xff1d] & 0xff) + ((this.memory[0xff1e] & 0x07) << 8);
+
+                ((VoluntaryWaveChannel) this.sound.getSoundChannels()[2]).setFrequency(frequencyGB);
+                if (adr == 0xff1e) {
+                    if ((data & 0x80) != 0) {
+                        this.sound.getSoundChannels()[2].setRepeat((data & 0x40) == 0);
+                        this.sound.getSoundChannels()[2].setLength(0xff - (this.memory[0xff1b] & 0xff));
+                    }
+                }
+                break;
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995437
+src/de/joergjahnke/gameboy/core/CPU.java 2828 2841
+src/de/joergjahnke/gameboy/core/CPU.java 2850 2863
+----------------------------------------
+            case 0xff14: {
+                this.memory[adr] = data;
+
+                final int frequencyGB = (this.memory[0xff13] & 0xff) + ((this.memory[0xff14] & 0x07) << 8);
+
+                ((SquareWaveChannel) this.sound.getSoundChannels()[0]).setFrequency(frequencyGB);
+                if (adr == 0xff14) {
+                    if ((data & 0x80) != 0) {
+                        this.sound.getSoundChannels()[0].setRepeat((data & 0x40) == 0);
+                        this.sound.getSoundChannels()[0].setLength(0x40 - (this.memory[0xff11] & 0x3f));
+                    }
+                }
+                break;
+            }
+
+----------------------------------------
+            case 0xff19: {
+                this.memory[adr] = data;
+
+                final int frequencyGB = (this.memory[0xff18] & 0xff) + ((this.memory[0xff19] & 0x07) << 8);
+
+                ((SquareWaveChannel) this.sound.getSoundChannels()[1]).setFrequency(frequencyGB);
+                if (adr == 0xff19) {
+                    if ((data & 0x80) != 0) {
+                        this.sound.getSoundChannels()[1].setRepeat((data & 0x40) == 0);
+                        this.sound.getSoundChannels()[1].setLength(0x40 - (this.memory[0xff16] & 0x3f));
+                    }
+                }
+                break;
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995390
+src/de/joergjahnke/gameboy/core/CPU.java 2877 2890
+src/de/joergjahnke/gameboy/core/CPU.java 2850 2863
+----------------------------------------
+            case 0xff1e: {
+                this.memory[adr] = data;
+
+                final int frequencyGB = (this.memory[0xff1d] & 0xff) + ((this.memory[0xff1e] & 0x07) << 8);
+
+                ((VoluntaryWaveChannel) this.sound.getSoundChannels()[2]).setFrequency(frequencyGB);
+                if (adr == 0xff1e) {
+                    if ((data & 0x80) != 0) {
+                        this.sound.getSoundChannels()[2].setRepeat((data & 0x40) == 0);
+                        this.sound.getSoundChannels()[2].setLength(0xff - (this.memory[0xff1b] & 0xff));
+                    }
+                }
+                break;
+            }
+
+----------------------------------------
+            case 0xff19: {
+                this.memory[adr] = data;
+
+                final int frequencyGB = (this.memory[0xff18] & 0xff) + ((this.memory[0xff19] & 0x07) << 8);
+
+                ((SquareWaveChannel) this.sound.getSoundChannels()[1]).setFrequency(frequencyGB);
+                if (adr == 0xff19) {
+                    if ((data & 0x80) != 0) {
+                        this.sound.getSoundChannels()[1].setRepeat((data & 0x40) == 0);
+                        this.sound.getSoundChannels()[1].setLength(0x40 - (this.memory[0xff16] & 0x3f));
+                    }
+                }
+                break;
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995408
+src/de/joergjahnke/common/extendeddevices/WavePlayer.java 64 70
+src/de/joergjahnke/gameboy/core/CPU.java 3104 3110
+----------------------------------------
+                        synchronized (buffer) {
+                            buffer.reset();
+                            try {
+                                buffer.wait();
+                            } catch (InterruptedException e) {
+                            }
+                        }
+
+----------------------------------------
+    public final void throttle(final long ms) {
+        this.throttledMillis += ms;
+        try {
+            Thread.sleep(ms);
+        } catch (InterruptedException ex) {
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995400
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 510 515
+src/de/joergjahnke/gameboy/core/CPU.java 3104 3110
+----------------------------------------
+        } finally {
+            try {
+                romStream.close();
+            } catch (Exception e) {
+            }
+        }
+
+----------------------------------------
+    public final void throttle(final long ms) {
+        this.throttledMillis += ms;
+        try {
+            Thread.sleep(ms);
+        } catch (InterruptedException ex) {
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995410
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 998 1004
+src/de/joergjahnke/gameboy/core/CPU.java 3104 3110
+----------------------------------------
+    private void jMenuItemContentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemContentsActionPerformed
+        try {
+            java.awt.Desktop.getDesktop().browse(new URI(URL_ONLINE_HELP));
+        } catch (Throwable t) {
+            JOptionPane.showMessageDialog(this, this.commonResources.getString("CouldNotDisplayOnlineHelp") + " '" + URL_ONLINE_HELP + "'", this.commonResources.getString("CouldNotStartBrowser"), JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jMenuItemContentsActionPerformed
+
+----------------------------------------
+    public final void throttle(final long ms) {
+        this.throttledMillis += ms;
+        try {
+            Thread.sleep(ms);
+        } catch (InterruptedException ex) {
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995405
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 375 380
+src/de/joergjahnke/gameboy/core/CPU.java 3104 3110
+----------------------------------------
+        } finally {
+            try {
+                in.close();
+            } catch (Exception e) {
+            }
+        }
+
+----------------------------------------
+    public final void throttle(final long ms) {
+        this.throttledMillis += ms;
+        try {
+            Thread.sleep(ms);
+        } catch (InterruptedException ex) {
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995402
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 296 301
+src/de/joergjahnke/gameboy/core/CPU.java 3104 3110
+----------------------------------------
+        } finally {
+            try {
+                out.close();
+            } catch (Exception e) {
+            }
+        }
+
+----------------------------------------
+    public final void throttle(final long ms) {
+        this.throttledMillis += ms;
+        try {
+            Thread.sleep(ms);
+        } catch (InterruptedException ex) {
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995394
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 489 494
+src/de/joergjahnke/gameboy/core/CPU.java 3104 3110
+----------------------------------------
+            } finally {
+                try {
+                    saveStream.close();
+                } catch (Exception e) {
+                }
+            }
+
+----------------------------------------
+    public final void throttle(final long ms) {
+        this.throttledMillis += ms;
+        try {
+            Thread.sleep(ms);
+        } catch (InterruptedException ex) {
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995432
+src/de/joergjahnke/common/bluetooth/BluetoothClient.java 149 158
+src/de/joergjahnke/gameboy/core/CPU.java 3104 3110
+----------------------------------------
+        synchronized (this.agent) {
+            this.agent.searchServices(null, uuids, btDevice, this);
+
+            // wait until the discovery agents notifies us that he is finished or one minute has passed
+            try {
+                this.agent.wait(getTimeout(), 0);
+            } catch (InterruptedException e) {
+                // we got interrupted, no problem
+            }
+        }
+
+----------------------------------------
+    public final void throttle(final long ms) {
+        this.throttledMillis += ms;
+        try {
+            Thread.sleep(ms);
+        } catch (InterruptedException ex) {
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995433
+src/de/joergjahnke/common/jme/Settings.java 84 90
+src/de/joergjahnke/gameboy/core/CPU.java 3104 3110
+----------------------------------------
+    public int getInteger(final String key, final int defaultValue) {
+        try {
+            return getInteger(key);
+        } catch (Exception e) {
+            return defaultValue;
+        }
+    }
+
+----------------------------------------
+    public final void throttle(final long ms) {
+        this.throttledMillis += ms;
+        try {
+            Thread.sleep(ms);
+        } catch (InterruptedException ex) {
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995406
+src/de/joergjahnke/common/jme/OrientationSensitiveCanvasHelper.java 113 119
+src/de/joergjahnke/gameboy/core/CPU.java 3104 3110
+----------------------------------------
+    public void deactivateAccelerometer() {
+        try {
+            ((javax.microedition.sensor.SensorConnection) this.con).removeDataListener();
+            this.con.close();
+        } catch (Throwable t) {
+        }
+    }
+
+----------------------------------------
+    public final void throttle(final long ms) {
+        this.throttledMillis += ms;
+        try {
+            Thread.sleep(ms);
+        } catch (InterruptedException ex) {
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995407
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 241 248
+src/de/joergjahnke/gameboy/core/CPU.java 3104 3110
+----------------------------------------
+                    public void windowClosing(final WindowEvent evt) {
+                        try {
+                            settings.storeToXML(new FileOutputStream(new File(PROPERTIES_NAME)), "Properties for JSwingBoy");
+                            stopGame();
+                        } catch (Exception e) {
+                            // we can't save the settings, that's a pity, but we'll just use defaults on next startup
+                        }
+                    }
+
+----------------------------------------
+    public final void throttle(final long ms) {
+        this.throttledMillis += ms;
+        try {
+            Thread.sleep(ms);
+        } catch (InterruptedException ex) {
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995434
+src/de/joergjahnke/common/bluetooth/BluetoothClient.java 174 180
+src/de/joergjahnke/gameboy/core/CPU.java 3104 3110
+----------------------------------------
+    public void servicesDiscovered(final int transID, final ServiceRecord[] servRecord) {
+        try {
+            this.serviceRecord = servRecord[0];
+        } catch (Exception e) {
+            // it may happen that no service record can be retrieved, in this case serviceRecord remains null
+        }
+    }
+
+----------------------------------------
+    public final void throttle(final long ms) {
+        this.throttledMillis += ms;
+        try {
+            Thread.sleep(ms);
+        } catch (InterruptedException ex) {
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995396
+src/de/joergjahnke/common/jme/FormattedTextForm.java 159 165
+src/de/joergjahnke/gameboy/core/CPU.java 3104 3110
+----------------------------------------
+                public void commandAction(final Command c, final Item item) {
+                    try {
+                        midlet.platformRequest(((StringItem)item).getText());
+                    } catch (Exception e) {
+                        // we could not invoke the browser, that's a pity but we can live with it
+                    }
+                }
+
+----------------------------------------
+    public final void throttle(final long ms) {
+        this.throttledMillis += ms;
+        try {
+            Thread.sleep(ms);
+        } catch (InterruptedException ex) {
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995397
+src/de/joergjahnke/common/android/FileDialog.java 40 49
+src/de/joergjahnke/gameboy/core/CPU.java 3104 3110
+----------------------------------------
+    public void onCreate(final Bundle icicle) {
+        super.onCreate(icicle);
+
+        // go to the root directory
+        try {
+            showDirectory(getIntent().getStringExtra("de.joergjahnke.c64.android.prgdir"));
+        } catch (NullPointerException e) {
+            showDirectory("/");
+        }
+    }
+
+----------------------------------------
+    public final void throttle(final long ms) {
+        this.throttledMillis += ms;
+        try {
+            Thread.sleep(ms);
+        } catch (InterruptedException ex) {
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995431
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 984 991
+src/de/joergjahnke/gameboy/core/CPU.java 3104 3110
+----------------------------------------
+                if (evt.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
+                    try {
+                        Desktop.getDesktop().browse(evt.getURL().toURI());
+                    } catch (Throwable t) {
+                        // could not display the web page, what to do now???
+                        System.err.println("Could not browse to page " + evt.getURL());
+                    }
+                }
+
+----------------------------------------
+    public final void throttle(final long ms) {
+        this.throttledMillis += ms;
+        try {
+            Thread.sleep(ms);
+        } catch (InterruptedException ex) {
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995401
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 260 266
+src/de/joergjahnke/gameboy/core/CPU.java 3104 3110
+----------------------------------------
+    private ImageIcon getMenuIcon(final String filename) {
+        try {
+            return new ImageIcon(new ImageIcon(getClass().getResource("/res/drawable/" + filename)).getImage().getScaledInstance(16, 16, Image.SCALE_SMOOTH));
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+----------------------------------------
+    public final void throttle(final long ms) {
+        this.throttledMillis += ms;
+        try {
+            Thread.sleep(ms);
+        } catch (InterruptedException ex) {
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995395
+src/de/joergjahnke/common/jme/Settings.java 121 127
+src/de/joergjahnke/gameboy/core/CPU.java 3104 3110
+----------------------------------------
+    public boolean getBoolean(final String key, final boolean defaultValue) {
+        try {
+            return getBoolean(key);
+        } catch (Exception e) {
+            return defaultValue;
+        }
+    }
+
+----------------------------------------
+    public final void throttle(final long ms) {
+        this.throttledMillis += ms;
+        try {
+            Thread.sleep(ms);
+        } catch (InterruptedException ex) {
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995398
+src/de/joergjahnke/common/bluetooth/BluetoothOBEXClient.java 226 233
+src/de/joergjahnke/gameboy/core/CPU.java 3104 3110
+----------------------------------------
+            public void run() {
+                try {
+                    notifier.acceptAndOpen(handler);
+                } catch (IOException e) {
+                    notifyErrorOccurred(e);
+                    abortFileReception();
+                }
+            }
+
+----------------------------------------
+    public final void throttle(final long ms) {
+        this.throttledMillis += ms;
+        try {
+            Thread.sleep(ms);
+        } catch (InterruptedException ex) {
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995404
+src/de/joergjahnke/common/jme/FileSystemHandler.java 189 195
+src/de/joergjahnke/gameboy/core/CPU.java 3104 3110
+----------------------------------------
+                if (prgsString.length() > 0) {
+                    try {
+                        settings.setString(SETTING_PROGRAMS, prgsString.toString());
+                    } catch (Exception e) {
+                    // we could not save the list of programs on the phone, that's OK
+                    }
+                }
+
+----------------------------------------
+    public final void throttle(final long ms) {
+        this.throttledMillis += ms;
+        try {
+            Thread.sleep(ms);
+        } catch (InterruptedException ex) {
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995409
+src/de/joergjahnke/common/jme/Settings.java 161 167
+src/de/joergjahnke/gameboy/core/CPU.java 3104 3110
+----------------------------------------
+    public String getString(final String key, final String defaultValue) {
+        try {
+            return getString(key);
+        } catch (Exception e) {
+            return defaultValue;
+        }
+    }
+
+----------------------------------------
+    public final void throttle(final long ms) {
+        this.throttledMillis += ms;
+        try {
+            Thread.sleep(ms);
+        } catch (InterruptedException ex) {
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995403
+src/de/joergjahnke/common/bluetooth/BluetoothDevice.java 158 164
+src/de/joergjahnke/gameboy/core/CPU.java 3104 3110
+----------------------------------------
+    public static String getRemoteDeviceName(final RemoteDevice dev) {
+        try {
+            return dev.getFriendlyName(false) == null ? dev.getBluetoothAddress() : dev.getFriendlyName(false);
+        } catch (IOException e) {
+            return "unknown";
+        }
+    }
+
+----------------------------------------
+    public final void throttle(final long ms) {
+        this.throttledMillis += ms;
+        try {
+            Thread.sleep(ms);
+        } catch (InterruptedException ex) {
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995399
+src/de/joergjahnke/gameboy/core/CPU.java 3104 3110
+src/de/joergjahnke/gameboy/core/CPU.java 2166 2171
+----------------------------------------
+    public final void throttle(final long ms) {
+        this.throttledMillis += ms;
+        try {
+            Thread.sleep(ms);
+        } catch (InterruptedException ex) {
+        }
+    }
+
+----------------------------------------
+            if (this.isPaused) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException ex) {
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995472
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 260 266
+src/de/joergjahnke/gameboy/core/CPU.java 2166 2171
+----------------------------------------
+    private ImageIcon getMenuIcon(final String filename) {
+        try {
+            return new ImageIcon(new ImageIcon(getClass().getResource("/res/drawable/" + filename)).getImage().getScaledInstance(16, 16, Image.SCALE_SMOOTH));
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+----------------------------------------
+            if (this.isPaused) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException ex) {
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995491
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 998 1004
+src/de/joergjahnke/gameboy/core/CPU.java 2166 2171
+----------------------------------------
+    private void jMenuItemContentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemContentsActionPerformed
+        try {
+            java.awt.Desktop.getDesktop().browse(new URI(URL_ONLINE_HELP));
+        } catch (Throwable t) {
+            JOptionPane.showMessageDialog(this, this.commonResources.getString("CouldNotDisplayOnlineHelp") + " '" + URL_ONLINE_HELP + "'", this.commonResources.getString("CouldNotStartBrowser"), JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jMenuItemContentsActionPerformed
+
+----------------------------------------
+            if (this.isPaused) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException ex) {
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995480
+src/de/joergjahnke/common/jme/Settings.java 161 167
+src/de/joergjahnke/gameboy/core/CPU.java 2166 2171
+----------------------------------------
+    public String getString(final String key, final String defaultValue) {
+        try {
+            return getString(key);
+        } catch (Exception e) {
+            return defaultValue;
+        }
+    }
+
+----------------------------------------
+            if (this.isPaused) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException ex) {
+                }
+            }
+
+----------------------------------------

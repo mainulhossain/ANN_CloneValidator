@@ -1,0 +1,2728 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+21467718
+core/src/main/java/net/sourceforge/javaocr/scanner/DocumentScanner.java 197 390
+core/src/main/java/net/sourceforge/javaocr/ocr/DocumentScanner.java 192 278
+----------------------------------------
+    {
+
+        int[] pixels = pixelImage.pixels;
+        int w = pixelImage.width;
+        int h = pixelImage.height;
+
+        if (blockX1 < 0)
+        {
+            blockX1 = 0;
+        }
+        else if (blockX1 >= w)
+        {
+            blockX1 = w - 1;
+        }
+        if (blockY1 < 0)
+        {
+            blockY1 = 0;
+        }
+        else if (blockY1 >= h)
+        {
+            blockY1 = h - 1;
+        }
+        if ((blockX2 <= 0) || (blockX2 >= w))
+        {
+            blockX2 = w - 1;
+        }
+        if ((blockY2 <= 0) || (blockY2 >= h))
+        {
+            blockY2 = h - 1;
+        }
+
+        /*
+        int origBlockX1 = blockX1, origBlockY1 = blockY1, origBlockX2 = blockX2, origBlockY2 = blockY2;
+
+        // Narrow the block until there are no remaining dark edges.
+        ///	int thresh = Math.min(255, whiteThreshold+(whiteThreshold/4));
+        int thresh = whiteThreshold;
+        float blackElimFraction = 0.1f;
+        ///System.out.println("thresh="+thresh);
+        for (boolean reduced = true; reduced;) {
+        reduced = false;
+        // Left edge
+        int blackCount = 0;
+        int idx = (blockY1*w)+blockX1;
+        int maxBlack = Math.max(1, (int)((float)((blockY2+1)-blockY1)*blackElimFraction));
+        for (int y = blockY1; y <= blockY2; y++, idx += w) {
+        if (pixels[idx] < thresh) blackCount++;
+        }
+        ///System.out.println("left blackCount="+blackCount+" maxBlack="+maxBlack+" blockY1="+blockY1+" blockY2="+blockY2);
+        if (blackCount >= maxBlack) {
+        ///System.out.println("    reduce left");
+        reduced = true;
+        blockX1++;
+        if (blockX1 >= blockX2) break;
+        }
+        // Right edge
+        blackCount = 0;
+        idx = (blockY1*w)+blockX2;
+        maxBlack = Math.max(1, (int)((float)((blockY2+1)-blockY1)*blackElimFraction));
+        for (int y = blockY1; y <= blockY2; y++, idx += w) {
+        ///System.out.print("["+pixels[idx]+"]");
+        if (pixels[idx] < thresh) blackCount++;
+        }
+        ///System.out.println();
+        ///System.out.println("right blackCount="+blackCount+" maxBlack="+maxBlack+" blockY1="+blockY1+" blockY2="+blockY2);
+        if (blackCount >= maxBlack) {
+        ///System.out.println("    reduce right");
+        reduced = true;
+        blockX2--;
+        if (blockX1 >= blockX2) break;
+        }
+        // Top edge
+        blackCount = 0;
+        idx = (blockY1*w)+blockX1;
+        maxBlack = Math.max(1, (int)((float)((blockX2+1)-blockX1)*blackElimFraction));
+        for (int x = blockX1; x <= blockX2; x++, idx++) {
+        if (pixels[idx] < thresh) blackCount++;
+        }
+        ///System.out.println("top blackCount="+blackCount+" maxBlack="+maxBlack+" blockX1="+blockX1+" blockX2="+blockX2);
+        if (blackCount >= maxBlack) {
+        ///System.out.println("    reduce top");
+        reduced = true;
+        blockY1++;
+        if (blockY1 >= blockY2) break;
+        }
+        // Bottom edge
+        blackCount = 0;
+        idx = (blockY2*w)+blockX1;
+        maxBlack = Math.max(1, (int)((float)((blockX2+1)-blockX1)*blackElimFraction));
+        for (int x = blockX1; x <= blockX2; x++, idx++) {
+        if (pixels[idx] < thresh) blackCount++;
+        }
+        ///System.out.println("bottom blackCount="+blackCount+" maxBlack="+maxBlack+" blockX1="+blockX1+" blockX2="+blockX2);
+        if (blackCount >= maxBlack) {
+        ///System.out.println("    reduce bottom");
+        reduced = true;
+        blockY2--;
+        if (blockY1 >= blockY2) break;
+        }
+        }
+
+        if ( (blockX1 >= blockX2) || (blockY1 >= blockY2) ) {
+        // Reduction failed; restore to original values.
+        blockX1 = origBlockX1;
+        blockY1 = origBlockY1;
+        blockX2 = origBlockX2;
+        blockY2 = origBlockY2;
+        }
+         */
+
+        blockX2++;
+        blockY2++;
+
+        boolean whiteLine = true;
+        listener.beginDocument(pixelImage);
+        // First build list of rows of text.
+        ArrayList<Integer> al = new ArrayList<Integer>();
+        int y1 = 0;
+        for (int y = blockY1; y < blockY2; y++)
+        {
+            boolean isWhiteSpace = true;
+            for (int x = blockX1, idx = (y * w) + blockX1; x < blockX2;
+                    x++, idx++)
+            {
+                if (pixels[idx] < whiteThreshold)
+                {
+                    isWhiteSpace = false;
+                    break;
+                }
+            }
+            if (isWhiteSpace)
+            {
+                if (!whiteLine)
+                {
+                    whiteLine = true;
+                    al.add(new Integer(y1));
+                    al.add(new Integer(y));
+                }
+            }
+            else
+            {
+                if (whiteLine)
+                {
+                    whiteLine = false;
+                    y1 = y;
+                }
+            }
+        }
+        if (!whiteLine)
+        {
+            al.add(new Integer(y1));
+            al.add(new Integer(blockY2));
+        }
+        // Now for each row that looks unreasonably short
+        // compared to the previous row, merge the short row into
+        // the previous row.  This accommodates characters such as
+        // underscores.
+        for (int i = 0; (i + 4) <= al.size(); i += 2)
+        {
+            int bY0 = (al.get(i)).intValue();
+            int bY1 = (al.get(i + 1)).intValue();
+            int bY2 = (al.get(i + 2)).intValue();
+            int bY3 = (al.get(i + 3)).intValue();
+            int row0H = bY1 - bY0;
+            int whiteH = bY2 - bY1;
+            int row1H = bY3 - bY2;
+            if (((row1H <= (int) ((float) row0H * shortRowFraction))
+                    || (row1H < 6))
+                    && ((whiteH <= (int) ((float) row0H * shortRowFraction))
+                    || (whiteH < 6)))
+            {
+                al.remove(i + 2);
+                al.remove(i + 1);
+                i -= 2;
+            }
+        }
+        if (al.size() == 0)
+        {
+            al.add(new Integer(blockY1));
+            al.add(new Integer(blockY2));
+        }
+        // Process the rows.
+        for (int i = 0; (i + 1) < al.size(); i += 2)
+        {
+            int bY1 = (al.get(i)).intValue();
+            int bY2 = (al.get(i + 1)).intValue();
+
+///
+///System.err.println("process row: "+blockX1+","+bY1+" "+blockX2+","+bY2);
+            processRow(pixelImage,
+                    listener,
+                    pixels, w, h, blockX1, bY1, blockX2, bY2);
+        }
+    }
+
+----------------------------------------
+            int blockY2) {
+
+
+        int w = pixelImage.getWidth();
+        int h = pixelImage.getHeight();
+
+        if (blockX1 < 0) {
+            blockX1 = 0;
+        } else if (blockX1 >= w) {
+            blockX1 = w - 1;
+        }
+        if (blockY1 < 0) {
+            blockY1 = 0;
+        } else if (blockY1 >= h) {
+            blockY1 = h - 1;
+        }
+        if ((blockX2 <= 0) || (blockX2 >= w)) {
+            blockX2 = w - 1;
+        }
+        if ((blockY2 <= 0) || (blockY2 >= h)) {
+            blockY2 = h - 1;
+        }
+
+
+        blockX2++;
+        blockY2++;
+
+        boolean whiteLine = true;
+        listener.beginDocument(pixelImage);
+        // First build list of rows of text.
+        ArrayList al = new ArrayList();
+        int y1 = 0;
+        for (int y = blockY1; y < blockY2; y++) {
+            boolean isWhiteSpace = pixelImage.horizontalSpanEquals(y, blockX1, blockX2, 0);
+
+            if (isWhiteSpace) {
+                if (!whiteLine) {
+                    whiteLine = true;
+                    al.add(new Integer(y1));
+                    al.add(new Integer(y));
+                }
+            } else {
+                if (whiteLine) {
+                    whiteLine = false;
+                    y1 = y;
+                }
+            }
+        }
+        if (!whiteLine) {
+            al.add(new Integer(y1));
+            al.add(new Integer(blockY2));
+        }
+        // Now for each row that looks unreasonably short
+        // compared to the previous row, merge the short row into
+        // the previous row.  This accommodates characters such as
+        // underscores.
+        for (int i = 0; (i + 4) <= al.size(); i += 2) {
+            int bY0 = ((Integer) (al.get(i))).intValue();
+            int bY1 = ((Integer) (al.get(i + 1))).intValue();
+            int bY2 = ((Integer) (al.get(i + 2))).intValue();
+            int bY3 = ((Integer) (al.get(i + 3))).intValue();
+            int row0H = bY1 - bY0;
+            int whiteH = bY2 - bY1;
+            int row1H = bY3 - bY2;
+            if (((row1H <= (int) ((float) row0H * shortRowFraction))
+                    || (row1H < 6))
+                    && ((whiteH <= (int) ((float) row0H * shortRowFraction))
+                    || (whiteH < 6))) {
+                al.remove(i + 2);
+                al.remove(i + 1);
+                i -= 2;
+            }
+        }
+        if (al.size() == 0) {
+            al.add(new Integer(blockY1));
+            al.add(new Integer(blockY2));
+        }
+        // Process the rows.
+        for (int i = 0; (i + 1) < al.size(); i += 2) {
+            int bY1 = ((Integer) (al.get(i))).intValue();
+            int bY2 = ((Integer) (al.get(i + 1))).intValue();
+
+///
+///System.err.println("process row: "+blockX1+","+bY1+" "+blockX2+","+bY2);
+            processRow(pixelImage, listener, w, h, blockX1, bY1, blockX2, bY2);
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+21467723
+core/src/main/java/net/sourceforge/javaocr/scanner/DocumentScanner.java 355 372
+core/src/main/java/net/sourceforge/javaocr/ocr/DocumentScanner.java 248 264
+----------------------------------------
+        {
+            int bY0 = (al.get(i)).intValue();
+            int bY1 = (al.get(i + 1)).intValue();
+            int bY2 = (al.get(i + 2)).intValue();
+            int bY3 = (al.get(i + 3)).intValue();
+            int row0H = bY1 - bY0;
+            int whiteH = bY2 - bY1;
+            int row1H = bY3 - bY2;
+            if (((row1H <= (int) ((float) row0H * shortRowFraction))
+                    || (row1H < 6))
+                    && ((whiteH <= (int) ((float) row0H * shortRowFraction))
+                    || (whiteH < 6)))
+            {
+                al.remove(i + 2);
+                al.remove(i + 1);
+                i -= 2;
+            }
+        }
+
+----------------------------------------
+        for (int i = 0; (i + 4) <= al.size(); i += 2) {
+            int bY0 = ((Integer) (al.get(i))).intValue();
+            int bY1 = ((Integer) (al.get(i + 1))).intValue();
+            int bY2 = ((Integer) (al.get(i + 2))).intValue();
+            int bY3 = ((Integer) (al.get(i + 3))).intValue();
+            int row0H = bY1 - bY0;
+            int whiteH = bY2 - bY1;
+            int row1H = bY3 - bY2;
+            if (((row1H <= (int) ((float) row0H * shortRowFraction))
+                    || (row1H < 6))
+                    && ((whiteH <= (int) ((float) row0H * shortRowFraction))
+                    || (whiteH < 6))) {
+                al.remove(i + 2);
+                al.remove(i + 1);
+                i -= 2;
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+21467725
+plugins/awt/src/main/java/net/sourceforge/javaocr/ocrPlugins/aspectRatio/AspectRatioOCR.java 95 102
+plugins/awt/src/main/java/net/sourceforge/javaocr/ocrPlugins/mseOCR/OCRScanner.java 289 295
+----------------------------------------
+    {
+        if (listener != null)
+        {
+            OCRIdentification identAccuracy = new OCRIdentification(OCRComp.ASPECT_RATIO);
+            identAccuracy.addChar(' ', 0.0);
+            listener.processCharOrSpace(identAccuracy);
+        }
+    }
+
+----------------------------------------
+        {
+            if (accListener != null)
+            {
+                OCRIdentification identAccuracy = new OCRIdentification(OCRComp.MSE);
+                accListener.processCharOrSpace(identAccuracy);
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+21467724
+plugins/awt/src/main/java/net/sourceforge/javaocr/ocrPlugins/aspectRatio/AspectRatioOCR.java 69 77
+plugins/awt/src/main/java/net/sourceforge/javaocr/ocrPlugins/mseOCR/OCRScanner.java 289 295
+----------------------------------------
+    {
+        //Send accuracy of this identification to the listener
+        if (listener != null)
+        {
+            OCRIdentification identAccuracy = new OCRIdentification(OCRComp.ASPECT_RATIO);
+            identAccuracy.addChar('\n', 0.0);
+            listener.processCharOrSpace(identAccuracy);
+        }
+    }
+
+----------------------------------------
+        {
+            if (accListener != null)
+            {
+                OCRIdentification identAccuracy = new OCRIdentification(OCRComp.MSE);
+                accListener.processCharOrSpace(identAccuracy);
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+21467726
+plugins/awt/src/main/java/net/sourceforge/javaocr/ocrPlugins/mseOCR/OCRScanner.java 140 148
+plugins/awt/src/main/java/net/sourceforge/javaocr/ocrPlugins/mseOCR/OCRScanner.java 289 295
+----------------------------------------
+    {
+        //Send accuracy of this identification to the listener
+        if (accListener != null)
+        {
+            OCRIdentification identAccuracy = new OCRIdentification(OCRComp.MSE);
+            identAccuracy.addChar('\n', 0.0);
+            accListener.processCharOrSpace(identAccuracy);
+        }
+    }
+
+----------------------------------------
+        {
+            if (accListener != null)
+            {
+                OCRIdentification identAccuracy = new OCRIdentification(OCRComp.MSE);
+                accListener.processCharOrSpace(identAccuracy);
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+21467730
+plugins/awt/src/main/java/net/sourceforge/javaocr/ocrPlugins/mseOCR/OCRScanner.java 140 148
+plugins/awt/src/main/java/net/sourceforge/javaocr/ocrPlugins/mseOCR/OCRScanner.java 354 363
+----------------------------------------
+    {
+        //Send accuracy of this identification to the listener
+        if (accListener != null)
+        {
+            OCRIdentification identAccuracy = new OCRIdentification(OCRComp.MSE);
+            identAccuracy.addChar('\n', 0.0);
+            accListener.processCharOrSpace(identAccuracy);
+        }
+    }
+
+----------------------------------------
+    {
+        decodeBuffer.append(' ');
+        //Send accuracy of this identification to the listener
+        if (accListener != null)
+        {
+            OCRIdentification identAccuracy = new OCRIdentification(OCRComp.MSE);
+            identAccuracy.addChar(' ', 0.0);
+            accListener.processCharOrSpace(identAccuracy);
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+21467727
+plugins/awt/src/main/java/net/sourceforge/javaocr/ocrPlugins/aspectRatio/AspectRatioOCR.java 69 77
+plugins/awt/src/main/java/net/sourceforge/javaocr/ocrPlugins/mseOCR/OCRScanner.java 354 363
+----------------------------------------
+    {
+        //Send accuracy of this identification to the listener
+        if (listener != null)
+        {
+            OCRIdentification identAccuracy = new OCRIdentification(OCRComp.ASPECT_RATIO);
+            identAccuracy.addChar('\n', 0.0);
+            listener.processCharOrSpace(identAccuracy);
+        }
+    }
+
+----------------------------------------
+    {
+        decodeBuffer.append(' ');
+        //Send accuracy of this identification to the listener
+        if (accListener != null)
+        {
+            OCRIdentification identAccuracy = new OCRIdentification(OCRComp.MSE);
+            identAccuracy.addChar(' ', 0.0);
+            accListener.processCharOrSpace(identAccuracy);
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+21467729
+plugins/awt/src/main/java/net/sourceforge/javaocr/ocrPlugins/mseOCR/OCRScanner.java 289 295
+plugins/awt/src/main/java/net/sourceforge/javaocr/ocrPlugins/mseOCR/OCRScanner.java 354 363
+----------------------------------------
+        {
+            if (accListener != null)
+            {
+                OCRIdentification identAccuracy = new OCRIdentification(OCRComp.MSE);
+                accListener.processCharOrSpace(identAccuracy);
+            }
+        }
+
+----------------------------------------
+    {
+        decodeBuffer.append(' ');
+        //Send accuracy of this identification to the listener
+        if (accListener != null)
+        {
+            OCRIdentification identAccuracy = new OCRIdentification(OCRComp.MSE);
+            identAccuracy.addChar(' ', 0.0);
+            accListener.processCharOrSpace(identAccuracy);
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+21467728
+plugins/awt/src/main/java/net/sourceforge/javaocr/ocrPlugins/aspectRatio/AspectRatioOCR.java 95 102
+plugins/awt/src/main/java/net/sourceforge/javaocr/ocrPlugins/mseOCR/OCRScanner.java 354 363
+----------------------------------------
+    {
+        if (listener != null)
+        {
+            OCRIdentification identAccuracy = new OCRIdentification(OCRComp.ASPECT_RATIO);
+            identAccuracy.addChar(' ', 0.0);
+            listener.processCharOrSpace(identAccuracy);
+        }
+    }
+
+----------------------------------------
+    {
+        decodeBuffer.append(' ');
+        //Send accuracy of this identification to the listener
+        if (accListener != null)
+        {
+            OCRIdentification identAccuracy = new OCRIdentification(OCRComp.MSE);
+            identAccuracy.addChar(' ', 0.0);
+            accListener.processCharOrSpace(identAccuracy);
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+24061354
+demos/recognizer/src/net/sf/javaocr/demos/android/recognizer/Recognizer.java 418 424
+demos/sampler/src/net/sf/javaocr/demos/android/sampler/Sampler.java 204 211
+----------------------------------------
+    public void acquireAndProcess() {
+        Log.d(LOG_TAG, "autofocus requested");
+        if (!cameraManager.doAutofocus()) {
+            Log.d(LOG_TAG, "autofocus failed");
+            return;
+        }
+        Log.d(LOG_TAG, "autofocus obtained");
+
+----------------------------------------
+    private void acquireAndProcess() {
+        // first request auto focus
+        Log.d(LOG_TAG, "autofocus requested");
+        if (!cameraManager.doAutofocus()) {
+            Log.d(LOG_TAG, "autofocus failed");
+            return;
+        }
+        Log.d(LOG_TAG, "autofocus obtained");
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+24061355
+demos/sampler/src/net/sf/javaocr/demos/android/sampler/Sampler.java 114 125
+demos/recognizer/src/net/sf/javaocr/demos/android/recognizer/Recognizer.java 146 156
+----------------------------------------
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+
+        getWindow().setFlags(
+                WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+
+        setContentView(R.layout.main);
+
+----------------------------------------
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+
+        getWindow().setFlags(
+                WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        setContentView(R.layout.main);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+24061356
+demos/recognizer/src/net/sf/javaocr/demos/android/recognizer/Recognizer.java 376 385
+demos/sampler/src/net/sf/javaocr/demos/android/sampler/Sampler.java 397 406
+----------------------------------------
+        int viewfinderH = scanArea.getBottom() - scanArea.getTop();
+        int viewfinderW = scanArea.getRight() - scanArea.getLeft();
+
+        // scaling factor between preview image and screen coordinates
+        scaleW = (float) overlayW / (float) previewSize.width;
+        scaleH = (float) overlayH / (float) previewSize.height;
+
+        // bitmap size
+        bitmapW = (int) ((float) viewfinderW / scaleW);
+        bitmapH = (int) ((float) viewfinderH / scaleH);
+
+----------------------------------------
+        int viewfinderH = scanArea.getBottom() - scanArea.getTop();
+        int viewfinderW = scanArea.getRight() - scanArea.getLeft();
+
+        // scaling factor between preview image and screen coordinates
+        scaleW = (float) overlayW / (float) previewSize.width;
+        scaleH = (float) overlayH / (float) previewSize.height;
+
+        // bitmap size
+        bitmapW = (int) ((float) viewfinderW / scaleW);
+        bitmapH = (int) ((float) viewfinderH / scaleH);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+24061357
+core/src/main/java/net/sourceforge/javaocr/ocr/DocumentScanner.java 358 366
+core/src/main/java/net/sourceforge/javaocr/scanner/DocumentScanner.java 498 508
+----------------------------------------
+            if ((thisCharWidth < minCharWidth) || (thisCharWidth < 6)) {
+                al.remove(i + 2);
+                al.remove(i + 1);
+                i -= 2;
+            }
+        }
+        // Process the remaining character cells.
+        for (int i = 0; (i + 1) < al.size(); i += 2) {
+            if (i >= 2) {
+
+----------------------------------------
+            if ((thisCharWidth < minCharWidth) || (thisCharWidth < 6))
+            {
+                al.remove(i + 2);
+                al.remove(i + 1);
+                i -= 2;
+            }
+        }
+        // Process the remaining character cells.
+        for (int i = 0; (i + 1) < al.size(); i += 2)
+        {
+            if (i >= 2)
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+24061358
+demos/recognizer/src/net/sf/javaocr/demos/android/recognizer/Recognizer.java 336 348
+demos/sampler/src/net/sf/javaocr/demos/android/sampler/Sampler.java 370 381
+----------------------------------------
+    private void computeViewfinderOrigin() {
+
+        int[] absPos = new int[2];
+        scanArea.getLocationOnScreen(absPos);
+
+
+        viewfinderOriginX = absPos[0];
+        viewfinderOriginY = absPos[1];
+
+        // subtract origin of preview view
+        surfaceView.getLocationOnScreen(absPos);
+
+        viewfinderOriginX -= absPos[0];
+
+----------------------------------------
+    private void computeViewfinderOrigin() {
+        int[] absPos = new int[2];
+        scanArea.getLocationOnScreen(absPos);
+
+
+        viewfinderOriginX = absPos[0];
+        viewfinderOriginY = absPos[1];
+
+        // subtract origin of preview view
+        surfaceView.getLocationOnScreen(absPos);
+
+        viewfinderOriginX -= absPos[0];
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+24061359
+core/src/main/java/net/sourceforge/javaocr/DocumentScannerListener.java 27 126
+core/src/main/java/net/sourceforge/javaocr/ocr/DocumentScannerListenerAdaptor.java 32 55
+----------------------------------------
+public interface DocumentScannerListener {
+
+    /**
+     * This method is called when scanning of the document begins.
+     *
+     * @param pixelImage The <code>PixelImage</code> containing the document
+     *                   which is being scanned.
+     */
+    public void beginDocument(Image pixelImage);
+
+    /**
+     * This method is called when scanning of a row of text within the document
+     * begins.
+     *
+     * @param pixelImage The <code>PixelImage</code> containing the document
+     *                   which is being scanned.
+     * @param y1         The y position of the top pixel row of the row of text that
+     *                   is being scanned.
+     * @param y2         The y position of the pixel row immediately below the last
+     *                   pixel row of the row of text that is being scanned.  This is always
+     *                   one more than the last pixel row of the row of text that is being
+     *                   scanned.
+     */
+    public void beginRow(Image pixelImage, int y1, int y2);
+
+    /**
+     * This method is called to process a character or group of characters
+     * within the document.<p>
+     * Note that when two or more characters are connected together without
+     * enough whitespace to determine where the first one ends and the next
+     * one begins, the document scanner may not be able to split the characters
+     * properly.  If this occurs, then two or more characters may be included
+     * in a single call to this method.  In this case, it is the responsibility
+     * of this method to process all characters included in the area passed
+     * into this method.
+     *
+     * @param pixelImage The <code>PixelImage</code> containing the document
+     *                   which is being scanned.
+     * @param x1         The x position of the first pixel column of the character
+     *                   or group of characters being scanned.
+     * @param y1         The y position of the top pixel row of the row of text that
+     *                   is being scanned.
+     * @param x2         The x position of the pixel column immediately to the right
+     *                   of the last pixel column of the character or group of characters being
+     *                   scanned.  This is always one more than the last pixel column of the
+     *                   character or group of characters that is being scanned.
+     * @param y2         The y position of the pixel row immediately below the last
+     *                   pixel row of the row of text that is being scanned.  This is always
+     *                   one more than the last pixel row of the row of text that is being
+     *                   scanned.
+     * @param rowY1      The y position of the top scan line of the row.
+     * @param rowY2      The y position of the scan line immediately below the bottom of the row.
+     */
+    public void processChar(Image pixelImage, int x1, int y1, int x2, int y2, int rowY1, int rowY2);
+
+    /**
+     * This method is called to process a space within the document.<p>
+     * A space is simply an area of whitespace between two characters that is
+     * deemed by the document scanner to be wide enough to represent a space
+     * character.
+     *
+     * @param pixelImage The <code>PixelImage</code> containing the document
+     *                   which is being scanned.
+     * @param x1         The x position of the first pixel column of the character
+     *                   or group of characters being scanned.
+     * @param y1         The y position of the top pixel row of the row of text that
+     *                   is being scanned.
+     * @param x2         The x position of the pixel column immediately to the right
+     *                   of the last pixel column of the character or group of characters being
+     *                   scanned.  This is always one more than the last pixel column of the
+     *                   character or group of characters that is being scanned.
+     * @param y2         The y position of the pixel row immediately below the last
+     *                   pixel row of the row of text that is being scanned.  This is always
+     *                   one more than the last pixel row of the row of text that is being
+     *                   scanned.
+     */
+    public void processSpace(Image pixelImage, int x1, int y1, int x2, int y2);
+
+    /**
+     * This method is called when scanning of a row of text within the document
+     * is complete.
+     *
+     * @param pixelImage The <code>PixelImage</code> containing the document
+     *                   which is being scanned.
+     * @param y1         The y position of the top pixel row of the row of text that
+     *                   is being scanned.
+     * @param y2         The y position of the pixel row immediately below the last
+     *                   pixel row of the row of text that is being scanned.  This is always
+     *                   one more than the last pixel row of the row of text that is being
+     *                   scanned.
+     */
+    public void endRow(Image pixelImage, int y1, int y2);
+
+    /**
+     * This method is called when scanning of the document is complete.
+     *
+     * @param pixelImage The <code>PixelImage</code> containing the document
+     *                   which is being scanned.
+     */
+    public void endDocument(Image pixelImage);
+
+----------------------------------------
+        implements DocumentScannerListener
+{
+
+    public void beginDocument(Image pixelImage)
+    {
+    }
+
+    public void beginRow(Image pixelImage, int y1, int y2)
+    {
+    }
+
+    public void processChar(Image pixelImage, int x1, int y1, int x2, int y2, int rowY1, int rowY2)
+    {
+    }
+
+    public void processSpace(Image pixelImage, int x1, int y1, int x2, int y2)
+    {
+    }
+
+    public void endRow(Image pixelImage, int y1, int y2)
+    {
+    }
+
+    public void endDocument(Image pixelImage)
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+24061360
+plugins/awt/src/main/java/net/sourceforge/javaocr/ocrPlugins/lineExtractor/LineExtractor.java 50 58
+plugins/awt/src/main/java/net/sourceforge/javaocr/ocrPlugins/charTracer/CharacterTracer.java 52 60
+----------------------------------------
+            Image img = ImageIO.read(inputImage);
+            PixelImage pixelImage = new PixelImage(img);
+            pixelImage.toGrayScale(true);
+            pixelImage.filter();
+            documentScanner.scan(pixelImage, this, 0, 0, pixelImage.width, pixelImage.height);
+        }
+        catch (IOException ex)
+        {
+            LOG.log(Level.SEVERE, null, ex);
+
+----------------------------------------
+            Image img = ImageIO.read(inputImage);
+            PixelImage pixelImage = new PixelImage(img);
+            pixelImage.toGrayScale(true);
+            pixelImage.filter();
+            documentScanner.scan(pixelImage, this, 0, 0, pixelImage.width, pixelImage.height);
+        }
+        catch (IOException ex)
+        {
+            LOG.log(Level.SEVERE, null, ex);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+24061361
+core/src/main/java/net/sourceforge/javaocr/scanner/DocumentScannerListenerAdaptor.java 31 54
+core/src/main/java/net/sourceforge/javaocr/scanner/DocumentScannerListener.java 25 119
+----------------------------------------
+        implements DocumentScannerListener
+{
+
+    public void beginDocument(PixelImage pixelImage)
+    {
+    }
+
+    public void beginRow(PixelImage pixelImage, int y1, int y2)
+    {
+    }
+
+    public void processChar(PixelImage pixelImage, int x1, int y1, int x2, int y2, int rowY1, int rowY2)
+    {
+    }
+
+    public void processSpace(PixelImage pixelImage, int x1, int y1, int x2, int y2)
+    {
+    }
+
+    public void endRow(PixelImage pixelImage, int y1, int y2)
+    {
+    }
+
+    public void endDocument(PixelImage pixelImage)
+
+----------------------------------------
+public interface DocumentScannerListener
+{
+
+    /**
+     * This method is called when scanning of the document begins.
+     * @param pixelImage The <code>PixelImage</code> containing the document
+     * which is being scanned.
+     */
+    public void beginDocument(PixelImage pixelImage);
+
+    /**
+     * This method is called when scanning of a row of text within the document
+     * begins.
+     * @param pixelImage The <code>PixelImage</code> containing the document
+     * which is being scanned.
+     * @param y1 The y position of the top pixel row of the row of text that
+     * is being scanned.
+     * @param y2 The y position of the pixel row immediately below the last
+     * pixel row of the row of text that is being scanned.  This is always
+     * one more than the last pixel row of the row of text that is being
+     * scanned.
+     */
+    public void beginRow(PixelImage pixelImage, int y1, int y2);
+
+    /**
+     * This method is called to process a character or group of characters
+     * within the document.<p>
+     * Note that when two or more characters are connected together without
+     * enough whitespace to determine where the first one ends and the next
+     * one begins, the document scanner may not be able to split the characters
+     * properly.  If this occurs, then two or more characters may be included
+     * in a single call to this method.  In this case, it is the responsibility
+     * of this method to process all characters included in the area passed
+     * into this method.
+     * @param pixelImage The <code>PixelImage</code> containing the document
+     * which is being scanned.
+     * @param x1 The x position of the first pixel column of the character
+     * or group of characters being scanned.
+     * @param y1 The y position of the top pixel row of the row of text that
+     * is being scanned.
+     * @param x2 The x position of the pixel column immediately to the right
+     * of the last pixel column of the character or group of characters being
+     * scanned.  This is always one more than the last pixel column of the
+     * character or group of characters that is being scanned.
+     * @param y2 The y position of the pixel row immediately below the last
+     * pixel row of the row of text that is being scanned.  This is always
+     * one more than the last pixel row of the row of text that is being
+     * scanned.
+     * @param rowY1 The y position of the top scan line of the row.
+     * @param rowY2 The y position of the scan line immediately below the bottom of the row.
+     */
+    public void processChar(PixelImage pixelImage, int x1, int y1, int x2, int y2, int rowY1, int rowY2);
+
+    /**
+     * This method is called to process a space within the document.<p>
+     * A space is simply an area of whitespace between two characters that is
+     * deemed by the document scanner to be wide enough to represent a space
+     * character.
+     * @param pixelImage The <code>PixelImage</code> containing the document
+     * which is being scanned.
+     * @param x1 The x position of the first pixel column of the character
+     * or group of characters being scanned.
+     * @param y1 The y position of the top pixel row of the row of text that
+     * is being scanned.
+     * @param x2 The x position of the pixel column immediately to the right
+     * of the last pixel column of the character or group of characters being
+     * scanned.  This is always one more than the last pixel column of the
+     * character or group of characters that is being scanned.
+     * @param y2 The y position of the pixel row immediately below the last
+     * pixel row of the row of text that is being scanned.  This is always
+     * one more than the last pixel row of the row of text that is being
+     * scanned.
+     */
+    public void processSpace(PixelImage pixelImage, int x1, int y1, int x2, int y2);
+
+    /**
+     * This method is called when scanning of a row of text within the document
+     * is complete.
+     * @param pixelImage The <code>PixelImage</code> containing the document
+     * which is being scanned.
+     * @param y1 The y position of the top pixel row of the row of text that
+     * is being scanned.
+     * @param y2 The y position of the pixel row immediately below the last
+     * pixel row of the row of text that is being scanned.  This is always
+     * one more than the last pixel row of the row of text that is being
+     * scanned.
+     */
+    public void endRow(PixelImage pixelImage, int y1, int y2);
+
+    /**
+     * This method is called when scanning of the document is complete.
+     * @param pixelImage The <code>PixelImage</code> containing the document
+     * which is being scanned.
+     */
+    public void endDocument(PixelImage pixelImage);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+24061362
+core/src/main/java/net/sourceforge/javaocr/scanner/DocumentScanner.java 556 572
+core/src/main/java/net/sourceforge/javaocr/ocr/DocumentScanner.java 392 404
+----------------------------------------
+                if (!isWhiteSpace)
+                {
+                    break;
+                }
+                cy2--;
+            }
+            if (cy1 >= cy2)
+            {
+                // Everything is white in this cell.  Make it a space.
+                listener.processSpace(pixelImage, cx1, y1, cx2, y2);
+            }
+            else
+            {
+                listener.processChar(pixelImage, cx1, cy1, cx2, cy2, y1, y2);
+            }
+        }
+        listener.endRow(pixelImage, y1, y2);
+
+----------------------------------------
+                if (!isWhiteSpace) {
+                    break;
+                }
+                cy2--;
+            }
+            if (cy1 >= cy2) {
+                // Everything is white in this cell.  Make it a space.
+                listener.processSpace(pixelImage, cx1, y1, cx2, y2);
+            } else {
+                listener.processChar(pixelImage, cx1, cy1, cx2, cy2, y1, y2);
+            }
+        }
+        listener.endRow(pixelImage, y1, y2);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+24061363
+core/src/main/java/net/sourceforge/javaocr/matcher/Match.java 72 90
+core/src/main/java/net/sourceforge/javaocr/matcher/MetricContainer.java 54 67
+----------------------------------------
+    public double getRed() {
+        return red;
+    }
+
+    public void setRed(double red) {
+        this.red = red;
+    }
+
+    /**
+     * threshold marking problematic (low quality) match
+     *
+     * @return
+     */
+    public double getYellow() {
+        return yellow;
+    }
+
+    public void setYellow(double yellow) {
+        this.yellow = yellow;
+
+----------------------------------------
+    public double getRed() {
+        return red;
+    }
+
+    public void setRed(double red) {
+        this.red = red;
+    }
+
+    public double getYellow() {
+        return yellow;
+    }
+
+    public void setYellow(double yellow) {
+        this.yellow = yellow;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+24061364
+plugins/awt/src/main/java/net/sourceforge/javaocr/ocrPlugins/charExtractor/CharacterExtractor.java 54 62
+plugins/awt/src/main/java/net/sourceforge/javaocr/ocrPlugins/lineExtractor/LineExtractor.java 48 56
+----------------------------------------
+            this.inputImage = inputImage;
+            this.outputDir = outputDir;
+            Image img = ImageIO.read(inputImage);
+            PixelImage pixelImage = new PixelImage(img);
+            pixelImage.toGrayScale(true);
+            pixelImage.filter();
+            documentScanner.scan(pixelImage, this, 0, 0, pixelImage.width, pixelImage.height);
+        }
+        catch (IOException ex)
+
+----------------------------------------
+            this.inputImage = inputImage;
+            this.outputDir = outputDir;
+            Image img = ImageIO.read(inputImage);
+            PixelImage pixelImage = new PixelImage(img);
+            pixelImage.toGrayScale(true);
+            pixelImage.filter();
+            documentScanner.scan(pixelImage, this, 0, 0, pixelImage.width, pixelImage.height);
+        }
+        catch (IOException ex)
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+24061365
+demos/recognizer/src/net/sf/javaocr/demos/android/recognizer/Recognizer.java 245 264
+demos/sampler/src/net/sf/javaocr/demos/android/sampler/Sampler.java 167 184
+----------------------------------------
+        if (haveSurface) {
+            try {
+                Log.d(LOG_TAG, "existing surface - start camera now");
+                startCamera();
+            } catch (IOException e) {
+                Log.e(LOG_TAG, "error starting preview in on resume", e);
+            }
+        }
+
+    }
+
+
+    /**
+     * perform necessary operations to start camera
+     *
+     * @throws IOException
+     */
+    private void startCamera() throws IOException {
+        cameraManager.start(preview);
+        setUpImagesAndBitmaps();
+
+----------------------------------------
+        if (haveSurface) {
+            try {
+                Log.d(LOG_TAG, "existing surface - start camera now");
+                startCamera();
+            } catch (IOException e) {
+                Log.e(LOG_TAG, "error starting preview in on resume", e);
+            }
+        }
+    }
+
+    /**
+     * perfrom necessary operations to start camera
+     *
+     * @throws IOException
+     */
+    private void startCamera() throws IOException {
+        cameraManager.start(preview);
+        setUpImagesAndBitmaps();
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+24061366
+core/src/main/java/net/sourceforge/javaocr/scanner/DocumentScanner.java 414 430
+core/src/main/java/net/sourceforge/javaocr/ocr/DocumentScanner.java 300 314
+----------------------------------------
+        boolean inCharSeparator = true;
+        int charX1 = 0, prevCharX1 = -1;
+        boolean liberalWhitespacePolicy = false;
+        int numConsecutiveWhite = 0;
+        for (int x = x1 + 1; x < (x2 - 1); x++)
+        {
+            if ((!liberalWhitespacePolicy)
+                    && (numConsecutiveWhite == 0)
+                    && ((x - charX1) >= rowHeight))
+            {
+                // Something's amiss.  No whitespace.
+                // Try again but do it with the liberal whitespace
+                // detection algorithm.
+                x = charX1;
+                liberalWhitespacePolicy = true;
+            }
+            int numWhitePixelsThisColumn = 0;
+
+----------------------------------------
+        boolean inCharSeparator = true;
+        int charX1 = 0, prevCharX1 = -1;
+        boolean liberalWhitespacePolicy = false;
+        int numConsecutiveWhite = 0;
+        for (int x = x1 + 1; x < (x2 - 1); x++) {
+            if ((!liberalWhitespacePolicy)
+                    && (numConsecutiveWhite == 0)
+                    && ((x - charX1) >= rowHeight)) {
+                // Something's amiss.  No whitespace.
+                // Try again but do it with the liberal whitespace
+                // detection algorithm.
+                x = charX1;
+                liberalWhitespacePolicy = true;
+            }
+            int numWhitePixelsThisColumn = 0;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+24061367
+demos/recognizer/src/net/sf/javaocr/demos/android/recognizer/Recognizer.java 297 314
+demos/sampler/src/net/sf/javaocr/demos/android/sampler/Sampler.java 301 312
+----------------------------------------
+        haveSurface = true;
+
+        Log.d(LOG_TAG, "surface changed " + width + "x" + height);
+        overlayW = width;
+        overlayH = height;
+        try {
+            startCamera();
+        } catch (IOException e) {
+            Log.e(LOG_TAG, "error starting preview", e);
+        }
+    }
+
+    /**
+     * when surface if being destroyed, we just stop camera
+     *
+     * @param surfaceHolder
+     */
+    public void surfaceDestroyed(SurfaceHolder surfaceHolder) {
+
+----------------------------------------
+        haveSurface = true;
+        Log.d(LOG_TAG, "surface changed " + width + "x" + height);
+        overlayW = width;
+        overlayH = height;
+        try {
+            startCamera();
+        } catch (IOException e) {
+            Log.e(LOG_TAG, "error starting preview", e);
+        }
+    }
+
+    public void surfaceDestroyed(SurfaceHolder surfaceHolder) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+24061368
+core/src/main/java/net/sourceforge/javaocr/scanner/PixelImage.java 268 282
+core/src/main/java/net/sourceforge/javaocr/scanner/PixelImage.java 321 335
+----------------------------------------
+                c = 0.0f;
+                for (int j = 0; j < lastPos; j++)
+                {
+                    c += (firSamples[j] * FILTER_FIR_COEFFS[j]);
+                    firSamples[j] = firSamples[j + 1];
+                }
+                c += (firSamples[lastPos] * FILTER_FIR_COEFFS[lastPos]);
+                firSamples[lastPos] = 255.0f;
+                if (c < 0.0f)
+                {
+                    c = 0.0f;
+                }
+                else if (c > 255.0f)
+                {
+                    c = 255.0f;
+
+----------------------------------------
+                c = 0.0f;
+                for (int j = 0; j < lastPos; j++)
+                {
+                    c += (firSamples[j] * FILTER_FIR_COEFFS[j]);
+                    firSamples[j] = firSamples[j + 1];
+                }
+                c += (firSamples[lastPos] * FILTER_FIR_COEFFS[lastPos]);
+                firSamples[lastPos] = 255.0f;
+                if (c < 0.0f)
+                {
+                    c = 0.0f;
+                }
+                else if (c > 255.0f)
+                {
+                    c = 255.0f;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+24061369
+plugins/morphology/src/main/java/net/sourceforge/javaocr/plugin/morphology/ErosionFilter.java 54 73
+plugins/morphology/src/main/java/net/sourceforge/javaocr/plugin/morphology/DilationFilter.java 54 73
+----------------------------------------
+    super(strElem, dest, full, empty);
+  }
+  
+  /**
+   * Apply erosion to the given image, leaving borders unprocessed.
+   * @param image Input image
+   */
+  public void process(Image image) {
+    final int imageW = image.getWidth();
+    final int imageH = image.getHeight();
+    
+    // copy four borders as they are
+    image.chisel(0, 0, imageW, sizeT).copy(destImage.chisel(0, 0, imageW, sizeT));
+    image.chisel(0, imageH-sizeB, imageW, sizeB).copy(destImage.chisel(0, imageH-sizeB, imageW, sizeB));
+    image.chisel(0, 0, sizeL, imageH).copy(destImage.chisel(0, 0, sizeL, imageH));
+    image.chisel(imageW-sizeR, 0, sizeR, imageH).copy(destImage.chisel(imageW-sizeR, 0, sizeR, imageH));
+    
+    // process valid area of the image
+    for (int y = sizeT; y < imageH-sizeB; ++y) {
+      for (int x = sizeL; x < imageW-sizeR; ++x) {
+
+----------------------------------------
+    super(strElem, dest, full, empty);
+  }
+  
+  /**
+   * Apply dilation to the given image, leaving borders unprocessed.
+   * @param image Input image
+   */
+  public void process(Image image) {
+    final int imageW = image.getWidth();
+    final int imageH = image.getHeight();
+    
+    // copy four borders as they are
+    image.chisel(0, 0, imageW, sizeT).copy(destImage.chisel(0, 0, imageW, sizeT));
+    image.chisel(0, imageH-sizeB, imageW, sizeB).copy(destImage.chisel(0, imageH-sizeB, imageW, sizeB));
+    image.chisel(0, 0, sizeL, imageH).copy(destImage.chisel(0, 0, sizeL, imageH));
+    image.chisel(imageW-sizeR, 0, sizeR, imageH).copy(destImage.chisel(imageW-sizeR, 0, sizeR, imageH));
+    
+    // process valid area of the image
+    for (int y = sizeT; y < imageH-sizeB; ++y) {
+      for (int x = sizeL; x < imageW-sizeR; ++x) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+24061370
+core/src/main/java/net/sourceforge/javaocr/scanner/PixelImage.java 298 312
+core/src/main/java/net/sourceforge/javaocr/scanner/PixelImage.java 245 259
+----------------------------------------
+                c = 0.0f;
+                for (int j = 0; j < lastPos; j++)
+                {
+                    c += (firSamples[j] * FILTER_FIR_COEFFS[j]);
+                    firSamples[j] = firSamples[j + 1];
+                }
+                c += (firSamples[lastPos] * FILTER_FIR_COEFFS[lastPos]);
+                firSamples[lastPos] = getPixel(x, y);
+                if (c < 0.0f)
+                {
+                    c = 0.0f;
+                }
+                else if (c > 255.0f)
+                {
+                    c = 255.0f;
+
+----------------------------------------
+                c = 0.0f;
+                for (int j = 0; j < lastPos; j++)
+                {
+                    c += (firSamples[j] * FILTER_FIR_COEFFS[j]);
+                    firSamples[j] = firSamples[j + 1];
+                }
+                c += (firSamples[lastPos] * FILTER_FIR_COEFFS[lastPos]);
+                firSamples[lastPos] = getPixel(x, y);
+                if (c < 0.0f)
+                {
+                    c = 0.0f;
+                }
+                else if (c > 255.0f)
+                {
+                    c = 255.0f;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+24061371
+core/src/main/java/net/sourceforge/javaocr/ocr/DocumentScanner.java 253 270
+core/src/main/java/net/sourceforge/javaocr/scanner/DocumentScanner.java 360 379
+----------------------------------------
+            int row0H = bY1 - bY0;
+            int whiteH = bY2 - bY1;
+            int row1H = bY3 - bY2;
+            if (((row1H <= (int) ((float) row0H * shortRowFraction))
+                    || (row1H < 6))
+                    && ((whiteH <= (int) ((float) row0H * shortRowFraction))
+                    || (whiteH < 6))) {
+                al.remove(i + 2);
+                al.remove(i + 1);
+                i -= 2;
+            }
+        }
+        if (al.size() == 0) {
+            al.add(new Integer(blockY1));
+            al.add(new Integer(blockY2));
+        }
+        // Process the rows.
+        for (int i = 0; (i + 1) < al.size(); i += 2) {
+
+----------------------------------------
+            int row0H = bY1 - bY0;
+            int whiteH = bY2 - bY1;
+            int row1H = bY3 - bY2;
+            if (((row1H <= (int) ((float) row0H * shortRowFraction))
+                    || (row1H < 6))
+                    && ((whiteH <= (int) ((float) row0H * shortRowFraction))
+                    || (whiteH < 6)))
+            {
+                al.remove(i + 2);
+                al.remove(i + 1);
+                i -= 2;
+            }
+        }
+        if (al.size() == 0)
+        {
+            al.add(new Integer(blockY1));
+            al.add(new Integer(blockY2));
+        }
+        // Process the rows.
+        for (int i = 0; (i + 1) < al.size(); i += 2)
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+24061372
+core/src/main/java/net/sourceforge/javaocr/scanner/DocumentScanner.java 327 354
+core/src/main/java/net/sourceforge/javaocr/ocr/DocumentScanner.java 227 248
+----------------------------------------
+            if (isWhiteSpace)
+            {
+                if (!whiteLine)
+                {
+                    whiteLine = true;
+                    al.add(new Integer(y1));
+                    al.add(new Integer(y));
+                }
+            }
+            else
+            {
+                if (whiteLine)
+                {
+                    whiteLine = false;
+                    y1 = y;
+                }
+            }
+        }
+        if (!whiteLine)
+        {
+            al.add(new Integer(y1));
+            al.add(new Integer(blockY2));
+        }
+        // Now for each row that looks unreasonably short
+        // compared to the previous row, merge the short row into
+        // the previous row.  This accommodates characters such as
+        // underscores.
+        for (int i = 0; (i + 4) <= al.size(); i += 2)
+
+----------------------------------------
+            if (isWhiteSpace) {
+                if (!whiteLine) {
+                    whiteLine = true;
+                    al.add(new Integer(y1));
+                    al.add(new Integer(y));
+                }
+            } else {
+                if (whiteLine) {
+                    whiteLine = false;
+                    y1 = y;
+                }
+            }
+        }
+        if (!whiteLine) {
+            al.add(new Integer(y1));
+            al.add(new Integer(blockY2));
+        }
+        // Now for each row that looks unreasonably short
+        // compared to the previous row, merge the short row into
+        // the previous row.  This accommodates characters such as
+        // underscores.
+        for (int i = 0; (i + 4) <= al.size(); i += 2) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+24061373
+core/src/main/java/net/sourceforge/javaocr/scanner/DocumentScanner.java 203 311
+core/src/main/java/net/sourceforge/javaocr/ocr/DocumentScanner.java 198 220
+----------------------------------------
+        if (blockX1 < 0)
+        {
+            blockX1 = 0;
+        }
+        else if (blockX1 >= w)
+        {
+            blockX1 = w - 1;
+        }
+        if (blockY1 < 0)
+        {
+            blockY1 = 0;
+        }
+        else if (blockY1 >= h)
+        {
+            blockY1 = h - 1;
+        }
+        if ((blockX2 <= 0) || (blockX2 >= w))
+        {
+            blockX2 = w - 1;
+        }
+        if ((blockY2 <= 0) || (blockY2 >= h))
+        {
+            blockY2 = h - 1;
+        }
+
+        /*
+        int origBlockX1 = blockX1, origBlockY1 = blockY1, origBlockX2 = blockX2, origBlockY2 = blockY2;
+
+        // Narrow the block until there are no remaining dark edges.
+        ///	int thresh = Math.min(255, whiteThreshold+(whiteThreshold/4));
+        int thresh = whiteThreshold;
+        float blackElimFraction = 0.1f;
+        ///System.out.println("thresh="+thresh);
+        for (boolean reduced = true; reduced;) {
+        reduced = false;
+        // Left edge
+        int blackCount = 0;
+        int idx = (blockY1*w)+blockX1;
+        int maxBlack = Math.max(1, (int)((float)((blockY2+1)-blockY1)*blackElimFraction));
+        for (int y = blockY1; y <= blockY2; y++, idx += w) {
+        if (pixels[idx] < thresh) blackCount++;
+        }
+        ///System.out.println("left blackCount="+blackCount+" maxBlack="+maxBlack+" blockY1="+blockY1+" blockY2="+blockY2);
+        if (blackCount >= maxBlack) {
+        ///System.out.println("    reduce left");
+        reduced = true;
+        blockX1++;
+        if (blockX1 >= blockX2) break;
+        }
+        // Right edge
+        blackCount = 0;
+        idx = (blockY1*w)+blockX2;
+        maxBlack = Math.max(1, (int)((float)((blockY2+1)-blockY1)*blackElimFraction));
+        for (int y = blockY1; y <= blockY2; y++, idx += w) {
+        ///System.out.print("["+pixels[idx]+"]");
+        if (pixels[idx] < thresh) blackCount++;
+        }
+        ///System.out.println();
+        ///System.out.println("right blackCount="+blackCount+" maxBlack="+maxBlack+" blockY1="+blockY1+" blockY2="+blockY2);
+        if (blackCount >= maxBlack) {
+        ///System.out.println("    reduce right");
+        reduced = true;
+        blockX2--;
+        if (blockX1 >= blockX2) break;
+        }
+        // Top edge
+        blackCount = 0;
+        idx = (blockY1*w)+blockX1;
+        maxBlack = Math.max(1, (int)((float)((blockX2+1)-blockX1)*blackElimFraction));
+        for (int x = blockX1; x <= blockX2; x++, idx++) {
+        if (pixels[idx] < thresh) blackCount++;
+        }
+        ///System.out.println("top blackCount="+blackCount+" maxBlack="+maxBlack+" blockX1="+blockX1+" blockX2="+blockX2);
+        if (blackCount >= maxBlack) {
+        ///System.out.println("    reduce top");
+        reduced = true;
+        blockY1++;
+        if (blockY1 >= blockY2) break;
+        }
+        // Bottom edge
+        blackCount = 0;
+        idx = (blockY2*w)+blockX1;
+        maxBlack = Math.max(1, (int)((float)((blockX2+1)-blockX1)*blackElimFraction));
+        for (int x = blockX1; x <= blockX2; x++, idx++) {
+        if (pixels[idx] < thresh) blackCount++;
+        }
+        ///System.out.println("bottom blackCount="+blackCount+" maxBlack="+maxBlack+" blockX1="+blockX1+" blockX2="+blockX2);
+        if (blackCount >= maxBlack) {
+        ///System.out.println("    reduce bottom");
+        reduced = true;
+        blockY2--;
+        if (blockY1 >= blockY2) break;
+        }
+        }
+
+        if ( (blockX1 >= blockX2) || (blockY1 >= blockY2) ) {
+        // Reduction failed; restore to original values.
+        blockX1 = origBlockX1;
+        blockY1 = origBlockY1;
+        blockX2 = origBlockX2;
+        blockY2 = origBlockY2;
+        }
+         */
+
+        blockX2++;
+        blockY2++;
+
+        boolean whiteLine = true;
+        listener.beginDocument(pixelImage);
+
+----------------------------------------
+        if (blockX1 < 0) {
+            blockX1 = 0;
+        } else if (blockX1 >= w) {
+            blockX1 = w - 1;
+        }
+        if (blockY1 < 0) {
+            blockY1 = 0;
+        } else if (blockY1 >= h) {
+            blockY1 = h - 1;
+        }
+        if ((blockX2 <= 0) || (blockX2 >= w)) {
+            blockX2 = w - 1;
+        }
+        if ((blockY2 <= 0) || (blockY2 >= h)) {
+            blockY2 = h - 1;
+        }
+
+
+        blockX2++;
+        blockY2++;
+
+        boolean whiteLine = true;
+        listener.beginDocument(pixelImage);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+24061374
+core/src/main/java/net/sourceforge/javaocr/ocr/DocumentScanner.java 317 355
+core/src/main/java/net/sourceforge/javaocr/scanner/DocumentScanner.java 447 495
+----------------------------------------
+            if ((liberalWhitespacePolicy)
+                    && (numWhitePixelsThisColumn
+                    < liberalWhitspaceMinWhitePixelsPerColumn)) {
+                isWhiteSpace = false;
+            }
+            if (isWhiteSpace) {
+                numConsecutiveWhite++;
+                if (numConsecutiveWhite >= minCharBreakWidth) {
+                    if (!inCharSeparator) {
+                        inCharSeparator = true;
+                        al.add(new Integer(charX1));
+                        al.add(new Integer(x - (numConsecutiveWhite - 1)));
+                    }
+                }
+            } else {
+                numConsecutiveWhite = 0;
+                if (inCharSeparator) {
+                    inCharSeparator = false;
+                    prevCharX1 = charX1;
+                    charX1 = x;
+                    liberalWhitespacePolicy = false;
+                }
+            }
+        }
+        if (numConsecutiveWhite == 0) {
+            al.add(new Integer(charX1));
+            al.add(new Integer(x2));
+        }
+        int minSpaceWidth =
+                (int) ((float) rowHeight * minSpaceWidthAsFractionOfRowHeight);
+        // Next combine concecutive supposed character cells where their
+        // leftmost X positions are too close together.
+        int minCharWidth =
+                (int) ((float) rowHeight * minCharWidthAsFractionOfRowHeight);
+        if (minCharWidth < 1) {
+            minCharWidth = 1;
+        }
+        for (int i = 0; (i + 4) < al.size(); i += 2) {
+            int thisCharWidth =
+
+----------------------------------------
+            if ((liberalWhitespacePolicy)
+                    && (numWhitePixelsThisColumn
+                    < liberalWhitspaceMinWhitePixelsPerColumn))
+            {
+                isWhiteSpace = false;
+            }
+            if (isWhiteSpace)
+            {
+                numConsecutiveWhite++;
+                if (numConsecutiveWhite >= minCharBreakWidth)
+                {
+                    if (!inCharSeparator)
+                    {
+                        inCharSeparator = true;
+                        al.add(new Integer(charX1));
+                        al.add(new Integer(x - (numConsecutiveWhite - 1)));
+                    }
+                }
+            }
+            else
+            {
+                numConsecutiveWhite = 0;
+                if (inCharSeparator)
+                {
+                    inCharSeparator = false;
+                    prevCharX1 = charX1;
+                    charX1 = x;
+                    liberalWhitespacePolicy = false;
+                }
+            }
+        }
+        if (numConsecutiveWhite == 0)
+        {
+            al.add(new Integer(charX1));
+            al.add(new Integer(x2));
+        }
+        int minSpaceWidth =
+                (int) ((float) rowHeight * minSpaceWidthAsFractionOfRowHeight);
+        // Next combine concecutive supposed character cells where their
+        // leftmost X positions are too close together.
+        int minCharWidth =
+                (int) ((float) rowHeight * minCharWidthAsFractionOfRowHeight);
+        if (minCharWidth < 1)
+        {
+            minCharWidth = 1;
+        }
+        for (int i = 0; (i + 4) < al.size(); i += 2)
+        {
+            int thisCharWidth =
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+24061375
+core/src/main/java/net/sourceforge/javaocr/scanner/DocumentScanner.java 36 174
+core/src/main/java/net/sourceforge/javaocr/ocr/DocumentScanner.java 40 170
+----------------------------------------
+    protected float shortRowFraction = 0.125f;
+    /**
+     * The minimum fraction of pixels in an area which must be white in order for the area to
+     * be considered whitespace when the liberal whitespace policy is in effect.
+     */
+    protected float liberalPolicyAreaWhitespaceFraction = 0.95f;
+    /**
+     * The minimum arrayWidth of a space, expressed as a fraction of the arrayHeight of a row of text.
+     */
+    protected float minSpaceWidthAsFractionOfRowHeight = 0.6f;
+    /**
+     * The minimum arrayWidth of a character, expressed as a fraction of the arrayHeight of a row of text.
+     */
+    protected float minCharWidthAsFractionOfRowHeight = 0.35f;
+    /**
+     * The minimum arrayWidth of a character break (a vertical column of whitespace that separates
+     * two characters on a row of text), expressed as a fraction of the arrayHeight of a row of text.
+     */
+    protected float minCharBreakWidthAsFractionOfRowHeight = 0.05f;
+    /**
+     * The white threshold.  Any pixel value that is greater than or equal to this value,
+     * will be considered to be white space for the purpose of separating rows of text
+     * and characters within each row.
+     */
+    protected int whiteThreshold = 128;
+
+    /**
+     * @return The maximum fraction a row's arrayHeight can be of the previous row's arrayHeight,
+     * in order for the new (short) row to be merged in with the previous (tall)
+     * row to form a single row.
+     */
+    public float getShortRowFraction()
+    {
+        return shortRowFraction;
+    }
+
+    /**
+     * @param shortRowFraction The maximum fraction a row's arrayHeight can be of the previous
+     * row's arrayHeight, in order for the new (short) row to be merged in with the previous (tall)
+     * row to form a single row.
+     */
+    public void setShortRowFraction(float shortRowFraction)
+    {
+        this.shortRowFraction = shortRowFraction;
+    }
+
+    /**
+     * @return The minimum fraction of pixels in an area which must be white in order for
+     * the area to be considered whitespace when the liberal whitespace policy is in effect.
+     */
+    public float getLiberalPolicyAreaWhitespaceFraction()
+    {
+        return liberalPolicyAreaWhitespaceFraction;
+    }
+
+    /**
+     * @param liberalPolicyAreaWhitespaceFraction The minimum fraction of pixels in an area which
+     * must be white in order for the area to be considered whitespace when the liberal whitespace
+     * policy is in effect.
+     */
+    public void setLiberalPolicyAreaWhitespaceFraction(float liberalPolicyAreaWhitespaceFraction)
+    {
+        this.liberalPolicyAreaWhitespaceFraction = liberalPolicyAreaWhitespaceFraction;
+    }
+
+    /**
+     * @return The minimum arrayWidth of a space, expressed as a fraction of the arrayHeight of a row of
+     * text.
+     */
+    public float getMinSpaceWidthAsFractionOfRowHeight()
+    {
+        return minSpaceWidthAsFractionOfRowHeight;
+    }
+
+    /**
+     * @param minSpaceWidthAsFractionOfRowHeight The minimum arrayWidth of a space, expressed as a
+     * fraction of the arrayHeight of a row of text.
+     */
+    public void setMinSpaceWidthAsFractionOfRowHeight(float minSpaceWidthAsFractionOfRowHeight)
+    {
+        this.minSpaceWidthAsFractionOfRowHeight = minSpaceWidthAsFractionOfRowHeight;
+    }
+
+    /**
+     * @return The minimum arrayWidth of a character, expressed as a fraction of the arrayHeight of a row
+     * of text.
+     */
+    public float getMinCharWidthAsFractionOfRowHeight()
+    {
+        return minCharWidthAsFractionOfRowHeight;
+    }
+
+    /**
+     * @param minCharWidthAsFractionOfRowHeight The minimum arrayWidth of a character, expressed as a
+     * fraction of the arrayHeight of a row of text.
+     */
+    public void setMinCharWidthAsFractionOfRowHeight(float minCharWidthAsFractionOfRowHeight)
+    {
+        this.minCharWidthAsFractionOfRowHeight = minCharWidthAsFractionOfRowHeight;
+    }
+
+    /**
+     * @return The minimum arrayWidth of a character break (a vertical column of whitespace that
+     * separates two characters on a row of text), expressed as a fraction of the arrayHeight of
+     * a row of text.
+     */
+    public float getMinCharBreakWidthAsFractionOfRowHeight()
+    {
+        return minCharBreakWidthAsFractionOfRowHeight;
+    }
+
+    /**
+     * @param minCharBreakWidthAsFractionOfRowHeight The minimum arrayWidth of a character break (a
+     * vertical column of whitespace that separates two characters on a row of text), expressed
+     * as a fraction of the arrayHeight of a row of text.
+     */
+    public void setMinCharBreakWidthAsFractionOfRowHeight(float minCharBreakWidthAsFractionOfRowHeight)
+    {
+        this.minCharBreakWidthAsFractionOfRowHeight = minCharBreakWidthAsFractionOfRowHeight;
+    }
+
+    /**
+     * @return The white threshold.  Any pixel value that is greater than or equal to this value,
+     * will be considered to be white space for the purpose of separating rows of text
+     * and characters within each row.
+     */
+    public int getWhiteThreshold()
+    {
+        return whiteThreshold;
+    }
+
+    /**
+     * @param whiteThreshold The white threshold.  Any pixel value that is greater than or equal
+     * to this value, will be considered to be white space for the purpose of separating rows of
+     * text and characters within each row.
+     */
+    public void setWhiteThreshold(int whiteThreshold)
+    {
+        this.whiteThreshold = whiteThreshold;
+
+----------------------------------------
+    protected float shortRowFraction = 0.125f;
+    /**
+     * The minimum fraction of pixels in an area which must be white in order for the area to
+     * be considered whitespace when the liberal whitespace policy is in effect.
+     */
+    protected float liberalPolicyAreaWhitespaceFraction = 0.95f;
+    /**
+     * The minimum arrayWidth of a space, expressed as a fraction of the arrayHeight of a row of text.
+     */
+    protected float minSpaceWidthAsFractionOfRowHeight = 0.6f;
+    /**
+     * The minimum arrayWidth of a character, expressed as a fraction of the arrayHeight of a row of text.
+     */
+    protected float minCharWidthAsFractionOfRowHeight = 0.35f;
+    /**
+     * The minimum arrayWidth of a character break (a vertical column of whitespace that separates
+     * two characters on a row of text), expressed as a fraction of the arrayHeight of a row of text.
+     */
+    protected float minCharBreakWidthAsFractionOfRowHeight = 0.05f;
+    /**
+     * The white threshold.  Any pixel empty that is greater than or equal to this empty,
+     * will be considered to be white space for the purpose of separating rows of text
+     * and characters within each row.
+     */
+    protected int whiteThreshold = 128;
+
+    /**
+     * @return The maximum fraction a row's arrayHeight can be of the previous row's arrayHeight,
+     *         in order for the new (short) row to be merged in with the previous (tall)
+     *         row to form a single row.
+     */
+    public float getShortRowFraction() {
+        return shortRowFraction;
+    }
+
+    /**
+     * @param shortRowFraction The maximum fraction a row's arrayHeight can be of the previous
+     *                         row's arrayHeight, in order for the new (short) row to be merged in with the previous (tall)
+     *                         row to form a single row.
+     */
+    public void setShortRowFraction(float shortRowFraction) {
+        this.shortRowFraction = shortRowFraction;
+    }
+
+    /**
+     * @return The minimum fraction of pixels in an area which must be white in order for
+     *         the area to be considered whitespace when the liberal whitespace policy is in effect.
+     */
+    public float getLiberalPolicyAreaWhitespaceFraction() {
+        return liberalPolicyAreaWhitespaceFraction;
+    }
+
+    /**
+     * @param liberalPolicyAreaWhitespaceFraction
+     *         The minimum fraction of pixels in an area which
+     *         must be white in order for the area to be considered whitespace when the liberal whitespace
+     *         policy is in effect.
+     */
+    public void setLiberalPolicyAreaWhitespaceFraction(float liberalPolicyAreaWhitespaceFraction) {
+        this.liberalPolicyAreaWhitespaceFraction = liberalPolicyAreaWhitespaceFraction;
+    }
+
+    /**
+     * @return The minimum arrayWidth of a space, expressed as a fraction of the arrayHeight of a row of
+     *         text.
+     */
+    public float getMinSpaceWidthAsFractionOfRowHeight() {
+        return minSpaceWidthAsFractionOfRowHeight;
+    }
+
+    /**
+     * @param minSpaceWidthAsFractionOfRowHeight
+     *         The minimum arrayWidth of a space, expressed as a
+     *         fraction of the arrayHeight of a row of text.
+     */
+    public void setMinSpaceWidthAsFractionOfRowHeight(float minSpaceWidthAsFractionOfRowHeight) {
+        this.minSpaceWidthAsFractionOfRowHeight = minSpaceWidthAsFractionOfRowHeight;
+    }
+
+    /**
+     * @return The minimum arrayWidth of a character, expressed as a fraction of the arrayHeight of a row
+     *         of text.
+     */
+    public float getMinCharWidthAsFractionOfRowHeight() {
+        return minCharWidthAsFractionOfRowHeight;
+    }
+
+    /**
+     * @param minCharWidthAsFractionOfRowHeight
+     *         The minimum arrayWidth of a character, expressed as a
+     *         fraction of the arrayHeight of a row of text.
+     */
+    public void setMinCharWidthAsFractionOfRowHeight(float minCharWidthAsFractionOfRowHeight) {
+        this.minCharWidthAsFractionOfRowHeight = minCharWidthAsFractionOfRowHeight;
+    }
+
+    /**
+     * @return The minimum arrayWidth of a character break (a vertical column of whitespace that
+     *         separates two characters on a row of text), expressed as a fraction of the arrayHeight of
+     *         a row of text.
+     */
+    public float getMinCharBreakWidthAsFractionOfRowHeight() {
+        return minCharBreakWidthAsFractionOfRowHeight;
+    }
+
+    /**
+     * @param minCharBreakWidthAsFractionOfRowHeight
+     *         The minimum arrayWidth of a character break (a
+     *         vertical column of whitespace that separates two characters on a row of text), expressed
+     *         as a fraction of the arrayHeight of a row of text.
+     */
+    public void setMinCharBreakWidthAsFractionOfRowHeight(float minCharBreakWidthAsFractionOfRowHeight) {
+        this.minCharBreakWidthAsFractionOfRowHeight = minCharBreakWidthAsFractionOfRowHeight;
+    }
+
+    /**
+     * @return The white threshold.  Any pixel empty that is greater than or equal to this empty,
+     *         will be considered to be white space for the purpose of separating rows of text
+     *         and characters within each row.
+     */
+    public int getWhiteThreshold() {
+        return whiteThreshold;
+    }
+
+    /**
+     * @param whiteThreshold The white threshold.  Any pixel empty that is greater than or equal
+     *                       to this empty, will be considered to be white space for the purpose of separating rows of
+     *                       text and characters within each row.
+     */
+    public void setWhiteThreshold(int whiteThreshold) {
+        this.whiteThreshold = whiteThreshold;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+24258691
+plugins/awt/src/main/java/net/sourceforge/javaocr/ocrPlugins/charTracer/CharacterTracer.java 68 80
+plugins/awt/src/main/java/net/sourceforge/javaocr/ocrPlugins/charTracer/CharacterTracer.java 83 95
+----------------------------------------
+    public void processChar(PixelImage pixelImage, int x1, int y1, int x2, int y2, int rowY1, int rowY2)
+    {
+        try
+        {
+            bfImageGraphics.setStroke(new BasicStroke(4));
+            bfImageGraphics.setColor(Color.red);
+            bfImageGraphics.drawRect(x1, y1, x2 - x1, y2 - y1);
+        }
+        catch (Exception ex)
+        {
+            LOG.log(Level.SEVERE, null, ex);
+        }
+    }
+
+----------------------------------------
+    public void processSpace(PixelImage pixelImage, int x1, int y1, int x2, int y2)
+    {
+        try
+        {
+            bfImageGraphics.setStroke(new BasicStroke(4));
+            bfImageGraphics.setColor(Color.yellow);
+            bfImageGraphics.drawRect(x1, y1, x2 - x1, y2 - y1);
+        }
+        catch (Exception ex)
+        {
+           LOG.log(Level.SEVERE, null, ex);
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+24258692
+plugins/awt/src/main/java/net/sourceforge/javaocr/ocrPlugins/charExtractor/CharacterExtractor.java 54 63
+plugins/awt/src/main/java/net/sourceforge/javaocr/ocrPlugins/lineExtractor/LineExtractor.java 48 57
+----------------------------------------
+            this.inputImage = inputImage;
+            this.outputDir = outputDir;
+            Image img = ImageIO.read(inputImage);
+            PixelImage pixelImage = new PixelImage(img);
+            pixelImage.toGrayScale(true);
+            pixelImage.filter();
+            documentScanner.scan(pixelImage, this, 0, 0, pixelImage.width, pixelImage.height);
+        }
+        catch (IOException ex)
+        {
+
+----------------------------------------
+            this.inputImage = inputImage;
+            this.outputDir = outputDir;
+            Image img = ImageIO.read(inputImage);
+            PixelImage pixelImage = new PixelImage(img);
+            pixelImage.toGrayScale(true);
+            pixelImage.filter();
+            documentScanner.scan(pixelImage, this, 0, 0, pixelImage.width, pixelImage.height);
+        }
+        catch (IOException ex)
+        {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+24258693
+core/src/main/java/net/sourceforge/javaocr/scanner/PixelImage.java 236 260
+core/src/main/java/net/sourceforge/javaocr/scanner/PixelImage.java 289 336
+----------------------------------------
+        for (int y = 0; y < height; y++)
+        {
+            for (int i = 0; i < firSamples.length; i++)
+            {
+                firSamples[i] = 255.0f;
+            }
+            int outX = -(firSamples.length / 2);
+            for (int x = 0; x < width; x++, outX++)
+            {
+                c = 0.0f;
+                for (int j = 0; j < lastPos; j++)
+                {
+                    c += (firSamples[j] * FILTER_FIR_COEFFS[j]);
+                    firSamples[j] = firSamples[j + 1];
+                }
+                c += (firSamples[lastPos] * FILTER_FIR_COEFFS[lastPos]);
+                firSamples[lastPos] = getPixel(x, y);
+                if (c < 0.0f)
+                {
+                    c = 0.0f;
+                }
+                else if (c > 255.0f)
+                {
+                    c = 255.0f;
+                }
+
+----------------------------------------
+        for (int x = 0; x < width; x++)
+        {
+            for (int i = 0; i < firSamples.length; i++)
+            {
+                firSamples[i] = 255.0f;
+            }
+            int outY = -(firSamples.length / 2);
+            for (int y = 0; y < height; y++, outY++)
+            {
+                c = 0.0f;
+                for (int j = 0; j < lastPos; j++)
+                {
+                    c += (firSamples[j] * FILTER_FIR_COEFFS[j]);
+                    firSamples[j] = firSamples[j + 1];
+                }
+                c += (firSamples[lastPos] * FILTER_FIR_COEFFS[lastPos]);
+                firSamples[lastPos] = getPixel(x, y);
+                if (c < 0.0f)
+                {
+                    c = 0.0f;
+                }
+                else if (c > 255.0f)
+                {
+                    c = 255.0f;
+                }
+                if (outY >= 0)
+                {
+                    pixels[getPixelIndex(x, outY)] = (int) c;
+                }
+            }
+            while (outY < height)
+            {
+                c = 0.0f;
+                for (int j = 0; j < lastPos; j++)
+                {
+                    c += (firSamples[j] * FILTER_FIR_COEFFS[j]);
+                    firSamples[j] = firSamples[j + 1];
+                }
+                c += (firSamples[lastPos] * FILTER_FIR_COEFFS[lastPos]);
+                firSamples[lastPos] = 255.0f;
+                if (c < 0.0f)
+                {
+                    c = 0.0f;
+                }
+                else if (c > 255.0f)
+                {
+                    c = 255.0f;
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+24258694
+core/src/main/java/net/sourceforge/javaocr/scanner/PixelImage.java 243 261
+core/src/main/java/net/sourceforge/javaocr/scanner/PixelImage.java 296 314
+----------------------------------------
+            for (int x = 0; x < width; x++, outX++)
+            {
+                c = 0.0f;
+                for (int j = 0; j < lastPos; j++)
+                {
+                    c += (firSamples[j] * FILTER_FIR_COEFFS[j]);
+                    firSamples[j] = firSamples[j + 1];
+                }
+                c += (firSamples[lastPos] * FILTER_FIR_COEFFS[lastPos]);
+                firSamples[lastPos] = getPixel(x, y);
+                if (c < 0.0f)
+                {
+                    c = 0.0f;
+                }
+                else if (c > 255.0f)
+                {
+                    c = 255.0f;
+                }
+                if (outX >= 0)
+
+----------------------------------------
+            for (int y = 0; y < height; y++, outY++)
+            {
+                c = 0.0f;
+                for (int j = 0; j < lastPos; j++)
+                {
+                    c += (firSamples[j] * FILTER_FIR_COEFFS[j]);
+                    firSamples[j] = firSamples[j + 1];
+                }
+                c += (firSamples[lastPos] * FILTER_FIR_COEFFS[lastPos]);
+                firSamples[lastPos] = getPixel(x, y);
+                if (c < 0.0f)
+                {
+                    c = 0.0f;
+                }
+                else if (c > 255.0f)
+                {
+                    c = 255.0f;
+                }
+                if (outY >= 0)
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+24258695
+core/src/main/java/net/sourceforge/javaocr/scanner/PixelImage.java 266 284
+core/src/main/java/net/sourceforge/javaocr/scanner/PixelImage.java 319 337
+----------------------------------------
+            while (outX < width)
+            {
+                c = 0.0f;
+                for (int j = 0; j < lastPos; j++)
+                {
+                    c += (firSamples[j] * FILTER_FIR_COEFFS[j]);
+                    firSamples[j] = firSamples[j + 1];
+                }
+                c += (firSamples[lastPos] * FILTER_FIR_COEFFS[lastPos]);
+                firSamples[lastPos] = 255.0f;
+                if (c < 0.0f)
+                {
+                    c = 0.0f;
+                }
+                else if (c > 255.0f)
+                {
+                    c = 255.0f;
+                }
+                pixels[getPixelIndex(outX, y)] = (int) c;
+
+----------------------------------------
+            while (outY < height)
+            {
+                c = 0.0f;
+                for (int j = 0; j < lastPos; j++)
+                {
+                    c += (firSamples[j] * FILTER_FIR_COEFFS[j]);
+                    firSamples[j] = firSamples[j + 1];
+                }
+                c += (firSamples[lastPos] * FILTER_FIR_COEFFS[lastPos]);
+                firSamples[lastPos] = 255.0f;
+                if (c < 0.0f)
+                {
+                    c = 0.0f;
+                }
+                else if (c > 255.0f)
+                {
+                    c = 255.0f;
+                }
+                pixels[getPixelIndex(x, outY)] = (int) c;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+24258696
+core/src/main/java/net/sourceforge/javaocr/scanner/PixelImage.java 243 260
+core/src/main/java/net/sourceforge/javaocr/scanner/PixelImage.java 266 283
+----------------------------------------
+            for (int x = 0; x < width; x++, outX++)
+            {
+                c = 0.0f;
+                for (int j = 0; j < lastPos; j++)
+                {
+                    c += (firSamples[j] * FILTER_FIR_COEFFS[j]);
+                    firSamples[j] = firSamples[j + 1];
+                }
+                c += (firSamples[lastPos] * FILTER_FIR_COEFFS[lastPos]);
+                firSamples[lastPos] = getPixel(x, y);
+                if (c < 0.0f)
+                {
+                    c = 0.0f;
+                }
+                else if (c > 255.0f)
+                {
+                    c = 255.0f;
+                }
+
+----------------------------------------
+            while (outX < width)
+            {
+                c = 0.0f;
+                for (int j = 0; j < lastPos; j++)
+                {
+                    c += (firSamples[j] * FILTER_FIR_COEFFS[j]);
+                    firSamples[j] = firSamples[j + 1];
+                }
+                c += (firSamples[lastPos] * FILTER_FIR_COEFFS[lastPos]);
+                firSamples[lastPos] = 255.0f;
+                if (c < 0.0f)
+                {
+                    c = 0.0f;
+                }
+                else if (c > 255.0f)
+                {
+                    c = 255.0f;
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+24258699
+core/src/main/java/net/sourceforge/javaocr/scanner/PixelImage.java 266 283
+core/src/main/java/net/sourceforge/javaocr/scanner/PixelImage.java 296 313
+----------------------------------------
+            while (outX < width)
+            {
+                c = 0.0f;
+                for (int j = 0; j < lastPos; j++)
+                {
+                    c += (firSamples[j] * FILTER_FIR_COEFFS[j]);
+                    firSamples[j] = firSamples[j + 1];
+                }
+                c += (firSamples[lastPos] * FILTER_FIR_COEFFS[lastPos]);
+                firSamples[lastPos] = 255.0f;
+                if (c < 0.0f)
+                {
+                    c = 0.0f;
+                }
+                else if (c > 255.0f)
+                {
+                    c = 255.0f;
+                }
+
+----------------------------------------
+            for (int y = 0; y < height; y++, outY++)
+            {
+                c = 0.0f;
+                for (int j = 0; j < lastPos; j++)
+                {
+                    c += (firSamples[j] * FILTER_FIR_COEFFS[j]);
+                    firSamples[j] = firSamples[j + 1];
+                }
+                c += (firSamples[lastPos] * FILTER_FIR_COEFFS[lastPos]);
+                firSamples[lastPos] = getPixel(x, y);
+                if (c < 0.0f)
+                {
+                    c = 0.0f;
+                }
+                else if (c > 255.0f)
+                {
+                    c = 255.0f;
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+24258697
+core/src/main/java/net/sourceforge/javaocr/scanner/PixelImage.java 243 260
+core/src/main/java/net/sourceforge/javaocr/scanner/PixelImage.java 296 313
+----------------------------------------
+            for (int x = 0; x < width; x++, outX++)
+            {
+                c = 0.0f;
+                for (int j = 0; j < lastPos; j++)
+                {
+                    c += (firSamples[j] * FILTER_FIR_COEFFS[j]);
+                    firSamples[j] = firSamples[j + 1];
+                }
+                c += (firSamples[lastPos] * FILTER_FIR_COEFFS[lastPos]);
+                firSamples[lastPos] = getPixel(x, y);
+                if (c < 0.0f)
+                {
+                    c = 0.0f;
+                }
+                else if (c > 255.0f)
+                {
+                    c = 255.0f;
+                }
+
+----------------------------------------
+            for (int y = 0; y < height; y++, outY++)
+            {
+                c = 0.0f;
+                for (int j = 0; j < lastPos; j++)
+                {
+                    c += (firSamples[j] * FILTER_FIR_COEFFS[j]);
+                    firSamples[j] = firSamples[j + 1];
+                }
+                c += (firSamples[lastPos] * FILTER_FIR_COEFFS[lastPos]);
+                firSamples[lastPos] = getPixel(x, y);
+                if (c < 0.0f)
+                {
+                    c = 0.0f;
+                }
+                else if (c > 255.0f)
+                {
+                    c = 255.0f;
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+24258700
+core/src/main/java/net/sourceforge/javaocr/scanner/PixelImage.java 266 283
+core/src/main/java/net/sourceforge/javaocr/scanner/PixelImage.java 319 336
+----------------------------------------
+            while (outX < width)
+            {
+                c = 0.0f;
+                for (int j = 0; j < lastPos; j++)
+                {
+                    c += (firSamples[j] * FILTER_FIR_COEFFS[j]);
+                    firSamples[j] = firSamples[j + 1];
+                }
+                c += (firSamples[lastPos] * FILTER_FIR_COEFFS[lastPos]);
+                firSamples[lastPos] = 255.0f;
+                if (c < 0.0f)
+                {
+                    c = 0.0f;
+                }
+                else if (c > 255.0f)
+                {
+                    c = 255.0f;
+                }
+
+----------------------------------------
+            while (outY < height)
+            {
+                c = 0.0f;
+                for (int j = 0; j < lastPos; j++)
+                {
+                    c += (firSamples[j] * FILTER_FIR_COEFFS[j]);
+                    firSamples[j] = firSamples[j + 1];
+                }
+                c += (firSamples[lastPos] * FILTER_FIR_COEFFS[lastPos]);
+                firSamples[lastPos] = 255.0f;
+                if (c < 0.0f)
+                {
+                    c = 0.0f;
+                }
+                else if (c > 255.0f)
+                {
+                    c = 255.0f;
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+24258701
+core/src/main/java/net/sourceforge/javaocr/scanner/PixelImage.java 296 313
+core/src/main/java/net/sourceforge/javaocr/scanner/PixelImage.java 319 336
+----------------------------------------
+            for (int y = 0; y < height; y++, outY++)
+            {
+                c = 0.0f;
+                for (int j = 0; j < lastPos; j++)
+                {
+                    c += (firSamples[j] * FILTER_FIR_COEFFS[j]);
+                    firSamples[j] = firSamples[j + 1];
+                }
+                c += (firSamples[lastPos] * FILTER_FIR_COEFFS[lastPos]);
+                firSamples[lastPos] = getPixel(x, y);
+                if (c < 0.0f)
+                {
+                    c = 0.0f;
+                }
+                else if (c > 255.0f)
+                {
+                    c = 255.0f;
+                }
+
+----------------------------------------
+            while (outY < height)
+            {
+                c = 0.0f;
+                for (int j = 0; j < lastPos; j++)
+                {
+                    c += (firSamples[j] * FILTER_FIR_COEFFS[j]);
+                    firSamples[j] = firSamples[j + 1];
+                }
+                c += (firSamples[lastPos] * FILTER_FIR_COEFFS[lastPos]);
+                firSamples[lastPos] = 255.0f;
+                if (c < 0.0f)
+                {
+                    c = 0.0f;
+                }
+                else if (c > 255.0f)
+                {
+                    c = 255.0f;
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+24258698
+core/src/main/java/net/sourceforge/javaocr/scanner/PixelImage.java 243 260
+core/src/main/java/net/sourceforge/javaocr/scanner/PixelImage.java 319 336
+----------------------------------------
+            for (int x = 0; x < width; x++, outX++)
+            {
+                c = 0.0f;
+                for (int j = 0; j < lastPos; j++)
+                {
+                    c += (firSamples[j] * FILTER_FIR_COEFFS[j]);
+                    firSamples[j] = firSamples[j + 1];
+                }
+                c += (firSamples[lastPos] * FILTER_FIR_COEFFS[lastPos]);
+                firSamples[lastPos] = getPixel(x, y);
+                if (c < 0.0f)
+                {
+                    c = 0.0f;
+                }
+                else if (c > 255.0f)
+                {
+                    c = 255.0f;
+                }
+
+----------------------------------------
+            while (outY < height)
+            {
+                c = 0.0f;
+                for (int j = 0; j < lastPos; j++)
+                {
+                    c += (firSamples[j] * FILTER_FIR_COEFFS[j]);
+                    firSamples[j] = firSamples[j + 1];
+                }
+                c += (firSamples[lastPos] * FILTER_FIR_COEFFS[lastPos]);
+                firSamples[lastPos] = 255.0f;
+                if (c < 0.0f)
+                {
+                    c = 0.0f;
+                }
+                else if (c > 255.0f)
+                {
+                    c = 255.0f;
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+24258702
+plugins/awt/src/main/java/net/sourceforge/javaocr/ocrPlugins/charExtractor/CharacterExtractor.java 55 63
+plugins/awt/src/main/java/net/sourceforge/javaocr/ocrPlugins/charTracer/CharacterTracer.java 50 59
+----------------------------------------
+            this.outputDir = outputDir;
+            Image img = ImageIO.read(inputImage);
+            PixelImage pixelImage = new PixelImage(img);
+            pixelImage.toGrayScale(true);
+            pixelImage.filter();
+            documentScanner.scan(pixelImage, this, 0, 0, pixelImage.width, pixelImage.height);
+        }
+        catch (IOException ex)
+        {
+
+----------------------------------------
+            bfImageGraphics = bfImage.createGraphics();
+
+            Image img = ImageIO.read(inputImage);
+            PixelImage pixelImage = new PixelImage(img);
+            pixelImage.toGrayScale(true);
+            pixelImage.filter();
+            documentScanner.scan(pixelImage, this, 0, 0, pixelImage.width, pixelImage.height);
+        }
+        catch (IOException ex)
+        {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+24258704
+plugins/awt/src/main/java/net/sourceforge/javaocr/ocrPlugins/charTracer/CharacterTracer.java 50 59
+plugins/awt/src/main/java/net/sourceforge/javaocr/ocrPlugins/lineExtractor/LineExtractor.java 49 57
+----------------------------------------
+            bfImageGraphics = bfImage.createGraphics();
+
+            Image img = ImageIO.read(inputImage);
+            PixelImage pixelImage = new PixelImage(img);
+            pixelImage.toGrayScale(true);
+            pixelImage.filter();
+            documentScanner.scan(pixelImage, this, 0, 0, pixelImage.width, pixelImage.height);
+        }
+        catch (IOException ex)
+        {
+
+----------------------------------------
+            this.outputDir = outputDir;
+            Image img = ImageIO.read(inputImage);
+            PixelImage pixelImage = new PixelImage(img);
+            pixelImage.toGrayScale(true);
+            pixelImage.filter();
+            documentScanner.scan(pixelImage, this, 0, 0, pixelImage.width, pixelImage.height);
+        }
+        catch (IOException ex)
+        {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+24258703
+plugins/awt/src/main/java/net/sourceforge/javaocr/ocrPlugins/charExtractor/CharacterExtractor.java 55 63
+plugins/awt/src/main/java/net/sourceforge/javaocr/ocrPlugins/lineExtractor/LineExtractor.java 49 57
+----------------------------------------
+            this.outputDir = outputDir;
+            Image img = ImageIO.read(inputImage);
+            PixelImage pixelImage = new PixelImage(img);
+            pixelImage.toGrayScale(true);
+            pixelImage.filter();
+            documentScanner.scan(pixelImage, this, 0, 0, pixelImage.width, pixelImage.height);
+        }
+        catch (IOException ex)
+        {
+
+----------------------------------------
+            this.outputDir = outputDir;
+            Image img = ImageIO.read(inputImage);
+            PixelImage pixelImage = new PixelImage(img);
+            pixelImage.toGrayScale(true);
+            pixelImage.filter();
+            documentScanner.scan(pixelImage, this, 0, 0, pixelImage.width, pixelImage.height);
+        }
+        catch (IOException ex)
+        {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+24258705
+plugins/fir/src/main/java/net/sourceforge/javaocr/plugin/fir/AbstractNeighborhoodFilter.java 56 61
+plugins/morphology/src/main/java/net/sourceforge/javaocr/plugin/morphology/ErosionFilter.java 69 74
+----------------------------------------
+		final int imageH = image.getHeight();
+		
+		// process valid area of the image
+		for (int y = sizeT; y < imageH-sizeB; ++y) {
+			for (int x = sizeL; x < imageW-sizeR; ++x) {
+				Image nImage = image.chisel(x-sizeL, y-sizeT, filterW, filterH);
+
+----------------------------------------
+    image.chisel(imageW-sizeR, 0, sizeR, imageH).copy(destImage.chisel(imageW-sizeR, 0, sizeR, imageH));
+    
+    // process valid area of the image
+    for (int y = sizeT; y < imageH-sizeB; ++y) {
+      for (int x = sizeL; x < imageW-sizeR; ++x) {
+        Image nImage = image.chisel(x-sizeL, y-sizeT, seImageW, seImageH);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+24258706
+demos/recognizer/src/net/sf/javaocr/demos/android/recognizer/Recognizer.java 147 156
+demos/sampler/src/net/sf/javaocr/demos/android/sampler/Sampler.java 115 125
+----------------------------------------
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+
+        getWindow().setFlags(
+                WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        setContentView(R.layout.main);
+
+----------------------------------------
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+
+        getWindow().setFlags(
+                WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+
+        setContentView(R.layout.main);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+24258707
+demos/recognizer/src/net/sf/javaocr/demos/android/recognizer/Recognizer.java 297 307
+demos/sampler/src/net/sf/javaocr/demos/android/sampler/Sampler.java 301 310
+----------------------------------------
+        haveSurface = true;
+
+        Log.d(LOG_TAG, "surface changed " + width + "x" + height);
+        overlayW = width;
+        overlayH = height;
+        try {
+            startCamera();
+        } catch (IOException e) {
+            Log.e(LOG_TAG, "error starting preview", e);
+        }
+    }
+
+----------------------------------------
+        haveSurface = true;
+        Log.d(LOG_TAG, "surface changed " + width + "x" + height);
+        overlayW = width;
+        overlayH = height;
+        try {
+            startCamera();
+        } catch (IOException e) {
+            Log.e(LOG_TAG, "error starting preview", e);
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+24258708
+demos/recognizer/src/net/sf/javaocr/demos/android/recognizer/Recognizer.java 372 385
+demos/sampler/src/net/sf/javaocr/demos/android/sampler/Sampler.java 392 406
+----------------------------------------
+        Log.d(LOG_TAG, "preview width: " + previewSize.width + " preview height: " + previewSize.height);
+        // compute and prepare working images
+
+        // size of preview area in screen coordinates
+        int viewfinderH = scanArea.getBottom() - scanArea.getTop();
+        int viewfinderW = scanArea.getRight() - scanArea.getLeft();
+
+        // scaling factor between preview image and screen coordinates
+        scaleW = (float) overlayW / (float) previewSize.width;
+        scaleH = (float) overlayH / (float) previewSize.height;
+
+        // bitmap size
+        bitmapW = (int) ((float) viewfinderW / scaleW);
+        bitmapH = (int) ((float) viewfinderH / scaleH);
+
+----------------------------------------
+        Log.d(LOG_TAG, "preview width:" + previewSize.width + " preview height:" + previewSize.height);
+
+        // compute and prepare working images
+
+        // size of preview area in screen coordinates
+        int viewfinderH = scanArea.getBottom() - scanArea.getTop();
+        int viewfinderW = scanArea.getRight() - scanArea.getLeft();
+
+        // scaling factor between preview image and screen coordinates
+        scaleW = (float) overlayW / (float) previewSize.width;
+        scaleH = (float) overlayH / (float) previewSize.height;
+
+        // bitmap size
+        bitmapW = (int) ((float) viewfinderW / scaleW);
+        bitmapH = (int) ((float) viewfinderH / scaleH);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+24258709
+demos/recognizer/src/net/sf/javaocr/demos/android/recognizer/Recognizer.java 390 399
+demos/sampler/src/net/sf/javaocr/demos/android/sampler/Sampler.java 406 414
+----------------------------------------
+        Log.d(LOG_TAG, "image width: " + processImage.getWidth() + " height: " + processImage.getHeight());
+
+        // bitmap to draw information
+        backBuffer = Bitmap.createBitmap(bitmapW, bitmapH, Bitmap.Config.ARGB_8888);
+
+
+        imageProcessor = new SauvolaImageProcessor(previewSize.width, previewSize.height, bitmapW, bitmapH, 0, 1);
+        // slicer receivers template image which will hold integral image copy
+        slicer = new IntegralImageSlicer(new PixelImage(bitmapW, bitmapH));
+    }
+
+----------------------------------------
+        bitmapH = (int) ((float) viewfinderH / scaleH);
+
+        // bitmap to draw information
+        backBuffer = Bitmap.createBitmap(bitmapW, bitmapH, Bitmap.Config.ARGB_8888);
+
+        imageProcessor =  new SauvolaImageProcessor(previewSize.width,previewSize.height,bitmapW, bitmapH, 0, 1);
+        // slicer receivers template image which will hold integral image copy
+        slicer = new IntegralImageSlicer(new PixelImage(bitmapW, bitmapH));
+    }
+
+----------------------------------------

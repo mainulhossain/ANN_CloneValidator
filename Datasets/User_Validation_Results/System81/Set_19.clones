@@ -1,0 +1,1874 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27364879
+src/org/jfm/views/list/briefview/BriefView.java 194 202
+src/org/jfm/views/list/detailview/DetailView.java 201 209
+----------------------------------------
+	      files[i]=(JFMFile)model.getElementAt(rows.get(i).intValue());
+	    }
+	    if(rows.size()==0)
+	    {
+	    	files=new JFMFile[1];
+	    	files[0]=getSelectedFile();
+	    }
+	    return files;				
+	}
+
+----------------------------------------
+      files[i]=model.getFileAt(rows.get(i).intValue());
+    }
+    if(rows.size()==0)
+    {
+    	files=new JFMFile[1];
+    	files[0]=getSelectedFile();
+    }
+    return files;
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27364880
+src/org/jfm/views/list/briefview/BriefView.java 185 194
+src/org/jfm/views/list/detailview/DetailView.java 194 201
+----------------------------------------
+		return (JFMFile)model.getElementAt(row);
+	}
+	/* (non-Javadoc)
+	 * @see org.jfm.views.JFMView#getSelectedFiles()
+	 */
+	public JFMFile[] getSelectedFiles() {
+	    List<Integer> rows=list.getMarkedFiles();
+	    JFMFile[] files=new JFMFile[rows.size()];   
+	    for (int i = 0; i < rows.size(); i++) {
+	      files[i]=(JFMFile)model.getElementAt(rows.get(i).intValue());
+
+----------------------------------------
+    return model.getFileAt(row);
+  }
+  
+  public JFMFile[] getSelectedFiles(){
+    List<Integer> rows=table.getMarkedFiles();
+    JFMFile[] files=new JFMFile[rows.size()];   
+    for (int i = 0; i < rows.size(); i++) {
+      files[i]=model.getFileAt(rows.get(i).intValue());
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27364881
+src/org/jfm/views/list/briefview/BriefView.java 118 125
+src/org/jfm/views/list/detailview/DetailView.java 130 137
+----------------------------------------
+				if(e.getOppositeComponent()!=null ) 
+				{
+					Options.setActivePanel(BriefView.this);
+				}				
+				ChangeDirectoryEvent event=new ChangeDirectoryEvent();
+				event.setDirectory(getCurrentWorkingDirectory());
+				event.setSource(BriefView.this);
+				Broadcaster.notifyChangeDirectoryListeners(event);				
+
+----------------------------------------
+				if(e.getOppositeComponent()!=null ) 
+				{
+					Options.setActivePanel(DetailView.this);
+				}
+				ChangeDirectoryEvent event=new ChangeDirectoryEvent();
+				event.setDirectory(getCurrentWorkingDirectory());
+				event.setSource(DetailView.this);
+				Broadcaster.notifyChangeDirectoryListeners(event);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27364882
+src/org/jfm/views/list/briefview/BriefView.java 14 21
+src/org/jfm/views/list/detailview/DetailView.java 31 38
+----------------------------------------
+import java.util.List;
+
+import javax.swing.JComponent;
+import javax.swing.JScrollPane;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
+----------------------------------------
+import org.jfm.views.list.PanelChangeRequestListener;
+
+import javax.swing.JComponent;
+import javax.swing.JScrollPane;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27364883
+src/org/jfm/views/list/briefview/BriefViewListComponent.java 298 310
+src/org/jfm/views/list/detailview/DetailsTable.java 185 198
+----------------------------------------
+      }
+    }
+
+    private class UpDirectoryAction implements Action{
+      //requested methods
+      public Object getValue(String key){return null;}
+      public void putValue(String key, Object value){}
+      public void setEnabled(boolean b){}
+      public boolean isEnabled(){return true;}
+      public void addPropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void removePropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void actionPerformed(java.awt.event.ActionEvent e){        
+        processActionOnRow(0);
+
+----------------------------------------
+      }
+    }
+    
+    private class MarkAllRowAction implements Action{
+      //requested methods
+      public Object getValue(String key){return null;}
+      public void putValue(String key, Object value){}
+      public void setEnabled(boolean b){}
+      public boolean isEnabled(){return true;}
+      public void addPropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void removePropertyChangeListener(java.beans.PropertyChangeListener listener){}
+
+      public void actionPerformed(java.awt.event.ActionEvent e){
+      	DetailsTableModel model=((DetailsTableModel)DetailsTable.this.getModel());
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27364884
+src/org/jfm/views/list/briefview/BriefViewListComponent.java 298 310
+src/org/jfm/views/list/detailview/DetailsTable.java 240 253
+----------------------------------------
+      }
+    }
+
+    private class UpDirectoryAction implements Action{
+      //requested methods
+      public Object getValue(String key){return null;}
+      public void putValue(String key, Object value){}
+      public void setEnabled(boolean b){}
+      public boolean isEnabled(){return true;}
+      public void addPropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void removePropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void actionPerformed(java.awt.event.ActionEvent e){        
+        processActionOnRow(0);
+
+----------------------------------------
+      }
+    }
+	
+    private class RefreshAction implements Action{
+      //requested methods
+      public Object getValue(String key){return null;}
+      public void putValue(String key, Object value){}
+      public void setEnabled(boolean b){}
+      public boolean isEnabled(){return true;}
+      public void addPropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void removePropertyChangeListener(java.beans.PropertyChangeListener listener){}
+
+      public void actionPerformed(java.awt.event.ActionEvent e){
+        JFMFile el=(JFMFile)((DetailsTableModel)DetailsTable.this.getModel()).getWorkingDirectory();
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27364885
+src/org/jfm/views/list/briefview/BriefViewListComponent.java 296 309
+src/org/jfm/views/list/detailview/DetailsTable.java 270 284
+----------------------------------------
+                  processActionOnRow(row);
+          }
+      }
+    }
+
+    private class UpDirectoryAction implements Action{
+      //requested methods
+      public Object getValue(String key){return null;}
+      public void putValue(String key, Object value){}
+      public void setEnabled(boolean b){}
+      public boolean isEnabled(){return true;}
+      public void addPropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void removePropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void actionPerformed(java.awt.event.ActionEvent e){        
+
+----------------------------------------
+        	panelChangeListener.requestPanelChange();
+        }
+      }
+    }
+
+    private class FileAction implements Action{
+      //requested methods
+      public Object getValue(String key){return null;}
+      public void putValue(String key, Object value){}
+      public void setEnabled(boolean b){}
+      public boolean isEnabled(){return true;}
+      public void addPropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void removePropertyChangeListener(java.beans.PropertyChangeListener listener){}
+
+      public void actionPerformed(java.awt.event.ActionEvent e){
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27364891
+src/org/jfm/views/list/briefview/BriefViewListComponent.java 281 293
+src/org/jfm/views/list/detailview/DetailsTable.java 150 162
+----------------------------------------
+      }
+    }
+
+    private class FileAction implements Action{
+      //requested methods
+      public Object getValue(String key){return null;}
+      public void putValue(String key, Object value){}
+      public void setEnabled(boolean b){}
+      public boolean isEnabled(){return true;}
+      public void addPropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void removePropertyChangeListener(java.beans.PropertyChangeListener listener){}
+
+      public void actionPerformed(java.awt.event.ActionEvent e){
+
+----------------------------------------
+        }
+    }
+    
+    private class MarkAllFilteredRowAction implements Action{
+      //requested methods
+      public Object getValue(String key){return null;}
+      public void putValue(String key, Object value){}
+      public void setEnabled(boolean b){}
+      public boolean isEnabled(){return true;}
+      public void addPropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void removePropertyChangeListener(java.beans.PropertyChangeListener listener){}
+
+      public void actionPerformed(java.awt.event.ActionEvent e){
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27364886
+src/org/jfm/views/list/briefview/BriefViewListComponent.java 298 309
+src/org/jfm/views/list/detailview/DetailsTable.java 150 162
+----------------------------------------
+      }
+    }
+
+    private class UpDirectoryAction implements Action{
+      //requested methods
+      public Object getValue(String key){return null;}
+      public void putValue(String key, Object value){}
+      public void setEnabled(boolean b){}
+      public boolean isEnabled(){return true;}
+      public void addPropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void removePropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void actionPerformed(java.awt.event.ActionEvent e){        
+
+----------------------------------------
+        }
+    }
+    
+    private class MarkAllFilteredRowAction implements Action{
+      //requested methods
+      public Object getValue(String key){return null;}
+      public void putValue(String key, Object value){}
+      public void setEnabled(boolean b){}
+      public boolean isEnabled(){return true;}
+      public void addPropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void removePropertyChangeListener(java.beans.PropertyChangeListener listener){}
+
+      public void actionPerformed(java.awt.event.ActionEvent e){
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27364922
+src/org/jfm/views/list/briefview/BriefViewListComponent.java 161 173
+src/org/jfm/views/list/detailview/DetailsTable.java 211 223
+----------------------------------------
+    	}
+    }
+
+    private class MarkAllFilteredRowAction implements Action{
+      //requested methods
+      public Object getValue(String key){return null;}
+      public void putValue(String key, Object value){}
+      public void setEnabled(boolean b){}
+      public boolean isEnabled(){return true;}
+      public void addPropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void removePropertyChangeListener(java.beans.PropertyChangeListener listener){}
+
+      public void actionPerformed(java.awt.event.ActionEvent e){
+
+----------------------------------------
+      }
+    }
+    
+    private class MarkRowAction implements Action{
+      //requested methods
+      public Object getValue(String key){return null;}
+      public void putValue(String key, Object value){}
+      public void setEnabled(boolean b){}
+      public boolean isEnabled(){return true;}
+      public void addPropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void removePropertyChangeListener(java.beans.PropertyChangeListener listener){}
+
+      public void actionPerformed(java.awt.event.ActionEvent e){
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27364887
+src/org/jfm/views/list/briefview/BriefViewListComponent.java 298 309
+src/org/jfm/views/list/detailview/DetailsTable.java 211 223
+----------------------------------------
+      }
+    }
+
+    private class UpDirectoryAction implements Action{
+      //requested methods
+      public Object getValue(String key){return null;}
+      public void putValue(String key, Object value){}
+      public void setEnabled(boolean b){}
+      public boolean isEnabled(){return true;}
+      public void addPropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void removePropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void actionPerformed(java.awt.event.ActionEvent e){        
+
+----------------------------------------
+      }
+    }
+    
+    private class MarkRowAction implements Action{
+      //requested methods
+      public Object getValue(String key){return null;}
+      public void putValue(String key, Object value){}
+      public void setEnabled(boolean b){}
+      public boolean isEnabled(){return true;}
+      public void addPropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void removePropertyChangeListener(java.beans.PropertyChangeListener listener){}
+
+      public void actionPerformed(java.awt.event.ActionEvent e){
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27364894
+src/org/jfm/views/list/briefview/BriefViewListComponent.java 281 293
+src/org/jfm/views/list/detailview/DetailsTable.java 255 268
+----------------------------------------
+      }
+    }
+
+    private class FileAction implements Action{
+      //requested methods
+      public Object getValue(String key){return null;}
+      public void putValue(String key, Object value){}
+      public void setEnabled(boolean b){}
+      public boolean isEnabled(){return true;}
+      public void addPropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void removePropertyChangeListener(java.beans.PropertyChangeListener listener){}
+
+      public void actionPerformed(java.awt.event.ActionEvent e){
+
+----------------------------------------
+      }
+    }
+
+
+    private class ChangePanelAction implements Action{
+      //requested methods
+      public Object getValue(String key){return null;}
+      public void putValue(String key, Object value){}
+      public void setEnabled(boolean b){}
+      public boolean isEnabled(){return true;}
+      public void addPropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void removePropertyChangeListener(java.beans.PropertyChangeListener listener){}
+
+      public void actionPerformed(java.awt.event.ActionEvent e){
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27364888
+src/org/jfm/views/list/briefview/BriefViewListComponent.java 298 309
+src/org/jfm/views/list/detailview/DetailsTable.java 255 268
+----------------------------------------
+      }
+    }
+
+    private class UpDirectoryAction implements Action{
+      //requested methods
+      public Object getValue(String key){return null;}
+      public void putValue(String key, Object value){}
+      public void setEnabled(boolean b){}
+      public boolean isEnabled(){return true;}
+      public void addPropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void removePropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void actionPerformed(java.awt.event.ActionEvent e){        
+
+----------------------------------------
+      }
+    }
+
+
+    private class ChangePanelAction implements Action{
+      //requested methods
+      public Object getValue(String key){return null;}
+      public void putValue(String key, Object value){}
+      public void setEnabled(boolean b){}
+      public boolean isEnabled(){return true;}
+      public void addPropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void removePropertyChangeListener(java.beans.PropertyChangeListener listener){}
+
+      public void actionPerformed(java.awt.event.ActionEvent e){
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27364889
+src/org/jfm/views/list/briefview/BriefViewListComponent.java 281 294
+src/org/jfm/views/list/detailview/DetailsTable.java 211 224
+----------------------------------------
+      }
+    }
+
+    private class FileAction implements Action{
+      //requested methods
+      public Object getValue(String key){return null;}
+      public void putValue(String key, Object value){}
+      public void setEnabled(boolean b){}
+      public boolean isEnabled(){return true;}
+      public void addPropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void removePropertyChangeListener(java.beans.PropertyChangeListener listener){}
+
+      public void actionPerformed(java.awt.event.ActionEvent e){
+          int row=((BriefViewListComponent)e.getSource()).getSelectedIndex();
+
+----------------------------------------
+      }
+    }
+    
+    private class MarkRowAction implements Action{
+      //requested methods
+      public Object getValue(String key){return null;}
+      public void putValue(String key, Object value){}
+      public void setEnabled(boolean b){}
+      public boolean isEnabled(){return true;}
+      public void addPropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void removePropertyChangeListener(java.beans.PropertyChangeListener listener){}
+
+      public void actionPerformed(java.awt.event.ActionEvent e){
+          int row=((DetailsTable)e.getSource()).getSelectedRow();
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27364890
+src/org/jfm/views/list/briefview/BriefViewListComponent.java 279 293
+src/org/jfm/views/list/detailview/DetailsTable.java 287 301
+----------------------------------------
+        	panelChangeListener.requestPanelChange();
+        }
+      }
+    }
+
+    private class FileAction implements Action{
+      //requested methods
+      public Object getValue(String key){return null;}
+      public void putValue(String key, Object value){}
+      public void setEnabled(boolean b){}
+      public boolean isEnabled(){return true;}
+      public void addPropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void removePropertyChangeListener(java.beans.PropertyChangeListener listener){}
+
+      public void actionPerformed(java.awt.event.ActionEvent e){
+
+----------------------------------------
+                  processActionOnRow(row);
+          }
+      }
+    }
+
+    private class UpDirectoryAction implements Action{
+      //requested methods
+      public Object getValue(String key){return null;}
+      public void putValue(String key, Object value){}
+      public void setEnabled(boolean b){}
+      public boolean isEnabled(){return true;}
+      public void addPropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void removePropertyChangeListener(java.beans.PropertyChangeListener listener){}
+
+      public void actionPerformed(java.awt.event.ActionEvent e){
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27364892
+src/org/jfm/views/list/briefview/BriefViewListComponent.java 281 293
+src/org/jfm/views/list/detailview/DetailsTable.java 185 197
+----------------------------------------
+      }
+    }
+
+    private class FileAction implements Action{
+      //requested methods
+      public Object getValue(String key){return null;}
+      public void putValue(String key, Object value){}
+      public void setEnabled(boolean b){}
+      public boolean isEnabled(){return true;}
+      public void addPropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void removePropertyChangeListener(java.beans.PropertyChangeListener listener){}
+
+      public void actionPerformed(java.awt.event.ActionEvent e){
+
+----------------------------------------
+      }
+    }
+    
+    private class MarkAllRowAction implements Action{
+      //requested methods
+      public Object getValue(String key){return null;}
+      public void putValue(String key, Object value){}
+      public void setEnabled(boolean b){}
+      public boolean isEnabled(){return true;}
+      public void addPropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void removePropertyChangeListener(java.beans.PropertyChangeListener listener){}
+
+      public void actionPerformed(java.awt.event.ActionEvent e){
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27364921
+src/org/jfm/views/list/briefview/BriefViewListComponent.java 161 173
+src/org/jfm/views/list/detailview/DetailsTable.java 185 197
+----------------------------------------
+    	}
+    }
+
+    private class MarkAllFilteredRowAction implements Action{
+      //requested methods
+      public Object getValue(String key){return null;}
+      public void putValue(String key, Object value){}
+      public void setEnabled(boolean b){}
+      public boolean isEnabled(){return true;}
+      public void addPropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void removePropertyChangeListener(java.beans.PropertyChangeListener listener){}
+
+      public void actionPerformed(java.awt.event.ActionEvent e){
+
+----------------------------------------
+      }
+    }
+    
+    private class MarkAllRowAction implements Action{
+      //requested methods
+      public Object getValue(String key){return null;}
+      public void putValue(String key, Object value){}
+      public void setEnabled(boolean b){}
+      public boolean isEnabled(){return true;}
+      public void addPropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void removePropertyChangeListener(java.beans.PropertyChangeListener listener){}
+
+      public void actionPerformed(java.awt.event.ActionEvent e){
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27364923
+src/org/jfm/views/list/briefview/BriefViewListComponent.java 161 173
+src/org/jfm/views/list/detailview/DetailsTable.java 240 252
+----------------------------------------
+    	}
+    }
+
+    private class MarkAllFilteredRowAction implements Action{
+      //requested methods
+      public Object getValue(String key){return null;}
+      public void putValue(String key, Object value){}
+      public void setEnabled(boolean b){}
+      public boolean isEnabled(){return true;}
+      public void addPropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void removePropertyChangeListener(java.beans.PropertyChangeListener listener){}
+
+      public void actionPerformed(java.awt.event.ActionEvent e){
+
+----------------------------------------
+      }
+    }
+	
+    private class RefreshAction implements Action{
+      //requested methods
+      public Object getValue(String key){return null;}
+      public void putValue(String key, Object value){}
+      public void setEnabled(boolean b){}
+      public boolean isEnabled(){return true;}
+      public void addPropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void removePropertyChangeListener(java.beans.PropertyChangeListener listener){}
+
+      public void actionPerformed(java.awt.event.ActionEvent e){
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27364893
+src/org/jfm/views/list/briefview/BriefViewListComponent.java 281 293
+src/org/jfm/views/list/detailview/DetailsTable.java 240 252
+----------------------------------------
+      }
+    }
+
+    private class FileAction implements Action{
+      //requested methods
+      public Object getValue(String key){return null;}
+      public void putValue(String key, Object value){}
+      public void setEnabled(boolean b){}
+      public boolean isEnabled(){return true;}
+      public void addPropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void removePropertyChangeListener(java.beans.PropertyChangeListener listener){}
+
+      public void actionPerformed(java.awt.event.ActionEvent e){
+
+----------------------------------------
+      }
+    }
+	
+    private class RefreshAction implements Action{
+      //requested methods
+      public Object getValue(String key){return null;}
+      public void putValue(String key, Object value){}
+      public void setEnabled(boolean b){}
+      public boolean isEnabled(){return true;}
+      public void addPropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void removePropertyChangeListener(java.beans.PropertyChangeListener listener){}
+
+      public void actionPerformed(java.awt.event.ActionEvent e){
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27364895
+src/org/jfm/views/list/briefview/BriefViewListComponent.java 263 277
+src/org/jfm/views/list/detailview/DetailsTable.java 184 197
+----------------------------------------
+        ((BriefViewListComponentModel)BriefViewListComponent.this.getModel()).browseDirectory(el);
+      }
+    }
+
+
+    private class ChangePanelAction implements Action{
+      //requested methods
+      public Object getValue(String key){return null;}
+      public void putValue(String key, Object value){}
+      public void setEnabled(boolean b){}
+      public boolean isEnabled(){return true;}
+      public void addPropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void removePropertyChangeListener(java.beans.PropertyChangeListener listener){}
+
+      public void actionPerformed(java.awt.event.ActionEvent e){
+
+----------------------------------------
+          DetailsTable.this.repaint();
+      }
+    }
+    
+    private class MarkAllRowAction implements Action{
+      //requested methods
+      public Object getValue(String key){return null;}
+      public void putValue(String key, Object value){}
+      public void setEnabled(boolean b){}
+      public boolean isEnabled(){return true;}
+      public void addPropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void removePropertyChangeListener(java.beans.PropertyChangeListener listener){}
+
+      public void actionPerformed(java.awt.event.ActionEvent e){
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27364897
+src/org/jfm/views/list/briefview/BriefViewListComponent.java 263 277
+src/org/jfm/views/list/detailview/DetailsTable.java 239 252
+----------------------------------------
+        ((BriefViewListComponentModel)BriefViewListComponent.this.getModel()).browseDirectory(el);
+      }
+    }
+
+
+    private class ChangePanelAction implements Action{
+      //requested methods
+      public Object getValue(String key){return null;}
+      public void putValue(String key, Object value){}
+      public void setEnabled(boolean b){}
+      public boolean isEnabled(){return true;}
+      public void addPropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void removePropertyChangeListener(java.beans.PropertyChangeListener listener){}
+
+      public void actionPerformed(java.awt.event.ActionEvent e){
+
+----------------------------------------
+          DetailsTable.this.repaint();
+      }
+    }
+	
+    private class RefreshAction implements Action{
+      //requested methods
+      public Object getValue(String key){return null;}
+      public void putValue(String key, Object value){}
+      public void setEnabled(boolean b){}
+      public boolean isEnabled(){return true;}
+      public void addPropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void removePropertyChangeListener(java.beans.PropertyChangeListener listener){}
+
+      public void actionPerformed(java.awt.event.ActionEvent e){
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27364898
+src/org/jfm/views/list/detailview/DetailsTable.java 272 284
+src/org/jfm/views/list/briefview/BriefViewListComponent.java 264 277
+----------------------------------------
+      }
+    }
+
+    private class FileAction implements Action{
+      //requested methods
+      public Object getValue(String key){return null;}
+      public void putValue(String key, Object value){}
+      public void setEnabled(boolean b){}
+      public boolean isEnabled(){return true;}
+      public void addPropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void removePropertyChangeListener(java.beans.PropertyChangeListener listener){}
+
+      public void actionPerformed(java.awt.event.ActionEvent e){
+
+----------------------------------------
+      }
+    }
+
+
+    private class ChangePanelAction implements Action{
+      //requested methods
+      public Object getValue(String key){return null;}
+      public void putValue(String key, Object value){}
+      public void setEnabled(boolean b){}
+      public boolean isEnabled(){return true;}
+      public void addPropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void removePropertyChangeListener(java.beans.PropertyChangeListener listener){}
+
+      public void actionPerformed(java.awt.event.ActionEvent e){
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27364899
+src/org/jfm/views/list/briefview/BriefViewListComponent.java 264 277
+src/org/jfm/views/list/detailview/DetailsTable.java 289 301
+----------------------------------------
+      }
+    }
+
+
+    private class ChangePanelAction implements Action{
+      //requested methods
+      public Object getValue(String key){return null;}
+      public void putValue(String key, Object value){}
+      public void setEnabled(boolean b){}
+      public boolean isEnabled(){return true;}
+      public void addPropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void removePropertyChangeListener(java.beans.PropertyChangeListener listener){}
+
+      public void actionPerformed(java.awt.event.ActionEvent e){
+
+----------------------------------------
+      }
+    }
+
+    private class UpDirectoryAction implements Action{
+      //requested methods
+      public Object getValue(String key){return null;}
+      public void putValue(String key, Object value){}
+      public void setEnabled(boolean b){}
+      public boolean isEnabled(){return true;}
+      public void addPropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void removePropertyChangeListener(java.beans.PropertyChangeListener listener){}
+
+      public void actionPerformed(java.awt.event.ActionEvent e){
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27364925
+src/org/jfm/views/list/briefview/BriefViewListComponent.java 161 173
+src/org/jfm/views/list/detailview/DetailsTable.java 289 301
+----------------------------------------
+    	}
+    }
+
+    private class MarkAllFilteredRowAction implements Action{
+      //requested methods
+      public Object getValue(String key){return null;}
+      public void putValue(String key, Object value){}
+      public void setEnabled(boolean b){}
+      public boolean isEnabled(){return true;}
+      public void addPropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void removePropertyChangeListener(java.beans.PropertyChangeListener listener){}
+
+      public void actionPerformed(java.awt.event.ActionEvent e){
+
+----------------------------------------
+      }
+    }
+
+    private class UpDirectoryAction implements Action{
+      //requested methods
+      public Object getValue(String key){return null;}
+      public void putValue(String key, Object value){}
+      public void setEnabled(boolean b){}
+      public boolean isEnabled(){return true;}
+      public void addPropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void removePropertyChangeListener(java.beans.PropertyChangeListener listener){}
+
+      public void actionPerformed(java.awt.event.ActionEvent e){
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27364900
+src/org/jfm/views/list/detailview/DetailsTable.java 289 302
+src/org/jfm/views/list/briefview/BriefViewListComponent.java 249 262
+----------------------------------------
+      }
+    }
+
+    private class UpDirectoryAction implements Action{
+      //requested methods
+      public Object getValue(String key){return null;}
+      public void putValue(String key, Object value){}
+      public void setEnabled(boolean b){}
+      public boolean isEnabled(){return true;}
+      public void addPropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void removePropertyChangeListener(java.beans.PropertyChangeListener listener){}
+
+      public void actionPerformed(java.awt.event.ActionEvent e){
+        processActionOnRow(0);
+
+----------------------------------------
+      }
+    }
+    
+    private class RefreshAction implements Action{
+      //requested methods
+      public Object getValue(String key){return null;}
+      public void putValue(String key, Object value){}
+      public void setEnabled(boolean b){}
+      public boolean isEnabled(){return true;}
+      public void addPropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void removePropertyChangeListener(java.beans.PropertyChangeListener listener){}
+
+      public void actionPerformed(java.awt.event.ActionEvent e){
+        JFMFile el=(JFMFile)((BriefViewListComponentModel)BriefViewListComponent.this.getModel()).getWorkingDirectory();
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27364901
+src/org/jfm/views/list/briefview/BriefViewListComponent.java 247 261
+src/org/jfm/views/list/detailview/DetailsTable.java 209 223
+----------------------------------------
+          }
+          BriefViewListComponent.this.repaint();                    
+      }
+    }
+    
+    private class RefreshAction implements Action{
+      //requested methods
+      public Object getValue(String key){return null;}
+      public void putValue(String key, Object value){}
+      public void setEnabled(boolean b){}
+      public boolean isEnabled(){return true;}
+      public void addPropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void removePropertyChangeListener(java.beans.PropertyChangeListener listener){}
+
+      public void actionPerformed(java.awt.event.ActionEvent e){
+
+----------------------------------------
+          }
+          DetailsTable.this.repaint();
+      }
+    }
+    
+    private class MarkRowAction implements Action{
+      //requested methods
+      public Object getValue(String key){return null;}
+      public void putValue(String key, Object value){}
+      public void setEnabled(boolean b){}
+      public boolean isEnabled(){return true;}
+      public void addPropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void removePropertyChangeListener(java.beans.PropertyChangeListener listener){}
+
+      public void actionPerformed(java.awt.event.ActionEvent e){
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27364903
+src/org/jfm/views/list/detailview/DetailsTable.java 254 268
+src/org/jfm/views/list/briefview/BriefViewListComponent.java 248 261
+----------------------------------------
+        ((DetailsTableModel)DetailsTable.this.getModel()).browseDirectory(el);
+      }
+    }
+
+
+    private class ChangePanelAction implements Action{
+      //requested methods
+      public Object getValue(String key){return null;}
+      public void putValue(String key, Object value){}
+      public void setEnabled(boolean b){}
+      public boolean isEnabled(){return true;}
+      public void addPropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void removePropertyChangeListener(java.beans.PropertyChangeListener listener){}
+
+      public void actionPerformed(java.awt.event.ActionEvent e){
+
+----------------------------------------
+          BriefViewListComponent.this.repaint();                    
+      }
+    }
+    
+    private class RefreshAction implements Action{
+      //requested methods
+      public Object getValue(String key){return null;}
+      public void putValue(String key, Object value){}
+      public void setEnabled(boolean b){}
+      public boolean isEnabled(){return true;}
+      public void addPropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void removePropertyChangeListener(java.beans.PropertyChangeListener listener){}
+
+      public void actionPerformed(java.awt.event.ActionEvent e){
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27364902
+src/org/jfm/views/list/detailview/DetailsTable.java 149 162
+src/org/jfm/views/list/briefview/BriefViewListComponent.java 248 261
+----------------------------------------
+            scrollRectToVisible(cellBounds);
+        }
+    }
+    
+    private class MarkAllFilteredRowAction implements Action{
+      //requested methods
+      public Object getValue(String key){return null;}
+      public void putValue(String key, Object value){}
+      public void setEnabled(boolean b){}
+      public boolean isEnabled(){return true;}
+      public void addPropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void removePropertyChangeListener(java.beans.PropertyChangeListener listener){}
+
+      public void actionPerformed(java.awt.event.ActionEvent e){
+
+----------------------------------------
+          BriefViewListComponent.this.repaint();                    
+      }
+    }
+    
+    private class RefreshAction implements Action{
+      //requested methods
+      public Object getValue(String key){return null;}
+      public void putValue(String key, Object value){}
+      public void setEnabled(boolean b){}
+      public boolean isEnabled(){return true;}
+      public void addPropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void removePropertyChangeListener(java.beans.PropertyChangeListener listener){}
+
+      public void actionPerformed(java.awt.event.ActionEvent e){
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27364904
+src/org/jfm/views/list/detailview/DetailsTable.java 272 284
+src/org/jfm/views/list/briefview/BriefViewListComponent.java 249 261
+----------------------------------------
+      }
+    }
+
+    private class FileAction implements Action{
+      //requested methods
+      public Object getValue(String key){return null;}
+      public void putValue(String key, Object value){}
+      public void setEnabled(boolean b){}
+      public boolean isEnabled(){return true;}
+      public void addPropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void removePropertyChangeListener(java.beans.PropertyChangeListener listener){}
+
+      public void actionPerformed(java.awt.event.ActionEvent e){
+
+----------------------------------------
+      }
+    }
+    
+    private class RefreshAction implements Action{
+      //requested methods
+      public Object getValue(String key){return null;}
+      public void putValue(String key, Object value){}
+      public void setEnabled(boolean b){}
+      public boolean isEnabled(){return true;}
+      public void addPropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void removePropertyChangeListener(java.beans.PropertyChangeListener listener){}
+
+      public void actionPerformed(java.awt.event.ActionEvent e){
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27364905
+src/org/jfm/views/list/briefview/BriefViewListComponent.java 209 234
+src/org/jfm/views/list/detailview/DetailsTable.java 200 224
+----------------------------------------
+                  JFMFile el=(JFMFile)BriefViewListComponent.this.getModel().getElementAt(row);
+                  if(el.isFile() || Options.getDirectoriesSelectedOnAsterisk()){
+                  	el.setMarked(!el.isMarked());
+	                  if(el.isMarked()){
+	                	  markedRows.add(new Integer(row));
+	                  }else{
+	                	  markedRows.remove(new Integer(row));
+	                  }
+                  	
+                  }
+          }
+          BriefViewListComponent.this.repaint();                    
+      }
+    }
+    
+    private class MarkRowAction implements Action{
+      //requested methods
+      public Object getValue(String key){return null;}
+      public void putValue(String key, Object value){}
+      public void setEnabled(boolean b){}
+      public boolean isEnabled(){return true;}
+      public void addPropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void removePropertyChangeListener(java.beans.PropertyChangeListener listener){}
+
+      public void actionPerformed(java.awt.event.ActionEvent e){
+          int row=BriefViewListComponent.this.getSelectedIndex();          
+
+----------------------------------------
+                  JFMFile el=model.getFileAt(row);
+                  if(el.isFile() || Options.getDirectoriesSelectedOnAsterisk()){
+                  	el.setMarked(!el.isMarked());
+	                  if(el.isMarked()){
+	                	  markedRows.add(new Integer(row));
+	                  }else{
+	                	  markedRows.remove(new Integer(row));
+	                  }
+                  }
+          }
+          DetailsTable.this.repaint();
+      }
+    }
+    
+    private class MarkRowAction implements Action{
+      //requested methods
+      public Object getValue(String key){return null;}
+      public void putValue(String key, Object value){}
+      public void setEnabled(boolean b){}
+      public boolean isEnabled(){return true;}
+      public void addPropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void removePropertyChangeListener(java.beans.PropertyChangeListener listener){}
+
+      public void actionPerformed(java.awt.event.ActionEvent e){
+          int row=((DetailsTable)e.getSource()).getSelectedRow();
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27364906
+src/org/jfm/views/list/briefview/BriefViewListComponent.java 221 234
+src/org/jfm/views/list/detailview/DetailsTable.java 272 285
+----------------------------------------
+      }
+    }
+    
+    private class MarkRowAction implements Action{
+      //requested methods
+      public Object getValue(String key){return null;}
+      public void putValue(String key, Object value){}
+      public void setEnabled(boolean b){}
+      public boolean isEnabled(){return true;}
+      public void addPropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void removePropertyChangeListener(java.beans.PropertyChangeListener listener){}
+
+      public void actionPerformed(java.awt.event.ActionEvent e){
+          int row=BriefViewListComponent.this.getSelectedIndex();          
+
+----------------------------------------
+      }
+    }
+
+    private class FileAction implements Action{
+      //requested methods
+      public Object getValue(String key){return null;}
+      public void putValue(String key, Object value){}
+      public void setEnabled(boolean b){}
+      public boolean isEnabled(){return true;}
+      public void addPropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void removePropertyChangeListener(java.beans.PropertyChangeListener listener){}
+
+      public void actionPerformed(java.awt.event.ActionEvent e){
+          int row=((DetailsTable)e.getSource()).getSelectedRow();
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27364907
+src/org/jfm/views/list/briefview/BriefViewListComponent.java 210 233
+src/org/jfm/views/list/detailview/DetailsTable.java 174 197
+----------------------------------------
+                  if(el.isFile() || Options.getDirectoriesSelectedOnAsterisk()){
+                  	el.setMarked(!el.isMarked());
+	                  if(el.isMarked()){
+	                	  markedRows.add(new Integer(row));
+	                  }else{
+	                	  markedRows.remove(new Integer(row));
+	                  }
+                  	
+                  }
+          }
+          BriefViewListComponent.this.repaint();                    
+      }
+    }
+    
+    private class MarkRowAction implements Action{
+      //requested methods
+      public Object getValue(String key){return null;}
+      public void putValue(String key, Object value){}
+      public void setEnabled(boolean b){}
+      public boolean isEnabled(){return true;}
+      public void addPropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void removePropertyChangeListener(java.beans.PropertyChangeListener listener){}
+
+      public void actionPerformed(java.awt.event.ActionEvent e){
+
+----------------------------------------
+              if(matcher.matches() && (el.isFile() || Options.getDirectoriesSelectedOnPlus())){
+              	el.setMarked(!el.isMarked());
+                  if(el.isMarked()){
+                	  markedRows.add(new Integer(row));
+                  }else{
+                	  markedRows.remove(new Integer(row));
+                  }
+              	
+              }
+          }
+          DetailsTable.this.repaint();
+      }
+    }
+    
+    private class MarkAllRowAction implements Action{
+      //requested methods
+      public Object getValue(String key){return null;}
+      public void putValue(String key, Object value){}
+      public void setEnabled(boolean b){}
+      public boolean isEnabled(){return true;}
+      public void addPropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void removePropertyChangeListener(java.beans.PropertyChangeListener listener){}
+
+      public void actionPerformed(java.awt.event.ActionEvent e){
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27364908
+src/org/jfm/views/list/briefview/BriefViewListComponent.java 219 233
+src/org/jfm/views/list/detailview/DetailsTable.java 238 252
+----------------------------------------
+          }
+          BriefViewListComponent.this.repaint();                    
+      }
+    }
+    
+    private class MarkRowAction implements Action{
+      //requested methods
+      public Object getValue(String key){return null;}
+      public void putValue(String key, Object value){}
+      public void setEnabled(boolean b){}
+      public boolean isEnabled(){return true;}
+      public void addPropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void removePropertyChangeListener(java.beans.PropertyChangeListener listener){}
+
+      public void actionPerformed(java.awt.event.ActionEvent e){
+
+----------------------------------------
+          }
+          DetailsTable.this.repaint();
+      }
+    }
+	
+    private class RefreshAction implements Action{
+      //requested methods
+      public Object getValue(String key){return null;}
+      public void putValue(String key, Object value){}
+      public void setEnabled(boolean b){}
+      public boolean isEnabled(){return true;}
+      public void addPropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void removePropertyChangeListener(java.beans.PropertyChangeListener listener){}
+
+      public void actionPerformed(java.awt.event.ActionEvent e){
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27364911
+src/org/jfm/views/list/detailview/DetailsTable.java 289 301
+src/org/jfm/views/list/briefview/BriefViewListComponent.java 221 233
+----------------------------------------
+      }
+    }
+
+    private class UpDirectoryAction implements Action{
+      //requested methods
+      public Object getValue(String key){return null;}
+      public void putValue(String key, Object value){}
+      public void setEnabled(boolean b){}
+      public boolean isEnabled(){return true;}
+      public void addPropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void removePropertyChangeListener(java.beans.PropertyChangeListener listener){}
+
+      public void actionPerformed(java.awt.event.ActionEvent e){
+
+----------------------------------------
+      }
+    }
+    
+    private class MarkRowAction implements Action{
+      //requested methods
+      public Object getValue(String key){return null;}
+      public void putValue(String key, Object value){}
+      public void setEnabled(boolean b){}
+      public boolean isEnabled(){return true;}
+      public void addPropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void removePropertyChangeListener(java.beans.PropertyChangeListener listener){}
+
+      public void actionPerformed(java.awt.event.ActionEvent e){
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27364912
+src/org/jfm/views/list/briefview/BriefViewListComponent.java 182 207
+src/org/jfm/views/list/detailview/DetailsTable.java 172 197
+----------------------------------------
+          JFMFile el=(JFMFile)BriefViewListComponent.this.getModel().getElementAt(row);          
+          Matcher matcher=pattern.matcher(el.getName());
+          if(matcher.matches() && (el.isFile() || Options.getDirectoriesSelectedOnPlus())){
+          	el.setMarked(!el.isMarked());
+                  if(el.isMarked()){
+                	  markedRows.add(new Integer(row));
+                  }else{
+                	  markedRows.remove(new Integer(row));
+                  }
+          	
+          }
+        }
+          BriefViewListComponent.this.repaint();                    
+      }
+    }
+    
+    private class MarkAllRowAction implements Action{
+      //requested methods
+      public Object getValue(String key){return null;}
+      public void putValue(String key, Object value){}
+      public void setEnabled(boolean b){}
+      public boolean isEnabled(){return true;}
+      public void addPropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void removePropertyChangeListener(java.beans.PropertyChangeListener listener){}
+
+      public void actionPerformed(java.awt.event.ActionEvent e){
+
+----------------------------------------
+              JFMFile el=model.getFileAt(row);
+              Matcher matcher=pattern.matcher(el.getName());
+              if(matcher.matches() && (el.isFile() || Options.getDirectoriesSelectedOnPlus())){
+              	el.setMarked(!el.isMarked());
+                  if(el.isMarked()){
+                	  markedRows.add(new Integer(row));
+                  }else{
+                	  markedRows.remove(new Integer(row));
+                  }
+              	
+              }
+          }
+          DetailsTable.this.repaint();
+      }
+    }
+    
+    private class MarkAllRowAction implements Action{
+      //requested methods
+      public Object getValue(String key){return null;}
+      public void putValue(String key, Object value){}
+      public void setEnabled(boolean b){}
+      public boolean isEnabled(){return true;}
+      public void addPropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void removePropertyChangeListener(java.beans.PropertyChangeListener listener){}
+
+      public void actionPerformed(java.awt.event.ActionEvent e){
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27364913
+src/org/jfm/views/list/briefview/BriefViewListComponent.java 184 207
+src/org/jfm/views/list/detailview/DetailsTable.java 201 223
+----------------------------------------
+          if(matcher.matches() && (el.isFile() || Options.getDirectoriesSelectedOnPlus())){
+          	el.setMarked(!el.isMarked());
+                  if(el.isMarked()){
+                	  markedRows.add(new Integer(row));
+                  }else{
+                	  markedRows.remove(new Integer(row));
+                  }
+          	
+          }
+        }
+          BriefViewListComponent.this.repaint();                    
+      }
+    }
+    
+    private class MarkAllRowAction implements Action{
+      //requested methods
+      public Object getValue(String key){return null;}
+      public void putValue(String key, Object value){}
+      public void setEnabled(boolean b){}
+      public boolean isEnabled(){return true;}
+      public void addPropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void removePropertyChangeListener(java.beans.PropertyChangeListener listener){}
+
+      public void actionPerformed(java.awt.event.ActionEvent e){
+
+----------------------------------------
+                  if(el.isFile() || Options.getDirectoriesSelectedOnAsterisk()){
+                  	el.setMarked(!el.isMarked());
+	                  if(el.isMarked()){
+	                	  markedRows.add(new Integer(row));
+	                  }else{
+	                	  markedRows.remove(new Integer(row));
+	                  }
+                  }
+          }
+          DetailsTable.this.repaint();
+      }
+    }
+    
+    private class MarkRowAction implements Action{
+      //requested methods
+      public Object getValue(String key){return null;}
+      public void putValue(String key, Object value){}
+      public void setEnabled(boolean b){}
+      public boolean isEnabled(){return true;}
+      public void addPropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void removePropertyChangeListener(java.beans.PropertyChangeListener listener){}
+
+      public void actionPerformed(java.awt.event.ActionEvent e){
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27364914
+src/org/jfm/views/list/detailview/DetailsTable.java 238 252
+src/org/jfm/views/list/briefview/BriefViewListComponent.java 193 207
+----------------------------------------
+          }
+          DetailsTable.this.repaint();
+      }
+    }
+	
+    private class RefreshAction implements Action{
+      //requested methods
+      public Object getValue(String key){return null;}
+      public void putValue(String key, Object value){}
+      public void setEnabled(boolean b){}
+      public boolean isEnabled(){return true;}
+      public void addPropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void removePropertyChangeListener(java.beans.PropertyChangeListener listener){}
+
+      public void actionPerformed(java.awt.event.ActionEvent e){
+
+----------------------------------------
+        }
+          BriefViewListComponent.this.repaint();                    
+      }
+    }
+    
+    private class MarkAllRowAction implements Action{
+      //requested methods
+      public Object getValue(String key){return null;}
+      public void putValue(String key, Object value){}
+      public void setEnabled(boolean b){}
+      public boolean isEnabled(){return true;}
+      public void addPropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void removePropertyChangeListener(java.beans.PropertyChangeListener listener){}
+
+      public void actionPerformed(java.awt.event.ActionEvent e){
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27364918
+src/org/jfm/views/list/detailview/DetailsTable.java 289 301
+src/org/jfm/views/list/briefview/BriefViewListComponent.java 195 207
+----------------------------------------
+      }
+    }
+
+    private class UpDirectoryAction implements Action{
+      //requested methods
+      public Object getValue(String key){return null;}
+      public void putValue(String key, Object value){}
+      public void setEnabled(boolean b){}
+      public boolean isEnabled(){return true;}
+      public void addPropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void removePropertyChangeListener(java.beans.PropertyChangeListener listener){}
+
+      public void actionPerformed(java.awt.event.ActionEvent e){
+
+----------------------------------------
+      }
+    }
+    
+    private class MarkAllRowAction implements Action{
+      //requested methods
+      public Object getValue(String key){return null;}
+      public void putValue(String key, Object value){}
+      public void setEnabled(boolean b){}
+      public boolean isEnabled(){return true;}
+      public void addPropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void removePropertyChangeListener(java.beans.PropertyChangeListener listener){}
+
+      public void actionPerformed(java.awt.event.ActionEvent e){
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27364917
+src/org/jfm/views/list/detailview/DetailsTable.java 272 284
+src/org/jfm/views/list/briefview/BriefViewListComponent.java 195 207
+----------------------------------------
+      }
+    }
+
+    private class FileAction implements Action{
+      //requested methods
+      public Object getValue(String key){return null;}
+      public void putValue(String key, Object value){}
+      public void setEnabled(boolean b){}
+      public boolean isEnabled(){return true;}
+      public void addPropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void removePropertyChangeListener(java.beans.PropertyChangeListener listener){}
+
+      public void actionPerformed(java.awt.event.ActionEvent e){
+
+----------------------------------------
+      }
+    }
+    
+    private class MarkAllRowAction implements Action{
+      //requested methods
+      public Object getValue(String key){return null;}
+      public void putValue(String key, Object value){}
+      public void setEnabled(boolean b){}
+      public boolean isEnabled(){return true;}
+      public void addPropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void removePropertyChangeListener(java.beans.PropertyChangeListener listener){}
+
+      public void actionPerformed(java.awt.event.ActionEvent e){
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27364919
+src/org/jfm/views/list/briefview/BriefViewListComponent.java 161 180
+src/org/jfm/views/list/detailview/DetailsTable.java 150 169
+----------------------------------------
+    	}
+    }
+
+    private class MarkAllFilteredRowAction implements Action{
+      //requested methods
+      public Object getValue(String key){return null;}
+      public void putValue(String key, Object value){}
+      public void setEnabled(boolean b){}
+      public boolean isEnabled(){return true;}
+      public void addPropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void removePropertyChangeListener(java.beans.PropertyChangeListener listener){}
+
+      public void actionPerformed(java.awt.event.ActionEvent e){
+      	if(true)return;
+      	//for the moment, disable this, since we don't have an expression parser
+      	//that would parse expressions that are common for file names (*.*,a?.txt, etc.)
+      	
+      	String filter=JOptionPane.showInputDialog(Options.getMainFrame(),"Files type (regular expression accepted):","*");
+      	if(filter==null || filter.length()<=0) return;
+      	Pattern pattern=Pattern.compile(filter,Pattern.CASE_INSENSITIVE);
+
+----------------------------------------
+        }
+    }
+    
+    private class MarkAllFilteredRowAction implements Action{
+      //requested methods
+      public Object getValue(String key){return null;}
+      public void putValue(String key, Object value){}
+      public void setEnabled(boolean b){}
+      public boolean isEnabled(){return true;}
+      public void addPropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void removePropertyChangeListener(java.beans.PropertyChangeListener listener){}
+
+      public void actionPerformed(java.awt.event.ActionEvent e){
+      	if(true)return;
+      	//for the moment, disable this, since we don't have an expression parser
+      	//that would parse expressions that are common for file names (*.*,a?.txt, etc.)
+      	
+      	String filter=JOptionPane.showInputDialog(Options.getMainFrame(),"Files type (regular expression accepted):","*");
+      	if(filter==null || filter.length()<=0) return;
+      	DetailsTableModel model=((DetailsTableModel)DetailsTable.this.getModel());
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27364920
+src/org/jfm/views/list/briefview/BriefViewListComponent.java 161 174
+src/org/jfm/views/list/detailview/DetailsTable.java 255 269
+----------------------------------------
+    	}
+    }
+
+    private class MarkAllFilteredRowAction implements Action{
+      //requested methods
+      public Object getValue(String key){return null;}
+      public void putValue(String key, Object value){}
+      public void setEnabled(boolean b){}
+      public boolean isEnabled(){return true;}
+      public void addPropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void removePropertyChangeListener(java.beans.PropertyChangeListener listener){}
+
+      public void actionPerformed(java.awt.event.ActionEvent e){
+      	if(true)return;
+
+----------------------------------------
+      }
+    }
+
+
+    private class ChangePanelAction implements Action{
+      //requested methods
+      public Object getValue(String key){return null;}
+      public void putValue(String key, Object value){}
+      public void setEnabled(boolean b){}
+      public boolean isEnabled(){return true;}
+      public void addPropertyChangeListener(java.beans.PropertyChangeListener listener){}
+      public void removePropertyChangeListener(java.beans.PropertyChangeListener listener){}
+
+      public void actionPerformed(java.awt.event.ActionEvent e){
+        if(panelChangeListener!=null){
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27364926
+src/org/jfm/views/list/briefview/BriefViewListComponent.java 126 139
+src/org/jfm/views/list/detailview/DetailsTable.java 102 110
+----------------------------------------
+    public ListCellRenderer getCellRenderer() {
+    	
+	  return renderer;
+    }
+    
+    /*public void updateUI(){
+    	
+    }*/
+
+    private void addMouseActions(){
+      this.addMouseListener(new MouseAdapter(){
+        public void mouseClicked(MouseEvent e){
+          int row=BriefViewListComponent.this.locationToIndex(e.getPoint());
+          if(e.getClickCount()==2 && (row>=0) && (row<BriefViewListComponent.this.getModel().getSize())){//double click on row
+
+----------------------------------------
+    public TableCellRenderer getCellRenderer(int row, int column) {
+	  return renderer;
+    }
+
+    private void addMouseActions(){
+      this.addMouseListener(new MouseAdapter(){
+        public void mouseClicked(MouseEvent e){
+          int row=DetailsTable.this.rowAtPoint(e.getPoint());
+          if(e.getClickCount()==2 && (row>=0) && (row<((DetailsTableModel)DetailsTable.this.getModel()).getRowCount())){//double click on row
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+28820980
+src/org/jfm/main/JFMClassLoader.java 100 118
+src/org/jfm/main/JFMClassLoader.java 101 114
+----------------------------------------
+		{
+			try {
+				JarFile jarFile=new JarFile(jarsList.get(i));
+				ZipEntry entry=jarFile.getEntry(className);
+				if(entry==null) continue;
+				InputStream classStream=jarFile.getInputStream(entry);
+				ByteArrayOutputStream outStr=new ByteArrayOutputStream();
+				byte[] data=new byte[1024];
+				int read=0;
+				while((read=classStream.read(data))>=0){
+					outStr.write(data,0,read);
+				}
+				byte[] theClass=outStr.toByteArray();
+				loadedClass=defineClass(name, theClass, 0, theClass.length);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+----------------------------------------
+			try {
+				JarFile jarFile=new JarFile(jarsList.get(i));
+				ZipEntry entry=jarFile.getEntry(className);
+				if(entry==null) continue;
+				InputStream classStream=jarFile.getInputStream(entry);
+				ByteArrayOutputStream outStr=new ByteArrayOutputStream();
+				byte[] data=new byte[1024];
+				int read=0;
+				while((read=classStream.read(data))>=0){
+					outStr.write(data,0,read);
+				}
+				byte[] theClass=outStr.toByteArray();
+				loadedClass=defineClass(name, theClass, 0, theClass.length);
+			} catch (IOException e) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+28820981
+src/org/jfm/views/list/briefview/BriefView.java 102 110
+src/org/jfm/main/MainPanel.java 80 90
+----------------------------------------
+			public void colorChanged(ColorChangeEvent event){
+				if(event.getColorType()==ColorChangeEvent.BACKGROUND){
+					scroll.getViewport().setBackground(Options.getBackgroundColor());
+					list.setBackground(Options.getBackgroundColor());
+				}
+				if(event.getColorType()==ColorChangeEvent.FOREGROUND){
+					list.setForeground(Options.getForegroundColor());
+				}
+			}
+
+----------------------------------------
+    	public void changeDirectory(ChangeDirectoryEvent event){
+    		if(event.getDirectory()==null ||event.getDirectory().getAbsolutePath()==null ) return;
+    		if(event.getSource()==leftPanel)
+    		{
+    			Options.getPreferences().put(Options.JFM_LEFTVIEWPANELDIR_PREF, event.getDirectory().getAbsolutePath());
+    		}
+    		else
+    		{
+    			Options.getPreferences().put(Options.JFM_RIGHTVIEWPANELDIR_PREF, event.getDirectory().getAbsolutePath());
+    		}
+    	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+28820982
+src/org/jfm/views/list/detailview/DetailView.java 90 98
+src/org/jfm/main/MainPanel.java 80 90
+----------------------------------------
+			public void colorChanged(ColorChangeEvent event){
+				if(event.getColorType()==ColorChangeEvent.BACKGROUND){
+					scroll.getViewport().setBackground(Options.getBackgroundColor());
+					table.setBackground(Options.getBackgroundColor());
+				}
+				if(event.getColorType()==ColorChangeEvent.FOREGROUND){
+					table.setForeground(Options.getForegroundColor());
+				}
+			}
+
+----------------------------------------
+    	public void changeDirectory(ChangeDirectoryEvent event){
+    		if(event.getDirectory()==null ||event.getDirectory().getAbsolutePath()==null ) return;
+    		if(event.getSource()==leftPanel)
+    		{
+    			Options.getPreferences().put(Options.JFM_LEFTVIEWPANELDIR_PREF, event.getDirectory().getAbsolutePath());
+    		}
+    		else
+    		{
+    			Options.getPreferences().put(Options.JFM_RIGHTVIEWPANELDIR_PREF, event.getDirectory().getAbsolutePath());
+    		}
+    	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+28820983
+src/org/jfm/views/list/ListView.java 67 78
+src/org/jfm/views/list/ListView.java 65 79
+----------------------------------------
+    	  {
+    		  JFMFile f= getCurrentWorkingDirectory().getRootDriveFile();
+    		  for(int i=0;i<rootsCombo.getItemCount();i++)
+    		  {
+    			ComboBoxCellObject obj=  (ComboBoxCellObject)rootsCombo.getItemAt(i);
+    			if(obj.getFile().equals(f))
+    			{
+    				shouldFireComboEvent=false;
+    				//rootsCombo.setSelectedIndex(i);
+    			}
+    		  }
+    	  }
+
+----------------------------------------
+      public void changeDirectory(ChangeDirectoryEvent e){
+    	  if(getCurrentWorkingDirectory()!=null)
+    	  {
+    		  JFMFile f= getCurrentWorkingDirectory().getRootDriveFile();
+    		  for(int i=0;i<rootsCombo.getItemCount();i++)
+    		  {
+    			ComboBoxCellObject obj=  (ComboBoxCellObject)rootsCombo.getItemAt(i);
+    			if(obj.getFile().equals(f))
+    			{
+    				shouldFireComboEvent=false;
+    				//rootsCombo.setSelectedIndex(i);
+    			}
+    		  }
+    	  }
+      }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+28820984
+src/org/jfm/views/list/ListView.java 109 121
+src/org/jfm/views/tree/TreeViewPanel.java 47 55
+----------------------------------------
+    	if(roots!=null){
+    		for(int i=0;i<roots.length;i++){
+    			rootsCombo.addItem(new ComboBoxCellObject(roots[i]));
+    			if(filesystem!=null){
+    				@SuppressWarnings("unused")
+    				JFMFile startDir=filesystem.getStartDirectory();
+    				//JFMFile curDir=getCurrentWorkingDirectory();
+    				if(filesystem.getStartDirectory().getRootDriveFile().equals(roots[i])){
+    					rootsCombo.setSelectedIndex(i);
+    				}
+    			}
+    		}
+    	}    	
+
+----------------------------------------
+     if(roots!=null){
+        for(int i=0;i<roots.length;i++){
+        //System.err.println(roots[i].getPath());
+          rootsCombo.addItem(roots[i].getPath());
+          if(filesystem.getStartDirectory().getRootDriveFile().equals(roots[i])){
+            rootsCombo.setSelectedIndex(i);
+          }
+        }
+     }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+28821004
+src/org/jfm/po/CopyAction.java 209 218
+src/org/jfm/filesystems/JFMFile.java 403 409
+----------------------------------------
+      }finally{
+        try {
+          in.close();          
+        }
+        catch (Exception ignored) {}
+        try {
+            out.close();
+        }
+        catch (Exception ignored) {}
+      }
+
+----------------------------------------
+    public String toString() {
+      if(getDisplayName()==null){
+        return getName();
+      }else{
+        return getDisplayName();
+      }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+28820999
+src/org/jfm/po/CommandOutputViewDialog.java 81 91
+src/org/jfm/filesystems/JFMFile.java 403 409
+----------------------------------------
+    public void run(){
+      try {
+          //i'm not interested in the return value of the process 
+          //i just want to know when it's over
+          process.waitFor();
+      }
+      catch (InterruptedException ex) {}
+      finally {
+        CommandOutputViewDialog.this.dispose();
+      }
+    }
+
+----------------------------------------
+    public String toString() {
+      if(getDisplayName()==null){
+        return getName();
+      }else{
+        return getDisplayName();
+      }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+28821012
+src/org/jfm/main/Options.java 108 114
+src/org/jfm/filesystems/JFMFile.java 403 409
+----------------------------------------
+  public static void savePreferences(){
+  	try {
+		getPreferences().flush();
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+  }
+
+----------------------------------------
+    public String toString() {
+      if(getDisplayName()==null){
+        return getName();
+      }else{
+        return getDisplayName();
+      }
+    }
+
+----------------------------------------

@@ -1,0 +1,1306 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995706
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 998 1004
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1077 1083
+----------------------------------------
+    private void jMenuItemContentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemContentsActionPerformed
+        try {
+            java.awt.Desktop.getDesktop().browse(new URI(URL_ONLINE_HELP));
+        } catch (Throwable t) {
+            JOptionPane.showMessageDialog(this, this.commonResources.getString("CouldNotDisplayOnlineHelp") + " '" + URL_ONLINE_HELP + "'", this.commonResources.getString("CouldNotStartBrowser"), JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jMenuItemContentsActionPerformed
+
+----------------------------------------
+            public void commandAction(final Command c, final Item item) {
+                try {
+                    platformRequest(((StringItem) item).getText());
+                } catch (Exception e) {
+                    // we could not invoke the browser, that's a pity but we can live with it
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995708
+src/de/joergjahnke/common/bluetooth/BluetoothClient.java 149 158
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1077 1083
+----------------------------------------
+        synchronized (this.agent) {
+            this.agent.searchServices(null, uuids, btDevice, this);
+
+            // wait until the discovery agents notifies us that he is finished or one minute has passed
+            try {
+                this.agent.wait(getTimeout(), 0);
+            } catch (InterruptedException e) {
+                // we got interrupted, no problem
+            }
+        }
+
+----------------------------------------
+            public void commandAction(final Command c, final Item item) {
+                try {
+                    platformRequest(((StringItem) item).getText());
+                } catch (Exception e) {
+                    // we could not invoke the browser, that's a pity but we can live with it
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995703
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 414 420
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1077 1083
+----------------------------------------
+        if (null == snapshotImage) {
+            try {
+                snapshotImage = Image.createImage("/res/drawable/snapshot.png");
+            } catch (Exception e) {
+                // we can work without the image
+            }
+        }
+
+----------------------------------------
+            public void commandAction(final Command c, final Item item) {
+                try {
+                    platformRequest(((StringItem) item).getText());
+                } catch (Exception e) {
+                    // we could not invoke the browser, that's a pity but we can live with it
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995710
+src/de/joergjahnke/common/bluetooth/BluetoothClient.java 174 180
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1077 1083
+----------------------------------------
+    public void servicesDiscovered(final int transID, final ServiceRecord[] servRecord) {
+        try {
+            this.serviceRecord = servRecord[0];
+        } catch (Exception e) {
+            // it may happen that no service record can be retrieved, in this case serviceRecord remains null
+        }
+    }
+
+----------------------------------------
+            public void commandAction(final Command c, final Item item) {
+                try {
+                    platformRequest(((StringItem) item).getText());
+                } catch (Exception e) {
+                    // we could not invoke the browser, that's a pity but we can live with it
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995694
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 260 266
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1077 1083
+----------------------------------------
+    private ImageIcon getMenuIcon(final String filename) {
+        try {
+            return new ImageIcon(new ImageIcon(getClass().getResource("/res/drawable/" + filename)).getImage().getScaledInstance(16, 16, Image.SCALE_SMOOTH));
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+----------------------------------------
+            public void commandAction(final Command c, final Item item) {
+                try {
+                    platformRequest(((StringItem) item).getText());
+                } catch (Exception e) {
+                    // we could not invoke the browser, that's a pity but we can live with it
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995689
+src/de/joergjahnke/common/jme/Settings.java 121 127
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1077 1083
+----------------------------------------
+    public boolean getBoolean(final String key, final boolean defaultValue) {
+        try {
+            return getBoolean(key);
+        } catch (Exception e) {
+            return defaultValue;
+        }
+    }
+
+----------------------------------------
+            public void commandAction(final Command c, final Item item) {
+                try {
+                    platformRequest(((StringItem) item).getText());
+                } catch (Exception e) {
+                    // we could not invoke the browser, that's a pity but we can live with it
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995650
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 82 88
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1077 1083
+----------------------------------------
+            if (null == floppyImage) {
+                try {
+                    floppyImage = Image.createImage("/res/drawable/floppy.png");
+                } catch (Exception e) {
+                    // we can work without the image
+                    }
+            }
+
+----------------------------------------
+            public void commandAction(final Command c, final Item item) {
+                try {
+                    platformRequest(((StringItem) item).getText());
+                } catch (Exception e) {
+                    // we could not invoke the browser, that's a pity but we can live with it
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995700
+src/de/joergjahnke/common/jme/OrientationSensitiveCanvasHelper.java 113 119
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1077 1083
+----------------------------------------
+    public void deactivateAccelerometer() {
+        try {
+            ((javax.microedition.sensor.SensorConnection) this.con).removeDataListener();
+            this.con.close();
+        } catch (Throwable t) {
+        }
+    }
+
+----------------------------------------
+            public void commandAction(final Command c, final Item item) {
+                try {
+                    platformRequest(((StringItem) item).getText());
+                } catch (Exception e) {
+                    // we could not invoke the browser, that's a pity but we can live with it
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995690
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 461 467
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1077 1083
+----------------------------------------
+    protected Image getMenuIcon(final String filename) {
+        try {
+            return ImageUtils.scale(Image.createImage("/res/drawable/" + filename), 16, 16, true);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+----------------------------------------
+            public void commandAction(final Command c, final Item item) {
+                try {
+                    platformRequest(((StringItem) item).getText());
+                } catch (Exception e) {
+                    // we could not invoke the browser, that's a pity but we can live with it
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995709
+src/de/joergjahnke/common/jme/Settings.java 84 90
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1077 1083
+----------------------------------------
+    public int getInteger(final String key, final int defaultValue) {
+        try {
+            return getInteger(key);
+        } catch (Exception e) {
+            return defaultValue;
+        }
+    }
+
+----------------------------------------
+            public void commandAction(final Command c, final Item item) {
+                try {
+                    platformRequest(((StringItem) item).getText());
+                } catch (Exception e) {
+                    // we could not invoke the browser, that's a pity but we can live with it
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+28734586
+src/de/joergjahnke/common/bluetooth/BluetoothClient.java 145 161
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1077 1083
+----------------------------------------
+    public synchronized ServiceRecord searchServices(final RemoteDevice btDevice, final UUID[] uuids) throws IOException {
+        this.serviceRecord = null;
+
+        // query the other device for the service
+        synchronized (this.agent) {
+            this.agent.searchServices(null, uuids, btDevice, this);
+
+            // wait until the discovery agents notifies us that he is finished or one minute has passed
+            try {
+                this.agent.wait(getTimeout(), 0);
+            } catch (InterruptedException e) {
+                // we got interrupted, no problem
+            }
+        }
+
+        return this.serviceRecord;
+    }
+
+----------------------------------------
+            public void commandAction(final Command c, final Item item) {
+                try {
+                    platformRequest(((StringItem) item).getText());
+                } catch (Exception e) {
+                    // we could not invoke the browser, that's a pity but we can live with it
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995692
+src/de/joergjahnke/gameboy/core/CPU.java 2166 2171
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1077 1083
+----------------------------------------
+            if (this.isPaused) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException ex) {
+                }
+            }
+
+----------------------------------------
+            public void commandAction(final Command c, final Item item) {
+                try {
+                    platformRequest(((StringItem) item).getText());
+                } catch (Exception e) {
+                    // we could not invoke the browser, that's a pity but we can live with it
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995701
+src/de/joergjahnke/gameboy/core/CPU.java 3104 3110
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1077 1083
+----------------------------------------
+    public final void throttle(final long ms) {
+        this.throttledMillis += ms;
+        try {
+            Thread.sleep(ms);
+        } catch (InterruptedException ex) {
+        }
+    }
+
+----------------------------------------
+            public void commandAction(final Command c, final Item item) {
+                try {
+                    platformRequest(((StringItem) item).getText());
+                } catch (Exception e) {
+                    // we could not invoke the browser, that's a pity but we can live with it
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995696
+src/de/joergjahnke/common/bluetooth/BluetoothDevice.java 158 164
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1077 1083
+----------------------------------------
+    public static String getRemoteDeviceName(final RemoteDevice dev) {
+        try {
+            return dev.getFriendlyName(false) == null ? dev.getBluetoothAddress() : dev.getFriendlyName(false);
+        } catch (IOException e) {
+            return "unknown";
+        }
+    }
+
+----------------------------------------
+            public void commandAction(final Command c, final Item item) {
+                try {
+                    platformRequest(((StringItem) item).getText());
+                } catch (Exception e) {
+                    // we could not invoke the browser, that's a pity but we can live with it
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995698
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 723 729
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1077 1083
+----------------------------------------
+            if (hasSuspendData) {
+                try {
+                    rs.closeRecordStore();
+                } catch (Exception e) {
+                    // we could not close the record store, that hopefully does not hinder other actions on it and it was closed anyway...
+                }
+            }
+
+----------------------------------------
+            public void commandAction(final Command c, final Item item) {
+                try {
+                    platformRequest(((StringItem) item).getText());
+                } catch (Exception e) {
+                    // we could not invoke the browser, that's a pity but we can live with it
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995693
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 510 515
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1077 1083
+----------------------------------------
+        } finally {
+            try {
+                romStream.close();
+            } catch (Exception e) {
+            }
+        }
+
+----------------------------------------
+            public void commandAction(final Command c, final Item item) {
+                try {
+                    platformRequest(((StringItem) item).getText());
+                } catch (Exception e) {
+                    // we could not invoke the browser, that's a pity but we can live with it
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995660
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 579 586
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1318 1326
+----------------------------------------
+    public static void main(final String args[]) {
+        java.awt.EventQueue.invokeLater(new Runnable() {
+
+            public void run() {
+                new GameboyFrame().setVisible(true);
+            }
+        });
+    }
+
+----------------------------------------
+                        if (isRestartRequired) {
+                            display.callSerially(
+                                    new Runnable() {
+
+                                        public void run() {
+                                            display.setCurrent(new Alert(LocalizationSupport.getMessage("RestartRequired"), LocalizationSupport.getMessage("SomeSettingsRequireRestart"), null, AlertType.INFO));
+                                        }
+                                    });
+                        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995676
+src/de/joergjahnke/gameboy/android/AndroidGB.java 476 484
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1345 1354
+----------------------------------------
+            if (this.gameboy.getSoundChip().countObservers() == 0) {
+                try {
+                    this.gameboy.getSoundChip().addObserver(new WavePlayer(this.gameboy.getSoundChip()));
+                } catch (Throwable t) {
+                    // we could not add a player, that's OK
+                    this.gameboy.getLogger().warning("Could not create sound player! Sound output remains deactivated.");
+                    t.printStackTrace();
+                }
+            }
+
+----------------------------------------
+                } catch (Throwable t) {
+                    // if that does not work we try the WavePlayer
+                    try {
+                        this.gameboy.getSoundChip().addObserver(new WavePlayer(this.gameboy.getSoundChip()));
+                    } catch (Throwable t2) {
+                        // we could not add a player, that's OK
+                        this.gameboy.getLogger().warning(LocalizationSupport.getMessage("CouldNotCreateSoundPlayer"));
+                        t2.printStackTrace();
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995681
+src/de/joergjahnke/common/extendeddevices/WavePlayer.java 64 70
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1345 1354
+----------------------------------------
+                        synchronized (buffer) {
+                            buffer.reset();
+                            try {
+                                buffer.wait();
+                            } catch (InterruptedException e) {
+                            }
+                        }
+
+----------------------------------------
+                } catch (Throwable t) {
+                    // if that does not work we try the WavePlayer
+                    try {
+                        this.gameboy.getSoundChip().addObserver(new WavePlayer(this.gameboy.getSoundChip()));
+                    } catch (Throwable t2) {
+                        // we could not add a player, that's OK
+                        this.gameboy.getLogger().warning(LocalizationSupport.getMessage("CouldNotCreateSoundPlayer"));
+                        t2.printStackTrace();
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995679
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 375 380
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1345 1354
+----------------------------------------
+        } finally {
+            try {
+                in.close();
+            } catch (Exception e) {
+            }
+        }
+
+----------------------------------------
+                } catch (Throwable t) {
+                    // if that does not work we try the WavePlayer
+                    try {
+                        this.gameboy.getSoundChip().addObserver(new WavePlayer(this.gameboy.getSoundChip()));
+                    } catch (Throwable t2) {
+                        // we could not add a player, that's OK
+                        this.gameboy.getLogger().warning(LocalizationSupport.getMessage("CouldNotCreateSoundPlayer"));
+                        t2.printStackTrace();
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995674
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 510 515
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1345 1354
+----------------------------------------
+        } finally {
+            try {
+                romStream.close();
+            } catch (Exception e) {
+            }
+        }
+
+----------------------------------------
+                } catch (Throwable t) {
+                    // if that does not work we try the WavePlayer
+                    try {
+                        this.gameboy.getSoundChip().addObserver(new WavePlayer(this.gameboy.getSoundChip()));
+                    } catch (Throwable t2) {
+                        // we could not add a player, that's OK
+                        this.gameboy.getLogger().warning(LocalizationSupport.getMessage("CouldNotCreateSoundPlayer"));
+                        t2.printStackTrace();
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995678
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 723 729
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1345 1354
+----------------------------------------
+            if (hasSuspendData) {
+                try {
+                    rs.closeRecordStore();
+                } catch (Exception e) {
+                    // we could not close the record store, that hopefully does not hinder other actions on it and it was closed anyway...
+                }
+            }
+
+----------------------------------------
+                } catch (Throwable t) {
+                    // if that does not work we try the WavePlayer
+                    try {
+                        this.gameboy.getSoundChip().addObserver(new WavePlayer(this.gameboy.getSoundChip()));
+                    } catch (Throwable t2) {
+                        // we could not add a player, that's OK
+                        this.gameboy.getLogger().warning(LocalizationSupport.getMessage("CouldNotCreateSoundPlayer"));
+                        t2.printStackTrace();
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995673
+src/de/joergjahnke/gameboy/core/Gameboy.java 207 216
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1345 1354
+----------------------------------------
+        if (!isRunning()) {
+            this.logger.info("Gameboy starting");
+            super.run();
+            // we use this thread to run the CPU
+            try {
+                this.cpu.run();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+----------------------------------------
+                } catch (Throwable t) {
+                    // if that does not work we try the WavePlayer
+                    try {
+                        this.gameboy.getSoundChip().addObserver(new WavePlayer(this.gameboy.getSoundChip()));
+                    } catch (Throwable t2) {
+                        // we could not add a player, that's OK
+                        this.gameboy.getLogger().warning(LocalizationSupport.getMessage("CouldNotCreateSoundPlayer"));
+                        t2.printStackTrace();
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995683
+src/de/joergjahnke/common/bluetooth/BluetoothOBEXClient.java 240 250
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1345 1354
+----------------------------------------
+    public void abortFileReception() {
+        super.stop();
+
+        try {
+            this.local.setDiscoverable(DiscoveryAgent.NOT_DISCOVERABLE);
+            this.notifier.close();
+            this.notifier = null;
+        } catch (Exception e) {
+            // we could not completely shut down the service, what to do now?
+        }
+    }
+
+----------------------------------------
+                } catch (Throwable t) {
+                    // if that does not work we try the WavePlayer
+                    try {
+                        this.gameboy.getSoundChip().addObserver(new WavePlayer(this.gameboy.getSoundChip()));
+                    } catch (Throwable t2) {
+                        // we could not add a player, that's OK
+                        this.gameboy.getLogger().warning(LocalizationSupport.getMessage("CouldNotCreateSoundPlayer"));
+                        t2.printStackTrace();
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995686
+src/de/joergjahnke/common/bluetooth/BluetoothOBEXClient.java 110 120
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1345 1354
+----------------------------------------
+    public void disconnect() {
+        super.stop();
+
+        try {
+            this.clientSession.disconnect(null);
+            this.clientSession.close();
+        } catch (IOException e) {
+            // we had a problem with closing the streams, what to do now?
+        }
+        this.clientSession = null;
+    }
+
+----------------------------------------
+                } catch (Throwable t) {
+                    // if that does not work we try the WavePlayer
+                    try {
+                        this.gameboy.getSoundChip().addObserver(new WavePlayer(this.gameboy.getSoundChip()));
+                    } catch (Throwable t2) {
+                        // we could not add a player, that's OK
+                        this.gameboy.getLogger().warning(LocalizationSupport.getMessage("CouldNotCreateSoundPlayer"));
+                        t2.printStackTrace();
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995675
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 772 779
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1345 1354
+----------------------------------------
+                if (status == STATUS_LOAD_FAILED || status == STATUS_LOAD_OK) {
+                    try {
+                        RecordStore.deleteRecordStore(name);
+                    } catch (Exception e) {
+                        display.setCurrent(new Alert(LocalizationSupport.getMessage("CouldNotRemoveSuspendData"), LocalizationSupport.getMessage("FailedToRemoveSuspendData"), null, AlertType.WARNING));
+                        e.printStackTrace();
+                    }
+                }
+
+----------------------------------------
+                } catch (Throwable t) {
+                    // if that does not work we try the WavePlayer
+                    try {
+                        this.gameboy.getSoundChip().addObserver(new WavePlayer(this.gameboy.getSoundChip()));
+                    } catch (Throwable t2) {
+                        // we could not add a player, that's OK
+                        this.gameboy.getLogger().warning(LocalizationSupport.getMessage("CouldNotCreateSoundPlayer"));
+                        t2.printStackTrace();
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995672
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 393 400
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1345 1354
+----------------------------------------
+        if (status == STATUS_LOAD_OK || status == STATUS_LOAD_FAILED) {
+            try {
+                new File(SUSPENDFILE_NAME).delete();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Could not remove the suspend file! Please remove the suspend file '" + SUSPENDFILE_NAME + "' manually.", this.commonResources.getString("CouldNotRemoveSuspendData"), JOptionPane.ERROR_MESSAGE);
+                e.printStackTrace();
+            }
+        }
+
+----------------------------------------
+                } catch (Throwable t) {
+                    // if that does not work we try the WavePlayer
+                    try {
+                        this.gameboy.getSoundChip().addObserver(new WavePlayer(this.gameboy.getSoundChip()));
+                    } catch (Throwable t2) {
+                        // we could not add a player, that's OK
+                        this.gameboy.getLogger().warning(LocalizationSupport.getMessage("CouldNotCreateSoundPlayer"));
+                        t2.printStackTrace();
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995677
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 296 301
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1345 1354
+----------------------------------------
+        } finally {
+            try {
+                out.close();
+            } catch (Exception e) {
+            }
+        }
+
+----------------------------------------
+                } catch (Throwable t) {
+                    // if that does not work we try the WavePlayer
+                    try {
+                        this.gameboy.getSoundChip().addObserver(new WavePlayer(this.gameboy.getSoundChip()));
+                    } catch (Throwable t2) {
+                        // we could not add a player, that's OK
+                        this.gameboy.getLogger().warning(LocalizationSupport.getMessage("CouldNotCreateSoundPlayer"));
+                        t2.printStackTrace();
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995685
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 613 622
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1345 1354
+----------------------------------------
+        } catch (Throwable t) {
+            try {
+                RecordStore.deleteRecordStore(name);
+            } catch (Throwable t2) {
+                // the snapshot probably was not saved at all, so we ignore this
+            }
+            // show the cause of the error
+            Display.getDisplay(this).setCurrent(new Alert(LocalizationSupport.getMessage("SavingSnapshotFailed"), LocalizationSupport.getMessage("FailedToStoreState"), null, AlertType.WARNING));
+            t.printStackTrace();
+        }
+
+----------------------------------------
+                } catch (Throwable t) {
+                    // if that does not work we try the WavePlayer
+                    try {
+                        this.gameboy.getSoundChip().addObserver(new WavePlayer(this.gameboy.getSoundChip()));
+                    } catch (Throwable t2) {
+                        // we could not add a player, that's OK
+                        this.gameboy.getLogger().warning(LocalizationSupport.getMessage("CouldNotCreateSoundPlayer"));
+                        t2.printStackTrace();
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995680
+src/de/joergjahnke/common/jme/WavePlayer.java 178 188
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1345 1354
+----------------------------------------
+            if (!this.players.isEmpty()) {
+                // then use the next player from the queue and play it
+                this.currentPlayer = (Player) this.players.elementAt(0);
+                this.players.removeElementAt(0);
+                try {
+                    this.currentPlayer.start();
+                } catch (Exception e) {
+                    // we couldn't start the player, we stop the sound as it does not seem to work
+                    producer.deleteObservers();
+                }
+            } else {
+
+----------------------------------------
+                } catch (Throwable t) {
+                    // if that does not work we try the WavePlayer
+                    try {
+                        this.gameboy.getSoundChip().addObserver(new WavePlayer(this.gameboy.getSoundChip()));
+                    } catch (Throwable t2) {
+                        // we could not add a player, that's OK
+                        this.gameboy.getLogger().warning(LocalizationSupport.getMessage("CouldNotCreateSoundPlayer"));
+                        t2.printStackTrace();
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995682
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 722 731
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1345 1354
+----------------------------------------
+        } finally {
+            if (hasSuspendData) {
+                try {
+                    rs.closeRecordStore();
+                } catch (Exception e) {
+                    // we could not close the record store, that hopefully does not hinder other actions on it and it was closed anyway...
+                }
+            }
+            display.setCurrent(this.mainMenu);
+        }
+
+----------------------------------------
+                } catch (Throwable t) {
+                    // if that does not work we try the WavePlayer
+                    try {
+                        this.gameboy.getSoundChip().addObserver(new WavePlayer(this.gameboy.getSoundChip()));
+                    } catch (Throwable t2) {
+                        // we could not add a player, that's OK
+                        this.gameboy.getLogger().warning(LocalizationSupport.getMessage("CouldNotCreateSoundPlayer"));
+                        t2.printStackTrace();
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995684
+src/de/joergjahnke/gameboy/android/AndroidGB.java 475 485
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1345 1354
+----------------------------------------
+        if (active) {
+            if (this.gameboy.getSoundChip().countObservers() == 0) {
+                try {
+                    this.gameboy.getSoundChip().addObserver(new WavePlayer(this.gameboy.getSoundChip()));
+                } catch (Throwable t) {
+                    // we could not add a player, that's OK
+                    this.gameboy.getLogger().warning("Could not create sound player! Sound output remains deactivated.");
+                    t.printStackTrace();
+                }
+            }
+        } else {
+
+----------------------------------------
+                } catch (Throwable t) {
+                    // if that does not work we try the WavePlayer
+                    try {
+                        this.gameboy.getSoundChip().addObserver(new WavePlayer(this.gameboy.getSoundChip()));
+                    } catch (Throwable t2) {
+                        // we could not add a player, that's OK
+                        this.gameboy.getLogger().warning(LocalizationSupport.getMessage("CouldNotCreateSoundPlayer"));
+                        t2.printStackTrace();
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995671
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 489 494
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1345 1354
+----------------------------------------
+            } finally {
+                try {
+                    saveStream.close();
+                } catch (Exception e) {
+                }
+            }
+
+----------------------------------------
+                } catch (Throwable t) {
+                    // if that does not work we try the WavePlayer
+                    try {
+                        this.gameboy.getSoundChip().addObserver(new WavePlayer(this.gameboy.getSoundChip()));
+                    } catch (Throwable t2) {
+                        // we could not add a player, that's OK
+                        this.gameboy.getLogger().warning(LocalizationSupport.getMessage("CouldNotCreateSoundPlayer"));
+                        t2.printStackTrace();
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995767
+src/de/joergjahnke/common/bluetooth/BluetoothDevice.java 158 164
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1178 1185
+----------------------------------------
+    public static String getRemoteDeviceName(final RemoteDevice dev) {
+        try {
+            return dev.getFriendlyName(false) == null ? dev.getBluetoothAddress() : dev.getFriendlyName(false);
+        } catch (IOException e) {
+            return "unknown";
+        }
+    }
+
+----------------------------------------
+            public void onError(final Throwable t) {
+                super.onError(t);
+                try {
+                    settings.remove(SETTING_FILESEARCH_STARTDIR);
+                } catch (Exception e) {
+                    // we couldn't save the settings, that's OK
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995765
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1077 1083
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1178 1185
+----------------------------------------
+            public void commandAction(final Command c, final Item item) {
+                try {
+                    platformRequest(((StringItem) item).getText());
+                } catch (Exception e) {
+                    // we could not invoke the browser, that's a pity but we can live with it
+                }
+            }
+
+----------------------------------------
+            public void onError(final Throwable t) {
+                super.onError(t);
+                try {
+                    settings.remove(SETTING_FILESEARCH_STARTDIR);
+                } catch (Exception e) {
+                    // we couldn't save the settings, that's OK
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995770
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 375 380
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1178 1185
+----------------------------------------
+        } finally {
+            try {
+                in.close();
+            } catch (Exception e) {
+            }
+        }
+
+----------------------------------------
+            public void onError(final Throwable t) {
+                super.onError(t);
+                try {
+                    settings.remove(SETTING_FILESEARCH_STARTDIR);
+                } catch (Exception e) {
+                    // we couldn't save the settings, that's OK
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995775
+src/de/joergjahnke/common/extendeddevices/WavePlayer.java 64 70
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1178 1185
+----------------------------------------
+                        synchronized (buffer) {
+                            buffer.reset();
+                            try {
+                                buffer.wait();
+                            } catch (InterruptedException e) {
+                            }
+                        }
+
+----------------------------------------
+            public void onError(final Throwable t) {
+                super.onError(t);
+                try {
+                    settings.remove(SETTING_FILESEARCH_STARTDIR);
+                } catch (Exception e) {
+                    // we couldn't save the settings, that's OK
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995780
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 613 622
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1178 1185
+----------------------------------------
+        } catch (Throwable t) {
+            try {
+                RecordStore.deleteRecordStore(name);
+            } catch (Throwable t2) {
+                // the snapshot probably was not saved at all, so we ignore this
+            }
+            // show the cause of the error
+            Display.getDisplay(this).setCurrent(new Alert(LocalizationSupport.getMessage("SavingSnapshotFailed"), LocalizationSupport.getMessage("FailedToStoreState"), null, AlertType.WARNING));
+            t.printStackTrace();
+        }
+
+----------------------------------------
+            public void onError(final Throwable t) {
+                super.onError(t);
+                try {
+                    settings.remove(SETTING_FILESEARCH_STARTDIR);
+                } catch (Exception e) {
+                    // we couldn't save the settings, that's OK
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995776
+src/de/joergjahnke/common/jme/Settings.java 161 167
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1178 1185
+----------------------------------------
+    public String getString(final String key, final String defaultValue) {
+        try {
+            return getString(key);
+        } catch (Exception e) {
+            return defaultValue;
+        }
+    }
+
+----------------------------------------
+            public void onError(final Throwable t) {
+                super.onError(t);
+                try {
+                    settings.remove(SETTING_FILESEARCH_STARTDIR);
+                } catch (Exception e) {
+                    // we couldn't save the settings, that's OK
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995771
+src/de/joergjahnke/common/jme/OrientationSensitiveCanvasHelper.java 113 119
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1178 1185
+----------------------------------------
+    public void deactivateAccelerometer() {
+        try {
+            ((javax.microedition.sensor.SensorConnection) this.con).removeDataListener();
+            this.con.close();
+        } catch (Throwable t) {
+        }
+    }
+
+----------------------------------------
+            public void onError(final Throwable t) {
+                super.onError(t);
+                try {
+                    settings.remove(SETTING_FILESEARCH_STARTDIR);
+                } catch (Exception e) {
+                    // we couldn't save the settings, that's OK
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995758
+src/de/joergjahnke/common/jme/FormattedTextForm.java 159 165
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1178 1185
+----------------------------------------
+                public void commandAction(final Command c, final Item item) {
+                    try {
+                        midlet.platformRequest(((StringItem)item).getText());
+                    } catch (Exception e) {
+                        // we could not invoke the browser, that's a pity but we can live with it
+                    }
+                }
+
+----------------------------------------
+            public void onError(final Throwable t) {
+                super.onError(t);
+                try {
+                    settings.remove(SETTING_FILESEARCH_STARTDIR);
+                } catch (Exception e) {
+                    // we couldn't save the settings, that's OK
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995763
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 260 266
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1178 1185
+----------------------------------------
+    private ImageIcon getMenuIcon(final String filename) {
+        try {
+            return new ImageIcon(new ImageIcon(getClass().getResource("/res/drawable/" + filename)).getImage().getScaledInstance(16, 16, Image.SCALE_SMOOTH));
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+----------------------------------------
+            public void onError(final Throwable t) {
+                super.onError(t);
+                try {
+                    settings.remove(SETTING_FILESEARCH_STARTDIR);
+                } catch (Exception e) {
+                    // we couldn't save the settings, that's OK
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995768
+src/de/joergjahnke/common/jme/FileSystemHandler.java 189 195
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1178 1185
+----------------------------------------
+                if (prgsString.length() > 0) {
+                    try {
+                        settings.setString(SETTING_PROGRAMS, prgsString.toString());
+                    } catch (Exception e) {
+                    // we could not save the list of programs on the phone, that's OK
+                    }
+                }
+
+----------------------------------------
+            public void onError(final Throwable t) {
+                super.onError(t);
+                try {
+                    settings.remove(SETTING_FILESEARCH_STARTDIR);
+                } catch (Exception e) {
+                    // we couldn't save the settings, that's OK
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995773
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 241 248
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1178 1185
+----------------------------------------
+                    public void windowClosing(final WindowEvent evt) {
+                        try {
+                            settings.storeToXML(new FileOutputStream(new File(PROPERTIES_NAME)), "Properties for JSwingBoy");
+                            stopGame();
+                        } catch (Exception e) {
+                            // we can't save the settings, that's a pity, but we'll just use defaults on next startup
+                        }
+                    }
+
+----------------------------------------
+            public void onError(final Throwable t) {
+                super.onError(t);
+                try {
+                    settings.remove(SETTING_FILESEARCH_STARTDIR);
+                } catch (Exception e) {
+                    // we couldn't save the settings, that's OK
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995778
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 984 991
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1178 1185
+----------------------------------------
+                if (evt.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
+                    try {
+                        Desktop.getDesktop().browse(evt.getURL().toURI());
+                    } catch (Throwable t) {
+                        // could not display the web page, what to do now???
+                        System.err.println("Could not browse to page " + evt.getURL());
+                    }
+                }
+
+----------------------------------------
+            public void onError(final Throwable t) {
+                super.onError(t);
+                try {
+                    settings.remove(SETTING_FILESEARCH_STARTDIR);
+                } catch (Exception e) {
+                    // we couldn't save the settings, that's OK
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995783
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 934 940
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1178 1185
+----------------------------------------
+                        for (int i = 0; i < buttons.size(); ++i) {
+                            try {
+                                settings.remove(SETTING_PREFIX_KEYS + buttons.elementAt(i).toString());
+                            } catch (IllegalArgumentException e) {
+                                // this happens if the key was not assigned, no problem
+                            }
+                        }
+
+----------------------------------------
+            public void onError(final Throwable t) {
+                super.onError(t);
+                try {
+                    settings.remove(SETTING_FILESEARCH_STARTDIR);
+                } catch (Exception e) {
+                    // we couldn't save the settings, that's OK
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995766
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 296 301
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1178 1185
+----------------------------------------
+        } finally {
+            try {
+                out.close();
+            } catch (Exception e) {
+            }
+        }
+
+----------------------------------------
+            public void onError(final Throwable t) {
+                super.onError(t);
+                try {
+                    settings.remove(SETTING_FILESEARCH_STARTDIR);
+                } catch (Exception e) {
+                    // we couldn't save the settings, that's OK
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995781
+src/de/joergjahnke/common/jme/Settings.java 84 90
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1178 1185
+----------------------------------------
+    public int getInteger(final String key, final int defaultValue) {
+        try {
+            return getInteger(key);
+        } catch (Exception e) {
+            return defaultValue;
+        }
+    }
+
+----------------------------------------
+            public void onError(final Throwable t) {
+                super.onError(t);
+                try {
+                    settings.remove(SETTING_FILESEARCH_STARTDIR);
+                } catch (Exception e) {
+                    // we couldn't save the settings, that's OK
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995761
+src/de/joergjahnke/gameboy/core/CPU.java 2166 2171
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1178 1185
+----------------------------------------
+            if (this.isPaused) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException ex) {
+                }
+            }
+
+----------------------------------------
+            public void onError(final Throwable t) {
+                super.onError(t);
+                try {
+                    settings.remove(SETTING_FILESEARCH_STARTDIR);
+                } catch (Exception e) {
+                    // we couldn't save the settings, that's OK
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995782
+src/de/joergjahnke/common/bluetooth/BluetoothClient.java 174 180
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1178 1185
+----------------------------------------
+    public void servicesDiscovered(final int transID, final ServiceRecord[] servRecord) {
+        try {
+            this.serviceRecord = servRecord[0];
+        } catch (Exception e) {
+            // it may happen that no service record can be retrieved, in this case serviceRecord remains null
+        }
+    }
+
+----------------------------------------
+            public void onError(final Throwable t) {
+                super.onError(t);
+                try {
+                    settings.remove(SETTING_FILESEARCH_STARTDIR);
+                } catch (Exception e) {
+                    // we couldn't save the settings, that's OK
+                }
+            }
+
+----------------------------------------

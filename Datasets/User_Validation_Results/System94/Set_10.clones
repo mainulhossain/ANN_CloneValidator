@@ -1,0 +1,1626 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830732
+source/net/filebot/MediaTypes.java 70 79
+source/net/filebot/util/TemporaryFolder.java 28 40
+----------------------------------------
+	public ExtensionFileFilter getFilter(String name) {
+		ExtensionFileFilter filter = filters.get(name);
+
+		if (filter == null) {
+			filter = new ExtensionFileFilter(getExtensionList(name));
+			filters.put(name, filter);
+		}
+
+		return filter;
+	}
+
+----------------------------------------
+		synchronized (folders) {
+			TemporaryFolder folder = folders.get(name);
+
+			if (folder == null) {
+				File tmpdir = new File(System.getProperty("java.io.tmpdir"));
+				String subdir = String.format("%s [%s]", name, UUID.randomUUID());
+
+				folder = new TemporaryFolder(new File(tmpdir, subdir));
+				folders.put(name, folder);
+			}
+
+			return folder;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830735
+source/net/filebot/History.java 147 153
+source/net/filebot/util/TemporaryFolder.java 50 56
+----------------------------------------
+	public void merge(History history) {
+		for (Sequence sequence : history.sequences()) {
+			if (!sequences.contains(sequence)) {
+				add(sequence);
+			}
+		}
+	}
+
+----------------------------------------
+			public void run() {
+				synchronized (folders) {
+					for (TemporaryFolder folder : folders.values()) {
+						folder.delete();
+					}
+				}
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830733
+source/net/filebot/cli/FolderWatchService.java 93 99
+source/net/filebot/util/TemporaryFolder.java 50 56
+----------------------------------------
+			public void run() {
+				synchronized (processor) {
+					for (Entry<File, ? extends Collection<File>> it : commitBatches.entrySet()) {
+						processCommitSet(it.getValue().toArray(new File[0]), it.getKey());
+					}
+				}
+			}
+
+----------------------------------------
+			public void run() {
+				synchronized (folders) {
+					for (TemporaryFolder folder : folders.values()) {
+						folder.delete();
+					}
+				}
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830736
+source/net/filebot/ui/sfv/ChecksumComputationService.java 34 41
+source/net/filebot/util/TemporaryFolder.java 50 56
+----------------------------------------
+			for (ExecutorService executor : executors) {
+				for (Runnable runnable : executor.shutdownNow()) {
+					// cancel all remaining tasks
+					if (runnable instanceof Future) {
+						((Future<?>) runnable).cancel(false);
+					}
+				}
+			}
+
+----------------------------------------
+			public void run() {
+				synchronized (folders) {
+					for (TemporaryFolder folder : folders.values()) {
+						folder.delete();
+					}
+				}
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830738
+source/net/filebot/cli/FolderWatchService.java 158 164
+source/net/filebot/util/TemporaryFolder.java 50 56
+----------------------------------------
+			protected void modified(File file) {
+				synchronized (commitSet) {
+					if (!file.isDirectory()) {
+						commitSet.add(file);
+					}
+				}
+			}
+
+----------------------------------------
+			public void run() {
+				synchronized (folders) {
+					for (TemporaryFolder folder : folders.values()) {
+						folder.delete();
+					}
+				}
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830734
+source/net/filebot/ui/sfv/ChecksumComputationService.java 76 82
+source/net/filebot/util/TemporaryFolder.java 50 56
+----------------------------------------
+	public void purge() {
+		synchronized (executors) {
+			for (ThreadPoolExecutor executor : executors) {
+				executor.purge();
+			}
+		}
+	}
+
+----------------------------------------
+			public void run() {
+				synchronized (folders) {
+					for (TemporaryFolder folder : folders.values()) {
+						folder.delete();
+					}
+				}
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830737
+source/net/filebot/util/TemporaryFolder.java 50 56
+source/net/filebot/Settings.java 248 256
+----------------------------------------
+			public void run() {
+				synchronized (folders) {
+					for (TemporaryFolder folder : folders.values()) {
+						folder.delete();
+					}
+				}
+			}
+
+----------------------------------------
+		try {
+			// remove child nodes
+			for (String nodeName : prefs.childrenNames()) {
+				prefs.node(nodeName).removeNode();
+			}
+
+			// remove entries
+			prefs.clear();
+		} catch (BackingStoreException e) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830741
+source/net/filebot/ui/rename/ScrollPaneSynchronizer.java 33 38
+source/net/filebot/ui/sfv/ChecksumTableModel.java 223 228
+----------------------------------------
+				public void actionPerformed(ActionEvent e) {
+					updatePreferredSize();
+
+					// fire only once
+					timer.stop();
+				}
+
+----------------------------------------
+	public void clear() {
+		checksumColumns.clear();
+		rows.clear();
+
+		fireTableStructureChanged();
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830746
+source/net/filebot/History.java 197 205
+source/net/filebot/History.java 207 217
+----------------------------------------
+	public static void exportHistory(History history, OutputStream output) {
+		try {
+			Marshaller marshaller = JAXBContext.newInstance(History.class).createMarshaller();
+			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+			marshaller.marshal(history, output);
+		} catch (Exception e) {
+			debug.log(Level.SEVERE, "Failed to write history", e);
+		}
+	}
+
+----------------------------------------
+	public static History importHistory(InputStream stream) {
+		try {
+			Unmarshaller unmarshaller = JAXBContext.newInstance(History.class).createUnmarshaller();
+			return ((History) unmarshaller.unmarshal(stream));
+		} catch (Exception e) {
+			debug.log(Level.SEVERE, "Failed to read history", e);
+		}
+
+		// default to empty history
+		return new History();
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830747
+source/net/filebot/ui/rename/RenameListCellRenderer.java 213 225
+source/net/filebot/util/ExceptionUtilities.java 28 37
+----------------------------------------
+	protected String getType(File file) {
+		if (file.isDirectory()) {
+			return "Folder";
+		}
+
+		String extension = FileUtilities.getExtension(file);
+		if (extension != null) {
+			return extension.toLowerCase();
+		}
+
+		// some file with no extension
+		return "File";
+	}
+
+----------------------------------------
+	public static String getMessage(Throwable t) {
+		if (t != null) {
+			String m = t.getMessage();
+			if (m == null || m.isEmpty()) {
+				return t.toString();
+			}
+			return m;
+		}
+		return null;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+24079257
+source/net/filebot/util/ui/AbstractFancyListCellRenderer.java 127 132
+source/net/filebot/util/ui/ListView.java 105 110
+----------------------------------------
+		if (isSelected) {
+			setBackground(list.getSelectionBackground());
+			setForeground(list.getSelectionForeground());
+		} else {
+			setBackground(list.getBackground());
+			setForeground(list.getForeground());
+
+----------------------------------------
+			if (isSelected) {
+				setBackground(list.getSelectionBackground());
+				setForeground(list.getSelectionForeground());
+			} else {
+				setBackground(list.getBackground());
+				setForeground(list.getForeground());
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+24079258
+source/net/filebot/ui/subtitle/SubtitleViewer.java 257 262
+source/net/filebot/ui/rename/HistoryDialog.java 700 705
+----------------------------------------
+		@Override
+		public String getColumnName(int column) {
+			switch (column) {
+			case 0:
+				return "#";
+			case 1:
+
+----------------------------------------
+		@Override
+		public String getColumnName(int column) {
+			switch (column) {
+			case 0:
+				return "#";
+			case 1:
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+24079259
+source/net/filebot/ui/subtitle/SubtitleViewer.java 257 262
+source/net/filebot/ui/rename/HistoryDialog.java 783 788
+----------------------------------------
+		@Override
+		public String getColumnName(int column) {
+			switch (column) {
+			case 0:
+				return "#";
+			case 1:
+
+----------------------------------------
+		@Override
+		public String getColumnName(int column) {
+			switch (column) {
+			case 0:
+				return "#";
+			case 1:
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+24079260
+source/net/filebot/ui/episodelist/EpisodeListPanel.java 219 226
+source/net/filebot/ui/subtitle/SubtitlePanel.java 327 334
+----------------------------------------
+		@Override
+		public Icon getIcon() {
+			return request.provider.getIcon();
+		}
+
+		@Override
+		protected void configureSelectDialog(SelectDialog<SearchResult> selectDialog) {
+			super.configureSelectDialog(selectDialog);
+
+----------------------------------------
+		@Override
+		public Icon getIcon() {
+			return request.provider.getIcon();
+		}
+
+		@Override
+		protected void configureSelectDialog(SelectDialog<SearchResult> selectDialog) {
+			super.configureSelectDialog(selectDialog);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+24079261
+source/net/filebot/ui/rename/FormatDialog.java 196 202
+source/net/filebot/ui/list/ListPanel.java 125 131
+----------------------------------------
+		RTextScrollPane editorScrollPane = new RTextScrollPane(editor, false);
+		editorScrollPane.setLineNumbersEnabled(false);
+		editorScrollPane.setFoldIndicatorEnabled(false);
+		editorScrollPane.setIconRowHeaderEnabled(false);
+
+		editorScrollPane.setVerticalScrollBarPolicy(RTextScrollPane.VERTICAL_SCROLLBAR_NEVER);
+		editorScrollPane.setHorizontalScrollBarPolicy(RTextScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+
+----------------------------------------
+		RTextScrollPane editorScrollPane = new RTextScrollPane(editor, false);
+		editorScrollPane.setLineNumbersEnabled(false);
+		editorScrollPane.setFoldIndicatorEnabled(false);
+		editorScrollPane.setIconRowHeaderEnabled(false);
+
+		editorScrollPane.setVerticalScrollBarPolicy(RTextScrollPane.VERTICAL_SCROLLBAR_NEVER);
+		editorScrollPane.setHorizontalScrollBarPolicy(RTextScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+24079262
+source/net/filebot/ui/rename/BindingDialog.java 493 501
+source/net/filebot/ui/rename/BindingDialog.java 450 458
+----------------------------------------
+			default:
+				return null;
+			}
+		}
+
+		@Override
+		public Object getValueAt(int row, int column) {
+			switch (column) {
+			case 0:
+
+----------------------------------------
+			default:
+				return null;
+			}
+		}
+
+		@Override
+		public Object getValueAt(int row, int column) {
+			switch (column) {
+			case 0:
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+24079263
+source/net/filebot/ui/rename/BindingDialog.java 493 501
+source/net/filebot/ui/subtitle/SubtitleViewer.java 294 302
+----------------------------------------
+			default:
+				return null;
+			}
+		}
+
+		@Override
+		public Object getValueAt(int row, int column) {
+			switch (column) {
+			case 0:
+
+----------------------------------------
+			default:
+				return null;
+			}
+		}
+
+		@Override
+		public Object getValueAt(int row, int column) {
+			switch (column) {
+			case 0:
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+24079264
+source/net/filebot/ui/filter/FileTreeTransferablePolicy.java 32 39
+source/net/filebot/ui/sfv/ChecksumTableTransferablePolicy.java 42 49
+----------------------------------------
+	@Override
+	protected boolean accept(List<File> files) {
+		return true;
+	}
+
+	@Override
+	protected void clear() {
+		super.clear();
+
+----------------------------------------
+	@Override
+	protected boolean accept(List<File> files) {
+		return true;
+	}
+
+	@Override
+	protected void clear() {
+		super.clear();
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+24079265
+source/net/filebot/ui/rename/BindingDialog.java 443 448
+source/net/filebot/ui/subtitle/SubtitleAutoMatchDialog.java 556 561
+----------------------------------------
+		@Override
+		public Class<?> getColumnClass(int column) {
+			switch (column) {
+			case 0:
+				return String.class;
+			case 1:
+
+----------------------------------------
+		@Override
+		public Class<?> getColumnClass(int column) {
+			switch (column) {
+			case 0:
+				return String.class;
+			case 1:
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+24079266
+source/net/filebot/hash/VerificationFileReader.java 95 103
+source/net/filebot/subtitle/SubtitleReader.java 51 58
+----------------------------------------
+	@Override
+	public void close() throws IOException {
+		scanner.close();
+	}
+
+
+	@Override
+	public void remove() {
+		throw new UnsupportedOperationException();
+
+----------------------------------------
+	@Override
+	public void close() throws IOException {
+		scanner.close();
+	}
+
+	@Override
+	public void remove() {
+		throw new UnsupportedOperationException();
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+24079267
+source/net/filebot/util/FileUtilities.java 536 545
+source/net/filebot/util/FileUtilities.java 557 566
+----------------------------------------
+			List<File> valueList = map.get(key);
+			if (valueList == null) {
+				valueList = new ArrayList<File>();
+				map.put(key, valueList);
+			}
+
+			valueList.add(file);
+		}
+
+		return map;
+
+----------------------------------------
+			List<File> valueList = map.get(key);
+			if (valueList == null) {
+				valueList = new ArrayList<File>();
+				map.put(key, valueList);
+			}
+
+			valueList.add(file);
+		}
+
+		return map;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+24079268
+source/net/filebot/util/FileUtilities.java 536 545
+source/net/filebot/media/MediaDetection.java 1081 1090
+----------------------------------------
+			List<File> valueList = map.get(key);
+			if (valueList == null) {
+				valueList = new ArrayList<File>();
+				map.put(key, valueList);
+			}
+
+			valueList.add(file);
+		}
+
+		return map;
+
+----------------------------------------
+			List<File> valueList = map.get(key);
+			if (valueList == null) {
+				valueList = new ArrayList<File>();
+				map.put(key, valueList);
+			}
+
+			valueList.add(file);
+		}
+
+		return map;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+24079269
+source/net/filebot/format/ExpressionBindings.java 105 129
+source/net/filebot/format/PropertyBindings.java 102 128
+----------------------------------------
+	@Override
+	public Set<Entry<String, Object>> entrySet() {
+		Set<Entry<String, Object>> entrySet = new HashSet<Entry<String, Object>>();
+
+		for (final String key : keySet()) {
+			entrySet.add(new Entry<String, Object>() {
+
+				@Override
+				public String getKey() {
+					return key;
+				}
+
+				@Override
+				public Object getValue() {
+					return get(key);
+				}
+
+				@Override
+				public Object setValue(Object value) {
+					return put(key, value);
+				}
+			});
+		}
+
+		return entrySet;
+
+----------------------------------------
+	@Override
+	public Set<Entry<String, Object>> entrySet() {
+		Set<Entry<String, Object>> entrySet = new HashSet<Entry<String, Object>>();
+
+		for (final String key : keySet()) {
+			entrySet.add(new Entry<String, Object>() {
+
+				@Override
+				public String getKey() {
+					return key;
+				}
+
+
+				@Override
+				public Object getValue() {
+					return get(key);
+				}
+
+
+				@Override
+				public Object setValue(Object value) {
+					return put(key, value);
+				}
+			});
+		}
+
+		return entrySet;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+24079270
+source/net/filebot/ui/rename/ConflictDialog.java 184 193
+source/net/filebot/ui/subtitle/SubtitleViewer.java 269 279
+----------------------------------------
+			return null;
+		}
+
+		@Override
+		public int getColumnCount() {
+			return 4;
+		}
+
+		@Override
+		public int getRowCount() {
+
+----------------------------------------
+				return null;
+			}
+		}
+
+		@Override
+		public int getColumnCount() {
+			return 4;
+		}
+
+		@Override
+		public int getRowCount() {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+24079271
+source/net/filebot/web/TheTVDBClientV1.java 56 63
+source/net/filebot/web/TheTVDBClient.java 46 53
+----------------------------------------
+	@Override
+	public Icon getIcon() {
+		return ResourceManager.getIcon("search.thetvdb");
+	}
+
+	@Override
+	public boolean hasSeasonSupport() {
+		return true;
+
+----------------------------------------
+	@Override
+	public Icon getIcon() {
+		return ResourceManager.getIcon("search.thetvdb");
+	}
+
+	@Override
+	public boolean hasSeasonSupport() {
+		return true;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+24079272
+source/net/filebot/media/MediaDetection.java 538 549
+source/net/filebot/media/MediaDetection.java 896 907
+----------------------------------------
+		Pattern spacing = Pattern.compile("(^(?i)(The|A)\\b)|[\\p{Punct}\\p{Space}]+");
+
+		List<String> terms = new ArrayList<String>(names.size());
+		for (String it : names) {
+			String term = spacing.matcher(it).replaceAll("").toLowerCase();
+			if (term.length() >= 3) {
+				terms.add(term); // only consider words, not just random letters
+			}
+		}
+
+		// similarity threshold based on strict/non-strict
+		SimilarityMetric metric = new NameSimilarityMetric();
+
+----------------------------------------
+		Pattern spacing = Pattern.compile("(^(?i)(The|A)\\b)|[\\p{Punct}\\p{Space}]+");
+
+		List<String> terms = new ArrayList<String>(names.size());
+		for (String it : names) {
+			String term = spacing.matcher(it).replaceAll("").toLowerCase();
+			if (term.length() >= 3) {
+				terms.add(term); // only consider words, not just random letters
+			}
+		}
+
+		// similarity threshold based on strict/non-strict
+		SimilarityMetric metric = new NameSimilarityMetric();
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+24079273
+source/net/filebot/similarity/DateMatcher.java 118 130
+source/net/filebot/similarity/SeasonEpisodeMatcher.java 186 198
+----------------------------------------
+					return match;
+				}
+			}
+		}
+		return null;
+	}
+
+	protected List<String> tokenizeTail(File file) {
+		List<String> tail = new ArrayList<String>(2);
+		for (File f : listPathTail(file, 2, true)) {
+			tail.add(getName(f));
+		}
+		return tail;
+
+----------------------------------------
+					return match;
+				}
+			}
+		}
+		return null;
+	}
+
+	protected List<String> tokenizeTail(File file) {
+		List<String> tail = new ArrayList<String>(2);
+		for (File f : listPathTail(file, 2, true)) {
+			tail.add(getName(f));
+		}
+		return tail;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+24079274
+source/net/filebot/ui/rename/HistoryDialog.java 824 832
+source/net/filebot/ui/subtitle/SubtitleViewer.java 295 304
+----------------------------------------
+			return null;
+		}
+
+		@Override
+		public Object getValueAt(int row, int column) {
+			switch (column) {
+			case 0:
+				return row + 1;
+			case 1:
+
+----------------------------------------
+				return null;
+			}
+		}
+
+		@Override
+		public Object getValueAt(int row, int column) {
+			switch (column) {
+			case 0:
+				return row + 1;
+			case 1:
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+24079275
+source/net/filebot/ui/rename/HistoryDialog.java 824 832
+source/net/filebot/ui/rename/HistoryDialog.java 733 741
+----------------------------------------
+			return null;
+		}
+
+		@Override
+		public Object getValueAt(int row, int column) {
+			switch (column) {
+			case 0:
+				return row + 1;
+			case 1:
+
+----------------------------------------
+			return null;
+		}
+
+		@Override
+		public Object getValueAt(int row, int column) {
+			switch (column) {
+			case 0:
+				return row + 1;
+			case 1:
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+24079276
+source/net/filebot/cli/CmdlineOperations.java 224 236
+source/net/filebot/ui/rename/EpisodeListMatcher.java 125 137
+----------------------------------------
+		derivateFiles.removeAll(mediaFiles);
+
+		for (File file : derivateFiles) {
+			for (Match<File, ?> match : matches) {
+				if (file.getPath().startsWith(match.getValue().getParentFile().getPath()) && isDerived(file, match.getValue()) && match.getCandidate() instanceof Episode) {
+					derivateMatches.add(new Match<File, Object>(file, ((Episode) match.getCandidate()).clone()));
+					break;
+				}
+			}
+		}
+
+		// add matches from other files that are linked via filenames
+		matches.addAll(derivateMatches);
+
+----------------------------------------
+		derivateFiles.removeAll(mediaFiles);
+
+		for (File file : derivateFiles) {
+			for (Match<File, ?> match : matches) {
+				if (file.getPath().startsWith(match.getValue().getParentFile().getPath()) && isDerived(file, match.getValue()) && match.getCandidate() instanceof Episode) {
+					derivateMatches.add(new Match<File, Object>(file, ((Episode) match.getCandidate()).clone()));
+					break;
+				}
+			}
+		}
+
+		// add matches from other files that are linked via filenames
+		matches.addAll(derivateMatches);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+24079277
+source/net/filebot/web/TVMazeClient.java 32 42
+source/net/filebot/web/TMDbTVClient.java 43 53
+----------------------------------------
+	@Override
+	public boolean hasSeasonSupport() {
+		return true;
+	}
+
+	@Override
+	protected SortOrder vetoRequestParameter(SortOrder order) {
+		return SortOrder.Airdate;
+	}
+
+	@Override
+
+----------------------------------------
+	@Override
+	public boolean hasSeasonSupport() {
+		return true;
+	}
+
+	@Override
+	protected SortOrder vetoRequestParameter(SortOrder order) {
+		return SortOrder.Airdate;
+	}
+
+	@Override
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+24079278
+source/net/filebot/ui/AbstractSearchPanel.java 189 202
+source/net/filebot/ui/AbstractSearchPanel.java 253 265
+----------------------------------------
+			} finally {
+				requestProcessor.duration += (System.currentTimeMillis() - start);
+			}
+		}
+
+		@Override
+		public void done() {
+			FileBotTab<?> tab = requestProcessor.tab;
+
+			// tab might have been closed
+			if (tab.isClosed())
+				return;
+
+			try {
+
+----------------------------------------
+			} finally {
+				requestProcessor.duration += (System.currentTimeMillis() - start);
+			}
+		}
+
+		@Override
+		public void done() {
+			FileBotTab<?> tab = requestProcessor.tab;
+
+			if (tab.isClosed())
+				return;
+
+			try {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+24079279
+source/net/filebot/ui/subtitle/SubtitleDownloadComponent.java 429 440
+source/net/filebot/ui/filter/FileTree.java 175 186
+----------------------------------------
+		@Override
+		public void mousePressed(MouseEvent e) {
+			maybeShowPopup(e);
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			maybeShowPopup(e);
+		}
+
+		private void maybeShowPopup(MouseEvent e) {
+			if (e.isPopupTrigger()) {
+
+----------------------------------------
+		@Override
+		public void mousePressed(MouseEvent e) {
+			maybeShowPopup(e);
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			maybeShowPopup(e);
+		}
+
+		private void maybeShowPopup(MouseEvent e) {
+			if (e.isPopupTrigger()) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+24079280
+source/net/filebot/ui/subtitle/SubtitleDownloadComponent.java 429 440
+source/net/filebot/ui/subtitle/SubtitleDownloadComponent.java 360 371
+----------------------------------------
+		@Override
+		public void mousePressed(MouseEvent e) {
+			maybeShowPopup(e);
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			maybeShowPopup(e);
+		}
+
+		private void maybeShowPopup(MouseEvent e) {
+			if (e.isPopupTrigger()) {
+
+----------------------------------------
+		@Override
+		public void mousePressed(MouseEvent e) {
+			maybeShowPopup(e);
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			maybeShowPopup(e);
+		}
+
+		private void maybeShowPopup(MouseEvent e) {
+			if (e.isPopupTrigger()) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+24079281
+source/net/filebot/ui/subtitle/SubtitleDownloadComponent.java 429 440
+source/net/filebot/ui/rename/HistoryDialog.java 325 336
+----------------------------------------
+		@Override
+		public void mousePressed(MouseEvent e) {
+			maybeShowPopup(e);
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			maybeShowPopup(e);
+		}
+
+		private void maybeShowPopup(MouseEvent e) {
+			if (e.isPopupTrigger()) {
+
+----------------------------------------
+		@Override
+		public void mousePressed(MouseEvent e) {
+			maybeShowPopup(e);
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			maybeShowPopup(e);
+		}
+
+		private void maybeShowPopup(MouseEvent e) {
+			if (e.isPopupTrigger()) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+24079282
+source/net/filebot/web/WebRequest.java 212 223
+source/net/filebot/web/WebRequest.java 153 164
+----------------------------------------
+		ByteBufferOutputStream buffer = new ByteBufferOutputStream(contentLength >= 0 ? contentLength : BUFFER_SIZE);
+		try {
+			// read all
+			buffer.transferFully(inputStream);
+		} catch (IOException e) {
+			// if the content length is not known in advance an IOException (Premature EOF)
+			// is always thrown after all the data has been read
+			if (contentLength >= 0) {
+				throw e;
+			}
+		} finally {
+			inputStream.close();
+
+----------------------------------------
+		ByteBufferOutputStream buffer = new ByteBufferOutputStream(contentLength >= 0 ? contentLength : BUFFER_SIZE);
+		try {
+			// read all
+			buffer.transferFully(inputStream);
+		} catch (IOException e) {
+			// if the content length is not known in advance an IOException (Premature EOF)
+			// is always thrown after all the data has been read
+			if (contentLength >= 0) {
+				throw e;
+			}
+		} finally {
+			inputStream.close();
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+24079283
+source/net/filebot/media/MediaDetection.java 1077 1090
+source/net/filebot/util/FileUtilities.java 553 566
+----------------------------------------
+			if (key != null) {
+				key = key.toLowerCase();
+			}
+
+			List<File> valueList = map.get(key);
+			if (valueList == null) {
+				valueList = new ArrayList<File>();
+				map.put(key, valueList);
+			}
+
+			valueList.add(file);
+		}
+
+		return map;
+
+----------------------------------------
+			if (key != null) {
+				key = key.toLowerCase();
+			}
+
+			List<File> valueList = map.get(key);
+			if (valueList == null) {
+				valueList = new ArrayList<File>();
+				map.put(key, valueList);
+			}
+
+			valueList.add(file);
+		}
+
+		return map;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+24079284
+source/net/filebot/ui/subtitle/upload/SubtitleMappingTableModel.java 61 72
+source/net/filebot/ui/subtitle/SubtitleAutoMatchDialog.java 526 537
+----------------------------------------
+		return null;
+	}
+
+	@Override
+	public int getRowCount() {
+		return data.length;
+	}
+
+	@Override
+	public Object getValueAt(int row, int column) {
+		switch (column) {
+		case 0:
+
+----------------------------------------
+			return null;
+		}
+
+		@Override
+		public int getRowCount() {
+			return data.length;
+		}
+
+		@Override
+		public Object getValueAt(int row, int column) {
+			switch (column) {
+			case 0:
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+24079285
+source/net/filebot/ui/filter/ExtractTool.java 52 61
+source/net/filebot/ui/filter/AttributeTool.java 33 42
+----------------------------------------
+		table.setAutoCreateRowSorter(true);
+		table.setAutoCreateColumnsFromModel(true);
+		table.setFillsViewportHeight(true);
+
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
+		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+
+		table.setBackground(Color.white);
+		table.setGridColor(new Color(0xEEEEEE));
+		table.setRowHeight(25);
+
+----------------------------------------
+		table.setAutoCreateRowSorter(true);
+		table.setAutoCreateColumnsFromModel(true);
+		table.setFillsViewportHeight(true);
+
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
+		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+
+		table.setBackground(Color.white);
+		table.setGridColor(new Color(0xEEEEEE));
+		table.setRowHeight(25);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+24079286
+source/net/filebot/ui/filter/ExtractTool.java 52 61
+source/net/filebot/ui/rename/BindingDialog.java 277 286
+----------------------------------------
+		table.setAutoCreateRowSorter(true);
+		table.setAutoCreateColumnsFromModel(true);
+		table.setFillsViewportHeight(true);
+
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
+		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+
+		table.setBackground(Color.white);
+		table.setGridColor(new Color(0xEEEEEE));
+		table.setRowHeight(25);
+
+----------------------------------------
+					table.setAutoCreateRowSorter(true);
+					table.setAutoCreateColumnsFromModel(true);
+					table.setFillsViewportHeight(true);
+
+					table.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
+					table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+
+					table.setBackground(Color.white);
+					table.setGridColor(new Color(0xEEEEEE));
+					table.setRowHeight(25);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+24079287
+source/net/filebot/ui/subtitle/SubtitleViewer.java 278 288
+source/net/filebot/ui/rename/HistoryDialog.java 718 728
+----------------------------------------
+		@Override
+		public int getRowCount() {
+			return data.size();
+		}
+
+		@Override
+		public Class<?> getColumnClass(int column) {
+			switch (column) {
+			case 0:
+				return Integer.class;
+			case 1:
+
+----------------------------------------
+		@Override
+		public int getRowCount() {
+			return data.size();
+		}
+
+		@Override
+		public Class<?> getColumnClass(int column) {
+			switch (column) {
+			case 0:
+				return Integer.class;
+			case 1:
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+24079288
+source/net/filebot/ui/subtitle/SubtitleViewer.java 278 288
+source/net/filebot/ui/rename/HistoryDialog.java 805 815
+----------------------------------------
+		@Override
+		public int getRowCount() {
+			return data.size();
+		}
+
+		@Override
+		public Class<?> getColumnClass(int column) {
+			switch (column) {
+			case 0:
+				return Integer.class;
+			case 1:
+
+----------------------------------------
+		@Override
+		public int getRowCount() {
+			return data.size();
+		}
+
+		@Override
+		public Class<?> getColumnClass(int column) {
+			switch (column) {
+			case 0:
+				return Integer.class;
+			case 1:
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+24079289
+source/net/filebot/ui/filter/MediaInfoTool.java 43 57
+source/net/filebot/ui/filter/AttributeTool.java 38 52
+----------------------------------------
+		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+
+		table.setBackground(Color.white);
+		table.setGridColor(new Color(0xEEEEEE));
+		table.setRowHeight(25);
+
+		JScrollPane scrollPane = new JScrollPane(table);
+		scrollPane.setBorder(BorderFactory.createEmptyBorder());
+
+		setLayout(new MigLayout("insets 0, fill"));
+		add(new LoadingOverlayPane(scrollPane, this), "grow");
+	}
+
+	@Override
+	protected TableModel createModelInBackground(List<File> root) {
+
+----------------------------------------
+		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+
+		table.setBackground(Color.white);
+		table.setGridColor(new Color(0xEEEEEE));
+		table.setRowHeight(25);
+
+		JScrollPane scrollPane = new JScrollPane(table);
+		scrollPane.setBorder(BorderFactory.createEmptyBorder());
+
+		setLayout(new MigLayout("insets 0, fill"));
+		add(new LoadingOverlayPane(scrollPane, this), "grow");
+	}
+
+	@Override
+	protected TableModel createModelInBackground(List<File> root) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+24079290
+source/net/filebot/ui/rename/HistoryDialog.java 805 817
+source/net/filebot/ui/rename/HistoryDialog.java 718 730
+----------------------------------------
+		@Override
+		public int getRowCount() {
+			return data.size();
+		}
+
+		@Override
+		public Class<?> getColumnClass(int column) {
+			switch (column) {
+			case 0:
+				return Integer.class;
+			case 1:
+				return String.class;
+			case 2:
+
+----------------------------------------
+		@Override
+		public int getRowCount() {
+			return data.size();
+		}
+
+		@Override
+		public Class<?> getColumnClass(int column) {
+			switch (column) {
+			case 0:
+				return Integer.class;
+			case 1:
+				return String.class;
+			case 2:
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+24079291
+source/net/filebot/util/ui/notification/QueueNotificationLayout.java 42 58
+source/net/filebot/util/ui/notification/SimpleNotificationLayout.java 27 43
+----------------------------------------
+	private Point getBaseAnchor(Dimension screen, Insets insets) {
+		Point p = new Point();
+
+		screen.height -= insets.top + insets.bottom;
+		screen.width -= insets.left + insets.right;
+
+		p.x = (int) (alignment.ax * screen.width);
+		p.y = (int) (alignment.ay * screen.height);
+
+		p.x += insets.left;
+		p.y += insets.top;
+
+		return p;
+	}
+
+	private Point getLocation(Point anchor, Dimension size) {
+		Point p = new Point();
+
+----------------------------------------
+	private Point getBaseAnchor(Dimension screen, Insets insets) {
+		Point p = new Point();
+
+		screen.height -= insets.top + insets.bottom;
+		screen.width -= insets.left + insets.right;
+
+		p.x = (int) (alignment.ax * screen.width);
+		p.y = (int) (alignment.ay * screen.height);
+
+		p.x += insets.left;
+		p.y += insets.top;
+
+		return p;
+	}
+
+	private Point getLocation(Point anchor, Dimension size) {
+		Point p = new Point();
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+24079292
+source/net/filebot/ui/filter/ExtractTool.java 214 235
+source/net/filebot/cli/CmdlineOperations.java 1064 1085
+----------------------------------------
+						final FileMapper outputMapper = new FileMapper(outputFolder);
+
+						final List<FileInfo> outputMapping = new ArrayList<FileInfo>();
+						for (FileInfo it : archive.listFiles()) {
+							File outputPath = outputMapper.getOutputFile(it.toFile());
+							outputMapping.add(new SimpleFileInfo(outputPath.getPath(), it.getLength()));
+						}
+
+						final Set<FileInfo> selection = new TreeSet<FileInfo>();
+						for (FileInfo future : outputMapping) {
+							if (filter == null || filter.accept(future.toFile())) {
+								selection.add(future);
+							}
+						}
+
+						// check if there is anything to extract at all
+						if (selection.isEmpty()) {
+							continue;
+						}
+
+						boolean skip = true;
+						for (FileInfo future : filter == null || forceExtractAll ? outputMapping : selection) {
+
+----------------------------------------
+				FileMapper outputMapper = new FileMapper(outputFolder);
+
+				List<FileInfo> outputMapping = new ArrayList<FileInfo>();
+				for (FileInfo it : archive.listFiles()) {
+					File outputPath = outputMapper.getOutputFile(it.toFile());
+					outputMapping.add(new SimpleFileInfo(outputPath.getPath(), it.getLength()));
+				}
+
+				Set<FileInfo> selection = new TreeSet<FileInfo>();
+				for (FileInfo future : outputMapping) {
+					if (filter == null || filter.accept(future.toFile())) {
+						selection.add(future);
+					}
+				}
+
+				// check if there is anything to extract at all
+				if (selection.isEmpty()) {
+					continue;
+				}
+
+				boolean skip = true;
+				for (FileInfo future : filter == null || forceExtractAll ? outputMapping : selection) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+24079293
+source/net/filebot/ui/subtitle/SubtitleDownloadComponent.java 360 384
+source/net/filebot/ui/subtitle/SubtitleDownloadComponent.java 429 452
+----------------------------------------
+		@Override
+		public void mousePressed(MouseEvent e) {
+			maybeShowPopup(e);
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			maybeShowPopup(e);
+		}
+
+		private void maybeShowPopup(MouseEvent e) {
+			if (e.isPopupTrigger()) {
+				JList list = (JList) e.getSource();
+
+				int index = list.locationToIndex(e.getPoint());
+
+				if (index >= 0 && !list.isSelectedIndex(index)) {
+					// auto-select clicked element
+					list.setSelectedIndex(index);
+				}
+
+				final Object[] selection = list.getSelectedValuesList().toArray();
+
+				if (selection.length > 0) {
+					JPopupMenu contextMenu = new JPopupMenu();
+
+----------------------------------------
+		@Override
+		public void mousePressed(MouseEvent e) {
+			maybeShowPopup(e);
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			maybeShowPopup(e);
+		}
+
+		private void maybeShowPopup(MouseEvent e) {
+			if (e.isPopupTrigger()) {
+				JList list = (JList) e.getSource();
+
+				int index = list.locationToIndex(e.getPoint());
+
+				if (index >= 0 && !list.isSelectedIndex(index)) {
+					// auto-select clicked element
+					list.setSelectedIndex(index);
+				}
+
+				Object[] selection = list.getSelectedValuesList().toArray();
+				if (selection.length > 0) {
+					JPopupMenu contextMenu = new JPopupMenu();
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+24079294
+source/net/filebot/ui/rename/PresetEditor.java 200 217
+source/net/filebot/ui/rename/FormatDialog.java 322 339
+----------------------------------------
+	private RSyntaxTextArea createEditor() {
+		RSyntaxTextArea editor = new RSyntaxTextArea(new RSyntaxDocument(SyntaxConstants.SYNTAX_STYLE_GROOVY), "", 1, 80);
+
+		editor.setAntiAliasingEnabled(true);
+		editor.setAnimateBracketMatching(false);
+		editor.setAutoIndentEnabled(false);
+		editor.setClearWhitespaceLinesEnabled(false);
+		editor.setBracketMatchingEnabled(true);
+		editor.setCloseCurlyBraces(false);
+		editor.setCodeFoldingEnabled(false);
+		editor.setHyperlinksEnabled(false);
+		editor.setUseFocusableTips(false);
+		editor.setHighlightCurrentLine(false);
+		editor.setLineWrap(false);
+		editor.setPaintMarkOccurrencesBorder(false);
+		editor.setPaintTabLines(false);
+		editor.setMarkOccurrences(false);
+		editor.setFont(new Font(MONOSPACED, PLAIN, 14));
+
+----------------------------------------
+	private RSyntaxTextArea createEditor() {
+		RSyntaxTextArea editor = new RSyntaxTextArea(new RSyntaxDocument(SyntaxConstants.SYNTAX_STYLE_GROOVY), "", 1, 80);
+
+		editor.setAntiAliasingEnabled(true);
+		editor.setAnimateBracketMatching(false);
+		editor.setAutoIndentEnabled(false);
+		editor.setClearWhitespaceLinesEnabled(false);
+		editor.setBracketMatchingEnabled(true);
+		editor.setCloseCurlyBraces(false);
+		editor.setCodeFoldingEnabled(false);
+		editor.setHyperlinksEnabled(false);
+		editor.setUseFocusableTips(false);
+		editor.setHighlightCurrentLine(false);
+		editor.setLineWrap(false);
+		editor.setPaintMarkOccurrencesBorder(false);
+		editor.setPaintTabLines(false);
+		editor.setMarkOccurrences(false);
+		editor.setFont(new Font(MONOSPACED, PLAIN, 14));
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+24079295
+source/net/filebot/ui/rename/PresetEditor.java 200 217
+source/net/filebot/ui/list/ListPanel.java 161 178
+----------------------------------------
+	private RSyntaxTextArea createEditor() {
+		RSyntaxTextArea editor = new RSyntaxTextArea(new RSyntaxDocument(SyntaxConstants.SYNTAX_STYLE_GROOVY), "", 1, 80);
+
+		editor.setAntiAliasingEnabled(true);
+		editor.setAnimateBracketMatching(false);
+		editor.setAutoIndentEnabled(false);
+		editor.setClearWhitespaceLinesEnabled(false);
+		editor.setBracketMatchingEnabled(true);
+		editor.setCloseCurlyBraces(false);
+		editor.setCodeFoldingEnabled(false);
+		editor.setHyperlinksEnabled(false);
+		editor.setUseFocusableTips(false);
+		editor.setHighlightCurrentLine(false);
+		editor.setLineWrap(false);
+		editor.setPaintMarkOccurrencesBorder(false);
+		editor.setPaintTabLines(false);
+		editor.setMarkOccurrences(false);
+		editor.setFont(new Font(MONOSPACED, PLAIN, 14));
+
+----------------------------------------
+	private RSyntaxTextArea createEditor() {
+		RSyntaxTextArea editor = new RSyntaxTextArea(new RSyntaxDocument(SyntaxConstants.SYNTAX_STYLE_GROOVY), "", 1, 80);
+
+		editor.setAntiAliasingEnabled(true);
+		editor.setAnimateBracketMatching(false);
+		editor.setAutoIndentEnabled(false);
+		editor.setClearWhitespaceLinesEnabled(false);
+		editor.setBracketMatchingEnabled(true);
+		editor.setCloseCurlyBraces(false);
+		editor.setCodeFoldingEnabled(false);
+		editor.setHyperlinksEnabled(false);
+		editor.setUseFocusableTips(false);
+		editor.setHighlightCurrentLine(false);
+		editor.setLineWrap(false);
+		editor.setPaintMarkOccurrencesBorder(false);
+		editor.setPaintTabLines(false);
+		editor.setMarkOccurrences(false);
+		editor.setFont(new Font(MONOSPACED, PLAIN, 14));
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+26804861
+source/net/filebot/ui/rename/FormatDialog.java 322 339
+source/net/filebot/ui/list/ListPanel.java 161 178
+----------------------------------------
+	private RSyntaxTextArea createEditor() {
+		RSyntaxTextArea editor = new RSyntaxTextArea(new RSyntaxDocument(SyntaxConstants.SYNTAX_STYLE_GROOVY), "", 1, 80);
+
+		editor.setAntiAliasingEnabled(true);
+		editor.setAnimateBracketMatching(false);
+		editor.setAutoIndentEnabled(false);
+		editor.setClearWhitespaceLinesEnabled(false);
+		editor.setBracketMatchingEnabled(true);
+		editor.setCloseCurlyBraces(false);
+		editor.setCodeFoldingEnabled(false);
+		editor.setHyperlinksEnabled(false);
+		editor.setUseFocusableTips(false);
+		editor.setHighlightCurrentLine(false);
+		editor.setLineWrap(false);
+		editor.setPaintMarkOccurrencesBorder(false);
+		editor.setPaintTabLines(false);
+		editor.setMarkOccurrences(false);
+		editor.setFont(new Font(MONOSPACED, PLAIN, 14));
+
+----------------------------------------
+	private RSyntaxTextArea createEditor() {
+		RSyntaxTextArea editor = new RSyntaxTextArea(new RSyntaxDocument(SyntaxConstants.SYNTAX_STYLE_GROOVY), "", 1, 80);
+
+		editor.setAntiAliasingEnabled(true);
+		editor.setAnimateBracketMatching(false);
+		editor.setAutoIndentEnabled(false);
+		editor.setClearWhitespaceLinesEnabled(false);
+		editor.setBracketMatchingEnabled(true);
+		editor.setCloseCurlyBraces(false);
+		editor.setCodeFoldingEnabled(false);
+		editor.setHyperlinksEnabled(false);
+		editor.setUseFocusableTips(false);
+		editor.setHighlightCurrentLine(false);
+		editor.setLineWrap(false);
+		editor.setPaintMarkOccurrencesBorder(false);
+		editor.setPaintTabLines(false);
+		editor.setMarkOccurrences(false);
+		editor.setFont(new Font(MONOSPACED, PLAIN, 14));
+
+----------------------------------------

@@ -1,0 +1,88 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+28820977
+pdfsam-core/src/main/java/org/pdfsam/ui/workspace/SaveWorkspaceEvent.java 74 84
+pdfsam-fx/src/main/java/org/pdfsam/ui/selection/multiple/ReverseColumn.java 42 56
+----------------------------------------
+    public Map<String, String> getDataForModule(String module) {
+        Map<String, String> values = data.get(module);
+        if (values == null) {
+            Map<String, String> emptyValues = new HashMap<>();
+            values = data.putIfAbsent(module, emptyValues);
+            if (values == null) {
+                values = emptyValues;
+            }
+        }
+        return values;
+    }
+
+----------------------------------------
+    public TableColumn<SelectionTableRowData, Boolean> getTableColumn() {
+        TableColumn<SelectionTableRowData, Boolean> tableColumn = new TableColumn<>(getColumnTitle());
+        tableColumn.setCellFactory(CheckBoxTableCell.forTableColumn(tableColumn));
+        tableColumn.setCellValueFactory(
+                new Callback<CellDataFeatures<SelectionTableRowData, Boolean>, ObservableValue<Boolean>>() {
+                    @Override
+                    public ObservableValue<Boolean> call(CellDataFeatures<SelectionTableRowData, Boolean> param) {
+                        if (param.getValue() != null) {
+                            return param.getValue().reverse;
+                        }
+                        return null;
+                    }
+                });
+        return tableColumn;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+28820979
+pdfsam-fx/src/main/java/org/pdfsam/ui/io/BrowsablePdfOutputField.java 47 54
+pdfsam-fx/src/main/java/org/pdfsam/ui/selection/single/TaskParametersBuilderSingleSelectionPane.java 44 51
+----------------------------------------
+    public void apply(SingleOutputTaskParametersBuilder<?> builder, Consumer<String> onError) {
+        getTextField().validate();
+        if (getTextField().getValidationState() == ValidationState.VALID) {
+            builder.output(new FileOutputAdapter(getTextField().getText()).getFileOutput());
+        } else {
+            onError.accept(DefaultI18nContext.getInstance().i18n("The selected PDF file is invalid"));
+        }
+    }
+
+----------------------------------------
+            Consumer<String> onError) {
+        getField().getTextField().validate();
+        if (getField().getTextField().getValidationState() == ValidationState.VALID) {
+            builder.source(getPdfDocumentDescriptor().toPdfFileSource());
+        } else {
+            onError.accept(DefaultI18nContext.getInstance().i18n("The selected PDF document is invalid"));
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+28820978
+pdfsam-fx/src/main/java/org/pdfsam/ui/io/BrowsablePdfInputField.java 52 59
+pdfsam-fx/src/main/java/org/pdfsam/ui/selection/single/TaskParametersBuilderSingleSelectionPane.java 44 51
+----------------------------------------
+    public void apply(SinglePdfSourceTaskParametersBuilder<?> builder, Consumer<String> onError) {
+        getTextField().validate();
+        if (getTextField().getValidationState() == ValidationState.VALID) {
+            builder.source(new PdfFileSourceAdapter(getTextField().getText()).getPdfFileSource());
+        } else {
+            onError.accept(DefaultI18nContext.getInstance().i18n("The selected PDF file is invalid"));
+        }
+    }
+
+----------------------------------------
+            Consumer<String> onError) {
+        getField().getTextField().validate();
+        if (getField().getTextField().getValidationState() == ValidationState.VALID) {
+            builder.source(getPdfDocumentDescriptor().toPdfFileSource());
+        } else {
+            onError.accept(DefaultI18nContext.getInstance().i18n("The selected PDF document is invalid"));
+        }
+    }
+
+----------------------------------------

@@ -1,0 +1,1457 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24218044
+src/com/_17od/upm/gui/OptionsDialog.java 396 403
+src/com/_17od/upm/gui/AccountDialog.java 478 485
+----------------------------------------
+		c.gridx = 0;
+		c.gridy = 2;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 5, 5, 0);
+		c.weightx = 1;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+
+----------------------------------------
+		c.gridx = 1;
+		c.gridy = 2;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(10, 10, 10, 10);
+		c.weightx = 1;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24218090
+src/com/_17od/upm/gui/DatabasePropertiesDialog.java 108 115
+src/com/_17od/upm/gui/AccountDialog.java 478 485
+----------------------------------------
+        c.gridx = 0;
+        c.gridy = 2;
+        c.anchor = GridBagConstraints.LINE_START;
+        c.insets = new Insets(3, 3, 0, 0);
+        c.weightx = 1;
+        c.weighty = 0;
+        c.gridwidth = 1;
+        c.fill = GridBagConstraints.NONE;
+
+----------------------------------------
+		c.gridx = 1;
+		c.gridy = 2;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(10, 10, 10, 10);
+		c.weightx = 1;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24218045
+src/com/_17od/upm/gui/AccountDialog.java 476 493
+src/com/_17od/upm/gui/OptionsDialog.java 406 422
+----------------------------------------
+		passwordPanel.add(hidePasswordCheckbox, c);
+
+		c.gridx = 1;
+		c.gridy = 2;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(10, 10, 10, 10);
+		c.weightx = 1;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		container.add(passwordPanel, c);
+
+		// URL Row
+		JLabel urlLabel = new JLabel(Translator.translate("url"));
+		c.gridx = 0;
+		c.gridy = 3;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(10, 10, 10, 10);
+
+----------------------------------------
+		httpProxyPort = new JTextField(Preferences.get(Preferences.ApplicationOptions.HTTP_PROXY_PORT), 6);
+		c.gridx = 1;
+		c.gridy = 2;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 5, 5, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		proxyPanel.add(httpProxyPort, c);
+
+		// The "HTTP Proxy Username" label row
+		proxyUsernameLabel = new JLabel(Translator.translate("httpProxyUsername"));
+		c.gridx = 0;
+		c.gridy = 3;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 5, 3, 0);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24218046
+src/com/_17od/upm/gui/AccountDialog.java 707 720
+src/com/_17od/upm/gui/OptionsDialog.java 496 509
+----------------------------------------
+		JPanel buttonPanel = new JPanel();
+		JButton okButton = new JButton(Translator.translate("ok"));
+		// Link Enter key to okButton
+		getRootPane().setDefaultButton(okButton);
+		okButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				okButtonAction();
+			}
+		});
+		buttonPanel.add(okButton);
+		if (!readOnly) {
+			JButton cancelButton = new JButton(Translator.translate("cancel"));
+			cancelButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+
+----------------------------------------
+		emptyBorderPanel.add(buttonPanel);
+		JButton okButton = new JButton(Translator.translate("ok"));
+		// Link Enter key to okButton
+		getRootPane().setDefaultButton(okButton);
+		okButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				okButtonAction();
+			}
+		});
+		buttonPanel.add(okButton);
+
+		JButton cancelButton = new JButton(Translator.translate("cancel"));
+		cancelButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24218111
+src/com/_17od/upm/gui/AccountDialog.java 289 296
+src/com/_17od/upm/gui/AccountDialog.java 161 168
+----------------------------------------
+		c.gridx = 1;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+
+----------------------------------------
+		c.gridx = 0;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(10, 10, 10, 10);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24218113
+src/com/_17od/upm/gui/AccountDialog.java 551 558
+src/com/_17od/upm/gui/AccountDialog.java 161 168
+----------------------------------------
+		c.gridx = 1;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+
+----------------------------------------
+		c.gridx = 0;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(10, 10, 10, 10);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24218112
+src/com/_17od/upm/gui/AccountDialog.java 309 316
+src/com/_17od/upm/gui/AccountDialog.java 161 168
+----------------------------------------
+		c.gridx = 2;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+
+----------------------------------------
+		c.gridx = 0;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(10, 10, 10, 10);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24218115
+src/com/_17od/upm/gui/AccountDialog.java 591 598
+src/com/_17od/upm/gui/AccountDialog.java 161 168
+----------------------------------------
+		c.gridx = 3;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+
+----------------------------------------
+		c.gridx = 0;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(10, 10, 10, 10);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24218110
+src/com/_17od/upm/gui/AccountDialog.java 224 231
+src/com/_17od/upm/gui/AccountDialog.java 161 168
+----------------------------------------
+		c.gridx = 2;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+
+----------------------------------------
+		c.gridx = 0;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(10, 10, 10, 10);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24218049
+src/com/_17od/upm/gui/AccountDialog.java 441 448
+src/com/_17od/upm/gui/AccountDialog.java 161 168
+----------------------------------------
+		c.gridx = 3;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+
+----------------------------------------
+		c.gridx = 0;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(10, 10, 10, 10);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24218047
+src/com/_17od/upm/gui/AccountDialog.java 401 408
+src/com/_17od/upm/gui/AccountDialog.java 161 168
+----------------------------------------
+		c.gridx = 1;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+
+----------------------------------------
+		c.gridx = 0;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(10, 10, 10, 10);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24218109
+src/com/_17od/upm/gui/AccountDialog.java 204 211
+src/com/_17od/upm/gui/AccountDialog.java 161 168
+----------------------------------------
+		c.gridx = 1;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+
+----------------------------------------
+		c.gridx = 0;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(10, 10, 10, 10);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24218114
+src/com/_17od/upm/gui/AccountDialog.java 571 578
+src/com/_17od/upm/gui/AccountDialog.java 161 168
+----------------------------------------
+		c.gridx = 2;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+
+----------------------------------------
+		c.gridx = 0;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(10, 10, 10, 10);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24218048
+src/com/_17od/upm/gui/AccountDialog.java 421 428
+src/com/_17od/upm/gui/AccountDialog.java 161 168
+----------------------------------------
+		c.gridx = 2;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+
+----------------------------------------
+		c.gridx = 0;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(10, 10, 10, 10);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24218062
+src/com/_17od/upm/gui/AccountDialog.java 568 578
+src/com/_17od/upm/gui/AccountDialog.java 221 231
+----------------------------------------
+				copyTextField(url);
+			}
+		});
+		c.gridx = 2;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+
+----------------------------------------
+				pasteToTextField(accountName);
+			}
+		});
+		c.gridx = 2;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24218061
+src/com/_17od/upm/gui/AccountDialog.java 418 428
+src/com/_17od/upm/gui/AccountDialog.java 221 231
+----------------------------------------
+				copyTextField(password);
+			}
+		});
+		c.gridx = 2;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+
+----------------------------------------
+				pasteToTextField(accountName);
+			}
+		});
+		c.gridx = 2;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24218064
+src/com/_17od/upm/gui/AccountDialog.java 568 578
+src/com/_17od/upm/gui/AccountDialog.java 306 316
+----------------------------------------
+				copyTextField(url);
+			}
+		});
+		c.gridx = 2;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+
+----------------------------------------
+				pasteToTextField(userId);
+			}
+		});
+		c.gridx = 2;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24218063
+src/com/_17od/upm/gui/AccountDialog.java 418 428
+src/com/_17od/upm/gui/AccountDialog.java 306 316
+----------------------------------------
+				copyTextField(password);
+			}
+		});
+		c.gridx = 2;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+
+----------------------------------------
+				pasteToTextField(userId);
+			}
+		});
+		c.gridx = 2;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24218060
+src/com/_17od/upm/gui/AccountDialog.java 221 231
+src/com/_17od/upm/gui/AccountDialog.java 306 316
+----------------------------------------
+				pasteToTextField(accountName);
+			}
+		});
+		c.gridx = 2;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+
+----------------------------------------
+				pasteToTextField(userId);
+			}
+		});
+		c.gridx = 2;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24218066
+src/com/_17od/upm/gui/AccountDialog.java 225 239
+src/com/_17od/upm/gui/AccountDialog.java 310 324
+----------------------------------------
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+		accountPanel.add(acctPasteButton, c);
+
+		c.gridx = 1;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(10, 10, 10, 10);
+		c.weightx = 1;
+		c.weighty = 1;
+
+----------------------------------------
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+		idPanel.add(idPasteButton, c);
+
+		c.gridx = 1;
+		c.gridy = 1;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(10, 10, 10, 10);
+		c.weightx = 1;
+		c.weighty = 1;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24218069
+src/com/_17od/upm/gui/AccountDialog.java 310 324
+src/com/_17od/upm/gui/AccountDialog.java 469 483
+----------------------------------------
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+		idPanel.add(idPasteButton, c);
+
+		c.gridx = 1;
+		c.gridy = 1;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(10, 10, 10, 10);
+		c.weightx = 1;
+		c.weighty = 1;
+
+----------------------------------------
+		c.gridy = 1;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 0);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		passwordPanel.add(hidePasswordCheckbox, c);
+
+		c.gridx = 1;
+		c.gridy = 2;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(10, 10, 10, 10);
+		c.weightx = 1;
+		c.weighty = 0;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24218067
+src/com/_17od/upm/gui/AccountDialog.java 225 239
+src/com/_17od/upm/gui/AccountDialog.java 469 483
+----------------------------------------
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+		accountPanel.add(acctPasteButton, c);
+
+		c.gridx = 1;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(10, 10, 10, 10);
+		c.weightx = 1;
+		c.weighty = 1;
+
+----------------------------------------
+		c.gridy = 1;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 0);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		passwordPanel.add(hidePasswordCheckbox, c);
+
+		c.gridx = 1;
+		c.gridy = 2;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(10, 10, 10, 10);
+		c.weightx = 1;
+		c.weighty = 0;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24218068
+src/com/_17od/upm/gui/AccountDialog.java 225 239
+src/com/_17od/upm/gui/AccountDialog.java 592 606
+----------------------------------------
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+		accountPanel.add(acctPasteButton, c);
+
+		c.gridx = 1;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(10, 10, 10, 10);
+		c.weightx = 1;
+		c.weighty = 1;
+
+----------------------------------------
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+		urlPanel.add(urlPasteButton, c);
+
+		c.gridx = 1;
+		c.gridy = 3;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(10, 10, 10, 10);
+		c.weightx = 1;
+		c.weighty = 1;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24218071
+src/com/_17od/upm/gui/AccountDialog.java 469 483
+src/com/_17od/upm/gui/AccountDialog.java 592 606
+----------------------------------------
+		c.gridy = 1;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 0);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		passwordPanel.add(hidePasswordCheckbox, c);
+
+		c.gridx = 1;
+		c.gridy = 2;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(10, 10, 10, 10);
+		c.weightx = 1;
+		c.weighty = 0;
+
+----------------------------------------
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+		urlPanel.add(urlPasteButton, c);
+
+		c.gridx = 1;
+		c.gridy = 3;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(10, 10, 10, 10);
+		c.weightx = 1;
+		c.weighty = 1;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24218070
+src/com/_17od/upm/gui/AccountDialog.java 310 324
+src/com/_17od/upm/gui/AccountDialog.java 592 606
+----------------------------------------
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+		idPanel.add(idPasteButton, c);
+
+		c.gridx = 1;
+		c.gridy = 1;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(10, 10, 10, 10);
+		c.weightx = 1;
+		c.weighty = 1;
+
+----------------------------------------
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+		urlPanel.add(urlPasteButton, c);
+
+		c.gridx = 1;
+		c.gridy = 3;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(10, 10, 10, 10);
+		c.weightx = 1;
+		c.weighty = 1;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24218072
+src/com/_17od/upm/gui/AccountDialog.java 235 242
+src/com/_17od/upm/gui/AccountDialog.java 320 327
+----------------------------------------
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(10, 10, 10, 10);
+		c.weightx = 1;
+		c.weighty = 1;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		container.add(accountPanel, c);
+
+----------------------------------------
+		c.gridy = 1;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(10, 10, 10, 10);
+		c.weightx = 1;
+		c.weighty = 1;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		container.add(idPanel, c);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24218075
+src/com/_17od/upm/gui/AccountDialog.java 320 327
+src/com/_17od/upm/gui/AccountDialog.java 602 609
+----------------------------------------
+		c.gridy = 1;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(10, 10, 10, 10);
+		c.weightx = 1;
+		c.weighty = 1;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		container.add(idPanel, c);
+
+----------------------------------------
+		c.gridy = 3;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(10, 10, 10, 10);
+		c.weightx = 1;
+		c.weighty = 1;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		container.add(urlPanel, c);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24218073
+src/com/_17od/upm/gui/AccountDialog.java 235 242
+src/com/_17od/upm/gui/AccountDialog.java 602 609
+----------------------------------------
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(10, 10, 10, 10);
+		c.weightx = 1;
+		c.weighty = 1;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		container.add(accountPanel, c);
+
+----------------------------------------
+		c.gridy = 3;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(10, 10, 10, 10);
+		c.weightx = 1;
+		c.weighty = 1;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		container.add(urlPanel, c);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24218074
+src/com/_17od/upm/gui/AccountDialog.java 235 242
+src/com/_17od/upm/gui/AccountDialog.java 685 692
+----------------------------------------
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(10, 10, 10, 10);
+		c.weightx = 1;
+		c.weighty = 1;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		container.add(accountPanel, c);
+
+----------------------------------------
+		c.gridy = 4;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(10, 10, 10, 10);
+		c.weightx = 1;
+		c.weighty = 1;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		container.add(notesPanel, c);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24218077
+src/com/_17od/upm/gui/AccountDialog.java 602 609
+src/com/_17od/upm/gui/AccountDialog.java 685 692
+----------------------------------------
+		c.gridy = 3;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(10, 10, 10, 10);
+		c.weightx = 1;
+		c.weighty = 1;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		container.add(urlPanel, c);
+
+----------------------------------------
+		c.gridy = 4;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(10, 10, 10, 10);
+		c.weightx = 1;
+		c.weighty = 1;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		container.add(notesPanel, c);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24218076
+src/com/_17od/upm/gui/AccountDialog.java 320 327
+src/com/_17od/upm/gui/AccountDialog.java 685 692
+----------------------------------------
+		c.gridy = 1;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(10, 10, 10, 10);
+		c.weightx = 1;
+		c.weighty = 1;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		container.add(idPanel, c);
+
+----------------------------------------
+		c.gridy = 4;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(10, 10, 10, 10);
+		c.weightx = 1;
+		c.weighty = 1;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		container.add(notesPanel, c);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24218078
+src/com/_17od/upm/gui/AccountDialog.java 354 362
+src/com/_17od/upm/gui/AccountDialog.java 401 409
+----------------------------------------
+		c.gridx = 0;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 1;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		passwordPanel.add(password, c);
+
+----------------------------------------
+		c.gridx = 1;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		passwordPanel.add(generateRandomPasswordButton, c);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24218081
+src/com/_17od/upm/gui/AccountDialog.java 401 409
+src/com/_17od/upm/gui/AccountDialog.java 421 429
+----------------------------------------
+		c.gridx = 1;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		passwordPanel.add(generateRandomPasswordButton, c);
+
+----------------------------------------
+		c.gridx = 2;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		passwordPanel.add(pwCopyButton, c);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24218079
+src/com/_17od/upm/gui/AccountDialog.java 354 362
+src/com/_17od/upm/gui/AccountDialog.java 421 429
+----------------------------------------
+		c.gridx = 0;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 1;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		passwordPanel.add(password, c);
+
+----------------------------------------
+		c.gridx = 2;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		passwordPanel.add(pwCopyButton, c);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24218080
+src/com/_17od/upm/gui/AccountDialog.java 354 362
+src/com/_17od/upm/gui/AccountDialog.java 441 449
+----------------------------------------
+		c.gridx = 0;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 1;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		passwordPanel.add(password, c);
+
+----------------------------------------
+		c.gridx = 3;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		passwordPanel.add(pwPasteButton, c);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24218083
+src/com/_17od/upm/gui/AccountDialog.java 421 429
+src/com/_17od/upm/gui/AccountDialog.java 441 449
+----------------------------------------
+		c.gridx = 2;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		passwordPanel.add(pwCopyButton, c);
+
+----------------------------------------
+		c.gridx = 3;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		passwordPanel.add(pwPasteButton, c);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24218082
+src/com/_17od/upm/gui/AccountDialog.java 401 409
+src/com/_17od/upm/gui/AccountDialog.java 441 449
+----------------------------------------
+		c.gridx = 1;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		passwordPanel.add(generateRandomPasswordButton, c);
+
+----------------------------------------
+		c.gridx = 3;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		passwordPanel.add(pwPasteButton, c);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24218086
+src/com/_17od/upm/gui/AccountDialog.java 469 476
+src/com/_17od/upm/gui/AccountDialog.java 402 409
+----------------------------------------
+		c.gridy = 1;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 0);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		passwordPanel.add(hidePasswordCheckbox, c);
+
+----------------------------------------
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		passwordPanel.add(generateRandomPasswordButton, c);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24218088
+src/com/_17od/upm/gui/AccountDialog.java 469 476
+src/com/_17od/upm/gui/AccountDialog.java 422 429
+----------------------------------------
+		c.gridy = 1;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 0);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		passwordPanel.add(hidePasswordCheckbox, c);
+
+----------------------------------------
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		passwordPanel.add(pwCopyButton, c);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24218084
+src/com/_17od/upm/gui/AccountDialog.java 402 409
+src/com/_17od/upm/gui/AccountDialog.java 422 429
+----------------------------------------
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		passwordPanel.add(generateRandomPasswordButton, c);
+
+----------------------------------------
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		passwordPanel.add(pwCopyButton, c);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24218089
+src/com/_17od/upm/gui/AccountDialog.java 469 476
+src/com/_17od/upm/gui/AccountDialog.java 442 449
+----------------------------------------
+		c.gridy = 1;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 0);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		passwordPanel.add(hidePasswordCheckbox, c);
+
+----------------------------------------
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		passwordPanel.add(pwPasteButton, c);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24218085
+src/com/_17od/upm/gui/AccountDialog.java 402 409
+src/com/_17od/upm/gui/AccountDialog.java 442 449
+----------------------------------------
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		passwordPanel.add(generateRandomPasswordButton, c);
+
+----------------------------------------
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		passwordPanel.add(pwPasteButton, c);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24218087
+src/com/_17od/upm/gui/AccountDialog.java 422 429
+src/com/_17od/upm/gui/AccountDialog.java 442 449
+----------------------------------------
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		passwordPanel.add(pwCopyButton, c);
+
+----------------------------------------
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		passwordPanel.add(pwPasteButton, c);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24218097
+src/com/_17od/upm/gui/AccountDialog.java 571 578
+src/com/_17od/upm/gui/DatabasePropertiesDialog.java 84 91
+----------------------------------------
+		c.gridx = 2;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+
+----------------------------------------
+        c.gridx = 0;
+        c.gridy = 0;
+        c.anchor = GridBagConstraints.LINE_START;
+        c.insets = new Insets(0, 3, 0, 0);
+        c.weightx = 1;
+        c.weighty = 0;
+        c.gridwidth = 1;
+        c.fill = GridBagConstraints.NONE;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24218093
+src/com/_17od/upm/gui/AccountDialog.java 224 231
+src/com/_17od/upm/gui/DatabasePropertiesDialog.java 84 91
+----------------------------------------
+		c.gridx = 2;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+
+----------------------------------------
+        c.gridx = 0;
+        c.gridy = 0;
+        c.anchor = GridBagConstraints.LINE_START;
+        c.insets = new Insets(0, 3, 0, 0);
+        c.weightx = 1;
+        c.weighty = 0;
+        c.gridwidth = 1;
+        c.fill = GridBagConstraints.NONE;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24218095
+src/com/_17od/upm/gui/AccountDialog.java 309 316
+src/com/_17od/upm/gui/DatabasePropertiesDialog.java 84 91
+----------------------------------------
+		c.gridx = 2;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+
+----------------------------------------
+        c.gridx = 0;
+        c.gridy = 0;
+        c.anchor = GridBagConstraints.LINE_START;
+        c.insets = new Insets(0, 3, 0, 0);
+        c.weightx = 1;
+        c.weighty = 0;
+        c.gridwidth = 1;
+        c.fill = GridBagConstraints.NONE;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24218098
+src/com/_17od/upm/gui/AccountDialog.java 591 598
+src/com/_17od/upm/gui/DatabasePropertiesDialog.java 84 91
+----------------------------------------
+		c.gridx = 3;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+
+----------------------------------------
+        c.gridx = 0;
+        c.gridy = 0;
+        c.anchor = GridBagConstraints.LINE_START;
+        c.insets = new Insets(0, 3, 0, 0);
+        c.weightx = 1;
+        c.weighty = 0;
+        c.gridwidth = 1;
+        c.fill = GridBagConstraints.NONE;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24218094
+src/com/_17od/upm/gui/AccountDialog.java 289 296
+src/com/_17od/upm/gui/DatabasePropertiesDialog.java 84 91
+----------------------------------------
+		c.gridx = 1;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+
+----------------------------------------
+        c.gridx = 0;
+        c.gridy = 0;
+        c.anchor = GridBagConstraints.LINE_START;
+        c.insets = new Insets(0, 3, 0, 0);
+        c.weightx = 1;
+        c.weighty = 0;
+        c.gridwidth = 1;
+        c.fill = GridBagConstraints.NONE;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24218092
+src/com/_17od/upm/gui/AccountDialog.java 204 211
+src/com/_17od/upm/gui/DatabasePropertiesDialog.java 84 91
+----------------------------------------
+		c.gridx = 1;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+
+----------------------------------------
+        c.gridx = 0;
+        c.gridy = 0;
+        c.anchor = GridBagConstraints.LINE_START;
+        c.insets = new Insets(0, 3, 0, 0);
+        c.weightx = 1;
+        c.weighty = 0;
+        c.gridwidth = 1;
+        c.fill = GridBagConstraints.NONE;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24218096
+src/com/_17od/upm/gui/AccountDialog.java 551 558
+src/com/_17od/upm/gui/DatabasePropertiesDialog.java 84 91
+----------------------------------------
+		c.gridx = 1;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+
+----------------------------------------
+        c.gridx = 0;
+        c.gridy = 0;
+        c.anchor = GridBagConstraints.LINE_START;
+        c.insets = new Insets(0, 3, 0, 0);
+        c.weightx = 1;
+        c.weighty = 0;
+        c.gridwidth = 1;
+        c.fill = GridBagConstraints.NONE;
+
+----------------------------------------

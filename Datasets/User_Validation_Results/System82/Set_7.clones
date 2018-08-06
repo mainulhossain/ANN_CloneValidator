@@ -1,0 +1,1383 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513861
+src/jmemorize/gui/swing/panels/CardPanel.java 609 623
+src/jmemorize/gui/swing/panels/CardPanel.java 754 768
+----------------------------------------
+    {
+        FormLayout layout = new FormLayout(
+//            "38dlu, 3dlu, d:grow", // columns //$NON-NLS-1$
+            "d:grow", // columns //$NON-NLS-1$
+            "fill:20dlu:grow"); // rows //$NON-NLS-1$
+    
+        CellConstraints cc = new CellConstraints();
+        DefaultFormBuilder builder = new DefaultFormBuilder(layout);
+        
+//        builder.addLabel(title, cc.xy(1, 1, "left, top")); //$NON-NLS-1$
+//        builder.add(cardSide, cc.xy(3, 1 ));
+        builder.add(cardSide, cc.xy(1, 1 ));
+        
+        return builder.getPanel();
+    }
+
+----------------------------------------
+    {
+        CellConstraints cc = new CellConstraints();
+        
+        DefaultFormBuilder builder;
+        FormLayout layout = new FormLayout(
+//            "38dlu, 3dlu, d:grow", // columns //$NON-NLS-1$
+            "d:grow", // columns //$NON-NLS-1$
+            "p, 3dlu"); // rows //$NON-NLS-1$
+
+        builder = new DefaultFormBuilder(layout);
+//        builder.add(comp, cc.xy (3, 1));
+        builder.add(comp, cc.xy (1, 1));
+        
+        return builder.getPanel();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513862
+src/jmemorize/gui/swing/panels/CardPanel.java 735 751
+src/jmemorize/gui/swing/panels/CardPanel.java 754 768
+----------------------------------------
+    {
+        CellConstraints cc = new CellConstraints();
+        
+        DefaultFormBuilder builder;
+        
+        FormLayout layout = new FormLayout(
+//            "38dlu, 3dlu, d:grow", // columns //$NON-NLS-1$
+            "d:grow", // columns //$NON-NLS-1$
+            "p, 3dlu"); // rows //$NON-NLS-1$
+
+        builder = new DefaultFormBuilder(layout);
+//        builder.addLabel(Localization.get(LC.CATEGORY), cc.xy ( 1, 1));
+//        builder.add(m_categoryBox, cc.xy(3, 1));
+        builder.add(m_categoryBox, cc.xy(1, 1));
+        
+        return builder.getPanel();
+    }
+
+----------------------------------------
+    {
+        CellConstraints cc = new CellConstraints();
+        
+        DefaultFormBuilder builder;
+        FormLayout layout = new FormLayout(
+//            "38dlu, 3dlu, d:grow", // columns //$NON-NLS-1$
+            "d:grow", // columns //$NON-NLS-1$
+            "p, 3dlu"); // rows //$NON-NLS-1$
+
+        builder = new DefaultFormBuilder(layout);
+//        builder.add(comp, cc.xy (3, 1));
+        builder.add(comp, cc.xy (1, 1));
+        
+        return builder.getPanel();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513863
+src/jmemorize/gui/swing/dialogs/PreferencesDialog.java 230 244
+src/jmemorize/gui/swing/panels/CardPanel.java 754 768
+----------------------------------------
+    {
+        // build main panel
+        FormLayout layout = new FormLayout(
+            "p:grow",       // columns //$NON-NLS-1$
+            "fill:p:grow"); // rows    //$NON-NLS-1$
+        
+        CellConstraints cc = new CellConstraints();
+        
+        DefaultFormBuilder builder = new DefaultFormBuilder(layout);
+        builder.setDefaultDialogBorder();
+        
+        builder.add(m_settingsPanel, cc.xy(1,1));
+        
+        return builder.getPanel();
+    }
+
+----------------------------------------
+    {
+        CellConstraints cc = new CellConstraints();
+        
+        DefaultFormBuilder builder;
+        FormLayout layout = new FormLayout(
+//            "38dlu, 3dlu, d:grow", // columns //$NON-NLS-1$
+            "d:grow", // columns //$NON-NLS-1$
+            "p, 3dlu"); // rows //$NON-NLS-1$
+
+        builder = new DefaultFormBuilder(layout);
+//        builder.add(comp, cc.xy (3, 1));
+        builder.add(comp, cc.xy (1, 1));
+        
+        return builder.getPanel();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513864
+src/jmemorize/gui/swing/panels/CardPanel.java 723 732
+src/jmemorize/gui/swing/panels/CardPanel.java 771 776
+----------------------------------------
+    {
+        JMenuItem item = new JMenuItem(action);
+        
+        if (action instanceof AbstractStyledTextAction)
+            ((AbstractStyledTextAction)action).setButton(item);
+        
+        item.setIcon(new ImageIcon(getClass().getResource("/resource/icons/"+icon)));
+        item.setText(text);
+        return item;
+    }
+
+----------------------------------------
+    {
+        JButton button = new JButton(action);
+        button.setText("");
+        button.setIcon(new ImageIcon(getClass().getResource("/resource/icons/"+icon)));
+        return button;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513865
+src/jmemorize/gui/swing/panels/CardPanel.java 713 720
+src/jmemorize/gui/swing/panels/CardPanel.java 771 776
+----------------------------------------
+    {
+        JButton button = new JButton(action);
+        action.setButton(button);
+        
+        button.setText("");
+        button.setIcon(new ImageIcon(getClass().getResource("/resource/icons/"+icon)));
+        return button;
+    }
+
+----------------------------------------
+    {
+        JButton button = new JButton(action);
+        button.setText("");
+        button.setIcon(new ImageIcon(getClass().getResource("/resource/icons/"+icon)));
+        return button;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513866
+src/jmemorize/gui/swing/widgets/CategoryTree.java 491 501
+src/jmemorize/gui/swing/widgets/CardTable.java 810 818
+----------------------------------------
+                    {
+                        if (!selectionModel.isRowSelected(row))
+                        {
+                            if (m_beforeMenuCategory == null)
+                                m_beforeMenuCategory = getCategory();
+                            
+                            setSelectionRow(row);
+                        }
+                        
+                        m_categoryMenu.show(e.getComponent(), e.getX(), e.getY());
+                    }
+
+----------------------------------------
+                {
+                    int row = rowAtPoint(e.getPoint());
+                    if (!selectionModel.isSelectedIndex(row))
+                    {
+                        selectionModel.setSelectionInterval(row,row);
+                    }
+                    
+                    m_cardMenu.show(e.getComponent(), e.getX(), e.getY());
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513867
+src/jmemorize/core/Category.java 334 342
+src/jmemorize/core/Category.java 358 366
+----------------------------------------
+    {
+        List<Card> learnableCards = new LinkedList<Card>();
+        for (int i = 0; i < getNumberOfDecks(); i++)
+        {
+            learnableCards.addAll(getLearnableCards(i));
+        }
+        
+        return learnableCards;
+    }
+
+----------------------------------------
+    {
+        List<Card> localCards = new ArrayList<Card>();
+        for (int i = 0; i < getNumberOfDecks(); i++)
+        {
+            localCards.addAll(getLocalCards(i));
+        }
+        
+        return localCards;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513868
+src/jmemorize/core/Category.java 358 366
+src/jmemorize/core/Category.java 184 194
+----------------------------------------
+    {
+        List<Card> localCards = new ArrayList<Card>();
+        for (int i = 0; i < getNumberOfDecks(); i++)
+        {
+            localCards.addAll(getLocalCards(i));
+        }
+        
+        return localCards;
+    }
+
+----------------------------------------
+    {
+        List<Card> cardList = new ArrayList<Card>();
+        
+        //get cards from all decks
+        for (int i=0; i < m_decks.size(); i++)
+        {
+            cardList.addAll(getCards(i));
+        }
+        
+        return cardList;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21514002
+src/jmemorize/core/Category.java 334 342
+src/jmemorize/core/Category.java 184 194
+----------------------------------------
+    {
+        List<Card> learnableCards = new LinkedList<Card>();
+        for (int i = 0; i < getNumberOfDecks(); i++)
+        {
+            learnableCards.addAll(getLearnableCards(i));
+        }
+        
+        return learnableCards;
+    }
+
+----------------------------------------
+    {
+        List<Card> cardList = new ArrayList<Card>();
+        
+        //get cards from all decks
+        for (int i=0; i < m_decks.size(); i++)
+        {
+            cardList.addAll(getCards(i));
+        }
+        
+        return cardList;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513869
+src/jmemorize/gui/swing/GeneralTransferHandler.java 333 341
+src/jmemorize/core/Category.java 406 414
+----------------------------------------
+            {
+                List<Card> cards = (List<Card>)t.getTransferData(CARDS_FLAVOR);
+                for (Card card : cards)
+                {
+                    targetCategory.addCard((Card)card.clone(), card.getLevel());
+                }
+    
+                return true;
+            }
+
+----------------------------------------
+    {
+        for (Category category : m_childCategories)
+        {
+            if (category.getName().equals(name))
+                return category;
+        }
+        
+        return null;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513872
+src/jmemorize/gui/swing/GeneralTransferHandler.java 234 240
+src/jmemorize/core/Category.java 468 473
+----------------------------------------
+            {
+                if (transferFlavors[i] == CARDS_FLAVOR || 
+                    transferFlavors[i] == CATEGORY_FLAVOR)
+                {
+                    return true;
+                }
+            }
+
+----------------------------------------
+        {
+            if (cat.contains(category))
+            {
+                return true;
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513871
+src/jmemorize/gui/swing/NewCardFramesManager.java 102 107
+src/jmemorize/core/Category.java 468 473
+----------------------------------------
+        {
+            if (!frame.close())
+            {
+                return false; // user canceled closing of this new card frame
+            }
+        }
+
+----------------------------------------
+        {
+            if (cat.contains(category))
+            {
+                return true;
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513870
+src/jmemorize/gui/swing/GeneralTransferHandler.java 246 252
+src/jmemorize/core/Category.java 468 473
+----------------------------------------
+            {
+                if (transferFlavors[i] == FORMATTED_TEXT_FLAVOR || 
+                    transferFlavors[i] == DataFlavor.stringFlavor)
+                {
+                    return true;
+                }
+            }
+
+----------------------------------------
+        {
+            if (cat.contains(category))
+            {
+                return true;
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513873
+src/jmemorize/gui/swing/panels/CardSidePanel.java 397 412
+src/jmemorize/gui/swing/panels/CardPanel.java 475 481
+----------------------------------------
+    {
+        m_textPane.addCaretListener(listener);
+        
+        /*
+         * Our problem is that the TextPane inserts new CaretListeners at the
+         * first position. Because we add our text actions after the editor kit
+         * has already been implictly set, they will get fired before the
+         * AttributeTracker in StyledEditorKit (which also listens as caret
+         * listener) has the chance to update the input attributes which our
+         * text actions rely on. By resetting the editor kit, the editor kit
+         * will be removed from the caret listeners and reinserted at the first
+         * position, so that our text actions can correctly access the current
+         * input attributes.
+         */
+        m_textPane.setEditorKit(m_textPane.getEditorKit());
+    }
+
+----------------------------------------
+    {
+        m_cardSidesPanel.getComponent(index);
+        
+        m_cardSidesPanel.remove(index);
+        
+        // TODO
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513876
+src/jmemorize/gui/swing/frames/MainFrame.java 310 315
+src/jmemorize/gui/swing/panels/CardPanel.java 475 481
+----------------------------------------
+    {
+        m_deck = level;
+        
+        m_deckTablePanel.setDeck(level);
+        m_deckChartPanel.setDeck(level);
+    }
+
+----------------------------------------
+    {
+        m_cardSidesPanel.getComponent(index);
+        
+        m_cardSidesPanel.remove(index);
+        
+        // TODO
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513875
+src/jmemorize/core/learn/LearnHistory.java 350 355
+src/jmemorize/gui/swing/panels/CardPanel.java 475 481
+----------------------------------------
+    {
+        SessionSummary sessionSummary = new SessionSummary(
+            start, end, passed, failed, skipped, relearned);
+        
+        m_summaries.add(sessionSummary);
+    }
+
+----------------------------------------
+    {
+        m_cardSidesPanel.getComponent(index);
+        
+        m_cardSidesPanel.remove(index);
+        
+        // TODO
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513874
+src/jmemorize/core/learn/DefaultLearnSession.java 306 311
+src/jmemorize/gui/swing/panels/CardPanel.java 475 481
+----------------------------------------
+    {
+        m_end = new Date();
+        
+        m_rootCategory.removeObserver(this);
+        m_provider.sessionEnded(this);
+    }
+
+----------------------------------------
+    {
+        m_cardSidesPanel.getComponent(index);
+        
+        m_cardSidesPanel.remove(index);
+        
+        // TODO
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513879
+src/jmemorize/gui/swing/widgets/CategoryTree.java 445 450
+src/jmemorize/gui/swing/panels/CardPanel.java 492 500
+----------------------------------------
+    {
+        for (SelectionObserver observer : m_selectionObservers)
+        {
+            observer.selectionChanged(this);
+        }
+    }
+
+----------------------------------------
+    {
+        for (ShowCardSideButton button : m_showSideButtons)
+        {
+            if (button.hasSide(index))
+                button.setEnabled(enabled);
+        }
+        
+//        m_showSideButtons.get(index).setEnabled(enabled);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513877
+src/jmemorize/core/Main.java 537 542
+src/jmemorize/gui/swing/panels/CardPanel.java 492 500
+----------------------------------------
+        {
+            for (LessonObserver observer : m_lessonObservers)
+            {
+                observer.lessonModified(lesson);
+            }
+        }
+
+----------------------------------------
+    {
+        for (ShowCardSideButton button : m_showSideButtons)
+        {
+            if (button.hasSide(index))
+                button.setEnabled(enabled);
+        }
+        
+//        m_showSideButtons.get(index).setEnabled(enabled);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513878
+src/jmemorize/gui/swing/widgets/CardTable.java 661 666
+src/jmemorize/gui/swing/panels/CardPanel.java 492 500
+----------------------------------------
+        {
+            for (SelectionObserver listener : m_selectionListeners)
+            {
+                listener.selectionChanged(this);
+            }
+        }
+
+----------------------------------------
+    {
+        for (ShowCardSideButton button : m_showSideButtons)
+        {
+            if (button.hasSide(index))
+                button.setEnabled(enabled);
+        }
+        
+//        m_showSideButtons.get(index).setEnabled(enabled);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513885
+src/jmemorize/gui/swing/widgets/CategoryTree.java 445 450
+src/jmemorize/gui/swing/panels/CardPanel.java 515 520
+----------------------------------------
+    {
+        for (SelectionObserver observer : m_selectionObservers)
+        {
+            observer.selectionChanged(this);
+        }
+    }
+
+----------------------------------------
+    {
+        for (CardSidePanel cardSide : m_cardSides)
+        {
+            cardSide.setEditable(editable);
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513882
+src/jmemorize/gui/swing/widgets/CardTable.java 661 666
+src/jmemorize/gui/swing/panels/CardPanel.java 515 520
+----------------------------------------
+        {
+            for (SelectionObserver listener : m_selectionListeners)
+            {
+                listener.selectionChanged(this);
+            }
+        }
+
+----------------------------------------
+    {
+        for (CardSidePanel cardSide : m_cardSides)
+        {
+            cardSide.setEditable(editable);
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513896
+src/jmemorize/core/SearchTool.java 59 64
+src/jmemorize/gui/swing/panels/CardPanel.java 515 520
+----------------------------------------
+            {
+                if (flipSide.indexOf(text) > -1)
+                {
+                    foundCards.add(card);
+                }
+            }
+
+----------------------------------------
+    {
+        for (CardSidePanel cardSide : m_cardSides)
+        {
+            cardSide.setEditable(editable);
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513897
+src/jmemorize/util/RecentItems.java 99 106
+src/jmemorize/gui/swing/panels/CardPanel.java 515 520
+----------------------------------------
+    {
+        for (RecentItemsObserver observer : m_observers)
+        {
+            observer.onRecentItemChange(this);
+        }
+        
+        storeToPreferences();
+    }
+
+----------------------------------------
+    {
+        for (CardSidePanel cardSide : m_cardSides)
+        {
+            cardSide.setEditable(editable);
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513898
+src/jmemorize/gui/swing/panels/CardPanel.java 492 500
+src/jmemorize/gui/swing/panels/CardPanel.java 515 520
+----------------------------------------
+    {
+        for (ShowCardSideButton button : m_showSideButtons)
+        {
+            if (button.hasSide(index))
+                button.setEnabled(enabled);
+        }
+        
+//        m_showSideButtons.get(index).setEnabled(enabled);
+    }
+
+----------------------------------------
+    {
+        for (CardSidePanel cardSide : m_cardSides)
+        {
+            cardSide.setEditable(editable);
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513880
+src/jmemorize/core/Main.java 535 543
+src/jmemorize/gui/swing/panels/CardPanel.java 515 520
+----------------------------------------
+    {
+        if (lesson.canSave())
+        {
+            for (LessonObserver observer : m_lessonObservers)
+            {
+                observer.lessonModified(lesson);
+            }
+        }
+    }
+
+----------------------------------------
+    {
+        for (CardSidePanel cardSide : m_cardSides)
+        {
+            cardSide.setEditable(editable);
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513881
+src/jmemorize/core/Main.java 537 542
+src/jmemorize/gui/swing/panels/CardPanel.java 515 520
+----------------------------------------
+        {
+            for (LessonObserver observer : m_lessonObservers)
+            {
+                observer.lessonModified(lesson);
+            }
+        }
+
+----------------------------------------
+    {
+        for (CardSidePanel cardSide : m_cardSides)
+        {
+            cardSide.setEditable(editable);
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513883
+src/jmemorize/core/Main.java 525 532
+src/jmemorize/gui/swing/panels/CardPanel.java 515 520
+----------------------------------------
+    {
+        lesson.getRootCategory().removeObserver(this);
+        
+        for (LessonObserver observer : m_lessonObservers)
+        {
+            observer.lessonClosed(lesson);
+        }
+    }
+
+----------------------------------------
+    {
+        for (CardSidePanel cardSide : m_cardSides)
+        {
+            cardSide.setEditable(editable);
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513884
+src/jmemorize/core/Main.java 515 522
+src/jmemorize/gui/swing/panels/CardPanel.java 515 520
+----------------------------------------
+    {
+        lesson.getRootCategory().addObserver(this);
+        
+        for (LessonObserver observer : m_lessonObservers)
+        {
+            observer.lessonLoaded(lesson);
+        }
+    }
+
+----------------------------------------
+    {
+        for (CardSidePanel cardSide : m_cardSides)
+        {
+            cardSide.setEditable(editable);
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513899
+src/jmemorize/gui/swing/NewCardFramesManager.java 160 165
+src/jmemorize/gui/swing/panels/CardPanel.java 515 520
+----------------------------------------
+    {
+        if (type == Events.REMOVED_EVENT)
+        {
+            m_createdCards.remove(card);
+        }
+    }
+
+----------------------------------------
+    {
+        for (CardSidePanel cardSide : m_cardSides)
+        {
+            cardSide.setEditable(editable);
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513889
+src/jmemorize/core/learn/LearnHistory.java 552 573
+src/jmemorize/core/learn/LearnHistory.java 576 598
+----------------------------------------
+    {
+        if (!file.exists())
+            return;
+        
+        InputStream in = new FileInputStream(file);
+        
+        // get lesson tag
+        try
+        {
+            Document doc = DocumentBuilderFactory.newInstance().
+                newDocumentBuilder().parse(in);
+    
+            XmlBuilder.loadLearnHistory(doc, this);
+        }
+        finally
+        {
+            if (in != null)
+            {
+                in.close();
+            }
+        }
+    }
+
+----------------------------------------
+    {
+        OutputStream out = new FileOutputStream(file);
+        
+        try
+        {
+            Document document = DocumentBuilderFactory.newInstance()
+                .newDocumentBuilder().newDocument();
+            
+            XmlBuilder.writeLearnHistory(document, this);
+            
+            // transform document for file output
+            Transformer transformer = TransformerFactory.newInstance().newTransformer();
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes"); //$NON-NLS-1$
+            transformer.transform(new DOMSource(document), new StreamResult(out));
+        }
+        finally
+        {
+            if (out != null)
+            {
+                out.close();
+            }
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513894
+src/jmemorize/core/FormattedText.java 217 225
+src/jmemorize/core/learn/LearnHistory.java 604 613
+----------------------------------------
+    {
+        if (obj instanceof FormattedText)
+        {
+            FormattedText other = (FormattedText)obj;
+            return m_formattedText.equals(other.m_formattedText);
+        }
+        
+        return false;
+    }
+
+----------------------------------------
+    {
+        if (!(obj instanceof LearnHistory))
+        {
+            return false;
+        }
+        
+        LearnHistory other = (LearnHistory)obj;
+        
+        return m_summaries.equals(other.m_summaries);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513893
+src/jmemorize/core/learn/LearnHistory.java 140 150
+src/jmemorize/core/learn/LearnHistory.java 604 613
+----------------------------------------
+        {
+            if (!(obj instanceof SessionSummary))
+            {
+                return false;
+            }
+            
+            SessionSummary other = (SessionSummary)obj;
+            
+            return m_passed == other.m_passed && m_failed == other.m_failed &&
+                m_skipped == other.m_skipped && m_relearned == other.m_relearned;
+        }
+
+----------------------------------------
+    {
+        if (!(obj instanceof LearnHistory))
+        {
+            return false;
+        }
+        
+        LearnHistory other = (LearnHistory)obj;
+        
+        return m_summaries.equals(other.m_summaries);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513892
+src/jmemorize/core/Lesson.java 123 132
+src/jmemorize/core/learn/LearnHistory.java 604 613
+----------------------------------------
+    {
+        if (obj instanceof Lesson)
+        {
+            Lesson other = (Lesson)obj;
+            return other.getRootCategory().getCards().equals(
+                getRootCategory().getCards());
+        }
+        
+        return false;
+    }
+
+----------------------------------------
+    {
+        if (!(obj instanceof LearnHistory))
+        {
+            return false;
+        }
+        
+        LearnHistory other = (LearnHistory)obj;
+        
+        return m_summaries.equals(other.m_summaries);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513926
+src/jmemorize/gui/swing/dialogs/PreferencesDialog.java 230 244
+src/jmemorize/gui/swing/panels/StatusBar.java 107 121
+----------------------------------------
+    {
+        // build main panel
+        FormLayout layout = new FormLayout(
+            "p:grow",       // columns //$NON-NLS-1$
+            "fill:p:grow"); // rows    //$NON-NLS-1$
+        
+        CellConstraints cc = new CellConstraints();
+        
+        DefaultFormBuilder builder = new DefaultFormBuilder(layout);
+        builder.setDefaultDialogBorder();
+        
+        builder.add(m_settingsPanel, cc.xy(1,1));
+        
+        return builder.getPanel();
+    }
+
+----------------------------------------
+    {
+        FormLayout layout = new FormLayout(
+            "3dlu, p, 9dlu:grow, p, 3dlu", // columns //$NON-NLS-1$
+            "p");                          // rows    //$NON-NLS-1$
+        
+        CellConstraints cc = new CellConstraints();
+        
+        DefaultFormBuilder builder = new DefaultFormBuilder(layout);
+        builder.setBorder(new EmptyBorder(4, 5, 2, 5));
+        
+        builder.add(m_leftLabel,   cc.xy(2,1));
+        builder.add(m_rightLabel,  cc.xy(4,1));
+        
+        return builder.getPanel();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513895
+src/jmemorize/gui/swing/panels/CardPanel.java 609 623
+src/jmemorize/gui/swing/panels/StatusBar.java 107 121
+----------------------------------------
+    {
+        FormLayout layout = new FormLayout(
+//            "38dlu, 3dlu, d:grow", // columns //$NON-NLS-1$
+            "d:grow", // columns //$NON-NLS-1$
+            "fill:20dlu:grow"); // rows //$NON-NLS-1$
+    
+        CellConstraints cc = new CellConstraints();
+        DefaultFormBuilder builder = new DefaultFormBuilder(layout);
+        
+//        builder.addLabel(title, cc.xy(1, 1, "left, top")); //$NON-NLS-1$
+//        builder.add(cardSide, cc.xy(3, 1 ));
+        builder.add(cardSide, cc.xy(1, 1 ));
+        
+        return builder.getPanel();
+    }
+
+----------------------------------------
+    {
+        FormLayout layout = new FormLayout(
+            "3dlu, p, 9dlu:grow, p, 3dlu", // columns //$NON-NLS-1$
+            "p");                          // rows    //$NON-NLS-1$
+        
+        CellConstraints cc = new CellConstraints();
+        
+        DefaultFormBuilder builder = new DefaultFormBuilder(layout);
+        builder.setBorder(new EmptyBorder(4, 5, 2, 5));
+        
+        builder.add(m_leftLabel,   cc.xy(2,1));
+        builder.add(m_rightLabel,  cc.xy(4,1));
+        
+        return builder.getPanel();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513927
+src/jmemorize/gui/swing/panels/QuizPanel.java 383 398
+src/jmemorize/gui/swing/panels/StatusBar.java 107 121
+----------------------------------------
+    {
+        JButton skipButton = new JButton(new SkipAction());
+        
+        // build it using forms layout
+        FormLayout layout = getBottomFormLayout();
+        CellConstraints cc = new CellConstraints();
+        
+        DefaultFormBuilder builder = new DefaultFormBuilder(layout);
+        builder.setBorder(new EmptyBorder(5, 5, 5, 10));
+        
+        builder.addLabel(m_quiz.getHelpText(), cc.xy(1, 1));
+        builder.add(m_showButton, cc.xy(3,1));
+        builder.add(skipButton,   cc.xy(5,1));
+        
+        return builder.getPanel();
+    }
+
+----------------------------------------
+    {
+        FormLayout layout = new FormLayout(
+            "3dlu, p, 9dlu:grow, p, 3dlu", // columns //$NON-NLS-1$
+            "p");                          // rows    //$NON-NLS-1$
+        
+        CellConstraints cc = new CellConstraints();
+        
+        DefaultFormBuilder builder = new DefaultFormBuilder(layout);
+        builder.setBorder(new EmptyBorder(4, 5, 2, 5));
+        
+        builder.add(m_leftLabel,   cc.xy(2,1));
+        builder.add(m_rightLabel,  cc.xy(4,1));
+        
+        return builder.getPanel();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513928
+src/jmemorize/gui/swing/panels/QuizPanel.java 401 417
+src/jmemorize/gui/swing/panels/StatusBar.java 107 121
+----------------------------------------
+    {
+        // preapre no button
+        JButton noButton = new JButton(new NoAction());
+        
+        // build it using forms layout
+        FormLayout layout = getBottomFormLayout();
+        CellConstraints cc = new CellConstraints();
+        
+        DefaultFormBuilder builder = new DefaultFormBuilder(layout);
+        builder.setBorder(new EmptyBorder(5, 5, 5, 10));
+        
+        builder.addLabel(Localization.get(LC.LEARN_DID_YOU_KNOW), cc.xy(1,1));
+        builder.add(m_yesButton, cc.xy(3,1));
+        builder.add(noButton,    cc.xy(5,1));
+        
+        return builder.getPanel();
+    }
+
+----------------------------------------
+    {
+        FormLayout layout = new FormLayout(
+            "3dlu, p, 9dlu:grow, p, 3dlu", // columns //$NON-NLS-1$
+            "p");                          // rows    //$NON-NLS-1$
+        
+        CellConstraints cc = new CellConstraints();
+        
+        DefaultFormBuilder builder = new DefaultFormBuilder(layout);
+        builder.setBorder(new EmptyBorder(4, 5, 2, 5));
+        
+        builder.add(m_leftLabel,   cc.xy(2,1));
+        builder.add(m_rightLabel,  cc.xy(4,1));
+        
+        return builder.getPanel();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513901
+src/jmemorize/core/learn/LearnHistory.java 567 572
+src/jmemorize/gui/swing/panels/CardPanel.java 549 554
+----------------------------------------
+        {
+            if (in != null)
+            {
+                in.close();
+            }
+        }
+
+----------------------------------------
+    {
+        for (CardPanelObserver observer : m_observers)
+        {
+            observer.onTextChanged();
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513904
+src/jmemorize/core/learn/LearnHistory.java 592 597
+src/jmemorize/gui/swing/panels/CardPanel.java 549 554
+----------------------------------------
+        {
+            if (out != null)
+            {
+                out.close();
+            }
+        }
+
+----------------------------------------
+    {
+        for (CardPanelObserver observer : m_observers)
+        {
+            observer.onTextChanged();
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513902
+src/jmemorize/core/Main.java 537 542
+src/jmemorize/gui/swing/panels/CardPanel.java 549 554
+----------------------------------------
+        {
+            for (LessonObserver observer : m_lessonObservers)
+            {
+                observer.lessonModified(lesson);
+            }
+        }
+
+----------------------------------------
+    {
+        for (CardPanelObserver observer : m_observers)
+        {
+            observer.onTextChanged();
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513905
+src/jmemorize/gui/swing/widgets/CategoryTree.java 445 450
+src/jmemorize/gui/swing/panels/CardPanel.java 549 554
+----------------------------------------
+    {
+        for (SelectionObserver observer : m_selectionObservers)
+        {
+            observer.selectionChanged(this);
+        }
+    }
+
+----------------------------------------
+    {
+        for (CardPanelObserver observer : m_observers)
+        {
+            observer.onTextChanged();
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513900
+src/jmemorize/core/Main.java 262 269
+src/jmemorize/gui/swing/panels/CardPanel.java 549 554
+----------------------------------------
+    {
+        for (ProgramEndObserver observer : m_programEndObservers)
+        {
+            observer.onProgramEnd();
+        }
+        
+        System.exit(0);
+    }
+
+----------------------------------------
+    {
+        for (CardPanelObserver observer : m_observers)
+        {
+            observer.onTextChanged();
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513903
+src/jmemorize/gui/swing/widgets/CardTable.java 661 666
+src/jmemorize/gui/swing/panels/CardPanel.java 549 554
+----------------------------------------
+        {
+            for (SelectionObserver listener : m_selectionListeners)
+            {
+                listener.selectionChanged(this);
+            }
+        }
+
+----------------------------------------
+    {
+        for (CardPanelObserver observer : m_observers)
+        {
+            observer.onTextChanged();
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513907
+src/jmemorize/gui/swing/panels/CardPanel.java 515 520
+src/jmemorize/gui/swing/panels/CardPanel.java 549 554
+----------------------------------------
+    {
+        for (CardSidePanel cardSide : m_cardSides)
+        {
+            cardSide.setEditable(editable);
+        }
+    }
+
+----------------------------------------
+    {
+        for (CardPanelObserver observer : m_observers)
+        {
+            observer.onTextChanged();
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513908
+src/jmemorize/gui/swing/panels/CardPanel.java 492 500
+src/jmemorize/gui/swing/panels/CardPanel.java 549 554
+----------------------------------------
+    {
+        for (ShowCardSideButton button : m_showSideButtons)
+        {
+            if (button.hasSide(index))
+                button.setEnabled(enabled);
+        }
+        
+//        m_showSideButtons.get(index).setEnabled(enabled);
+    }
+
+----------------------------------------
+    {
+        for (CardPanelObserver observer : m_observers)
+        {
+            observer.onTextChanged();
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513906
+src/jmemorize/gui/swing/panels/CardPanel.java 140 149
+src/jmemorize/gui/swing/panels/CardPanel.java 549 554
+----------------------------------------
+            {
+                for (CardSidePanel cardSidePanel : m_cardSides)
+                {
+                    if (cardSidePanel.getTextPane() != editor)
+                        continue;
+                    
+                    cardSidePanel.removeImage();
+                    editor.requestFocus();
+                }
+            }
+
+----------------------------------------
+    {
+        for (CardPanelObserver observer : m_observers)
+        {
+            observer.onTextChanged();
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513914
+src/jmemorize/gui/swing/widgets/CategoryTree.java 445 450
+src/jmemorize/gui/swing/panels/CardPanel.java 557 562
+----------------------------------------
+    {
+        for (SelectionObserver observer : m_selectionObservers)
+        {
+            observer.selectionChanged(this);
+        }
+    }
+
+----------------------------------------
+    {
+        for (CardPanelObserver observer : m_observers)
+        {
+            observer.onImageChanged();
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21514004
+src/jmemorize/gui/swing/panels/CardPanel.java 492 500
+src/jmemorize/gui/swing/panels/CardPanel.java 557 562
+----------------------------------------
+    {
+        for (ShowCardSideButton button : m_showSideButtons)
+        {
+            if (button.hasSide(index))
+                button.setEnabled(enabled);
+        }
+        
+//        m_showSideButtons.get(index).setEnabled(enabled);
+    }
+
+----------------------------------------
+    {
+        for (CardPanelObserver observer : m_observers)
+        {
+            observer.onImageChanged();
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513915
+src/jmemorize/gui/swing/panels/CardPanel.java 140 149
+src/jmemorize/gui/swing/panels/CardPanel.java 557 562
+----------------------------------------
+            {
+                for (CardSidePanel cardSidePanel : m_cardSides)
+                {
+                    if (cardSidePanel.getTextPane() != editor)
+                        continue;
+                    
+                    cardSidePanel.removeImage();
+                    editor.requestFocus();
+                }
+            }
+
+----------------------------------------
+    {
+        for (CardPanelObserver observer : m_observers)
+        {
+            observer.onImageChanged();
+        }
+    }
+
+----------------------------------------

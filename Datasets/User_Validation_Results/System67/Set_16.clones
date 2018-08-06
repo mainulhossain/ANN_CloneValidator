@@ -1,0 +1,1234 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995629
+src/de/joergjahnke/common/bluetooth/BluetoothOBEXClient.java 226 233
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 772 779
+----------------------------------------
+            public void run() {
+                try {
+                    notifier.acceptAndOpen(handler);
+                } catch (IOException e) {
+                    notifyErrorOccurred(e);
+                    abortFileReception();
+                }
+            }
+
+----------------------------------------
+                if (status == STATUS_LOAD_FAILED || status == STATUS_LOAD_OK) {
+                    try {
+                        RecordStore.deleteRecordStore(name);
+                    } catch (Exception e) {
+                        display.setCurrent(new Alert(LocalizationSupport.getMessage("CouldNotRemoveSuspendData"), LocalizationSupport.getMessage("FailedToRemoveSuspendData"), null, AlertType.WARNING));
+                        e.printStackTrace();
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995631
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 296 301
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 772 779
+----------------------------------------
+        } finally {
+            try {
+                out.close();
+            } catch (Exception e) {
+            }
+        }
+
+----------------------------------------
+                if (status == STATUS_LOAD_FAILED || status == STATUS_LOAD_OK) {
+                    try {
+                        RecordStore.deleteRecordStore(name);
+                    } catch (Exception e) {
+                        display.setCurrent(new Alert(LocalizationSupport.getMessage("CouldNotRemoveSuspendData"), LocalizationSupport.getMessage("FailedToRemoveSuspendData"), null, AlertType.WARNING));
+                        e.printStackTrace();
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995626
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 393 400
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 772 779
+----------------------------------------
+        if (status == STATUS_LOAD_OK || status == STATUS_LOAD_FAILED) {
+            try {
+                new File(SUSPENDFILE_NAME).delete();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Could not remove the suspend file! Please remove the suspend file '" + SUSPENDFILE_NAME + "' manually.", this.commonResources.getString("CouldNotRemoveSuspendData"), JOptionPane.ERROR_MESSAGE);
+                e.printStackTrace();
+            }
+        }
+
+----------------------------------------
+                if (status == STATUS_LOAD_FAILED || status == STATUS_LOAD_OK) {
+                    try {
+                        RecordStore.deleteRecordStore(name);
+                    } catch (Exception e) {
+                        display.setCurrent(new Alert(LocalizationSupport.getMessage("CouldNotRemoveSuspendData"), LocalizationSupport.getMessage("FailedToRemoveSuspendData"), null, AlertType.WARNING));
+                        e.printStackTrace();
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995640
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 613 622
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 772 779
+----------------------------------------
+        } catch (Throwable t) {
+            try {
+                RecordStore.deleteRecordStore(name);
+            } catch (Throwable t2) {
+                // the snapshot probably was not saved at all, so we ignore this
+            }
+            // show the cause of the error
+            Display.getDisplay(this).setCurrent(new Alert(LocalizationSupport.getMessage("SavingSnapshotFailed"), LocalizationSupport.getMessage("FailedToStoreState"), null, AlertType.WARNING));
+            t.printStackTrace();
+        }
+
+----------------------------------------
+                if (status == STATUS_LOAD_FAILED || status == STATUS_LOAD_OK) {
+                    try {
+                        RecordStore.deleteRecordStore(name);
+                    } catch (Exception e) {
+                        display.setCurrent(new Alert(LocalizationSupport.getMessage("CouldNotRemoveSuspendData"), LocalizationSupport.getMessage("FailedToRemoveSuspendData"), null, AlertType.WARNING));
+                        e.printStackTrace();
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995635
+src/de/joergjahnke/common/jme/WavePlayer.java 178 188
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 772 779
+----------------------------------------
+            if (!this.players.isEmpty()) {
+                // then use the next player from the queue and play it
+                this.currentPlayer = (Player) this.players.elementAt(0);
+                this.players.removeElementAt(0);
+                try {
+                    this.currentPlayer.start();
+                } catch (Exception e) {
+                    // we couldn't start the player, we stop the sound as it does not seem to work
+                    producer.deleteObservers();
+                }
+            } else {
+
+----------------------------------------
+                if (status == STATUS_LOAD_FAILED || status == STATUS_LOAD_OK) {
+                    try {
+                        RecordStore.deleteRecordStore(name);
+                    } catch (Exception e) {
+                        display.setCurrent(new Alert(LocalizationSupport.getMessage("CouldNotRemoveSuspendData"), LocalizationSupport.getMessage("FailedToRemoveSuspendData"), null, AlertType.WARNING));
+                        e.printStackTrace();
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995630
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 510 515
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 772 779
+----------------------------------------
+        } finally {
+            try {
+                romStream.close();
+            } catch (Exception e) {
+            }
+        }
+
+----------------------------------------
+                if (status == STATUS_LOAD_FAILED || status == STATUS_LOAD_OK) {
+                    try {
+                        RecordStore.deleteRecordStore(name);
+                    } catch (Exception e) {
+                        display.setCurrent(new Alert(LocalizationSupport.getMessage("CouldNotRemoveSuspendData"), LocalizationSupport.getMessage("FailedToRemoveSuspendData"), null, AlertType.WARNING));
+                        e.printStackTrace();
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995637
+src/de/joergjahnke/common/extendeddevices/WavePlayer.java 64 70
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 772 779
+----------------------------------------
+                        synchronized (buffer) {
+                            buffer.reset();
+                            try {
+                                buffer.wait();
+                            } catch (InterruptedException e) {
+                            }
+                        }
+
+----------------------------------------
+                if (status == STATUS_LOAD_FAILED || status == STATUS_LOAD_OK) {
+                    try {
+                        RecordStore.deleteRecordStore(name);
+                    } catch (Exception e) {
+                        display.setCurrent(new Alert(LocalizationSupport.getMessage("CouldNotRemoveSuspendData"), LocalizationSupport.getMessage("FailedToRemoveSuspendData"), null, AlertType.WARNING));
+                        e.printStackTrace();
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995632
+src/de/joergjahnke/gameboy/android/AndroidGB.java 476 484
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 772 779
+----------------------------------------
+            if (this.gameboy.getSoundChip().countObservers() == 0) {
+                try {
+                    this.gameboy.getSoundChip().addObserver(new WavePlayer(this.gameboy.getSoundChip()));
+                } catch (Throwable t) {
+                    // we could not add a player, that's OK
+                    this.gameboy.getLogger().warning("Could not create sound player! Sound output remains deactivated.");
+                    t.printStackTrace();
+                }
+            }
+
+----------------------------------------
+                if (status == STATUS_LOAD_FAILED || status == STATUS_LOAD_OK) {
+                    try {
+                        RecordStore.deleteRecordStore(name);
+                    } catch (Exception e) {
+                        display.setCurrent(new Alert(LocalizationSupport.getMessage("CouldNotRemoveSuspendData"), LocalizationSupport.getMessage("FailedToRemoveSuspendData"), null, AlertType.WARNING));
+                        e.printStackTrace();
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995627
+src/de/joergjahnke/gameboy/core/Gameboy.java 207 216
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 772 779
+----------------------------------------
+        if (!isRunning()) {
+            this.logger.info("Gameboy starting");
+            super.run();
+            // we use this thread to run the CPU
+            try {
+                this.cpu.run();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+----------------------------------------
+                if (status == STATUS_LOAD_FAILED || status == STATUS_LOAD_OK) {
+                    try {
+                        RecordStore.deleteRecordStore(name);
+                    } catch (Exception e) {
+                        display.setCurrent(new Alert(LocalizationSupport.getMessage("CouldNotRemoveSuspendData"), LocalizationSupport.getMessage("FailedToRemoveSuspendData"), null, AlertType.WARNING));
+                        e.printStackTrace();
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995625
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 489 494
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 772 779
+----------------------------------------
+            } finally {
+                try {
+                    saveStream.close();
+                } catch (Exception e) {
+                }
+            }
+
+----------------------------------------
+                if (status == STATUS_LOAD_FAILED || status == STATUS_LOAD_OK) {
+                    try {
+                        RecordStore.deleteRecordStore(name);
+                    } catch (Exception e) {
+                        display.setCurrent(new Alert(LocalizationSupport.getMessage("CouldNotRemoveSuspendData"), LocalizationSupport.getMessage("FailedToRemoveSuspendData"), null, AlertType.WARNING));
+                        e.printStackTrace();
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995638
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 722 731
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 772 779
+----------------------------------------
+        } finally {
+            if (hasSuspendData) {
+                try {
+                    rs.closeRecordStore();
+                } catch (Exception e) {
+                    // we could not close the record store, that hopefully does not hinder other actions on it and it was closed anyway...
+                }
+            }
+            display.setCurrent(this.mainMenu);
+        }
+
+----------------------------------------
+                if (status == STATUS_LOAD_FAILED || status == STATUS_LOAD_OK) {
+                    try {
+                        RecordStore.deleteRecordStore(name);
+                    } catch (Exception e) {
+                        display.setCurrent(new Alert(LocalizationSupport.getMessage("CouldNotRemoveSuspendData"), LocalizationSupport.getMessage("FailedToRemoveSuspendData"), null, AlertType.WARNING));
+                        e.printStackTrace();
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995628
+src/de/joergjahnke/common/android/FileDialog.java 40 49
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 772 779
+----------------------------------------
+    public void onCreate(final Bundle icicle) {
+        super.onCreate(icicle);
+
+        // go to the root directory
+        try {
+            showDirectory(getIntent().getStringExtra("de.joergjahnke.c64.android.prgdir"));
+        } catch (NullPointerException e) {
+            showDirectory("/");
+        }
+    }
+
+----------------------------------------
+                if (status == STATUS_LOAD_FAILED || status == STATUS_LOAD_OK) {
+                    try {
+                        RecordStore.deleteRecordStore(name);
+                    } catch (Exception e) {
+                        display.setCurrent(new Alert(LocalizationSupport.getMessage("CouldNotRemoveSuspendData"), LocalizationSupport.getMessage("FailedToRemoveSuspendData"), null, AlertType.WARNING));
+                        e.printStackTrace();
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995633
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 723 729
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 772 779
+----------------------------------------
+            if (hasSuspendData) {
+                try {
+                    rs.closeRecordStore();
+                } catch (Exception e) {
+                    // we could not close the record store, that hopefully does not hinder other actions on it and it was closed anyway...
+                }
+            }
+
+----------------------------------------
+                if (status == STATUS_LOAD_FAILED || status == STATUS_LOAD_OK) {
+                    try {
+                        RecordStore.deleteRecordStore(name);
+                    } catch (Exception e) {
+                        display.setCurrent(new Alert(LocalizationSupport.getMessage("CouldNotRemoveSuspendData"), LocalizationSupport.getMessage("FailedToRemoveSuspendData"), null, AlertType.WARNING));
+                        e.printStackTrace();
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995639
+src/de/joergjahnke/common/bluetooth/BluetoothOBEXClient.java 240 250
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 772 779
+----------------------------------------
+    public void abortFileReception() {
+        super.stop();
+
+        try {
+            this.local.setDiscoverable(DiscoveryAgent.NOT_DISCOVERABLE);
+            this.notifier.close();
+            this.notifier = null;
+        } catch (Exception e) {
+            // we could not completely shut down the service, what to do now?
+        }
+    }
+
+----------------------------------------
+                if (status == STATUS_LOAD_FAILED || status == STATUS_LOAD_OK) {
+                    try {
+                        RecordStore.deleteRecordStore(name);
+                    } catch (Exception e) {
+                        display.setCurrent(new Alert(LocalizationSupport.getMessage("CouldNotRemoveSuspendData"), LocalizationSupport.getMessage("FailedToRemoveSuspendData"), null, AlertType.WARNING));
+                        e.printStackTrace();
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995648
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 510 515
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 82 88
+----------------------------------------
+        } finally {
+            try {
+                romStream.close();
+            } catch (Exception e) {
+            }
+        }
+
+----------------------------------------
+            if (null == floppyImage) {
+                try {
+                    floppyImage = Image.createImage("/res/drawable/floppy.png");
+                } catch (Exception e) {
+                    // we can work without the image
+                    }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995662
+src/de/joergjahnke/common/bluetooth/BluetoothDevice.java 158 164
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 82 88
+----------------------------------------
+    public static String getRemoteDeviceName(final RemoteDevice dev) {
+        try {
+            return dev.getFriendlyName(false) == null ? dev.getBluetoothAddress() : dev.getFriendlyName(false);
+        } catch (IOException e) {
+            return "unknown";
+        }
+    }
+
+----------------------------------------
+            if (null == floppyImage) {
+                try {
+                    floppyImage = Image.createImage("/res/drawable/floppy.png");
+                } catch (Exception e) {
+                    // we can work without the image
+                    }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995667
+src/de/joergjahnke/gameboy/core/CPU.java 3104 3110
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 82 88
+----------------------------------------
+    public final void throttle(final long ms) {
+        this.throttledMillis += ms;
+        try {
+            Thread.sleep(ms);
+        } catch (InterruptedException ex) {
+        }
+    }
+
+----------------------------------------
+            if (null == floppyImage) {
+                try {
+                    floppyImage = Image.createImage("/res/drawable/floppy.png");
+                } catch (Exception e) {
+                    // we can work without the image
+                    }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995664
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 723 729
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 82 88
+----------------------------------------
+            if (hasSuspendData) {
+                try {
+                    rs.closeRecordStore();
+                } catch (Exception e) {
+                    // we could not close the record store, that hopefully does not hinder other actions on it and it was closed anyway...
+                }
+            }
+
+----------------------------------------
+            if (null == floppyImage) {
+                try {
+                    floppyImage = Image.createImage("/res/drawable/floppy.png");
+                } catch (Exception e) {
+                    // we can work without the image
+                    }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995669
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 241 248
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 82 88
+----------------------------------------
+                    public void windowClosing(final WindowEvent evt) {
+                        try {
+                            settings.storeToXML(new FileOutputStream(new File(PROPERTIES_NAME)), "Properties for JSwingBoy");
+                            stopGame();
+                        } catch (Exception e) {
+                            // we can't save the settings, that's a pity, but we'll just use defaults on next startup
+                        }
+                    }
+
+----------------------------------------
+            if (null == floppyImage) {
+                try {
+                    floppyImage = Image.createImage("/res/drawable/floppy.png");
+                } catch (Exception e) {
+                    // we can work without the image
+                    }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995644
+src/de/joergjahnke/common/jme/Settings.java 121 127
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 82 88
+----------------------------------------
+    public boolean getBoolean(final String key, final boolean defaultValue) {
+        try {
+            return getBoolean(key);
+        } catch (Exception e) {
+            return defaultValue;
+        }
+    }
+
+----------------------------------------
+            if (null == floppyImage) {
+                try {
+                    floppyImage = Image.createImage("/res/drawable/floppy.png");
+                } catch (Exception e) {
+                    // we can work without the image
+                    }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995649
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 260 266
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 82 88
+----------------------------------------
+    private ImageIcon getMenuIcon(final String filename) {
+        try {
+            return new ImageIcon(new ImageIcon(getClass().getResource("/res/drawable/" + filename)).getImage().getScaledInstance(16, 16, Image.SCALE_SMOOTH));
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+----------------------------------------
+            if (null == floppyImage) {
+                try {
+                    floppyImage = Image.createImage("/res/drawable/floppy.png");
+                } catch (Exception e) {
+                    // we can work without the image
+                    }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995642
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 407 413
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 82 88
+----------------------------------------
+        if (null == cartridgeImage) {
+            try {
+                cartridgeImage = Image.createImage("/res/drawable/cartridge.png");
+            } catch (Exception e) {
+                // we can work without the image
+            }
+        }
+
+----------------------------------------
+            if (null == floppyImage) {
+                try {
+                    floppyImage = Image.createImage("/res/drawable/floppy.png");
+                } catch (Exception e) {
+                    // we can work without the image
+                    }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995647
+src/de/joergjahnke/gameboy/core/CPU.java 2166 2171
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 82 88
+----------------------------------------
+            if (this.isPaused) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException ex) {
+                }
+            }
+
+----------------------------------------
+            if (null == floppyImage) {
+                try {
+                    floppyImage = Image.createImage("/res/drawable/floppy.png");
+                } catch (Exception e) {
+                    // we can work without the image
+                    }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995713
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 984 991
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 82 88
+----------------------------------------
+                if (evt.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
+                    try {
+                        Desktop.getDesktop().browse(evt.getURL().toURI());
+                    } catch (Throwable t) {
+                        // could not display the web page, what to do now???
+                        System.err.println("Could not browse to page " + evt.getURL());
+                    }
+                }
+
+----------------------------------------
+            if (null == floppyImage) {
+                try {
+                    floppyImage = Image.createImage("/res/drawable/floppy.png");
+                } catch (Exception e) {
+                    // we can work without the image
+                    }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995661
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 296 301
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 82 88
+----------------------------------------
+        } finally {
+            try {
+                out.close();
+            } catch (Exception e) {
+            }
+        }
+
+----------------------------------------
+            if (null == floppyImage) {
+                try {
+                    floppyImage = Image.createImage("/res/drawable/floppy.png");
+                } catch (Exception e) {
+                    // we can work without the image
+                    }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995666
+src/de/joergjahnke/common/jme/OrientationSensitiveCanvasHelper.java 113 119
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 82 88
+----------------------------------------
+    public void deactivateAccelerometer() {
+        try {
+            ((javax.microedition.sensor.SensorConnection) this.con).removeDataListener();
+            this.con.close();
+        } catch (Throwable t) {
+        }
+    }
+
+----------------------------------------
+            if (null == floppyImage) {
+                try {
+                    floppyImage = Image.createImage("/res/drawable/floppy.png");
+                } catch (Exception e) {
+                    // we can work without the image
+                    }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995646
+src/de/joergjahnke/common/jme/FormattedTextForm.java 159 165
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 82 88
+----------------------------------------
+                public void commandAction(final Command c, final Item item) {
+                    try {
+                        midlet.platformRequest(((StringItem)item).getText());
+                    } catch (Exception e) {
+                        // we could not invoke the browser, that's a pity but we can live with it
+                    }
+                }
+
+----------------------------------------
+            if (null == floppyImage) {
+                try {
+                    floppyImage = Image.createImage("/res/drawable/floppy.png");
+                } catch (Exception e) {
+                    // we can work without the image
+                    }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995712
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 998 1004
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 82 88
+----------------------------------------
+    private void jMenuItemContentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemContentsActionPerformed
+        try {
+            java.awt.Desktop.getDesktop().browse(new URI(URL_ONLINE_HELP));
+        } catch (Throwable t) {
+            JOptionPane.showMessageDialog(this, this.commonResources.getString("CouldNotDisplayOnlineHelp") + " '" + URL_ONLINE_HELP + "'", this.commonResources.getString("CouldNotStartBrowser"), JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jMenuItemContentsActionPerformed
+
+----------------------------------------
+            if (null == floppyImage) {
+                try {
+                    floppyImage = Image.createImage("/res/drawable/floppy.png");
+                } catch (Exception e) {
+                    // we can work without the image
+                    }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995645
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 461 467
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 82 88
+----------------------------------------
+    protected Image getMenuIcon(final String filename) {
+        try {
+            return ImageUtils.scale(Image.createImage("/res/drawable/" + filename), 16, 16, true);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+----------------------------------------
+            if (null == floppyImage) {
+                try {
+                    floppyImage = Image.createImage("/res/drawable/floppy.png");
+                } catch (Exception e) {
+                    // we can work without the image
+                    }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995711
+src/de/joergjahnke/common/jme/Settings.java 161 167
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 82 88
+----------------------------------------
+    public String getString(final String key, final String defaultValue) {
+        try {
+            return getString(key);
+        } catch (Exception e) {
+            return defaultValue;
+        }
+    }
+
+----------------------------------------
+            if (null == floppyImage) {
+                try {
+                    floppyImage = Image.createImage("/res/drawable/floppy.png");
+                } catch (Exception e) {
+                    // we can work without the image
+                    }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995716
+src/de/joergjahnke/common/bluetooth/BluetoothClient.java 174 180
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 82 88
+----------------------------------------
+    public void servicesDiscovered(final int transID, final ServiceRecord[] servRecord) {
+        try {
+            this.serviceRecord = servRecord[0];
+        } catch (Exception e) {
+            // it may happen that no service record can be retrieved, in this case serviceRecord remains null
+        }
+    }
+
+----------------------------------------
+            if (null == floppyImage) {
+                try {
+                    floppyImage = Image.createImage("/res/drawable/floppy.png");
+                } catch (Exception e) {
+                    // we can work without the image
+                    }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995643
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 489 494
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 82 88
+----------------------------------------
+            } finally {
+                try {
+                    saveStream.close();
+                } catch (Exception e) {
+                }
+            }
+
+----------------------------------------
+            if (null == floppyImage) {
+                try {
+                    floppyImage = Image.createImage("/res/drawable/floppy.png");
+                } catch (Exception e) {
+                    // we can work without the image
+                    }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995714
+src/de/joergjahnke/common/bluetooth/BluetoothClient.java 149 158
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 82 88
+----------------------------------------
+        synchronized (this.agent) {
+            this.agent.searchServices(null, uuids, btDevice, this);
+
+            // wait until the discovery agents notifies us that he is finished or one minute has passed
+            try {
+                this.agent.wait(getTimeout(), 0);
+            } catch (InterruptedException e) {
+                // we got interrupted, no problem
+            }
+        }
+
+----------------------------------------
+            if (null == floppyImage) {
+                try {
+                    floppyImage = Image.createImage("/res/drawable/floppy.png");
+                } catch (Exception e) {
+                    // we can work without the image
+                    }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995663
+src/de/joergjahnke/common/jme/FileSystemHandler.java 189 195
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 82 88
+----------------------------------------
+                if (prgsString.length() > 0) {
+                    try {
+                        settings.setString(SETTING_PROGRAMS, prgsString.toString());
+                    } catch (Exception e) {
+                    // we could not save the list of programs on the phone, that's OK
+                    }
+                }
+
+----------------------------------------
+            if (null == floppyImage) {
+                try {
+                    floppyImage = Image.createImage("/res/drawable/floppy.png");
+                } catch (Exception e) {
+                    // we can work without the image
+                    }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995668
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 414 420
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 82 88
+----------------------------------------
+        if (null == snapshotImage) {
+            try {
+                snapshotImage = Image.createImage("/res/drawable/snapshot.png");
+            } catch (Exception e) {
+                // we can work without the image
+            }
+        }
+
+----------------------------------------
+            if (null == floppyImage) {
+                try {
+                    floppyImage = Image.createImage("/res/drawable/floppy.png");
+                } catch (Exception e) {
+                    // we can work without the image
+                    }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995665
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 375 380
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 82 88
+----------------------------------------
+        } finally {
+            try {
+                in.close();
+            } catch (Exception e) {
+            }
+        }
+
+----------------------------------------
+            if (null == floppyImage) {
+                try {
+                    floppyImage = Image.createImage("/res/drawable/floppy.png");
+                } catch (Exception e) {
+                    // we can work without the image
+                    }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995670
+src/de/joergjahnke/common/extendeddevices/WavePlayer.java 64 70
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 82 88
+----------------------------------------
+                        synchronized (buffer) {
+                            buffer.reset();
+                            try {
+                                buffer.wait();
+                            } catch (InterruptedException e) {
+                            }
+                        }
+
+----------------------------------------
+            if (null == floppyImage) {
+                try {
+                    floppyImage = Image.createImage("/res/drawable/floppy.png");
+                } catch (Exception e) {
+                    // we can work without the image
+                    }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995718
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 934 940
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 82 88
+----------------------------------------
+                        for (int i = 0; i < buttons.size(); ++i) {
+                            try {
+                                settings.remove(SETTING_PREFIX_KEYS + buttons.elementAt(i).toString());
+                            } catch (IllegalArgumentException e) {
+                                // this happens if the key was not assigned, no problem
+                            }
+                        }
+
+----------------------------------------
+            if (null == floppyImage) {
+                try {
+                    floppyImage = Image.createImage("/res/drawable/floppy.png");
+                } catch (Exception e) {
+                    // we can work without the image
+                    }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995715
+src/de/joergjahnke/common/jme/Settings.java 84 90
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 82 88
+----------------------------------------
+    public int getInteger(final String key, final int defaultValue) {
+        try {
+            return getInteger(key);
+        } catch (Exception e) {
+            return defaultValue;
+        }
+    }
+
+----------------------------------------
+            if (null == floppyImage) {
+                try {
+                    floppyImage = Image.createImage("/res/drawable/floppy.png");
+                } catch (Exception e) {
+                    // we can work without the image
+                    }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995705
+src/de/joergjahnke/common/jme/Settings.java 161 167
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1077 1083
+----------------------------------------
+    public String getString(final String key, final String defaultValue) {
+        try {
+            return getString(key);
+        } catch (Exception e) {
+            return defaultValue;
+        }
+    }
+
+----------------------------------------
+            public void commandAction(final Command c, final Item item) {
+                try {
+                    platformRequest(((StringItem) item).getText());
+                } catch (Exception e) {
+                    // we could not invoke the browser, that's a pity but we can live with it
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995695
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 296 301
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1077 1083
+----------------------------------------
+        } finally {
+            try {
+                out.close();
+            } catch (Exception e) {
+            }
+        }
+
+----------------------------------------
+            public void commandAction(final Command c, final Item item) {
+                try {
+                    platformRequest(((StringItem) item).getText());
+                } catch (Exception e) {
+                    // we could not invoke the browser, that's a pity but we can live with it
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995688
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 489 494
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1077 1083
+----------------------------------------
+            } finally {
+                try {
+                    saveStream.close();
+                } catch (Exception e) {
+                }
+            }
+
+----------------------------------------
+            public void commandAction(final Command c, final Item item) {
+                try {
+                    platformRequest(((StringItem) item).getText());
+                } catch (Exception e) {
+                    // we could not invoke the browser, that's a pity but we can live with it
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995751
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 934 940
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1077 1083
+----------------------------------------
+                        for (int i = 0; i < buttons.size(); ++i) {
+                            try {
+                                settings.remove(SETTING_PREFIX_KEYS + buttons.elementAt(i).toString());
+                            } catch (IllegalArgumentException e) {
+                                // this happens if the key was not assigned, no problem
+                            }
+                        }
+
+----------------------------------------
+            public void commandAction(final Command c, final Item item) {
+                try {
+                    platformRequest(((StringItem) item).getText());
+                } catch (Exception e) {
+                    // we could not invoke the browser, that's a pity but we can live with it
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995687
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 407 413
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1077 1083
+----------------------------------------
+        if (null == cartridgeImage) {
+            try {
+                cartridgeImage = Image.createImage("/res/drawable/cartridge.png");
+            } catch (Exception e) {
+                // we can work without the image
+            }
+        }
+
+----------------------------------------
+            public void commandAction(final Command c, final Item item) {
+                try {
+                    platformRequest(((StringItem) item).getText());
+                } catch (Exception e) {
+                    // we could not invoke the browser, that's a pity but we can live with it
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995697
+src/de/joergjahnke/common/jme/FileSystemHandler.java 189 195
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1077 1083
+----------------------------------------
+                if (prgsString.length() > 0) {
+                    try {
+                        settings.setString(SETTING_PROGRAMS, prgsString.toString());
+                    } catch (Exception e) {
+                    // we could not save the list of programs on the phone, that's OK
+                    }
+                }
+
+----------------------------------------
+            public void commandAction(final Command c, final Item item) {
+                try {
+                    platformRequest(((StringItem) item).getText());
+                } catch (Exception e) {
+                    // we could not invoke the browser, that's a pity but we can live with it
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995707
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 984 991
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1077 1083
+----------------------------------------
+                if (evt.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
+                    try {
+                        Desktop.getDesktop().browse(evt.getURL().toURI());
+                    } catch (Throwable t) {
+                        // could not display the web page, what to do now???
+                        System.err.println("Could not browse to page " + evt.getURL());
+                    }
+                }
+
+----------------------------------------
+            public void commandAction(final Command c, final Item item) {
+                try {
+                    platformRequest(((StringItem) item).getText());
+                } catch (Exception e) {
+                    // we could not invoke the browser, that's a pity but we can live with it
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995691
+src/de/joergjahnke/common/jme/FormattedTextForm.java 159 165
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1077 1083
+----------------------------------------
+                public void commandAction(final Command c, final Item item) {
+                    try {
+                        midlet.platformRequest(((StringItem)item).getText());
+                    } catch (Exception e) {
+                        // we could not invoke the browser, that's a pity but we can live with it
+                    }
+                }
+
+----------------------------------------
+            public void commandAction(final Command c, final Item item) {
+                try {
+                    platformRequest(((StringItem) item).getText());
+                } catch (Exception e) {
+                    // we could not invoke the browser, that's a pity but we can live with it
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995702
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 241 248
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1077 1083
+----------------------------------------
+                    public void windowClosing(final WindowEvent evt) {
+                        try {
+                            settings.storeToXML(new FileOutputStream(new File(PROPERTIES_NAME)), "Properties for JSwingBoy");
+                            stopGame();
+                        } catch (Exception e) {
+                            // we can't save the settings, that's a pity, but we'll just use defaults on next startup
+                        }
+                    }
+
+----------------------------------------
+            public void commandAction(final Command c, final Item item) {
+                try {
+                    platformRequest(((StringItem) item).getText());
+                } catch (Exception e) {
+                    // we could not invoke the browser, that's a pity but we can live with it
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995704
+src/de/joergjahnke/common/extendeddevices/WavePlayer.java 64 70
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1077 1083
+----------------------------------------
+                        synchronized (buffer) {
+                            buffer.reset();
+                            try {
+                                buffer.wait();
+                            } catch (InterruptedException e) {
+                            }
+                        }
+
+----------------------------------------
+            public void commandAction(final Command c, final Item item) {
+                try {
+                    platformRequest(((StringItem) item).getText());
+                } catch (Exception e) {
+                    // we could not invoke the browser, that's a pity but we can live with it
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995699
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 375 380
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1077 1083
+----------------------------------------
+        } finally {
+            try {
+                in.close();
+            } catch (Exception e) {
+            }
+        }
+
+----------------------------------------
+            public void commandAction(final Command c, final Item item) {
+                try {
+                    platformRequest(((StringItem) item).getText());
+                } catch (Exception e) {
+                    // we could not invoke the browser, that's a pity but we can live with it
+                }
+            }
+
+----------------------------------------

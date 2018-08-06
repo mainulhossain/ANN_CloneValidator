@@ -1,0 +1,1724 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995945
+src/de/joergjahnke/common/jme/ImageButton.java 66 71
+src/de/joergjahnke/gameboy/core/Sprite.java 87 94
+----------------------------------------
+        if (this.isPressed != isPressed) {
+            this.isPressed = isPressed;
+            if (isPressed) {
+                onButtonPressed();
+            }
+        }
+
+----------------------------------------
+    public final void setAttributes(final int attributes) {
+        if (attributes != this.attributes) {
+            this.attributes = attributes;
+            this.hasPriority = (this.attributes & 0x80) == 0;
+            // the tile might have changed due to a different tile memory area being used
+            updateTile();
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995947
+src/de/joergjahnke/gameboy/core/VideoChip.java 730 736
+src/de/joergjahnke/gameboy/core/Sprite.java 87 94
+----------------------------------------
+        if (scrollX != this.scrollX) {
+            if (DEBUG) {
+                System.out.println("Set x-scroll to " + scrollX + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.scrollX = scrollX;
+            invalidateLines();
+        }
+
+----------------------------------------
+    public final void setAttributes(final int attributes) {
+        if (attributes != this.attributes) {
+            this.attributes = attributes;
+            this.hasPriority = (this.attributes & 0x80) == 0;
+            // the tile might have changed due to a different tile memory area being used
+            updateTile();
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995946
+src/de/joergjahnke/gameboy/core/VideoChip.java 646 652
+src/de/joergjahnke/gameboy/core/Sprite.java 87 94
+----------------------------------------
+        if (isBGBlank != this.isBGBlank) {
+            if (DEBUG) {
+                System.out.println("Set background enable to " + !isBGBlank + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.isBGBlank = isBGBlank;
+            invalidateLines();
+        }
+
+----------------------------------------
+    public final void setAttributes(final int attributes) {
+        if (attributes != this.attributes) {
+            this.attributes = attributes;
+            this.hasPriority = (this.attributes & 0x80) == 0;
+            // the tile might have changed due to a different tile memory area being used
+            updateTile();
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995974
+src/de/joergjahnke/common/jme/ImageButton.java 96 102
+src/de/joergjahnke/common/jme/ImageButton.java 104 110
+----------------------------------------
+    protected void keyPressed(final int keyCode) {
+        if (getGameAction(keyCode) == Canvas.FIRE) {
+            setPressed(true);
+        } else {
+            super.keyPressed(keyCode);
+        }
+    }
+
+----------------------------------------
+    protected void keyReleased(final int keyCode) {
+        if (getGameAction(keyCode) == Canvas.FIRE) {
+            setPressed(false);
+        } else {
+            super.keyPressed(keyCode);
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995975
+src/de/joergjahnke/common/jme/OrientationSensitiveCanvas.java 106 116
+src/de/joergjahnke/common/jme/OrientationSensitiveCanvas.java 89 99
+----------------------------------------
+    public void setUseAccelerometer(final boolean useAccelerometer) {
+        if (useAccelerometer != this.useAccelerometer) {
+            this.useAccelerometer = useAccelerometer;
+            // switch on the accelerometer support if needed or switch it off if no service needs it
+            if (useAccelerometer && !this.isAutoChangeOrientation) {
+                activateAccelerometer();
+            } else if (!this.isAutoChangeOrientation) {
+                ((OrientationSensitiveCanvasHelper) getSensorUtils()).deactivateAccelerometer();
+            }
+        }
+    }
+
+----------------------------------------
+    public void setAutoChangeOrientation(final boolean isAutoChangeOrientation) {
+        if (isAutoChangeOrientation != this.isAutoChangeOrientation) {
+            this.isAutoChangeOrientation = isAutoChangeOrientation;
+            // switch on the accelerometer support if needed or switch it off if no service needs it
+            if (isAutoChangeOrientation && !this.useAccelerometer) {
+                activateAccelerometer();
+            } else if (!this.useAccelerometer) {
+                ((OrientationSensitiveCanvasHelper) getSensorUtils()).deactivateAccelerometer();
+            }
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995977
+src/de/joergjahnke/common/jme/OrientationSensitiveCanvas.java 89 99
+src/de/joergjahnke/common/jme/OrientationSensitiveCanvas.java 107 115
+----------------------------------------
+    public void setAutoChangeOrientation(final boolean isAutoChangeOrientation) {
+        if (isAutoChangeOrientation != this.isAutoChangeOrientation) {
+            this.isAutoChangeOrientation = isAutoChangeOrientation;
+            // switch on the accelerometer support if needed or switch it off if no service needs it
+            if (isAutoChangeOrientation && !this.useAccelerometer) {
+                activateAccelerometer();
+            } else if (!this.useAccelerometer) {
+                ((OrientationSensitiveCanvasHelper) getSensorUtils()).deactivateAccelerometer();
+            }
+        }
+    }
+
+----------------------------------------
+        if (useAccelerometer != this.useAccelerometer) {
+            this.useAccelerometer = useAccelerometer;
+            // switch on the accelerometer support if needed or switch it off if no service needs it
+            if (useAccelerometer && !this.isAutoChangeOrientation) {
+                activateAccelerometer();
+            } else if (!this.isAutoChangeOrientation) {
+                ((OrientationSensitiveCanvasHelper) getSensorUtils()).deactivateAccelerometer();
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995976
+src/de/joergjahnke/common/jme/OrientationSensitiveCanvas.java 90 98
+src/de/joergjahnke/common/jme/OrientationSensitiveCanvas.java 107 115
+----------------------------------------
+        if (isAutoChangeOrientation != this.isAutoChangeOrientation) {
+            this.isAutoChangeOrientation = isAutoChangeOrientation;
+            // switch on the accelerometer support if needed or switch it off if no service needs it
+            if (isAutoChangeOrientation && !this.useAccelerometer) {
+                activateAccelerometer();
+            } else if (!this.useAccelerometer) {
+                ((OrientationSensitiveCanvasHelper) getSensorUtils()).deactivateAccelerometer();
+            }
+        }
+
+----------------------------------------
+        if (useAccelerometer != this.useAccelerometer) {
+            this.useAccelerometer = useAccelerometer;
+            // switch on the accelerometer support if needed or switch it off if no service needs it
+            if (useAccelerometer && !this.isAutoChangeOrientation) {
+                activateAccelerometer();
+            } else if (!this.isAutoChangeOrientation) {
+                ((OrientationSensitiveCanvasHelper) getSensorUtils()).deactivateAccelerometer();
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995979
+src/de/joergjahnke/common/jme/FileBrowser.java 101 106
+src/de/joergjahnke/common/util/LRUCache.java 192 197
+----------------------------------------
+    public FileBrowser(final Display display, final String currentDir, final Vector filters) {
+        this.selected = currentDir;
+        this.filters = filters;
+        this.previous = display.getCurrent();
+        this.display = display;
+    }
+
+----------------------------------------
+        public LRUNode(final Object key, final Object data, final LRUNode previous, final LRUNode next) {
+            this.key = key;
+            this.data = data;
+            this.previous = previous;
+            this.next = next;
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995978
+src/de/joergjahnke/common/jme/PCMtoMIDIPlayer.java 317 322
+src/de/joergjahnke/common/util/LRUCache.java 192 197
+----------------------------------------
+        public MIDIQueueEntry(final int type, final int event, final int arg1, final int arg2) {
+            this.type = type;
+            this.event = event;
+            this.arg1 = arg1;
+            this.arg2 = arg2;
+        }
+
+----------------------------------------
+        public LRUNode(final Object key, final Object data, final LRUNode previous, final LRUNode next) {
+            this.key = key;
+            this.data = data;
+            this.previous = previous;
+            this.next = next;
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995990
+src/de/joergjahnke/gameboy/core/SoundChip.java 112 119
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 409 414
+----------------------------------------
+        for (int c = 0, to = soundChannels_.length; c < to; ++c) {
+            final SoundChannel soundChannel = soundChannels_[c];
+
+            if (soundChannel.isActive()) {
+                soundChannel.update();
+                soundChannel.mix(buffer_);
+            }
+        }
+
+----------------------------------------
+                public void commandAction(Command c, Displayable d) {
+                    if (c == cancelCommand) {
+                        receiver.abortFileReception();
+                        display.setCurrent(previous);
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17996002
+src/de/joergjahnke/gameboy/core/VideoChip.java 1594 1602
+src/de/joergjahnke/gameboy/core/SoundChip.java 159 167
+----------------------------------------
+    public void update(final Object observed, final Object arg) {
+        // we get informed about a new CPU speed?
+        if (observed == this.gameboy.getCPU() && arg instanceof Long) {
+            // then calculate a new multiplier for calculations where CPU speed is relevant
+            final long newSpeed = ((Long) arg).longValue();
+
+            this.cpuSpeedMult = (int) (newSpeed * 1024 / Gameboy.ORIGINAL_SPEED_CLASSIC);
+        }
+    }
+
+----------------------------------------
+    public void update(final Object observed, final Object arg) {
+        // we get informed about a new CPU speed?
+        if (observed == this.gameboy.getCPU() && arg instanceof Long) {
+            // then re-calculate the number of cycles that pass between updates of the sound chip
+            final long newSpeed = ((Long) arg).longValue();
+
+            this.updateCycles = newSpeed / UPDATES_PER_SECOND;
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17996003
+src/de/joergjahnke/gameboy/core/VideoChip.java 1596 1601
+src/de/joergjahnke/gameboy/core/SoundChip.java 161 166
+----------------------------------------
+        if (observed == this.gameboy.getCPU() && arg instanceof Long) {
+            // then calculate a new multiplier for calculations where CPU speed is relevant
+            final long newSpeed = ((Long) arg).longValue();
+
+            this.cpuSpeedMult = (int) (newSpeed * 1024 / Gameboy.ORIGINAL_SPEED_CLASSIC);
+        }
+
+----------------------------------------
+        if (observed == this.gameboy.getCPU() && arg instanceof Long) {
+            // then re-calculate the number of cycles that pass between updates of the sound chip
+            final long newSpeed = ((Long) arg).longValue();
+
+            this.updateCycles = newSpeed / UPDATES_PER_SECOND;
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17996004
+src/de/joergjahnke/gameboy/core/WhiteNoiseChannel.java 25 31
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 373 380
+----------------------------------------
+    static {
+        final Random rand = new Random();
+        
+        for(int i = 0 ; i < randoms.length;++i) {
+            randoms[i] = (rand.nextInt() & 1) == 1;
+        }
+    }
+
+----------------------------------------
+            if (this.settings.exists(SETTING_PREFIX_KEYS + JOYPAD_KEYS[0])) {
+                final Hashtable assignments = new Hashtable();
+
+                for (int i = 0; i < JOYPAD_KEYS.length; ++i) {
+                    assignments.put(new Integer(this.settings.getInteger(SETTING_PREFIX_KEYS + JOYPAD_KEYS[i])), JOYPAD_KEYS[i]);
+                }
+                this.gbCanvas.setButtonAssignments(assignments);
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+24056238
+src/de/joergjahnke/gameboy/core/CPU.java 2036 2042
+src/de/joergjahnke/gameboy/core/CPU.java 2063 2069
+----------------------------------------
+                            operationCALL();
+                            this.cycles += 24;
+                        } else {
+                            this.pc += 2;
+                            this.cycles += 12;
+                        }
+                        break;
+
+----------------------------------------
+                            operationCALL();
+                            this.cycles += 24;
+                        } else {
+                            this.pc += 2;
+                            this.cycles += 12;
+                        }
+                        break;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+24056239
+src/de/joergjahnke/gameboy/core/CPU.java 2036 2042
+src/de/joergjahnke/gameboy/core/CPU.java 2045 2051
+----------------------------------------
+                            operationCALL();
+                            this.cycles += 24;
+                        } else {
+                            this.pc += 2;
+                            this.cycles += 12;
+                        }
+                        break;
+
+----------------------------------------
+                            operationCALL();
+                            this.cycles += 24;
+                        } else {
+                            this.pc += 2;
+                            this.cycles += 12;
+                        }
+                        break;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+24056240
+src/de/joergjahnke/gameboy/core/CPU.java 2036 2042
+src/de/joergjahnke/gameboy/core/CPU.java 2054 2060
+----------------------------------------
+                            operationCALL();
+                            this.cycles += 24;
+                        } else {
+                            this.pc += 2;
+                            this.cycles += 12;
+                        }
+                        break;
+
+----------------------------------------
+                            operationCALL();
+                            this.cycles += 24;
+                        } else {
+                            this.pc += 2;
+                            this.cycles += 12;
+                        }
+                        break;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+24056241
+src/de/joergjahnke/gameboy/core/CPU.java 2019 2025
+src/de/joergjahnke/gameboy/core/CPU.java 2001 2007
+----------------------------------------
+                            this.pc += (byte) (memory_[this.pc] & 0xff) + 1;
+                            this.cycles += 12;
+                        } else {
+                            ++this.pc;
+                            this.cycles += 8;
+                        }
+                        break;
+
+----------------------------------------
+                            this.pc += (byte) (memory_[this.pc] & 0xff) + 1;
+                            this.cycles += 12;
+                        } else {
+                            ++this.pc;
+                            this.cycles += 8;
+                        }
+                        break;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+24056242
+src/de/joergjahnke/gameboy/core/CPU.java 2019 2025
+src/de/joergjahnke/gameboy/core/CPU.java 1992 1998
+----------------------------------------
+                            this.pc += (byte) (memory_[this.pc] & 0xff) + 1;
+                            this.cycles += 12;
+                        } else {
+                            ++this.pc;
+                            this.cycles += 8;
+                        }
+                        break;
+
+----------------------------------------
+                            this.pc += (byte) (memory_[this.pc] & 0xff) + 1;
+                            this.cycles += 12;
+                        } else {
+                            ++this.pc;
+                            this.cycles += 8;
+                        }
+                        break;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+24056243
+src/de/joergjahnke/gameboy/core/CPU.java 2019 2025
+src/de/joergjahnke/gameboy/core/CPU.java 2010 2016
+----------------------------------------
+                            this.pc += (byte) (memory_[this.pc] & 0xff) + 1;
+                            this.cycles += 12;
+                        } else {
+                            ++this.pc;
+                            this.cycles += 8;
+                        }
+                        break;
+
+----------------------------------------
+                            this.pc += (byte) (memory_[this.pc] & 0xff) + 1;
+                            this.cycles += 12;
+                        } else {
+                            ++this.pc;
+                            this.cycles += 8;
+                        }
+                        break;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+24056244
+src/de/joergjahnke/gameboy/core/CPU.java 1957 1965
+src/de/joergjahnke/gameboy/core/CPU.java 1968 1976
+----------------------------------------
+                            final int pc_ = this.pc;
+
+                            this.pc = (memory_[pc_] & 0xff) + ((memory_[pc_ + 1] & 0xff) << 8);
+                            this.cycles += 16;
+                        } else {
+                            this.pc += 2;
+                            this.cycles += 12;
+                        }
+                        break;
+
+----------------------------------------
+                            final int pc_ = this.pc;
+
+                            this.pc = (memory_[pc_] & 0xff) + ((memory_[pc_ + 1] & 0xff) << 8);
+                            this.cycles += 16;
+                        } else {
+                            this.pc += 2;
+                            this.cycles += 12;
+                        }
+                        break;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+24056245
+src/de/joergjahnke/gameboy/core/CPU.java 1957 1965
+src/de/joergjahnke/gameboy/core/CPU.java 1946 1954
+----------------------------------------
+                            final int pc_ = this.pc;
+
+                            this.pc = (memory_[pc_] & 0xff) + ((memory_[pc_ + 1] & 0xff) << 8);
+                            this.cycles += 16;
+                        } else {
+                            this.pc += 2;
+                            this.cycles += 12;
+                        }
+                        break;
+
+----------------------------------------
+                            final int pc_ = this.pc;
+
+                            this.pc = (memory_[pc_] & 0xff) + ((memory_[pc_ + 1] & 0xff) << 8);
+                            this.cycles += 16;
+                        } else {
+                            this.pc += 2;
+                            this.cycles += 12;
+                        }
+                        break;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+24056246
+src/de/joergjahnke/gameboy/core/CPU.java 1957 1965
+src/de/joergjahnke/gameboy/core/CPU.java 1979 1987
+----------------------------------------
+                            final int pc_ = this.pc;
+
+                            this.pc = (memory_[pc_] & 0xff) + ((memory_[pc_ + 1] & 0xff) << 8);
+                            this.cycles += 16;
+                        } else {
+                            this.pc += 2;
+                            this.cycles += 12;
+                        }
+                        break;
+
+----------------------------------------
+                            final int pc_ = this.pc;
+
+                            this.pc = (memory_[pc_] & 0xff) + ((memory_[pc_ + 1] & 0xff) << 8);
+                            this.cycles += 16;
+                        } else {
+                            this.pc += 2;
+                            this.cycles += 12;
+                        }
+                        break;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+24056247
+src/de/joergjahnke/gameboy/core/WhiteNoiseChannel.java 90 102
+src/de/joergjahnke/gameboy/core/SquareWaveChannel.java 125 137
+----------------------------------------
+        if (this.envelopeSweeps > 0) {
+            --this.envelopeSweepsLeft;
+            if (this.envelopeSweepsLeft <= 0) {
+                this.volume = Math.min(MAX_VOLUME, Math.max(0, this.volume + this.envelopeDirection));
+                this.envelopeSweepsLeft = this.envelopeSweeps;
+            }
+        }
+    }
+
+    public void mix(final byte[] buffer) {
+        final int sampleRate = this.sound.getSampleRate();
+        final boolean isLeftActive = isTerminalActive(LEFT);
+        final boolean isRightActive = isTerminalActive(RIGHT);
+
+----------------------------------------
+        if (this.envelopeSweeps > 0) {
+            --this.envelopeSweepsLeft;
+            if (this.envelopeSweepsLeft <= 0) {
+                this.volume = Math.min(MAX_VOLUME, Math.max(0, this.volume + this.envelopeDirection));
+                this.envelopeSweepsLeft = this.envelopeSweeps;
+            }
+        }
+    }
+
+    public void mix(final byte[] buffer) {
+        final int sampleRate = this.sound.getSampleRate();
+        final boolean isLeftActive = isTerminalActive(LEFT);
+        final boolean isRightActive = isTerminalActive(RIGHT);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+24056248
+src/de/joergjahnke/gameboy/core/SquareWaveChannel.java 145 167
+src/de/joergjahnke/gameboy/core/VoluntaryWaveChannel.java 106 128
+----------------------------------------
+            if (isLeftActive) {
+                buffer[i + LEFT] += sample;
+            }
+            if (isRightActive) {
+                buffer[i + RIGHT] += sample;
+            }
+
+            // proceed to next sample
+            this.audioIndex += this.frequency;
+            this.audioIndex %= sampleRate;
+        }
+    }
+
+    // implementation of the FrequencyDataProducer interface
+    public final int getFrequency() {
+        return Math.min(12544, this.startFrequency);
+    }
+
+    public final int getVolume() {
+        return hasSound() && this.length > 0 ? this.startVolume * 100 / MAX_VOLUME : 0;
+    }
+
+    public final int getType() {
+
+----------------------------------------
+            if (isLeftActive) {
+                buffer[i + LEFT] += sample;
+            }
+            if (isRightActive) {
+                buffer[i + RIGHT] += sample;
+            }
+
+            // proceed to next sample
+            this.audioIndex += this.frequency;
+            this.audioIndex %= sampleRate;
+        }
+    }
+
+    // implementation of the FrequencyDataProducer interface
+    public final int getFrequency() {
+        return Math.min(12544, this.startFrequency);
+    }
+
+    public final int getVolume() {
+        return hasSound() && this.length > 0 ? this.startVolume * 100 / MAX_VOLUME : 0;
+    }
+
+    public final int getType() {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+24056249
+src/de/joergjahnke/gameboy/core/Tile.java 349 373
+src/de/joergjahnke/gameboy/core/Tile.java 307 333
+----------------------------------------
+                            final int x1 = (sX1024 >> VideoChip.SCALING_MULTIPLIER_BITS);
+                            final int x2 = Math.min(maxSX, sX1024Next >> VideoChip.SCALING_MULTIPLIER_BITS);
+                            final int y2 = Math.min(maxSY, sY1024Next >> VideoChip.SCALING_MULTIPLIER_BITS);
+                            final int offsetY1 = (sY1024 >> VideoChip.SCALING_MULTIPLIER_BITS) * w;
+                            final int offsetY2 = y2 * w;
+                            int col11 = source[offsetY1 + x1];
+                            int col12 = source[offsetY1 + x2];
+                            int col21 = source[offsetY2 + x1];
+                            int col22 = source[offsetY2 + x2];
+
+                            // we need a special handling for transparent (sprite) pixels
+                            if (col11 == TRANSPARENT) {
+                                col11 = col12;
+                            } else if (col12 == TRANSPARENT) {
+                                col12 = col11;
+                            }
+                            if (col21 == TRANSPARENT) {
+                                col21 = col22;
+                            } else if (col22 == TRANSPARENT) {
+                                col22 = col21;
+                            }
+                            if (col11 == TRANSPARENT) {
+                                col11 = col21;
+                            } else if (col21 == TRANSPARENT) {
+                                col21 = col11;
+
+----------------------------------------
+                            final int x1 = (sX1024 >> VideoChip.SCALING_MULTIPLIER_BITS);
+                            final int x2 = Math.min(maxSX, sX1024Next >> VideoChip.SCALING_MULTIPLIER_BITS);
+                            final int y2 = Math.min(maxSY, sY1024Next >> VideoChip.SCALING_MULTIPLIER_BITS);
+
+                            // get four pixel colors from the source array to mix
+                            final int offsetY1 = (sY1024 >> VideoChip.SCALING_MULTIPLIER_BITS) * w;
+                            final int offsetY2 = y2 * w;
+                            int col11 = source[offsetY1 + x1];
+                            int col12 = source[offsetY1 + x2];
+                            int col21 = source[offsetY2 + x1];
+                            int col22 = source[offsetY2 + x2];
+
+                            // we need a special handling for transparent (sprite) pixels
+                            if (col11 == TRANSPARENT) {
+                                col11 = col12;
+                            } else if (col12 == TRANSPARENT) {
+                                col12 = col11;
+                            }
+                            if (col21 == TRANSPARENT) {
+                                col21 = col22;
+                            } else if (col22 == TRANSPARENT) {
+                                col22 = col21;
+                            }
+                            if (col11 == TRANSPARENT) {
+                                col11 = col21;
+                            } else if (col21 == TRANSPARENT) {
+                                col21 = col11;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+24056250
+src/de/joergjahnke/gameboy/core/Tile.java 349 373
+src/de/joergjahnke/gameboy/core/Tile.java 382 406
+----------------------------------------
+                            final int x1 = (sX1024 >> VideoChip.SCALING_MULTIPLIER_BITS);
+                            final int x2 = Math.min(maxSX, sX1024Next >> VideoChip.SCALING_MULTIPLIER_BITS);
+                            final int y2 = Math.min(maxSY, sY1024Next >> VideoChip.SCALING_MULTIPLIER_BITS);
+                            final int offsetY1 = (sY1024 >> VideoChip.SCALING_MULTIPLIER_BITS) * w;
+                            final int offsetY2 = y2 * w;
+                            int col11 = source[offsetY1 + x1];
+                            int col12 = source[offsetY1 + x2];
+                            int col21 = source[offsetY2 + x1];
+                            int col22 = source[offsetY2 + x2];
+
+                            // we need a special handling for transparent (sprite) pixels
+                            if (col11 == TRANSPARENT) {
+                                col11 = col12;
+                            } else if (col12 == TRANSPARENT) {
+                                col12 = col11;
+                            }
+                            if (col21 == TRANSPARENT) {
+                                col21 = col22;
+                            } else if (col22 == TRANSPARENT) {
+                                col22 = col21;
+                            }
+                            if (col11 == TRANSPARENT) {
+                                col11 = col21;
+                            } else if (col21 == TRANSPARENT) {
+                                col21 = col11;
+
+----------------------------------------
+                                    final int x1 = (sX1024 >> VideoChip.SCALING_MULTIPLIER_BITS);
+                                    final int x2 = Math.min(maxSX, sX1024Next >> VideoChip.SCALING_MULTIPLIER_BITS);
+                                    final int y2 = Math.min(maxSY, sY1024Next >> VideoChip.SCALING_MULTIPLIER_BITS);
+                                    final int offsetY1 = (sY1024 >> VideoChip.SCALING_MULTIPLIER_BITS) * w;
+                                    final int offsetY2 = y2 * w;
+                                    int col11 = source[offsetY1 + x1];
+                                    int col12 = source[offsetY1 + x2];
+                                    int col21 = source[offsetY2 + x1];
+                                    int col22 = source[offsetY2 + x2];
+
+                                    // we need a special handling for transparent (sprite) pixels
+                                    if (col11 == TRANSPARENT) {
+                                        col11 = col12;
+                                    } else if (col12 == TRANSPARENT) {
+                                        col12 = col11;
+                                    }
+                                    if (col21 == TRANSPARENT) {
+                                        col21 = col22;
+                                    } else if (col22 == TRANSPARENT) {
+                                        col22 = col21;
+                                    }
+                                    if (col11 == TRANSPARENT) {
+                                        col11 = col21;
+                                    } else if (col21 == TRANSPARENT) {
+                                        col21 = col11;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+24056251
+src/de/joergjahnke/gameboy/core/Tile.java 382 409
+src/de/joergjahnke/gameboy/core/Tile.java 349 376
+----------------------------------------
+                                    final int x1 = (sX1024 >> VideoChip.SCALING_MULTIPLIER_BITS);
+                                    final int x2 = Math.min(maxSX, sX1024Next >> VideoChip.SCALING_MULTIPLIER_BITS);
+                                    final int y2 = Math.min(maxSY, sY1024Next >> VideoChip.SCALING_MULTIPLIER_BITS);
+                                    final int offsetY1 = (sY1024 >> VideoChip.SCALING_MULTIPLIER_BITS) * w;
+                                    final int offsetY2 = y2 * w;
+                                    int col11 = source[offsetY1 + x1];
+                                    int col12 = source[offsetY1 + x2];
+                                    int col21 = source[offsetY2 + x1];
+                                    int col22 = source[offsetY2 + x2];
+
+                                    // we need a special handling for transparent (sprite) pixels
+                                    if (col11 == TRANSPARENT) {
+                                        col11 = col12;
+                                    } else if (col12 == TRANSPARENT) {
+                                        col12 = col11;
+                                    }
+                                    if (col21 == TRANSPARENT) {
+                                        col21 = col22;
+                                    } else if (col22 == TRANSPARENT) {
+                                        col22 = col21;
+                                    }
+                                    if (col11 == TRANSPARENT) {
+                                        col11 = col21;
+                                    } else if (col21 == TRANSPARENT) {
+                                        col21 = col11;
+                                    }
+
+                                    scaled[yidx + x] = Color.mix(col11, col12, col21, col22);
+
+----------------------------------------
+                            final int x1 = (sX1024 >> VideoChip.SCALING_MULTIPLIER_BITS);
+                            final int x2 = Math.min(maxSX, sX1024Next >> VideoChip.SCALING_MULTIPLIER_BITS);
+                            final int y2 = Math.min(maxSY, sY1024Next >> VideoChip.SCALING_MULTIPLIER_BITS);
+                            final int offsetY1 = (sY1024 >> VideoChip.SCALING_MULTIPLIER_BITS) * w;
+                            final int offsetY2 = y2 * w;
+                            int col11 = source[offsetY1 + x1];
+                            int col12 = source[offsetY1 + x2];
+                            int col21 = source[offsetY2 + x1];
+                            int col22 = source[offsetY2 + x2];
+
+                            // we need a special handling for transparent (sprite) pixels
+                            if (col11 == TRANSPARENT) {
+                                col11 = col12;
+                            } else if (col12 == TRANSPARENT) {
+                                col12 = col11;
+                            }
+                            if (col21 == TRANSPARENT) {
+                                col21 = col22;
+                            } else if (col22 == TRANSPARENT) {
+                                col22 = col21;
+                            }
+                            if (col11 == TRANSPARENT) {
+                                col11 = col21;
+                            } else if (col21 == TRANSPARENT) {
+                                col21 = col11;
+                            }
+
+                            scaled[yidx + x] = Color.mix(col11, col12, col21, col22);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+24056252
+src/de/joergjahnke/gameboy/swing/GameboyCanvas.java 129 156
+src/de/joergjahnke/gameboy/swing/GameboyCanvas.java 168 195
+----------------------------------------
+        int pressedDirection = 0, pressedButton = 0;
+
+        switch (event.getKeyCode()) {
+            case KeyEvent.VK_LEFT:
+                pressedDirection = Joypad.LEFT;
+                break;
+            case KeyEvent.VK_RIGHT:
+                pressedDirection = Joypad.RIGHT;
+                break;
+            case KeyEvent.VK_UP:
+                pressedDirection = Joypad.UP;
+                break;
+            case KeyEvent.VK_DOWN:
+                pressedDirection = Joypad.DOWN;
+                break;
+            case KeyEvent.VK_A:
+                pressedButton = Joypad.A;
+                break;
+            case KeyEvent.VK_B:
+                pressedButton = Joypad.B;
+                break;
+            case KeyEvent.VK_ENTER:
+                pressedButton = Joypad.SELECT;
+                break;
+            case KeyEvent.VK_SPACE:
+                pressedButton = Joypad.START;
+                break;
+            default:
+
+----------------------------------------
+        int pressedDirection = 0, pressedButton = 0;
+
+        switch (event.getKeyCode()) {
+            case KeyEvent.VK_LEFT:
+                pressedDirection = Joypad.LEFT;
+                break;
+            case KeyEvent.VK_RIGHT:
+                pressedDirection = Joypad.RIGHT;
+                break;
+            case KeyEvent.VK_UP:
+                pressedDirection = Joypad.UP;
+                break;
+            case KeyEvent.VK_DOWN:
+                pressedDirection = Joypad.DOWN;
+                break;
+            case KeyEvent.VK_A:
+                pressedButton = Joypad.A;
+                break;
+            case KeyEvent.VK_B:
+                pressedButton = Joypad.B;
+                break;
+            case KeyEvent.VK_ENTER:
+                pressedButton = Joypad.SELECT;
+                break;
+            case KeyEvent.VK_SPACE:
+                pressedButton = Joypad.START;
+                break;
+            default:
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+24219932
+src/de/joergjahnke/common/bluetooth/BluetoothOBEXClient.java 258 263
+src/de/joergjahnke/common/bluetooth/BluetoothOBEXClient.java 273 278
+----------------------------------------
+    private void notifyTransferStarted(final String name, final long len) {
+        for (int i = 0, to = this.listeners.size(); i < to; ++i) {
+            final BluetoothEventListener listener = (BluetoothEventListener) this.listeners.elementAt(i);
+
+            if (listener instanceof BluetoothOBEXEventListener) {
+                ((BluetoothOBEXEventListener) listener).transferStarted(name, len);
+
+----------------------------------------
+    private void notifyTransferProgressed(final long n) {
+        for (int i = 0, to = this.listeners.size(); i < to; ++i) {
+            final BluetoothEventListener listener = (BluetoothEventListener) this.listeners.elementAt(i);
+
+            if (listener instanceof BluetoothOBEXEventListener) {
+                ((BluetoothOBEXEventListener) listener).transferProgressed(n);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+24219934
+src/de/joergjahnke/common/bluetooth/BluetoothOBEXClient.java 273 278
+src/de/joergjahnke/common/bluetooth/BluetoothOBEXClient.java 289 294
+----------------------------------------
+    private void notifyTransferProgressed(final long n) {
+        for (int i = 0, to = this.listeners.size(); i < to; ++i) {
+            final BluetoothEventListener listener = (BluetoothEventListener) this.listeners.elementAt(i);
+
+            if (listener instanceof BluetoothOBEXEventListener) {
+                ((BluetoothOBEXEventListener) listener).transferProgressed(n);
+
+----------------------------------------
+    private void notifyFileReceived(final String name, final byte[] data) {
+        for (int i = 0, to = this.listeners.size(); i < to; ++i) {
+            final BluetoothEventListener listener = (BluetoothEventListener) this.listeners.elementAt(i);
+
+            if (listener instanceof BluetoothOBEXEventListener) {
+                ((BluetoothOBEXEventListener) listener).fileReceived(name, data);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+24219933
+src/de/joergjahnke/common/bluetooth/BluetoothOBEXClient.java 258 263
+src/de/joergjahnke/common/bluetooth/BluetoothOBEXClient.java 289 294
+----------------------------------------
+    private void notifyTransferStarted(final String name, final long len) {
+        for (int i = 0, to = this.listeners.size(); i < to; ++i) {
+            final BluetoothEventListener listener = (BluetoothEventListener) this.listeners.elementAt(i);
+
+            if (listener instanceof BluetoothOBEXEventListener) {
+                ((BluetoothOBEXEventListener) listener).transferStarted(name, len);
+
+----------------------------------------
+    private void notifyFileReceived(final String name, final byte[] data) {
+        for (int i = 0, to = this.listeners.size(); i < to; ++i) {
+            final BluetoothEventListener listener = (BluetoothEventListener) this.listeners.elementAt(i);
+
+            if (listener instanceof BluetoothOBEXEventListener) {
+                ((BluetoothOBEXEventListener) listener).fileReceived(name, data);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+24219935
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 118 127
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 999 1008
+----------------------------------------
+            for (int j = 0, to = programSnapshots.size(); j < to; ++j) {
+                fileList.append(programSnapshots.elementAt(j).toString(), snapshotImage);
+            }
+        }
+
+        fileList.setCommandListener(
+                new CommandListener() {
+
+                    public void commandAction(Command c, Displayable d) {
+                        display.setCurrent(mainMenu);
+
+----------------------------------------
+            for (int j = 0, to = programSnapshots.size(); j < to; ++j) {
+                imageList.append(programSnapshots.elementAt(j).toString(), snapshotImage);
+            }
+        }
+
+        imageList.setCommandListener(
+                new CommandListener() {
+
+                    public void commandAction(Command c, Displayable d) {
+                        display.setCurrent(mainMenu);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+24219936
+src/de/joergjahnke/common/jme/ImageUtils.java 68 82
+src/de/joergjahnke/common/jme/ImageUtils.java 169 177
+----------------------------------------
+        final int srcw = src.getWidth();
+        final int srch = src.getHeight();
+
+        // no scaling to be done?
+        if (srcw == width && srch == height) {
+            // then return source image
+            return src;
+        } else {
+            // initialize source buffer
+            int buf[] = new int[srcw * srch];
+            // initialize target buffer
+            final int buf2[] = new int[width * height];
+
+            // copy image data to source buffer
+            src.getRGB(buf, 0, srcw, 0, 0, srcw, srch);
+
+----------------------------------------
+        final int srcw = src.getWidth();
+        final int srch = src.getHeight();
+        // initialize source buffer
+        int buf[] = new int[srcw * srch];
+        // initialize target buffer
+        final int buf2[] = new int[width * height];
+
+        // copy image data to source buffer
+        src.getRGB(buf, 0, srcw, 0, 0, srcw, srch);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+24219938
+src/de/joergjahnke/common/jme/ImageUtils.java 169 177
+src/de/joergjahnke/common/jme/ImageUtils.java 235 243
+----------------------------------------
+        final int srcw = src.getWidth();
+        final int srch = src.getHeight();
+        // initialize source buffer
+        int buf[] = new int[srcw * srch];
+        // initialize target buffer
+        final int buf2[] = new int[width * height];
+
+        // copy image data to source buffer
+        src.getRGB(buf, 0, srcw, 0, 0, srcw, srch);
+
+----------------------------------------
+        final int srcw = src.getWidth();
+        final int srch = src.getHeight();
+        // initialize source buffer
+        int buf[] = new int[srcw * srch];
+        // initialize target buffer
+        final int buf2[] = new int[srcw * srch];
+
+        // copy image data to source buffer
+        src.getRGB(buf, 0, srcw, 0, 0, srcw, srch);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+24219937
+src/de/joergjahnke/common/jme/ImageUtils.java 68 82
+src/de/joergjahnke/common/jme/ImageUtils.java 235 243
+----------------------------------------
+        final int srcw = src.getWidth();
+        final int srch = src.getHeight();
+
+        // no scaling to be done?
+        if (srcw == width && srch == height) {
+            // then return source image
+            return src;
+        } else {
+            // initialize source buffer
+            int buf[] = new int[srcw * srch];
+            // initialize target buffer
+            final int buf2[] = new int[width * height];
+
+            // copy image data to source buffer
+            src.getRGB(buf, 0, srcw, 0, 0, srcw, srch);
+
+----------------------------------------
+        final int srcw = src.getWidth();
+        final int srch = src.getHeight();
+        // initialize source buffer
+        int buf[] = new int[srcw * srch];
+        // initialize target buffer
+        final int buf2[] = new int[srcw * srch];
+
+        // copy image data to source buffer
+        src.getRGB(buf, 0, srcw, 0, 0, srcw, srch);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+24219939
+src/de/joergjahnke/common/jme/ImageUtils.java 66 82
+src/de/joergjahnke/common/jme/ImageUtils.java 167 177
+----------------------------------------
+    public static Image scale(final Image src, final int width, final int height, final boolean useAntialiasing) {
+        // get source dimensions
+        final int srcw = src.getWidth();
+        final int srch = src.getHeight();
+
+        // no scaling to be done?
+        if (srcw == width && srch == height) {
+            // then return source image
+            return src;
+        } else {
+            // initialize source buffer
+            int buf[] = new int[srcw * srch];
+            // initialize target buffer
+            final int buf2[] = new int[width * height];
+
+            // copy image data to source buffer
+            src.getRGB(buf, 0, srcw, 0, 0, srcw, srch);
+
+----------------------------------------
+    public static Image expand(final Image src, final int width, final int height, final int alpha, final int r, final int g, final int b, final int alignment) {
+        // get source dimensions
+        final int srcw = src.getWidth();
+        final int srch = src.getHeight();
+        // initialize source buffer
+        int buf[] = new int[srcw * srch];
+        // initialize target buffer
+        final int buf2[] = new int[width * height];
+
+        // copy image data to source buffer
+        src.getRGB(buf, 0, srcw, 0, 0, srcw, srch);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+24219940
+src/de/joergjahnke/gameboy/android/GameboyView.java 269 276
+src/de/joergjahnke/gameboy/android/GameboyView.java 321 325
+----------------------------------------
+	        case KeyEvent.KEYCODE_DPAD_LEFT:
+	            this.gameboy.getJoypad().setDirections(this.gameboy.getJoypad().getDirections() | Joypad.LEFT);
+	            break;
+	        case KeyEvent.KEYCODE_DPAD_RIGHT:
+	            this.gameboy.getJoypad().setDirections(this.gameboy.getJoypad().getDirections() | Joypad.RIGHT);
+	            break;
+	        case KeyEvent.KEYCODE_DPAD_UP:
+	            this.gameboy.getJoypad().setDirections(this.gameboy.getJoypad().getDirections() | Joypad.UP);
+
+----------------------------------------
+	        case KeyEvent.KEYCODE_DPAD_UP:
+	            this.gameboy.getJoypad().setDirections(this.gameboy.getJoypad().getDirections() & (0x0f - Joypad.UP));
+	            break;
+	        case KeyEvent.KEYCODE_DPAD_DOWN:
+	            this.gameboy.getJoypad().setDirections(this.gameboy.getJoypad().getDirections() & (0x0f - Joypad.DOWN));
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+24219941
+src/de/joergjahnke/gameboy/android/GameboyView.java 275 279
+src/de/joergjahnke/gameboy/android/GameboyView.java 315 322
+----------------------------------------
+	        case KeyEvent.KEYCODE_DPAD_UP:
+	            this.gameboy.getJoypad().setDirections(this.gameboy.getJoypad().getDirections() | Joypad.UP);
+	            break;
+	        case KeyEvent.KEYCODE_DPAD_DOWN:
+	            this.gameboy.getJoypad().setDirections(this.gameboy.getJoypad().getDirections() | Joypad.DOWN);
+
+----------------------------------------
+	        case KeyEvent.KEYCODE_DPAD_LEFT:
+	            this.gameboy.getJoypad().setDirections(this.gameboy.getJoypad().getDirections() & (0x0f - Joypad.LEFT));
+	            break;
+	        case KeyEvent.KEYCODE_DPAD_RIGHT:
+	            this.gameboy.getJoypad().setDirections(this.gameboy.getJoypad().getDirections() & (0x0f - Joypad.RIGHT));
+	            break;
+	        case KeyEvent.KEYCODE_DPAD_UP:
+	            this.gameboy.getJoypad().setDirections(this.gameboy.getJoypad().getDirections() & (0x0f - Joypad.UP));
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+24219942
+src/de/joergjahnke/gameboy/android/GameboyView.java 273 299
+src/de/joergjahnke/gameboy/android/GameboyView.java 319 345
+----------------------------------------
+	            this.gameboy.getJoypad().setDirections(this.gameboy.getJoypad().getDirections() | Joypad.RIGHT);
+	            break;
+	        case KeyEvent.KEYCODE_DPAD_UP:
+	            this.gameboy.getJoypad().setDirections(this.gameboy.getJoypad().getDirections() | Joypad.UP);
+	            break;
+	        case KeyEvent.KEYCODE_DPAD_DOWN:
+	            this.gameboy.getJoypad().setDirections(this.gameboy.getJoypad().getDirections() | Joypad.DOWN);
+	            break;
+	        case KeyEvent.KEYCODE_DPAD_CENTER:
+	        case KeyEvent.KEYCODE_A:
+	        case KeyEvent.KEYCODE_1:
+	            this.gameboy.getJoypad().setButtons(this.gameboy.getJoypad().getButtons() | Joypad.A);
+	            if(this.buttons != null ) this.buttons[0].setAlpha(0x80);
+	            break;
+	        case KeyEvent.KEYCODE_B:
+	        case KeyEvent.KEYCODE_3:
+	            this.gameboy.getJoypad().setButtons(this.gameboy.getJoypad().getButtons() | Joypad.B);
+	            if(this.buttons != null ) this.buttons[1].setAlpha(0x80);
+	            break;
+	        case KeyEvent.KEYCODE_NEWLINE:
+	        case KeyEvent.KEYCODE_7:
+	            this.gameboy.getJoypad().setButtons(this.gameboy.getJoypad().getButtons() | Joypad.SELECT);
+	            if(this.buttons != null ) this.buttons[2].setAlpha(0x80);
+	            break;
+	        case KeyEvent.KEYCODE_SPACE:
+	        case KeyEvent.KEYCODE_9:
+	            this.gameboy.getJoypad().setButtons(this.gameboy.getJoypad().getButtons() | Joypad.START);
+
+----------------------------------------
+	            this.gameboy.getJoypad().setDirections(this.gameboy.getJoypad().getDirections() & (0x0f - Joypad.RIGHT));
+	            break;
+	        case KeyEvent.KEYCODE_DPAD_UP:
+	            this.gameboy.getJoypad().setDirections(this.gameboy.getJoypad().getDirections() & (0x0f - Joypad.UP));
+	            break;
+	        case KeyEvent.KEYCODE_DPAD_DOWN:
+	            this.gameboy.getJoypad().setDirections(this.gameboy.getJoypad().getDirections() & (0x0f - Joypad.DOWN));
+	            break;
+	        case KeyEvent.KEYCODE_DPAD_CENTER:
+	        case KeyEvent.KEYCODE_A:
+	        case KeyEvent.KEYCODE_1:
+	            this.gameboy.getJoypad().setButtons(this.gameboy.getJoypad().getButtons() & (0x0f - Joypad.A));
+	            if(this.buttons != null ) this.buttons[0].setAlpha(0xff);
+	            break;
+	        case KeyEvent.KEYCODE_B:
+	        case KeyEvent.KEYCODE_3:
+	            this.gameboy.getJoypad().setButtons(this.gameboy.getJoypad().getButtons() & (0x0f - Joypad.B));
+	            if(this.buttons != null ) this.buttons[1].setAlpha(0xff);
+	            break;
+	        case KeyEvent.KEYCODE_NEWLINE:
+	        case KeyEvent.KEYCODE_7:
+	            this.gameboy.getJoypad().setButtons(this.gameboy.getJoypad().getButtons() & (0x0f - Joypad.SELECT));
+	            if(this.buttons != null ) this.buttons[2].setAlpha(0xff);
+	            break;
+	        case KeyEvent.KEYCODE_SPACE:
+	        case KeyEvent.KEYCODE_9:
+	            this.gameboy.getJoypad().setButtons(this.gameboy.getJoypad().getButtons() & (0x0f - Joypad.START));
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+24219943
+src/de/joergjahnke/gameboy/core/Tile.java 306 334
+src/de/joergjahnke/gameboy/core/Tile.java 348 374
+----------------------------------------
+                        case VideoChip.SCALING_QUALITY: {
+                            final int x1 = (sX1024 >> VideoChip.SCALING_MULTIPLIER_BITS);
+                            final int x2 = Math.min(maxSX, sX1024Next >> VideoChip.SCALING_MULTIPLIER_BITS);
+                            final int y2 = Math.min(maxSY, sY1024Next >> VideoChip.SCALING_MULTIPLIER_BITS);
+
+                            // get four pixel colors from the source array to mix
+                            final int offsetY1 = (sY1024 >> VideoChip.SCALING_MULTIPLIER_BITS) * w;
+                            final int offsetY2 = y2 * w;
+                            int col11 = source[offsetY1 + x1];
+                            int col12 = source[offsetY1 + x2];
+                            int col21 = source[offsetY2 + x1];
+                            int col22 = source[offsetY2 + x2];
+
+                            // we need a special handling for transparent (sprite) pixels
+                            if (col11 == TRANSPARENT) {
+                                col11 = col12;
+                            } else if (col12 == TRANSPARENT) {
+                                col12 = col11;
+                            }
+                            if (col21 == TRANSPARENT) {
+                                col21 = col22;
+                            } else if (col22 == TRANSPARENT) {
+                                col22 = col21;
+                            }
+                            if (col11 == TRANSPARENT) {
+                                col11 = col21;
+                            } else if (col21 == TRANSPARENT) {
+                                col21 = col11;
+                            }
+
+----------------------------------------
+                        case VideoChip.SCALING_AVERAGING: {
+                            final int x1 = (sX1024 >> VideoChip.SCALING_MULTIPLIER_BITS);
+                            final int x2 = Math.min(maxSX, sX1024Next >> VideoChip.SCALING_MULTIPLIER_BITS);
+                            final int y2 = Math.min(maxSY, sY1024Next >> VideoChip.SCALING_MULTIPLIER_BITS);
+                            final int offsetY1 = (sY1024 >> VideoChip.SCALING_MULTIPLIER_BITS) * w;
+                            final int offsetY2 = y2 * w;
+                            int col11 = source[offsetY1 + x1];
+                            int col12 = source[offsetY1 + x2];
+                            int col21 = source[offsetY2 + x1];
+                            int col22 = source[offsetY2 + x2];
+
+                            // we need a special handling for transparent (sprite) pixels
+                            if (col11 == TRANSPARENT) {
+                                col11 = col12;
+                            } else if (col12 == TRANSPARENT) {
+                                col12 = col11;
+                            }
+                            if (col21 == TRANSPARENT) {
+                                col21 = col22;
+                            } else if (col22 == TRANSPARENT) {
+                                col22 = col21;
+                            }
+                            if (col11 == TRANSPARENT) {
+                                col11 = col21;
+                            } else if (col21 == TRANSPARENT) {
+                                col21 = col11;
+                            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+24219945
+src/de/joergjahnke/gameboy/core/Tile.java 348 374
+src/de/joergjahnke/gameboy/core/Tile.java 381 407
+----------------------------------------
+                        case VideoChip.SCALING_AVERAGING: {
+                            final int x1 = (sX1024 >> VideoChip.SCALING_MULTIPLIER_BITS);
+                            final int x2 = Math.min(maxSX, sX1024Next >> VideoChip.SCALING_MULTIPLIER_BITS);
+                            final int y2 = Math.min(maxSY, sY1024Next >> VideoChip.SCALING_MULTIPLIER_BITS);
+                            final int offsetY1 = (sY1024 >> VideoChip.SCALING_MULTIPLIER_BITS) * w;
+                            final int offsetY2 = y2 * w;
+                            int col11 = source[offsetY1 + x1];
+                            int col12 = source[offsetY1 + x2];
+                            int col21 = source[offsetY2 + x1];
+                            int col22 = source[offsetY2 + x2];
+
+                            // we need a special handling for transparent (sprite) pixels
+                            if (col11 == TRANSPARENT) {
+                                col11 = col12;
+                            } else if (col12 == TRANSPARENT) {
+                                col12 = col11;
+                            }
+                            if (col21 == TRANSPARENT) {
+                                col21 = col22;
+                            } else if (col22 == TRANSPARENT) {
+                                col22 = col21;
+                            }
+                            if (col11 == TRANSPARENT) {
+                                col11 = col21;
+                            } else if (col21 == TRANSPARENT) {
+                                col21 = col11;
+                            }
+
+----------------------------------------
+                                if (x % 3 == 1 && y % 3 == 1) {
+                                    final int x1 = (sX1024 >> VideoChip.SCALING_MULTIPLIER_BITS);
+                                    final int x2 = Math.min(maxSX, sX1024Next >> VideoChip.SCALING_MULTIPLIER_BITS);
+                                    final int y2 = Math.min(maxSY, sY1024Next >> VideoChip.SCALING_MULTIPLIER_BITS);
+                                    final int offsetY1 = (sY1024 >> VideoChip.SCALING_MULTIPLIER_BITS) * w;
+                                    final int offsetY2 = y2 * w;
+                                    int col11 = source[offsetY1 + x1];
+                                    int col12 = source[offsetY1 + x2];
+                                    int col21 = source[offsetY2 + x1];
+                                    int col22 = source[offsetY2 + x2];
+
+                                    // we need a special handling for transparent (sprite) pixels
+                                    if (col11 == TRANSPARENT) {
+                                        col11 = col12;
+                                    } else if (col12 == TRANSPARENT) {
+                                        col12 = col11;
+                                    }
+                                    if (col21 == TRANSPARENT) {
+                                        col21 = col22;
+                                    } else if (col22 == TRANSPARENT) {
+                                        col22 = col21;
+                                    }
+                                    if (col11 == TRANSPARENT) {
+                                        col11 = col21;
+                                    } else if (col21 == TRANSPARENT) {
+                                        col21 = col11;
+                                    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+24219944
+src/de/joergjahnke/gameboy/core/Tile.java 306 334
+src/de/joergjahnke/gameboy/core/Tile.java 381 407
+----------------------------------------
+                        case VideoChip.SCALING_QUALITY: {
+                            final int x1 = (sX1024 >> VideoChip.SCALING_MULTIPLIER_BITS);
+                            final int x2 = Math.min(maxSX, sX1024Next >> VideoChip.SCALING_MULTIPLIER_BITS);
+                            final int y2 = Math.min(maxSY, sY1024Next >> VideoChip.SCALING_MULTIPLIER_BITS);
+
+                            // get four pixel colors from the source array to mix
+                            final int offsetY1 = (sY1024 >> VideoChip.SCALING_MULTIPLIER_BITS) * w;
+                            final int offsetY2 = y2 * w;
+                            int col11 = source[offsetY1 + x1];
+                            int col12 = source[offsetY1 + x2];
+                            int col21 = source[offsetY2 + x1];
+                            int col22 = source[offsetY2 + x2];
+
+                            // we need a special handling for transparent (sprite) pixels
+                            if (col11 == TRANSPARENT) {
+                                col11 = col12;
+                            } else if (col12 == TRANSPARENT) {
+                                col12 = col11;
+                            }
+                            if (col21 == TRANSPARENT) {
+                                col21 = col22;
+                            } else if (col22 == TRANSPARENT) {
+                                col22 = col21;
+                            }
+                            if (col11 == TRANSPARENT) {
+                                col11 = col21;
+                            } else if (col21 == TRANSPARENT) {
+                                col21 = col11;
+                            }
+
+----------------------------------------
+                                if (x % 3 == 1 && y % 3 == 1) {
+                                    final int x1 = (sX1024 >> VideoChip.SCALING_MULTIPLIER_BITS);
+                                    final int x2 = Math.min(maxSX, sX1024Next >> VideoChip.SCALING_MULTIPLIER_BITS);
+                                    final int y2 = Math.min(maxSY, sY1024Next >> VideoChip.SCALING_MULTIPLIER_BITS);
+                                    final int offsetY1 = (sY1024 >> VideoChip.SCALING_MULTIPLIER_BITS) * w;
+                                    final int offsetY2 = y2 * w;
+                                    int col11 = source[offsetY1 + x1];
+                                    int col12 = source[offsetY1 + x2];
+                                    int col21 = source[offsetY2 + x1];
+                                    int col22 = source[offsetY2 + x2];
+
+                                    // we need a special handling for transparent (sprite) pixels
+                                    if (col11 == TRANSPARENT) {
+                                        col11 = col12;
+                                    } else if (col12 == TRANSPARENT) {
+                                        col12 = col11;
+                                    }
+                                    if (col21 == TRANSPARENT) {
+                                        col21 = col22;
+                                    } else if (col22 == TRANSPARENT) {
+                                        col22 = col21;
+                                    }
+                                    if (col11 == TRANSPARENT) {
+                                        col11 = col21;
+                                    } else if (col21 == TRANSPARENT) {
+                                        col21 = col11;
+                                    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+24219946
+src/de/joergjahnke/common/jme/OrientationSensitiveCanvasHelper.java 57 61
+src/de/joergjahnke/common/jme/OrientationSensitiveCanvasHelper.java 73 77
+----------------------------------------
+                        switch (data[0].getChannelInfo().getDataType()) {
+                            case javax.microedition.sensor.ChannelInfo.TYPE_INT:
+                                x = (double) data[0].getIntValues()[0];
+                                break;
+                            case javax.microedition.sensor.ChannelInfo.TYPE_DOUBLE:
+
+----------------------------------------
+                        switch (data[2].getChannelInfo().getDataType()) {
+                            case javax.microedition.sensor.ChannelInfo.TYPE_INT:
+                                z = (double) data[2].getIntValues()[0];
+                                break;
+                            case javax.microedition.sensor.ChannelInfo.TYPE_DOUBLE:
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+24219947
+src/de/joergjahnke/gameboy/core/SquareWaveChannel.java 95 99
+src/de/joergjahnke/gameboy/core/WhiteNoiseChannel.java 65 69
+----------------------------------------
+    public void setVolumeEnvelope(final int initialVolume, final boolean increase, final int envelopeSweeps) {
+        this.volume = initialVolume;
+        this.envelopeSweeps = this.envelopeSweepsLeft = (envelopeSweeps * SoundChip.UPDATES_PER_SECOND) >> 6;
+        this.envelopeDirection = increase ? 1 : -1;
+    }
+
+----------------------------------------
+    public void setVolumeEnvelope(final int initialVolume, final boolean increase, final int envelopeSweeps) {
+        this.volume = initialVolume;
+        this.envelopeSweeps = this.envelopeSweepsLeft = (envelopeSweeps * SoundChip.UPDATES_PER_SECOND) >> 6;
+        this.envelopeDirection = increase ? 1 : -1;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+24219948
+src/de/joergjahnke/gameboy/core/SquareWaveChannel.java 125 132
+src/de/joergjahnke/gameboy/core/WhiteNoiseChannel.java 90 97
+----------------------------------------
+        if (this.envelopeSweeps > 0) {
+            --this.envelopeSweepsLeft;
+            if (this.envelopeSweepsLeft <= 0) {
+                this.volume = Math.min(MAX_VOLUME, Math.max(0, this.volume + this.envelopeDirection));
+                this.envelopeSweepsLeft = this.envelopeSweeps;
+            }
+        }
+    }
+
+----------------------------------------
+        if (this.envelopeSweeps > 0) {
+            --this.envelopeSweepsLeft;
+            if (this.envelopeSweepsLeft <= 0) {
+                this.volume = Math.min(MAX_VOLUME, Math.max(0, this.volume + this.envelopeDirection));
+                this.envelopeSweepsLeft = this.envelopeSweeps;
+            }
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+24219949
+src/de/joergjahnke/gameboy/core/SquareWaveChannel.java 134 142
+src/de/joergjahnke/gameboy/core/WhiteNoiseChannel.java 99 106
+----------------------------------------
+    public void mix(final byte[] buffer) {
+        final int sampleRate = this.sound.getSampleRate();
+        final boolean isLeftActive = isTerminalActive(LEFT);
+        final boolean isRightActive = isTerminalActive(RIGHT);
+        final int target = this.dutyPercent * sampleRate / 100;
+
+        for (int i = 0, to = buffer.length; i < to; i += 2) {
+            // determine sample
+            final byte sample = (byte) (this.audioIndex >= target ? this.volume << 1 : -this.volume << 1);
+
+----------------------------------------
+    public void mix(final byte[] buffer) {
+        final int sampleRate = this.sound.getSampleRate();
+        final boolean isLeftActive = isTerminalActive(LEFT);
+        final boolean isRightActive = isTerminalActive(RIGHT);
+        final int mod = sampleRate * (this.isSmallStepWidth ? 1 << 7 : 1 << 15);
+
+        for (int i = 0,  to = buffer.length; i < to; i += 2) {
+            final int index = this.audioIndex / sampleRate;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+24219950
+src/de/joergjahnke/gameboy/swing/GameboyCanvas.java 128 161
+src/de/joergjahnke/gameboy/swing/GameboyCanvas.java 167 200
+----------------------------------------
+    public void keyPressed(final KeyEvent event) {
+        int pressedDirection = 0, pressedButton = 0;
+
+        switch (event.getKeyCode()) {
+            case KeyEvent.VK_LEFT:
+                pressedDirection = Joypad.LEFT;
+                break;
+            case KeyEvent.VK_RIGHT:
+                pressedDirection = Joypad.RIGHT;
+                break;
+            case KeyEvent.VK_UP:
+                pressedDirection = Joypad.UP;
+                break;
+            case KeyEvent.VK_DOWN:
+                pressedDirection = Joypad.DOWN;
+                break;
+            case KeyEvent.VK_A:
+                pressedButton = Joypad.A;
+                break;
+            case KeyEvent.VK_B:
+                pressedButton = Joypad.B;
+                break;
+            case KeyEvent.VK_ENTER:
+                pressedButton = Joypad.SELECT;
+                break;
+            case KeyEvent.VK_SPACE:
+                pressedButton = Joypad.START;
+                break;
+            default:
+                ;
+        }
+
+        this.gameboy.getJoypad().setDirections(this.gameboy.getJoypad().getDirections() | pressedDirection);
+        this.gameboy.getJoypad().setButtons(this.gameboy.getJoypad().getButtons() | pressedButton);
+
+----------------------------------------
+    public void keyReleased(final KeyEvent event) {
+        int pressedDirection = 0, pressedButton = 0;
+
+        switch (event.getKeyCode()) {
+            case KeyEvent.VK_LEFT:
+                pressedDirection = Joypad.LEFT;
+                break;
+            case KeyEvent.VK_RIGHT:
+                pressedDirection = Joypad.RIGHT;
+                break;
+            case KeyEvent.VK_UP:
+                pressedDirection = Joypad.UP;
+                break;
+            case KeyEvent.VK_DOWN:
+                pressedDirection = Joypad.DOWN;
+                break;
+            case KeyEvent.VK_A:
+                pressedButton = Joypad.A;
+                break;
+            case KeyEvent.VK_B:
+                pressedButton = Joypad.B;
+                break;
+            case KeyEvent.VK_ENTER:
+                pressedButton = Joypad.SELECT;
+                break;
+            case KeyEvent.VK_SPACE:
+                pressedButton = Joypad.START;
+                break;
+            default:
+                ;
+        }
+
+        this.gameboy.getJoypad().setDirections(this.gameboy.getJoypad().getDirections() & (0x0f - pressedDirection));
+        this.gameboy.getJoypad().setButtons(this.gameboy.getJoypad().getButtons() & (0x0f - pressedButton));
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+24219951
+src/de/joergjahnke/gameboy/core/Tile.java 348 376
+src/de/joergjahnke/gameboy/core/Tile.java 381 409
+----------------------------------------
+                        case VideoChip.SCALING_AVERAGING: {
+                            final int x1 = (sX1024 >> VideoChip.SCALING_MULTIPLIER_BITS);
+                            final int x2 = Math.min(maxSX, sX1024Next >> VideoChip.SCALING_MULTIPLIER_BITS);
+                            final int y2 = Math.min(maxSY, sY1024Next >> VideoChip.SCALING_MULTIPLIER_BITS);
+                            final int offsetY1 = (sY1024 >> VideoChip.SCALING_MULTIPLIER_BITS) * w;
+                            final int offsetY2 = y2 * w;
+                            int col11 = source[offsetY1 + x1];
+                            int col12 = source[offsetY1 + x2];
+                            int col21 = source[offsetY2 + x1];
+                            int col22 = source[offsetY2 + x2];
+
+                            // we need a special handling for transparent (sprite) pixels
+                            if (col11 == TRANSPARENT) {
+                                col11 = col12;
+                            } else if (col12 == TRANSPARENT) {
+                                col12 = col11;
+                            }
+                            if (col21 == TRANSPARENT) {
+                                col21 = col22;
+                            } else if (col22 == TRANSPARENT) {
+                                col22 = col21;
+                            }
+                            if (col11 == TRANSPARENT) {
+                                col11 = col21;
+                            } else if (col21 == TRANSPARENT) {
+                                col21 = col11;
+                            }
+
+                            scaled[yidx + x] = Color.mix(col11, col12, col21, col22);
+
+----------------------------------------
+                                if (x % 3 == 1 && y % 3 == 1) {
+                                    final int x1 = (sX1024 >> VideoChip.SCALING_MULTIPLIER_BITS);
+                                    final int x2 = Math.min(maxSX, sX1024Next >> VideoChip.SCALING_MULTIPLIER_BITS);
+                                    final int y2 = Math.min(maxSY, sY1024Next >> VideoChip.SCALING_MULTIPLIER_BITS);
+                                    final int offsetY1 = (sY1024 >> VideoChip.SCALING_MULTIPLIER_BITS) * w;
+                                    final int offsetY2 = y2 * w;
+                                    int col11 = source[offsetY1 + x1];
+                                    int col12 = source[offsetY1 + x2];
+                                    int col21 = source[offsetY2 + x1];
+                                    int col22 = source[offsetY2 + x2];
+
+                                    // we need a special handling for transparent (sprite) pixels
+                                    if (col11 == TRANSPARENT) {
+                                        col11 = col12;
+                                    } else if (col12 == TRANSPARENT) {
+                                        col12 = col11;
+                                    }
+                                    if (col21 == TRANSPARENT) {
+                                        col21 = col22;
+                                    } else if (col22 == TRANSPARENT) {
+                                        col22 = col21;
+                                    }
+                                    if (col11 == TRANSPARENT) {
+                                        col11 = col21;
+                                    } else if (col21 == TRANSPARENT) {
+                                        col21 = col11;
+                                    }
+
+                                    scaled[yidx + x] = Color.mix(col11, col12, col21, col22);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+24219952
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 757 762
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 768 773
+----------------------------------------
+        jMenuItemSizeX1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_1, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.SHIFT_MASK));
+        buttonGroupScreenSizes.add(jMenuItemSizeX1);
+        jMenuItemSizeX1.setText("100%");
+        jMenuItemSizeX1.setToolTipText(bundle.getString("Size100Tooltip")); // NOI18N
+        jMenuItemSizeX1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+
+----------------------------------------
+        jMenuItemSizeX2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_2, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.SHIFT_MASK));
+        buttonGroupScreenSizes.add(jMenuItemSizeX2);
+        jMenuItemSizeX2.setText("200%");
+        jMenuItemSizeX2.setToolTipText(bundle.getString("Size200Tooltip")); // NOI18N
+        jMenuItemSizeX2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+24219953
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 757 762
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 779 784
+----------------------------------------
+        jMenuItemSizeX1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_1, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.SHIFT_MASK));
+        buttonGroupScreenSizes.add(jMenuItemSizeX1);
+        jMenuItemSizeX1.setText("100%");
+        jMenuItemSizeX1.setToolTipText(bundle.getString("Size100Tooltip")); // NOI18N
+        jMenuItemSizeX1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+
+----------------------------------------
+        jMenuItemSizeX3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_3, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.SHIFT_MASK));
+        buttonGroupScreenSizes.add(jMenuItemSizeX3);
+        jMenuItemSizeX3.setText("300%");
+        jMenuItemSizeX3.setToolTipText(bundle.getString("Size300Tooltip")); // NOI18N
+        jMenuItemSizeX3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+
+----------------------------------------

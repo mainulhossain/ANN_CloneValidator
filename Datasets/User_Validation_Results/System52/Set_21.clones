@@ -1,0 +1,1298 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24202663
+src/jse/org/luaj/vm2/parser/LuaParserTokenManager.java 801 807
+src/jse/org/luaj/vm2/parser/LuaParserTokenManager.java 823 829
+----------------------------------------
+private int jjMoveStringLiteralDfa6_0(long old0, long active0)
+{
+   if (((active0 &= old0)) == 0L)
+      return jjStartNfa_0(4, old0, 0L);
+   try { curChar = input_stream.readChar(); }
+   catch(java.io.IOException e) {
+      jjStopStringLiteralDfa_0(5, active0, 0L);
+
+----------------------------------------
+private int jjMoveStringLiteralDfa7_0(long old0, long active0)
+{
+   if (((active0 &= old0)) == 0L)
+      return jjStartNfa_0(5, old0, 0L);
+   try { curChar = input_stream.readChar(); }
+   catch(java.io.IOException e) {
+      jjStopStringLiteralDfa_0(6, active0, 0L);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24202664
+src/core/org/luaj/vm2/LuaString.java 134 142
+src/core/org/luaj/vm2/LuaString.java 163 171
+----------------------------------------
+			return valueFromCopy(bytes, off, len);
+		final int hash = hashCode(bytes, off, len);
+		final int bucket = hash & (RECENT_STRINGS_CACHE_SIZE - 1);
+		final LuaString t = RecentShortStrings.recent_short_strings[bucket];
+		if (t != null && t.m_hashcode == hash && t.byteseq(bytes, off, len)) return t;
+		final LuaString s = valueFromCopy(bytes, off, len);
+		RecentShortStrings.recent_short_strings[bucket] = s;
+		return s;
+	}
+
+----------------------------------------
+			return new LuaString(bytes, off, len);
+		final int hash = hashCode(bytes, off, len);
+		final int bucket = hash & (RECENT_STRINGS_CACHE_SIZE - 1);
+		final LuaString t = RecentShortStrings.recent_short_strings[bucket];
+		if (t != null && t.m_hashcode == hash && t.byteseq(bytes, off, len)) return t;
+		final LuaString s = new LuaString(bytes, off, len);
+		RecentShortStrings.recent_short_strings[bucket] = s;
+		return s;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24202665
+src/core/org/luaj/vm2/LuaString.java 759 763
+src/core/org/luaj/vm2/LuaString.java 778 782
+----------------------------------------
+		int i=m_offset,j=m_offset+m_length;
+		while ( i<j && m_bytes[i]==' ' ) ++i;
+		while ( i<j && m_bytes[j-1]==' ' ) --j;
+		if ( i>=j )
+			return Double.NaN;
+
+----------------------------------------
+		int i=m_offset,j=m_offset+m_length;
+		while ( i<j && m_bytes[i]==' ' ) ++i;
+		while ( i<j && m_bytes[j-1]==' ' ) --j;
+		if ( i>=j )
+			return Double.NaN;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24202666
+src/jse/org/luaj/vm2/parser/LuaParser.java 293 311
+src/jse/org/luaj/vm2/parser/LuaParser.java 519 537
+----------------------------------------
+    jj_consume_token(RETURN);
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case LONGSTRING0:
+    case LONGSTRING1:
+    case LONGSTRING2:
+    case LONGSTRING3:
+    case LONGSTRINGN:
+    case FALSE:
+    case FUNCTION:
+    case NIL:
+    case NOT:
+    case TRUE:
+    case NAME:
+    case NUMBER:
+    case STRING:
+    case CHARSTRING:
+    case 69:
+    case 75:
+    case 79:
+
+----------------------------------------
+      jj_consume_token(75);
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case LONGSTRING0:
+      case LONGSTRING1:
+      case LONGSTRING2:
+      case LONGSTRING3:
+      case LONGSTRINGN:
+      case FALSE:
+      case FUNCTION:
+      case NIL:
+      case NOT:
+      case TRUE:
+      case NAME:
+      case NUMBER:
+      case STRING:
+      case CHARSTRING:
+      case 69:
+      case 75:
+      case 79:
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24202668
+src/jse/org/luaj/vm2/parser/LuaParser.java 519 537
+src/jse/org/luaj/vm2/parser/LuaParser.java 828 846
+----------------------------------------
+      jj_consume_token(75);
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case LONGSTRING0:
+      case LONGSTRING1:
+      case LONGSTRING2:
+      case LONGSTRING3:
+      case LONGSTRINGN:
+      case FALSE:
+      case FUNCTION:
+      case NIL:
+      case NOT:
+      case TRUE:
+      case NAME:
+      case NUMBER:
+      case STRING:
+      case CHARSTRING:
+      case 69:
+      case 75:
+      case 79:
+
+----------------------------------------
+    jj_consume_token(80);
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case LONGSTRING0:
+    case LONGSTRING1:
+    case LONGSTRING2:
+    case LONGSTRING3:
+    case LONGSTRINGN:
+    case FALSE:
+    case FUNCTION:
+    case NIL:
+    case NOT:
+    case TRUE:
+    case NAME:
+    case NUMBER:
+    case STRING:
+    case CHARSTRING:
+    case 69:
+    case 75:
+    case 77:
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24202667
+src/jse/org/luaj/vm2/parser/LuaParser.java 293 311
+src/jse/org/luaj/vm2/parser/LuaParser.java 828 846
+----------------------------------------
+    jj_consume_token(RETURN);
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case LONGSTRING0:
+    case LONGSTRING1:
+    case LONGSTRING2:
+    case LONGSTRING3:
+    case LONGSTRINGN:
+    case FALSE:
+    case FUNCTION:
+    case NIL:
+    case NOT:
+    case TRUE:
+    case NAME:
+    case NUMBER:
+    case STRING:
+    case CHARSTRING:
+    case 69:
+    case 75:
+    case 79:
+
+----------------------------------------
+    jj_consume_token(80);
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case LONGSTRING0:
+    case LONGSTRING1:
+    case LONGSTRING2:
+    case LONGSTRING3:
+    case LONGSTRINGN:
+    case FALSE:
+    case FUNCTION:
+    case NIL:
+    case NOT:
+    case TRUE:
+    case NAME:
+    case NUMBER:
+    case STRING:
+    case CHARSTRING:
+    case 69:
+    case 75:
+    case 77:
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24202670
+src/jse/org/luaj/vm2/parser/LuaParser.java 440 448
+src/jse/org/luaj/vm2/parser/LuaParser.java 501 509
+----------------------------------------
+                                  p=Exp.parensprefix(e); L(p,i); {if (true) return p;}
+      break;
+    default:
+      jj_la1[16] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+    throw new Error("Missing return statement in function");
+  }
+
+----------------------------------------
+                                                  p=Exp.functionop(lhs, a); L(p,i); {if (true) return p;}
+      break;
+    default:
+      jj_la1[17] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+    throw new Error("Missing return statement in function");
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24202671
+src/jse/org/luaj/vm2/parser/LuaParser.java 440 448
+src/jse/org/luaj/vm2/parser/LuaParser.java 814 822
+----------------------------------------
+                                  p=Exp.parensprefix(e); L(p,i); {if (true) return p;}
+      break;
+    default:
+      jj_la1[16] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+    throw new Error("Missing return statement in function");
+  }
+
+----------------------------------------
+                 p=new ParList(null,true); L(p,i); {if (true) return p;}
+      break;
+    default:
+      jj_la1[26] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+    throw new Error("Missing return statement in function");
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24202672
+src/jse/org/luaj/vm2/parser/LuaParser.java 501 509
+src/jse/org/luaj/vm2/parser/LuaParser.java 814 822
+----------------------------------------
+                                                  p=Exp.functionop(lhs, a); L(p,i); {if (true) return p;}
+      break;
+    default:
+      jj_la1[17] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+    throw new Error("Missing return statement in function");
+  }
+
+----------------------------------------
+                 p=new ParList(null,true); L(p,i); {if (true) return p;}
+      break;
+    default:
+      jj_la1[26] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+    throw new Error("Missing return statement in function");
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24202673
+examples/jse/SampleApplet.java 74 84
+src/jse/org/luaj/vm2/lib/jse/JsePlatform.java 95 105
+----------------------------------------
+		globals = new Globals();
+		globals.load(new JseBaseLib());
+		globals.load(new PackageLib());
+		globals.load(new Bit32Lib());
+		globals.load(new TableLib());
+		globals.load(new StringLib());
+		globals.load(new CoroutineLib());
+		globals.load(new JseMathLib());
+		globals.load(new JseIoLib());
+		globals.load(new JseOsLib());
+		globals.load(new AppletLuajavaLib());
+
+----------------------------------------
+		Globals globals = new Globals();
+		globals.load(new JseBaseLib());
+		globals.load(new PackageLib());
+		globals.load(new Bit32Lib());
+		globals.load(new TableLib());
+		globals.load(new StringLib());
+		globals.load(new CoroutineLib());
+		globals.load(new JseMathLib());
+		globals.load(new JseIoLib());
+		globals.load(new JseOsLib());
+		globals.load(new LuajavaLib());
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24202674
+src/core/org/luaj/vm2/lib/DebugLib.java 226 230
+src/core/org/luaj/vm2/lib/DebugLib.java 302 306
+----------------------------------------
+		public Varargs invoke(Varargs args) {
+			int a=1;
+			LuaThread thread = args.isthread(a)? args.checkthread(a++): globals.running; 
+			int level = args.checkint(a++);
+			int local = args.checkint(a++);
+
+----------------------------------------
+		public Varargs invoke(Varargs args) {
+			int a=1;
+			LuaThread thread = args.isthread(a)? args.checkthread(a++): globals.running; 
+			int level = args.checkint(a++);
+			int local = args.checkint(a++);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24202675
+src/jse/org/luaj/vm2/luajc/ProtoInfo.java 195 198
+src/jse/org/luaj/vm2/luajc/ProtoInfo.java 212 215
+----------------------------------------
+					b = Lua.GETARG_B( ins );
+					c = Lua.GETARG_C( ins );
+					if (!Lua.ISK(b)) v[b][pc].isreferenced = true;
+					if (!Lua.ISK(c)) v[c][pc].isreferenced = true;
+
+----------------------------------------
+					b = Lua.GETARG_B( ins );
+					c = Lua.GETARG_C( ins );
+					if (!Lua.ISK(b)) v[b][pc].isreferenced = true;
+					if (!Lua.ISK(c)) v[c][pc].isreferenced = true;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24202677
+src/jse/org/luaj/vm2/luajc/ProtoInfo.java 212 215
+src/jse/org/luaj/vm2/luajc/ProtoInfo.java 362 365
+----------------------------------------
+					b = Lua.GETARG_B( ins );
+					c = Lua.GETARG_C( ins );
+					if (!Lua.ISK(b)) v[b][pc].isreferenced = true;
+					if (!Lua.ISK(c)) v[c][pc].isreferenced = true;
+
+----------------------------------------
+					b = Lua.GETARG_B( ins );
+					c = Lua.GETARG_C( ins );
+					if (!Lua.ISK(b)) v[b][pc].isreferenced = true;
+					if (!Lua.ISK(c)) v[c][pc].isreferenced = true;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24202676
+src/jse/org/luaj/vm2/luajc/ProtoInfo.java 195 198
+src/jse/org/luaj/vm2/luajc/ProtoInfo.java 362 365
+----------------------------------------
+					b = Lua.GETARG_B( ins );
+					c = Lua.GETARG_C( ins );
+					if (!Lua.ISK(b)) v[b][pc].isreferenced = true;
+					if (!Lua.ISK(c)) v[c][pc].isreferenced = true;
+
+----------------------------------------
+					b = Lua.GETARG_B( ins );
+					c = Lua.GETARG_C( ins );
+					if (!Lua.ISK(b)) v[b][pc].isreferenced = true;
+					if (!Lua.ISK(c)) v[c][pc].isreferenced = true;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24202678
+src/jse/org/luaj/vm2/luajc/ProtoInfo.java 197 199
+src/jse/org/luaj/vm2/luajc/ProtoInfo.java 237 239
+----------------------------------------
+					if (!Lua.ISK(b)) v[b][pc].isreferenced = true;
+					if (!Lua.ISK(c)) v[c][pc].isreferenced = true;
+					v[a][pc] = new VarInfo(a,pc);
+
+----------------------------------------
+					v[b][pc].isreferenced = true;
+					if (!Lua.ISK(c)) v[c][pc].isreferenced = true;
+					v[a][pc] = new VarInfo(a,pc);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24202680
+src/jse/org/luaj/vm2/luajc/ProtoInfo.java 237 239
+src/jse/org/luaj/vm2/luajc/ProtoInfo.java 253 255
+----------------------------------------
+					v[b][pc].isreferenced = true;
+					if (!Lua.ISK(c)) v[c][pc].isreferenced = true;
+					v[a][pc] = new VarInfo(a,pc);
+
+----------------------------------------
+					v[b][pc].isreferenced = true;
+					if (!Lua.ISK(c)) v[c][pc].isreferenced = true;
+					v[a][pc] = new VarInfo(a,pc);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24202679
+src/jse/org/luaj/vm2/luajc/ProtoInfo.java 197 199
+src/jse/org/luaj/vm2/luajc/ProtoInfo.java 253 255
+----------------------------------------
+					if (!Lua.ISK(b)) v[b][pc].isreferenced = true;
+					if (!Lua.ISK(c)) v[c][pc].isreferenced = true;
+					v[a][pc] = new VarInfo(a,pc);
+
+----------------------------------------
+					v[b][pc].isreferenced = true;
+					if (!Lua.ISK(c)) v[c][pc].isreferenced = true;
+					v[a][pc] = new VarInfo(a,pc);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24202681
+src/jse/org/luaj/vm2/luajc/ProtoInfo.java 206 211
+src/jse/org/luaj/vm2/luajc/ProtoInfo.java 213 218
+----------------------------------------
+					v[a][pc].isreferenced = true;
+					if (!Lua.ISK(b)) v[b][pc].isreferenced = true;
+					if (!Lua.ISK(c)) v[c][pc].isreferenced = true;
+					break;
+
+				case Lua.OP_SETTABUP: /*	A B C	UpValue[A][RK(B)] := RK(C)			*/
+
+----------------------------------------
+					c = Lua.GETARG_C( ins );
+					if (!Lua.ISK(b)) v[b][pc].isreferenced = true;
+					if (!Lua.ISK(c)) v[c][pc].isreferenced = true;
+					break;
+					
+				case Lua.OP_CONCAT: /*	A B C	R(A) := R(B).. ... ..R(C)			*/
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24202683
+src/jse/org/luaj/vm2/luajc/ProtoInfo.java 213 218
+src/jse/org/luaj/vm2/luajc/ProtoInfo.java 363 368
+----------------------------------------
+					c = Lua.GETARG_C( ins );
+					if (!Lua.ISK(b)) v[b][pc].isreferenced = true;
+					if (!Lua.ISK(c)) v[c][pc].isreferenced = true;
+					break;
+					
+				case Lua.OP_CONCAT: /*	A B C	R(A) := R(B).. ... ..R(C)			*/
+
+----------------------------------------
+					c = Lua.GETARG_C( ins );
+					if (!Lua.ISK(b)) v[b][pc].isreferenced = true;
+					if (!Lua.ISK(c)) v[c][pc].isreferenced = true;
+					break;
+
+				case Lua.OP_JMP: /*	sBx	pc+=sBx					*/
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24202682
+src/jse/org/luaj/vm2/luajc/ProtoInfo.java 206 211
+src/jse/org/luaj/vm2/luajc/ProtoInfo.java 363 368
+----------------------------------------
+					v[a][pc].isreferenced = true;
+					if (!Lua.ISK(b)) v[b][pc].isreferenced = true;
+					if (!Lua.ISK(c)) v[c][pc].isreferenced = true;
+					break;
+
+				case Lua.OP_SETTABUP: /*	A B C	UpValue[A][RK(B)] := RK(C)			*/
+
+----------------------------------------
+					c = Lua.GETARG_C( ins );
+					if (!Lua.ISK(b)) v[b][pc].isreferenced = true;
+					if (!Lua.ISK(c)) v[c][pc].isreferenced = true;
+					break;
+
+				case Lua.OP_JMP: /*	sBx	pc+=sBx					*/
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24202685
+src/jse/org/luaj/vm2/luajc/ProtoInfo.java 307 313
+src/jse/org/luaj/vm2/luajc/ProtoInfo.java 280 287
+----------------------------------------
+					for ( int j=0; j<c; j++, a++ )
+						v[a][pc] = new VarInfo(a,pc);
+					for ( ; a<m; a++ )
+						v[a][pc] = VarInfo.INVALID;
+					break;
+					
+				case Lua.OP_TFORLOOP: /* A sBx	if R(A+1) ~= nil then { R(A)=R(A+1); pc += sBx */
+
+----------------------------------------
+					for ( int j=1; j<b; j++, a++ )
+						v[a][pc] = new VarInfo(a,pc);
+					if ( b == 0 ) 
+						for ( ; a<m; a++ )
+							v[a][pc] = VarInfo.INVALID;
+					break;
+					
+				case Lua.OP_CALL: /*	A B C	R(A), ... ,R(A+C-2) := R(A)(R(A+1), ... ,R(A+B-1)) */
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24202684
+src/jse/org/luaj/vm2/luajc/ProtoInfo.java 295 301
+src/jse/org/luaj/vm2/luajc/ProtoInfo.java 280 287
+----------------------------------------
+					for ( int j=0; j<=c-2; j++, a++ )
+						v[a][pc] = new VarInfo(a,pc);
+					for ( ; a<m; a++ )
+						v[a][pc] = VarInfo.INVALID;
+					break;
+					
+				case Lua.OP_TFORCALL: /* A C	R(A+3), ... ,R(A+2+C) := R(A)(R(A+1), R(A+2));	*/
+
+----------------------------------------
+					for ( int j=1; j<b; j++, a++ )
+						v[a][pc] = new VarInfo(a,pc);
+					if ( b == 0 ) 
+						for ( ; a<m; a++ )
+							v[a][pc] = VarInfo.INVALID;
+					break;
+					
+				case Lua.OP_CALL: /*	A B C	R(A), ... ,R(A+C-2) := R(A)(R(A+1), ... ,R(A+B-1)) */
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24202686
+src/core/org/luaj/vm2/LuaClosure.java 147 152
+src/core/org/luaj/vm2/LuaClosure.java 158 163
+----------------------------------------
+	public final LuaValue call(LuaValue arg1, LuaValue arg2) {
+		LuaValue[] stack = new LuaValue[p.maxstacksize];
+		for (int i = 2; i < p.numparams; ++i )
+			stack[i] = NIL;
+		switch ( p.numparams ) {
+		default: stack[0]=arg1; stack[1]=arg2; return execute(stack,NONE).arg1();
+
+----------------------------------------
+	public final LuaValue call(LuaValue arg1, LuaValue arg2, LuaValue arg3) {
+		LuaValue[] stack = new LuaValue[p.maxstacksize];
+		for (int i = 3; i < p.numparams; ++i )
+			stack[i] = NIL;
+		switch ( p.numparams ) {
+		default: stack[0]=arg1; stack[1]=arg2; stack[2]=arg3; return execute(stack,NONE).arg1();
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24202687
+src/core/org/luaj/vm2/LuaClosure.java 152 154
+src/core/org/luaj/vm2/LuaClosure.java 164 166
+----------------------------------------
+		default: stack[0]=arg1; stack[1]=arg2; return execute(stack,NONE).arg1();
+		case 1: stack[0]=arg1; return execute(stack,arg2).arg1();
+		case 0: return execute(stack,p.is_vararg!=0? varargsOf(arg1,arg2): NONE).arg1();
+
+----------------------------------------
+		case 2: stack[0]=arg1; stack[1]=arg2; return execute(stack,arg3).arg1();
+		case 1: stack[0]=arg1; return execute(stack,p.is_vararg!=0? varargsOf(arg2,arg3): NONE).arg1();
+		case 0: return execute(stack,p.is_vararg!=0? varargsOf(arg1,arg2,arg3): NONE).arg1();
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24202688
+src/core/org/luaj/vm2/LuaClosure.java 234 241
+src/core/org/luaj/vm2/LuaClosure.java 279 286
+----------------------------------------
+					stack[a] = upValues[i>>>23].getValue().get((c=(i>>14)&0x1ff)>0xff? k[c&0x0ff]: stack[c]);
+					continue;
+	                
+				case Lua.OP_GETTABLE: /*	A B C	R(A):= R(B)[RK(C)]				*/
+	                stack[a] = stack[i>>>23].get((c=(i>>14)&0x1ff)>0xff? k[c&0x0ff]: stack[c]);
+					continue;
+					
+				case Lua.OP_SETTABUP: /*	A B C	UpValue[A][RK(B)] := RK(C)			*/
+
+----------------------------------------
+					stack[a] = ((b=i>>>23)>0xff? k[b&0x0ff]: stack[b]).mod((c=(i>>14)&0x1ff)>0xff? k[c&0x0ff]: stack[c]);
+					continue;
+					
+				case Lua.OP_POW: /*	A B C	R(A):= RK(B) ^ RK(C)				*/
+					stack[a] = ((b=i>>>23)>0xff? k[b&0x0ff]: stack[b]).pow((c=(i>>14)&0x1ff)>0xff? k[c&0x0ff]: stack[c]);
+					continue;
+					
+				case Lua.OP_UNM: /*	A B	R(A):= -R(B)					*/
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24202689
+src/core/org/luaj/vm2/LuaClosure.java 238 245
+src/core/org/luaj/vm2/LuaClosure.java 259 266
+----------------------------------------
+	                stack[a] = stack[i>>>23].get((c=(i>>14)&0x1ff)>0xff? k[c&0x0ff]: stack[c]);
+					continue;
+					
+				case Lua.OP_SETTABUP: /*	A B C	UpValue[A][RK(B)] := RK(C)			*/
+	                upValues[a].getValue().set(((b=i>>>23)>0xff? k[b&0x0ff]: stack[b]), (c=(i>>14)&0x1ff)>0xff? k[c&0x0ff]: stack[c]);
+					continue;
+					
+				case Lua.OP_SETUPVAL: /*	A B	UpValue[B]:= R(A)				*/
+
+----------------------------------------
+					stack[a] = o.get((c=(i>>14)&0x1ff)>0xff? k[c&0x0ff]: stack[c]);
+					continue;
+					
+				case Lua.OP_ADD: /*	A B C	R(A):= RK(B) + RK(C)				*/
+					stack[a] = ((b=i>>>23)>0xff? k[b&0x0ff]: stack[b]).add((c=(i>>14)&0x1ff)>0xff? k[c&0x0ff]: stack[c]);
+					continue;
+					
+				case Lua.OP_SUB: /*	A B C	R(A):= RK(B) - RK(C)				*/
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24202690
+src/core/org/luaj/vm2/LuaClosure.java 259 267
+src/core/org/luaj/vm2/LuaClosure.java 325 335
+----------------------------------------
+					stack[a] = o.get((c=(i>>14)&0x1ff)>0xff? k[c&0x0ff]: stack[c]);
+					continue;
+					
+				case Lua.OP_ADD: /*	A B C	R(A):= RK(B) + RK(C)				*/
+					stack[a] = ((b=i>>>23)>0xff? k[b&0x0ff]: stack[b]).add((c=(i>>14)&0x1ff)>0xff? k[c&0x0ff]: stack[c]);
+					continue;
+					
+				case Lua.OP_SUB: /*	A B C	R(A):= RK(B) - RK(C)				*/
+					stack[a] = ((b=i>>>23)>0xff? k[b&0x0ff]: stack[b]).sub((c=(i>>14)&0x1ff)>0xff? k[c&0x0ff]: stack[c]);
+
+----------------------------------------
+					if ( ((b=i>>>23)>0xff? k[b&0x0ff]: stack[b]).eq_b((c=(i>>14)&0x1ff)>0xff? k[c&0x0ff]: stack[c]) != (a!=0) ) 
+						++pc;
+					continue;
+					
+				case Lua.OP_LT: /*	A B C	if ((RK(B) <  RK(C)) ~= A) then pc++  		*/
+					if ( ((b=i>>>23)>0xff? k[b&0x0ff]: stack[b]).lt_b((c=(i>>14)&0x1ff)>0xff? k[c&0x0ff]: stack[c]) != (a!=0) ) 
+						++pc;
+					continue;
+					
+				case Lua.OP_LE: /*	A B C	if ((RK(B) <= RK(C)) ~= A) then pc++  		*/
+					if ( ((b=i>>>23)>0xff? k[b&0x0ff]: stack[b]).lteq_b((c=(i>>14)&0x1ff)>0xff? k[c&0x0ff]: stack[c]) != (a!=0) ) 
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24202691
+src/core/org/luaj/vm2/LuaClosure.java 279 283
+src/core/org/luaj/vm2/LuaClosure.java 325 330
+----------------------------------------
+					stack[a] = ((b=i>>>23)>0xff? k[b&0x0ff]: stack[b]).mod((c=(i>>14)&0x1ff)>0xff? k[c&0x0ff]: stack[c]);
+					continue;
+					
+				case Lua.OP_POW: /*	A B C	R(A):= RK(B) ^ RK(C)				*/
+					stack[a] = ((b=i>>>23)>0xff? k[b&0x0ff]: stack[b]).pow((c=(i>>14)&0x1ff)>0xff? k[c&0x0ff]: stack[c]);
+
+----------------------------------------
+					if ( ((b=i>>>23)>0xff? k[b&0x0ff]: stack[b]).eq_b((c=(i>>14)&0x1ff)>0xff? k[c&0x0ff]: stack[c]) != (a!=0) ) 
+						++pc;
+					continue;
+					
+				case Lua.OP_LT: /*	A B C	if ((RK(B) <  RK(C)) ~= A) then pc++  		*/
+					if ( ((b=i>>>23)>0xff? k[b&0x0ff]: stack[b]).lt_b((c=(i>>14)&0x1ff)>0xff? k[c&0x0ff]: stack[c]) != (a!=0) ) 
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24202692
+src/core/org/luaj/vm2/LuaClosure.java 324 334
+src/core/org/luaj/vm2/LuaClosure.java 334 339
+----------------------------------------
+				case Lua.OP_EQ: /*	A B C	if ((RK(B) == RK(C)) ~= A) then pc++		*/
+					if ( ((b=i>>>23)>0xff? k[b&0x0ff]: stack[b]).eq_b((c=(i>>14)&0x1ff)>0xff? k[c&0x0ff]: stack[c]) != (a!=0) ) 
+						++pc;
+					continue;
+					
+				case Lua.OP_LT: /*	A B C	if ((RK(B) <  RK(C)) ~= A) then pc++  		*/
+					if ( ((b=i>>>23)>0xff? k[b&0x0ff]: stack[b]).lt_b((c=(i>>14)&0x1ff)>0xff? k[c&0x0ff]: stack[c]) != (a!=0) ) 
+						++pc;
+					continue;
+					
+				case Lua.OP_LE: /*	A B C	if ((RK(B) <= RK(C)) ~= A) then pc++  		*/
+
+----------------------------------------
+				case Lua.OP_LE: /*	A B C	if ((RK(B) <= RK(C)) ~= A) then pc++  		*/
+					if ( ((b=i>>>23)>0xff? k[b&0x0ff]: stack[b]).lteq_b((c=(i>>14)&0x1ff)>0xff? k[c&0x0ff]: stack[c]) != (a!=0) ) 
+						++pc;
+					continue;
+					
+				case Lua.OP_TEST: /*	A C	if not (R(A) <=> C) then pc++			*/ 
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24202693
+src/core/org/luaj/vm2/LuaClosure.java 356 358
+src/core/org/luaj/vm2/LuaClosure.java 360 363
+----------------------------------------
+					case (1<<Lua.POS_B) | (1<<Lua.POS_C): stack[a].call(); continue;
+					case (2<<Lua.POS_B) | (1<<Lua.POS_C): stack[a].call(stack[a+1]); continue;
+					case (3<<Lua.POS_B) | (1<<Lua.POS_C): stack[a].call(stack[a+1],stack[a+2]); continue;
+
+----------------------------------------
+					case (1<<Lua.POS_B) | (2<<Lua.POS_C): stack[a] = stack[a].call(); continue;
+					case (2<<Lua.POS_B) | (2<<Lua.POS_C): stack[a] = stack[a].call(stack[a+1]); continue;
+					case (3<<Lua.POS_B) | (2<<Lua.POS_C): stack[a] = stack[a].call(stack[a+1],stack[a+2]); continue;
+					case (4<<Lua.POS_B) | (2<<Lua.POS_C): stack[a] = stack[a].call(stack[a+1],stack[a+2],stack[a+3]); continue;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+27134665
+examples/android/src/android/LuajView.java 28 34
+src/core/org/luaj/vm2/lib/PackageLib.java 310 313
+----------------------------------------
+	public InputStream findResource(String name) {
+		try {
+			return getContext().getAssets().open(name);
+		} catch (java.io.IOException ioe) {
+			return null;
+		}
+	}
+
+----------------------------------------
+				if (is != null) {
+					try { is.close(); } catch ( java.io.IOException ioe ) {}
+					return valueOf(filename);
+				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+27134666
+src/core/org/luaj/vm2/lib/BaseLib.java 440 446
+src/core/org/luaj/vm2/lib/PackageLib.java 310 313
+----------------------------------------
+		} finally {
+			try {
+				is.close();
+			} catch ( Exception e ) {
+				e.printStackTrace();
+			}
+		}
+
+----------------------------------------
+				if (is != null) {
+					try { is.close(); } catch ( java.io.IOException ioe ) {}
+					return valueOf(filename);
+				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+27134667
+src/core/org/luaj/vm2/LuaTable.java 553 557
+src/jse/org/luaj/vm2/luajc/JavaGen.java 415 420
+----------------------------------------
+	private void dropWeakArrayValues() {
+		for ( int i = 0; i < array.length; ++i ) {
+			m_metatable.arrayget(array, i);
+		}
+	}
+
+----------------------------------------
+					} else {
+						for ( int i=1; i<b; ++a, ++i ) { 
+							builder.loadVarargs( i );
+							builder.storeLocal(pc, a);
+						}
+					}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+27134668
+src/jse/org/luaj/vm2/parser/LuaParserTokenManager.java 2084 2088
+src/jse/org/luaj/vm2/parser/LuaParserTokenManager.java 2096 2100
+----------------------------------------
+{
+   do {
+      jjstateSet[jjnewStateCnt++] = jjnextStates[start];
+   } while (start++ != end);
+}
+
+----------------------------------------
+{
+   do {
+      jjCheckNAdd(jjnextStates[start]);
+   } while (start++ != end);
+}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+27223023
+examples/jse/SampleApplet.java 74 86
+src/jse/org/luaj/vm2/lib/jse/JsePlatform.java 95 107
+----------------------------------------
+		globals = new Globals();
+		globals.load(new JseBaseLib());
+		globals.load(new PackageLib());
+		globals.load(new Bit32Lib());
+		globals.load(new TableLib());
+		globals.load(new StringLib());
+		globals.load(new CoroutineLib());
+		globals.load(new JseMathLib());
+		globals.load(new JseIoLib());
+		globals.load(new JseOsLib());
+		globals.load(new AppletLuajavaLib());
+		LoadState.install(globals);
+		LuaC.install(globals);
+
+----------------------------------------
+		Globals globals = new Globals();
+		globals.load(new JseBaseLib());
+		globals.load(new PackageLib());
+		globals.load(new Bit32Lib());
+		globals.load(new TableLib());
+		globals.load(new StringLib());
+		globals.load(new CoroutineLib());
+		globals.load(new JseMathLib());
+		globals.load(new JseIoLib());
+		globals.load(new JseOsLib());
+		globals.load(new LuajavaLib());
+		LoadState.install(globals);
+		LuaC.install(globals);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+27223024
+src/jme/org/luaj/vm2/lib/jme/JmeIoLib.java 152 162
+src/jse/org/luaj/vm2/lib/jse/JseIoLib.java 154 164
+----------------------------------------
+			if ( os != null )
+				os.write( s.m_bytes, s.m_offset, s.m_length );
+			else
+				notimplemented();
+			if ( nobuffer )
+				flush();
+		}
+		public boolean isclosed() {
+			return closed;
+		}
+		public int seek(String option, int pos) throws IOException {
+
+----------------------------------------
+			else if ( file != null )
+				file.write( s.m_bytes, s.m_offset, s.m_length );
+			else
+				notimplemented();
+			if ( nobuffer )
+				flush();
+		}
+		public boolean isclosed() {
+			return closed;
+		}
+		public int seek(String option, int pos) throws IOException {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+27223025
+src/jme/org/luaj/vm2/lib/jme/JmeIoLib.java 127 154
+src/jse/org/luaj/vm2/lib/jse/JseIoLib.java 127 154
+----------------------------------------
+			this.os = os;
+		}
+		private FileImpl( InputStream i ) {
+			this( null, i, null );
+		}
+		private FileImpl( OutputStream o ) {
+			this( null, null, o );
+		}
+		public String tojstring() {
+			return "file ("+this.hashCode()+")";
+		}
+		public boolean isstdfile() {
+			return conn == null;
+		}
+		public void close() throws IOException  {
+			closed = true;
+			if ( conn != null ) {
+				conn.close();
+			}
+		}
+		public void flush() throws IOException {
+			if ( os != null )
+				os.flush();
+		}
+		public void write(LuaString s) throws IOException {
+			if ( os != null )
+				os.write( s.m_bytes, s.m_offset, s.m_length );
+			else
+
+----------------------------------------
+			this( f, null, null );
+		}
+		private FileImpl( InputStream i ) {
+			this( null, i, null );
+		}
+		private FileImpl( OutputStream o ) {
+			this( null, null, o );
+		}
+		public String tojstring() {
+			return "file ("+this.hashCode()+")";
+		}
+		public boolean isstdfile() {
+			return file == null;
+		}
+		public void close() throws IOException  {
+			closed = true;
+			if ( file != null ) {
+				file.close();
+			}
+		}
+		public void flush() throws IOException {
+			if ( os != null )
+				os.flush();
+		}
+		public void write(LuaString s) throws IOException {
+			if ( os != null )
+				os.write( s.m_bytes, s.m_offset, s.m_length );
+			else if ( file != null )
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+27223026
+src/core/org/luaj/vm2/LuaDouble.java 213 223
+src/core/org/luaj/vm2/LuaInteger.java 193 203
+----------------------------------------
+	public LuaValue   gteq( LuaValue rhs )       { return rhs.lteq_b(v)? LuaValue.TRUE: FALSE; }
+	public LuaValue   gteq( double rhs )    { return v >= rhs? TRUE: FALSE; }
+	public LuaValue   gteq( int rhs )       { return v >= rhs? TRUE: FALSE; }
+	public boolean gteq_b( LuaValue rhs )     { return rhs.lteq_b(v); }
+	public boolean gteq_b( int rhs )       { return v >= rhs; }
+	public boolean gteq_b( double rhs )    { return v >= rhs; }
+	
+	// string comparison
+	public int strcmp( LuaString rhs )      { typerror("attempt to compare number with string"); return 0; }
+			
+	public String tojstring() {
+
+----------------------------------------
+	public LuaValue   gteq( LuaValue rhs )       { return rhs.lteq_b(v)? TRUE: FALSE; }
+	public LuaValue   gteq( double rhs )    { return v >= rhs? TRUE: FALSE; }
+	public LuaValue   gteq( int rhs )       { return v >= rhs? TRUE: FALSE; }
+	public boolean gteq_b( LuaValue rhs )     { return rhs.lteq_b(v); }
+	public boolean gteq_b( int rhs )       { return v >= rhs; }
+	public boolean gteq_b( double rhs )    { return v >= rhs; }
+	
+	// string comparison
+	public int strcmp( LuaString rhs )      { typerror("attempt to compare number with string"); return 0; }
+	
+	public int checkint() { 
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+27223027
+src/core/org/luaj/vm2/LuaDouble.java 207 213
+src/core/org/luaj/vm2/LuaInteger.java 187 193
+----------------------------------------
+	public LuaValue   gt( LuaValue rhs )         { return rhs.lt_b(v)? LuaValue.TRUE: FALSE; }
+	public LuaValue   gt( double rhs )      { return v > rhs? TRUE: FALSE; }
+	public LuaValue   gt( int rhs )         { return v > rhs? TRUE: FALSE; }
+	public boolean gt_b( LuaValue rhs )       { return rhs.lt_b(v); }
+	public boolean gt_b( int rhs )         { return v > rhs; }
+	public boolean gt_b( double rhs )      { return v > rhs; }
+	public LuaValue   gteq( LuaValue rhs )       { return rhs.lteq_b(v)? LuaValue.TRUE: FALSE; }
+
+----------------------------------------
+	public LuaValue   gt( LuaValue rhs )         { return rhs.lt_b(v)? TRUE: FALSE; }
+	public LuaValue   gt( double rhs )      { return v > rhs? TRUE: FALSE; }
+	public LuaValue   gt( int rhs )         { return v > rhs? TRUE: FALSE; }
+	public boolean gt_b( LuaValue rhs )       { return rhs.lt_b(v); }
+	public boolean gt_b( int rhs )         { return v > rhs; }
+	public boolean gt_b( double rhs )      { return v > rhs; }
+	public LuaValue   gteq( LuaValue rhs )       { return rhs.lteq_b(v)? TRUE: FALSE; }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+27223028
+src/core/org/luaj/vm2/LuaDouble.java 201 207
+src/core/org/luaj/vm2/LuaInteger.java 181 187
+----------------------------------------
+	public LuaValue   lteq( LuaValue rhs )       { return rhs.gteq_b(v)? LuaValue.TRUE: FALSE; }
+	public LuaValue   lteq( double rhs )    { return v <= rhs? TRUE: FALSE; }
+	public LuaValue   lteq( int rhs )       { return v <= rhs? TRUE: FALSE; }
+	public boolean lteq_b( LuaValue rhs )     { return rhs.gteq_b(v); }
+	public boolean lteq_b( int rhs )       { return v <= rhs; }
+	public boolean lteq_b( double rhs )    { return v <= rhs; }
+	public LuaValue   gt( LuaValue rhs )         { return rhs.lt_b(v)? LuaValue.TRUE: FALSE; }
+
+----------------------------------------
+	public LuaValue   lteq( LuaValue rhs )       { return rhs.gteq_b(v)? TRUE: FALSE; }
+	public LuaValue   lteq( double rhs )    { return v <= rhs? TRUE: FALSE; }
+	public LuaValue   lteq( int rhs )       { return v <= rhs? TRUE: FALSE; }
+	public boolean lteq_b( LuaValue rhs )     { return rhs.gteq_b(v); }
+	public boolean lteq_b( int rhs )       { return v <= rhs; }
+	public boolean lteq_b( double rhs )    { return v <= rhs; }
+	public LuaValue   gt( LuaValue rhs )         { return rhs.lt_b(v)? TRUE: FALSE; }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+27223029
+src/core/org/luaj/vm2/LuaDouble.java 195 201
+src/core/org/luaj/vm2/LuaInteger.java 175 181
+----------------------------------------
+	public LuaValue   lt( LuaValue rhs )         { return rhs.gt_b(v)? LuaValue.TRUE: FALSE; }
+	public LuaValue   lt( double rhs )      { return v < rhs? TRUE: FALSE; }
+	public LuaValue   lt( int rhs )         { return v < rhs? TRUE: FALSE; }
+	public boolean lt_b( LuaValue rhs )       { return rhs.gt_b(v); }
+	public boolean lt_b( int rhs )         { return v < rhs; }
+	public boolean lt_b( double rhs )      { return v < rhs; }
+	public LuaValue   lteq( LuaValue rhs )       { return rhs.gteq_b(v)? LuaValue.TRUE: FALSE; }
+
+----------------------------------------
+	public LuaValue   lt( LuaValue rhs )         { return rhs.gt_b(v)? TRUE: FALSE; }	
+	public LuaValue   lt( double rhs )      { return v < rhs? TRUE: FALSE; }
+	public LuaValue   lt( int rhs )         { return v < rhs? TRUE: FALSE; }
+	public boolean lt_b( LuaValue rhs )       { return rhs.gt_b(v); }
+	public boolean lt_b( int rhs )         { return v < rhs; }
+	public boolean lt_b( double rhs )      { return v < rhs; }
+	public LuaValue   lteq( LuaValue rhs )       { return rhs.gteq_b(v)? TRUE: FALSE; }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+27223030
+src/core/org/luaj/vm2/LuaDouble.java 135 158
+src/core/org/luaj/vm2/LuaInteger.java 159 175
+----------------------------------------
+	public LuaValue   mul( int lhs )      { return LuaDouble.valueOf(lhs * v); }
+	public LuaValue   pow( LuaValue rhs )        { return rhs.powWith(v); }
+	public LuaValue   pow( double rhs )        { return MathLib.dpow(v,rhs); }
+	public LuaValue   pow( int rhs )        { return MathLib.dpow(v,rhs); }
+	public LuaValue   powWith( double lhs )   { return MathLib.dpow(lhs,v); }
+	public LuaValue   powWith( int lhs )      { return MathLib.dpow(lhs,v); }
+	public LuaValue   div( LuaValue rhs )        { return rhs.divInto(v); }
+	public LuaValue   div( double rhs )        { return LuaDouble.ddiv(v,rhs); }
+	public LuaValue   div( int rhs )        { return LuaDouble.ddiv(v,rhs); }
+	public LuaValue   divInto( double lhs )   { return LuaDouble.ddiv(lhs,v); }
+	public LuaValue   mod( LuaValue rhs )        { return rhs.modFrom(v); }
+	public LuaValue   mod( double rhs )        { return LuaDouble.dmod(v,rhs); }
+	public LuaValue   mod( int rhs )        { return LuaDouble.dmod(v,rhs); }
+	public LuaValue   modFrom( double lhs )   { return LuaDouble.dmod(lhs,v); }
+	
+	
+	/** Divide two double numbers according to lua math, and return a {@link LuaValue} result.
+	 * @param lhs Left-hand-side of the division.
+	 * @param rhs Right-hand-side of the division.
+	 * @return {@link LuaValue} for the result of the division, 
+	 * taking into account positive and negiative infinity, and Nan
+	 * @see #ddiv_d(double, double) 
+	 */
+	public static LuaValue ddiv(double lhs, double rhs) {
+
+----------------------------------------
+	public LuaValue   mul( int lhs )      { return LuaInteger.valueOf(lhs * (long)v); }
+	public LuaValue   pow( LuaValue rhs )        { return rhs.powWith(v); }
+	public LuaValue   pow( double rhs )        { return MathLib.dpow(v,rhs); }
+	public LuaValue   pow( int rhs )        { return MathLib.dpow(v,rhs); }
+	public LuaValue   powWith( double lhs )   { return MathLib.dpow(lhs,v); }
+	public LuaValue   powWith( int lhs )      { return MathLib.dpow(lhs,v); }
+	public LuaValue   div( LuaValue rhs )        { return rhs.divInto(v); }
+	public LuaValue   div( double rhs )        { return LuaDouble.ddiv(v,rhs); }
+	public LuaValue   div( int rhs )        { return LuaDouble.ddiv(v,rhs); }
+	public LuaValue   divInto( double lhs )   { return LuaDouble.ddiv(lhs,v); }
+	public LuaValue   mod( LuaValue rhs )        { return rhs.modFrom(v); }
+	public LuaValue   mod( double rhs )        { return LuaDouble.dmod(v,rhs); }
+	public LuaValue   mod( int rhs )        { return LuaDouble.dmod(v,rhs); }
+	public LuaValue   modFrom( double lhs )   { return LuaDouble.dmod(lhs,v); }
+	
+	// relational operators
+	public LuaValue   lt( LuaValue rhs )         { return rhs.gt_b(v)? TRUE: FALSE; }	
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+27223031
+src/core/org/luaj/vm2/LuaDouble.java 132 135
+src/core/org/luaj/vm2/LuaInteger.java 156 159
+----------------------------------------
+	public LuaValue   subFrom( double lhs )   { return LuaDouble.valueOf(lhs - v); }
+	public LuaValue   mul( LuaValue rhs )        { return rhs.mul(v); }
+	public LuaValue   mul( double lhs )   { return LuaDouble.valueOf(lhs * v); }
+	public LuaValue   mul( int lhs )      { return LuaDouble.valueOf(lhs * v); }
+
+----------------------------------------
+	public LuaValue   subFrom( int lhs )      { return LuaInteger.valueOf(lhs - (long)v); }
+	public LuaValue   mul( LuaValue rhs )        { return rhs.mul(v); }
+	public LuaValue   mul( double lhs )   { return LuaDouble.valueOf(lhs * v); }
+	public LuaValue   mul( int lhs )      { return LuaInteger.valueOf(lhs * (long)v); }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+27223032
+src/core/org/luaj/vm2/LuaDouble.java 128 133
+src/core/org/luaj/vm2/LuaInteger.java 151 156
+----------------------------------------
+	public LuaValue   add( double lhs )     { return LuaDouble.valueOf(lhs + v); }
+	public LuaValue   sub( LuaValue rhs )        { return rhs.subFrom(v); }
+	public LuaValue   sub( double rhs )        { return LuaDouble.valueOf(v - rhs); }
+	public LuaValue   sub( int rhs )        { return LuaDouble.valueOf(v - rhs); }
+	public LuaValue   subFrom( double lhs )   { return LuaDouble.valueOf(lhs - v); }
+	public LuaValue   mul( LuaValue rhs )        { return rhs.mul(v); }
+
+----------------------------------------
+	public LuaValue   add( int lhs )        { return LuaInteger.valueOf(lhs + (long)v); }
+	public LuaValue   sub( LuaValue rhs )        { return rhs.subFrom(v); }
+	public LuaValue   sub( double rhs )        { return LuaDouble.valueOf(v - rhs); }
+	public LuaValue   sub( int rhs )        { return LuaDouble.valueOf(v - rhs); }
+	public LuaValue   subFrom( double lhs )   { return LuaDouble.valueOf(lhs - v); }
+	public LuaValue   subFrom( int lhs )      { return LuaInteger.valueOf(lhs - (long)v); }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+27223033
+src/core/org/luaj/vm2/LuaDouble.java 112 129
+src/core/org/luaj/vm2/LuaInteger.java 134 151
+----------------------------------------
+	public LuaValue neg() { return valueOf(-v); }
+	
+	// object equality, used for key comparison
+	public boolean equals(Object o) { return o instanceof LuaDouble? ((LuaDouble)o).v == v: false; }
+	
+	// equality w/ metatable processing
+	public LuaValue eq( LuaValue val )        { return val.raweq(v)? TRUE: FALSE; }
+	public boolean eq_b( LuaValue val )       { return val.raweq(v); }
+
+	// equality w/o metatable processing
+	public boolean raweq( LuaValue val )      { return val.raweq(v); }
+	public boolean raweq( double val )        { return v == val; }
+	public boolean raweq( int val )           { return v == val; }
+	
+	// basic binary arithmetic
+	public LuaValue   add( LuaValue rhs )        { return rhs.add(v); }
+	public LuaValue   add( double lhs )     { return LuaDouble.valueOf(lhs + v); }
+	public LuaValue   sub( LuaValue rhs )        { return rhs.subFrom(v); }
+
+----------------------------------------
+	public LuaValue neg() { return valueOf(-(long)v); }
+	
+	// object equality, used for key comparison
+	public boolean equals(Object o) { return o instanceof LuaInteger? ((LuaInteger)o).v == v: false; }
+	
+	// equality w/ metatable processing
+	public LuaValue eq( LuaValue val )    { return val.raweq(v)? TRUE: FALSE; }
+	public boolean eq_b( LuaValue val )   { return val.raweq(v); }
+	
+	// equality w/o metatable processing
+	public boolean raweq( LuaValue val )  { return val.raweq(v); }
+	public boolean raweq( double val )    { return v == val; }
+	public boolean raweq( int val )       { return v == val; }
+	
+	// arithmetic operators
+	public LuaValue   add( LuaValue rhs )        { return rhs.add(v); }
+	public LuaValue   add( double lhs )     { return LuaDouble.valueOf(lhs + v); }
+	public LuaValue   add( int lhs )        { return LuaInteger.valueOf(lhs + (long)v); }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+27223034
+src/core/org/luaj/vm2/lib/MathLib.java 152 156
+src/jse/org/luaj/vm2/lib/jse/JseMathLib.java 88 92
+----------------------------------------
+	static final class sin extends UnaryOp { protected double call(double d) { return Math.sin(d); } }
+	static final class sqrt extends UnaryOp { protected double call(double d) { return Math.sqrt(d); } }
+	static final class tan extends UnaryOp { protected double call(double d) { return Math.tan(d); } }
+
+	static final class exp extends UnaryOp {
+
+----------------------------------------
+	}
+
+	static final class acos extends UnaryOp { protected double call(double d) { return Math.acos(d); } }
+	static final class asin extends UnaryOp { protected double call(double d) { return Math.asin(d); } }
+	static final class atan extends UnaryOp { protected double call(double d) { return Math.atan(d); } }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+27223035
+src/core/org/luaj/vm2/lib/MathLib.java 152 154
+src/jse/org/luaj/vm2/lib/jse/JseMathLib.java 97 99
+----------------------------------------
+	static final class sin extends UnaryOp { protected double call(double d) { return Math.sin(d); } }
+	static final class sqrt extends UnaryOp { protected double call(double d) { return Math.sqrt(d); } }
+	static final class tan extends UnaryOp { protected double call(double d) { return Math.tan(d); } }
+
+----------------------------------------
+	static final class pow extends BinaryOp { protected double call(double x, double y) { return Math.pow(x, y); } }
+	static final class sinh extends UnaryOp { protected double call(double d) { return Math.sinh(d); } }
+	static final class tanh extends UnaryOp { protected double call(double d) { return Math.tanh(d); } }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+27223036
+src/jse/org/luaj/vm2/lib/jse/JseMathLib.java 97 99
+src/core/org/luaj/vm2/lib/MathLib.java 151 153
+----------------------------------------
+	static final class pow extends BinaryOp { protected double call(double x, double y) { return Math.pow(x, y); } }
+	static final class sinh extends UnaryOp { protected double call(double d) { return Math.sinh(d); } }
+	static final class tanh extends UnaryOp { protected double call(double d) { return Math.tanh(d); } }
+
+----------------------------------------
+	static final class rad extends UnaryOp { protected double call(double d) { return Math.toRadians(d); } }
+	static final class sin extends UnaryOp { protected double call(double d) { return Math.sin(d); } }
+	static final class sqrt extends UnaryOp { protected double call(double d) { return Math.sqrt(d); } }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+27223037
+src/jse/org/luaj/vm2/lib/jse/JseMathLib.java 97 99
+src/core/org/luaj/vm2/lib/MathLib.java 146 148
+----------------------------------------
+	static final class pow extends BinaryOp { protected double call(double x, double y) { return Math.pow(x, y); } }
+	static final class sinh extends UnaryOp { protected double call(double d) { return Math.sinh(d); } }
+	static final class tanh extends UnaryOp { protected double call(double d) { return Math.tanh(d); } }
+
+----------------------------------------
+	static final class abs extends UnaryOp { protected double call(double d) { return Math.abs(d); } }
+	static final class ceil extends UnaryOp { protected double call(double d) { return Math.ceil(d); } }
+	static final class cos extends UnaryOp { protected double call(double d) { return Math.cos(d); } }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+27223038
+src/jse/org/luaj/vm2/lib/jse/JseMathLib.java 97 99
+src/core/org/luaj/vm2/lib/MathLib.java 144 147
+----------------------------------------
+	static final class pow extends BinaryOp { protected double call(double x, double y) { return Math.pow(x, y); } }
+	static final class sinh extends UnaryOp { protected double call(double d) { return Math.sinh(d); } }
+	static final class tanh extends UnaryOp { protected double call(double d) { return Math.tanh(d); } }
+
+----------------------------------------
+	}
+
+	static final class abs extends UnaryOp { protected double call(double d) { return Math.abs(d); } }
+	static final class ceil extends UnaryOp { protected double call(double d) { return Math.ceil(d); } }
+
+----------------------------------------

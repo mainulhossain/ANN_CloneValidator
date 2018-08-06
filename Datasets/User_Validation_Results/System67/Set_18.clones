@@ -1,0 +1,1415 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995756
+src/de/joergjahnke/common/jme/Settings.java 121 127
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1178 1185
+----------------------------------------
+    public boolean getBoolean(final String key, final boolean defaultValue) {
+        try {
+            return getBoolean(key);
+        } catch (Exception e) {
+            return defaultValue;
+        }
+    }
+
+----------------------------------------
+            public void onError(final Throwable t) {
+                super.onError(t);
+                try {
+                    settings.remove(SETTING_FILESEARCH_STARTDIR);
+                } catch (Exception e) {
+                    // we couldn't save the settings, that's OK
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995757
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 461 467
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1178 1185
+----------------------------------------
+    protected Image getMenuIcon(final String filename) {
+        try {
+            return ImageUtils.scale(Image.createImage("/res/drawable/" + filename), 16, 16, true);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+----------------------------------------
+            public void onError(final Throwable t) {
+                super.onError(t);
+                try {
+                    settings.remove(SETTING_FILESEARCH_STARTDIR);
+                } catch (Exception e) {
+                    // we couldn't save the settings, that's OK
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995762
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 510 515
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1178 1185
+----------------------------------------
+        } finally {
+            try {
+                romStream.close();
+            } catch (Exception e) {
+            }
+        }
+
+----------------------------------------
+            public void onError(final Throwable t) {
+                super.onError(t);
+                try {
+                    settings.remove(SETTING_FILESEARCH_STARTDIR);
+                } catch (Exception e) {
+                    // we couldn't save the settings, that's OK
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995760
+src/de/joergjahnke/common/bluetooth/BluetoothOBEXClient.java 226 233
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1178 1185
+----------------------------------------
+            public void run() {
+                try {
+                    notifier.acceptAndOpen(handler);
+                } catch (IOException e) {
+                    notifyErrorOccurred(e);
+                    abortFileReception();
+                }
+            }
+
+----------------------------------------
+            public void onError(final Throwable t) {
+                super.onError(t);
+                try {
+                    settings.remove(SETTING_FILESEARCH_STARTDIR);
+                } catch (Exception e) {
+                    // we couldn't save the settings, that's OK
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995772
+src/de/joergjahnke/gameboy/core/CPU.java 3104 3110
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1178 1185
+----------------------------------------
+    public final void throttle(final long ms) {
+        this.throttledMillis += ms;
+        try {
+            Thread.sleep(ms);
+        } catch (InterruptedException ex) {
+        }
+    }
+
+----------------------------------------
+            public void onError(final Throwable t) {
+                super.onError(t);
+                try {
+                    settings.remove(SETTING_FILESEARCH_STARTDIR);
+                } catch (Exception e) {
+                    // we couldn't save the settings, that's OK
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995777
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 998 1004
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1178 1185
+----------------------------------------
+    private void jMenuItemContentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemContentsActionPerformed
+        try {
+            java.awt.Desktop.getDesktop().browse(new URI(URL_ONLINE_HELP));
+        } catch (Throwable t) {
+            JOptionPane.showMessageDialog(this, this.commonResources.getString("CouldNotDisplayOnlineHelp") + " '" + URL_ONLINE_HELP + "'", this.commonResources.getString("CouldNotStartBrowser"), JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jMenuItemContentsActionPerformed
+
+----------------------------------------
+            public void onError(final Throwable t) {
+                super.onError(t);
+                try {
+                    settings.remove(SETTING_FILESEARCH_STARTDIR);
+                } catch (Exception e) {
+                    // we couldn't save the settings, that's OK
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995717
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 82 88
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1178 1185
+----------------------------------------
+            if (null == floppyImage) {
+                try {
+                    floppyImage = Image.createImage("/res/drawable/floppy.png");
+                } catch (Exception e) {
+                    // we can work without the image
+                    }
+            }
+
+----------------------------------------
+            public void onError(final Throwable t) {
+                super.onError(t);
+                try {
+                    settings.remove(SETTING_FILESEARCH_STARTDIR);
+                } catch (Exception e) {
+                    // we couldn't save the settings, that's OK
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995754
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 407 413
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1178 1185
+----------------------------------------
+        if (null == cartridgeImage) {
+            try {
+                cartridgeImage = Image.createImage("/res/drawable/cartridge.png");
+            } catch (Exception e) {
+                // we can work without the image
+            }
+        }
+
+----------------------------------------
+            public void onError(final Throwable t) {
+                super.onError(t);
+                try {
+                    settings.remove(SETTING_FILESEARCH_STARTDIR);
+                } catch (Exception e) {
+                    // we couldn't save the settings, that's OK
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995759
+src/de/joergjahnke/common/android/FileDialog.java 40 49
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1178 1185
+----------------------------------------
+    public void onCreate(final Bundle icicle) {
+        super.onCreate(icicle);
+
+        // go to the root directory
+        try {
+            showDirectory(getIntent().getStringExtra("de.joergjahnke.c64.android.prgdir"));
+        } catch (NullPointerException e) {
+            showDirectory("/");
+        }
+    }
+
+----------------------------------------
+            public void onError(final Throwable t) {
+                super.onError(t);
+                try {
+                    settings.remove(SETTING_FILESEARCH_STARTDIR);
+                } catch (Exception e) {
+                    // we couldn't save the settings, that's OK
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995764
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 772 779
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1178 1185
+----------------------------------------
+                if (status == STATUS_LOAD_FAILED || status == STATUS_LOAD_OK) {
+                    try {
+                        RecordStore.deleteRecordStore(name);
+                    } catch (Exception e) {
+                        display.setCurrent(new Alert(LocalizationSupport.getMessage("CouldNotRemoveSuspendData"), LocalizationSupport.getMessage("FailedToRemoveSuspendData"), null, AlertType.WARNING));
+                        e.printStackTrace();
+                    }
+                }
+
+----------------------------------------
+            public void onError(final Throwable t) {
+                super.onError(t);
+                try {
+                    settings.remove(SETTING_FILESEARCH_STARTDIR);
+                } catch (Exception e) {
+                    // we couldn't save the settings, that's OK
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995774
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 414 420
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1178 1185
+----------------------------------------
+        if (null == snapshotImage) {
+            try {
+                snapshotImage = Image.createImage("/res/drawable/snapshot.png");
+            } catch (Exception e) {
+                // we can work without the image
+            }
+        }
+
+----------------------------------------
+            public void onError(final Throwable t) {
+                super.onError(t);
+                try {
+                    settings.remove(SETTING_FILESEARCH_STARTDIR);
+                } catch (Exception e) {
+                    // we couldn't save the settings, that's OK
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995779
+src/de/joergjahnke/common/bluetooth/BluetoothClient.java 149 158
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1178 1185
+----------------------------------------
+        synchronized (this.agent) {
+            this.agent.searchServices(null, uuids, btDevice, this);
+
+            // wait until the discovery agents notifies us that he is finished or one minute has passed
+            try {
+                this.agent.wait(getTimeout(), 0);
+            } catch (InterruptedException e) {
+                // we got interrupted, no problem
+            }
+        }
+
+----------------------------------------
+            public void onError(final Throwable t) {
+                super.onError(t);
+                try {
+                    settings.remove(SETTING_FILESEARCH_STARTDIR);
+                } catch (Exception e) {
+                    // we couldn't save the settings, that's OK
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995755
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 489 494
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1178 1185
+----------------------------------------
+            } finally {
+                try {
+                    saveStream.close();
+                } catch (Exception e) {
+                }
+            }
+
+----------------------------------------
+            public void onError(final Throwable t) {
+                super.onError(t);
+                try {
+                    settings.remove(SETTING_FILESEARCH_STARTDIR);
+                } catch (Exception e) {
+                    // we couldn't save the settings, that's OK
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995769
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 723 729
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1178 1185
+----------------------------------------
+            if (hasSuspendData) {
+                try {
+                    rs.closeRecordStore();
+                } catch (Exception e) {
+                    // we could not close the record store, that hopefully does not hinder other actions on it and it was closed anyway...
+                }
+            }
+
+----------------------------------------
+            public void onError(final Throwable t) {
+                super.onError(t);
+                try {
+                    settings.remove(SETTING_FILESEARCH_STARTDIR);
+                } catch (Exception e) {
+                    // we couldn't save the settings, that's OK
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995719
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 973 1052
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 97 172
+----------------------------------------
+    private void showSelectGameForm() {
+        // show programs for selection
+        final Display display = Display.getDisplay(this);
+        final List imageList = new List(LocalizationSupport.getMessage("SelectCartridge"), List.IMPLICIT);
+
+        imageList.addCommand(okCommand);
+        imageList.addCommand(removeCommand);
+        imageList.addCommand(cancelCommand);
+        imageList.setSelectCommand(okCommand);
+
+        // sort program names
+        final Vector programNames = new Vector();
+
+        CollectionUtils.addAll(programNames, getPrograms().keys());
+        CollectionUtils.sort(programNames);
+
+        // add program names plus associated snapshots to listbox
+        final Vector snapshots = getSnapshots();
+
+        for (int i = 0; i < programNames.size(); ++i) {
+            final String name = programNames.elementAt(i).toString();
+
+            imageList.append(name, name.endsWith(SNAPSHOT_EXTENSION) ? snapshotImage : cartridgeImage);
+
+            final Vector programSnapshots = getSnapshots(name, snapshots);
+
+            for (int j = 0, to = programSnapshots.size(); j < to; ++j) {
+                imageList.append(programSnapshots.elementAt(j).toString(), snapshotImage);
+            }
+        }
+
+        imageList.setCommandListener(
+                new CommandListener() {
+
+                    public void commandAction(Command c, Displayable d) {
+                        display.setCurrent(mainMenu);
+
+                        // retrieve name of the selected program or snapshot
+                        final String name = imageList.getString(imageList.getSelectedIndex());
+
+                        // the entry was selected for running it?
+                        if (c == okCommand) {
+                            // load game or snapshot and start the emulation
+                            if (programs.containsKey(name) && !name.endsWith(SNAPSHOT_EXTENSION)) {
+                                runGame(name);
+                            } else {
+                                runSnapshot(name);
+                            }
+                            // the entry was selected for removal?
+                        } else if (c == removeCommand) {
+                            // a program was selected?
+                            if (programs.containsKey(name)) {
+                                // this is not allowed
+                                display.setCurrent(new Alert(LocalizationSupport.getMessage("NotASnapshot"), LocalizationSupport.getMessage("OnlySnapshotsCanBeRemoved"), null, AlertType.INFO), previous);
+                            } else {
+                                try {
+                                    // remove the snapshot from the device...
+                                    RecordStore.deleteRecordStore(name);
+
+                                    // ...and also from the list of snapshots
+                                    final Vector snapshots = getSnapshots();
+
+                                    snapshots.removeElement(name);
+                                    setSnapshots(snapshots);
+
+                                    // inform the user about the successful removal
+                                    display.setCurrent(new Alert(LocalizationSupport.getMessage("RemovedSnapshotData"), LocalizationSupport.getMessage("RemovedSnapshotDataFor") + " " + name, null, AlertType.INFO), previous);
+                                } catch (Exception e) {
+                                    display.setCurrent(new Alert(LocalizationSupport.getMessage("CouldNotRemoveSnapshotData"), LocalizationSupport.getMessage("FailedToRemoveSnapshotDataFor") + " " + name, null, AlertType.WARNING), previous);
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                    }
+                });
+
+        // show listbox
+        this.previous = display.getCurrent();
+        display.setCurrent(imageList);
+    }
+
+----------------------------------------
+    private void showSendFileForm() {
+        // show saved games and snapshots for selection
+        final Display display = Display.getDisplay(this);
+        final List fileList = new List(LocalizationSupport.getMessage("SelectFile"), List.IMPLICIT);
+
+        fileList.addCommand(okCommand);
+        fileList.addCommand(backCommand);
+        fileList.setSelectCommand(okCommand);
+
+        final Vector snapshots = getSnapshots();
+        final Vector programNames = new Vector();
+
+        CollectionUtils.addAll(programNames, getPrograms().keys());
+
+        for (int i = 0; i < programNames.size(); ++i) {
+            final String name = programNames.elementAt(i).toString();
+            final Vector programSnapshots = getSnapshots(name, snapshots);
+
+            if (getSettings().exists(name)) {
+                fileList.append(name + SAVE_EXTENSION, floppyImage);
+            }
+            for (int j = 0, to = programSnapshots.size(); j < to; ++j) {
+                fileList.append(programSnapshots.elementAt(j).toString(), snapshotImage);
+            }
+        }
+
+        fileList.setCommandListener(
+                new CommandListener() {
+
+                    public void commandAction(Command c, Displayable d) {
+                        display.setCurrent(mainMenu);
+
+                        // the entry was selected for transmitting it?
+                        if (c == okCommand) {
+                            // retrieve name of the selected program or snapshot
+                            String name = fileList.getString(fileList.getSelectedIndex());
+
+                            // gather data to send
+                            byte[] data = null;
+
+                            if (name.endsWith(SAVE_EXTENSION)) {
+                                data = getSettings().getString(name, null).getBytes();
+                            } else {
+                                RecordStore rs = null;
+
+                                try {
+                                    // open the suspend "file"
+                                    rs = RecordStore.openRecordStore(name, false);
+
+                                    name += SNAPSHOT_EXTENSION;
+                                    data = rs.getRecord(1);
+                                } catch (Throwable t) {
+                                    // will be handled below since data is still null
+                                } finally {
+                                    try {
+                                        rs.closeRecordStore();
+                                    } catch (Exception e) {
+                                        // we could not close the record store, that hopefully does not hinder other actions on it and it was closed anyway...
+                                    }
+                                }
+                            }
+
+                            // send data
+                            if (null != data) {
+                                showSelectDeviceForm(name, data);
+                            } else {
+                                display.setCurrent(new Alert(LocalizationSupport.getMessage("FileTransferFailed"), LocalizationSupport.getMessage("NoDataToSend"), null, AlertType.WARNING), previous);
+                            }
+                        }
+                    }
+                });
+
+        // show listbox
+        this.previous = display.getCurrent();
+        display.setCurrent(fileList);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995720
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 992 1002
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 111 121
+----------------------------------------
+        for (int i = 0; i < programNames.size(); ++i) {
+            final String name = programNames.elementAt(i).toString();
+
+            imageList.append(name, name.endsWith(SNAPSHOT_EXTENSION) ? snapshotImage : cartridgeImage);
+
+            final Vector programSnapshots = getSnapshots(name, snapshots);
+
+            for (int j = 0, to = programSnapshots.size(); j < to; ++j) {
+                imageList.append(programSnapshots.elementAt(j).toString(), snapshotImage);
+            }
+        }
+
+----------------------------------------
+        for (int i = 0; i < programNames.size(); ++i) {
+            final String name = programNames.elementAt(i).toString();
+            final Vector programSnapshots = getSnapshots(name, snapshots);
+
+            if (getSettings().exists(name)) {
+                fileList.append(name + SAVE_EXTENSION, floppyImage);
+            }
+            for (int j = 0, to = programSnapshots.size(); j < to; ++j) {
+                fileList.append(programSnapshots.elementAt(j).toString(), snapshotImage);
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995721
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1340 1356
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 139 157
+----------------------------------------
+        if (active) {
+            if (this.gameboy.getSoundChip().countObservers() == 0) {
+                // first try to initialize the PCMtoMIDIPlayer
+                try {
+                    this.gameboy.getSoundChip().addObserver(new PCMtoMIDIPlayer(this.gameboy.getSoundChip()));
+                } catch (Throwable t) {
+                    // if that does not work we try the WavePlayer
+                    try {
+                        this.gameboy.getSoundChip().addObserver(new WavePlayer(this.gameboy.getSoundChip()));
+                    } catch (Throwable t2) {
+                        // we could not add a player, that's OK
+                        this.gameboy.getLogger().warning(LocalizationSupport.getMessage("CouldNotCreateSoundPlayer"));
+                        t2.printStackTrace();
+                    }
+                }
+            }
+        } else {
+
+----------------------------------------
+                            } else {
+                                RecordStore rs = null;
+
+                                try {
+                                    // open the suspend "file"
+                                    rs = RecordStore.openRecordStore(name, false);
+
+                                    name += SNAPSHOT_EXTENSION;
+                                    data = rs.getRecord(1);
+                                } catch (Throwable t) {
+                                    // will be handled below since data is still null
+                                } finally {
+                                    try {
+                                        rs.closeRecordStore();
+                                    } catch (Exception e) {
+                                        // we could not close the record store, that hopefully does not hinder other actions on it and it was closed anyway...
+                                    }
+                                }
+                            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995804
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 613 622
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 150 156
+----------------------------------------
+        } catch (Throwable t) {
+            try {
+                RecordStore.deleteRecordStore(name);
+            } catch (Throwable t2) {
+                // the snapshot probably was not saved at all, so we ignore this
+            }
+            // show the cause of the error
+            Display.getDisplay(this).setCurrent(new Alert(LocalizationSupport.getMessage("SavingSnapshotFailed"), LocalizationSupport.getMessage("FailedToStoreState"), null, AlertType.WARNING));
+            t.printStackTrace();
+        }
+
+----------------------------------------
+                                } finally {
+                                    try {
+                                        rs.closeRecordStore();
+                                    } catch (Exception e) {
+                                        // we could not close the record store, that hopefully does not hinder other actions on it and it was closed anyway...
+                                    }
+                                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995746
+src/de/joergjahnke/common/extendeddevices/WavePlayer.java 64 70
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 150 156
+----------------------------------------
+                        synchronized (buffer) {
+                            buffer.reset();
+                            try {
+                                buffer.wait();
+                            } catch (InterruptedException e) {
+                            }
+                        }
+
+----------------------------------------
+                                } finally {
+                                    try {
+                                        rs.closeRecordStore();
+                                    } catch (Exception e) {
+                                        // we could not close the record store, that hopefully does not hinder other actions on it and it was closed anyway...
+                                    }
+                                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995741
+src/de/joergjahnke/common/jme/WavePlayer.java 178 188
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 150 156
+----------------------------------------
+            if (!this.players.isEmpty()) {
+                // then use the next player from the queue and play it
+                this.currentPlayer = (Player) this.players.elementAt(0);
+                this.players.removeElementAt(0);
+                try {
+                    this.currentPlayer.start();
+                } catch (Exception e) {
+                    // we couldn't start the player, we stop the sound as it does not seem to work
+                    producer.deleteObservers();
+                }
+            } else {
+
+----------------------------------------
+                                } finally {
+                                    try {
+                                        rs.closeRecordStore();
+                                    } catch (Exception e) {
+                                        // we could not close the record store, that hopefully does not hinder other actions on it and it was closed anyway...
+                                    }
+                                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995736
+src/de/joergjahnke/gameboy/android/AndroidGB.java 476 484
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 150 156
+----------------------------------------
+            if (this.gameboy.getSoundChip().countObservers() == 0) {
+                try {
+                    this.gameboy.getSoundChip().addObserver(new WavePlayer(this.gameboy.getSoundChip()));
+                } catch (Throwable t) {
+                    // we could not add a player, that's OK
+                    this.gameboy.getLogger().warning("Could not create sound player! Sound output remains deactivated.");
+                    t.printStackTrace();
+                }
+            }
+
+----------------------------------------
+                                } finally {
+                                    try {
+                                        rs.closeRecordStore();
+                                    } catch (Exception e) {
+                                        // we could not close the record store, that hopefully does not hinder other actions on it and it was closed anyway...
+                                    }
+                                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995731
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 510 515
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 150 156
+----------------------------------------
+        } finally {
+            try {
+                romStream.close();
+            } catch (Exception e) {
+            }
+        }
+
+----------------------------------------
+                                } finally {
+                                    try {
+                                        rs.closeRecordStore();
+                                    } catch (Exception e) {
+                                        // we could not close the record store, that hopefully does not hinder other actions on it and it was closed anyway...
+                                    }
+                                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995726
+src/de/joergjahnke/common/jme/Settings.java 121 127
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 150 156
+----------------------------------------
+    public boolean getBoolean(final String key, final boolean defaultValue) {
+        try {
+            return getBoolean(key);
+        } catch (Exception e) {
+            return defaultValue;
+        }
+    }
+
+----------------------------------------
+                                } finally {
+                                    try {
+                                        rs.closeRecordStore();
+                                    } catch (Exception e) {
+                                        // we could not close the record store, that hopefully does not hinder other actions on it and it was closed anyway...
+                                    }
+                                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995801
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 998 1004
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 150 156
+----------------------------------------
+    private void jMenuItemContentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemContentsActionPerformed
+        try {
+            java.awt.Desktop.getDesktop().browse(new URI(URL_ONLINE_HELP));
+        } catch (Throwable t) {
+            JOptionPane.showMessageDialog(this, this.commonResources.getString("CouldNotDisplayOnlineHelp") + " '" + URL_ONLINE_HELP + "'", this.commonResources.getString("CouldNotStartBrowser"), JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jMenuItemContentsActionPerformed
+
+----------------------------------------
+                                } finally {
+                                    try {
+                                        rs.closeRecordStore();
+                                    } catch (Exception e) {
+                                        // we could not close the record store, that hopefully does not hinder other actions on it and it was closed anyway...
+                                    }
+                                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995806
+src/de/joergjahnke/common/bluetooth/BluetoothClient.java 174 180
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 150 156
+----------------------------------------
+    public void servicesDiscovered(final int transID, final ServiceRecord[] servRecord) {
+        try {
+            this.serviceRecord = servRecord[0];
+        } catch (Exception e) {
+            // it may happen that no service record can be retrieved, in this case serviceRecord remains null
+        }
+    }
+
+----------------------------------------
+                                } finally {
+                                    try {
+                                        rs.closeRecordStore();
+                                    } catch (Exception e) {
+                                        // we could not close the record store, that hopefully does not hinder other actions on it and it was closed anyway...
+                                    }
+                                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995748
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1345 1354
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 150 156
+----------------------------------------
+                } catch (Throwable t) {
+                    // if that does not work we try the WavePlayer
+                    try {
+                        this.gameboy.getSoundChip().addObserver(new WavePlayer(this.gameboy.getSoundChip()));
+                    } catch (Throwable t2) {
+                        // we could not add a player, that's OK
+                        this.gameboy.getLogger().warning(LocalizationSupport.getMessage("CouldNotCreateSoundPlayer"));
+                        t2.printStackTrace();
+                    }
+                }
+
+----------------------------------------
+                                } finally {
+                                    try {
+                                        rs.closeRecordStore();
+                                    } catch (Exception e) {
+                                        // we could not close the record store, that hopefully does not hinder other actions on it and it was closed anyway...
+                                    }
+                                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995743
+src/de/joergjahnke/gameboy/core/CPU.java 3104 3110
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 150 156
+----------------------------------------
+    public final void throttle(final long ms) {
+        this.throttledMillis += ms;
+        try {
+            Thread.sleep(ms);
+        } catch (InterruptedException ex) {
+        }
+    }
+
+----------------------------------------
+                                } finally {
+                                    try {
+                                        rs.closeRecordStore();
+                                    } catch (Exception e) {
+                                        // we could not close the record store, that hopefully does not hinder other actions on it and it was closed anyway...
+                                    }
+                                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995738
+src/de/joergjahnke/common/jme/FileSystemHandler.java 189 195
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 150 156
+----------------------------------------
+                if (prgsString.length() > 0) {
+                    try {
+                        settings.setString(SETTING_PROGRAMS, prgsString.toString());
+                    } catch (Exception e) {
+                    // we could not save the list of programs on the phone, that's OK
+                    }
+                }
+
+----------------------------------------
+                                } finally {
+                                    try {
+                                        rs.closeRecordStore();
+                                    } catch (Exception e) {
+                                        // we could not close the record store, that hopefully does not hinder other actions on it and it was closed anyway...
+                                    }
+                                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995733
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 772 779
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 150 156
+----------------------------------------
+                if (status == STATUS_LOAD_FAILED || status == STATUS_LOAD_OK) {
+                    try {
+                        RecordStore.deleteRecordStore(name);
+                    } catch (Exception e) {
+                        display.setCurrent(new Alert(LocalizationSupport.getMessage("CouldNotRemoveSuspendData"), LocalizationSupport.getMessage("FailedToRemoveSuspendData"), null, AlertType.WARNING));
+                        e.printStackTrace();
+                    }
+                }
+
+----------------------------------------
+                                } finally {
+                                    try {
+                                        rs.closeRecordStore();
+                                    } catch (Exception e) {
+                                        // we could not close the record store, that hopefully does not hinder other actions on it and it was closed anyway...
+                                    }
+                                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995728
+src/de/joergjahnke/common/jme/FormattedTextForm.java 159 165
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 150 156
+----------------------------------------
+                public void commandAction(final Command c, final Item item) {
+                    try {
+                        midlet.platformRequest(((StringItem)item).getText());
+                    } catch (Exception e) {
+                        // we could not invoke the browser, that's a pity but we can live with it
+                    }
+                }
+
+----------------------------------------
+                                } finally {
+                                    try {
+                                        rs.closeRecordStore();
+                                    } catch (Exception e) {
+                                        // we could not close the record store, that hopefully does not hinder other actions on it and it was closed anyway...
+                                    }
+                                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995723
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 489 494
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 150 156
+----------------------------------------
+            } finally {
+                try {
+                    saveStream.close();
+                } catch (Exception e) {
+                }
+            }
+
+----------------------------------------
+                                } finally {
+                                    try {
+                                        rs.closeRecordStore();
+                                    } catch (Exception e) {
+                                        // we could not close the record store, that hopefully does not hinder other actions on it and it was closed anyway...
+                                    }
+                                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995803
+src/de/joergjahnke/common/bluetooth/BluetoothClient.java 149 158
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 150 156
+----------------------------------------
+        synchronized (this.agent) {
+            this.agent.searchServices(null, uuids, btDevice, this);
+
+            // wait until the discovery agents notifies us that he is finished or one minute has passed
+            try {
+                this.agent.wait(getTimeout(), 0);
+            } catch (InterruptedException e) {
+                // we got interrupted, no problem
+            }
+        }
+
+----------------------------------------
+                                } finally {
+                                    try {
+                                        rs.closeRecordStore();
+                                    } catch (Exception e) {
+                                        // we could not close the record store, that hopefully does not hinder other actions on it and it was closed anyway...
+                                    }
+                                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995808
+src/de/joergjahnke/common/bluetooth/BluetoothOBEXClient.java 110 120
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 150 156
+----------------------------------------
+    public void disconnect() {
+        super.stop();
+
+        try {
+            this.clientSession.disconnect(null);
+            this.clientSession.close();
+        } catch (IOException e) {
+            // we had a problem with closing the streams, what to do now?
+        }
+        this.clientSession = null;
+    }
+
+----------------------------------------
+                                } finally {
+                                    try {
+                                        rs.closeRecordStore();
+                                    } catch (Exception e) {
+                                        // we could not close the record store, that hopefully does not hinder other actions on it and it was closed anyway...
+                                    }
+                                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995722
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 407 413
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 150 156
+----------------------------------------
+        if (null == cartridgeImage) {
+            try {
+                cartridgeImage = Image.createImage("/res/drawable/cartridge.png");
+            } catch (Exception e) {
+                // we can work without the image
+            }
+        }
+
+----------------------------------------
+                                } finally {
+                                    try {
+                                        rs.closeRecordStore();
+                                    } catch (Exception e) {
+                                        // we could not close the record store, that hopefully does not hinder other actions on it and it was closed anyway...
+                                    }
+                                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995727
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 461 467
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 150 156
+----------------------------------------
+    protected Image getMenuIcon(final String filename) {
+        try {
+            return ImageUtils.scale(Image.createImage("/res/drawable/" + filename), 16, 16, true);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+----------------------------------------
+                                } finally {
+                                    try {
+                                        rs.closeRecordStore();
+                                    } catch (Exception e) {
+                                        // we could not close the record store, that hopefully does not hinder other actions on it and it was closed anyway...
+                                    }
+                                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995732
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 260 266
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 150 156
+----------------------------------------
+    private ImageIcon getMenuIcon(final String filename) {
+        try {
+            return new ImageIcon(new ImageIcon(getClass().getResource("/res/drawable/" + filename)).getImage().getScaledInstance(16, 16, Image.SCALE_SMOOTH));
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+----------------------------------------
+                                } finally {
+                                    try {
+                                        rs.closeRecordStore();
+                                    } catch (Exception e) {
+                                        // we could not close the record store, that hopefully does not hinder other actions on it and it was closed anyway...
+                                    }
+                                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995737
+src/de/joergjahnke/common/bluetooth/BluetoothDevice.java 158 164
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 150 156
+----------------------------------------
+    public static String getRemoteDeviceName(final RemoteDevice dev) {
+        try {
+            return dev.getFriendlyName(false) == null ? dev.getBluetoothAddress() : dev.getFriendlyName(false);
+        } catch (IOException e) {
+            return "unknown";
+        }
+    }
+
+----------------------------------------
+                                } finally {
+                                    try {
+                                        rs.closeRecordStore();
+                                    } catch (Exception e) {
+                                        // we could not close the record store, that hopefully does not hinder other actions on it and it was closed anyway...
+                                    }
+                                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995742
+src/de/joergjahnke/common/jme/OrientationSensitiveCanvasHelper.java 113 119
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 150 156
+----------------------------------------
+    public void deactivateAccelerometer() {
+        try {
+            ((javax.microedition.sensor.SensorConnection) this.con).removeDataListener();
+            this.con.close();
+        } catch (Throwable t) {
+        }
+    }
+
+----------------------------------------
+                                } finally {
+                                    try {
+                                        rs.closeRecordStore();
+                                    } catch (Exception e) {
+                                        // we could not close the record store, that hopefully does not hinder other actions on it and it was closed anyway...
+                                    }
+                                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995747
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 722 731
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 150 156
+----------------------------------------
+        } finally {
+            if (hasSuspendData) {
+                try {
+                    rs.closeRecordStore();
+                } catch (Exception e) {
+                    // we could not close the record store, that hopefully does not hinder other actions on it and it was closed anyway...
+                }
+            }
+            display.setCurrent(this.mainMenu);
+        }
+
+----------------------------------------
+                                } finally {
+                                    try {
+                                        rs.closeRecordStore();
+                                    } catch (Exception e) {
+                                        // we could not close the record store, that hopefully does not hinder other actions on it and it was closed anyway...
+                                    }
+                                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995725
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 82 88
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 150 156
+----------------------------------------
+            if (null == floppyImage) {
+                try {
+                    floppyImage = Image.createImage("/res/drawable/floppy.png");
+                } catch (Exception e) {
+                    // we can work without the image
+                    }
+            }
+
+----------------------------------------
+                                } finally {
+                                    try {
+                                        rs.closeRecordStore();
+                                    } catch (Exception e) {
+                                        // we could not close the record store, that hopefully does not hinder other actions on it and it was closed anyway...
+                                    }
+                                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995730
+src/de/joergjahnke/gameboy/core/CPU.java 2166 2171
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 150 156
+----------------------------------------
+            if (this.isPaused) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException ex) {
+                }
+            }
+
+----------------------------------------
+                                } finally {
+                                    try {
+                                        rs.closeRecordStore();
+                                    } catch (Exception e) {
+                                        // we could not close the record store, that hopefully does not hinder other actions on it and it was closed anyway...
+                                    }
+                                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995735
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 296 301
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 150 156
+----------------------------------------
+        } finally {
+            try {
+                out.close();
+            } catch (Exception e) {
+            }
+        }
+
+----------------------------------------
+                                } finally {
+                                    try {
+                                        rs.closeRecordStore();
+                                    } catch (Exception e) {
+                                        // we could not close the record store, that hopefully does not hinder other actions on it and it was closed anyway...
+                                    }
+                                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995745
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 414 420
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 150 156
+----------------------------------------
+        if (null == snapshotImage) {
+            try {
+                snapshotImage = Image.createImage("/res/drawable/snapshot.png");
+            } catch (Exception e) {
+                // we can work without the image
+            }
+        }
+
+----------------------------------------
+                                } finally {
+                                    try {
+                                        rs.closeRecordStore();
+                                    } catch (Exception e) {
+                                        // we could not close the record store, that hopefully does not hinder other actions on it and it was closed anyway...
+                                    }
+                                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995750
+src/de/joergjahnke/common/bluetooth/BluetoothOBEXClient.java 240 250
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 150 156
+----------------------------------------
+    public void abortFileReception() {
+        super.stop();
+
+        try {
+            this.local.setDiscoverable(DiscoveryAgent.NOT_DISCOVERABLE);
+            this.notifier.close();
+            this.notifier = null;
+        } catch (Exception e) {
+            // we could not completely shut down the service, what to do now?
+        }
+    }
+
+----------------------------------------
+                                } finally {
+                                    try {
+                                        rs.closeRecordStore();
+                                    } catch (Exception e) {
+                                        // we could not close the record store, that hopefully does not hinder other actions on it and it was closed anyway...
+                                    }
+                                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995749
+src/de/joergjahnke/common/jme/Settings.java 161 167
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 150 156
+----------------------------------------
+    public String getString(final String key, final String defaultValue) {
+        try {
+            return getString(key);
+        } catch (Exception e) {
+            return defaultValue;
+        }
+    }
+
+----------------------------------------
+                                } finally {
+                                    try {
+                                        rs.closeRecordStore();
+                                    } catch (Exception e) {
+                                        // we could not close the record store, that hopefully does not hinder other actions on it and it was closed anyway...
+                                    }
+                                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995740
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 375 380
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 150 156
+----------------------------------------
+        } finally {
+            try {
+                in.close();
+            } catch (Exception e) {
+            }
+        }
+
+----------------------------------------
+                                } finally {
+                                    try {
+                                        rs.closeRecordStore();
+                                    } catch (Exception e) {
+                                        // we could not close the record store, that hopefully does not hinder other actions on it and it was closed anyway...
+                                    }
+                                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995744
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 241 248
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 150 156
+----------------------------------------
+                    public void windowClosing(final WindowEvent evt) {
+                        try {
+                            settings.storeToXML(new FileOutputStream(new File(PROPERTIES_NAME)), "Properties for JSwingBoy");
+                            stopGame();
+                        } catch (Exception e) {
+                            // we can't save the settings, that's a pity, but we'll just use defaults on next startup
+                        }
+                    }
+
+----------------------------------------
+                                } finally {
+                                    try {
+                                        rs.closeRecordStore();
+                                    } catch (Exception e) {
+                                        // we could not close the record store, that hopefully does not hinder other actions on it and it was closed anyway...
+                                    }
+                                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995739
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 723 729
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 150 156
+----------------------------------------
+            if (hasSuspendData) {
+                try {
+                    rs.closeRecordStore();
+                } catch (Exception e) {
+                    // we could not close the record store, that hopefully does not hinder other actions on it and it was closed anyway...
+                }
+            }
+
+----------------------------------------
+                                } finally {
+                                    try {
+                                        rs.closeRecordStore();
+                                    } catch (Exception e) {
+                                        // we could not close the record store, that hopefully does not hinder other actions on it and it was closed anyway...
+                                    }
+                                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995805
+src/de/joergjahnke/common/jme/Settings.java 84 90
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 150 156
+----------------------------------------
+    public int getInteger(final String key, final int defaultValue) {
+        try {
+            return getInteger(key);
+        } catch (Exception e) {
+            return defaultValue;
+        }
+    }
+
+----------------------------------------
+                                } finally {
+                                    try {
+                                        rs.closeRecordStore();
+                                    } catch (Exception e) {
+                                        // we could not close the record store, that hopefully does not hinder other actions on it and it was closed anyway...
+                                    }
+                                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995734
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1077 1083
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 150 156
+----------------------------------------
+            public void commandAction(final Command c, final Item item) {
+                try {
+                    platformRequest(((StringItem) item).getText());
+                } catch (Exception e) {
+                    // we could not invoke the browser, that's a pity but we can live with it
+                }
+            }
+
+----------------------------------------
+                                } finally {
+                                    try {
+                                        rs.closeRecordStore();
+                                    } catch (Exception e) {
+                                        // we could not close the record store, that hopefully does not hinder other actions on it and it was closed anyway...
+                                    }
+                                }
+
+----------------------------------------

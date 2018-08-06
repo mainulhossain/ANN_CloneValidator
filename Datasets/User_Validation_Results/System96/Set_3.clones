@@ -1,0 +1,2077 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834280
+net/sf/varscan/LimitVariants.java 141 188
+net/sf/varscan/Comparison.java 160 210
+----------------------------------------
+	    		{
+	    			// Try to parse chrom and position //
+	    			try
+	    			{
+	    				String refName = lineContents[0];
+	    				int position = Integer.parseInt(lineContents[1]);
+
+	    				numVariants++;
+
+	    				// Declare a BitSet //
+	    				BitSet refPositions;
+
+	    				boolean inTarget = false;
+
+	    				// Get the position BitSet for this chromosome//
+	    				if(targetHash.containsKey(refName))
+	    				{
+	    					refPositions = targetHash.get(refName);
+
+	    					// Check to see if position set //
+	    					if(refPositions.get(position))
+	    					{
+	    						inTarget = true;
+    							numInTarget++;
+	    						if(params.containsKey("output-file"))
+	    						{
+	    							outFile.println(line);
+	    						}
+	    					}
+	    				}
+
+	    				// If no match and not file declared, print to it //
+	    				if(!inTarget && params.containsKey("not-file"))
+	    				{
+	    					notFile.println(line);
+	    				}
+
+	    			}
+	    			catch(Exception e)
+	    			{
+	    				if(lineCounter == 1)
+	    				{
+//	    					 Skip header // outFile.println(line);
+	    				}
+	    				else
+	    					System.err.println("Warning: Unable to parse chrom/position from " + line);
+	    			}
+	    		}
+
+----------------------------------------
+	    		{
+	    			// Try to parse chrom and position //
+	    			try
+	    			{
+	    				String refName = lineContents[0];
+	    				int position = Integer.parseInt(lineContents[1]);
+
+	    				// Declare booleans //
+
+	    				boolean inFile1 = false;
+	    				boolean inFile2 = false;
+
+	    				// Declare a BitSet //
+	    				BitSet refPositions;
+
+	    				if(positionHash1.containsKey(refName))
+	    				{
+	    					refPositions = positionHash1.get(refName);
+	    					if(refPositions.get(position))
+	    						inFile1 = true;
+	    				}
+
+	    				if(positionHash2.containsKey(refName))
+	    				{
+	    					refPositions = positionHash2.get(refName);
+	    					if(refPositions.get(position))
+	    						inFile2 = true;
+	    				}
+
+	    				// Check to see if shared //
+	    				if(inFile1 && inFile2)
+	    				{
+	    					// Already counted and printed in file 1 //
+	    				}
+	    				else if(inFile2)
+	    				{
+	    					if(comparisonType.equals("merge") || comparisonType.equals("unique2"))
+	    						outFile.println(line);
+
+	    					uniqueToFile2++;
+	    				}
+
+	    			}
+	    			catch(Exception e)
+	    			{
+	    				if(lineCounter == 1)
+	    					outFile.println(line);
+	    				else
+	    					System.err.println("Warning: Unable to parse chrom/position from " + line);
+	    			}
+	    		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834248
+net/sf/varscan/Comparison.java 90 150
+net/sf/varscan/Comparison.java 160 210
+----------------------------------------
+	    		{
+	    			// Try to parse chrom and position //
+	    			try
+	    			{
+	    				String refName = lineContents[0];
+	    				int position = Integer.parseInt(lineContents[1]);
+
+	    				// Declare booleans //
+
+	    				boolean inFile1 = false;
+	    				boolean inFile2 = false;
+
+	    				// Declare a BitSet //
+	    				BitSet refPositions;
+
+	    				if(positionHash1.containsKey(refName))
+	    				{
+	    					refPositions = positionHash1.get(refName);
+	    					if(refPositions.get(position))
+	    						inFile1 = true;
+	    				}
+
+	    				if(positionHash2.containsKey(refName))
+	    				{
+	    					refPositions = positionHash2.get(refName);
+	    					if(refPositions.get(position))
+	    						inFile2 = true;
+	    				}
+
+	    				// Check to see if shared //
+	    				if(inFile1 && inFile2)
+	    				{
+	    					numShared++;
+	    					if(comparisonType.equals("intersect"))
+	    					{
+	    						outFile.println(line);
+	    					}
+	    				}
+	    				else if(inFile1)
+	    				{
+	    					if(comparisonType.equals("unique1"))
+	    						outFile.println(line);
+	    					uniqueToFile1++;
+	    				}
+
+	    				// Check to see if merging //
+	    				if(comparisonType.equals("merge"))
+	    				{
+	    					outFile.println(line);
+	    				}
+	    			}
+	    			catch(Exception e)
+	    			{
+	    				if(lineCounter == 1)
+	    				{
+//	    					 Skip header // outFile.println(line);
+	    				}
+	    				else
+	    					System.err.println("Warning: Unable to parse chrom/position from " + line);
+	    			}
+	    		}
+
+----------------------------------------
+	    		{
+	    			// Try to parse chrom and position //
+	    			try
+	    			{
+	    				String refName = lineContents[0];
+	    				int position = Integer.parseInt(lineContents[1]);
+
+	    				// Declare booleans //
+
+	    				boolean inFile1 = false;
+	    				boolean inFile2 = false;
+
+	    				// Declare a BitSet //
+	    				BitSet refPositions;
+
+	    				if(positionHash1.containsKey(refName))
+	    				{
+	    					refPositions = positionHash1.get(refName);
+	    					if(refPositions.get(position))
+	    						inFile1 = true;
+	    				}
+
+	    				if(positionHash2.containsKey(refName))
+	    				{
+	    					refPositions = positionHash2.get(refName);
+	    					if(refPositions.get(position))
+	    						inFile2 = true;
+	    				}
+
+	    				// Check to see if shared //
+	    				if(inFile1 && inFile2)
+	    				{
+	    					// Already counted and printed in file 1 //
+	    				}
+	    				else if(inFile2)
+	    				{
+	    					if(comparisonType.equals("merge") || comparisonType.equals("unique2"))
+	    						outFile.println(line);
+
+	    					uniqueToFile2++;
+	    				}
+
+	    			}
+	    			catch(Exception e)
+	    			{
+	    				if(lineCounter == 1)
+	    					outFile.println(line);
+	    				else
+	    					System.err.println("Warning: Unable to parse chrom/position from " + line);
+	    			}
+	    		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834249
+net/sf/varscan/Comparison.java 93 140
+net/sf/varscan/Comparison.java 160 210
+----------------------------------------
+	    			{
+	    				String refName = lineContents[0];
+	    				int position = Integer.parseInt(lineContents[1]);
+
+	    				// Declare booleans //
+
+	    				boolean inFile1 = false;
+	    				boolean inFile2 = false;
+
+	    				// Declare a BitSet //
+	    				BitSet refPositions;
+
+	    				if(positionHash1.containsKey(refName))
+	    				{
+	    					refPositions = positionHash1.get(refName);
+	    					if(refPositions.get(position))
+	    						inFile1 = true;
+	    				}
+
+	    				if(positionHash2.containsKey(refName))
+	    				{
+	    					refPositions = positionHash2.get(refName);
+	    					if(refPositions.get(position))
+	    						inFile2 = true;
+	    				}
+
+	    				// Check to see if shared //
+	    				if(inFile1 && inFile2)
+	    				{
+	    					numShared++;
+	    					if(comparisonType.equals("intersect"))
+	    					{
+	    						outFile.println(line);
+	    					}
+	    				}
+	    				else if(inFile1)
+	    				{
+	    					if(comparisonType.equals("unique1"))
+	    						outFile.println(line);
+	    					uniqueToFile1++;
+	    				}
+
+	    				// Check to see if merging //
+	    				if(comparisonType.equals("merge"))
+	    				{
+	    					outFile.println(line);
+	    				}
+	    			}
+
+----------------------------------------
+	    		{
+	    			// Try to parse chrom and position //
+	    			try
+	    			{
+	    				String refName = lineContents[0];
+	    				int position = Integer.parseInt(lineContents[1]);
+
+	    				// Declare booleans //
+
+	    				boolean inFile1 = false;
+	    				boolean inFile2 = false;
+
+	    				// Declare a BitSet //
+	    				BitSet refPositions;
+
+	    				if(positionHash1.containsKey(refName))
+	    				{
+	    					refPositions = positionHash1.get(refName);
+	    					if(refPositions.get(position))
+	    						inFile1 = true;
+	    				}
+
+	    				if(positionHash2.containsKey(refName))
+	    				{
+	    					refPositions = positionHash2.get(refName);
+	    					if(refPositions.get(position))
+	    						inFile2 = true;
+	    				}
+
+	    				// Check to see if shared //
+	    				if(inFile1 && inFile2)
+	    				{
+	    					// Already counted and printed in file 1 //
+	    				}
+	    				else if(inFile2)
+	    				{
+	    					if(comparisonType.equals("merge") || comparisonType.equals("unique2"))
+	    						outFile.println(line);
+
+	    					uniqueToFile2++;
+	    				}
+
+	    			}
+	    			catch(Exception e)
+	    			{
+	    				if(lineCounter == 1)
+	    					outFile.println(line);
+	    				else
+	    					System.err.println("Warning: Unable to parse chrom/position from " + line);
+	    			}
+	    		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834250
+net/sf/varscan/LimitVariants.java 134 139
+net/sf/varscan/FpFilter.java 272 277
+----------------------------------------
+	    		{
+	    			// Handle native file headers //
+	    			outFile.println(line);
+	    			if(params.containsKey("not-file"))
+	    				notFile.println(line);
+	    		}
+
+----------------------------------------
+	    	    					{
+	    	    						if(line.startsWith("#CHROM"))
+	    	    							filteredFile.println(vcfHeaderInfo);
+
+	    	    						filteredFile.println(line);
+	    	    					}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834251
+net/sf/varscan/FpFilter.java 272 277
+net/sf/varscan/FpFilter.java 264 269
+----------------------------------------
+	    	    					{
+	    	    						if(line.startsWith("#CHROM"))
+	    	    							filteredFile.println(vcfHeaderInfo);
+
+	    	    						filteredFile.println(line);
+	    	    					}
+
+----------------------------------------
+	    	    					{
+	    	    						if(line.startsWith("#CHROM"))
+	    	    							outFile.println(vcfHeaderInfo);
+
+	    	    						outFile.println(line);
+	    	    					}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834385
+net/sf/varscan/LimitVariants.java 134 139
+net/sf/varscan/FpFilter.java 264 269
+----------------------------------------
+	    		{
+	    			// Handle native file headers //
+	    			outFile.println(line);
+	    			if(params.containsKey("not-file"))
+	    				notFile.println(line);
+	    		}
+
+----------------------------------------
+	    	    					{
+	    	    						if(line.startsWith("#CHROM"))
+	    	    							outFile.println(vcfHeaderInfo);
+
+	    	    						outFile.println(line);
+	    	    					}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834252
+net/sf/varscan/FpFilter.java 347 353
+net/sf/varscan/FpFilter.java 355 360
+----------------------------------------
+        	    						{
+        	    							isIndel = true;
+        	    							// Deletion //
+        	    							String thisVar = ref.replaceFirst(alt, "");
+        	    							ref = alt;
+        	    							alt = "-" + thisVar;
+        	    						}
+
+----------------------------------------
+        	    						{
+        	    							// Insertion //
+        	    							isIndel = true;
+        	    							String thisVar = alt.replaceFirst(ref, "");
+        	    							alt = "+" + thisVar;
+        	    						}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834253
+net/sf/varscan/LimitVariants.java 162 169
+net/sf/varscan/CallMpileup.java 719 726
+----------------------------------------
+	    					{
+	    						inTarget = true;
+    							numInTarget++;
+	    						if(params.containsKey("output-file"))
+	    						{
+	    							outFile.println(line);
+	    						}
+	    					}
+
+----------------------------------------
+    	    						{
+    	    							if(strandPvalue < strandPvalueThreshold)
+    	    	    					{
+    	    	    						strandFilterStatus = "Fail:" + allReads1plus + ":" + allReads1minus + ":" + allReads2plus + ":" + allReads2minus + ":" + pvalueFormat.format(strandPvalue);
+    	    	    						numFailStrandFilter++;
+    	    	    						failedStrandFilter = true;
+    	    	    					}
+    	    						}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834254
+net/sf/varscan/CallMpileup.java 810 815
+net/sf/varscan/CallMpileup.java 817 822
+----------------------------------------
+		    					{
+		    						// INSERTION //
+		    						// Ref = ref base; Var = ref base followed by inserted bases //
+	    							refColumn = refBase;
+		    						varColumn = refBase + varBases.replace("+", "");
+		    					}
+
+----------------------------------------
+		    					{
+		    						// DELETION //
+		    						// Ref = ref base followed by deleted bases; var = ref base //
+		    						refColumn = refBase + varBases.replace("-", "");
+		    						varColumn = refBase;
+		    					}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834256
+net/sf/varscan/ReadCounts.java 125 139
+net/sf/varscan/CallPileup.java 141 157
+----------------------------------------
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+	    		}
+		    	catch(Exception e)
+		    	{
+
+		    	}
+	    	}
+
+----------------------------------------
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.err.println("Exception while trying to get input" + e.getMessage());
+		    		System.exit(1);
+		    	}
+	    	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834257
+net/sf/varscan/Somatic.java 255 271
+net/sf/varscan/CallPileup.java 141 157
+----------------------------------------
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.err.println("Exception while trying to get input" + e.getMessage());
+		    		System.exit(1);
+		    	}
+	    	}
+
+----------------------------------------
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.err.println("Exception while trying to get input" + e.getMessage());
+		    		System.exit(1);
+		    	}
+	    	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834255
+net/sf/varscan/Somatic.java 964 979
+net/sf/varscan/CallPileup.java 141 157
+----------------------------------------
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file(s) were not ready for parsing after 100 5-second cycles! Pileup output may be invalid or too slow");
+			    		System.exit(10);
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+
+		    	}
+	    	}
+
+----------------------------------------
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.err.println("Exception while trying to get input" + e.getMessage());
+		    		System.exit(1);
+		    	}
+	    	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834300
+net/sf/varscan/ReadCounts.java 126 134
+net/sf/varscan/CallPileup.java 142 151
+----------------------------------------
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+	    		}
+
+----------------------------------------
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834259
+net/sf/varscan/Somatic.java 965 974
+net/sf/varscan/CallPileup.java 142 151
+----------------------------------------
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file(s) were not ready for parsing after 100 5-second cycles! Pileup output may be invalid or too slow");
+			    		System.exit(10);
+			    	}
+		    	}
+
+----------------------------------------
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834258
+net/sf/varscan/Somatic.java 256 265
+net/sf/varscan/CallPileup.java 142 151
+----------------------------------------
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+
+----------------------------------------
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834260
+net/sf/varscan/Somatic.java 1636 1641
+net/sf/varscan/Somatic.java 1649 1654
+----------------------------------------
+							{
+								tumorReads1plus = Integer.parseInt(tumorConsensusContents[11]);
+								tumorReads1minus = Integer.parseInt(tumorConsensusContents[12]);
+								tumorReads2plus = Integer.parseInt(tumorConsensusContents[13]);
+								tumorReads2minus = Integer.parseInt(tumorConsensusContents[14]);
+							}
+
+----------------------------------------
+							{
+								normalReads1plus = Integer.parseInt(normalConsensusContents[11]);
+								normalReads1minus = Integer.parseInt(normalConsensusContents[12]);
+								normalReads2plus = Integer.parseInt(normalConsensusContents[13]);
+								normalReads2minus = Integer.parseInt(normalConsensusContents[14]);
+							}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834261
+net/sf/varscan/FishersExact.java 108 114
+net/sf/varscan/FishersExact.java 168 174
+----------------------------------------
+            for (i = 0; i < min; i++) {
+                if (DEBUG) {System.out.print("doing round " + i);}
+                double pTemp = getP(--a, ++b, ++c, --d);
+                if (DEBUG) {System.out.print("\tpTemp = " + pTemp);}
+                p += pTemp;
+                if (DEBUG) {System.out.println("\ta=" + a + " b=" + b + " c=" + c + " d=" + d);}
+            }
+
+----------------------------------------
+        for (i = 0; i < min; i++) {
+            if (DEBUG) {System.out.print("doing round " + i);}
+            double pTemp = getP(--a, ++b, ++c, --d);
+            if (DEBUG) {System.out.print("\tpTemp = " + pTemp);}
+            p += pTemp;
+            if (DEBUG) {System.out.println("\ta=" + a + " b=" + b + " c=" + c + " d=" + d);}
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834262
+net/sf/varscan/FishersExact.java 108 114
+net/sf/varscan/FishersExact.java 219 227
+----------------------------------------
+            for (i = 0; i < min; i++) {
+                if (DEBUG) {System.out.print("doing round " + i);}
+                double pTemp = getP(--a, ++b, ++c, --d);
+                if (DEBUG) {System.out.print("\tpTemp = " + pTemp);}
+                p += pTemp;
+                if (DEBUG) {System.out.println("\ta=" + a + " b=" + b + " c=" + c + " d=" + d);}
+            }
+
+----------------------------------------
+        for (i = 0; i < min; i++) {
+            if (DEBUG) {System.out.print("doing round " + i);}
+            double tempP = getP(++a, --b, --c, ++d);
+            if (tempP <= baseP) {
+                if (DEBUG) {System.out.print("\ttempP (" + tempP + ") is less than baseP (" + baseP + ")");}
+                p += tempP;
+            }
+            if (DEBUG) {System.out.println(" a=" + a + " b=" + b + " c=" + c + " d=" + d);}
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834263
+net/sf/varscan/FishersExact.java 168 174
+net/sf/varscan/FishersExact.java 219 227
+----------------------------------------
+        for (i = 0; i < min; i++) {
+            if (DEBUG) {System.out.print("doing round " + i);}
+            double pTemp = getP(--a, ++b, ++c, --d);
+            if (DEBUG) {System.out.print("\tpTemp = " + pTemp);}
+            p += pTemp;
+            if (DEBUG) {System.out.println("\ta=" + a + " b=" + b + " c=" + c + " d=" + d);}
+        }
+
+----------------------------------------
+        for (i = 0; i < min; i++) {
+            if (DEBUG) {System.out.print("doing round " + i);}
+            double tempP = getP(++a, --b, --c, ++d);
+            if (tempP <= baseP) {
+                if (DEBUG) {System.out.print("\ttempP (" + tempP + ") is less than baseP (" + baseP + ")");}
+                p += tempP;
+            }
+            if (DEBUG) {System.out.println(" a=" + a + " b=" + b + " c=" + c + " d=" + d);}
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834266
+net/sf/varscan/FishersExact.java 219 227
+net/sf/varscan/FishersExact.java 238 247
+----------------------------------------
+        for (i = 0; i < min; i++) {
+            if (DEBUG) {System.out.print("doing round " + i);}
+            double tempP = getP(++a, --b, --c, ++d);
+            if (tempP <= baseP) {
+                if (DEBUG) {System.out.print("\ttempP (" + tempP + ") is less than baseP (" + baseP + ")");}
+                p += tempP;
+            }
+            if (DEBUG) {System.out.println(" a=" + a + " b=" + b + " c=" + c + " d=" + d);}
+        }
+
+----------------------------------------
+        for (i = 0; i < min; i++) {
+            if (DEBUG) {System.out.print("doing round " + i);}
+            double pTemp = getP(--a, ++b, ++c, --d);
+            if (DEBUG) {System.out.println("  pTemp = " + pTemp);}
+            if (pTemp <= baseP) {
+                if (DEBUG) {System.out.print("\ttempP (" + pTemp + ") is less than baseP (" + baseP + ")");}
+                p += pTemp;
+            }
+            if (DEBUG) {System.out.println(" a=" + a + " b=" + b + " c=" + c + " d=" + d);}
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834264
+net/sf/varscan/FishersExact.java 105 115
+net/sf/varscan/FishersExact.java 238 247
+----------------------------------------
+        if ((a * d) < (b * c)) {
+            if (DEBUG) {System.out.println("doing L-tail: a=" + a + " b=" + b + " c=" + c + " d=" + d);}
+            min = (a < d) ? a : d;
+            for (i = 0; i < min; i++) {
+                if (DEBUG) {System.out.print("doing round " + i);}
+                double pTemp = getP(--a, ++b, ++c, --d);
+                if (DEBUG) {System.out.print("\tpTemp = " + pTemp);}
+                p += pTemp;
+                if (DEBUG) {System.out.println("\ta=" + a + " b=" + b + " c=" + c + " d=" + d);}
+            }
+        }
+
+----------------------------------------
+        for (i = 0; i < min; i++) {
+            if (DEBUG) {System.out.print("doing round " + i);}
+            double pTemp = getP(--a, ++b, ++c, --d);
+            if (DEBUG) {System.out.println("  pTemp = " + pTemp);}
+            if (pTemp <= baseP) {
+                if (DEBUG) {System.out.print("\ttempP (" + pTemp + ") is less than baseP (" + baseP + ")");}
+                p += pTemp;
+            }
+            if (DEBUG) {System.out.println(" a=" + a + " b=" + b + " c=" + c + " d=" + d);}
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834267
+net/sf/varscan/FishersExact.java 168 174
+net/sf/varscan/FishersExact.java 238 247
+----------------------------------------
+        for (i = 0; i < min; i++) {
+            if (DEBUG) {System.out.print("doing round " + i);}
+            double pTemp = getP(--a, ++b, ++c, --d);
+            if (DEBUG) {System.out.print("\tpTemp = " + pTemp);}
+            p += pTemp;
+            if (DEBUG) {System.out.println("\ta=" + a + " b=" + b + " c=" + c + " d=" + d);}
+        }
+
+----------------------------------------
+        for (i = 0; i < min; i++) {
+            if (DEBUG) {System.out.print("doing round " + i);}
+            double pTemp = getP(--a, ++b, ++c, --d);
+            if (DEBUG) {System.out.println("  pTemp = " + pTemp);}
+            if (pTemp <= baseP) {
+                if (DEBUG) {System.out.print("\ttempP (" + pTemp + ") is less than baseP (" + baseP + ")");}
+                p += pTemp;
+            }
+            if (DEBUG) {System.out.println(" a=" + a + " b=" + b + " c=" + c + " d=" + d);}
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834265
+net/sf/varscan/FishersExact.java 108 114
+net/sf/varscan/FishersExact.java 238 247
+----------------------------------------
+            for (i = 0; i < min; i++) {
+                if (DEBUG) {System.out.print("doing round " + i);}
+                double pTemp = getP(--a, ++b, ++c, --d);
+                if (DEBUG) {System.out.print("\tpTemp = " + pTemp);}
+                p += pTemp;
+                if (DEBUG) {System.out.println("\ta=" + a + " b=" + b + " c=" + c + " d=" + d);}
+            }
+
+----------------------------------------
+        for (i = 0; i < min; i++) {
+            if (DEBUG) {System.out.print("doing round " + i);}
+            double pTemp = getP(--a, ++b, ++c, --d);
+            if (DEBUG) {System.out.println("  pTemp = " + pTemp);}
+            if (pTemp <= baseP) {
+                if (DEBUG) {System.out.print("\ttempP (" + pTemp + ") is less than baseP (" + baseP + ")");}
+                p += pTemp;
+            }
+            if (DEBUG) {System.out.println(" a=" + a + " b=" + b + " c=" + c + " d=" + d);}
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834268
+net/sf/varscan/FpFilter.java 272 277
+net/sf/varscan/FilterSomatic.java 206 211
+----------------------------------------
+	    	    					{
+	    	    						if(line.startsWith("#CHROM"))
+	    	    							filteredFile.println(vcfHeaderInfo);
+
+	    	    						filteredFile.println(line);
+	    	    					}
+
+----------------------------------------
+		    			{
+
+		    				// Print header //
+	    					if(params.containsKey("output-file"))
+	    						outFile.println(line);
+		    			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834269
+net/sf/varscan/LimitVariants.java 134 139
+net/sf/varscan/FilterSomatic.java 206 211
+----------------------------------------
+	    		{
+	    			// Handle native file headers //
+	    			outFile.println(line);
+	    			if(params.containsKey("not-file"))
+	    				notFile.println(line);
+	    		}
+
+----------------------------------------
+		    			{
+
+		    				// Print header //
+	    					if(params.containsKey("output-file"))
+	    						outFile.println(line);
+		    			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834290
+net/sf/varscan/FpFilter.java 264 269
+net/sf/varscan/FilterSomatic.java 206 211
+----------------------------------------
+	    	    					{
+	    	    						if(line.startsWith("#CHROM"))
+	    	    							outFile.println(vcfHeaderInfo);
+
+	    	    						outFile.println(line);
+	    	    					}
+
+----------------------------------------
+		    			{
+
+		    				// Print header //
+	    					if(params.containsKey("output-file"))
+	    						outFile.println(line);
+		    			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834456
+net/sf/varscan/Somatic.java 964 979
+net/sf/varscan/CallMpileup.java 233 249
+----------------------------------------
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file(s) were not ready for parsing after 100 5-second cycles! Pileup output may be invalid or too slow");
+			    		System.exit(10);
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+
+		    	}
+	    	}
+
+----------------------------------------
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.err.println("Exception while trying to get input" + e.getMessage());
+		    		System.exit(1);
+		    	}
+	    	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834457
+net/sf/varscan/CallPileup.java 141 157
+net/sf/varscan/CallMpileup.java 233 249
+----------------------------------------
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.err.println("Exception while trying to get input" + e.getMessage());
+		    		System.exit(1);
+		    	}
+	    	}
+
+----------------------------------------
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.err.println("Exception while trying to get input" + e.getMessage());
+		    		System.exit(1);
+		    	}
+	    	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834458
+net/sf/varscan/ReadCounts.java 125 139
+net/sf/varscan/CallMpileup.java 233 249
+----------------------------------------
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+	    		}
+		    	catch(Exception e)
+		    	{
+
+		    	}
+	    	}
+
+----------------------------------------
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.err.println("Exception while trying to get input" + e.getMessage());
+		    		System.exit(1);
+		    	}
+	    	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834459
+net/sf/varscan/Somatic.java 255 271
+net/sf/varscan/CallMpileup.java 233 249
+----------------------------------------
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.err.println("Exception while trying to get input" + e.getMessage());
+		    		System.exit(1);
+		    	}
+	    	}
+
+----------------------------------------
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.err.println("Exception while trying to get input" + e.getMessage());
+		    		System.exit(1);
+		    	}
+	    	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834274
+net/sf/varscan/ReadCounts.java 125 139
+net/sf/varscan/ProcessSomatic.java 79 95
+----------------------------------------
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+	    		}
+		    	catch(Exception e)
+		    	{
+
+		    	}
+	    	}
+
+----------------------------------------
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.err.println("Exception while trying to get input" + e.getMessage());
+		    		System.exit(1);
+		    	}
+	    	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834275
+net/sf/varscan/Somatic.java 255 271
+net/sf/varscan/ProcessSomatic.java 79 95
+----------------------------------------
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.err.println("Exception while trying to get input" + e.getMessage());
+		    		System.exit(1);
+		    	}
+	    	}
+
+----------------------------------------
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.err.println("Exception while trying to get input" + e.getMessage());
+		    		System.exit(1);
+		    	}
+	    	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834273
+net/sf/varscan/CallPileup.java 141 157
+net/sf/varscan/ProcessSomatic.java 79 95
+----------------------------------------
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.err.println("Exception while trying to get input" + e.getMessage());
+		    		System.exit(1);
+		    	}
+	    	}
+
+----------------------------------------
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.err.println("Exception while trying to get input" + e.getMessage());
+		    		System.exit(1);
+		    	}
+	    	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834272
+net/sf/varscan/Somatic.java 964 979
+net/sf/varscan/ProcessSomatic.java 79 95
+----------------------------------------
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file(s) were not ready for parsing after 100 5-second cycles! Pileup output may be invalid or too slow");
+			    		System.exit(10);
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+
+		    	}
+	    	}
+
+----------------------------------------
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.err.println("Exception while trying to get input" + e.getMessage());
+		    		System.exit(1);
+		    	}
+	    	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834271
+net/sf/varscan/CallMpileup.java 233 249
+net/sf/varscan/ProcessSomatic.java 79 95
+----------------------------------------
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.err.println("Exception while trying to get input" + e.getMessage());
+		    		System.exit(1);
+		    	}
+	    	}
+
+----------------------------------------
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.err.println("Exception while trying to get input" + e.getMessage());
+		    		System.exit(1);
+		    	}
+	    	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834340
+net/sf/varscan/ReadCounts.java 126 134
+net/sf/varscan/ProcessSomatic.java 80 89
+----------------------------------------
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+	    		}
+
+----------------------------------------
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834276
+net/sf/varscan/CallPileup.java 142 151
+net/sf/varscan/ProcessSomatic.java 80 89
+----------------------------------------
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+
+----------------------------------------
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834279
+net/sf/varscan/Somatic.java 965 974
+net/sf/varscan/ProcessSomatic.java 80 89
+----------------------------------------
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file(s) were not ready for parsing after 100 5-second cycles! Pileup output may be invalid or too slow");
+			    		System.exit(10);
+			    	}
+		    	}
+
+----------------------------------------
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834278
+net/sf/varscan/Somatic.java 256 265
+net/sf/varscan/ProcessSomatic.java 80 89
+----------------------------------------
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+
+----------------------------------------
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834662
+net/sf/varscan/Somatic.java 965 974
+net/sf/varscan/CallMpileup.java 234 243
+----------------------------------------
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file(s) were not ready for parsing after 100 5-second cycles! Pileup output may be invalid or too slow");
+			    		System.exit(10);
+			    	}
+		    	}
+
+----------------------------------------
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834661
+net/sf/varscan/Somatic.java 256 265
+net/sf/varscan/CallMpileup.java 234 243
+----------------------------------------
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+
+----------------------------------------
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834663
+net/sf/varscan/ReadCounts.java 126 134
+net/sf/varscan/CallMpileup.java 234 243
+----------------------------------------
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+	    		}
+
+----------------------------------------
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834277
+net/sf/varscan/ProcessSomatic.java 80 89
+net/sf/varscan/CallMpileup.java 234 243
+----------------------------------------
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+
+----------------------------------------
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834660
+net/sf/varscan/CallPileup.java 142 151
+net/sf/varscan/CallMpileup.java 234 243
+----------------------------------------
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+
+----------------------------------------
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834281
+net/sf/varscan/ProcessSomatic.java 256 264
+net/sf/varscan/ProcessSomatic.java 266 274
+----------------------------------------
+		    				{
+		    					numSomatic++;
+		    					outSomatic.println(line);
+		    					if(normalFreq <= maxNormalFreq && tumorFreq >= minTumorFreq && somaticPvalue <= pValueForHC)
+		    					{
+		    						numSomaticHC++;
+		    						outSomaticHC.println(line);
+		    					}
+		    				}
+
+----------------------------------------
+		    				{
+		    					numGermline++;
+		    					outGermline.println(line);
+		    					if(normalFreq >= minTumorFreq && tumorFreq >= minTumorFreq && somaticPvalue <= pValueForHC)
+		    					{
+		    						numGermlineHC++;
+		    						outGermlineHC.println(line);
+		    					}
+		    				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834283
+net/sf/varscan/ProcessSomatic.java 266 274
+net/sf/varscan/ProcessSomatic.java 276 286
+----------------------------------------
+		    				{
+		    					numGermline++;
+		    					outGermline.println(line);
+		    					if(normalFreq >= minTumorFreq && tumorFreq >= minTumorFreq && somaticPvalue <= pValueForHC)
+		    					{
+		    						numGermlineHC++;
+		    						outGermlineHC.println(line);
+		    					}
+		    				}
+
+----------------------------------------
+		    				{
+		    					numLOH++;
+		    					outLOH.println(line);
+		    					double normalHetDistance = Math.abs(0.50 - normalFreq);
+		    					double tumorHetDistance = Math.abs(0.50 - tumorFreq);
+		    					if(normalFreq >= minTumorFreq && tumorHetDistance > normalHetDistance && somaticPvalue <= pValueForHC)
+		    					{
+		    						numLOHHC++;
+		    						outLOHHC.println(line);
+		    					}
+		    				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834282
+net/sf/varscan/ProcessSomatic.java 256 264
+net/sf/varscan/ProcessSomatic.java 276 286
+----------------------------------------
+		    				{
+		    					numSomatic++;
+		    					outSomatic.println(line);
+		    					if(normalFreq <= maxNormalFreq && tumorFreq >= minTumorFreq && somaticPvalue <= pValueForHC)
+		    					{
+		    						numSomaticHC++;
+		    						outSomaticHC.println(line);
+		    					}
+		    				}
+
+----------------------------------------
+		    				{
+		    					numLOH++;
+		    					outLOH.println(line);
+		    					double normalHetDistance = Math.abs(0.50 - normalFreq);
+		    					double tumorHetDistance = Math.abs(0.50 - tumorFreq);
+		    					if(normalFreq >= minTumorFreq && tumorHetDistance > normalHetDistance && somaticPvalue <= pValueForHC)
+		    					{
+		    						numLOHHC++;
+		    						outLOHHC.println(line);
+		    					}
+		    				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834284
+net/sf/varscan/ProcessSomatic.java 182 189
+net/sf/varscan/ProcessSomatic.java 296 303
+----------------------------------------
+	    				{
+		    				outSomatic.println(line);
+		    				outSomaticHC.println(line);
+		    				outGermline.println(line);
+		    				outGermlineHC.println(line);
+		    				outLOH.println(line);
+		    				outLOHHC.println(line);
+	    				}
+
+----------------------------------------
+	    				{
+	    					// Print the header to the output files //
+	    					outSomatic.println(line);
+	    					outSomaticHC.println(line);
+	    					outGermline.println(line);
+	    					outLOH.println(line);
+
+	    				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834285
+net/sf/varscan/LimitVariants.java 225 300
+net/sf/varscan/ProcessSomatic.java 346 430
+----------------------------------------
+		{
+			BufferedReader infile = new BufferedReader(new FileReader(fileName));
+
+			String line = "";
+			int lineCounter = 0;
+
+	    	while ((line = infile.readLine()) != null)
+	    	{
+	    		lineCounter++;
+	    		String[] lineContents = line.split("\t");
+
+	    		if(line.substring(0, 1).equals("#"))
+	    		{
+	    			// Ignore VCF headers //
+	    		}
+	    		else if(lineContents.length >= 2)
+	    		{
+	    			// Try to parse chrom and position //
+	    			try
+	    			{
+	    				String refName = lineContents[0];
+
+	    				// Get or create BitSet for this refName //
+	    				BitSet refPositions;
+
+	    				if(positionsByChrom.containsKey(refName))
+	    				{
+	    					refPositions = positionsByChrom.get(refName);
+	    				}
+	    				else
+	    				{
+	    					refPositions = new BitSet();
+	    				}
+
+	    				// Mark position or regions, depending on what was provided //
+	    				int chrStart = 0;
+	    				int chrStop = 0;
+
+	    				if(fileType.equals("positions") && lineContents.length > 1)
+	    				{
+		    				// Set the position to true //
+		    				int position = Integer.parseInt(lineContents[1]);
+		    				chrStart = position - marginSize;
+		    				chrStop = position + marginSize;
+	    				}
+	    				else if(fileType.equals("regions") && lineContents.length > 2)
+	    				{
+	    					chrStart = Integer.parseInt(lineContents[1]) - marginSize;
+	    					chrStop = Integer.parseInt(lineContents[2]) + marginSize;
+	    				}
+
+    					// Check that it won't be an infinite loop//
+    					if(chrStart <= chrStop)
+    					{
+	    					// Mark every position //
+	    					for(int position = chrStart; position <= chrStop; position++)
+	    					{
+	    						refPositions.set(position, true);
+	    					}
+    					}
+
+	    				// Return it to the hash //
+	    				positionsByChrom.put(refName, refPositions);
+	    			}
+	    			catch(Exception e)
+	    			{
+	    				if(lineCounter > 1)
+	    					System.err.println("Warning: Unable to parse chrom/position from " + line);
+	    			}
+
+
+	    		}
+	    	}
+
+	    	infile.close();
+		}
+
+----------------------------------------
+	{
+		HashMap<String, BitSet> positionsByChrom = new HashMap<String, BitSet>();
+
+		try
+		{
+			BufferedReader infile = new BufferedReader(new FileReader(fileName));
+
+			String line = "";
+			int lineCounter = 0;
+
+	    	while ((line = infile.readLine()) != null)
+	    	{
+	    		lineCounter++;
+
+	    		String[] lineContents = line.split("\t");
+	    		if(lineContents.length >= 2)
+	    		{
+	    			// Try to parse chrom and position //
+	    			try
+	    			{
+	    				String refName = lineContents[0];
+
+	    				// Get or create BitSet for this refName //
+	    				BitSet refPositions;
+
+	    				if(positionsByChrom.containsKey(refName))
+	    				{
+	    					refPositions = positionsByChrom.get(refName);
+	    				}
+	    				else
+	    				{
+	    					refPositions = new BitSet();
+	    				}
+
+	    				// Mark position or regions, depending on what was provided //
+	    				int chrStart = 0;
+	    				int chrStop = 0;
+
+	    				if(fileType.equals("positions") && lineContents.length > 1)
+	    				{
+		    				// Set the position to true //
+		    				int position = Integer.parseInt(lineContents[1]);
+		    				chrStart = position - marginSize;
+		    				chrStop = position + marginSize;
+	    				}
+	    				else if(fileType.equals("regions") && lineContents.length > 2)
+	    				{
+	    					chrStart = Integer.parseInt(lineContents[1]) - marginSize;
+	    					chrStop = Integer.parseInt(lineContents[2]) + marginSize;
+	    				}
+
+    					// Check that it won't be an infinite loop//
+    					if(chrStart <= chrStop)
+    					{
+	    					// Mark every position //
+	    					for(int position = chrStart; position <= chrStop; position++)
+	    					{
+	    						refPositions.set(position, true);
+	    					}
+    					}
+
+	    				// Return it to the hash //
+	    				positionsByChrom.put(refName, refPositions);
+	    			}
+	    			catch(Exception e)
+	    			{
+	    				if(lineCounter > 1)
+	    					System.err.println("Warning: Unable to parse chrom/position from " + line);
+	    			}
+
+
+	    		}
+	    	}
+
+	    	infile.close();
+		}
+		catch(Exception e)
+		{
+			System.err.println("ERROR: File Parsing Exception: " + e.getLocalizedMessage());
+			e.printStackTrace(System.err);
+		}
+
+
+		return(positionsByChrom);
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834286
+net/sf/varscan/ProcessSomatic.java 346 430
+net/sf/varscan/LimitVariants.java 232 297
+----------------------------------------
+	{
+		HashMap<String, BitSet> positionsByChrom = new HashMap<String, BitSet>();
+
+		try
+		{
+			BufferedReader infile = new BufferedReader(new FileReader(fileName));
+
+			String line = "";
+			int lineCounter = 0;
+
+	    	while ((line = infile.readLine()) != null)
+	    	{
+	    		lineCounter++;
+
+	    		String[] lineContents = line.split("\t");
+	    		if(lineContents.length >= 2)
+	    		{
+	    			// Try to parse chrom and position //
+	    			try
+	    			{
+	    				String refName = lineContents[0];
+
+	    				// Get or create BitSet for this refName //
+	    				BitSet refPositions;
+
+	    				if(positionsByChrom.containsKey(refName))
+	    				{
+	    					refPositions = positionsByChrom.get(refName);
+	    				}
+	    				else
+	    				{
+	    					refPositions = new BitSet();
+	    				}
+
+	    				// Mark position or regions, depending on what was provided //
+	    				int chrStart = 0;
+	    				int chrStop = 0;
+
+	    				if(fileType.equals("positions") && lineContents.length > 1)
+	    				{
+		    				// Set the position to true //
+		    				int position = Integer.parseInt(lineContents[1]);
+		    				chrStart = position - marginSize;
+		    				chrStop = position + marginSize;
+	    				}
+	    				else if(fileType.equals("regions") && lineContents.length > 2)
+	    				{
+	    					chrStart = Integer.parseInt(lineContents[1]) - marginSize;
+	    					chrStop = Integer.parseInt(lineContents[2]) + marginSize;
+	    				}
+
+    					// Check that it won't be an infinite loop//
+    					if(chrStart <= chrStop)
+    					{
+	    					// Mark every position //
+	    					for(int position = chrStart; position <= chrStop; position++)
+	    					{
+	    						refPositions.set(position, true);
+	    					}
+    					}
+
+	    				// Return it to the hash //
+	    				positionsByChrom.put(refName, refPositions);
+	    			}
+	    			catch(Exception e)
+	    			{
+	    				if(lineCounter > 1)
+	    					System.err.println("Warning: Unable to parse chrom/position from " + line);
+	    			}
+
+
+	    		}
+	    	}
+
+	    	infile.close();
+		}
+		catch(Exception e)
+		{
+			System.err.println("ERROR: File Parsing Exception: " + e.getLocalizedMessage());
+			e.printStackTrace(System.err);
+		}
+
+
+		return(positionsByChrom);
+	}
+
+----------------------------------------
+	    	{
+	    		lineCounter++;
+	    		String[] lineContents = line.split("\t");
+
+	    		if(line.substring(0, 1).equals("#"))
+	    		{
+	    			// Ignore VCF headers //
+	    		}
+	    		else if(lineContents.length >= 2)
+	    		{
+	    			// Try to parse chrom and position //
+	    			try
+	    			{
+	    				String refName = lineContents[0];
+
+	    				// Get or create BitSet for this refName //
+	    				BitSet refPositions;
+
+	    				if(positionsByChrom.containsKey(refName))
+	    				{
+	    					refPositions = positionsByChrom.get(refName);
+	    				}
+	    				else
+	    				{
+	    					refPositions = new BitSet();
+	    				}
+
+	    				// Mark position or regions, depending on what was provided //
+	    				int chrStart = 0;
+	    				int chrStop = 0;
+
+	    				if(fileType.equals("positions") && lineContents.length > 1)
+	    				{
+		    				// Set the position to true //
+		    				int position = Integer.parseInt(lineContents[1]);
+		    				chrStart = position - marginSize;
+		    				chrStop = position + marginSize;
+	    				}
+	    				else if(fileType.equals("regions") && lineContents.length > 2)
+	    				{
+	    					chrStart = Integer.parseInt(lineContents[1]) - marginSize;
+	    					chrStop = Integer.parseInt(lineContents[2]) + marginSize;
+	    				}
+
+    					// Check that it won't be an infinite loop//
+    					if(chrStart <= chrStop)
+    					{
+	    					// Mark every position //
+	    					for(int position = chrStart; position <= chrStop; position++)
+	    					{
+	    						refPositions.set(position, true);
+	    					}
+    					}
+
+	    				// Return it to the hash //
+	    				positionsByChrom.put(refName, refPositions);
+	    			}
+	    			catch(Exception e)
+	    			{
+	    				if(lineCounter > 1)
+	    					System.err.println("Warning: Unable to parse chrom/position from " + line);
+	    			}
+
+
+	    		}
+	    	}
+
+----------------------------------------

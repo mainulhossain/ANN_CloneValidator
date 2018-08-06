@@ -1,0 +1,3095 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834287
+net/sf/varscan/ProcessSomatic.java 346 430
+net/sf/varscan/LimitVariants.java 221 309
+----------------------------------------
+	{
+		HashMap<String, BitSet> positionsByChrom = new HashMap<String, BitSet>();
+
+		try
+		{
+			BufferedReader infile = new BufferedReader(new FileReader(fileName));
+
+			String line = "";
+			int lineCounter = 0;
+
+	    	while ((line = infile.readLine()) != null)
+	    	{
+	    		lineCounter++;
+
+	    		String[] lineContents = line.split("\t");
+	    		if(lineContents.length >= 2)
+	    		{
+	    			// Try to parse chrom and position //
+	    			try
+	    			{
+	    				String refName = lineContents[0];
+
+	    				// Get or create BitSet for this refName //
+	    				BitSet refPositions;
+
+	    				if(positionsByChrom.containsKey(refName))
+	    				{
+	    					refPositions = positionsByChrom.get(refName);
+	    				}
+	    				else
+	    				{
+	    					refPositions = new BitSet();
+	    				}
+
+	    				// Mark position or regions, depending on what was provided //
+	    				int chrStart = 0;
+	    				int chrStop = 0;
+
+	    				if(fileType.equals("positions") && lineContents.length > 1)
+	    				{
+		    				// Set the position to true //
+		    				int position = Integer.parseInt(lineContents[1]);
+		    				chrStart = position - marginSize;
+		    				chrStop = position + marginSize;
+	    				}
+	    				else if(fileType.equals("regions") && lineContents.length > 2)
+	    				{
+	    					chrStart = Integer.parseInt(lineContents[1]) - marginSize;
+	    					chrStop = Integer.parseInt(lineContents[2]) + marginSize;
+	    				}
+
+    					// Check that it won't be an infinite loop//
+    					if(chrStart <= chrStop)
+    					{
+	    					// Mark every position //
+	    					for(int position = chrStart; position <= chrStop; position++)
+	    					{
+	    						refPositions.set(position, true);
+	    					}
+    					}
+
+	    				// Return it to the hash //
+	    				positionsByChrom.put(refName, refPositions);
+	    			}
+	    			catch(Exception e)
+	    			{
+	    				if(lineCounter > 1)
+	    					System.err.println("Warning: Unable to parse chrom/position from " + line);
+	    			}
+
+
+	    		}
+	    	}
+
+	    	infile.close();
+		}
+		catch(Exception e)
+		{
+			System.err.println("ERROR: File Parsing Exception: " + e.getLocalizedMessage());
+			e.printStackTrace(System.err);
+		}
+
+
+		return(positionsByChrom);
+	}
+
+----------------------------------------
+	{
+		HashMap<String, BitSet> positionsByChrom = new HashMap<String, BitSet>();
+
+		try
+		{
+			BufferedReader infile = new BufferedReader(new FileReader(fileName));
+
+			String line = "";
+			int lineCounter = 0;
+
+	    	while ((line = infile.readLine()) != null)
+	    	{
+	    		lineCounter++;
+	    		String[] lineContents = line.split("\t");
+
+	    		if(line.substring(0, 1).equals("#"))
+	    		{
+	    			// Ignore VCF headers //
+	    		}
+	    		else if(lineContents.length >= 2)
+	    		{
+	    			// Try to parse chrom and position //
+	    			try
+	    			{
+	    				String refName = lineContents[0];
+
+	    				// Get or create BitSet for this refName //
+	    				BitSet refPositions;
+
+	    				if(positionsByChrom.containsKey(refName))
+	    				{
+	    					refPositions = positionsByChrom.get(refName);
+	    				}
+	    				else
+	    				{
+	    					refPositions = new BitSet();
+	    				}
+
+	    				// Mark position or regions, depending on what was provided //
+	    				int chrStart = 0;
+	    				int chrStop = 0;
+
+	    				if(fileType.equals("positions") && lineContents.length > 1)
+	    				{
+		    				// Set the position to true //
+		    				int position = Integer.parseInt(lineContents[1]);
+		    				chrStart = position - marginSize;
+		    				chrStop = position + marginSize;
+	    				}
+	    				else if(fileType.equals("regions") && lineContents.length > 2)
+	    				{
+	    					chrStart = Integer.parseInt(lineContents[1]) - marginSize;
+	    					chrStop = Integer.parseInt(lineContents[2]) + marginSize;
+	    				}
+
+    					// Check that it won't be an infinite loop//
+    					if(chrStart <= chrStop)
+    					{
+	    					// Mark every position //
+	    					for(int position = chrStart; position <= chrStop; position++)
+	    					{
+	    						refPositions.set(position, true);
+	    					}
+    					}
+
+	    				// Return it to the hash //
+	    				positionsByChrom.put(refName, refPositions);
+	    			}
+	    			catch(Exception e)
+	    			{
+	    				if(lineCounter > 1)
+	    					System.err.println("Warning: Unable to parse chrom/position from " + line);
+	    			}
+
+
+	    		}
+	    	}
+
+	    	infile.close();
+		}
+		catch(Exception e)
+		{
+			System.err.println("ERROR: File Parsing Exception: " + e.getLocalizedMessage());
+			e.printStackTrace(System.err);
+		}
+
+
+		return(positionsByChrom);
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+28918713
+net/sf/varscan/Somatic.java 1798 1825
+net/sf/varscan/LimitVariants.java 241 296
+----------------------------------------
+											{
+												if(normalFreq > minVarFreq)
+												{
+													somaticStatus = "Germline";
+												}
+												else if(freqDiff >= 0.30 && tumorFreq > normalFreq)
+												{
+													somaticStatus = "Somatic";
+												}
+												else if(freqDiff <= -0.30 && tumorFreq < normalFreq)
+												{
+													somaticStatus = "LOH";
+												}
+												else// if(freqDiff < 0.50)
+												{
+													somaticStatus = "Germline"; // Should this be GOH? //
+													// Recalculate p-value //
+													int totalReads1 = normalReads1 + tumorReads1;
+													int totalReads2 = normalReads2 + tumorReads2;
+													int totalCoverage = totalReads1 + totalReads2;
+													pValue = VarScan.getSignificance(totalCoverage, 0, totalReads1, totalReads2);
+												}
+				//								else
+				//								{
+				//									somaticStatus = "LOH";
+				//								}
+												allele2 = tumorAllele2;
+											}
+
+----------------------------------------
+	    		{
+	    			// Try to parse chrom and position //
+	    			try
+	    			{
+	    				String refName = lineContents[0];
+
+	    				// Get or create BitSet for this refName //
+	    				BitSet refPositions;
+
+	    				if(positionsByChrom.containsKey(refName))
+	    				{
+	    					refPositions = positionsByChrom.get(refName);
+	    				}
+	    				else
+	    				{
+	    					refPositions = new BitSet();
+	    				}
+
+	    				// Mark position or regions, depending on what was provided //
+	    				int chrStart = 0;
+	    				int chrStop = 0;
+
+	    				if(fileType.equals("positions") && lineContents.length > 1)
+	    				{
+		    				// Set the position to true //
+		    				int position = Integer.parseInt(lineContents[1]);
+		    				chrStart = position - marginSize;
+		    				chrStop = position + marginSize;
+	    				}
+	    				else if(fileType.equals("regions") && lineContents.length > 2)
+	    				{
+	    					chrStart = Integer.parseInt(lineContents[1]) - marginSize;
+	    					chrStop = Integer.parseInt(lineContents[2]) + marginSize;
+	    				}
+
+    					// Check that it won't be an infinite loop//
+    					if(chrStart <= chrStop)
+    					{
+	    					// Mark every position //
+	    					for(int position = chrStart; position <= chrStop; position++)
+	    					{
+	    						refPositions.set(position, true);
+	    					}
+    					}
+
+	    				// Return it to the hash //
+	    				positionsByChrom.put(refName, refPositions);
+	    			}
+	    			catch(Exception e)
+	    			{
+	    				if(lineCounter > 1)
+	    					System.err.println("Warning: Unable to parse chrom/position from " + line);
+	    			}
+
+
+	    		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834289
+net/sf/varscan/LimitVariants.java 225 300
+net/sf/varscan/ProcessSomatic.java 350 421
+----------------------------------------
+		{
+			BufferedReader infile = new BufferedReader(new FileReader(fileName));
+
+			String line = "";
+			int lineCounter = 0;
+
+	    	while ((line = infile.readLine()) != null)
+	    	{
+	    		lineCounter++;
+	    		String[] lineContents = line.split("\t");
+
+	    		if(line.substring(0, 1).equals("#"))
+	    		{
+	    			// Ignore VCF headers //
+	    		}
+	    		else if(lineContents.length >= 2)
+	    		{
+	    			// Try to parse chrom and position //
+	    			try
+	    			{
+	    				String refName = lineContents[0];
+
+	    				// Get or create BitSet for this refName //
+	    				BitSet refPositions;
+
+	    				if(positionsByChrom.containsKey(refName))
+	    				{
+	    					refPositions = positionsByChrom.get(refName);
+	    				}
+	    				else
+	    				{
+	    					refPositions = new BitSet();
+	    				}
+
+	    				// Mark position or regions, depending on what was provided //
+	    				int chrStart = 0;
+	    				int chrStop = 0;
+
+	    				if(fileType.equals("positions") && lineContents.length > 1)
+	    				{
+		    				// Set the position to true //
+		    				int position = Integer.parseInt(lineContents[1]);
+		    				chrStart = position - marginSize;
+		    				chrStop = position + marginSize;
+	    				}
+	    				else if(fileType.equals("regions") && lineContents.length > 2)
+	    				{
+	    					chrStart = Integer.parseInt(lineContents[1]) - marginSize;
+	    					chrStop = Integer.parseInt(lineContents[2]) + marginSize;
+	    				}
+
+    					// Check that it won't be an infinite loop//
+    					if(chrStart <= chrStop)
+    					{
+	    					// Mark every position //
+	    					for(int position = chrStart; position <= chrStop; position++)
+	    					{
+	    						refPositions.set(position, true);
+	    					}
+    					}
+
+	    				// Return it to the hash //
+	    				positionsByChrom.put(refName, refPositions);
+	    			}
+	    			catch(Exception e)
+	    			{
+	    				if(lineCounter > 1)
+	    					System.err.println("Warning: Unable to parse chrom/position from " + line);
+	    			}
+
+
+	    		}
+	    	}
+
+	    	infile.close();
+		}
+
+----------------------------------------
+		{
+			BufferedReader infile = new BufferedReader(new FileReader(fileName));
+
+			String line = "";
+			int lineCounter = 0;
+
+	    	while ((line = infile.readLine()) != null)
+	    	{
+	    		lineCounter++;
+
+	    		String[] lineContents = line.split("\t");
+	    		if(lineContents.length >= 2)
+	    		{
+	    			// Try to parse chrom and position //
+	    			try
+	    			{
+	    				String refName = lineContents[0];
+
+	    				// Get or create BitSet for this refName //
+	    				BitSet refPositions;
+
+	    				if(positionsByChrom.containsKey(refName))
+	    				{
+	    					refPositions = positionsByChrom.get(refName);
+	    				}
+	    				else
+	    				{
+	    					refPositions = new BitSet();
+	    				}
+
+	    				// Mark position or regions, depending on what was provided //
+	    				int chrStart = 0;
+	    				int chrStop = 0;
+
+	    				if(fileType.equals("positions") && lineContents.length > 1)
+	    				{
+		    				// Set the position to true //
+		    				int position = Integer.parseInt(lineContents[1]);
+		    				chrStart = position - marginSize;
+		    				chrStop = position + marginSize;
+	    				}
+	    				else if(fileType.equals("regions") && lineContents.length > 2)
+	    				{
+	    					chrStart = Integer.parseInt(lineContents[1]) - marginSize;
+	    					chrStop = Integer.parseInt(lineContents[2]) + marginSize;
+	    				}
+
+    					// Check that it won't be an infinite loop//
+    					if(chrStart <= chrStop)
+    					{
+	    					// Mark every position //
+	    					for(int position = chrStart; position <= chrStop; position++)
+	    					{
+	    						refPositions.set(position, true);
+	    					}
+    					}
+
+	    				// Return it to the hash //
+	    				positionsByChrom.put(refName, refPositions);
+	    			}
+	    			catch(Exception e)
+	    			{
+	    				if(lineCounter > 1)
+	    					System.err.println("Warning: Unable to parse chrom/position from " + line);
+	    			}
+
+
+	    		}
+	    	}
+
+	    	infile.close();
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834311
+net/sf/varscan/LimitVariants.java 221 309
+net/sf/varscan/ProcessSomatic.java 350 421
+----------------------------------------
+	{
+		HashMap<String, BitSet> positionsByChrom = new HashMap<String, BitSet>();
+
+		try
+		{
+			BufferedReader infile = new BufferedReader(new FileReader(fileName));
+
+			String line = "";
+			int lineCounter = 0;
+
+	    	while ((line = infile.readLine()) != null)
+	    	{
+	    		lineCounter++;
+	    		String[] lineContents = line.split("\t");
+
+	    		if(line.substring(0, 1).equals("#"))
+	    		{
+	    			// Ignore VCF headers //
+	    		}
+	    		else if(lineContents.length >= 2)
+	    		{
+	    			// Try to parse chrom and position //
+	    			try
+	    			{
+	    				String refName = lineContents[0];
+
+	    				// Get or create BitSet for this refName //
+	    				BitSet refPositions;
+
+	    				if(positionsByChrom.containsKey(refName))
+	    				{
+	    					refPositions = positionsByChrom.get(refName);
+	    				}
+	    				else
+	    				{
+	    					refPositions = new BitSet();
+	    				}
+
+	    				// Mark position or regions, depending on what was provided //
+	    				int chrStart = 0;
+	    				int chrStop = 0;
+
+	    				if(fileType.equals("positions") && lineContents.length > 1)
+	    				{
+		    				// Set the position to true //
+		    				int position = Integer.parseInt(lineContents[1]);
+		    				chrStart = position - marginSize;
+		    				chrStop = position + marginSize;
+	    				}
+	    				else if(fileType.equals("regions") && lineContents.length > 2)
+	    				{
+	    					chrStart = Integer.parseInt(lineContents[1]) - marginSize;
+	    					chrStop = Integer.parseInt(lineContents[2]) + marginSize;
+	    				}
+
+    					// Check that it won't be an infinite loop//
+    					if(chrStart <= chrStop)
+    					{
+	    					// Mark every position //
+	    					for(int position = chrStart; position <= chrStop; position++)
+	    					{
+	    						refPositions.set(position, true);
+	    					}
+    					}
+
+	    				// Return it to the hash //
+	    				positionsByChrom.put(refName, refPositions);
+	    			}
+	    			catch(Exception e)
+	    			{
+	    				if(lineCounter > 1)
+	    					System.err.println("Warning: Unable to parse chrom/position from " + line);
+	    			}
+
+
+	    		}
+	    	}
+
+	    	infile.close();
+		}
+		catch(Exception e)
+		{
+			System.err.println("ERROR: File Parsing Exception: " + e.getLocalizedMessage());
+			e.printStackTrace(System.err);
+		}
+
+
+		return(positionsByChrom);
+	}
+
+----------------------------------------
+		{
+			BufferedReader infile = new BufferedReader(new FileReader(fileName));
+
+			String line = "";
+			int lineCounter = 0;
+
+	    	while ((line = infile.readLine()) != null)
+	    	{
+	    		lineCounter++;
+
+	    		String[] lineContents = line.split("\t");
+	    		if(lineContents.length >= 2)
+	    		{
+	    			// Try to parse chrom and position //
+	    			try
+	    			{
+	    				String refName = lineContents[0];
+
+	    				// Get or create BitSet for this refName //
+	    				BitSet refPositions;
+
+	    				if(positionsByChrom.containsKey(refName))
+	    				{
+	    					refPositions = positionsByChrom.get(refName);
+	    				}
+	    				else
+	    				{
+	    					refPositions = new BitSet();
+	    				}
+
+	    				// Mark position or regions, depending on what was provided //
+	    				int chrStart = 0;
+	    				int chrStop = 0;
+
+	    				if(fileType.equals("positions") && lineContents.length > 1)
+	    				{
+		    				// Set the position to true //
+		    				int position = Integer.parseInt(lineContents[1]);
+		    				chrStart = position - marginSize;
+		    				chrStop = position + marginSize;
+	    				}
+	    				else if(fileType.equals("regions") && lineContents.length > 2)
+	    				{
+	    					chrStart = Integer.parseInt(lineContents[1]) - marginSize;
+	    					chrStop = Integer.parseInt(lineContents[2]) + marginSize;
+	    				}
+
+    					// Check that it won't be an infinite loop//
+    					if(chrStart <= chrStop)
+    					{
+	    					// Mark every position //
+	    					for(int position = chrStart; position <= chrStop; position++)
+	    					{
+	    						refPositions.set(position, true);
+	    					}
+    					}
+
+	    				// Return it to the hash //
+	    				positionsByChrom.put(refName, refPositions);
+	    			}
+	    			catch(Exception e)
+	    			{
+	    				if(lineCounter > 1)
+	    					System.err.println("Warning: Unable to parse chrom/position from " + line);
+	    			}
+
+
+	    		}
+	    	}
+
+	    	infile.close();
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834288
+net/sf/varscan/LimitVariants.java 241 296
+net/sf/varscan/ProcessSomatic.java 350 421
+----------------------------------------
+	    		{
+	    			// Try to parse chrom and position //
+	    			try
+	    			{
+	    				String refName = lineContents[0];
+
+	    				// Get or create BitSet for this refName //
+	    				BitSet refPositions;
+
+	    				if(positionsByChrom.containsKey(refName))
+	    				{
+	    					refPositions = positionsByChrom.get(refName);
+	    				}
+	    				else
+	    				{
+	    					refPositions = new BitSet();
+	    				}
+
+	    				// Mark position or regions, depending on what was provided //
+	    				int chrStart = 0;
+	    				int chrStop = 0;
+
+	    				if(fileType.equals("positions") && lineContents.length > 1)
+	    				{
+		    				// Set the position to true //
+		    				int position = Integer.parseInt(lineContents[1]);
+		    				chrStart = position - marginSize;
+		    				chrStop = position + marginSize;
+	    				}
+	    				else if(fileType.equals("regions") && lineContents.length > 2)
+	    				{
+	    					chrStart = Integer.parseInt(lineContents[1]) - marginSize;
+	    					chrStop = Integer.parseInt(lineContents[2]) + marginSize;
+	    				}
+
+    					// Check that it won't be an infinite loop//
+    					if(chrStart <= chrStop)
+    					{
+	    					// Mark every position //
+	    					for(int position = chrStart; position <= chrStop; position++)
+	    					{
+	    						refPositions.set(position, true);
+	    					}
+    					}
+
+	    				// Return it to the hash //
+	    				positionsByChrom.put(refName, refPositions);
+	    			}
+	    			catch(Exception e)
+	    			{
+	    				if(lineCounter > 1)
+	    					System.err.println("Warning: Unable to parse chrom/position from " + line);
+	    			}
+
+
+	    		}
+
+----------------------------------------
+		{
+			BufferedReader infile = new BufferedReader(new FileReader(fileName));
+
+			String line = "";
+			int lineCounter = 0;
+
+	    	while ((line = infile.readLine()) != null)
+	    	{
+	    		lineCounter++;
+
+	    		String[] lineContents = line.split("\t");
+	    		if(lineContents.length >= 2)
+	    		{
+	    			// Try to parse chrom and position //
+	    			try
+	    			{
+	    				String refName = lineContents[0];
+
+	    				// Get or create BitSet for this refName //
+	    				BitSet refPositions;
+
+	    				if(positionsByChrom.containsKey(refName))
+	    				{
+	    					refPositions = positionsByChrom.get(refName);
+	    				}
+	    				else
+	    				{
+	    					refPositions = new BitSet();
+	    				}
+
+	    				// Mark position or regions, depending on what was provided //
+	    				int chrStart = 0;
+	    				int chrStop = 0;
+
+	    				if(fileType.equals("positions") && lineContents.length > 1)
+	    				{
+		    				// Set the position to true //
+		    				int position = Integer.parseInt(lineContents[1]);
+		    				chrStart = position - marginSize;
+		    				chrStop = position + marginSize;
+	    				}
+	    				else if(fileType.equals("regions") && lineContents.length > 2)
+	    				{
+	    					chrStart = Integer.parseInt(lineContents[1]) - marginSize;
+	    					chrStop = Integer.parseInt(lineContents[2]) + marginSize;
+	    				}
+
+    					// Check that it won't be an infinite loop//
+    					if(chrStart <= chrStop)
+    					{
+	    					// Mark every position //
+	    					for(int position = chrStart; position <= chrStop; position++)
+	    					{
+	    						refPositions.set(position, true);
+	    					}
+    					}
+
+	    				// Return it to the hash //
+	    				positionsByChrom.put(refName, refPositions);
+	    			}
+	    			catch(Exception e)
+	    			{
+	    				if(lineCounter > 1)
+	    					System.err.println("Warning: Unable to parse chrom/position from " + line);
+	    			}
+
+
+	    		}
+	    	}
+
+	    	infile.close();
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834310
+net/sf/varscan/LimitVariants.java 232 297
+net/sf/varscan/ProcessSomatic.java 350 421
+----------------------------------------
+	    	{
+	    		lineCounter++;
+	    		String[] lineContents = line.split("\t");
+
+	    		if(line.substring(0, 1).equals("#"))
+	    		{
+	    			// Ignore VCF headers //
+	    		}
+	    		else if(lineContents.length >= 2)
+	    		{
+	    			// Try to parse chrom and position //
+	    			try
+	    			{
+	    				String refName = lineContents[0];
+
+	    				// Get or create BitSet for this refName //
+	    				BitSet refPositions;
+
+	    				if(positionsByChrom.containsKey(refName))
+	    				{
+	    					refPositions = positionsByChrom.get(refName);
+	    				}
+	    				else
+	    				{
+	    					refPositions = new BitSet();
+	    				}
+
+	    				// Mark position or regions, depending on what was provided //
+	    				int chrStart = 0;
+	    				int chrStop = 0;
+
+	    				if(fileType.equals("positions") && lineContents.length > 1)
+	    				{
+		    				// Set the position to true //
+		    				int position = Integer.parseInt(lineContents[1]);
+		    				chrStart = position - marginSize;
+		    				chrStop = position + marginSize;
+	    				}
+	    				else if(fileType.equals("regions") && lineContents.length > 2)
+	    				{
+	    					chrStart = Integer.parseInt(lineContents[1]) - marginSize;
+	    					chrStop = Integer.parseInt(lineContents[2]) + marginSize;
+	    				}
+
+    					// Check that it won't be an infinite loop//
+    					if(chrStart <= chrStop)
+    					{
+	    					// Mark every position //
+	    					for(int position = chrStart; position <= chrStop; position++)
+	    					{
+	    						refPositions.set(position, true);
+	    					}
+    					}
+
+	    				// Return it to the hash //
+	    				positionsByChrom.put(refName, refPositions);
+	    			}
+	    			catch(Exception e)
+	    			{
+	    				if(lineCounter > 1)
+	    					System.err.println("Warning: Unable to parse chrom/position from " + line);
+	    			}
+
+
+	    		}
+	    	}
+
+----------------------------------------
+		{
+			BufferedReader infile = new BufferedReader(new FileReader(fileName));
+
+			String line = "";
+			int lineCounter = 0;
+
+	    	while ((line = infile.readLine()) != null)
+	    	{
+	    		lineCounter++;
+
+	    		String[] lineContents = line.split("\t");
+	    		if(lineContents.length >= 2)
+	    		{
+	    			// Try to parse chrom and position //
+	    			try
+	    			{
+	    				String refName = lineContents[0];
+
+	    				// Get or create BitSet for this refName //
+	    				BitSet refPositions;
+
+	    				if(positionsByChrom.containsKey(refName))
+	    				{
+	    					refPositions = positionsByChrom.get(refName);
+	    				}
+	    				else
+	    				{
+	    					refPositions = new BitSet();
+	    				}
+
+	    				// Mark position or regions, depending on what was provided //
+	    				int chrStart = 0;
+	    				int chrStop = 0;
+
+	    				if(fileType.equals("positions") && lineContents.length > 1)
+	    				{
+		    				// Set the position to true //
+		    				int position = Integer.parseInt(lineContents[1]);
+		    				chrStart = position - marginSize;
+		    				chrStop = position + marginSize;
+	    				}
+	    				else if(fileType.equals("regions") && lineContents.length > 2)
+	    				{
+	    					chrStart = Integer.parseInt(lineContents[1]) - marginSize;
+	    					chrStop = Integer.parseInt(lineContents[2]) + marginSize;
+	    				}
+
+    					// Check that it won't be an infinite loop//
+    					if(chrStart <= chrStop)
+    					{
+	    					// Mark every position //
+	    					for(int position = chrStart; position <= chrStop; position++)
+	    					{
+	    						refPositions.set(position, true);
+	    					}
+    					}
+
+	    				// Return it to the hash //
+	    				positionsByChrom.put(refName, refPositions);
+	    			}
+	    			catch(Exception e)
+	    			{
+	    				if(lineCounter > 1)
+	    					System.err.println("Warning: Unable to parse chrom/position from " + line);
+	    			}
+
+
+	    		}
+	    	}
+
+	    	infile.close();
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834291
+net/sf/varscan/ProcessSomatic.java 201 226
+net/sf/varscan/FilterSomatic.java 226 251
+----------------------------------------
+	    					{
+	    						String info = lineContents[7];
+	    						String normal = lineContents[9];
+	    						String tumor = lineContents[10];
+
+	    						String[] infoContents = info.split(";");
+	    						for(int colCounter = 0; colCounter < infoContents.length; colCounter++)
+	    						{
+	    							String element = infoContents[colCounter];
+	    							String[] elementContents = element.split("=");
+	    							if(elementContents[0].equals("SS"))
+	    								somaticStatus = elementContents[1];
+	    							else if(elementContents[0].equals("GPV") && somaticStatus.equals("1"))
+	    								somaticPvalue = Double.parseDouble(elementContents[1]);
+	    							else if(elementContents[0].equals("SPV") && !somaticStatus.equals("1"))
+	    								somaticPvalue = Double.parseDouble(elementContents[1]);
+	    						}
+
+	    						String[] normalContents = normal.split(":");
+	    						normalReads1 = Integer.parseInt(normalContents[3]);
+	    						normalReads2 = Integer.parseInt(normalContents[4]);
+
+	    						String[] tumorContents = tumor.split(":");
+	    						tumorReads1 = Integer.parseInt(tumorContents[3]);
+	    						tumorReads2 = Integer.parseInt(tumorContents[4]);
+	    					}
+
+----------------------------------------
+	    					{
+	    						String info = lineContents[7];
+	    						String normal = lineContents[9];
+	    						String tumor = lineContents[10];
+
+	    						String[] infoContents = info.split(";");
+	    						for(int colCounter = 0; colCounter < infoContents.length; colCounter++)
+	    						{
+	    							String element = infoContents[colCounter];
+	    							String[] elementContents = element.split("=");
+	    							if(elementContents[0].equals("SS"))
+	    								somaticStatus = elementContents[1];
+	    							else if(elementContents[0].equals("GPV") && somaticStatus.equals("1"))
+	    								somaticPvalue = Double.parseDouble(elementContents[1]);
+	    							else if(elementContents[0].equals("SPV") && !somaticStatus.equals("1"))
+	    								somaticPvalue = Double.parseDouble(elementContents[1]);
+	    						}
+
+	    						String[] normalContents = normal.split(":");
+	    						normalReads1 = Integer.parseInt(normalContents[3]);
+	    						normalReads2 = Integer.parseInt(normalContents[4]);
+
+	    						String[] tumorContents = tumor.split(":");
+	    						tumorReads1 = Integer.parseInt(tumorContents[3]);
+	    						tumorReads2 = Integer.parseInt(tumorContents[4]);
+	    					}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834292
+net/sf/varscan/ProcessSomatic.java 208 217
+net/sf/varscan/FilterSomatic.java 233 242
+----------------------------------------
+	    						{
+	    							String element = infoContents[colCounter];
+	    							String[] elementContents = element.split("=");
+	    							if(elementContents[0].equals("SS"))
+	    								somaticStatus = elementContents[1];
+	    							else if(elementContents[0].equals("GPV") && somaticStatus.equals("1"))
+	    								somaticPvalue = Double.parseDouble(elementContents[1]);
+	    							else if(elementContents[0].equals("SPV") && !somaticStatus.equals("1"))
+	    								somaticPvalue = Double.parseDouble(elementContents[1]);
+	    						}
+
+----------------------------------------
+	    						{
+	    							String element = infoContents[colCounter];
+	    							String[] elementContents = element.split("=");
+	    							if(elementContents[0].equals("SS"))
+	    								somaticStatus = elementContents[1];
+	    							else if(elementContents[0].equals("GPV") && somaticStatus.equals("1"))
+	    								somaticPvalue = Double.parseDouble(elementContents[1]);
+	    							else if(elementContents[0].equals("SPV") && !somaticStatus.equals("1"))
+	    								somaticPvalue = Double.parseDouble(elementContents[1]);
+	    						}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834384
+net/sf/varscan/Somatic.java 1649 1654
+net/sf/varscan/ProcessSomatic.java 232 240
+----------------------------------------
+							{
+								normalReads1plus = Integer.parseInt(normalConsensusContents[11]);
+								normalReads1minus = Integer.parseInt(normalConsensusContents[12]);
+								normalReads2plus = Integer.parseInt(normalConsensusContents[13]);
+								normalReads2minus = Integer.parseInt(normalConsensusContents[14]);
+							}
+
+----------------------------------------
+	    					{
+			    				normalReads1 = Integer.parseInt(lineContents[4]);
+			    				normalReads2 = Integer.parseInt(lineContents[5]);
+			    				tumorReads1 = Integer.parseInt(lineContents[8]);
+			    				tumorReads2 = Integer.parseInt(lineContents[9]);
+
+			    				somaticStatus = lineContents[12];
+			    				somaticPvalue = Double.parseDouble(lineContents[14]);
+	    					}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834383
+net/sf/varscan/Somatic.java 1636 1641
+net/sf/varscan/ProcessSomatic.java 232 240
+----------------------------------------
+							{
+								tumorReads1plus = Integer.parseInt(tumorConsensusContents[11]);
+								tumorReads1minus = Integer.parseInt(tumorConsensusContents[12]);
+								tumorReads2plus = Integer.parseInt(tumorConsensusContents[13]);
+								tumorReads2minus = Integer.parseInt(tumorConsensusContents[14]);
+							}
+
+----------------------------------------
+	    					{
+			    				normalReads1 = Integer.parseInt(lineContents[4]);
+			    				normalReads2 = Integer.parseInt(lineContents[5]);
+			    				tumorReads1 = Integer.parseInt(lineContents[8]);
+			    				tumorReads2 = Integer.parseInt(lineContents[9]);
+
+			    				somaticStatus = lineContents[12];
+			    				somaticPvalue = Double.parseDouble(lineContents[14]);
+	    					}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834296
+net/sf/varscan/Somatic.java 1649 1654
+net/sf/varscan/FilterSomatic.java 253 261
+----------------------------------------
+							{
+								normalReads1plus = Integer.parseInt(normalConsensusContents[11]);
+								normalReads1minus = Integer.parseInt(normalConsensusContents[12]);
+								normalReads2plus = Integer.parseInt(normalConsensusContents[13]);
+								normalReads2minus = Integer.parseInt(normalConsensusContents[14]);
+							}
+
+----------------------------------------
+	    					{
+			    				normalReads1 = Integer.parseInt(lineContents[4]);
+			    				normalReads2 = Integer.parseInt(lineContents[5]);
+			    				tumorReads1 = Integer.parseInt(lineContents[8]);
+			    				tumorReads2 = Integer.parseInt(lineContents[9]);
+
+			    				somaticStatus = lineContents[12];
+			    				somaticPvalue = Double.parseDouble(lineContents[14]);
+	    					}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834293
+net/sf/varscan/ProcessSomatic.java 232 240
+net/sf/varscan/FilterSomatic.java 253 261
+----------------------------------------
+	    					{
+			    				normalReads1 = Integer.parseInt(lineContents[4]);
+			    				normalReads2 = Integer.parseInt(lineContents[5]);
+			    				tumorReads1 = Integer.parseInt(lineContents[8]);
+			    				tumorReads2 = Integer.parseInt(lineContents[9]);
+
+			    				somaticStatus = lineContents[12];
+			    				somaticPvalue = Double.parseDouble(lineContents[14]);
+	    					}
+
+----------------------------------------
+	    					{
+			    				normalReads1 = Integer.parseInt(lineContents[4]);
+			    				normalReads2 = Integer.parseInt(lineContents[5]);
+			    				tumorReads1 = Integer.parseInt(lineContents[8]);
+			    				tumorReads2 = Integer.parseInt(lineContents[9]);
+
+			    				somaticStatus = lineContents[12];
+			    				somaticPvalue = Double.parseDouble(lineContents[14]);
+	    					}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834295
+net/sf/varscan/Somatic.java 1636 1641
+net/sf/varscan/FilterSomatic.java 253 261
+----------------------------------------
+							{
+								tumorReads1plus = Integer.parseInt(tumorConsensusContents[11]);
+								tumorReads1minus = Integer.parseInt(tumorConsensusContents[12]);
+								tumorReads2plus = Integer.parseInt(tumorConsensusContents[13]);
+								tumorReads2minus = Integer.parseInt(tumorConsensusContents[14]);
+							}
+
+----------------------------------------
+	    					{
+			    				normalReads1 = Integer.parseInt(lineContents[4]);
+			    				normalReads2 = Integer.parseInt(lineContents[5]);
+			    				tumorReads1 = Integer.parseInt(lineContents[8]);
+			    				tumorReads2 = Integer.parseInt(lineContents[9]);
+
+			    				somaticStatus = lineContents[12];
+			    				somaticPvalue = Double.parseDouble(lineContents[14]);
+	    					}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834294
+net/sf/varscan/FilterSomatic.java 253 261
+net/sf/varscan/VarScan.java 1110 1121
+----------------------------------------
+	    					{
+			    				normalReads1 = Integer.parseInt(lineContents[4]);
+			    				normalReads2 = Integer.parseInt(lineContents[5]);
+			    				tumorReads1 = Integer.parseInt(lineContents[8]);
+			    				tumorReads2 = Integer.parseInt(lineContents[9]);
+
+			    				somaticStatus = lineContents[12];
+			    				somaticPvalue = Double.parseDouble(lineContents[14]);
+	    					}
+
+----------------------------------------
+				{
+					String[] refBaseContents = readCounts.get(refBase).split("\t");
+					reads1 = Integer.parseInt(refBaseContents[0]);
+					strands1 = Integer.parseInt(refBaseContents[1]);
+					avgQual1 = Integer.parseInt(refBaseContents[2]);
+					avgMap1 = Integer.parseInt(refBaseContents[3]);
+					reads1plus = Integer.parseInt(refBaseContents[4]);
+					reads1minus = Integer.parseInt(refBaseContents[5]);
+
+					if(refBaseContents.length > 6)
+						reads1indel = Integer.parseInt(refBaseContents[6]);
+				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834337
+net/sf/varscan/ProcessSomatic.java 232 240
+net/sf/varscan/VarScan.java 1110 1121
+----------------------------------------
+	    					{
+			    				normalReads1 = Integer.parseInt(lineContents[4]);
+			    				normalReads2 = Integer.parseInt(lineContents[5]);
+			    				tumorReads1 = Integer.parseInt(lineContents[8]);
+			    				tumorReads2 = Integer.parseInt(lineContents[9]);
+
+			    				somaticStatus = lineContents[12];
+			    				somaticPvalue = Double.parseDouble(lineContents[14]);
+	    					}
+
+----------------------------------------
+				{
+					String[] refBaseContents = readCounts.get(refBase).split("\t");
+					reads1 = Integer.parseInt(refBaseContents[0]);
+					strands1 = Integer.parseInt(refBaseContents[1]);
+					avgQual1 = Integer.parseInt(refBaseContents[2]);
+					avgMap1 = Integer.parseInt(refBaseContents[3]);
+					reads1plus = Integer.parseInt(refBaseContents[4]);
+					reads1minus = Integer.parseInt(refBaseContents[5]);
+
+					if(refBaseContents.length > 6)
+						reads1indel = Integer.parseInt(refBaseContents[6]);
+				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834298
+net/sf/varscan/LimitVariants.java 134 139
+net/sf/varscan/FilterSomatic.java 341 346
+----------------------------------------
+	    		{
+	    			// Handle native file headers //
+	    			outFile.println(line);
+	    			if(params.containsKey("not-file"))
+	    				notFile.println(line);
+	    		}
+
+----------------------------------------
+		    				{
+		    					if(params.containsKey("output-file"))
+		    						outFile.println(line);
+
+		    					stats.put("numPassFilter", (stats.get("numPassFilter") + 1));
+		    				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834299
+net/sf/varscan/FilterSomatic.java 206 211
+net/sf/varscan/FilterSomatic.java 341 346
+----------------------------------------
+		    			{
+
+		    				// Print header //
+	    					if(params.containsKey("output-file"))
+	    						outFile.println(line);
+		    			}
+
+----------------------------------------
+		    				{
+		    					if(params.containsKey("output-file"))
+		    						outFile.println(line);
+
+		    					stats.put("numPassFilter", (stats.get("numPassFilter") + 1));
+		    				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834320
+net/sf/varscan/FpFilter.java 264 269
+net/sf/varscan/FilterSomatic.java 341 346
+----------------------------------------
+	    	    					{
+	    	    						if(line.startsWith("#CHROM"))
+	    	    							outFile.println(vcfHeaderInfo);
+
+	    	    						outFile.println(line);
+	    	    					}
+
+----------------------------------------
+		    				{
+		    					if(params.containsKey("output-file"))
+		    						outFile.println(line);
+
+		    					stats.put("numPassFilter", (stats.get("numPassFilter") + 1));
+		    				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834297
+net/sf/varscan/FpFilter.java 272 277
+net/sf/varscan/FilterSomatic.java 341 346
+----------------------------------------
+	    	    					{
+	    	    						if(line.startsWith("#CHROM"))
+	    	    							filteredFile.println(vcfHeaderInfo);
+
+	    	    						filteredFile.println(line);
+	    	    					}
+
+----------------------------------------
+		    				{
+		    					if(params.containsKey("output-file"))
+		    						outFile.println(line);
+
+		    					stats.put("numPassFilter", (stats.get("numPassFilter") + 1));
+		    				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834303
+net/sf/varscan/Somatic.java 1524 1534
+net/sf/varscan/CallPileup.java 197 207
+----------------------------------------
+			 {
+				 normalDepth = Integer.parseInt(normalContents[3]);
+				 normalBases = normalContents[4];
+				 normalQualities = normalContents[5];
+				 normalMapQuals = "";
+				 if(normalContents.length == 7)
+				 {
+					 normalMapQuals = normalContents[6];
+				 }
+
+			 }
+
+----------------------------------------
+	    					{
+		    					refName = lineContents[0];
+			    	        	position = lineContents[1];
+			    	        	refBase = lineContents[2].toUpperCase();
+			    	        	readDepth = Integer.parseInt(lineContents[3]);
+			    	        	readBases = lineContents[4];
+			    	        	readQualities = lineContents[5];
+			    	        	mapQualities = "";
+			    	        	if(lineContents.length > 6)			// Get Map Qualities if available //
+			    	        		mapQualities = lineContents[6];
+	    					}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834304
+net/sf/varscan/Somatic.java 1550 1560
+net/sf/varscan/CallPileup.java 197 207
+----------------------------------------
+			 {
+				 tumorDepth = Integer.parseInt(tumorContents[3]);
+				 tumorBases = tumorContents[4];
+				 tumorQualities = tumorContents[5];
+				 tumorMapQuals = "";
+				 if(tumorContents.length == 7)
+				 {
+					 tumorMapQuals = tumorContents[6];
+				 }
+
+			 }
+
+----------------------------------------
+	    					{
+		    					refName = lineContents[0];
+			    	        	position = lineContents[1];
+			    	        	refBase = lineContents[2].toUpperCase();
+			    	        	readDepth = Integer.parseInt(lineContents[3]);
+			    	        	readBases = lineContents[4];
+			    	        	readQualities = lineContents[5];
+			    	        	mapQualities = "";
+			    	        	if(lineContents.length > 6)			// Get Map Qualities if available //
+			    	        		mapQualities = lineContents[6];
+	    					}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834301
+net/sf/varscan/Somatic.java 1536 1545
+net/sf/varscan/CallPileup.java 197 207
+----------------------------------------
+			 {
+				 normalDepth = Integer.parseInt(normalContents[7]);
+				 normalBases = normalContents[8];
+				 normalQualities = normalContents[9];
+				 normalMapQuals = "";
+				 if(normalContents.length == 11)
+				 {
+					 normalMapQuals = normalContents[10];
+				 }
+			 }
+
+----------------------------------------
+	    					{
+		    					refName = lineContents[0];
+			    	        	position = lineContents[1];
+			    	        	refBase = lineContents[2].toUpperCase();
+			    	        	readDepth = Integer.parseInt(lineContents[3]);
+			    	        	readBases = lineContents[4];
+			    	        	readQualities = lineContents[5];
+			    	        	mapQualities = "";
+			    	        	if(lineContents.length > 6)			// Get Map Qualities if available //
+			    	        		mapQualities = lineContents[6];
+	    					}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834333
+net/sf/varscan/Somatic.java 1550 1560
+net/sf/varscan/Somatic.java 1562 1571
+----------------------------------------
+			 {
+				 tumorDepth = Integer.parseInt(tumorContents[3]);
+				 tumorBases = tumorContents[4];
+				 tumorQualities = tumorContents[5];
+				 tumorMapQuals = "";
+				 if(tumorContents.length == 7)
+				 {
+					 tumorMapQuals = tumorContents[6];
+				 }
+
+			 }
+
+----------------------------------------
+			 {
+				 tumorDepth = Integer.parseInt(tumorContents[7]);
+				 tumorBases = tumorContents[8];
+				 tumorQualities = tumorContents[9];
+				 tumorMapQuals = "";
+				 if(tumorContents.length == 11)
+				 {
+					 tumorMapQuals = tumorContents[10];
+				 }
+			 }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834302
+net/sf/varscan/CallPileup.java 197 207
+net/sf/varscan/Somatic.java 1562 1571
+----------------------------------------
+	    					{
+		    					refName = lineContents[0];
+			    	        	position = lineContents[1];
+			    	        	refBase = lineContents[2].toUpperCase();
+			    	        	readDepth = Integer.parseInt(lineContents[3]);
+			    	        	readBases = lineContents[4];
+			    	        	readQualities = lineContents[5];
+			    	        	mapQualities = "";
+			    	        	if(lineContents.length > 6)			// Get Map Qualities if available //
+			    	        		mapQualities = lineContents[6];
+	    					}
+
+----------------------------------------
+			 {
+				 tumorDepth = Integer.parseInt(tumorContents[7]);
+				 tumorBases = tumorContents[8];
+				 tumorQualities = tumorContents[9];
+				 tumorMapQuals = "";
+				 if(tumorContents.length == 11)
+				 {
+					 tumorMapQuals = tumorContents[10];
+				 }
+			 }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834332
+net/sf/varscan/Somatic.java 1536 1545
+net/sf/varscan/Somatic.java 1562 1571
+----------------------------------------
+			 {
+				 normalDepth = Integer.parseInt(normalContents[7]);
+				 normalBases = normalContents[8];
+				 normalQualities = normalContents[9];
+				 normalMapQuals = "";
+				 if(normalContents.length == 11)
+				 {
+					 normalMapQuals = normalContents[10];
+				 }
+			 }
+
+----------------------------------------
+			 {
+				 tumorDepth = Integer.parseInt(tumorContents[7]);
+				 tumorBases = tumorContents[8];
+				 tumorQualities = tumorContents[9];
+				 tumorMapQuals = "";
+				 if(tumorContents.length == 11)
+				 {
+					 tumorMapQuals = tumorContents[10];
+				 }
+			 }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834331
+net/sf/varscan/Somatic.java 1524 1534
+net/sf/varscan/Somatic.java 1562 1571
+----------------------------------------
+			 {
+				 normalDepth = Integer.parseInt(normalContents[3]);
+				 normalBases = normalContents[4];
+				 normalQualities = normalContents[5];
+				 normalMapQuals = "";
+				 if(normalContents.length == 7)
+				 {
+					 normalMapQuals = normalContents[6];
+				 }
+
+			 }
+
+----------------------------------------
+			 {
+				 tumorDepth = Integer.parseInt(tumorContents[7]);
+				 tumorBases = tumorContents[8];
+				 tumorQualities = tumorContents[9];
+				 tumorMapQuals = "";
+				 if(tumorContents.length == 11)
+				 {
+					 tumorMapQuals = tumorContents[10];
+				 }
+			 }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834307
+net/sf/varscan/Somatic.java 1562 1571
+net/sf/varscan/CallPileup.java 210 220
+----------------------------------------
+			 {
+				 tumorDepth = Integer.parseInt(tumorContents[7]);
+				 tumorBases = tumorContents[8];
+				 tumorQualities = tumorContents[9];
+				 tumorMapQuals = "";
+				 if(tumorContents.length == 11)
+				 {
+					 tumorMapQuals = tumorContents[10];
+				 }
+			 }
+
+----------------------------------------
+	    					{
+		    					refName = lineContents[0];
+			    	        	position = lineContents[1];
+			    	        	refBase = lineContents[2].toUpperCase();
+			    	        	readDepth = Integer.parseInt(lineContents[7]);
+			    	        	readBases = lineContents[8];
+			    	        	readQualities = lineContents[9];
+			    	        	mapQualities = "";
+			    	        	if(lineContents.length > 10)			// Get Map Qualities if available //
+			    	        		mapQualities = lineContents[10];
+	    					}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834306
+net/sf/varscan/Somatic.java 1536 1545
+net/sf/varscan/CallPileup.java 210 220
+----------------------------------------
+			 {
+				 normalDepth = Integer.parseInt(normalContents[7]);
+				 normalBases = normalContents[8];
+				 normalQualities = normalContents[9];
+				 normalMapQuals = "";
+				 if(normalContents.length == 11)
+				 {
+					 normalMapQuals = normalContents[10];
+				 }
+			 }
+
+----------------------------------------
+	    					{
+		    					refName = lineContents[0];
+			    	        	position = lineContents[1];
+			    	        	refBase = lineContents[2].toUpperCase();
+			    	        	readDepth = Integer.parseInt(lineContents[7]);
+			    	        	readBases = lineContents[8];
+			    	        	readQualities = lineContents[9];
+			    	        	mapQualities = "";
+			    	        	if(lineContents.length > 10)			// Get Map Qualities if available //
+			    	        		mapQualities = lineContents[10];
+	    					}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834309
+net/sf/varscan/Somatic.java 1550 1560
+net/sf/varscan/CallPileup.java 210 220
+----------------------------------------
+			 {
+				 tumorDepth = Integer.parseInt(tumorContents[3]);
+				 tumorBases = tumorContents[4];
+				 tumorQualities = tumorContents[5];
+				 tumorMapQuals = "";
+				 if(tumorContents.length == 7)
+				 {
+					 tumorMapQuals = tumorContents[6];
+				 }
+
+			 }
+
+----------------------------------------
+	    					{
+		    					refName = lineContents[0];
+			    	        	position = lineContents[1];
+			    	        	refBase = lineContents[2].toUpperCase();
+			    	        	readDepth = Integer.parseInt(lineContents[7]);
+			    	        	readBases = lineContents[8];
+			    	        	readQualities = lineContents[9];
+			    	        	mapQualities = "";
+			    	        	if(lineContents.length > 10)			// Get Map Qualities if available //
+			    	        		mapQualities = lineContents[10];
+	    					}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834305
+net/sf/varscan/CallPileup.java 197 207
+net/sf/varscan/CallPileup.java 210 220
+----------------------------------------
+	    					{
+		    					refName = lineContents[0];
+			    	        	position = lineContents[1];
+			    	        	refBase = lineContents[2].toUpperCase();
+			    	        	readDepth = Integer.parseInt(lineContents[3]);
+			    	        	readBases = lineContents[4];
+			    	        	readQualities = lineContents[5];
+			    	        	mapQualities = "";
+			    	        	if(lineContents.length > 6)			// Get Map Qualities if available //
+			    	        		mapQualities = lineContents[6];
+	    					}
+
+----------------------------------------
+	    					{
+		    					refName = lineContents[0];
+			    	        	position = lineContents[1];
+			    	        	refBase = lineContents[2].toUpperCase();
+			    	        	readDepth = Integer.parseInt(lineContents[7]);
+			    	        	readBases = lineContents[8];
+			    	        	readQualities = lineContents[9];
+			    	        	mapQualities = "";
+			    	        	if(lineContents.length > 10)			// Get Map Qualities if available //
+			    	        		mapQualities = lineContents[10];
+	    					}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834308
+net/sf/varscan/Somatic.java 1524 1534
+net/sf/varscan/CallPileup.java 210 220
+----------------------------------------
+			 {
+				 normalDepth = Integer.parseInt(normalContents[3]);
+				 normalBases = normalContents[4];
+				 normalQualities = normalContents[5];
+				 normalMapQuals = "";
+				 if(normalContents.length == 7)
+				 {
+					 normalMapQuals = normalContents[6];
+				 }
+
+			 }
+
+----------------------------------------
+	    					{
+		    					refName = lineContents[0];
+			    	        	position = lineContents[1];
+			    	        	refBase = lineContents[2].toUpperCase();
+			    	        	readDepth = Integer.parseInt(lineContents[7]);
+			    	        	readBases = lineContents[8];
+			    	        	readQualities = lineContents[9];
+			    	        	mapQualities = "";
+			    	        	if(lineContents.length > 10)			// Get Map Qualities if available //
+			    	        		mapQualities = lineContents[10];
+	    					}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834312
+net/sf/varscan/LimitVariants.java 241 296
+net/sf/varscan/ProcessSomatic.java 357 418
+----------------------------------------
+	    		{
+	    			// Try to parse chrom and position //
+	    			try
+	    			{
+	    				String refName = lineContents[0];
+
+	    				// Get or create BitSet for this refName //
+	    				BitSet refPositions;
+
+	    				if(positionsByChrom.containsKey(refName))
+	    				{
+	    					refPositions = positionsByChrom.get(refName);
+	    				}
+	    				else
+	    				{
+	    					refPositions = new BitSet();
+	    				}
+
+	    				// Mark position or regions, depending on what was provided //
+	    				int chrStart = 0;
+	    				int chrStop = 0;
+
+	    				if(fileType.equals("positions") && lineContents.length > 1)
+	    				{
+		    				// Set the position to true //
+		    				int position = Integer.parseInt(lineContents[1]);
+		    				chrStart = position - marginSize;
+		    				chrStop = position + marginSize;
+	    				}
+	    				else if(fileType.equals("regions") && lineContents.length > 2)
+	    				{
+	    					chrStart = Integer.parseInt(lineContents[1]) - marginSize;
+	    					chrStop = Integer.parseInt(lineContents[2]) + marginSize;
+	    				}
+
+    					// Check that it won't be an infinite loop//
+    					if(chrStart <= chrStop)
+    					{
+	    					// Mark every position //
+	    					for(int position = chrStart; position <= chrStop; position++)
+	    					{
+	    						refPositions.set(position, true);
+	    					}
+    					}
+
+	    				// Return it to the hash //
+	    				positionsByChrom.put(refName, refPositions);
+	    			}
+	    			catch(Exception e)
+	    			{
+	    				if(lineCounter > 1)
+	    					System.err.println("Warning: Unable to parse chrom/position from " + line);
+	    			}
+
+
+	    		}
+
+----------------------------------------
+	    	{
+	    		lineCounter++;
+
+	    		String[] lineContents = line.split("\t");
+	    		if(lineContents.length >= 2)
+	    		{
+	    			// Try to parse chrom and position //
+	    			try
+	    			{
+	    				String refName = lineContents[0];
+
+	    				// Get or create BitSet for this refName //
+	    				BitSet refPositions;
+
+	    				if(positionsByChrom.containsKey(refName))
+	    				{
+	    					refPositions = positionsByChrom.get(refName);
+	    				}
+	    				else
+	    				{
+	    					refPositions = new BitSet();
+	    				}
+
+	    				// Mark position or regions, depending on what was provided //
+	    				int chrStart = 0;
+	    				int chrStop = 0;
+
+	    				if(fileType.equals("positions") && lineContents.length > 1)
+	    				{
+		    				// Set the position to true //
+		    				int position = Integer.parseInt(lineContents[1]);
+		    				chrStart = position - marginSize;
+		    				chrStop = position + marginSize;
+	    				}
+	    				else if(fileType.equals("regions") && lineContents.length > 2)
+	    				{
+	    					chrStart = Integer.parseInt(lineContents[1]) - marginSize;
+	    					chrStop = Integer.parseInt(lineContents[2]) + marginSize;
+	    				}
+
+    					// Check that it won't be an infinite loop//
+    					if(chrStart <= chrStop)
+    					{
+	    					// Mark every position //
+	    					for(int position = chrStart; position <= chrStop; position++)
+	    					{
+	    						refPositions.set(position, true);
+	    					}
+    					}
+
+	    				// Return it to the hash //
+	    				positionsByChrom.put(refName, refPositions);
+	    			}
+	    			catch(Exception e)
+	    			{
+	    				if(lineCounter > 1)
+	    					System.err.println("Warning: Unable to parse chrom/position from " + line);
+	    			}
+
+
+	    		}
+	    	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834315
+net/sf/varscan/LimitVariants.java 232 297
+net/sf/varscan/ProcessSomatic.java 357 418
+----------------------------------------
+	    	{
+	    		lineCounter++;
+	    		String[] lineContents = line.split("\t");
+
+	    		if(line.substring(0, 1).equals("#"))
+	    		{
+	    			// Ignore VCF headers //
+	    		}
+	    		else if(lineContents.length >= 2)
+	    		{
+	    			// Try to parse chrom and position //
+	    			try
+	    			{
+	    				String refName = lineContents[0];
+
+	    				// Get or create BitSet for this refName //
+	    				BitSet refPositions;
+
+	    				if(positionsByChrom.containsKey(refName))
+	    				{
+	    					refPositions = positionsByChrom.get(refName);
+	    				}
+	    				else
+	    				{
+	    					refPositions = new BitSet();
+	    				}
+
+	    				// Mark position or regions, depending on what was provided //
+	    				int chrStart = 0;
+	    				int chrStop = 0;
+
+	    				if(fileType.equals("positions") && lineContents.length > 1)
+	    				{
+		    				// Set the position to true //
+		    				int position = Integer.parseInt(lineContents[1]);
+		    				chrStart = position - marginSize;
+		    				chrStop = position + marginSize;
+	    				}
+	    				else if(fileType.equals("regions") && lineContents.length > 2)
+	    				{
+	    					chrStart = Integer.parseInt(lineContents[1]) - marginSize;
+	    					chrStop = Integer.parseInt(lineContents[2]) + marginSize;
+	    				}
+
+    					// Check that it won't be an infinite loop//
+    					if(chrStart <= chrStop)
+    					{
+	    					// Mark every position //
+	    					for(int position = chrStart; position <= chrStop; position++)
+	    					{
+	    						refPositions.set(position, true);
+	    					}
+    					}
+
+	    				// Return it to the hash //
+	    				positionsByChrom.put(refName, refPositions);
+	    			}
+	    			catch(Exception e)
+	    			{
+	    				if(lineCounter > 1)
+	    					System.err.println("Warning: Unable to parse chrom/position from " + line);
+	    			}
+
+
+	    		}
+	    	}
+
+----------------------------------------
+	    	{
+	    		lineCounter++;
+
+	    		String[] lineContents = line.split("\t");
+	    		if(lineContents.length >= 2)
+	    		{
+	    			// Try to parse chrom and position //
+	    			try
+	    			{
+	    				String refName = lineContents[0];
+
+	    				// Get or create BitSet for this refName //
+	    				BitSet refPositions;
+
+	    				if(positionsByChrom.containsKey(refName))
+	    				{
+	    					refPositions = positionsByChrom.get(refName);
+	    				}
+	    				else
+	    				{
+	    					refPositions = new BitSet();
+	    				}
+
+	    				// Mark position or regions, depending on what was provided //
+	    				int chrStart = 0;
+	    				int chrStop = 0;
+
+	    				if(fileType.equals("positions") && lineContents.length > 1)
+	    				{
+		    				// Set the position to true //
+		    				int position = Integer.parseInt(lineContents[1]);
+		    				chrStart = position - marginSize;
+		    				chrStop = position + marginSize;
+	    				}
+	    				else if(fileType.equals("regions") && lineContents.length > 2)
+	    				{
+	    					chrStart = Integer.parseInt(lineContents[1]) - marginSize;
+	    					chrStop = Integer.parseInt(lineContents[2]) + marginSize;
+	    				}
+
+    					// Check that it won't be an infinite loop//
+    					if(chrStart <= chrStop)
+    					{
+	    					// Mark every position //
+	    					for(int position = chrStart; position <= chrStop; position++)
+	    					{
+	    						refPositions.set(position, true);
+	    					}
+    					}
+
+	    				// Return it to the hash //
+	    				positionsByChrom.put(refName, refPositions);
+	    			}
+	    			catch(Exception e)
+	    			{
+	    				if(lineCounter > 1)
+	    					System.err.println("Warning: Unable to parse chrom/position from " + line);
+	    			}
+
+
+	    		}
+	    	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834314
+net/sf/varscan/LimitVariants.java 225 300
+net/sf/varscan/ProcessSomatic.java 357 418
+----------------------------------------
+		{
+			BufferedReader infile = new BufferedReader(new FileReader(fileName));
+
+			String line = "";
+			int lineCounter = 0;
+
+	    	while ((line = infile.readLine()) != null)
+	    	{
+	    		lineCounter++;
+	    		String[] lineContents = line.split("\t");
+
+	    		if(line.substring(0, 1).equals("#"))
+	    		{
+	    			// Ignore VCF headers //
+	    		}
+	    		else if(lineContents.length >= 2)
+	    		{
+	    			// Try to parse chrom and position //
+	    			try
+	    			{
+	    				String refName = lineContents[0];
+
+	    				// Get or create BitSet for this refName //
+	    				BitSet refPositions;
+
+	    				if(positionsByChrom.containsKey(refName))
+	    				{
+	    					refPositions = positionsByChrom.get(refName);
+	    				}
+	    				else
+	    				{
+	    					refPositions = new BitSet();
+	    				}
+
+	    				// Mark position or regions, depending on what was provided //
+	    				int chrStart = 0;
+	    				int chrStop = 0;
+
+	    				if(fileType.equals("positions") && lineContents.length > 1)
+	    				{
+		    				// Set the position to true //
+		    				int position = Integer.parseInt(lineContents[1]);
+		    				chrStart = position - marginSize;
+		    				chrStop = position + marginSize;
+	    				}
+	    				else if(fileType.equals("regions") && lineContents.length > 2)
+	    				{
+	    					chrStart = Integer.parseInt(lineContents[1]) - marginSize;
+	    					chrStop = Integer.parseInt(lineContents[2]) + marginSize;
+	    				}
+
+    					// Check that it won't be an infinite loop//
+    					if(chrStart <= chrStop)
+    					{
+	    					// Mark every position //
+	    					for(int position = chrStart; position <= chrStop; position++)
+	    					{
+	    						refPositions.set(position, true);
+	    					}
+    					}
+
+	    				// Return it to the hash //
+	    				positionsByChrom.put(refName, refPositions);
+	    			}
+	    			catch(Exception e)
+	    			{
+	    				if(lineCounter > 1)
+	    					System.err.println("Warning: Unable to parse chrom/position from " + line);
+	    			}
+
+
+	    		}
+	    	}
+
+	    	infile.close();
+		}
+
+----------------------------------------
+	    	{
+	    		lineCounter++;
+
+	    		String[] lineContents = line.split("\t");
+	    		if(lineContents.length >= 2)
+	    		{
+	    			// Try to parse chrom and position //
+	    			try
+	    			{
+	    				String refName = lineContents[0];
+
+	    				// Get or create BitSet for this refName //
+	    				BitSet refPositions;
+
+	    				if(positionsByChrom.containsKey(refName))
+	    				{
+	    					refPositions = positionsByChrom.get(refName);
+	    				}
+	    				else
+	    				{
+	    					refPositions = new BitSet();
+	    				}
+
+	    				// Mark position or regions, depending on what was provided //
+	    				int chrStart = 0;
+	    				int chrStop = 0;
+
+	    				if(fileType.equals("positions") && lineContents.length > 1)
+	    				{
+		    				// Set the position to true //
+		    				int position = Integer.parseInt(lineContents[1]);
+		    				chrStart = position - marginSize;
+		    				chrStop = position + marginSize;
+	    				}
+	    				else if(fileType.equals("regions") && lineContents.length > 2)
+	    				{
+	    					chrStart = Integer.parseInt(lineContents[1]) - marginSize;
+	    					chrStop = Integer.parseInt(lineContents[2]) + marginSize;
+	    				}
+
+    					// Check that it won't be an infinite loop//
+    					if(chrStart <= chrStop)
+    					{
+	    					// Mark every position //
+	    					for(int position = chrStart; position <= chrStop; position++)
+	    					{
+	    						refPositions.set(position, true);
+	    					}
+    					}
+
+	    				// Return it to the hash //
+	    				positionsByChrom.put(refName, refPositions);
+	    			}
+	    			catch(Exception e)
+	    			{
+	    				if(lineCounter > 1)
+	    					System.err.println("Warning: Unable to parse chrom/position from " + line);
+	    			}
+
+
+	    		}
+	    	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834313
+net/sf/varscan/ProcessSomatic.java 357 418
+net/sf/varscan/LimitVariants.java 244 288
+----------------------------------------
+	    	{
+	    		lineCounter++;
+
+	    		String[] lineContents = line.split("\t");
+	    		if(lineContents.length >= 2)
+	    		{
+	    			// Try to parse chrom and position //
+	    			try
+	    			{
+	    				String refName = lineContents[0];
+
+	    				// Get or create BitSet for this refName //
+	    				BitSet refPositions;
+
+	    				if(positionsByChrom.containsKey(refName))
+	    				{
+	    					refPositions = positionsByChrom.get(refName);
+	    				}
+	    				else
+	    				{
+	    					refPositions = new BitSet();
+	    				}
+
+	    				// Mark position or regions, depending on what was provided //
+	    				int chrStart = 0;
+	    				int chrStop = 0;
+
+	    				if(fileType.equals("positions") && lineContents.length > 1)
+	    				{
+		    				// Set the position to true //
+		    				int position = Integer.parseInt(lineContents[1]);
+		    				chrStart = position - marginSize;
+		    				chrStop = position + marginSize;
+	    				}
+	    				else if(fileType.equals("regions") && lineContents.length > 2)
+	    				{
+	    					chrStart = Integer.parseInt(lineContents[1]) - marginSize;
+	    					chrStop = Integer.parseInt(lineContents[2]) + marginSize;
+	    				}
+
+    					// Check that it won't be an infinite loop//
+    					if(chrStart <= chrStop)
+    					{
+	    					// Mark every position //
+	    					for(int position = chrStart; position <= chrStop; position++)
+	    					{
+	    						refPositions.set(position, true);
+	    					}
+    					}
+
+	    				// Return it to the hash //
+	    				positionsByChrom.put(refName, refPositions);
+	    			}
+	    			catch(Exception e)
+	    			{
+	    				if(lineCounter > 1)
+	    					System.err.println("Warning: Unable to parse chrom/position from " + line);
+	    			}
+
+
+	    		}
+	    	}
+
+----------------------------------------
+	    			{
+	    				String refName = lineContents[0];
+
+	    				// Get or create BitSet for this refName //
+	    				BitSet refPositions;
+
+	    				if(positionsByChrom.containsKey(refName))
+	    				{
+	    					refPositions = positionsByChrom.get(refName);
+	    				}
+	    				else
+	    				{
+	    					refPositions = new BitSet();
+	    				}
+
+	    				// Mark position or regions, depending on what was provided //
+	    				int chrStart = 0;
+	    				int chrStop = 0;
+
+	    				if(fileType.equals("positions") && lineContents.length > 1)
+	    				{
+		    				// Set the position to true //
+		    				int position = Integer.parseInt(lineContents[1]);
+		    				chrStart = position - marginSize;
+		    				chrStop = position + marginSize;
+	    				}
+	    				else if(fileType.equals("regions") && lineContents.length > 2)
+	    				{
+	    					chrStart = Integer.parseInt(lineContents[1]) - marginSize;
+	    					chrStop = Integer.parseInt(lineContents[2]) + marginSize;
+	    				}
+
+    					// Check that it won't be an infinite loop//
+    					if(chrStart <= chrStop)
+    					{
+	    					// Mark every position //
+	    					for(int position = chrStart; position <= chrStop; position++)
+	    					{
+	    						refPositions.set(position, true);
+	    					}
+    					}
+
+	    				// Return it to the hash //
+	    				positionsByChrom.put(refName, refPositions);
+	    			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834318
+net/sf/varscan/LimitVariants.java 225 300
+net/sf/varscan/ProcessSomatic.java 362 417
+----------------------------------------
+		{
+			BufferedReader infile = new BufferedReader(new FileReader(fileName));
+
+			String line = "";
+			int lineCounter = 0;
+
+	    	while ((line = infile.readLine()) != null)
+	    	{
+	    		lineCounter++;
+	    		String[] lineContents = line.split("\t");
+
+	    		if(line.substring(0, 1).equals("#"))
+	    		{
+	    			// Ignore VCF headers //
+	    		}
+	    		else if(lineContents.length >= 2)
+	    		{
+	    			// Try to parse chrom and position //
+	    			try
+	    			{
+	    				String refName = lineContents[0];
+
+	    				// Get or create BitSet for this refName //
+	    				BitSet refPositions;
+
+	    				if(positionsByChrom.containsKey(refName))
+	    				{
+	    					refPositions = positionsByChrom.get(refName);
+	    				}
+	    				else
+	    				{
+	    					refPositions = new BitSet();
+	    				}
+
+	    				// Mark position or regions, depending on what was provided //
+	    				int chrStart = 0;
+	    				int chrStop = 0;
+
+	    				if(fileType.equals("positions") && lineContents.length > 1)
+	    				{
+		    				// Set the position to true //
+		    				int position = Integer.parseInt(lineContents[1]);
+		    				chrStart = position - marginSize;
+		    				chrStop = position + marginSize;
+	    				}
+	    				else if(fileType.equals("regions") && lineContents.length > 2)
+	    				{
+	    					chrStart = Integer.parseInt(lineContents[1]) - marginSize;
+	    					chrStop = Integer.parseInt(lineContents[2]) + marginSize;
+	    				}
+
+    					// Check that it won't be an infinite loop//
+    					if(chrStart <= chrStop)
+    					{
+	    					// Mark every position //
+	    					for(int position = chrStart; position <= chrStop; position++)
+	    					{
+	    						refPositions.set(position, true);
+	    					}
+    					}
+
+	    				// Return it to the hash //
+	    				positionsByChrom.put(refName, refPositions);
+	    			}
+	    			catch(Exception e)
+	    			{
+	    				if(lineCounter > 1)
+	    					System.err.println("Warning: Unable to parse chrom/position from " + line);
+	    			}
+
+
+	    		}
+	    	}
+
+	    	infile.close();
+		}
+
+----------------------------------------
+	    		{
+	    			// Try to parse chrom and position //
+	    			try
+	    			{
+	    				String refName = lineContents[0];
+
+	    				// Get or create BitSet for this refName //
+	    				BitSet refPositions;
+
+	    				if(positionsByChrom.containsKey(refName))
+	    				{
+	    					refPositions = positionsByChrom.get(refName);
+	    				}
+	    				else
+	    				{
+	    					refPositions = new BitSet();
+	    				}
+
+	    				// Mark position or regions, depending on what was provided //
+	    				int chrStart = 0;
+	    				int chrStop = 0;
+
+	    				if(fileType.equals("positions") && lineContents.length > 1)
+	    				{
+		    				// Set the position to true //
+		    				int position = Integer.parseInt(lineContents[1]);
+		    				chrStart = position - marginSize;
+		    				chrStop = position + marginSize;
+	    				}
+	    				else if(fileType.equals("regions") && lineContents.length > 2)
+	    				{
+	    					chrStart = Integer.parseInt(lineContents[1]) - marginSize;
+	    					chrStop = Integer.parseInt(lineContents[2]) + marginSize;
+	    				}
+
+    					// Check that it won't be an infinite loop//
+    					if(chrStart <= chrStop)
+    					{
+	    					// Mark every position //
+	    					for(int position = chrStart; position <= chrStop; position++)
+	    					{
+	    						refPositions.set(position, true);
+	    					}
+    					}
+
+	    				// Return it to the hash //
+	    				positionsByChrom.put(refName, refPositions);
+	    			}
+	    			catch(Exception e)
+	    			{
+	    				if(lineCounter > 1)
+	    					System.err.println("Warning: Unable to parse chrom/position from " + line);
+	    			}
+
+
+	    		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834317
+net/sf/varscan/LimitVariants.java 244 288
+net/sf/varscan/ProcessSomatic.java 362 417
+----------------------------------------
+	    			{
+	    				String refName = lineContents[0];
+
+	    				// Get or create BitSet for this refName //
+	    				BitSet refPositions;
+
+	    				if(positionsByChrom.containsKey(refName))
+	    				{
+	    					refPositions = positionsByChrom.get(refName);
+	    				}
+	    				else
+	    				{
+	    					refPositions = new BitSet();
+	    				}
+
+	    				// Mark position or regions, depending on what was provided //
+	    				int chrStart = 0;
+	    				int chrStop = 0;
+
+	    				if(fileType.equals("positions") && lineContents.length > 1)
+	    				{
+		    				// Set the position to true //
+		    				int position = Integer.parseInt(lineContents[1]);
+		    				chrStart = position - marginSize;
+		    				chrStop = position + marginSize;
+	    				}
+	    				else if(fileType.equals("regions") && lineContents.length > 2)
+	    				{
+	    					chrStart = Integer.parseInt(lineContents[1]) - marginSize;
+	    					chrStop = Integer.parseInt(lineContents[2]) + marginSize;
+	    				}
+
+    					// Check that it won't be an infinite loop//
+    					if(chrStart <= chrStop)
+    					{
+	    					// Mark every position //
+	    					for(int position = chrStart; position <= chrStop; position++)
+	    					{
+	    						refPositions.set(position, true);
+	    					}
+    					}
+
+	    				// Return it to the hash //
+	    				positionsByChrom.put(refName, refPositions);
+	    			}
+
+----------------------------------------
+	    		{
+	    			// Try to parse chrom and position //
+	    			try
+	    			{
+	    				String refName = lineContents[0];
+
+	    				// Get or create BitSet for this refName //
+	    				BitSet refPositions;
+
+	    				if(positionsByChrom.containsKey(refName))
+	    				{
+	    					refPositions = positionsByChrom.get(refName);
+	    				}
+	    				else
+	    				{
+	    					refPositions = new BitSet();
+	    				}
+
+	    				// Mark position or regions, depending on what was provided //
+	    				int chrStart = 0;
+	    				int chrStop = 0;
+
+	    				if(fileType.equals("positions") && lineContents.length > 1)
+	    				{
+		    				// Set the position to true //
+		    				int position = Integer.parseInt(lineContents[1]);
+		    				chrStart = position - marginSize;
+		    				chrStop = position + marginSize;
+	    				}
+	    				else if(fileType.equals("regions") && lineContents.length > 2)
+	    				{
+	    					chrStart = Integer.parseInt(lineContents[1]) - marginSize;
+	    					chrStop = Integer.parseInt(lineContents[2]) + marginSize;
+	    				}
+
+    					// Check that it won't be an infinite loop//
+    					if(chrStart <= chrStop)
+    					{
+	    					// Mark every position //
+	    					for(int position = chrStart; position <= chrStop; position++)
+	    					{
+	    						refPositions.set(position, true);
+	    					}
+    					}
+
+	    				// Return it to the hash //
+	    				positionsByChrom.put(refName, refPositions);
+	    			}
+	    			catch(Exception e)
+	    			{
+	    				if(lineCounter > 1)
+	    					System.err.println("Warning: Unable to parse chrom/position from " + line);
+	    			}
+
+
+	    		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834316
+net/sf/varscan/LimitVariants.java 241 296
+net/sf/varscan/ProcessSomatic.java 362 417
+----------------------------------------
+	    		{
+	    			// Try to parse chrom and position //
+	    			try
+	    			{
+	    				String refName = lineContents[0];
+
+	    				// Get or create BitSet for this refName //
+	    				BitSet refPositions;
+
+	    				if(positionsByChrom.containsKey(refName))
+	    				{
+	    					refPositions = positionsByChrom.get(refName);
+	    				}
+	    				else
+	    				{
+	    					refPositions = new BitSet();
+	    				}
+
+	    				// Mark position or regions, depending on what was provided //
+	    				int chrStart = 0;
+	    				int chrStop = 0;
+
+	    				if(fileType.equals("positions") && lineContents.length > 1)
+	    				{
+		    				// Set the position to true //
+		    				int position = Integer.parseInt(lineContents[1]);
+		    				chrStart = position - marginSize;
+		    				chrStop = position + marginSize;
+	    				}
+	    				else if(fileType.equals("regions") && lineContents.length > 2)
+	    				{
+	    					chrStart = Integer.parseInt(lineContents[1]) - marginSize;
+	    					chrStop = Integer.parseInt(lineContents[2]) + marginSize;
+	    				}
+
+    					// Check that it won't be an infinite loop//
+    					if(chrStart <= chrStop)
+    					{
+	    					// Mark every position //
+	    					for(int position = chrStart; position <= chrStop; position++)
+	    					{
+	    						refPositions.set(position, true);
+	    					}
+    					}
+
+	    				// Return it to the hash //
+	    				positionsByChrom.put(refName, refPositions);
+	    			}
+	    			catch(Exception e)
+	    			{
+	    				if(lineCounter > 1)
+	    					System.err.println("Warning: Unable to parse chrom/position from " + line);
+	    			}
+
+
+	    		}
+
+----------------------------------------
+	    		{
+	    			// Try to parse chrom and position //
+	    			try
+	    			{
+	    				String refName = lineContents[0];
+
+	    				// Get or create BitSet for this refName //
+	    				BitSet refPositions;
+
+	    				if(positionsByChrom.containsKey(refName))
+	    				{
+	    					refPositions = positionsByChrom.get(refName);
+	    				}
+	    				else
+	    				{
+	    					refPositions = new BitSet();
+	    				}
+
+	    				// Mark position or regions, depending on what was provided //
+	    				int chrStart = 0;
+	    				int chrStop = 0;
+
+	    				if(fileType.equals("positions") && lineContents.length > 1)
+	    				{
+		    				// Set the position to true //
+		    				int position = Integer.parseInt(lineContents[1]);
+		    				chrStart = position - marginSize;
+		    				chrStop = position + marginSize;
+	    				}
+	    				else if(fileType.equals("regions") && lineContents.length > 2)
+	    				{
+	    					chrStart = Integer.parseInt(lineContents[1]) - marginSize;
+	    					chrStop = Integer.parseInt(lineContents[2]) + marginSize;
+	    				}
+
+    					// Check that it won't be an infinite loop//
+    					if(chrStart <= chrStop)
+    					{
+	    					// Mark every position //
+	    					for(int position = chrStart; position <= chrStop; position++)
+	    					{
+	    						refPositions.set(position, true);
+	    					}
+    					}
+
+	    				// Return it to the hash //
+	    				positionsByChrom.put(refName, refPositions);
+	    			}
+	    			catch(Exception e)
+	    			{
+	    				if(lineCounter > 1)
+	    					System.err.println("Warning: Unable to parse chrom/position from " + line);
+	    			}
+
+
+	    		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834319
+net/sf/varscan/LimitVariants.java 232 297
+net/sf/varscan/ProcessSomatic.java 362 417
+----------------------------------------
+	    	{
+	    		lineCounter++;
+	    		String[] lineContents = line.split("\t");
+
+	    		if(line.substring(0, 1).equals("#"))
+	    		{
+	    			// Ignore VCF headers //
+	    		}
+	    		else if(lineContents.length >= 2)
+	    		{
+	    			// Try to parse chrom and position //
+	    			try
+	    			{
+	    				String refName = lineContents[0];
+
+	    				// Get or create BitSet for this refName //
+	    				BitSet refPositions;
+
+	    				if(positionsByChrom.containsKey(refName))
+	    				{
+	    					refPositions = positionsByChrom.get(refName);
+	    				}
+	    				else
+	    				{
+	    					refPositions = new BitSet();
+	    				}
+
+	    				// Mark position or regions, depending on what was provided //
+	    				int chrStart = 0;
+	    				int chrStop = 0;
+
+	    				if(fileType.equals("positions") && lineContents.length > 1)
+	    				{
+		    				// Set the position to true //
+		    				int position = Integer.parseInt(lineContents[1]);
+		    				chrStart = position - marginSize;
+		    				chrStop = position + marginSize;
+	    				}
+	    				else if(fileType.equals("regions") && lineContents.length > 2)
+	    				{
+	    					chrStart = Integer.parseInt(lineContents[1]) - marginSize;
+	    					chrStop = Integer.parseInt(lineContents[2]) + marginSize;
+	    				}
+
+    					// Check that it won't be an infinite loop//
+    					if(chrStart <= chrStop)
+    					{
+	    					// Mark every position //
+	    					for(int position = chrStart; position <= chrStop; position++)
+	    					{
+	    						refPositions.set(position, true);
+	    					}
+    					}
+
+	    				// Return it to the hash //
+	    				positionsByChrom.put(refName, refPositions);
+	    			}
+	    			catch(Exception e)
+	    			{
+	    				if(lineCounter > 1)
+	    					System.err.println("Warning: Unable to parse chrom/position from " + line);
+	    			}
+
+
+	    		}
+	    	}
+
+----------------------------------------
+	    		{
+	    			// Try to parse chrom and position //
+	    			try
+	    			{
+	    				String refName = lineContents[0];
+
+	    				// Get or create BitSet for this refName //
+	    				BitSet refPositions;
+
+	    				if(positionsByChrom.containsKey(refName))
+	    				{
+	    					refPositions = positionsByChrom.get(refName);
+	    				}
+	    				else
+	    				{
+	    					refPositions = new BitSet();
+	    				}
+
+	    				// Mark position or regions, depending on what was provided //
+	    				int chrStart = 0;
+	    				int chrStop = 0;
+
+	    				if(fileType.equals("positions") && lineContents.length > 1)
+	    				{
+		    				// Set the position to true //
+		    				int position = Integer.parseInt(lineContents[1]);
+		    				chrStart = position - marginSize;
+		    				chrStop = position + marginSize;
+	    				}
+	    				else if(fileType.equals("regions") && lineContents.length > 2)
+	    				{
+	    					chrStart = Integer.parseInt(lineContents[1]) - marginSize;
+	    					chrStop = Integer.parseInt(lineContents[2]) + marginSize;
+	    				}
+
+    					// Check that it won't be an infinite loop//
+    					if(chrStart <= chrStop)
+    					{
+	    					// Mark every position //
+	    					for(int position = chrStart; position <= chrStop; position++)
+	    					{
+	    						refPositions.set(position, true);
+	    					}
+    					}
+
+	    				// Return it to the hash //
+	    				positionsByChrom.put(refName, refPositions);
+	    			}
+	    			catch(Exception e)
+	    			{
+	    				if(lineCounter > 1)
+	    					System.err.println("Warning: Unable to parse chrom/position from " + line);
+	    			}
+
+
+	    		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+28918724
+net/sf/varscan/Somatic.java 1798 1825
+net/sf/varscan/ProcessSomatic.java 362 417
+----------------------------------------
+											{
+												if(normalFreq > minVarFreq)
+												{
+													somaticStatus = "Germline";
+												}
+												else if(freqDiff >= 0.30 && tumorFreq > normalFreq)
+												{
+													somaticStatus = "Somatic";
+												}
+												else if(freqDiff <= -0.30 && tumorFreq < normalFreq)
+												{
+													somaticStatus = "LOH";
+												}
+												else// if(freqDiff < 0.50)
+												{
+													somaticStatus = "Germline"; // Should this be GOH? //
+													// Recalculate p-value //
+													int totalReads1 = normalReads1 + tumorReads1;
+													int totalReads2 = normalReads2 + tumorReads2;
+													int totalCoverage = totalReads1 + totalReads2;
+													pValue = VarScan.getSignificance(totalCoverage, 0, totalReads1, totalReads2);
+												}
+				//								else
+				//								{
+				//									somaticStatus = "LOH";
+				//								}
+												allele2 = tumorAllele2;
+											}
+
+----------------------------------------
+	    		{
+	    			// Try to parse chrom and position //
+	    			try
+	    			{
+	    				String refName = lineContents[0];
+
+	    				// Get or create BitSet for this refName //
+	    				BitSet refPositions;
+
+	    				if(positionsByChrom.containsKey(refName))
+	    				{
+	    					refPositions = positionsByChrom.get(refName);
+	    				}
+	    				else
+	    				{
+	    					refPositions = new BitSet();
+	    				}
+
+	    				// Mark position or regions, depending on what was provided //
+	    				int chrStart = 0;
+	    				int chrStop = 0;
+
+	    				if(fileType.equals("positions") && lineContents.length > 1)
+	    				{
+		    				// Set the position to true //
+		    				int position = Integer.parseInt(lineContents[1]);
+		    				chrStart = position - marginSize;
+		    				chrStop = position + marginSize;
+	    				}
+	    				else if(fileType.equals("regions") && lineContents.length > 2)
+	    				{
+	    					chrStart = Integer.parseInt(lineContents[1]) - marginSize;
+	    					chrStop = Integer.parseInt(lineContents[2]) + marginSize;
+	    				}
+
+    					// Check that it won't be an infinite loop//
+    					if(chrStart <= chrStop)
+    					{
+	    					// Mark every position //
+	    					for(int position = chrStart; position <= chrStop; position++)
+	    					{
+	    						refPositions.set(position, true);
+	    					}
+    					}
+
+	    				// Return it to the hash //
+	    				positionsByChrom.put(refName, refPositions);
+	    			}
+	    			catch(Exception e)
+	    			{
+	    				if(lineCounter > 1)
+	    					System.err.println("Warning: Unable to parse chrom/position from " + line);
+	    			}
+
+
+	    		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834321
+net/sf/varscan/VarScan.java 321 331
+net/sf/varscan/VarScan.java 651 661
+----------------------------------------
+	{
+		if(params.containsKey("mpileup"))
+		{
+			 Copynumber myCopynumber = new Copynumber(args, true);
+		}
+		else
+		{
+			 Copynumber myCopynumber = new Copynumber(args);
+		}
+
+	}
+
+----------------------------------------
+					{
+						// Plus strand //
+						if(readCountsPlus.containsKey("ref"))
+						{
+							readCountsPlus.put("ref", (readCountsPlus.get("ref") + 1));
+						}
+						else
+						{
+							readCountsPlus.put("ref", 1);
+						}
+					}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834412
+net/sf/varscan/VarScan.java 321 331
+net/sf/varscan/ReadCounts.java 281 292
+----------------------------------------
+	{
+		if(params.containsKey("mpileup"))
+		{
+			 Copynumber myCopynumber = new Copynumber(args, true);
+		}
+		else
+		{
+			 Copynumber myCopynumber = new Copynumber(args);
+		}
+
+	}
+
+----------------------------------------
+			    	        	{
+			    	    			// Insufficient coverage - Print the output line //
+
+			    	    			if(params.containsKey("output-file"))
+			    	    			{
+			    	    				out.println(outputLine);
+			    	    			}
+			    	    			else
+			    	    			{
+			    	    				System.err.println(outputLine);
+			    	    			}
+			    	        	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834322
+net/sf/varscan/VarScan.java 651 661
+net/sf/varscan/ReadCounts.java 281 292
+----------------------------------------
+					{
+						// Plus strand //
+						if(readCountsPlus.containsKey("ref"))
+						{
+							readCountsPlus.put("ref", (readCountsPlus.get("ref") + 1));
+						}
+						else
+						{
+							readCountsPlus.put("ref", 1);
+						}
+					}
+
+----------------------------------------
+			    	        	{
+			    	    			// Insufficient coverage - Print the output line //
+
+			    	    			if(params.containsKey("output-file"))
+			    	    			{
+			    	    				out.println(outputLine);
+			    	    			}
+			    	    			else
+			    	    			{
+			    	    				System.err.println(outputLine);
+			    	    			}
+			    	        	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834413
+net/sf/varscan/VarScan.java 321 331
+net/sf/varscan/VarScan.java 291 301
+----------------------------------------
+	{
+		if(params.containsKey("mpileup"))
+		{
+			 Copynumber myCopynumber = new Copynumber(args, true);
+		}
+		else
+		{
+			 Copynumber myCopynumber = new Copynumber(args);
+		}
+
+	}
+
+----------------------------------------
+	{
+		if(params.containsKey("mpileup"))
+		{
+			Somatic mySomatic = new Somatic(args, true);
+		}
+		else
+		{
+			Somatic mySomatic = new Somatic(args);
+		}
+
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834323
+net/sf/varscan/VarScan.java 651 661
+net/sf/varscan/VarScan.java 291 301
+----------------------------------------
+					{
+						// Plus strand //
+						if(readCountsPlus.containsKey("ref"))
+						{
+							readCountsPlus.put("ref", (readCountsPlus.get("ref") + 1));
+						}
+						else
+						{
+							readCountsPlus.put("ref", 1);
+						}
+					}
+
+----------------------------------------
+	{
+		if(params.containsKey("mpileup"))
+		{
+			Somatic mySomatic = new Somatic(args, true);
+		}
+		else
+		{
+			Somatic mySomatic = new Somatic(args);
+		}
+
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834411
+net/sf/varscan/ReadCounts.java 281 292
+net/sf/varscan/VarScan.java 291 301
+----------------------------------------
+			    	        	{
+			    	    			// Insufficient coverage - Print the output line //
+
+			    	    			if(params.containsKey("output-file"))
+			    	    			{
+			    	    				out.println(outputLine);
+			    	    			}
+			    	    			else
+			    	    			{
+			    	    				System.err.println(outputLine);
+			    	    			}
+			    	        	}
+
+----------------------------------------
+	{
+		if(params.containsKey("mpileup"))
+		{
+			Somatic mySomatic = new Somatic(args, true);
+		}
+		else
+		{
+			Somatic mySomatic = new Somatic(args);
+		}
+
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834326
+net/sf/varscan/VarScan.java 291 301
+net/sf/varscan/VarScan.java 663 673
+----------------------------------------
+	{
+		if(params.containsKey("mpileup"))
+		{
+			Somatic mySomatic = new Somatic(args, true);
+		}
+		else
+		{
+			Somatic mySomatic = new Somatic(args);
+		}
+
+	}
+
+----------------------------------------
+					{
+						// Minus Strand //
+						if(readCountsMinus.containsKey("ref"))
+						{
+							readCountsMinus.put("ref", (readCountsMinus.get("ref") + 1));
+						}
+						else
+						{
+							readCountsMinus.put("ref", 1);
+						}
+					}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834324
+net/sf/varscan/VarScan.java 321 331
+net/sf/varscan/VarScan.java 663 673
+----------------------------------------
+	{
+		if(params.containsKey("mpileup"))
+		{
+			 Copynumber myCopynumber = new Copynumber(args, true);
+		}
+		else
+		{
+			 Copynumber myCopynumber = new Copynumber(args);
+		}
+
+	}
+
+----------------------------------------
+					{
+						// Minus Strand //
+						if(readCountsMinus.containsKey("ref"))
+						{
+							readCountsMinus.put("ref", (readCountsMinus.get("ref") + 1));
+						}
+						else
+						{
+							readCountsMinus.put("ref", 1);
+						}
+					}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834325
+net/sf/varscan/ReadCounts.java 281 292
+net/sf/varscan/VarScan.java 663 673
+----------------------------------------
+			    	        	{
+			    	    			// Insufficient coverage - Print the output line //
+
+			    	    			if(params.containsKey("output-file"))
+			    	    			{
+			    	    				out.println(outputLine);
+			    	    			}
+			    	    			else
+			    	    			{
+			    	    				System.err.println(outputLine);
+			    	    			}
+			    	        	}
+
+----------------------------------------
+					{
+						// Minus Strand //
+						if(readCountsMinus.containsKey("ref"))
+						{
+							readCountsMinus.put("ref", (readCountsMinus.get("ref") + 1));
+						}
+						else
+						{
+							readCountsMinus.put("ref", 1);
+						}
+					}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834327
+net/sf/varscan/VarScan.java 651 661
+net/sf/varscan/VarScan.java 663 673
+----------------------------------------
+					{
+						// Plus strand //
+						if(readCountsPlus.containsKey("ref"))
+						{
+							readCountsPlus.put("ref", (readCountsPlus.get("ref") + 1));
+						}
+						else
+						{
+							readCountsPlus.put("ref", 1);
+						}
+					}
+
+----------------------------------------
+					{
+						// Minus Strand //
+						if(readCountsMinus.containsKey("ref"))
+						{
+							readCountsMinus.put("ref", (readCountsMinus.get("ref") + 1));
+						}
+						else
+						{
+							readCountsMinus.put("ref", 1);
+						}
+					}
+
+----------------------------------------

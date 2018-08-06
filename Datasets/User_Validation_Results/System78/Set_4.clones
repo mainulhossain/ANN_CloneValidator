@@ -1,0 +1,609 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+28798833
+core/src/main/java/net/sourceforge/javaocr/scanner/DocumentScanner.java 524 540
+core/src/main/java/net/sourceforge/javaocr/scanner/DocumentScanner.java 316 344
+----------------------------------------
+            {
+                boolean isWhiteSpace = true;
+                for (int x = cx1, idx = (cy1 * w) + cx1; x < cx2;
+                        x++, idx++)
+                {
+                    if (pixels[idx] < whiteThreshold)
+                    {
+                        isWhiteSpace = false;
+                        break;
+                    }
+                }
+                if (!isWhiteSpace)
+                {
+                    break;
+                }
+                cy1++;
+            }
+
+----------------------------------------
+        {
+            boolean isWhiteSpace = true;
+            for (int x = blockX1, idx = (y * w) + blockX1; x < blockX2;
+                    x++, idx++)
+            {
+                if (pixels[idx] < whiteThreshold)
+                {
+                    isWhiteSpace = false;
+                    break;
+                }
+            }
+            if (isWhiteSpace)
+            {
+                if (!whiteLine)
+                {
+                    whiteLine = true;
+                    al.add(new Integer(y1));
+                    al.add(new Integer(y));
+                }
+            }
+            else
+            {
+                if (whiteLine)
+                {
+                    whiteLine = false;
+                    y1 = y;
+                }
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+28798837
+core/src/main/java/net/sourceforge/javaocr/scanner/DocumentScanner.java 549 555
+core/src/main/java/net/sourceforge/javaocr/scanner/DocumentScanner.java 433 446
+----------------------------------------
+                {
+                    if (pixels[idx] < whiteThreshold)
+                    {
+                        isWhiteSpace = false;
+                        break;
+                    }
+                }
+
+----------------------------------------
+            {
+                if (pixels[idx] >= whiteThreshold)
+                {
+                    numWhitePixelsThisColumn++;
+                }
+                else
+                {
+                    if (!liberalWhitespacePolicy)
+                    {
+                        isWhiteSpace = false;
+                        break;
+                    }
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+28798836
+core/src/main/java/net/sourceforge/javaocr/scanner/DocumentScanner.java 528 534
+core/src/main/java/net/sourceforge/javaocr/scanner/DocumentScanner.java 433 446
+----------------------------------------
+                {
+                    if (pixels[idx] < whiteThreshold)
+                    {
+                        isWhiteSpace = false;
+                        break;
+                    }
+                }
+
+----------------------------------------
+            {
+                if (pixels[idx] >= whiteThreshold)
+                {
+                    numWhitePixelsThisColumn++;
+                }
+                else
+                {
+                    if (!liberalWhitespacePolicy)
+                    {
+                        isWhiteSpace = false;
+                        break;
+                    }
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+28798834
+core/src/main/java/net/sourceforge/javaocr/scanner/DocumentScanner.java 320 326
+core/src/main/java/net/sourceforge/javaocr/scanner/DocumentScanner.java 433 446
+----------------------------------------
+            {
+                if (pixels[idx] < whiteThreshold)
+                {
+                    isWhiteSpace = false;
+                    break;
+                }
+            }
+
+----------------------------------------
+            {
+                if (pixels[idx] >= whiteThreshold)
+                {
+                    numWhitePixelsThisColumn++;
+                }
+                else
+                {
+                    if (!liberalWhitespacePolicy)
+                    {
+                        isWhiteSpace = false;
+                        break;
+                    }
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+28798835
+core/src/main/java/net/sourceforge/javaocr/scanner/DocumentScanner.java 419 477
+core/src/main/java/net/sourceforge/javaocr/ocr/DocumentScanner.java 304 340
+----------------------------------------
+        {
+            if ((!liberalWhitespacePolicy)
+                    && (numConsecutiveWhite == 0)
+                    && ((x - charX1) >= rowHeight))
+            {
+                // Something's amiss.  No whitespace.
+                // Try again but do it with the liberal whitespace
+                // detection algorithm.
+                x = charX1;
+                liberalWhitespacePolicy = true;
+            }
+            int numWhitePixelsThisColumn = 0;
+            boolean isWhiteSpace = true;
+            for (int y = y1, idx = (y1 * w) + x; y < y2; y++, idx += w)
+            {
+                if (pixels[idx] >= whiteThreshold)
+                {
+                    numWhitePixelsThisColumn++;
+                }
+                else
+                {
+                    if (!liberalWhitespacePolicy)
+                    {
+                        isWhiteSpace = false;
+                        break;
+                    }
+                }
+            }
+            if ((liberalWhitespacePolicy)
+                    && (numWhitePixelsThisColumn
+                    < liberalWhitspaceMinWhitePixelsPerColumn))
+            {
+                isWhiteSpace = false;
+            }
+            if (isWhiteSpace)
+            {
+                numConsecutiveWhite++;
+                if (numConsecutiveWhite >= minCharBreakWidth)
+                {
+                    if (!inCharSeparator)
+                    {
+                        inCharSeparator = true;
+                        al.add(new Integer(charX1));
+                        al.add(new Integer(x - (numConsecutiveWhite - 1)));
+                    }
+                }
+            }
+            else
+            {
+                numConsecutiveWhite = 0;
+                if (inCharSeparator)
+                {
+                    inCharSeparator = false;
+                    prevCharX1 = charX1;
+                    charX1 = x;
+                    liberalWhitespacePolicy = false;
+                }
+            }
+        }
+
+----------------------------------------
+        for (int x = x1 + 1; x < (x2 - 1); x++) {
+            if ((!liberalWhitespacePolicy)
+                    && (numConsecutiveWhite == 0)
+                    && ((x - charX1) >= rowHeight)) {
+                // Something's amiss.  No whitespace.
+                // Try again but do it with the liberal whitespace
+                // detection algorithm.
+                x = charX1;
+                liberalWhitespacePolicy = true;
+            }
+            int numWhitePixelsThisColumn = 0;
+            boolean isWhiteSpace = pixelImage.verticalSpanEquals(x,y1,y2-1, 0);
+
+            if ((liberalWhitespacePolicy)
+                    && (numWhitePixelsThisColumn
+                    < liberalWhitspaceMinWhitePixelsPerColumn)) {
+                isWhiteSpace = false;
+            }
+            if (isWhiteSpace) {
+                numConsecutiveWhite++;
+                if (numConsecutiveWhite >= minCharBreakWidth) {
+                    if (!inCharSeparator) {
+                        inCharSeparator = true;
+                        al.add(new Integer(charX1));
+                        al.add(new Integer(x - (numConsecutiveWhite - 1)));
+                    }
+                }
+            } else {
+                numConsecutiveWhite = 0;
+                if (inCharSeparator) {
+                    inCharSeparator = false;
+                    prevCharX1 = charX1;
+                    charX1 = x;
+                    liberalWhitespacePolicy = false;
+                }
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+28798838
+core/src/main/java/net/sourceforge/javaocr/scanner/PixelImage.java 175 180
+core/src/main/java/net/sourceforge/javaocr/filter/MedianFilter.java 68 72
+----------------------------------------
+        {
+            for (int i = 0; i < npix; i++)
+            {
+                pixels[i] = rgbToGrayScale(pixels[i]);
+            }
+        }
+
+----------------------------------------
+        for (int y = halfWindow; y < maxY; y++) {
+            for (int x = halfWindow; x < maxX; x++) {
+                destination.put(x, y, computePixel(image, y, x));
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+28798839
+core/src/main/java/net/sourceforge/javaocr/scanner/PixelImage.java 182 211
+demos/trainer/src/main/java/Trainer.java 238 247
+----------------------------------------
+        {
+            int pix;
+            pixels[0] = pix = rgbToGrayScale(pixels[0]);
+            int min = pix, max = pix;
+            for (int i = 1; i < npix; i++)
+            {
+                pixels[i] = pix = rgbToGrayScale(pixels[i]);
+                min = Math.min(min, pix);
+                max = Math.max(max, pix);
+            }
+            int range = max - min;
+            if (range < 1)
+            {
+                for (int i = 0; i < npix; i++)
+                {
+                    pixels[i] = 255;
+                }
+            }
+            else
+            {
+                for (int i = 0; i < npix; i++)
+                {
+                    pixels[i] =
+                            Math.min(255,
+                            Math.max(0,
+                            ((pixels[i]
+                            - min) * 255) / range));
+                }
+            }
+        }
+
+----------------------------------------
+        for (int i = 0; i < amountSamples; i++) {
+            int width = dis.readInt();
+            int height = dis.readInt();
+
+            int data[] = new int[width * height];
+            for (int j = 0; j < data.length; j++) {
+                data[j] = dis.readInt();
+            }
+            glyphs.add(new PixelImage(data, width, height));
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+28798840
+core/src/main/java/net/sourceforge/javaocr/scanner/PixelImage.java 237 287
+core/src/main/java/net/sourceforge/javaocr/scanner/PixelImage.java 231 341
+----------------------------------------
+        {
+            for (int i = 0; i < firSamples.length; i++)
+            {
+                firSamples[i] = 255.0f;
+            }
+            int outX = -(firSamples.length / 2);
+            for (int x = 0; x < width; x++, outX++)
+            {
+                c = 0.0f;
+                for (int j = 0; j < lastPos; j++)
+                {
+                    c += (firSamples[j] * FILTER_FIR_COEFFS[j]);
+                    firSamples[j] = firSamples[j + 1];
+                }
+                c += (firSamples[lastPos] * FILTER_FIR_COEFFS[lastPos]);
+                firSamples[lastPos] = getPixel(x, y);
+                if (c < 0.0f)
+                {
+                    c = 0.0f;
+                }
+                else if (c > 255.0f)
+                {
+                    c = 255.0f;
+                }
+                if (outX >= 0)
+                {
+                    pixels[getPixelIndex(outX, y)] = (int) c;
+                }
+            }
+            while (outX < width)
+            {
+                c = 0.0f;
+                for (int j = 0; j < lastPos; j++)
+                {
+                    c += (firSamples[j] * FILTER_FIR_COEFFS[j]);
+                    firSamples[j] = firSamples[j + 1];
+                }
+                c += (firSamples[lastPos] * FILTER_FIR_COEFFS[lastPos]);
+                firSamples[lastPos] = 255.0f;
+                if (c < 0.0f)
+                {
+                    c = 0.0f;
+                }
+                else if (c > 255.0f)
+                {
+                    c = 255.0f;
+                }
+                pixels[getPixelIndex(outX, y)] = (int) c;
+                outX++;
+            }
+        }
+
+----------------------------------------
+    {
+        float[] firSamples = new float[FILTER_FIR_COEFFS.length];
+        float c;
+        int lastPos = firSamples.length - 1;
+        // Filter horizontally.
+        for (int y = 0; y < height; y++)
+        {
+            for (int i = 0; i < firSamples.length; i++)
+            {
+                firSamples[i] = 255.0f;
+            }
+            int outX = -(firSamples.length / 2);
+            for (int x = 0; x < width; x++, outX++)
+            {
+                c = 0.0f;
+                for (int j = 0; j < lastPos; j++)
+                {
+                    c += (firSamples[j] * FILTER_FIR_COEFFS[j]);
+                    firSamples[j] = firSamples[j + 1];
+                }
+                c += (firSamples[lastPos] * FILTER_FIR_COEFFS[lastPos]);
+                firSamples[lastPos] = getPixel(x, y);
+                if (c < 0.0f)
+                {
+                    c = 0.0f;
+                }
+                else if (c > 255.0f)
+                {
+                    c = 255.0f;
+                }
+                if (outX >= 0)
+                {
+                    pixels[getPixelIndex(outX, y)] = (int) c;
+                }
+            }
+            while (outX < width)
+            {
+                c = 0.0f;
+                for (int j = 0; j < lastPos; j++)
+                {
+                    c += (firSamples[j] * FILTER_FIR_COEFFS[j]);
+                    firSamples[j] = firSamples[j + 1];
+                }
+                c += (firSamples[lastPos] * FILTER_FIR_COEFFS[lastPos]);
+                firSamples[lastPos] = 255.0f;
+                if (c < 0.0f)
+                {
+                    c = 0.0f;
+                }
+                else if (c > 255.0f)
+                {
+                    c = 255.0f;
+                }
+                pixels[getPixelIndex(outX, y)] = (int) c;
+                outX++;
+            }
+        }
+        // Filter vertically.
+        for (int x = 0; x < width; x++)
+        {
+            for (int i = 0; i < firSamples.length; i++)
+            {
+                firSamples[i] = 255.0f;
+            }
+            int outY = -(firSamples.length / 2);
+            for (int y = 0; y < height; y++, outY++)
+            {
+                c = 0.0f;
+                for (int j = 0; j < lastPos; j++)
+                {
+                    c += (firSamples[j] * FILTER_FIR_COEFFS[j]);
+                    firSamples[j] = firSamples[j + 1];
+                }
+                c += (firSamples[lastPos] * FILTER_FIR_COEFFS[lastPos]);
+                firSamples[lastPos] = getPixel(x, y);
+                if (c < 0.0f)
+                {
+                    c = 0.0f;
+                }
+                else if (c > 255.0f)
+                {
+                    c = 255.0f;
+                }
+                if (outY >= 0)
+                {
+                    pixels[getPixelIndex(x, outY)] = (int) c;
+                }
+            }
+            while (outY < height)
+            {
+                c = 0.0f;
+                for (int j = 0; j < lastPos; j++)
+                {
+                    c += (firSamples[j] * FILTER_FIR_COEFFS[j]);
+                    firSamples[j] = firSamples[j + 1];
+                }
+                c += (firSamples[lastPos] * FILTER_FIR_COEFFS[lastPos]);
+                firSamples[lastPos] = 255.0f;
+                if (c < 0.0f)
+                {
+                    c = 0.0f;
+                }
+                else if (c > 255.0f)
+                {
+                    c = 255.0f;
+                }
+                pixels[getPixelIndex(x, outY)] = (int) c;
+                outY++;
+            }
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+28798841
+plugins/awt/src/main/java/net/sourceforge/javaocr/ocrPlugins/charExtractor/CharacterExtractor.java 70 123
+plugins/awt/src/main/java/net/sourceforge/javaocr/ocrPlugins/charExtractor/CharacterExtractor.java 72 118
+----------------------------------------
+    {
+        try
+        {
+            int areaW = x2 - x1;
+            int areaH = y2 - y1;
+
+            //Extract the character
+            BufferedImage characterImage = ImageIO.read(inputImage);
+            characterImage = characterImage.getSubimage(x1, y1, areaW, areaH);
+
+            //Scale image so that both the arrayHeight and arrayWidth are less than std size
+            if (characterImage.getWidth() > std_width)
+            {
+                //Make image always std_width wide
+                double scaleAmount = (double) std_width / (double) characterImage.getWidth();
+                AffineTransform tx = new AffineTransform();
+                tx.scale(scaleAmount, scaleAmount);
+                AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
+                characterImage = op.filter(characterImage, null);
+            }
+
+            if (characterImage.getHeight() > std_height)
+            {
+                //Make image always std_height tall
+                double scaleAmount = (double) std_height / (double) characterImage.getHeight();
+                AffineTransform tx = new AffineTransform();
+                tx.scale(scaleAmount, scaleAmount);
+                AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
+                characterImage = op.filter(characterImage, null);
+            }
+
+            //Paint the scaled image on a white background
+            BufferedImage normalizedImage = new BufferedImage(std_width, std_height, BufferedImage.TYPE_INT_RGB);
+            Graphics2D g = normalizedImage.createGraphics();
+            g.setColor(Color.WHITE);
+            g.fillRect(0, 0, std_width, std_height);
+
+            //Center scaled image on new canvas
+            int x_offset = (std_width - characterImage.getWidth()) / 2;
+            int y_offset = (std_height - characterImage.getHeight()) / 2;
+
+            g.drawImage(characterImage, x_offset, y_offset, null);
+            g.dispose();
+
+            //Save new image to file
+            File outputfile = new File(outputDir + File.separator + "char_" + num + ".png");
+            ImageIO.write(normalizedImage, "png", outputfile);
+            num++;
+        }
+        catch (Exception ex)
+        {
+            Logger.getLogger(CharacterExtractor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+----------------------------------------
+        {
+            int areaW = x2 - x1;
+            int areaH = y2 - y1;
+
+            //Extract the character
+            BufferedImage characterImage = ImageIO.read(inputImage);
+            characterImage = characterImage.getSubimage(x1, y1, areaW, areaH);
+
+            //Scale image so that both the arrayHeight and arrayWidth are less than std size
+            if (characterImage.getWidth() > std_width)
+            {
+                //Make image always std_width wide
+                double scaleAmount = (double) std_width / (double) characterImage.getWidth();
+                AffineTransform tx = new AffineTransform();
+                tx.scale(scaleAmount, scaleAmount);
+                AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
+                characterImage = op.filter(characterImage, null);
+            }
+
+            if (characterImage.getHeight() > std_height)
+            {
+                //Make image always std_height tall
+                double scaleAmount = (double) std_height / (double) characterImage.getHeight();
+                AffineTransform tx = new AffineTransform();
+                tx.scale(scaleAmount, scaleAmount);
+                AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
+                characterImage = op.filter(characterImage, null);
+            }
+
+            //Paint the scaled image on a white background
+            BufferedImage normalizedImage = new BufferedImage(std_width, std_height, BufferedImage.TYPE_INT_RGB);
+            Graphics2D g = normalizedImage.createGraphics();
+            g.setColor(Color.WHITE);
+            g.fillRect(0, 0, std_width, std_height);
+
+            //Center scaled image on new canvas
+            int x_offset = (std_width - characterImage.getWidth()) / 2;
+            int y_offset = (std_height - characterImage.getHeight()) / 2;
+
+            g.drawImage(characterImage, x_offset, y_offset, null);
+            g.dispose();
+
+            //Save new image to file
+            File outputfile = new File(outputDir + File.separator + "char_" + num + ".png");
+            ImageIO.write(normalizedImage, "png", outputfile);
+            num++;
+        }
+
+----------------------------------------

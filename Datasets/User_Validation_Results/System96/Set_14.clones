@@ -1,0 +1,1603 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+24079507
+net/sf/varscan/Copynumber.java 962 970
+net/sf/varscan/Copynumber.java 398 406
+----------------------------------------
+			if(copyPositions > minSegmentSize)
+			{
+				rawCopySegments++;
+				String regionResults = processCopyRegion(copyChrom, copyStart, copyStop, copyPositions, copyPositionsGC, copySumNormal, copySumTumor, minCoverage, dataRatio);
+
+				if(regionResults.length() > 0)
+				{
+					outCopySegments.println(regionResults);
+					goodCopySegments++;
+
+----------------------------------------
+				if(copyPositions > minSegmentSize)
+				{
+					rawCopySegments++;
+					String regionResults = processCopyRegion(copyChrom, copyStart, copyStop, copyPositions, copyPositionsGC, copySumNormal, copySumTumor, minCoverage, dataRatio);
+
+					if(regionResults.length() > 0)
+					{
+						outCopySegments.println(regionResults);
+						goodCopySegments++;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+24079508
+net/sf/varscan/ProcessSomatic.java 183 188
+net/sf/varscan/ProcessSomatic.java 174 179
+----------------------------------------
+		    				outSomatic.println(line);
+		    				outSomaticHC.println(line);
+		    				outGermline.println(line);
+		    				outGermlineHC.println(line);
+		    				outLOH.println(line);
+		    				outLOHHC.println(line);
+
+----------------------------------------
+		    				outSomatic.println(line);
+		    				outSomaticHC.println(line);
+		    				outGermline.println(line);
+		    				outGermlineHC.println(line);
+		    				outLOH.println(line);
+		    				outLOHHC.println(line);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+24079509
+net/sf/varscan/Copynumber.java 59 64
+net/sf/varscan/Copynumber.java 479 484
+----------------------------------------
+		int minCoverage = 	10;
+		int minBaseQual = 	15;
+		int minSegmentSize = 10;
+		int maxSegmentSize = 100;
+		double dataRatio = 1.00;
+		double pValueThreshold = 0.01;
+
+----------------------------------------
+		int minCoverage = 	10;
+		int minBaseQual = 	15;
+		int minSegmentSize = 10;
+		int maxSegmentSize = 100;
+		double dataRatio = 1.00;
+		double pValueThreshold = 0.01;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+24079510
+net/sf/varscan/VarScan.java 1322 1327
+net/sf/varscan/VarScan.java 1237 1242
+----------------------------------------
+									reads2 = thisReads2;
+									strands2 = thisStrands2;
+									avgQual2 = thisAvgQual2;
+									avgMap2 = thisAvgMap2;
+									reads2plus = thisReads2plus;
+									reads2minus = thisReads2minus;
+
+----------------------------------------
+							reads2 = thisReads2;
+							strands2 = thisStrands2;
+							avgQual2 = thisAvgQual2;
+							avgMap2 = thisAvgMap2;
+							reads2plus = thisReads2plus;
+							reads2minus = thisReads2minus;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+24079511
+net/sf/varscan/VarScan.java 1322 1327
+net/sf/varscan/VarScan.java 1275 1280
+----------------------------------------
+									reads2 = thisReads2;
+									strands2 = thisStrands2;
+									avgQual2 = thisAvgQual2;
+									avgMap2 = thisAvgMap2;
+									reads2plus = thisReads2plus;
+									reads2minus = thisReads2minus;
+
+----------------------------------------
+									reads2 = thisReads2;
+									strands2 = thisStrands2;
+									avgQual2 = thisAvgQual2;
+									avgMap2 = thisAvgMap2;
+									reads2plus = thisReads2plus;
+									reads2minus = thisReads2minus;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+24079512
+net/sf/varscan/CallPileup.java 169 181
+net/sf/varscan/CallMpileup.java 299 311
+----------------------------------------
+	    		while ((line = in.readLine()) != null)
+	    		{
+	    			numBases++;//stats.put("numBases", (stats.get("numBases") + 1));
+
+	    			// Output progress line //
+	    			if(params.containsKey("verbose") && (numBases % 100000) == 0)
+		        		System.err.println(numBases + " positions parsed...");
+
+	    			// Begin try-catch for line parsing //
+
+	    			try
+	    			{
+	    				String[] lineContents = line.split("\t", -1);
+
+----------------------------------------
+	    		while ((line = in.readLine()) != null)
+	    		{
+	    			numBases++;//stats.put("numBases", (stats.get("numBases") + 1));
+
+	    			// Output progress line //
+	    			if(params.containsKey("verbose") && (numBases % 100000) == 0)
+		        		System.err.println(numBases + " positions parsed...");
+
+	    			// Begin try-catch for line parsing //
+
+	    			try
+	    			{
+	    				String[] lineContents = line.split("\t", -1);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+24079513
+net/sf/varscan/CallMpileup.java 616 624
+net/sf/varscan/CallMpileup.java 498 506
+----------------------------------------
+		    	        				if(!consBase.equals(refBase) && !consBase.equals("N"))
+		    	        				{
+		    	        					variantFlag = true;
+
+		    	        					// Flag what type of variant was observed //
+		    	        					if(consBase.length() > 1)
+		    	        						indelFlag = true;
+		    	        					else
+		    	        						snpFlag = true;
+
+----------------------------------------
+			    	        				if(!consBase.equals(refBase) && !consBase.equals("N"))
+			    	        				{
+			    	        					variantFlag = true;
+
+			    	        					// Flag what type of variant was observed //
+			    	        					if(consBase.length() > 1)
+			    	        						indelFlag = true;
+			    	        					else
+			    	        						snpFlag = true;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+24079514
+net/sf/varscan/FilterVariants.java 214 220
+net/sf/varscan/FilterVariants.java 203 209
+----------------------------------------
+							if(params.containsKey("output-file"))
+	    						outFile.println(line);
+							else
+			    				System.out.println(line);
+
+							if(params.containsKey("not-file"))
+								notFile.println(line);
+
+----------------------------------------
+							if(params.containsKey("output-file"))
+	    						outFile.println(line);
+							else
+			    				System.out.println(line);
+
+							if(params.containsKey("not-file"))
+								notFile.println(line);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+24079515
+net/sf/varscan/FilterVariants.java 137 143
+net/sf/varscan/LimitVariants.java 102 109
+----------------------------------------
+			PrintStream outFile = null;
+			if(params.containsKey("output-file"))
+				outFile = new PrintStream( new FileOutputStream(outFileName) );
+
+			PrintStream notFile = null;
+			if(params.containsKey("not-file"))
+				notFile = new PrintStream( new FileOutputStream(notFileName) );
+
+----------------------------------------
+			PrintStream outFile = null;
+			if(params.containsKey("output-file"))
+				outFile = new PrintStream( new FileOutputStream(outFileName) );
+
+			// Declare not output file //
+			PrintStream notFile = null;
+			if(params.containsKey("not-file"))
+				notFile = new PrintStream( new FileOutputStream(notFileName) );
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+24079516
+net/sf/varscan/FilterVariants.java 94 102
+net/sf/varscan/CallPileup.java 83 90
+----------------------------------------
+			System.err.println("Min var freq:\t" + minVarFreq);
+			System.err.println("Min avg qual:\t" + minAvgQual);
+			System.err.println("P-value thresh:\t" + pValueThreshold);
+
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+
+----------------------------------------
+			 System.err.println("Min var freq:\t" + minVarFreq);
+			 System.err.println("Min avg qual:\t" + minAvgQual);
+			 System.err.println("P-value thresh:\t" + pValueThreshold);
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+24079517
+net/sf/varscan/FilterVariants.java 94 102
+net/sf/varscan/CallMpileup.java 178 185
+----------------------------------------
+			System.err.println("Min var freq:\t" + minVarFreq);
+			System.err.println("Min avg qual:\t" + minAvgQual);
+			System.err.println("P-value thresh:\t" + pValueThreshold);
+
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+
+----------------------------------------
+			 System.err.println("Min var freq:\t" + minVarFreq);
+			 System.err.println("Min avg qual:\t" + minAvgQual);
+			 System.err.println("P-value thresh:\t" + pValueThreshold);
+		}
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+24079518
+net/sf/varscan/FilterSomatic.java 478 489
+net/sf/varscan/FilterSomatic.java 189 200
+----------------------------------------
+	    	if(in != null && in.ready())
+	    	{
+	    		// Parse the infile line by line //
+
+	    		while ((line = in.readLine()) != null)
+	    		{
+	    			lineCounter++;
+
+	    			try
+	    			{
+		    			String[] lineContents = line.split("\t");
+		    			String chrom = lineContents[0];
+
+----------------------------------------
+	    	if(in != null && in.ready())
+	    	{
+	    		// Parse the infile line by line //
+
+	    		while ((line = in.readLine()) != null)
+	    		{
+	    			lineCounter++;
+
+	    			try
+	    			{
+		    			String[] lineContents = line.split("\t");
+		    			String chrom = lineContents[0];
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+24079519
+net/sf/varscan/CallPileup.java 43 48
+net/sf/varscan/CallMpileup.java 67 72
+----------------------------------------
+		int minCoverage = 8;
+		int minReads2 = 2;
+		int minAvgQual = 15;
+		double minVarFreq = 0.01;
+		double minFreqForHom = 0.75;
+		double pValueThreshold = 0.99;
+
+----------------------------------------
+		int minCoverage = 8;
+		int minReads2 = 2;
+		int minAvgQual = 15;
+		double minVarFreq = 0.01;
+		double minFreqForHom = 0.75;
+		double pValueThreshold = 0.99;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+24079520
+net/sf/varscan/Somatic.java 47 52
+net/sf/varscan/Somatic.java 728 733
+----------------------------------------
+			"\t--min-var-freq - Minimum variant frequency to call a heterozygote [0.10]\n" +
+			"\t--min-freq-for-hom\tMinimum frequency to call homozygote [0.75]\n" +
+			"\t--normal-purity - Estimated purity (non-tumor content) of normal sample [1.00]\n" +
+			"\t--tumor-purity - Estimated purity (tumor content) of tumor sample [1.00]\n" +
+			"\t--p-value - P-value threshold to call a heterozygote [0.99]\n" +
+			"\t--somatic-p-value - P-value threshold to call a somatic site [0.05]\n" +
+
+----------------------------------------
+			"\t--min-var-freq - Minimum variant frequency to call a heterozygote [0.10]\n" +
+			"\t--min-freq-for-hom\tMinimum frequency to call homozygote [0.75]\n" +
+			"\t--normal-purity - Estimated purity (non-tumor content) of normal sample [1.00]\n" +
+			"\t--tumor-purity - Estimated purity (tumor content) of tumor sample [1.00]\n" +
+			"\t--p-value - P-value threshold to call a heterozygote [0.99]\n" +
+			"\t--somatic-p-value - P-value threshold to call a somatic site [0.05]\n" +
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+24079521
+net/sf/varscan/Trio.java 238 250
+net/sf/varscan/CopyCaller.java 171 183
+----------------------------------------
+	    	BufferedReader in = VarScan.getInfile(args);
+	    	String line;
+
+	    	// If no input, print usage //
+
+	    	if(in == null)
+	    	{
+	    		System.out.println(usage);
+				return;
+	    	}
+
+	    	// If input file not ready, give it a few seconds //
+	    	int numNaps = 0;
+
+----------------------------------------
+	    	BufferedReader in = VarScan.getInfile(args);
+	    	String line;
+
+	    	// If no input, print usage //
+
+	    	if(in == null)
+	    	{
+	    		System.out.println(usage);
+				return;
+	    	}
+
+	    	// If input file not ready, give it a few seconds //
+	    	int numNaps = 0;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+24079522
+net/sf/varscan/Trio.java 238 250
+net/sf/varscan/Somatic.java 240 252
+----------------------------------------
+	    	BufferedReader in = VarScan.getInfile(args);
+	    	String line;
+
+	    	// If no input, print usage //
+
+	    	if(in == null)
+	    	{
+	    		System.out.println(usage);
+				return;
+	    	}
+
+	    	// If input file not ready, give it a few seconds //
+	    	int numNaps = 0;
+
+----------------------------------------
+	    	BufferedReader in = VarScan.getInfile(args);
+	    	String line;
+
+	    	// If no input, print usage //
+
+	    	if(in == null)
+	    	{
+	    		System.out.println(usage);
+				return;
+	    	}
+
+	    	// If input file not ready, give it a few seconds //
+	    	int numNaps = 0;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+24079523
+net/sf/varscan/Trio.java 238 250
+net/sf/varscan/CallPileup.java 126 138
+----------------------------------------
+	    	BufferedReader in = VarScan.getInfile(args);
+	    	String line;
+
+	    	// If no input, print usage //
+
+	    	if(in == null)
+	    	{
+	    		System.out.println(usage);
+				return;
+	    	}
+
+	    	// If input file not ready, give it a few seconds //
+	    	int numNaps = 0;
+
+----------------------------------------
+	    	BufferedReader in = VarScan.getInfile(args);
+	    	String line;
+
+	    	// If no input, print usage //
+
+	    	if(in == null)
+	    	{
+	    		System.out.println(usage);
+				return;
+	    	}
+
+	    	// If input file not ready, give it a few seconds //
+	    	int numNaps = 0;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+24079524
+net/sf/varscan/Trio.java 238 250
+net/sf/varscan/CallMpileup.java 218 230
+----------------------------------------
+	    	BufferedReader in = VarScan.getInfile(args);
+	    	String line;
+
+	    	// If no input, print usage //
+
+	    	if(in == null)
+	    	{
+	    		System.out.println(usage);
+				return;
+	    	}
+
+	    	// If input file not ready, give it a few seconds //
+	    	int numNaps = 0;
+
+----------------------------------------
+	    	BufferedReader in = VarScan.getInfile(args);
+	    	String line;
+
+	    	// If no input, print usage //
+
+	    	if(in == null)
+	    	{
+	    		System.out.println(usage);
+				return;
+	    	}
+
+	    	// If input file not ready, give it a few seconds //
+	    	int numNaps = 0;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+24079525
+net/sf/varscan/Trio.java 238 250
+net/sf/varscan/Copynumber.java 124 136
+----------------------------------------
+	    	BufferedReader in = VarScan.getInfile(args);
+	    	String line;
+
+	    	// If no input, print usage //
+
+	    	if(in == null)
+	    	{
+	    		System.out.println(usage);
+				return;
+	    	}
+
+	    	// If input file not ready, give it a few seconds //
+	    	int numNaps = 0;
+
+----------------------------------------
+	    	BufferedReader in = VarScan.getInfile(args);
+	    	String line;
+
+	    	// If no input, print usage //
+
+	    	if(in == null)
+	    	{
+	    		System.out.println(usage);
+				return;
+	    	}
+
+	    	// If input file not ready, give it a few seconds //
+	    	int numNaps = 0;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+24079526
+net/sf/varscan/CallMpileup.java 421 427
+net/sf/varscan/Trio.java 747 753
+----------------------------------------
+			    	        				double logP = 0;
+			    	        				try {
+				    	        				logP = 0 - (10 * java.lang.Math.log10(pValue));
+				    	        				if(logP > 255)
+				    	        					logP = 255;
+			    	        				}
+			    	        				catch(Exception e)
+
+----------------------------------------
+		    	        				double logP = 0;
+		    	        				try {
+			    	        				logP = 0 - (10 * java.lang.Math.log10(pValue));
+			    	        				if(logP > 255)
+			    	        					logP = 255;
+		    	        				}
+		    	        				catch(Exception e)
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+24079527
+net/sf/varscan/CallMpileup.java 421 427
+net/sf/varscan/Trio.java 555 561
+----------------------------------------
+			    	        				double logP = 0;
+			    	        				try {
+				    	        				logP = 0 - (10 * java.lang.Math.log10(pValue));
+				    	        				if(logP > 255)
+				    	        					logP = 255;
+			    	        				}
+			    	        				catch(Exception e)
+
+----------------------------------------
+		    	        				double logP = 0;
+		    	        				try {
+			    	        				logP = 0 - (10 * java.lang.Math.log10(pValue));
+			    	        				if(logP > 255)
+			    	        					logP = 255;
+		    	        				}
+		    	        				catch(Exception e)
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+24079528
+net/sf/varscan/CallMpileup.java 421 427
+net/sf/varscan/Trio.java 651 657
+----------------------------------------
+			    	        				double logP = 0;
+			    	        				try {
+				    	        				logP = 0 - (10 * java.lang.Math.log10(pValue));
+				    	        				if(logP > 255)
+				    	        					logP = 255;
+			    	        				}
+			    	        				catch(Exception e)
+
+----------------------------------------
+		    	        				double logP = 0;
+		    	        				try {
+			    	        				logP = 0 - (10 * java.lang.Math.log10(pValue));
+			    	        				if(logP > 255)
+			    	        					logP = 255;
+		    	        				}
+		    	        				catch(Exception e)
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+24079529
+net/sf/varscan/Somatic.java 1480 1488
+net/sf/varscan/Copynumber.java 1059 1067
+----------------------------------------
+	static boolean inSortOrder(String chrom1, String chrom2)
+	{
+		String[] testArray = {chrom1, chrom2};
+		Arrays.sort(testArray);
+
+		if(testArray[0].equals(chrom1))
+			return true;
+
+		return false;
+
+----------------------------------------
+	static boolean inSortOrder(String chrom1, String chrom2)
+	{
+		String[] testArray = {chrom1, chrom2};
+		Arrays.sort(testArray);
+
+		if(testArray[0].equals(chrom1))
+			return true;
+
+		return false;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+24079530
+net/sf/varscan/ReadCounts.java 67 80
+net/sf/varscan/CopyCaller.java 117 130
+----------------------------------------
+	    	e.printStackTrace(System.err);
+	    	System.exit(1);
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+	    // Define the statistics hash and reset counters //
+
+	    HashMap<String, Integer> stats = new HashMap<String, Integer>();
+
+----------------------------------------
+	    	e.printStackTrace(System.err);
+	    	System.exit(1);
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+	    // Define the statistics hash and reset counters //
+
+	    HashMap<String, Integer> stats = new HashMap<String, Integer>();
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+24079531
+net/sf/varscan/ReadCounts.java 67 80
+net/sf/varscan/FilterVariants.java 102 118
+----------------------------------------
+	    	e.printStackTrace(System.err);
+	    	System.exit(1);
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+	    // Define the statistics hash and reset counters //
+
+	    HashMap<String, Integer> stats = new HashMap<String, Integer>();
+
+----------------------------------------
+	    	e.printStackTrace(System.err);
+	    	System.exit(1);
+		}
+
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+		}
+
+		// Get the input file and parse it //
+
+	    // Define two-decimal-place format and statistics hash //
+
+	    HashMap<String, Integer> stats = new HashMap<String, Integer>();
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+24079532
+net/sf/varscan/CopyCaller.java 508 525
+net/sf/varscan/CopyCaller.java 289 306
+----------------------------------------
+	    				stats.put("numParsingExceptions", (stats.get("numParsingExceptions") + 1));
+
+	    				if(stats.get("numParsingExceptions") >= 5)
+	    				{
+	    					System.err.println("Too many parsing exceptions encountered; exiting");
+		    				System.exit(11);
+	    				}
+
+	    		    }
+
+
+	    		}
+
+	    	}
+	    	else
+	    	{
+	    		System.err.println("Input was not ready for parsing!");
+		    	System.exit(10);
+
+----------------------------------------
+	    				stats.put("numParsingExceptions", (stats.get("numParsingExceptions") + 1));
+
+	    				if(stats.get("numParsingExceptions") >= 5)
+	    				{
+	    					System.err.println("Too many parsing exceptions encountered; exiting");
+		    				System.exit(11);
+	    				}
+
+	    		    }
+
+
+	    		}
+
+	    	}
+	    	else
+	    	{
+	    		System.err.println("Input was not ready for parsing!");
+		    	System.exit(10);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+24079533
+net/sf/varscan/Trio.java 1098 1112
+net/sf/varscan/CallPileup.java 296 310
+----------------------------------------
+	    		    	numParsingExceptions++;
+	    				if(numParsingExceptions >= 5)
+	    				{
+	    					System.err.println("Too many parsing exceptions encountered; exiting");
+	    					return;
+	    				}
+	    		    	return;
+	    		    }
+
+
+	    		}
+
+				in.close();
+
+				System.err.println(numBases + " bases in pileup file");
+
+----------------------------------------
+	    				numParsingExceptions++;
+	    				if(numParsingExceptions >= 5)
+	    				{
+	    					System.err.println("Too many parsing exceptions encountered; exiting");
+	    					return;
+	    				}
+	    		    	return;
+	    		    }
+
+
+	    		}
+
+				in.close();
+
+				System.err.println(numBases + " bases in pileup file");
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+24079534
+net/sf/varscan/Trio.java 1098 1112
+net/sf/varscan/CallMpileup.java 922 936
+----------------------------------------
+	    		    	numParsingExceptions++;
+	    				if(numParsingExceptions >= 5)
+	    				{
+	    					System.err.println("Too many parsing exceptions encountered; exiting");
+	    					return;
+	    				}
+	    		    	return;
+	    		    }
+
+
+	    		}
+
+				in.close();
+
+				System.err.println(numBases + " bases in pileup file");
+
+----------------------------------------
+	    				numParsingExceptions++;
+	    				if(numParsingExceptions >= 5)
+	    				{
+	    					System.err.println("Too many parsing exceptions encountered; exiting");
+	    					return;
+	    				}
+	    		    	return;
+	    		    }
+
+
+	    		}
+
+				in.close();
+
+				System.err.println(numBases + " bases in pileup file");
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+24079535
+net/sf/varscan/Coverage.java 400 415
+net/sf/varscan/ProcessSomatic.java 410 425
+----------------------------------------
+	    			catch(Exception e)
+	    			{
+	    				if(lineCounter > 1)
+	    					System.err.println("Warning: Unable to parse chrom/position from " + line);
+	    			}
+
+
+	    		}
+	    	}
+
+	    	infile.close();
+		}
+		catch(Exception e)
+		{
+			System.err.println("ERROR: File Parsing Exception: " + e.getLocalizedMessage());
+			e.printStackTrace(System.err);
+
+----------------------------------------
+	    			catch(Exception e)
+	    			{
+	    				if(lineCounter > 1)
+	    					System.err.println("Warning: Unable to parse chrom/position from " + line);
+	    			}
+
+
+	    		}
+	    	}
+
+	    	infile.close();
+		}
+		catch(Exception e)
+		{
+			System.err.println("ERROR: File Parsing Exception: " + e.getLocalizedMessage());
+			e.printStackTrace(System.err);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+24079536
+net/sf/varscan/Coverage.java 400 415
+net/sf/varscan/LimitVariants.java 289 304
+----------------------------------------
+	    			catch(Exception e)
+	    			{
+	    				if(lineCounter > 1)
+	    					System.err.println("Warning: Unable to parse chrom/position from " + line);
+	    			}
+
+
+	    		}
+	    	}
+
+	    	infile.close();
+		}
+		catch(Exception e)
+		{
+			System.err.println("ERROR: File Parsing Exception: " + e.getLocalizedMessage());
+			e.printStackTrace(System.err);
+
+----------------------------------------
+	    			catch(Exception e)
+	    			{
+	    				if(lineCounter > 1)
+	    					System.err.println("Warning: Unable to parse chrom/position from " + line);
+	    			}
+
+
+	    		}
+	    	}
+
+	    	infile.close();
+		}
+		catch(Exception e)
+		{
+			System.err.println("ERROR: File Parsing Exception: " + e.getLocalizedMessage());
+			e.printStackTrace(System.err);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+24079537
+net/sf/varscan/Coverage.java 400 415
+net/sf/varscan/ReadCounts.java 391 406
+----------------------------------------
+	    			catch(Exception e)
+	    			{
+	    				if(lineCounter > 1)
+	    					System.err.println("Warning: Unable to parse chrom/position from " + line);
+	    			}
+
+
+	    		}
+	    	}
+
+	    	infile.close();
+		}
+		catch(Exception e)
+		{
+			System.err.println("ERROR: File Parsing Exception: " + e.getLocalizedMessage());
+			e.printStackTrace(System.err);
+
+----------------------------------------
+	    			catch(Exception e)
+	    			{
+	    				if(lineCounter > 1)
+	    					System.err.println("Warning: Unable to parse chrom/position from " + line);
+	    			}
+
+
+	    		}
+	    	}
+
+	    	infile.close();
+		}
+		catch(Exception e)
+		{
+			System.err.println("ERROR: File Parsing Exception: " + e.getLocalizedMessage());
+			e.printStackTrace(System.err);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+24079538
+net/sf/varscan/Coverage.java 400 415
+net/sf/varscan/Comparison.java 280 295
+----------------------------------------
+	    			catch(Exception e)
+	    			{
+	    				if(lineCounter > 1)
+	    					System.err.println("Warning: Unable to parse chrom/position from " + line);
+	    			}
+
+
+	    		}
+	    	}
+
+	    	infile.close();
+		}
+		catch(Exception e)
+		{
+			System.err.println("ERROR: File Parsing Exception: " + e.getLocalizedMessage());
+			e.printStackTrace(System.err);
+
+----------------------------------------
+	    			catch(Exception e)
+	    			{
+	    				if(lineCounter > 1)
+	    					System.err.println("Warning: Unable to parse chrom/position from " + line);
+	    			}
+
+
+	    		}
+	    	}
+
+	    	infile.close();
+		}
+		catch(Exception e)
+		{
+			System.err.println("ERROR: File Parsing Exception: " + e.getLocalizedMessage());
+			e.printStackTrace(System.err);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+24079539
+net/sf/varscan/FpFilter.java 135 146
+net/sf/varscan/Somatic.java 877 888
+----------------------------------------
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	System.exit(1);
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+
+----------------------------------------
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	System.exit(1);
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+24079540
+net/sf/varscan/FpFilter.java 135 146
+net/sf/varscan/Copynumber.java 94 105
+----------------------------------------
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	System.exit(1);
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+
+----------------------------------------
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	System.exit(1);
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+24079541
+net/sf/varscan/FpFilter.java 135 146
+net/sf/varscan/FilterVariants.java 99 111
+----------------------------------------
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	System.exit(1);
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+
+----------------------------------------
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	System.exit(1);
+		}
+
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+24079542
+net/sf/varscan/FpFilter.java 135 146
+net/sf/varscan/ReadCounts.java 64 75
+----------------------------------------
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	System.exit(1);
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+
+----------------------------------------
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	System.exit(1);
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+24079543
+net/sf/varscan/FpFilter.java 135 146
+net/sf/varscan/Somatic.java 199 210
+----------------------------------------
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	System.exit(1);
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+
+----------------------------------------
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	System.exit(1);
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+24079544
+net/sf/varscan/FpFilter.java 135 146
+net/sf/varscan/Copynumber.java 517 528
+----------------------------------------
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	System.exit(1);
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+
+----------------------------------------
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	System.exit(1);
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+24079545
+net/sf/varscan/FpFilter.java 135 146
+net/sf/varscan/FilterSomatic.java 108 119
+----------------------------------------
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	System.exit(1);
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+
+----------------------------------------
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	System.exit(1);
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+24079546
+net/sf/varscan/FpFilter.java 135 146
+net/sf/varscan/ProcessSomatic.java 48 59
+----------------------------------------
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	System.exit(1);
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+
+----------------------------------------
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	System.exit(1);
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+24079547
+net/sf/varscan/Somatic.java 1074 1089
+net/sf/varscan/Copynumber.java 712 727
+----------------------------------------
+		    		while(chromNormal.equals(chromTumor) && posTumor < posNormal && ((lineTumor = tumor.readLine()) != null))
+		    		{
+		    			tumorContents = lineTumor.split("\t");
+				    	if(tumorContents.length > 1)
+				    	{
+					    	chromTumor = tumorContents[0];
+					    	posTumor = Integer.parseInt(tumorContents[1]);
+				    	}
+		    		}
+
+		    		// Proceed if normal and tumor positions match //
+
+		    		if(chromNormal.equals(chromTumor) && chromNormal.equals(chromTumor) && posNormal == posTumor)
+		    		{
+		    			//stats.put("sharedPositions", (stats.get("sharedPositions") + 1));
+		    			sharedPositions++;
+
+----------------------------------------
+		    		while(chromNormal.equals(chromTumor) && posTumor < posNormal && ((lineTumor = tumor.readLine()) != null))
+		    		{
+		    			tumorContents = lineTumor.split("\t");
+				    	if(tumorContents.length > 1)
+				    	{
+					    	chromTumor = tumorContents[0];
+					    	posTumor = Integer.parseInt(tumorContents[1]);
+				    	}
+		    		}
+
+		    		// Proceed if normal and tumor positions match //
+
+		    		if(chromNormal.equals(chromTumor) && chromNormal.equals(chromTumor) && posNormal == posTumor)
+		    		{
+		    			//stats.put("sharedPositions", (stats.get("sharedPositions") + 1));
+		    			sharedPositions++;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+24079548
+net/sf/varscan/FishersExact.java 157 165
+net/sf/varscan/FishersExact.java 129 137
+----------------------------------------
+        int min, i;
+        int n = a + b + c + d;
+        if (n > maxSize) {
+            return Double.NaN;
+        }
+        double p = 0;
+
+        p += getP(a, b, c, d);
+        if (DEBUG) {System.out.println("p = " + p);}
+
+----------------------------------------
+        int min, i;
+        int n = a + b + c + d;
+        if (n > maxSize) {
+            return Double.NaN;
+        }
+        double p = 0;
+
+        p += getP(a, b, c, d);
+        if (DEBUG) {System.out.println("p = " + p);}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+24079549
+net/sf/varscan/FishersExact.java 157 165
+net/sf/varscan/FishersExact.java 86 94
+----------------------------------------
+        int min, i;
+        int n = a + b + c + d;
+        if (n > maxSize) {
+            return Double.NaN;
+        }
+        double p = 0;
+
+        p += getP(a, b, c, d);
+        if (DEBUG) {System.out.println("p = " + p);}
+
+----------------------------------------
+        int min, i;
+        int n = a + b + c + d;
+        if (n > maxSize) {
+            return Double.NaN;
+        }
+        double p = 0;
+
+        p += getP(a, b, c, d);
+        if (DEBUG) {System.out.println("p = " + p);}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+24079550
+net/sf/varscan/LimitVariants.java 82 93
+net/sf/varscan/Coverage.java 66 77
+----------------------------------------
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	return;
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+
+----------------------------------------
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	return;
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+24079551
+net/sf/varscan/LimitVariants.java 82 93
+net/sf/varscan/Trio.java 196 207
+----------------------------------------
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	return;
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+
+----------------------------------------
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	return;
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+24079552
+net/sf/varscan/LimitVariants.java 82 93
+net/sf/varscan/CallPileup.java 87 98
+----------------------------------------
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	return;
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+
+----------------------------------------
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	return;
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+24079553
+net/sf/varscan/LimitVariants.java 82 93
+net/sf/varscan/CallMpileup.java 182 193
+----------------------------------------
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	return;
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+
+----------------------------------------
+		catch(Exception e)
+		{
+	    	System.err.println("Input Parameter Threw Exception: " + e.getLocalizedMessage());
+	    	e.printStackTrace(System.err);
+	    	return;
+		}
+
+		// Print usage if -h or --help invoked //
+		if(params.containsKey("help") || params.containsKey("h"))
+		{
+			System.err.println(usage);
+			return;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+24079554
+net/sf/varscan/Copynumber.java 418 428
+net/sf/varscan/Somatic.java 697 707
+----------------------------------------
+	    	else
+	    	{
+	    		System.err.println("Input file never ready for parsing (maybe due to file I/O)...");
+	    		System.exit(10);
+	    	}
+	    }
+		catch (IOException e)
+		{
+			System.err.println("File Parsing Exception: " + e.getLocalizedMessage());
+			e.printStackTrace(System.err);
+			System.exit(11);
+
+----------------------------------------
+	    	else
+	    	{
+	    		System.err.println("Input file never ready for parsing (maybe due to file I/O)...");
+	    		System.exit(10);
+	    	}
+		}
+		catch (IOException e)
+		{
+			System.err.println("File Parsing Exception: " + e.getLocalizedMessage());
+			e.printStackTrace(System.err);
+			System.exit(11);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+24079555
+net/sf/varscan/Somatic.java 721 727
+net/sf/varscan/Somatic.java 39 45
+----------------------------------------
+			"\toutput - Output base name for SNP and indel output\n" +
+			"\nOPTIONS:\n" +
+			"\t--output-snp - Output file for SNP calls [output.snp]\n" +
+			"\t--output-indel - Output file for indel calls [output.indel]\n" +
+			"\t--min-coverage - Minimum coverage in normal and tumor to call variant [8]\n" +
+			"\t--min-coverage-normal - Minimum coverage in normal to call somatic [8]\n" +
+			"\t--min-coverage-tumor - Minimum coverage in tumor to call somatic [6]\n" +
+
+----------------------------------------
+			"\toutput - Output base name for SNP and indel output\n" +
+			"\nOPTIONS:\n" +
+			"\t--output-snp - Output file for SNP calls [output.snp]\n" +
+			"\t--output-indel - Output file for indel calls [output.indel]\n" +
+			"\t--min-coverage - Minimum coverage in normal and tumor to call variant [8]\n" +
+			"\t--min-coverage-normal - Minimum coverage in normal to call somatic [8]\n" +
+			"\t--min-coverage-tumor - Minimum coverage in tumor to call somatic [6]\n" +
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+24079556
+net/sf/varscan/Trio.java 570 577
+net/sf/varscan/Trio.java 762 769
+----------------------------------------
+		    	        					int expReads1 = (reads1 + reads2) / 2;
+		    	        					int expReads2 = (reads1 + reads2) - expReads1;
+		    	        					double newPvalue = VarScan.getSignificance(reads1, reads2, expReads1, expReads2);
+		    	        					double newLogP = 0;
+			    	        				try {
+				    	        				newLogP = 0 - (10 * java.lang.Math.log10(newPvalue));
+			    	        				}
+			    	        				catch(Exception e)
+
+----------------------------------------
+		    	        					int expReads1 = (reads1 + reads2) / 2;
+		    	        					int expReads2 = (reads1 + reads2) - expReads1;
+		    	        					double newPvalue = VarScan.getSignificance(reads1, reads2, expReads1, expReads2);
+		    	        					double newLogP = 0;
+			    	        				try {
+				    	        				newLogP = 0 - (10 * java.lang.Math.log10(newPvalue));
+			    	        				}
+			    	        				catch(Exception e)
+
+----------------------------------------

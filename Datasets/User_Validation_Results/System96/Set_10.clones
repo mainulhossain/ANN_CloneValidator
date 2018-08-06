@@ -1,0 +1,5001 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834561
+net/sf/varscan/Somatic.java 1075 1082
+net/sf/varscan/Copynumber.java 921 929
+----------------------------------------
+		    		{
+		    			tumorContents = lineTumor.split("\t");
+				    	if(tumorContents.length > 1)
+				    	{
+					    	chromTumor = tumorContents[0];
+					    	posTumor = Integer.parseInt(tumorContents[1]);
+				    	}
+		    		}
+
+----------------------------------------
+		    			{
+			    			tumorContents = lineTumor.split("\t");
+
+					    	if(tumorContents.length > 1)
+					    	{
+						    	chromTumor = tumorContents[0];
+						    	posTumor = Integer.parseInt(tumorContents[1]);
+					    	}
+		    			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834563
+net/sf/varscan/Somatic.java 1063 1070
+net/sf/varscan/Copynumber.java 921 929
+----------------------------------------
+		    		{
+		    			String[] normalContents = lineNormal.split("\t");
+				    	if(normalContents.length > 1)
+				    	{
+					    	chromNormal = normalContents[0];
+					    	posNormal = Integer.parseInt(normalContents[1]);
+				    	}
+		    		}
+
+----------------------------------------
+		    			{
+			    			tumorContents = lineTumor.split("\t");
+
+					    	if(tumorContents.length > 1)
+					    	{
+						    	chromTumor = tumorContents[0];
+						    	posTumor = Integer.parseInt(tumorContents[1]);
+					    	}
+		    			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834568
+net/sf/varscan/Somatic.java 1039 1047
+net/sf/varscan/Copynumber.java 921 929
+----------------------------------------
+		    		{
+		    			String[] normalContents = lineNormal.split("\t");
+
+				    	if(normalContents.length > 1)
+				    	{
+					    	chromNormal = normalContents[0];
+					    	posNormal = Integer.parseInt(normalContents[1]);
+				    	}
+		    		}
+
+----------------------------------------
+		    			{
+			    			tumorContents = lineTumor.split("\t");
+
+					    	if(tumorContents.length > 1)
+					    	{
+						    	chromTumor = tumorContents[0];
+						    	posTumor = Integer.parseInt(tumorContents[1]);
+					    	}
+		    			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834564
+net/sf/varscan/Copynumber.java 619 627
+net/sf/varscan/Copynumber.java 921 929
+----------------------------------------
+		    {
+		    	String[] normalContents = lineNormal.split("\t");
+
+		    	if(normalContents.length > 1)
+		    	{
+			    	chromNormal = normalContents[0];
+			    	posNormal = Integer.parseInt(normalContents[1]);
+		    	}
+		    }
+
+----------------------------------------
+		    			{
+			    			tumorContents = lineTumor.split("\t");
+
+					    	if(tumorContents.length > 1)
+					    	{
+						    	chromTumor = tumorContents[0];
+						    	posTumor = Integer.parseInt(tumorContents[1]);
+					    	}
+		    			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834569
+net/sf/varscan/Somatic.java 1424 1437
+net/sf/varscan/Copynumber.java 939 952
+----------------------------------------
+		    		{
+		    			if(inSortOrder(chromNormal, chromTumor))
+		    			{
+		    				System.err.println("Not resetting normal file because " + chromNormal + " < " + chromTumor);
+		    			}
+		    			else
+		    			{
+		    				System.err.println("Resetting normal file because " + chromNormal + " > " + chromTumor);
+				    		normalWasReset = true;
+			    			normal.close();
+				    		normal = new BufferedReader(new FileReader(normalPileupFile));
+		    			}
+
+		    		}
+
+----------------------------------------
+		    		{
+		    			if(inSortOrder(chromNormal, chromTumor))
+		    			{
+		    				System.err.println("Not resetting normal file because " + chromNormal + " < " + chromTumor);
+		    			}
+		    			else
+		    			{
+		    				System.err.println("Resetting normal file because " + chromNormal + " > " + chromTumor);
+				    		normalWasReset = true;
+			    			normal.close();
+				    		normal = new BufferedReader(new FileReader(normalPileupFile));
+		    			}
+
+		    		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834572
+net/sf/varscan/Trio.java 590 627
+net/sf/varscan/Trio.java 782 819
+----------------------------------------
+		    	        				{
+		    	        					// Determine how many variant alleles have been seen //
+
+		    	        					int varAlleleNumber = 0;
+
+		    	        					// Determine if we've seen the variant and what its number is ##
+
+			    	        				if(varAlleles.containsKey(fatherAllele))
+			    	        				{
+			    	        					varAlleleNumber = varAlleles.get(fatherAllele);
+			    	        				}
+			    	        				else
+			    	        				{
+			    	        					// IF no variants yet seen, this is variant allele 1 //
+			    	        					varAlleleNumber = varAlleles.size() + 1;
+			    	        					varAlleles.put(fatherAllele, varAlleleNumber);
+			    	        				}
+
+			    	        				if(fatherContents.length >= 1)
+			    	        				{
+			    	        					if(VarScan.isHomozygous(consBase))
+			    	        					{
+			    	        						fatherVCF = varAlleleNumber + "/" + varAlleleNumber;
+			    	        					}
+			    	        					else
+			    	        					{
+			    	        						fatherVCF = "0" + "/" + varAlleleNumber;
+			    	        					}
+
+			    	        					fatherVCF += ":" + (int) logP + ":" + fatherDepth + ":" + fatherQualityDepth;
+		    	        						fatherVCF += ":" + reads1 + ":" + reads2 + ":" + varFreq + ":" + pvalueFormat.format(pValue);
+		    	        						fatherVCF += ":" + qual1 + ":" + qual2;
+		    	        						fatherVCF += ":" + reads1plus + ":" + reads1minus + ":" + reads2plus + ":" + reads2minus;
+			    	        				}
+
+		    	        					if(fatherAllele.length() > 1)
+		    	        						variantType = "Indel";
+		    	        				}
+
+----------------------------------------
+		    	        				{
+		    	        					// Determine how many variant alleles have been seen //
+
+		    	        					int varAlleleNumber = 0;
+
+		    	        					// Determine if we've seen the variant and what its number is ##
+
+			    	        				if(varAlleles.containsKey(childAllele))
+			    	        				{
+			    	        					varAlleleNumber = varAlleles.get(childAllele);
+			    	        				}
+			    	        				else
+			    	        				{
+			    	        					// IF no variants yet seen, this is variant allele 1 //
+			    	        					varAlleleNumber = varAlleles.size() + 1;
+			    	        					varAlleles.put(childAllele, varAlleleNumber);
+			    	        				}
+
+			    	        				if(childContents.length >= 1)
+			    	        				{
+			    	        					if(VarScan.isHomozygous(consBase))
+			    	        					{
+			    	        						childVCF = varAlleleNumber + "/" + varAlleleNumber;
+			    	        					}
+			    	        					else
+			    	        					{
+			    	        						childVCF = "0" + "/" + varAlleleNumber;
+			    	        					}
+
+			    	        					childVCF += ":" + (int) logP + ":" + childDepth + ":" + childQualityDepth;
+		    	        						childVCF += ":" + reads1 + ":" + reads2 + ":" + varFreq + ":" + pvalueFormat.format(pValue);
+		    	        						childVCF += ":" + qual1 + ":" + qual2;
+		    	        						childVCF += ":" + reads1plus + ":" + reads1minus + ":" + reads2plus + ":" + reads2minus;
+			    	        				}
+
+		    	        					if(childAllele.length() > 1)
+		    	        						variantType = "Indel";
+		    	        				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834571
+net/sf/varscan/CallMpileup.java 436 471
+net/sf/varscan/Trio.java 782 819
+----------------------------------------
+			    	        				{
+			    	        					varAllele = callContents[15];
+
+			    	        					// Determine how many variant alleles have been seen //
+
+			    	        					int varAlleleNumber = 0;
+
+			    	        					// Determine if we've seen the variant and what its number is ##
+
+				    	        				if(varAlleles.containsKey(varAllele))
+				    	        				{
+				    	        					varAlleleNumber = varAlleles.get(varAllele);
+				    	        				}
+				    	        				else
+				    	        				{
+				    	        					// IF no variants yet seen, this is variant allele 1 //
+				    	        					varAlleleNumber = varAlleles.size() + 1;
+				    	        					varAlleles.put(varAllele, varAlleleNumber);
+				    	        				}
+
+			    	        					if(VarScan.isHomozygous(consBase))
+			    	        					{
+			    	        						samplesHom++;
+			    	        						thisVCF = varAlleleNumber + "/" + varAlleleNumber;
+			    	        					}
+			    	        					else
+			    	        					{
+			    	        						samplesHet++;
+			    	        						thisVCF = "0" + "/" + varAlleleNumber;
+			    	        					}
+
+			    	        					thisVCF += ":" + (int) logP + ":" + readDepth + ":" + qualityDepth;
+		    	        						thisVCF += ":" + reads1 + ":" + reads2 + ":" + varFreq + ":" + pvalueFormat.format(pValue);
+		    	        						thisVCF += ":" + qual1 + ":" + qual2;
+		    	        						thisVCF += ":" + reads1plus + ":" + reads1minus + ":" + reads2plus + ":" + reads2minus;
+			    	        				}
+
+----------------------------------------
+		    	        				{
+		    	        					// Determine how many variant alleles have been seen //
+
+		    	        					int varAlleleNumber = 0;
+
+		    	        					// Determine if we've seen the variant and what its number is ##
+
+			    	        				if(varAlleles.containsKey(childAllele))
+			    	        				{
+			    	        					varAlleleNumber = varAlleles.get(childAllele);
+			    	        				}
+			    	        				else
+			    	        				{
+			    	        					// IF no variants yet seen, this is variant allele 1 //
+			    	        					varAlleleNumber = varAlleles.size() + 1;
+			    	        					varAlleles.put(childAllele, varAlleleNumber);
+			    	        				}
+
+			    	        				if(childContents.length >= 1)
+			    	        				{
+			    	        					if(VarScan.isHomozygous(consBase))
+			    	        					{
+			    	        						childVCF = varAlleleNumber + "/" + varAlleleNumber;
+			    	        					}
+			    	        					else
+			    	        					{
+			    	        						childVCF = "0" + "/" + varAlleleNumber;
+			    	        					}
+
+			    	        					childVCF += ":" + (int) logP + ":" + childDepth + ":" + childQualityDepth;
+		    	        						childVCF += ":" + reads1 + ":" + reads2 + ":" + varFreq + ":" + pvalueFormat.format(pValue);
+		    	        						childVCF += ":" + qual1 + ":" + qual2;
+		    	        						childVCF += ":" + reads1plus + ":" + reads1minus + ":" + reads2plus + ":" + reads2minus;
+			    	        				}
+
+		    	        					if(childAllele.length() > 1)
+		    	        						variantType = "Indel";
+		    	        				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834573
+net/sf/varscan/Trio.java 686 723
+net/sf/varscan/Trio.java 782 819
+----------------------------------------
+		    	        				{
+		    	        					// Determine how many variant alleles have been seen //
+
+		    	        					int varAlleleNumber = 0;
+
+		    	        					// Determine if we've seen the variant and what its number is ##
+
+			    	        				if(varAlleles.containsKey(motherAllele))
+			    	        				{
+			    	        					varAlleleNumber = varAlleles.get(motherAllele);
+			    	        				}
+			    	        				else
+			    	        				{
+			    	        					// IF no variants yet seen, this is variant allele 1 //
+			    	        					varAlleleNumber = varAlleles.size() + 1;
+			    	        					varAlleles.put(motherAllele, varAlleleNumber);
+			    	        				}
+
+			    	        				if(motherContents.length >= 1)
+			    	        				{
+			    	        					if(VarScan.isHomozygous(consBase))
+			    	        					{
+			    	        						motherVCF = varAlleleNumber + "/" + varAlleleNumber;
+			    	        					}
+			    	        					else
+			    	        					{
+			    	        						motherVCF = "0" + "/" + varAlleleNumber;
+			    	        					}
+
+			    	        					motherVCF += ":" + (int) logP + ":" + motherDepth + ":" + motherQualityDepth;
+		    	        						motherVCF += ":" + reads1 + ":" + reads2 + ":" + varFreq + ":" + pvalueFormat.format(pValue);
+		    	        						motherVCF += ":" + qual1 + ":" + qual2;
+		    	        						motherVCF += ":" + reads1plus + ":" + reads1minus + ":" + reads2plus + ":" + reads2minus;
+			    	        				}
+
+		    	        					if(motherAllele.length() > 1)
+		    	        						variantType = "Indel";
+		    	        				}
+
+----------------------------------------
+		    	        				{
+		    	        					// Determine how many variant alleles have been seen //
+
+		    	        					int varAlleleNumber = 0;
+
+		    	        					// Determine if we've seen the variant and what its number is ##
+
+			    	        				if(varAlleles.containsKey(childAllele))
+			    	        				{
+			    	        					varAlleleNumber = varAlleles.get(childAllele);
+			    	        				}
+			    	        				else
+			    	        				{
+			    	        					// IF no variants yet seen, this is variant allele 1 //
+			    	        					varAlleleNumber = varAlleles.size() + 1;
+			    	        					varAlleles.put(childAllele, varAlleleNumber);
+			    	        				}
+
+			    	        				if(childContents.length >= 1)
+			    	        				{
+			    	        					if(VarScan.isHomozygous(consBase))
+			    	        					{
+			    	        						childVCF = varAlleleNumber + "/" + varAlleleNumber;
+			    	        					}
+			    	        					else
+			    	        					{
+			    	        						childVCF = "0" + "/" + varAlleleNumber;
+			    	        					}
+
+			    	        					childVCF += ":" + (int) logP + ":" + childDepth + ":" + childQualityDepth;
+		    	        						childVCF += ":" + reads1 + ":" + reads2 + ":" + varFreq + ":" + pvalueFormat.format(pValue);
+		    	        						childVCF += ":" + qual1 + ":" + qual2;
+		    	        						childVCF += ":" + reads1plus + ":" + reads1minus + ":" + reads2plus + ":" + reads2minus;
+			    	        				}
+
+		    	        					if(childAllele.length() > 1)
+		    	        						variantType = "Indel";
+		    	        				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834574
+net/sf/varscan/Trio.java 705 719
+net/sf/varscan/Trio.java 801 815
+----------------------------------------
+			    	        				{
+			    	        					if(VarScan.isHomozygous(consBase))
+			    	        					{
+			    	        						motherVCF = varAlleleNumber + "/" + varAlleleNumber;
+			    	        					}
+			    	        					else
+			    	        					{
+			    	        						motherVCF = "0" + "/" + varAlleleNumber;
+			    	        					}
+
+			    	        					motherVCF += ":" + (int) logP + ":" + motherDepth + ":" + motherQualityDepth;
+		    	        						motherVCF += ":" + reads1 + ":" + reads2 + ":" + varFreq + ":" + pvalueFormat.format(pValue);
+		    	        						motherVCF += ":" + qual1 + ":" + qual2;
+		    	        						motherVCF += ":" + reads1plus + ":" + reads1minus + ":" + reads2plus + ":" + reads2minus;
+			    	        				}
+
+----------------------------------------
+			    	        				{
+			    	        					if(VarScan.isHomozygous(consBase))
+			    	        					{
+			    	        						childVCF = varAlleleNumber + "/" + varAlleleNumber;
+			    	        					}
+			    	        					else
+			    	        					{
+			    	        						childVCF = "0" + "/" + varAlleleNumber;
+			    	        					}
+
+			    	        					childVCF += ":" + (int) logP + ":" + childDepth + ":" + childQualityDepth;
+		    	        						childVCF += ":" + reads1 + ":" + reads2 + ":" + varFreq + ":" + pvalueFormat.format(pValue);
+		    	        						childVCF += ":" + qual1 + ":" + qual2;
+		    	        						childVCF += ":" + reads1plus + ":" + reads1minus + ":" + reads2plus + ":" + reads2minus;
+			    	        				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834575
+net/sf/varscan/Trio.java 609 623
+net/sf/varscan/Trio.java 801 815
+----------------------------------------
+			    	        				{
+			    	        					if(VarScan.isHomozygous(consBase))
+			    	        					{
+			    	        						fatherVCF = varAlleleNumber + "/" + varAlleleNumber;
+			    	        					}
+			    	        					else
+			    	        					{
+			    	        						fatherVCF = "0" + "/" + varAlleleNumber;
+			    	        					}
+
+			    	        					fatherVCF += ":" + (int) logP + ":" + fatherDepth + ":" + fatherQualityDepth;
+		    	        						fatherVCF += ":" + reads1 + ":" + reads2 + ":" + varFreq + ":" + pvalueFormat.format(pValue);
+		    	        						fatherVCF += ":" + qual1 + ":" + qual2;
+		    	        						fatherVCF += ":" + reads1plus + ":" + reads1minus + ":" + reads2plus + ":" + reads2minus;
+			    	        				}
+
+----------------------------------------
+			    	        				{
+			    	        					if(VarScan.isHomozygous(consBase))
+			    	        					{
+			    	        						childVCF = varAlleleNumber + "/" + varAlleleNumber;
+			    	        					}
+			    	        					else
+			    	        					{
+			    	        						childVCF = "0" + "/" + varAlleleNumber;
+			    	        					}
+
+			    	        					childVCF += ":" + (int) logP + ":" + childDepth + ":" + childQualityDepth;
+		    	        						childVCF += ":" + reads1 + ":" + reads2 + ":" + varFreq + ":" + pvalueFormat.format(pValue);
+		    	        						childVCF += ":" + qual1 + ":" + qual2;
+		    	        						childVCF += ":" + reads1plus + ":" + reads1minus + ":" + reads2plus + ":" + reads2minus;
+			    	        				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834617
+net/sf/varscan/CallMpileup.java 129 134
+net/sf/varscan/Trio.java 151 156
+----------------------------------------
+	    				{
+	    					String sampleName = line;
+	    					if(sampleList.length() > 0)
+	    						sampleList += "\t";
+	    					sampleList += sampleName;
+	    				}
+
+----------------------------------------
+	    				{
+	    					String sampleName = line;
+	    					if(sampleList.length() > 0)
+	    						sampleList += "\t";
+	    					sampleList += sampleName;
+	    				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834615
+net/sf/varscan/CallMpileup.java 662 667
+net/sf/varscan/Trio.java 151 156
+----------------------------------------
+	    					{
+	    						if(varBases.length() > 0)
+	    							varBases += ",";
+
+	    						varBases += allele;
+	    					}
+
+----------------------------------------
+	    				{
+	    					String sampleName = line;
+	    					if(sampleList.length() > 0)
+	    						sampleList += "\t";
+	    					sampleList += sampleName;
+	    				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834576
+net/sf/varscan/Trio.java 151 156
+net/sf/varscan/Trio.java 850 855
+----------------------------------------
+	    				{
+	    					String sampleName = line;
+	    					if(sampleList.length() > 0)
+	    						sampleList += "\t";
+	    					sampleList += sampleName;
+	    				}
+
+----------------------------------------
+	    	    					{
+	    	    						if(varBases.length() > 0)
+	    	    							varBases += ",";
+
+	    	    						varBases += allele;
+	    	    					}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834577
+net/sf/varscan/CallMpileup.java 662 667
+net/sf/varscan/Trio.java 850 855
+----------------------------------------
+	    					{
+	    						if(varBases.length() > 0)
+	    							varBases += ",";
+
+	    						varBases += allele;
+	    					}
+
+----------------------------------------
+	    	    					{
+	    	    						if(varBases.length() > 0)
+	    	    							varBases += ",";
+
+	    	    						varBases += allele;
+	    	    					}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834578
+net/sf/varscan/CallMpileup.java 129 134
+net/sf/varscan/Trio.java 850 855
+----------------------------------------
+	    				{
+	    					String sampleName = line;
+	    					if(sampleList.length() > 0)
+	    						sampleList += "\t";
+	    					sampleList += sampleName;
+	    				}
+
+----------------------------------------
+	    	    					{
+	    	    						if(varBases.length() > 0)
+	    	    							varBases += ",";
+
+	    	    						varBases += allele;
+	    	    					}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834579
+net/sf/varscan/Comparison.java 93 140
+net/sf/varscan/Comparison.java 163 202
+----------------------------------------
+	    			{
+	    				String refName = lineContents[0];
+	    				int position = Integer.parseInt(lineContents[1]);
+
+	    				// Declare booleans //
+
+	    				boolean inFile1 = false;
+	    				boolean inFile2 = false;
+
+	    				// Declare a BitSet //
+	    				BitSet refPositions;
+
+	    				if(positionHash1.containsKey(refName))
+	    				{
+	    					refPositions = positionHash1.get(refName);
+	    					if(refPositions.get(position))
+	    						inFile1 = true;
+	    				}
+
+	    				if(positionHash2.containsKey(refName))
+	    				{
+	    					refPositions = positionHash2.get(refName);
+	    					if(refPositions.get(position))
+	    						inFile2 = true;
+	    				}
+
+	    				// Check to see if shared //
+	    				if(inFile1 && inFile2)
+	    				{
+	    					numShared++;
+	    					if(comparisonType.equals("intersect"))
+	    					{
+	    						outFile.println(line);
+	    					}
+	    				}
+	    				else if(inFile1)
+	    				{
+	    					if(comparisonType.equals("unique1"))
+	    						outFile.println(line);
+	    					uniqueToFile1++;
+	    				}
+
+	    				// Check to see if merging //
+	    				if(comparisonType.equals("merge"))
+	    				{
+	    					outFile.println(line);
+	    				}
+	    			}
+
+----------------------------------------
+	    			{
+	    				String refName = lineContents[0];
+	    				int position = Integer.parseInt(lineContents[1]);
+
+	    				// Declare booleans //
+
+	    				boolean inFile1 = false;
+	    				boolean inFile2 = false;
+
+	    				// Declare a BitSet //
+	    				BitSet refPositions;
+
+	    				if(positionHash1.containsKey(refName))
+	    				{
+	    					refPositions = positionHash1.get(refName);
+	    					if(refPositions.get(position))
+	    						inFile1 = true;
+	    				}
+
+	    				if(positionHash2.containsKey(refName))
+	    				{
+	    					refPositions = positionHash2.get(refName);
+	    					if(refPositions.get(position))
+	    						inFile2 = true;
+	    				}
+
+	    				// Check to see if shared //
+	    				if(inFile1 && inFile2)
+	    				{
+	    					// Already counted and printed in file 1 //
+	    				}
+	    				else if(inFile2)
+	    				{
+	    					if(comparisonType.equals("merge") || comparisonType.equals("unique2"))
+	    						outFile.println(line);
+
+	    					uniqueToFile2++;
+	    				}
+
+	    			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834580
+net/sf/varscan/Somatic.java 1430 1435
+net/sf/varscan/Copynumber.java 945 950
+----------------------------------------
+		    			{
+		    				System.err.println("Resetting normal file because " + chromNormal + " > " + chromTumor);
+				    		normalWasReset = true;
+			    			normal.close();
+				    		normal = new BufferedReader(new FileReader(normalPileupFile));
+		    			}
+
+----------------------------------------
+		    			{
+		    				System.err.println("Resetting normal file because " + chromNormal + " > " + chromTumor);
+				    		normalWasReset = true;
+			    			normal.close();
+				    		normal = new BufferedReader(new FileReader(normalPileupFile));
+		    			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834585
+net/sf/varscan/ProcessSomatic.java 266 274
+net/sf/varscan/Copynumber.java 963 972
+----------------------------------------
+		    				{
+		    					numGermline++;
+		    					outGermline.println(line);
+		    					if(normalFreq >= minTumorFreq && tumorFreq >= minTumorFreq && somaticPvalue <= pValueForHC)
+		    					{
+		    						numGermlineHC++;
+		    						outGermlineHC.println(line);
+		    					}
+		    				}
+
+----------------------------------------
+			{
+				rawCopySegments++;
+				String regionResults = processCopyRegion(copyChrom, copyStart, copyStop, copyPositions, copyPositionsGC, copySumNormal, copySumTumor, minCoverage, dataRatio);
+
+				if(regionResults.length() > 0)
+				{
+					outCopySegments.println(regionResults);
+					goodCopySegments++;
+				}
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834581
+net/sf/varscan/ProcessSomatic.java 256 264
+net/sf/varscan/Copynumber.java 963 972
+----------------------------------------
+		    				{
+		    					numSomatic++;
+		    					outSomatic.println(line);
+		    					if(normalFreq <= maxNormalFreq && tumorFreq >= minTumorFreq && somaticPvalue <= pValueForHC)
+		    					{
+		    						numSomaticHC++;
+		    						outSomaticHC.println(line);
+		    					}
+		    				}
+
+----------------------------------------
+			{
+				rawCopySegments++;
+				String regionResults = processCopyRegion(copyChrom, copyStart, copyStop, copyPositions, copyPositionsGC, copySumNormal, copySumTumor, minCoverage, dataRatio);
+
+				if(regionResults.length() > 0)
+				{
+					outCopySegments.println(regionResults);
+					goodCopySegments++;
+				}
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834586
+net/sf/varscan/Copynumber.java 399 408
+net/sf/varscan/Copynumber.java 963 972
+----------------------------------------
+				{
+					rawCopySegments++;
+					String regionResults = processCopyRegion(copyChrom, copyStart, copyStop, copyPositions, copyPositionsGC, copySumNormal, copySumTumor, minCoverage, dataRatio);
+
+					if(regionResults.length() > 0)
+					{
+						outCopySegments.println(regionResults);
+						goodCopySegments++;
+					}
+				}
+
+----------------------------------------
+			{
+				rawCopySegments++;
+				String regionResults = processCopyRegion(copyChrom, copyStart, copyStop, copyPositions, copyPositionsGC, copySumNormal, copySumTumor, minCoverage, dataRatio);
+
+				if(regionResults.length() > 0)
+				{
+					outCopySegments.println(regionResults);
+					goodCopySegments++;
+				}
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834582
+net/sf/varscan/Copynumber.java 841 850
+net/sf/varscan/Copynumber.java 963 972
+----------------------------------------
+    	    					{
+    	    						rawCopySegments++;
+    	    						String regionResults = processCopyRegion(copyChrom, copyStart, copyStop, copyPositions, copyPositionsGC, copySumNormal, copySumTumor, minCoverage, dataRatio);
+
+    	    						if(regionResults.length() > 0)
+    	    						{
+    	    							outCopySegments.println(regionResults);
+    	    							goodCopySegments++;
+    	    						}
+    	    					}
+
+----------------------------------------
+			{
+				rawCopySegments++;
+				String regionResults = processCopyRegion(copyChrom, copyStart, copyStop, copyPositions, copyPositionsGC, copySumNormal, copySumTumor, minCoverage, dataRatio);
+
+				if(regionResults.length() > 0)
+				{
+					outCopySegments.println(regionResults);
+					goodCopySegments++;
+				}
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834587
+net/sf/varscan/Copynumber.java 318 327
+net/sf/varscan/Copynumber.java 963 972
+----------------------------------------
+	    	    					{
+	    	    						rawCopySegments++;
+	    	    						String regionResults = processCopyRegion(copyChrom, copyStart, copyStop, copyPositions, copyPositionsGC, copySumNormal, copySumTumor, minCoverage, dataRatio);
+
+	    	    						if(regionResults.length() > 0)
+	    	    						{
+	    	    							outCopySegments.println(regionResults);
+	    	    							goodCopySegments++;
+	    	    						}
+	    	    					}
+
+----------------------------------------
+			{
+				rawCopySegments++;
+				String regionResults = processCopyRegion(copyChrom, copyStart, copyStop, copyPositions, copyPositionsGC, copySumNormal, copySumTumor, minCoverage, dataRatio);
+
+				if(regionResults.length() > 0)
+				{
+					outCopySegments.println(regionResults);
+					goodCopySegments++;
+				}
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834584
+net/sf/varscan/Copynumber.java 351 360
+net/sf/varscan/Copynumber.java 963 972
+----------------------------------------
+		    					{
+		    						rawCopySegments++;
+		    						String regionResults = processCopyRegion(copyChrom, copyStart, copyStop, copyPositions, copyPositionsGC, copySumNormal, copySumTumor, minCoverage, dataRatio);
+
+		    						if(regionResults.length() > 0)
+		    						{
+		    							outCopySegments.println(regionResults);
+		    							goodCopySegments++;
+		    						}
+		    					}
+
+----------------------------------------
+			{
+				rawCopySegments++;
+				String regionResults = processCopyRegion(copyChrom, copyStart, copyStop, copyPositions, copyPositionsGC, copySumNormal, copySumTumor, minCoverage, dataRatio);
+
+				if(regionResults.length() > 0)
+				{
+					outCopySegments.println(regionResults);
+					goodCopySegments++;
+				}
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834583
+net/sf/varscan/Copynumber.java 874 883
+net/sf/varscan/Copynumber.java 963 972
+----------------------------------------
+	    					{
+	    						rawCopySegments++;
+	    						String regionResults = processCopyRegion(copyChrom, copyStart, copyStop, copyPositions, copyPositionsGC, copySumNormal, copySumTumor, minCoverage, dataRatio);
+
+	    						if(regionResults.length() > 0)
+	    						{
+	    							outCopySegments.println(regionResults);
+	    							goodCopySegments++;
+	    						}
+	    					}
+
+----------------------------------------
+			{
+				rawCopySegments++;
+				String regionResults = processCopyRegion(copyChrom, copyStart, copyStop, copyPositions, copyPositionsGC, copySumNormal, copySumTumor, minCoverage, dataRatio);
+
+				if(regionResults.length() > 0)
+				{
+					outCopySegments.println(regionResults);
+					goodCopySegments++;
+				}
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834588
+net/sf/varscan/CallMpileup.java 748 807
+net/sf/varscan/Trio.java 870 930
+----------------------------------------
+	    						{
+	    							// Multi-allele indel //
+	    							int maxDelSize = 0;
+	    							String maxDelBases = "";
+	    							// Go through each varAllele to find longest deletion //
+	    							String[] varBaseContents = varBases.split(",");
+	    							for(String varAllele : varBaseContents)
+	    							{
+	    								if(varAllele.startsWith("-"))
+	    								{
+	    									varAllele = varAllele.replace("-", "");
+	    									if(varAllele.length() > maxDelSize)
+	    									{
+	    										maxDelBases = varAllele;
+	    										maxDelSize = varAllele.length();
+	    									}
+	    								}
+	    							}
+
+	    							// Set refBase to maximum del //
+	    							refColumn = refBase + maxDelBases;
+
+	    							// Establish each allele in var Column //
+	    							varColumn = "";
+
+	    							for(String varAllele : varBaseContents)
+	    							{
+    									if(varColumn.length() > 0)
+    										varColumn = varColumn + ",";
+
+	    								if(varAllele.startsWith("-"))
+	    								{
+	    									varAllele = varAllele.replace("-", "");
+
+	    									// For the smaller deletion, determine ref bases to add //
+	    									if(varAllele.length() < maxDelSize)
+	    									{
+	    										String varEntry = maxDelBases.replace(varAllele, "");
+	    										varColumn = varColumn + refBase + varEntry;
+	    									}
+	    									else
+	    									{
+	    										varColumn = varColumn + refBase;
+	    									}
+	    								}
+	    								else if(varAllele.startsWith("+"))
+	    								{
+	    									varAllele = varAllele.replace("+", "");
+	    									String varEntry = refBase + varAllele + maxDelBases;
+	    									varColumn = varColumn + varEntry;
+	    								}
+	    								else
+	    								{
+	    									String varEntry = varAllele + maxDelBases;
+	    									varColumn = varColumn + varEntry;
+	    								}
+	    							}
+
+
+	    						}
+
+----------------------------------------
+		    						{
+		    							variantType = "INDEL";
+		    							// Multi-allele indel //
+		    							int maxDelSize = 0;
+		    							String maxDelBases = "";
+		    							// Go through each varAllele to find longest deletion //
+		    							String[] varBaseContents = varBases.split(",");
+		    							for(String varAllele : varBaseContents)
+		    							{
+		    								if(varAllele.startsWith("-"))
+		    								{
+		    									varAllele = varAllele.replace("-", "");
+		    									if(varAllele.length() > maxDelSize)
+		    									{
+		    										maxDelBases = varAllele;
+		    										maxDelSize = varAllele.length();
+		    									}
+		    								}
+		    							}
+
+		    							// Set refBase to maximum del //
+		    							refColumn = refBase + maxDelBases;
+
+		    							// Establish each allele in var Column //
+		    							varColumn = "";
+
+		    							for(String varAllele : varBaseContents)
+		    							{
+	    									if(varColumn.length() > 0)
+	    										varColumn = varColumn + ",";
+
+		    								if(varAllele.startsWith("-"))
+		    								{
+		    									varAllele = varAllele.replace("-", "");
+
+		    									// For the smaller deletion, determine ref bases to add //
+		    									if(varAllele.length() < maxDelSize)
+		    									{
+		    										String varEntry = maxDelBases.replace(varAllele, "");
+		    										varColumn = varColumn + refBase + varEntry;
+		    									}
+		    									else
+		    									{
+		    										varColumn = varColumn + refBase;
+		    									}
+		    								}
+		    								else if(varAllele.startsWith("+"))
+		    								{
+		    									varAllele = varAllele.replace("+", "");
+		    									String varEntry = refBase + varAllele + maxDelBases;
+		    									varColumn = varColumn + varEntry;
+		    								}
+		    								else
+		    								{
+		    									String varEntry = varAllele + maxDelBases;
+		    									varColumn = varColumn + varEntry;
+		    								}
+		    							}
+
+
+		    						}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834589
+net/sf/varscan/CallMpileup.java 757 764
+net/sf/varscan/Trio.java 878 888
+----------------------------------------
+	    								{
+	    									varAllele = varAllele.replace("-", "");
+	    									if(varAllele.length() > maxDelSize)
+	    									{
+	    										maxDelBases = varAllele;
+	    										maxDelSize = varAllele.length();
+	    									}
+	    								}
+
+----------------------------------------
+		    							{
+		    								if(varAllele.startsWith("-"))
+		    								{
+		    									varAllele = varAllele.replace("-", "");
+		    									if(varAllele.length() > maxDelSize)
+		    									{
+		    										maxDelBases = varAllele;
+		    										maxDelSize = varAllele.length();
+		    									}
+		    								}
+		    							}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834591
+net/sf/varscan/CallMpileup.java 906 917
+net/sf/varscan/Trio.java 1081 1092
+----------------------------------------
+	    				{
+	    					if(lineContents.length >= 4 && lineContents[3].equals("0"))
+	    					{
+	    						// A pileup line with 0x coverage, so ignore
+	    					}
+	    					else
+	    					{
+		    					System.err.println("Warning: Line ignored: Invalid format for pileup at line " + numBases + "\n" + line + "\n");
+		    					return;
+	    					}
+
+	    				}
+
+----------------------------------------
+	    				{
+	    					if(lineContents.length >= 4 && lineContents[3].equals("0"))
+	    					{
+	    						// A pileup line with 0x coverage, so ignore
+	    					}
+	    					else
+	    					{
+		    					System.err.println("Error: Invalid format for pileup at line " + numBases + "\n" + line + "\n");
+		    					return;
+	    					}
+
+	    				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834596
+net/sf/varscan/Copynumber.java 382 391
+net/sf/varscan/Trio.java 1095 1105
+----------------------------------------
+	    		    {
+	    		    	System.err.println("Parsing Exception on line:\n" + line + "\n" + e.getLocalizedMessage());
+	    				numParsingExceptions++;
+	    				if(numParsingExceptions >= 5)
+	    				{
+	    					System.err.println("Too many parsing exceptions encountered; exiting");
+	    					return;
+	    				}
+	    		    	return;
+	    		    }
+
+----------------------------------------
+	    		    {
+	    		    	System.err.println("Parsing Exception on line:\n" + line + "\n" + e.getMessage() + "\n" + e.getLocalizedMessage());
+	    		    	e.printStackTrace();
+	    		    	numParsingExceptions++;
+	    				if(numParsingExceptions >= 5)
+	    				{
+	    					System.err.println("Too many parsing exceptions encountered; exiting");
+	    					return;
+	    				}
+	    		    	return;
+	    		    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834592
+net/sf/varscan/CallPileup.java 294 303
+net/sf/varscan/Trio.java 1095 1105
+----------------------------------------
+	    		    {
+	    		    	System.err.println("Parsing Exception on line:\n" + line + "\n" + e.getLocalizedMessage());
+	    				numParsingExceptions++;
+	    				if(numParsingExceptions >= 5)
+	    				{
+	    					System.err.println("Too many parsing exceptions encountered; exiting");
+	    					return;
+	    				}
+	    		    	return;
+	    		    }
+
+----------------------------------------
+	    		    {
+	    		    	System.err.println("Parsing Exception on line:\n" + line + "\n" + e.getMessage() + "\n" + e.getLocalizedMessage());
+	    		    	e.printStackTrace();
+	    		    	numParsingExceptions++;
+	    				if(numParsingExceptions >= 5)
+	    				{
+	    					System.err.println("Too many parsing exceptions encountered; exiting");
+	    					return;
+	    				}
+	    		    	return;
+	    		    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834593
+net/sf/varscan/Somatic.java 668 677
+net/sf/varscan/Trio.java 1095 1105
+----------------------------------------
+	    		    {
+	    		    	System.err.println("Parsing Exception on line:\n" + line + "\n" + e.getLocalizedMessage());
+	    				numParsingExceptions++;
+	    				if(numParsingExceptions >= 5)
+	    				{
+	    					System.err.println("Too many parsing exceptions encountered; exiting");
+	    					return;
+	    				}
+	    		    	return;
+	    		    }
+
+----------------------------------------
+	    		    {
+	    		    	System.err.println("Parsing Exception on line:\n" + line + "\n" + e.getMessage() + "\n" + e.getLocalizedMessage());
+	    		    	e.printStackTrace();
+	    		    	numParsingExceptions++;
+	    				if(numParsingExceptions >= 5)
+	    				{
+	    					System.err.println("Too many parsing exceptions encountered; exiting");
+	    					return;
+	    				}
+	    		    	return;
+	    		    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834595
+net/sf/varscan/Coverage.java 227 236
+net/sf/varscan/Trio.java 1095 1105
+----------------------------------------
+	    		    {
+	    		    	System.err.println("Parsing Exception on line:\n" + line + "\n" + e.getLocalizedMessage());
+	    				numParsingExceptions++;
+	    				if(numParsingExceptions >= 5)
+	    				{
+	    					System.err.println("Too many parsing exceptions encountered; exiting");
+	    					return;
+	    				}
+	    		    	return;
+	    		    }
+
+----------------------------------------
+	    		    {
+	    		    	System.err.println("Parsing Exception on line:\n" + line + "\n" + e.getMessage() + "\n" + e.getLocalizedMessage());
+	    		    	e.printStackTrace();
+	    		    	numParsingExceptions++;
+	    				if(numParsingExceptions >= 5)
+	    				{
+	    					System.err.println("Too many parsing exceptions encountered; exiting");
+	    					return;
+	    				}
+	    		    	return;
+	    		    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834594
+net/sf/varscan/CallMpileup.java 920 929
+net/sf/varscan/Trio.java 1095 1105
+----------------------------------------
+	    		    {
+	    		    	System.err.println("Parsing Exception on line:\n" + line + "\n" + e.getLocalizedMessage());
+	    				numParsingExceptions++;
+	    				if(numParsingExceptions >= 5)
+	    				{
+	    					System.err.println("Too many parsing exceptions encountered; exiting");
+	    					return;
+	    				}
+	    		    	return;
+	    		    }
+
+----------------------------------------
+	    		    {
+	    		    	System.err.println("Parsing Exception on line:\n" + line + "\n" + e.getMessage() + "\n" + e.getLocalizedMessage());
+	    		    	e.printStackTrace();
+	    		    	numParsingExceptions++;
+	    				if(numParsingExceptions >= 5)
+	    				{
+	    					System.err.println("Too many parsing exceptions encountered; exiting");
+	    					return;
+	    				}
+	    		    	return;
+	    		    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834611
+net/sf/varscan/Somatic.java 1210 1222
+net/sf/varscan/Trio.java 1259 1270
+----------------------------------------
+		    					{
+		    						// Germline //
+		    						ssCode = 1;
+		    						calledGermline++;
+		    						if(somaticP == 0)
+		    						{
+		    							somScore = 0;
+		    						}
+		    						else
+		    						{
+		    							somScore = 0 - (10 * java.lang.Math.log10(somaticP));
+		    						}
+		    					}
+
+----------------------------------------
+				{
+					// Can one wildtype allele come from dad and one from mom ? //
+					if((father1.equals(refBase) || father2.equals(refBase)) && (mother1.equals(refBase) || mother2.equals(refBase)))
+					{
+						trioStatus = "Untransmitted";
+					}
+
+					else
+					{
+						trioStatus = "MIE";
+					}
+				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834599
+net/sf/varscan/Copynumber.java 805 820
+net/sf/varscan/Trio.java 1259 1270
+----------------------------------------
+    	    					{
+    	    						// Do a Fisher's exact test on the copy number changes. ##
+
+        	    					double changePvalue = VarScan.getSignificance(copyDepthNormal, copyDepthTumor, normalDepth, tumorDepth);
+
+        	    					// If depth change not significant, continue with region //
+        	    					if(changePvalue >= pValueThreshold)
+        	    					{
+        	    						continueFlag = true;
+        	    					}
+        	    					else
+        	    					{
+        	    						continueFlag = false;
+        	    					}
+
+    	    					}
+
+----------------------------------------
+				{
+					// Can one wildtype allele come from dad and one from mom ? //
+					if((father1.equals(refBase) || father2.equals(refBase)) && (mother1.equals(refBase) || mother2.equals(refBase)))
+					{
+						trioStatus = "Untransmitted";
+					}
+
+					else
+					{
+						trioStatus = "MIE";
+					}
+				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834614
+net/sf/varscan/Somatic.java 510 522
+net/sf/varscan/Trio.java 1259 1270
+----------------------------------------
+			    					{
+			    						// LOH //
+			    						ssCode = 3;
+			    						calledLOH++;
+			    						if(somaticP == 0)
+			    						{
+			    							somScore = 255;
+			    						}
+			    						else
+			    						{
+			    							somScore = 0 - (10 * java.lang.Math.log10(somaticP));
+			    						}
+			    					}
+
+----------------------------------------
+				{
+					// Can one wildtype allele come from dad and one from mom ? //
+					if((father1.equals(refBase) || father2.equals(refBase)) && (mother1.equals(refBase) || mother2.equals(refBase)))
+					{
+						trioStatus = "Untransmitted";
+					}
+
+					else
+					{
+						trioStatus = "MIE";
+					}
+				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834612
+net/sf/varscan/Copynumber.java 282 297
+net/sf/varscan/Trio.java 1259 1270
+----------------------------------------
+	    	    					{
+	    	    						// Do a Fisher's exact test on the copy number changes. ##
+
+	        	    					double changePvalue = VarScan.getSignificance(copyDepthNormal, copyDepthTumor, normalDepth, tumorDepth);
+
+	        	    					// If depth change not significant, continue with region //
+	        	    					if(changePvalue >= pValueThreshold)
+	        	    					{
+	        	    						continueFlag = true;
+	        	    					}
+	        	    					else
+	        	    					{
+	        	    						continueFlag = false;
+	        	    					}
+
+	    	    					}
+
+----------------------------------------
+				{
+					// Can one wildtype allele come from dad and one from mom ? //
+					if((father1.equals(refBase) || father2.equals(refBase)) && (mother1.equals(refBase) || mother2.equals(refBase)))
+					{
+						trioStatus = "Untransmitted";
+					}
+
+					else
+					{
+						trioStatus = "MIE";
+					}
+				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834597
+net/sf/varscan/Somatic.java 1238 1250
+net/sf/varscan/Trio.java 1259 1270
+----------------------------------------
+		    					{
+		    						// LOH //
+		    						ssCode = 3;
+		    						calledLOH++;
+		    						if(somaticP == 0)
+		    						{
+		    							somScore = 255;
+		    						}
+		    						else
+		    						{
+		    							somScore = 0 - (10 * java.lang.Math.log10(somaticP));
+		    						}
+		    					}
+
+----------------------------------------
+				{
+					// Can one wildtype allele come from dad and one from mom ? //
+					if((father1.equals(refBase) || father2.equals(refBase)) && (mother1.equals(refBase) || mother2.equals(refBase)))
+					{
+						trioStatus = "Untransmitted";
+					}
+
+					else
+					{
+						trioStatus = "MIE";
+					}
+				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834610
+net/sf/varscan/Somatic.java 482 494
+net/sf/varscan/Trio.java 1259 1270
+----------------------------------------
+			    					{
+			    						// Germline //
+			    						ssCode = 1;
+			    						calledGermline++;
+			    						if(somaticP == 0)
+			    						{
+			    							somScore = 0;
+			    						}
+			    						else
+			    						{
+			    							somScore = 0 - (10 * java.lang.Math.log10(somaticP));
+			    						}
+			    					}
+
+----------------------------------------
+				{
+					// Can one wildtype allele come from dad and one from mom ? //
+					if((father1.equals(refBase) || father2.equals(refBase)) && (mother1.equals(refBase) || mother2.equals(refBase)))
+					{
+						trioStatus = "Untransmitted";
+					}
+
+					else
+					{
+						trioStatus = "MIE";
+					}
+				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834613
+net/sf/varscan/Somatic.java 1224 1236
+net/sf/varscan/Trio.java 1259 1270
+----------------------------------------
+		    					{
+		    						// Somatic //
+		    						ssCode = 2;
+		    						calledSomatic++;
+		    						if(somaticP == 0)
+		    						{
+		    							somScore = 255;
+		    						}
+		    						else
+		    						{
+		    							somScore = 0 - (10 * java.lang.Math.log10(somaticP));
+		    						}
+		    					}
+
+----------------------------------------
+				{
+					// Can one wildtype allele come from dad and one from mom ? //
+					if((father1.equals(refBase) || father2.equals(refBase)) && (mother1.equals(refBase) || mother2.equals(refBase)))
+					{
+						trioStatus = "Untransmitted";
+					}
+
+					else
+					{
+						trioStatus = "MIE";
+					}
+				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834598
+net/sf/varscan/Somatic.java 496 508
+net/sf/varscan/Trio.java 1259 1270
+----------------------------------------
+			    					{
+			    						// Somatic //
+			    						ssCode = 2;
+			    						calledSomatic++;
+			    						if(somaticP == 0)
+			    						{
+			    							somScore = 255;
+			    						}
+			    						else
+			    						{
+			    							somScore = 0 - (10 * java.lang.Math.log10(somaticP));
+			    						}
+			    					}
+
+----------------------------------------
+				{
+					// Can one wildtype allele come from dad and one from mom ? //
+					if((father1.equals(refBase) || father2.equals(refBase)) && (mother1.equals(refBase) || mother2.equals(refBase)))
+					{
+						trioStatus = "Untransmitted";
+					}
+
+					else
+					{
+						trioStatus = "MIE";
+					}
+				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834604
+net/sf/varscan/Copynumber.java 68 93
+net/sf/varscan/Copynumber.java 491 516
+----------------------------------------
+		{
+			if(params.containsKey("min-coverage"))
+			{
+				 minCoverage = Integer.parseInt(params.get("min-coverage"));
+			}
+
+			if(params.containsKey("min-base-qual"))
+				 minBaseQual = Integer.parseInt(params.get("min-base-qual"));
+
+			if(params.containsKey("min-segment-size"))
+				 minSegmentSize = Integer.parseInt(params.get("min-segment-size"));
+
+			if(params.containsKey("max-segment-size"))
+				 maxSegmentSize = Integer.parseInt(params.get("max-segment-size"));
+
+			if(params.containsKey("p-value"))
+				 pValueThreshold = Double.parseDouble(params.get("p-value"));
+
+			if(params.containsKey("data-ratio"))
+				 dataRatio = Double.parseDouble(params.get("data-ratio"));
+
+			System.err.println("Min coverage:\t" + minCoverage);
+			System.err.println("Min avg qual:\t" + minBaseQual);
+			System.err.println("P-value thresh:\t" + pValueThreshold);
+
+		}
+
+----------------------------------------
+		{
+			if(params.containsKey("min-coverage"))
+			{
+				 minCoverage = Integer.parseInt(params.get("min-coverage"));
+			}
+
+			if(params.containsKey("min-base-qual"))
+				 minBaseQual = Integer.parseInt(params.get("min-base-qual"));
+
+			if(params.containsKey("min-segment-size"))
+				 minSegmentSize = Integer.parseInt(params.get("min-segment-size"));
+
+			if(params.containsKey("max-segment-size"))
+				 maxSegmentSize = Integer.parseInt(params.get("max-segment-size"));
+
+			if(params.containsKey("p-value"))
+				 pValueThreshold = Double.parseDouble(params.get("p-value"));
+
+			if(params.containsKey("data-ratio"))
+				 dataRatio = Double.parseDouble(params.get("data-ratio"));
+
+			System.err.println("Min coverage:\t" + minCoverage);
+			System.err.println("Min avg qual:\t" + minBaseQual);
+			System.err.println("P-value thresh:\t" + pValueThreshold);
+
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834784
+net/sf/varscan/Copynumber.java 68 93
+net/sf/varscan/CallPileup.java 60 86
+----------------------------------------
+		{
+			if(params.containsKey("min-coverage"))
+			{
+				 minCoverage = Integer.parseInt(params.get("min-coverage"));
+			}
+
+			if(params.containsKey("min-base-qual"))
+				 minBaseQual = Integer.parseInt(params.get("min-base-qual"));
+
+			if(params.containsKey("min-segment-size"))
+				 minSegmentSize = Integer.parseInt(params.get("min-segment-size"));
+
+			if(params.containsKey("max-segment-size"))
+				 maxSegmentSize = Integer.parseInt(params.get("max-segment-size"));
+
+			if(params.containsKey("p-value"))
+				 pValueThreshold = Double.parseDouble(params.get("p-value"));
+
+			if(params.containsKey("data-ratio"))
+				 dataRatio = Double.parseDouble(params.get("data-ratio"));
+
+			System.err.println("Min coverage:\t" + minCoverage);
+			System.err.println("Min avg qual:\t" + minBaseQual);
+			System.err.println("P-value thresh:\t" + pValueThreshold);
+
+		}
+
+----------------------------------------
+		{
+			if(params.containsKey("min-coverage"))
+				 minCoverage = Integer.parseInt(params.get("min-coverage"));
+
+			if(params.containsKey("min-reads2"))
+				 minReads2 = Integer.parseInt(params.get("min-reads2"));
+
+			if(params.containsKey("min-var-freq"))
+				 minVarFreq = Double.parseDouble(params.get("min-var-freq"));
+
+			if(params.containsKey("min-freq-for-hom"))
+				 minFreqForHom = Double.parseDouble(params.get("min-freq-for-hom"));
+
+			if(params.containsKey("min-avg-qual"))
+				 minAvgQual = Integer.parseInt(params.get("min-avg-qual"));
+
+			if(params.containsKey("p-value"))
+				 pValueThreshold = Double.parseDouble(params.get("p-value"));
+			else
+				System.err.println("Warning: No p-value threshold provided, so p-values will not be calculated");
+
+			 System.err.println("Min coverage:\t" + minCoverage);
+			 System.err.println("Min reads2:\t" + minReads2);
+			 System.err.println("Min var freq:\t" + minVarFreq);
+			 System.err.println("Min avg qual:\t" + minAvgQual);
+			 System.err.println("P-value thresh:\t" + pValueThreshold);
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834605
+net/sf/varscan/Copynumber.java 491 516
+net/sf/varscan/CallPileup.java 60 86
+----------------------------------------
+		{
+			if(params.containsKey("min-coverage"))
+			{
+				 minCoverage = Integer.parseInt(params.get("min-coverage"));
+			}
+
+			if(params.containsKey("min-base-qual"))
+				 minBaseQual = Integer.parseInt(params.get("min-base-qual"));
+
+			if(params.containsKey("min-segment-size"))
+				 minSegmentSize = Integer.parseInt(params.get("min-segment-size"));
+
+			if(params.containsKey("max-segment-size"))
+				 maxSegmentSize = Integer.parseInt(params.get("max-segment-size"));
+
+			if(params.containsKey("p-value"))
+				 pValueThreshold = Double.parseDouble(params.get("p-value"));
+
+			if(params.containsKey("data-ratio"))
+				 dataRatio = Double.parseDouble(params.get("data-ratio"));
+
+			System.err.println("Min coverage:\t" + minCoverage);
+			System.err.println("Min avg qual:\t" + minBaseQual);
+			System.err.println("P-value thresh:\t" + pValueThreshold);
+
+		}
+
+----------------------------------------
+		{
+			if(params.containsKey("min-coverage"))
+				 minCoverage = Integer.parseInt(params.get("min-coverage"));
+
+			if(params.containsKey("min-reads2"))
+				 minReads2 = Integer.parseInt(params.get("min-reads2"));
+
+			if(params.containsKey("min-var-freq"))
+				 minVarFreq = Double.parseDouble(params.get("min-var-freq"));
+
+			if(params.containsKey("min-freq-for-hom"))
+				 minFreqForHom = Double.parseDouble(params.get("min-freq-for-hom"));
+
+			if(params.containsKey("min-avg-qual"))
+				 minAvgQual = Integer.parseInt(params.get("min-avg-qual"));
+
+			if(params.containsKey("p-value"))
+				 pValueThreshold = Double.parseDouble(params.get("p-value"));
+			else
+				System.err.println("Warning: No p-value threshold provided, so p-values will not be calculated");
+
+			 System.err.println("Min coverage:\t" + minCoverage);
+			 System.err.println("Min reads2:\t" + minReads2);
+			 System.err.println("Min var freq:\t" + minVarFreq);
+			 System.err.println("Min avg qual:\t" + minAvgQual);
+			 System.err.println("P-value thresh:\t" + pValueThreshold);
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834606
+net/sf/varscan/Somatic.java 337 666
+net/sf/varscan/Somatic.java 1019 1440
+----------------------------------------
+	    			{
+	    				String[] lineContents = line.split("\t", -1);
+
+	    				// Verify expected pileup format //
+
+	    				if(lineContents.length > 5 && lineContents[0].length() > 0 && lineContents[1].length() > 0 && lineContents[2].length() > 0 && lineContents[3].length() > 0)
+	    				{
+	    					sharedPositions++;
+
+	    					// Parse common fields from line //
+	    					String refName = lineContents[0];
+	    					int position = Integer.parseInt(lineContents[1]);
+	    					refBase = lineContents[2].toUpperCase();
+
+	    					chromNormal = refName;
+	    					chromTumor = refName;
+	    					posNormal = position;
+	    					posTumor = position;
+
+	    					// Parse normal, which should be first sample //
+	    					int normalOffset = 3;
+	    					int pileupDepthNormal = Integer.parseInt(lineContents[normalOffset]);
+		    	        	String normalBases = lineContents[normalOffset + 1];
+		    	        	String normalQualities = lineContents[normalOffset + 2];
+
+	    					// Parse tumor, which should be second sample //
+	    					int tumorOffset = 6;
+	    					int pileupDepthTumor = Integer.parseInt(lineContents[tumorOffset]);
+		    	        	String tumorBases = lineContents[tumorOffset + 1];
+		    	        	String tumorQualities = lineContents[tumorOffset + 2];
+
+	    					lineNormal = refName + "\t" + position + "\t" + refBase + "\t" + pileupDepthNormal + "\t" + normalBases + "\t" + normalQualities;
+	    					lineTumor = refName + "\t" + position + "\t" + refBase + "\t" + pileupDepthTumor + "\t" + tumorBases + "\t" + tumorQualities;
+
+	    					String compareResult = comparePositions(lineNormal, lineTumor, minCoverage, minReads2, minVarFreq, minAvgQual, pValueThreshold, somaticPvalue, minFreqForHom, normalPurity, tumorPurity);
+
+			    			if(compareResult.length() > 0)
+			    			{
+			    				// Get the alleles to determine type //
+			    				String[] compareContents = compareResult.split("\t");
+				    			String allele1 = compareContents[0];
+				    			String allele2 = compareContents[1];
+
+				    			double strandedness1 = 0.50;
+				    			double strandedness2 = 0.50;
+				    			double strandednessDiff = 0.00;
+
+				    			if(compareContents.length >= 17)
+				    			{
+				    				try
+				    				{
+				    					int tumorReads1plus = Integer.parseInt(compareContents[13]);
+				    					int tumorReads1minus = Integer.parseInt(compareContents[14]);
+				    					int tumorReads2plus = Integer.parseInt(compareContents[15]);
+				    					int tumorReads2minus = Integer.parseInt(compareContents[16]);
+
+				    					if(tumorReads1plus > 0 || tumorReads1minus > 0)
+				    					{
+				    						strandedness1 = (double) tumorReads1plus / (double) (tumorReads1plus + tumorReads1minus);
+				    					}
+
+				    					if(tumorReads2plus > 0 || tumorReads2minus > 0)
+				    					{
+				    						strandedness2 = (double) tumorReads2plus / (double) (tumorReads2plus + tumorReads2minus);
+				    						if(tumorReads1plus > 0 || tumorReads1minus > 0)
+				    						{
+				    							strandednessDiff = java.lang.Math.abs(strandedness1 - strandedness2);
+				    						}
+				    					}
+				    				}
+				    				catch(Exception e)
+				    				{
+				    					// Exception parsing info from compareResult //
+				    				}
+				    			}
+
+			    				//stats.put("comparedPositions", (stats.get("comparedPositions") + 1));
+				    			comparedPositions++;
+
+			    				if(params.containsKey("verbose") && !compareResult.contains("Reference"))
+			    					System.err.println(chromNormal + "\t" + posNormal + "\t" + compareResult);
+
+			    				// If VCF format specified, supply it //
+
+			    				if(params.containsKey("output-vcf"))
+			    				{
+			    					int normalReads1 = Integer.parseInt(compareContents[2]);
+			    					int normalReads2 = Integer.parseInt(compareContents[3]);
+			    					String normalFreq = compareContents[4];
+			    					String normalCall = compareContents[5];
+			    					int tumorReads1 = Integer.parseInt(compareContents[6]);
+			    					int tumorReads2 = Integer.parseInt(compareContents[7]);
+			    					String tumorFreq = compareContents[8];
+			    					String tumorCall = compareContents[9];
+			    					String somStatus = compareContents[10];
+			    					Double germlineP = Double.parseDouble(compareContents[11]);
+			    					Double somaticP = Double.parseDouble(compareContents[12]);
+
+			    					int totalDepth = pileupDepthNormal + pileupDepthTumor;
+
+			    					if(allele2.startsWith("+"))
+			    					{
+			    						// INSERTION //
+			    						// Ref = ref base; Var = ref base followed by inserted bases //
+			    						String varColumn = allele1 + allele2.replace("+", "");
+			    						compareResult = "." + "\t" + allele1 + "\t" + varColumn + "\t" + ".";
+			    					}
+			    					else if(allele2.startsWith("-"))
+			    					{
+			    						// DELETION //
+			    						// Ref = ref base followed by deleted bases; var = ref base //
+			    						String refColumn = allele1 + allele2.replace("-", "");
+			    						compareResult = "." + "\t" + refColumn + "\t" + allele1 + "\t" + ".";
+			    					}
+			    					else
+			    					{
+				    					compareResult = "." + "\t" + allele1 + "\t" + allele2 + "\t" + ".";
+			    					}
+
+
+			    					// Decide on filter field //
+			    					if(doStrandFilter && strandednessDiff > 0.10 && (strandedness2 < 0.10 || strandedness2 > 0.90))
+			    					{
+			    						compareResult += "\t" + "str10";
+			    					}
+			    					else if(somStatus.equals("IndelFilter"))
+			    					{
+			    						compareResult += "\t" + "indelError";
+			    					}
+			    					else
+			    					{
+			    						compareResult += "\t" + "PASS";
+			    					}
+
+			    					// Determine somatic status id and score //
+			    					int ssCode = 0;
+			    					double somScore = 0;
+
+			    					if(somStatus.equals("Reference"))
+			    					{
+			    						// Wildtype //
+			    						ssCode = 0;
+			    						calledReference++;
+			    					}
+			    					else if(somStatus.equals("Germline"))
+			    					{
+			    						// Germline //
+			    						ssCode = 1;
+			    						calledGermline++;
+			    						if(somaticP == 0)
+			    						{
+			    							somScore = 0;
+			    						}
+			    						else
+			    						{
+			    							somScore = 0 - (10 * java.lang.Math.log10(somaticP));
+			    						}
+			    					}
+			    					else if(somStatus.equals("Somatic"))
+			    					{
+			    						// Somatic //
+			    						ssCode = 2;
+			    						calledSomatic++;
+			    						if(somaticP == 0)
+			    						{
+			    							somScore = 255;
+			    						}
+			    						else
+			    						{
+			    							somScore = 0 - (10 * java.lang.Math.log10(somaticP));
+			    						}
+			    					}
+			    					else if(somStatus.equals("LOH"))
+			    					{
+			    						// LOH //
+			    						ssCode = 3;
+			    						calledLOH++;
+			    						if(somaticP == 0)
+			    						{
+			    							somScore = 255;
+			    						}
+			    						else
+			    						{
+			    							somScore = 0 - (10 * java.lang.Math.log10(somaticP));
+			    						}
+			    					}
+			    					else
+			    					{
+			    						// Unknown //
+			    						calledUnknown++;
+			    						ssCode = 5;
+			    					}
+
+			    					// Adjust somatic score //
+			    					if(somScore > 255)
+			    						somScore = 255;
+
+			    					// Print the info field //
+
+			    					compareResult += "\t" + "DP=" + totalDepth;
+			    					if(somStatus.equals("Somatic"))
+			    						compareResult += ";SOMATIC";
+			    					compareResult += ";" + "SS=" + ssCode;
+			    					compareResult += ";" + "SSC=" + (int) somScore;
+			    					compareResult += ";" + "GPV=" + pvalueFormat.format(germlineP);
+			    					compareResult += ";" + "SPV=" + pvalueFormat.format(somaticP);
+
+			    					// Print the format field //
+
+			    					String tumorDP4 = "";
+			    					String normalDP4 = "";
+
+					    			if(compareContents.length >= 17)
+					    			{
+					    				try
+					    				{
+					    					tumorDP4 = compareContents[13] + "," + compareContents[14] + "," + compareContents[15] + "," + compareContents[16];
+					    					normalDP4 = compareContents[17] + "," + compareContents[18] + "," + compareContents[19] + "," + compareContents[20];
+					    				}
+					    				catch(Exception e)
+					    				{
+					    					// Exception parsing info from compareResult //
+					    					tumorDP4 = "";
+					    					normalDP4 = "";
+					    				}
+					    			}
+
+					    			if(tumorDP4.length() > 0)
+					    				compareResult += "\tGT:GQ:DP:RD:AD:FREQ:DP4";
+					    			else
+					    				compareResult += "\tGT:GQ:DP:RD:AD:FREQ";
+
+			    					// Determine normal genotype //
+			    					String normalGt = ".";
+			    					String tumorGt = ".";
+			    					if(normalCall.equals(refBase))
+			    					{
+			    						normalGt = "0/0";
+			    					}
+			    					else if(VarScan.isHeterozygous(normalCall))
+			    					{
+			    						normalGt = "0/1";
+			    					}
+			    					else
+			    					{
+			    						normalGt = "1/1";
+			    					}
+
+			    					if(tumorCall.equals(refBase))
+			    					{
+			    						tumorGt = "0/0";
+			    					}
+			    					else if(VarScan.isHeterozygous(tumorCall))
+			    					{
+			    						tumorGt = "0/1";
+			    					}
+			    					else
+			    					{
+			    						tumorGt = "1/1";
+			    					}
+
+			    					if(tumorDP4.length() > 0)
+			    					{
+				    					compareResult += "\t" + normalGt + ":.:" + pileupDepthNormal + ":" + normalReads1 + ":" + normalReads2 + ":" + normalFreq + ":" + normalDP4;
+				    					compareResult += "\t" + tumorGt + ":.:" + pileupDepthTumor + ":" + tumorReads1 + ":" + tumorReads2 + ":" + tumorFreq + ":" + tumorDP4;
+			    					}
+			    					else
+			    					{
+				    					compareResult += "\t" + normalGt + ":.:" + pileupDepthNormal + ":" + normalReads1 + ":" + normalReads2 + ":" + normalFreq;
+				    					compareResult += "\t" + tumorGt + ":.:" + pileupDepthTumor + ":" + tumorReads1 + ":" + tumorReads2 + ":" + tumorFreq;
+			    					}
+			    				}
+
+			    				// Print to master file for validation //
+
+			    				if(params.containsKey("validation"))
+			    				{
+			    					outValidation.println(chromNormal + "\t" + posNormal + "\t" + compareResult);
+			    				}
+
+			    				if(!params.containsKey("validation") && (compareResult.contains("Reference") || compareResult.contains("SS=0")  || compareResult.contains("Filter")))
+			    				{
+			    					// Don't print reference/indelfilter positions unless doing validation //
+			    				}
+			    				else if(doStrandFilter && strandednessDiff > 0.10 && (strandedness2 < 0.10 || strandedness2 > 0.90))
+			    				{
+			    					// If filter is set, ignore variants that are supported largely by one strand //
+			    					if(!params.containsKey("output-vcf"))
+			    						compareResult = "StrandFilter";
+			    				}
+			    				else if(allele1.contains("-") || allele1.contains("+") || allele2.contains("-") || allele2.contains("+"))//if(compareResult.contains("INS") || compareResult.contains("DEL"))
+			    				{
+			    					outIndel.println(chromNormal + "\t" + posNormal + "\t" + compareResult);
+			    				}
+			    				else
+			    				{
+				    				outSnp.println(chromNormal + "\t" + posNormal + "\t" + compareResult);
+			    				}
+			    			}
+			    			else
+			    			{
+//			    				System.err.println("Uncalled" + chromNormal + "\t" + posNormal + "\t" + compareResult);
+			    			}
+
+			    			if(compareResult.contains("Reference"))
+			    				calledReference++; //stats.put("calledReference", (stats.get("calledReference") + 1));
+			    			else if(compareResult.contains("IndelFilter"))
+			    				indelFilter++;	//stats.put("indelFilter", (stats.get("indelFilter") + 1));
+			    			else if(compareResult.contains("StrandFilter"))
+			    				strandFilter++;
+			    			else if(compareResult.contains("Germline"))
+			    				calledGermline++;	//stats.put("calledGermline", (stats.get("calledGermline") + 1));
+			    			else if(compareResult.contains("Somatic"))
+			    				calledSomatic++;	//stats.put("calledSomatic", (stats.get("calledSomatic") + 1));
+			    			else if(compareResult.contains("LOH"))
+			    				calledLOH++;	//stats.put("calledLOH", (stats.get("calledLOH") + 1));
+			    			else if(compareResult.contains("Unknown"))
+			    				calledUnknown++;	//stats.put("calledUnknown", (stats.get("calledUnknown") + 1));
+			    			else if(compareResult.contains("Variant"))
+			    				calledVariant++;	//stats.put("calledVariant", (stats.get("calledVariant") + 1));
+
+
+
+	    				}
+	    				else
+	    				{
+	    					System.err.println("Error: Invalid format or not enough samples in mpileup: " + line + "\n");
+	    					return;
+	    				}
+	    			}
+
+----------------------------------------
+	    	{
+	    		tumorPositions++;
+	    		String[] tumorContents = lineTumor.split("\t");
+
+		    	if(tumorContents.length > 1)
+		    	{
+			    	chromTumor = tumorContents[0];
+			    	posTumor = Integer.parseInt(tumorContents[1]);
+		    	}
+
+		    	// Parse normal lines until we get the same chromosome //
+		    	boolean flagEOF = false;
+		    	boolean normalWasReset = false;
+
+		    	//	Advance in normal file if tumor is changed but normal is not, or if tumor is higher //
+		    	while(!chromNormal.equals(chromTumor) && !chromTumor.equals(prevChromTumor) && !flagEOF && (chromNormal.equals(prevChromTumor) || inSortOrder(chromNormal, chromTumor)))
+		    	{
+		    		//System.err.println("Normal (" + chromNormal + ") catching up to " + chromTumor);
+		    		// Get next line from normal pileup //
+		    		if((lineNormal = normal.readLine()) != null)
+		    		{
+		    			String[] normalContents = lineNormal.split("\t");
+
+				    	if(normalContents.length > 1)
+				    	{
+					    	chromNormal = normalContents[0];
+					    	posNormal = Integer.parseInt(normalContents[1]);
+				    	}
+		    		}
+		    		else
+		    		{
+		    			flagEOF = true;
+		    		}
+
+
+		    	}
+
+		    	// If chromosomes match and are non-blank, attempt to get matching positions //
+		    	if(chromNormal.equals(chromTumor) && !chromNormal.equals(""))
+		    	{
+		    		normalWasReset = false;
+		    		// Seek to matching Normal Position //
+
+		    		while(chromNormal.equals(chromTumor) && posNormal < posTumor && ((lineNormal = normal.readLine()) != null))
+		    		{
+		    			String[] normalContents = lineNormal.split("\t");
+				    	if(normalContents.length > 1)
+				    	{
+					    	chromNormal = normalContents[0];
+					    	posNormal = Integer.parseInt(normalContents[1]);
+				    	}
+		    		}
+
+		    		// Seek to matching Tumor Position //
+
+		    		while(chromNormal.equals(chromTumor) && posTumor < posNormal && ((lineTumor = tumor.readLine()) != null))
+		    		{
+		    			tumorContents = lineTumor.split("\t");
+				    	if(tumorContents.length > 1)
+				    	{
+					    	chromTumor = tumorContents[0];
+					    	posTumor = Integer.parseInt(tumorContents[1]);
+				    	}
+		    		}
+
+		    		// Proceed if normal and tumor positions match //
+
+		    		if(chromNormal.equals(chromTumor) && chromNormal.equals(chromTumor) && posNormal == posTumor)
+		    		{
+		    			//stats.put("sharedPositions", (stats.get("sharedPositions") + 1));
+		    			sharedPositions++;
+		    			if(params.containsKey("verbose"))
+		    					System.err.println("Comparing calls at " + chromTumor + ":" + posTumor);
+
+		    			refBase = tumorContents[2];
+		    			String compareResult = comparePositions(lineNormal, lineTumor, minCoverage, minReads2, minVarFreq, minAvgQual, pValueThreshold, somaticPvalue, minFreqForHom, normalPurity, tumorPurity);
+
+		    			if(compareResult.length() > 0)
+		    			{
+		    				// Get the alleles to determine type //
+		    				String[] compareContents = compareResult.split("\t");
+			    			String allele1 = compareContents[0];
+			    			String allele2 = compareContents[1];
+
+			    			double strandedness1 = 0.50;
+			    			double strandedness2 = 0.50;
+			    			double strandednessDiff = 0.00;
+
+			    			if(compareContents.length >= 17)
+			    			{
+			    				try
+			    				{
+			    					int tumorReads1plus = Integer.parseInt(compareContents[13]);
+			    					int tumorReads1minus = Integer.parseInt(compareContents[14]);
+			    					int tumorReads2plus = Integer.parseInt(compareContents[15]);
+			    					int tumorReads2minus = Integer.parseInt(compareContents[16]);
+
+			    					if(tumorReads1plus > 0 || tumorReads1minus > 0)
+			    					{
+			    						strandedness1 = (double) tumorReads1plus / (double) (tumorReads1plus + tumorReads1minus);
+			    					}
+
+			    					if(tumorReads2plus > 0 || tumorReads2minus > 0)
+			    					{
+			    						strandedness2 = (double) tumorReads2plus / (double) (tumorReads2plus + tumorReads2minus);
+			    						if(tumorReads1plus > 0 || tumorReads1minus > 0)
+			    						{
+			    							strandednessDiff = java.lang.Math.abs(strandedness1 - strandedness2);
+			    						}
+			    					}
+			    				}
+			    				catch(Exception e)
+			    				{
+			    					// Exception parsing info from compareResult //
+			    				}
+			    			}
+
+		    				//stats.put("comparedPositions", (stats.get("comparedPositions") + 1));
+			    			comparedPositions++;
+
+		    				if(params.containsKey("verbose") && !compareResult.contains("Reference"))
+		    					System.err.println(chromNormal + "\t" + posNormal + "\t" + compareResult);
+
+		    				// If VCF format specified, supply it //
+
+		    				if(params.containsKey("output-vcf"))
+		    				{
+		    					int normalReads1 = Integer.parseInt(compareContents[2]);
+		    					int normalReads2 = Integer.parseInt(compareContents[3]);
+		    					String normalFreq = compareContents[4];
+		    					String normalCall = compareContents[5];
+		    					int tumorReads1 = Integer.parseInt(compareContents[6]);
+		    					int tumorReads2 = Integer.parseInt(compareContents[7]);
+		    					String tumorFreq = compareContents[8];
+		    					String tumorCall = compareContents[9];
+		    					String somStatus = compareContents[10];
+		    					Double germlineP = Double.parseDouble(compareContents[11]);
+		    					Double somaticP = Double.parseDouble(compareContents[12]);
+
+		    					String[] normalContents = lineNormal.split("\t");
+		    					//tumorContents = lineTumor.split("\t");
+		    					int pileupDepthNormal = Integer.parseInt(normalContents[3]);
+		    					int pileupDepthTumor = Integer.parseInt(tumorContents[3]);
+
+		    					int totalDepth = pileupDepthNormal + pileupDepthTumor;
+
+		    					if(allele2.startsWith("+"))
+		    					{
+		    						// INSERTION //
+		    						// Ref = ref base; Var = ref base followed by inserted bases //
+		    						String varColumn = allele1 + allele2.replace("+", "");
+		    						compareResult = "." + "\t" + allele1 + "\t" + varColumn + "\t" + ".";
+		    					}
+		    					else if(allele2.startsWith("-"))
+		    					{
+		    						// DELETION //
+		    						// Ref = ref base followed by deleted bases; var = ref base //
+		    						String refColumn = allele1 + allele2.replace("-", "");
+		    						compareResult = "." + "\t" + refColumn + "\t" + allele1 + "\t" + ".";
+		    					}
+		    					else
+		    					{
+			    					compareResult = "." + "\t" + allele1 + "\t" + allele2 + "\t" + ".";
+		    					}
+
+
+		    					// Decide on filter field //
+		    					if(params.containsKey("strand-filter") && strandednessDiff > 0.10 && (strandedness2 < 0.10 || strandedness2 > 0.90))
+		    					{
+		    						compareResult += "\t" + "str10";
+		    					}
+		    					else if(somStatus.equals("IndelFilter"))
+		    					{
+		    						compareResult += "\t" + "indelError";
+		    					}
+		    					else
+		    					{
+		    						compareResult += "\t" + "PASS";
+		    					}
+
+		    					// Determine somatic status id and score //
+		    					int ssCode = 0;
+		    					double somScore = 0;
+
+		    					if(somStatus.equals("Reference"))
+		    					{
+		    						// Wildtype //
+		    						ssCode = 0;
+		    						calledReference++;
+		    					}
+		    					else if(somStatus.equals("Germline"))
+		    					{
+		    						// Germline //
+		    						ssCode = 1;
+		    						calledGermline++;
+		    						if(somaticP == 0)
+		    						{
+		    							somScore = 0;
+		    						}
+		    						else
+		    						{
+		    							somScore = 0 - (10 * java.lang.Math.log10(somaticP));
+		    						}
+		    					}
+		    					else if(somStatus.equals("Somatic"))
+		    					{
+		    						// Somatic //
+		    						ssCode = 2;
+		    						calledSomatic++;
+		    						if(somaticP == 0)
+		    						{
+		    							somScore = 255;
+		    						}
+		    						else
+		    						{
+		    							somScore = 0 - (10 * java.lang.Math.log10(somaticP));
+		    						}
+		    					}
+		    					else if(somStatus.equals("LOH"))
+		    					{
+		    						// LOH //
+		    						ssCode = 3;
+		    						calledLOH++;
+		    						if(somaticP == 0)
+		    						{
+		    							somScore = 255;
+		    						}
+		    						else
+		    						{
+		    							somScore = 0 - (10 * java.lang.Math.log10(somaticP));
+		    						}
+		    					}
+		    					else
+		    					{
+		    						// Unknown //
+		    						calledUnknown++;
+		    						ssCode = 5;
+		    					}
+
+		    					// Adjust somatic score //
+		    					if(somScore > 255)
+		    						somScore = 255;
+
+		    					// Print the info field //
+
+		    					compareResult += "\t" + "DP=" + totalDepth;
+		    					if(somStatus.equals("Somatic"))
+		    						compareResult += ";SOMATIC";
+		    					compareResult += ";" + "SS=" + ssCode;
+		    					compareResult += ";" + "SSC=" + (int) somScore;
+		    					compareResult += ";" + "GPV=" + pvalueFormat.format(germlineP);
+		    					compareResult += ";" + "SPV=" + pvalueFormat.format(somaticP);
+
+		    					// Print the format field //
+
+		    					String tumorDP4 = "";
+		    					String normalDP4 = "";
+
+				    			if(compareContents.length >= 17)
+				    			{
+				    				try
+				    				{
+				    					tumorDP4 = compareContents[13] + "," + compareContents[14] + "," + compareContents[15] + "," + compareContents[16];
+				    					normalDP4 = compareContents[17] + "," + compareContents[18] + "," + compareContents[19] + "," + compareContents[20];
+				    				}
+				    				catch(Exception e)
+				    				{
+				    					// Exception parsing info from compareResult //
+				    					tumorDP4 = "";
+				    					normalDP4 = "";
+				    				}
+				    			}
+
+				    			if(tumorDP4.length() > 0)
+				    				compareResult += "\tGT:GQ:DP:RD:AD:FREQ:DP4";
+				    			else
+				    				compareResult += "\tGT:GQ:DP:RD:AD:FREQ";
+
+		    					// Determine normal genotype //
+		    					String normalGt = ".";
+		    					String tumorGt = ".";
+		    					if(normalCall.equals(refBase))
+		    					{
+		    						normalGt = "0/0";
+		    					}
+		    					else if(VarScan.isHeterozygous(normalCall))
+		    					{
+		    						normalGt = "0/1";
+		    					}
+		    					else
+		    					{
+		    						normalGt = "1/1";
+		    					}
+
+		    					if(tumorCall.equals(refBase))
+		    					{
+		    						tumorGt = "0/0";
+		    					}
+		    					else if(VarScan.isHeterozygous(tumorCall))
+		    					{
+		    						tumorGt = "0/1";
+		    					}
+		    					else
+		    					{
+		    						tumorGt = "1/1";
+		    					}
+
+		    					if(tumorDP4.length() > 0)
+		    					{
+			    					compareResult += "\t" + normalGt + ":.:" + pileupDepthNormal + ":" + normalReads1 + ":" + normalReads2 + ":" + normalFreq + ":" + normalDP4;
+			    					compareResult += "\t" + tumorGt + ":.:" + pileupDepthTumor + ":" + tumorReads1 + ":" + tumorReads2 + ":" + tumorFreq + ":" + tumorDP4;
+		    					}
+		    					else
+		    					{
+			    					compareResult += "\t" + normalGt + ":.:" + pileupDepthNormal + ":" + normalReads1 + ":" + normalReads2 + ":" + normalFreq;
+			    					compareResult += "\t" + tumorGt + ":.:" + pileupDepthTumor + ":" + tumorReads1 + ":" + tumorReads2 + ":" + tumorFreq;
+		    					}
+		    				}
+		    				// Print to master file for validation //
+
+		    				if(params.containsKey("validation"))
+		    				{
+		    					outValidation.println(chromNormal + "\t" + posNormal + "\t" + compareResult);
+		    				}
+
+		    				if(!params.containsKey("validation") && (compareResult.contains("Reference") || compareResult.contains("SS=0") || compareResult.contains("Filter")))
+		    				{
+		    					// Don't print reference/indelfilter positions unless doing validation //
+		    				}
+		    				else if(params.containsKey("strand-filter") && strandednessDiff > 0.10 && (strandedness2 < 0.10 || strandedness2 > 0.90))
+		    				{
+		    					// If filter is set, ignore variants that are supported largely by one strand //
+		    					compareResult = "StrandFilter";
+		    				}
+		    				else if(allele1.contains("-") || allele1.contains("+") || allele2.contains("-") || allele2.contains("+"))//if(compareResult.contains("INS") || compareResult.contains("DEL"))
+		    				{
+		    					outIndel.println(chromNormal + "\t" + posNormal + "\t" + compareResult);
+		    				}
+		    				else
+		    				{
+			    				outSnp.println(chromNormal + "\t" + posNormal + "\t" + compareResult);
+		    				}
+		    			}
+		    			else
+		    			{
+//		    				System.err.println("Uncalled" + chromNormal + "\t" + posNormal + "\t" + compareResult);
+		    			}
+
+		    			if(compareResult.contains("Reference"))
+		    				calledReference++; //stats.put("calledReference", (stats.get("calledReference") + 1));
+		    			else if(compareResult.contains("IndelFilter"))
+		    				indelFilter++;	//stats.put("indelFilter", (stats.get("indelFilter") + 1));
+		    			else if(compareResult.contains("StrandFilter"))
+		    				strandFilter++;
+		    			else if(compareResult.contains("Germline"))
+		    				calledGermline++;	//stats.put("calledGermline", (stats.get("calledGermline") + 1));
+		    			else if(compareResult.contains("Somatic"))
+		    				calledSomatic++;	//stats.put("calledSomatic", (stats.get("calledSomatic") + 1));
+		    			else if(compareResult.contains("LOH"))
+		    				calledLOH++;	//stats.put("calledLOH", (stats.get("calledLOH") + 1));
+		    			else if(compareResult.contains("Unknown"))
+		    				calledUnknown++;	//stats.put("calledUnknown", (stats.get("calledUnknown") + 1));
+		    			else if(compareResult.contains("Variant"))
+		    				calledVariant++;	//stats.put("calledVariant", (stats.get("calledVariant") + 1));
+
+				    	prevChromNormal = chromNormal;
+				    	prevChromTumor = chromTumor;
+		    		}
+		    		else
+		    		{
+		    			//System.err.println("Failed to match positions " + chromNormal + " " + posNormal + " to Tumor " + chromTumor + " " + posTumor);
+		    		}
+		    	}
+		    	// If they're in sort order, do nothing so that tumor can catch up //
+		    	else if(inSortOrder(chromNormal, chromTumor))
+		    	{
+		    		System.err.println("Not resetting normal file because " + chromNormal + " < " + chromTumor);
+		    	}
+		    	// If we reached the end of the normal file but never saw this chromosome, //
+		    	// fast-forward until tumor chromosome changes and reset normal file //
+		    	else if(flagEOF)
+		    	{
+		    		flagEOF = false;
+
+		    		while(prevChromTumor.equals(chromTumor) && !flagEOF)
+		    		{
+		    			if((lineTumor = tumor.readLine()) != null)
+		    			{
+			    			tumorContents = lineTumor.split("\t");
+
+					    	if(tumorContents.length > 1)
+					    	{
+						    	chromTumor = tumorContents[0];
+						    	posTumor = Integer.parseInt(tumorContents[1]);
+					    	}
+		    			}
+		    			else
+		    			{
+		    				flagEOF = true;
+		    			}
+		    		}
+
+		    		// Reset the normal file if we've already passed this chromosome in normal //
+
+		    		if(!flagEOF && !normalWasReset)
+		    		{
+		    			if(inSortOrder(chromNormal, chromTumor))
+		    			{
+		    				System.err.println("Not resetting normal file because " + chromNormal + " < " + chromTumor);
+		    			}
+		    			else
+		    			{
+		    				System.err.println("Resetting normal file because " + chromNormal + " > " + chromTumor);
+				    		normalWasReset = true;
+			    			normal.close();
+				    		normal = new BufferedReader(new FileReader(normalPileupFile));
+		    			}
+
+		    		}
+		    	}
+
+	    	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834609
+net/sf/varscan/Somatic.java 276 696
+net/sf/varscan/Somatic.java 1019 1440
+----------------------------------------
+	    	{
+	    		// Declare some file-parsing variables //
+			    String lineNormal;
+			    String lineTumor;
+			    String chromNormal = "";
+			    String chromTumor = "";
+			    String refBase = "";
+			    int posNormal = 0;
+			    int posTumor = 0;
+
+				// Declare output file //
+		 	 	PrintStream outSnp = null; // declare a print stream object for SNPs
+		 	 	PrintStream outIndel = null; // declare a print stream object for Indels
+		 	 	PrintStream outValidation = null; // declare a print stream object for both for validation
+		 	 	PrintStream outCopyNumber = null; // declare a print stream object for both for validation
+
+		 	 	if(params.containsKey("output-vcf"))
+		 	 	{
+		 	 		if(!outputSnp.contains(".vcf"))
+		 	 			outputSnp += ".vcf";
+		 	 		if(!outputIndel.contains(".vcf"))
+		 	 			outputIndel += ".vcf";
+		 	 	}
+		 		outSnp = new PrintStream( new FileOutputStream(outputSnp) );
+		 		outIndel = new PrintStream( new FileOutputStream(outputIndel) );
+
+		 		if(!params.containsKey("no-headers") && !params.containsKey("output-vcf"))
+		 		{
+		 			outSnp.println("chrom\tposition\tref\tvar\tnormal_reads1\tnormal_reads2\tnormal_var_freq\tnormal_gt\ttumor_reads1\ttumor_reads2\ttumor_var_freq\ttumor_gt\tsomatic_status\tvariant_p_value\tsomatic_p_value\ttumor_reads1_plus\ttumor_reads1_minus\ttumor_reads2_plus\ttumor_reads2_minus\tnormal_reads1_plus\tnormal_reads1_minus\tnormal_reads2_plus\tnormal_reads2_minus");
+		 			outIndel.println("chrom\tposition\tref\tvar\tnormal_reads1\tnormal_reads2\tnormal_var_freq\tnormal_gt\ttumor_reads1\ttumor_reads2\ttumor_var_freq\ttumor_gt\tsomatic_status\tvariant_p_value\tsomatic_p_value\ttumor_reads1_plus\ttumor_reads1_minus\ttumor_reads2_plus\ttumor_reads2_minus\tnormal_reads1_plus\tnormal_reads1_minus\tnormal_reads2_plus\tnormal_reads2_minus");
+		 		}
+
+		 		if(params.containsKey("output-vcf"))
+				{
+					// Output VCF Header //
+					outSnp.println(vcfHeader);
+					outIndel.println(vcfHeader);
+				}
+
+		 		if(params.containsKey("validation"))
+		 		{
+			 		outValidation = new PrintStream( new FileOutputStream(outputName + ".validation") );
+			 		if(!params.containsKey("no-headers") && !params.containsKey("output-vcf"))
+			 			outValidation.println("chrom\tposition\tref\tvar\tnormal_reads1\tnormal_reads2\tnormal_var_freq\tnormal_gt\ttumor_reads1\ttumor_reads2\ttumor_var_freq\ttumor_gt\tsomatic_status\tvariant_p_value\tsomatic_p_value\ttumor_reads1_plus\ttumor_reads1_minus\ttumor_reads2_plus\ttumor_reads2_minus");
+			 		if(params.containsKey("output-vcf"))
+					{
+						// Output VCF Header //
+						outValidation.println(vcfHeader);
+					}
+		 		}
+
+	    		// Parse the infile line by line //
+	    		System.err.println("Reading mpileup input...");
+	    		int numParsingExceptions = 0;
+
+	    		while ((line = in.readLine()) != null)
+	    		{
+
+	    			// Begin try-catch for line parsing //
+
+	    			try
+	    			{
+	    				String[] lineContents = line.split("\t", -1);
+
+	    				// Verify expected pileup format //
+
+	    				if(lineContents.length > 5 && lineContents[0].length() > 0 && lineContents[1].length() > 0 && lineContents[2].length() > 0 && lineContents[3].length() > 0)
+	    				{
+	    					sharedPositions++;
+
+	    					// Parse common fields from line //
+	    					String refName = lineContents[0];
+	    					int position = Integer.parseInt(lineContents[1]);
+	    					refBase = lineContents[2].toUpperCase();
+
+	    					chromNormal = refName;
+	    					chromTumor = refName;
+	    					posNormal = position;
+	    					posTumor = position;
+
+	    					// Parse normal, which should be first sample //
+	    					int normalOffset = 3;
+	    					int pileupDepthNormal = Integer.parseInt(lineContents[normalOffset]);
+		    	        	String normalBases = lineContents[normalOffset + 1];
+		    	        	String normalQualities = lineContents[normalOffset + 2];
+
+	    					// Parse tumor, which should be second sample //
+	    					int tumorOffset = 6;
+	    					int pileupDepthTumor = Integer.parseInt(lineContents[tumorOffset]);
+		    	        	String tumorBases = lineContents[tumorOffset + 1];
+		    	        	String tumorQualities = lineContents[tumorOffset + 2];
+
+	    					lineNormal = refName + "\t" + position + "\t" + refBase + "\t" + pileupDepthNormal + "\t" + normalBases + "\t" + normalQualities;
+	    					lineTumor = refName + "\t" + position + "\t" + refBase + "\t" + pileupDepthTumor + "\t" + tumorBases + "\t" + tumorQualities;
+
+	    					String compareResult = comparePositions(lineNormal, lineTumor, minCoverage, minReads2, minVarFreq, minAvgQual, pValueThreshold, somaticPvalue, minFreqForHom, normalPurity, tumorPurity);
+
+			    			if(compareResult.length() > 0)
+			    			{
+			    				// Get the alleles to determine type //
+			    				String[] compareContents = compareResult.split("\t");
+				    			String allele1 = compareContents[0];
+				    			String allele2 = compareContents[1];
+
+				    			double strandedness1 = 0.50;
+				    			double strandedness2 = 0.50;
+				    			double strandednessDiff = 0.00;
+
+				    			if(compareContents.length >= 17)
+				    			{
+				    				try
+				    				{
+				    					int tumorReads1plus = Integer.parseInt(compareContents[13]);
+				    					int tumorReads1minus = Integer.parseInt(compareContents[14]);
+				    					int tumorReads2plus = Integer.parseInt(compareContents[15]);
+				    					int tumorReads2minus = Integer.parseInt(compareContents[16]);
+
+				    					if(tumorReads1plus > 0 || tumorReads1minus > 0)
+				    					{
+				    						strandedness1 = (double) tumorReads1plus / (double) (tumorReads1plus + tumorReads1minus);
+				    					}
+
+				    					if(tumorReads2plus > 0 || tumorReads2minus > 0)
+				    					{
+				    						strandedness2 = (double) tumorReads2plus / (double) (tumorReads2plus + tumorReads2minus);
+				    						if(tumorReads1plus > 0 || tumorReads1minus > 0)
+				    						{
+				    							strandednessDiff = java.lang.Math.abs(strandedness1 - strandedness2);
+				    						}
+				    					}
+				    				}
+				    				catch(Exception e)
+				    				{
+				    					// Exception parsing info from compareResult //
+				    				}
+				    			}
+
+			    				//stats.put("comparedPositions", (stats.get("comparedPositions") + 1));
+				    			comparedPositions++;
+
+			    				if(params.containsKey("verbose") && !compareResult.contains("Reference"))
+			    					System.err.println(chromNormal + "\t" + posNormal + "\t" + compareResult);
+
+			    				// If VCF format specified, supply it //
+
+			    				if(params.containsKey("output-vcf"))
+			    				{
+			    					int normalReads1 = Integer.parseInt(compareContents[2]);
+			    					int normalReads2 = Integer.parseInt(compareContents[3]);
+			    					String normalFreq = compareContents[4];
+			    					String normalCall = compareContents[5];
+			    					int tumorReads1 = Integer.parseInt(compareContents[6]);
+			    					int tumorReads2 = Integer.parseInt(compareContents[7]);
+			    					String tumorFreq = compareContents[8];
+			    					String tumorCall = compareContents[9];
+			    					String somStatus = compareContents[10];
+			    					Double germlineP = Double.parseDouble(compareContents[11]);
+			    					Double somaticP = Double.parseDouble(compareContents[12]);
+
+			    					int totalDepth = pileupDepthNormal + pileupDepthTumor;
+
+			    					if(allele2.startsWith("+"))
+			    					{
+			    						// INSERTION //
+			    						// Ref = ref base; Var = ref base followed by inserted bases //
+			    						String varColumn = allele1 + allele2.replace("+", "");
+			    						compareResult = "." + "\t" + allele1 + "\t" + varColumn + "\t" + ".";
+			    					}
+			    					else if(allele2.startsWith("-"))
+			    					{
+			    						// DELETION //
+			    						// Ref = ref base followed by deleted bases; var = ref base //
+			    						String refColumn = allele1 + allele2.replace("-", "");
+			    						compareResult = "." + "\t" + refColumn + "\t" + allele1 + "\t" + ".";
+			    					}
+			    					else
+			    					{
+				    					compareResult = "." + "\t" + allele1 + "\t" + allele2 + "\t" + ".";
+			    					}
+
+
+			    					// Decide on filter field //
+			    					if(doStrandFilter && strandednessDiff > 0.10 && (strandedness2 < 0.10 || strandedness2 > 0.90))
+			    					{
+			    						compareResult += "\t" + "str10";
+			    					}
+			    					else if(somStatus.equals("IndelFilter"))
+			    					{
+			    						compareResult += "\t" + "indelError";
+			    					}
+			    					else
+			    					{
+			    						compareResult += "\t" + "PASS";
+			    					}
+
+			    					// Determine somatic status id and score //
+			    					int ssCode = 0;
+			    					double somScore = 0;
+
+			    					if(somStatus.equals("Reference"))
+			    					{
+			    						// Wildtype //
+			    						ssCode = 0;
+			    						calledReference++;
+			    					}
+			    					else if(somStatus.equals("Germline"))
+			    					{
+			    						// Germline //
+			    						ssCode = 1;
+			    						calledGermline++;
+			    						if(somaticP == 0)
+			    						{
+			    							somScore = 0;
+			    						}
+			    						else
+			    						{
+			    							somScore = 0 - (10 * java.lang.Math.log10(somaticP));
+			    						}
+			    					}
+			    					else if(somStatus.equals("Somatic"))
+			    					{
+			    						// Somatic //
+			    						ssCode = 2;
+			    						calledSomatic++;
+			    						if(somaticP == 0)
+			    						{
+			    							somScore = 255;
+			    						}
+			    						else
+			    						{
+			    							somScore = 0 - (10 * java.lang.Math.log10(somaticP));
+			    						}
+			    					}
+			    					else if(somStatus.equals("LOH"))
+			    					{
+			    						// LOH //
+			    						ssCode = 3;
+			    						calledLOH++;
+			    						if(somaticP == 0)
+			    						{
+			    							somScore = 255;
+			    						}
+			    						else
+			    						{
+			    							somScore = 0 - (10 * java.lang.Math.log10(somaticP));
+			    						}
+			    					}
+			    					else
+			    					{
+			    						// Unknown //
+			    						calledUnknown++;
+			    						ssCode = 5;
+			    					}
+
+			    					// Adjust somatic score //
+			    					if(somScore > 255)
+			    						somScore = 255;
+
+			    					// Print the info field //
+
+			    					compareResult += "\t" + "DP=" + totalDepth;
+			    					if(somStatus.equals("Somatic"))
+			    						compareResult += ";SOMATIC";
+			    					compareResult += ";" + "SS=" + ssCode;
+			    					compareResult += ";" + "SSC=" + (int) somScore;
+			    					compareResult += ";" + "GPV=" + pvalueFormat.format(germlineP);
+			    					compareResult += ";" + "SPV=" + pvalueFormat.format(somaticP);
+
+			    					// Print the format field //
+
+			    					String tumorDP4 = "";
+			    					String normalDP4 = "";
+
+					    			if(compareContents.length >= 17)
+					    			{
+					    				try
+					    				{
+					    					tumorDP4 = compareContents[13] + "," + compareContents[14] + "," + compareContents[15] + "," + compareContents[16];
+					    					normalDP4 = compareContents[17] + "," + compareContents[18] + "," + compareContents[19] + "," + compareContents[20];
+					    				}
+					    				catch(Exception e)
+					    				{
+					    					// Exception parsing info from compareResult //
+					    					tumorDP4 = "";
+					    					normalDP4 = "";
+					    				}
+					    			}
+
+					    			if(tumorDP4.length() > 0)
+					    				compareResult += "\tGT:GQ:DP:RD:AD:FREQ:DP4";
+					    			else
+					    				compareResult += "\tGT:GQ:DP:RD:AD:FREQ";
+
+			    					// Determine normal genotype //
+			    					String normalGt = ".";
+			    					String tumorGt = ".";
+			    					if(normalCall.equals(refBase))
+			    					{
+			    						normalGt = "0/0";
+			    					}
+			    					else if(VarScan.isHeterozygous(normalCall))
+			    					{
+			    						normalGt = "0/1";
+			    					}
+			    					else
+			    					{
+			    						normalGt = "1/1";
+			    					}
+
+			    					if(tumorCall.equals(refBase))
+			    					{
+			    						tumorGt = "0/0";
+			    					}
+			    					else if(VarScan.isHeterozygous(tumorCall))
+			    					{
+			    						tumorGt = "0/1";
+			    					}
+			    					else
+			    					{
+			    						tumorGt = "1/1";
+			    					}
+
+			    					if(tumorDP4.length() > 0)
+			    					{
+				    					compareResult += "\t" + normalGt + ":.:" + pileupDepthNormal + ":" + normalReads1 + ":" + normalReads2 + ":" + normalFreq + ":" + normalDP4;
+				    					compareResult += "\t" + tumorGt + ":.:" + pileupDepthTumor + ":" + tumorReads1 + ":" + tumorReads2 + ":" + tumorFreq + ":" + tumorDP4;
+			    					}
+			    					else
+			    					{
+				    					compareResult += "\t" + normalGt + ":.:" + pileupDepthNormal + ":" + normalReads1 + ":" + normalReads2 + ":" + normalFreq;
+				    					compareResult += "\t" + tumorGt + ":.:" + pileupDepthTumor + ":" + tumorReads1 + ":" + tumorReads2 + ":" + tumorFreq;
+			    					}
+			    				}
+
+			    				// Print to master file for validation //
+
+			    				if(params.containsKey("validation"))
+			    				{
+			    					outValidation.println(chromNormal + "\t" + posNormal + "\t" + compareResult);
+			    				}
+
+			    				if(!params.containsKey("validation") && (compareResult.contains("Reference") || compareResult.contains("SS=0")  || compareResult.contains("Filter")))
+			    				{
+			    					// Don't print reference/indelfilter positions unless doing validation //
+			    				}
+			    				else if(doStrandFilter && strandednessDiff > 0.10 && (strandedness2 < 0.10 || strandedness2 > 0.90))
+			    				{
+			    					// If filter is set, ignore variants that are supported largely by one strand //
+			    					if(!params.containsKey("output-vcf"))
+			    						compareResult = "StrandFilter";
+			    				}
+			    				else if(allele1.contains("-") || allele1.contains("+") || allele2.contains("-") || allele2.contains("+"))//if(compareResult.contains("INS") || compareResult.contains("DEL"))
+			    				{
+			    					outIndel.println(chromNormal + "\t" + posNormal + "\t" + compareResult);
+			    				}
+			    				else
+			    				{
+				    				outSnp.println(chromNormal + "\t" + posNormal + "\t" + compareResult);
+			    				}
+			    			}
+			    			else
+			    			{
+//			    				System.err.println("Uncalled" + chromNormal + "\t" + posNormal + "\t" + compareResult);
+			    			}
+
+			    			if(compareResult.contains("Reference"))
+			    				calledReference++; //stats.put("calledReference", (stats.get("calledReference") + 1));
+			    			else if(compareResult.contains("IndelFilter"))
+			    				indelFilter++;	//stats.put("indelFilter", (stats.get("indelFilter") + 1));
+			    			else if(compareResult.contains("StrandFilter"))
+			    				strandFilter++;
+			    			else if(compareResult.contains("Germline"))
+			    				calledGermline++;	//stats.put("calledGermline", (stats.get("calledGermline") + 1));
+			    			else if(compareResult.contains("Somatic"))
+			    				calledSomatic++;	//stats.put("calledSomatic", (stats.get("calledSomatic") + 1));
+			    			else if(compareResult.contains("LOH"))
+			    				calledLOH++;	//stats.put("calledLOH", (stats.get("calledLOH") + 1));
+			    			else if(compareResult.contains("Unknown"))
+			    				calledUnknown++;	//stats.put("calledUnknown", (stats.get("calledUnknown") + 1));
+			    			else if(compareResult.contains("Variant"))
+			    				calledVariant++;	//stats.put("calledVariant", (stats.get("calledVariant") + 1));
+
+
+
+	    				}
+	    				else
+	    				{
+	    					System.err.println("Error: Invalid format or not enough samples in mpileup: " + line + "\n");
+	    					return;
+	    				}
+	    			}
+	    			catch(Exception e)
+	    		    {
+	    		    	System.err.println("Parsing Exception on line:\n" + line + "\n" + e.getLocalizedMessage());
+	    				numParsingExceptions++;
+	    				if(numParsingExceptions >= 5)
+	    				{
+	    					System.err.println("Too many parsing exceptions encountered; exiting");
+	    					return;
+	    				}
+	    		    	return;
+	    		    }
+	    		}
+
+	    		// Close input/output files //
+	    		in.close();
+			    outSnp.close();
+			    outIndel.close();
+
+			    System.err.println(sharedPositions + " positions in mpileup file"); //stats.get("sharedPositions")
+			    System.err.println(comparedPositions + " had sufficient coverage for comparison"); //stats.get("comparedPositions")
+			    System.err.println(calledReference + " were called Reference"); //stats.get("calledReference")
+			    System.err.println(indelFilter + " were mixed SNP-indel calls and filtered");
+			    if(doStrandFilter)
+			    	System.err.println(strandFilter + " were removed by the strand filter");
+			    System.err.println(calledGermline + " were called Germline");
+			    System.err.println(calledLOH + " were called LOH");
+			    System.err.println(calledSomatic + " were called Somatic");
+			    System.err.println(calledUnknown + " were called Unknown");
+			    System.err.println(calledVariant + " were called Variant");
+	    	}
+
+----------------------------------------
+	    	{
+	    		tumorPositions++;
+	    		String[] tumorContents = lineTumor.split("\t");
+
+		    	if(tumorContents.length > 1)
+		    	{
+			    	chromTumor = tumorContents[0];
+			    	posTumor = Integer.parseInt(tumorContents[1]);
+		    	}
+
+		    	// Parse normal lines until we get the same chromosome //
+		    	boolean flagEOF = false;
+		    	boolean normalWasReset = false;
+
+		    	//	Advance in normal file if tumor is changed but normal is not, or if tumor is higher //
+		    	while(!chromNormal.equals(chromTumor) && !chromTumor.equals(prevChromTumor) && !flagEOF && (chromNormal.equals(prevChromTumor) || inSortOrder(chromNormal, chromTumor)))
+		    	{
+		    		//System.err.println("Normal (" + chromNormal + ") catching up to " + chromTumor);
+		    		// Get next line from normal pileup //
+		    		if((lineNormal = normal.readLine()) != null)
+		    		{
+		    			String[] normalContents = lineNormal.split("\t");
+
+				    	if(normalContents.length > 1)
+				    	{
+					    	chromNormal = normalContents[0];
+					    	posNormal = Integer.parseInt(normalContents[1]);
+				    	}
+		    		}
+		    		else
+		    		{
+		    			flagEOF = true;
+		    		}
+
+
+		    	}
+
+		    	// If chromosomes match and are non-blank, attempt to get matching positions //
+		    	if(chromNormal.equals(chromTumor) && !chromNormal.equals(""))
+		    	{
+		    		normalWasReset = false;
+		    		// Seek to matching Normal Position //
+
+		    		while(chromNormal.equals(chromTumor) && posNormal < posTumor && ((lineNormal = normal.readLine()) != null))
+		    		{
+		    			String[] normalContents = lineNormal.split("\t");
+				    	if(normalContents.length > 1)
+				    	{
+					    	chromNormal = normalContents[0];
+					    	posNormal = Integer.parseInt(normalContents[1]);
+				    	}
+		    		}
+
+		    		// Seek to matching Tumor Position //
+
+		    		while(chromNormal.equals(chromTumor) && posTumor < posNormal && ((lineTumor = tumor.readLine()) != null))
+		    		{
+		    			tumorContents = lineTumor.split("\t");
+				    	if(tumorContents.length > 1)
+				    	{
+					    	chromTumor = tumorContents[0];
+					    	posTumor = Integer.parseInt(tumorContents[1]);
+				    	}
+		    		}
+
+		    		// Proceed if normal and tumor positions match //
+
+		    		if(chromNormal.equals(chromTumor) && chromNormal.equals(chromTumor) && posNormal == posTumor)
+		    		{
+		    			//stats.put("sharedPositions", (stats.get("sharedPositions") + 1));
+		    			sharedPositions++;
+		    			if(params.containsKey("verbose"))
+		    					System.err.println("Comparing calls at " + chromTumor + ":" + posTumor);
+
+		    			refBase = tumorContents[2];
+		    			String compareResult = comparePositions(lineNormal, lineTumor, minCoverage, minReads2, minVarFreq, minAvgQual, pValueThreshold, somaticPvalue, minFreqForHom, normalPurity, tumorPurity);
+
+		    			if(compareResult.length() > 0)
+		    			{
+		    				// Get the alleles to determine type //
+		    				String[] compareContents = compareResult.split("\t");
+			    			String allele1 = compareContents[0];
+			    			String allele2 = compareContents[1];
+
+			    			double strandedness1 = 0.50;
+			    			double strandedness2 = 0.50;
+			    			double strandednessDiff = 0.00;
+
+			    			if(compareContents.length >= 17)
+			    			{
+			    				try
+			    				{
+			    					int tumorReads1plus = Integer.parseInt(compareContents[13]);
+			    					int tumorReads1minus = Integer.parseInt(compareContents[14]);
+			    					int tumorReads2plus = Integer.parseInt(compareContents[15]);
+			    					int tumorReads2minus = Integer.parseInt(compareContents[16]);
+
+			    					if(tumorReads1plus > 0 || tumorReads1minus > 0)
+			    					{
+			    						strandedness1 = (double) tumorReads1plus / (double) (tumorReads1plus + tumorReads1minus);
+			    					}
+
+			    					if(tumorReads2plus > 0 || tumorReads2minus > 0)
+			    					{
+			    						strandedness2 = (double) tumorReads2plus / (double) (tumorReads2plus + tumorReads2minus);
+			    						if(tumorReads1plus > 0 || tumorReads1minus > 0)
+			    						{
+			    							strandednessDiff = java.lang.Math.abs(strandedness1 - strandedness2);
+			    						}
+			    					}
+			    				}
+			    				catch(Exception e)
+			    				{
+			    					// Exception parsing info from compareResult //
+			    				}
+			    			}
+
+		    				//stats.put("comparedPositions", (stats.get("comparedPositions") + 1));
+			    			comparedPositions++;
+
+		    				if(params.containsKey("verbose") && !compareResult.contains("Reference"))
+		    					System.err.println(chromNormal + "\t" + posNormal + "\t" + compareResult);
+
+		    				// If VCF format specified, supply it //
+
+		    				if(params.containsKey("output-vcf"))
+		    				{
+		    					int normalReads1 = Integer.parseInt(compareContents[2]);
+		    					int normalReads2 = Integer.parseInt(compareContents[3]);
+		    					String normalFreq = compareContents[4];
+		    					String normalCall = compareContents[5];
+		    					int tumorReads1 = Integer.parseInt(compareContents[6]);
+		    					int tumorReads2 = Integer.parseInt(compareContents[7]);
+		    					String tumorFreq = compareContents[8];
+		    					String tumorCall = compareContents[9];
+		    					String somStatus = compareContents[10];
+		    					Double germlineP = Double.parseDouble(compareContents[11]);
+		    					Double somaticP = Double.parseDouble(compareContents[12]);
+
+		    					String[] normalContents = lineNormal.split("\t");
+		    					//tumorContents = lineTumor.split("\t");
+		    					int pileupDepthNormal = Integer.parseInt(normalContents[3]);
+		    					int pileupDepthTumor = Integer.parseInt(tumorContents[3]);
+
+		    					int totalDepth = pileupDepthNormal + pileupDepthTumor;
+
+		    					if(allele2.startsWith("+"))
+		    					{
+		    						// INSERTION //
+		    						// Ref = ref base; Var = ref base followed by inserted bases //
+		    						String varColumn = allele1 + allele2.replace("+", "");
+		    						compareResult = "." + "\t" + allele1 + "\t" + varColumn + "\t" + ".";
+		    					}
+		    					else if(allele2.startsWith("-"))
+		    					{
+		    						// DELETION //
+		    						// Ref = ref base followed by deleted bases; var = ref base //
+		    						String refColumn = allele1 + allele2.replace("-", "");
+		    						compareResult = "." + "\t" + refColumn + "\t" + allele1 + "\t" + ".";
+		    					}
+		    					else
+		    					{
+			    					compareResult = "." + "\t" + allele1 + "\t" + allele2 + "\t" + ".";
+		    					}
+
+
+		    					// Decide on filter field //
+		    					if(params.containsKey("strand-filter") && strandednessDiff > 0.10 && (strandedness2 < 0.10 || strandedness2 > 0.90))
+		    					{
+		    						compareResult += "\t" + "str10";
+		    					}
+		    					else if(somStatus.equals("IndelFilter"))
+		    					{
+		    						compareResult += "\t" + "indelError";
+		    					}
+		    					else
+		    					{
+		    						compareResult += "\t" + "PASS";
+		    					}
+
+		    					// Determine somatic status id and score //
+		    					int ssCode = 0;
+		    					double somScore = 0;
+
+		    					if(somStatus.equals("Reference"))
+		    					{
+		    						// Wildtype //
+		    						ssCode = 0;
+		    						calledReference++;
+		    					}
+		    					else if(somStatus.equals("Germline"))
+		    					{
+		    						// Germline //
+		    						ssCode = 1;
+		    						calledGermline++;
+		    						if(somaticP == 0)
+		    						{
+		    							somScore = 0;
+		    						}
+		    						else
+		    						{
+		    							somScore = 0 - (10 * java.lang.Math.log10(somaticP));
+		    						}
+		    					}
+		    					else if(somStatus.equals("Somatic"))
+		    					{
+		    						// Somatic //
+		    						ssCode = 2;
+		    						calledSomatic++;
+		    						if(somaticP == 0)
+		    						{
+		    							somScore = 255;
+		    						}
+		    						else
+		    						{
+		    							somScore = 0 - (10 * java.lang.Math.log10(somaticP));
+		    						}
+		    					}
+		    					else if(somStatus.equals("LOH"))
+		    					{
+		    						// LOH //
+		    						ssCode = 3;
+		    						calledLOH++;
+		    						if(somaticP == 0)
+		    						{
+		    							somScore = 255;
+		    						}
+		    						else
+		    						{
+		    							somScore = 0 - (10 * java.lang.Math.log10(somaticP));
+		    						}
+		    					}
+		    					else
+		    					{
+		    						// Unknown //
+		    						calledUnknown++;
+		    						ssCode = 5;
+		    					}
+
+		    					// Adjust somatic score //
+		    					if(somScore > 255)
+		    						somScore = 255;
+
+		    					// Print the info field //
+
+		    					compareResult += "\t" + "DP=" + totalDepth;
+		    					if(somStatus.equals("Somatic"))
+		    						compareResult += ";SOMATIC";
+		    					compareResult += ";" + "SS=" + ssCode;
+		    					compareResult += ";" + "SSC=" + (int) somScore;
+		    					compareResult += ";" + "GPV=" + pvalueFormat.format(germlineP);
+		    					compareResult += ";" + "SPV=" + pvalueFormat.format(somaticP);
+
+		    					// Print the format field //
+
+		    					String tumorDP4 = "";
+		    					String normalDP4 = "";
+
+				    			if(compareContents.length >= 17)
+				    			{
+				    				try
+				    				{
+				    					tumorDP4 = compareContents[13] + "," + compareContents[14] + "," + compareContents[15] + "," + compareContents[16];
+				    					normalDP4 = compareContents[17] + "," + compareContents[18] + "," + compareContents[19] + "," + compareContents[20];
+				    				}
+				    				catch(Exception e)
+				    				{
+				    					// Exception parsing info from compareResult //
+				    					tumorDP4 = "";
+				    					normalDP4 = "";
+				    				}
+				    			}
+
+				    			if(tumorDP4.length() > 0)
+				    				compareResult += "\tGT:GQ:DP:RD:AD:FREQ:DP4";
+				    			else
+				    				compareResult += "\tGT:GQ:DP:RD:AD:FREQ";
+
+		    					// Determine normal genotype //
+		    					String normalGt = ".";
+		    					String tumorGt = ".";
+		    					if(normalCall.equals(refBase))
+		    					{
+		    						normalGt = "0/0";
+		    					}
+		    					else if(VarScan.isHeterozygous(normalCall))
+		    					{
+		    						normalGt = "0/1";
+		    					}
+		    					else
+		    					{
+		    						normalGt = "1/1";
+		    					}
+
+		    					if(tumorCall.equals(refBase))
+		    					{
+		    						tumorGt = "0/0";
+		    					}
+		    					else if(VarScan.isHeterozygous(tumorCall))
+		    					{
+		    						tumorGt = "0/1";
+		    					}
+		    					else
+		    					{
+		    						tumorGt = "1/1";
+		    					}
+
+		    					if(tumorDP4.length() > 0)
+		    					{
+			    					compareResult += "\t" + normalGt + ":.:" + pileupDepthNormal + ":" + normalReads1 + ":" + normalReads2 + ":" + normalFreq + ":" + normalDP4;
+			    					compareResult += "\t" + tumorGt + ":.:" + pileupDepthTumor + ":" + tumorReads1 + ":" + tumorReads2 + ":" + tumorFreq + ":" + tumorDP4;
+		    					}
+		    					else
+		    					{
+			    					compareResult += "\t" + normalGt + ":.:" + pileupDepthNormal + ":" + normalReads1 + ":" + normalReads2 + ":" + normalFreq;
+			    					compareResult += "\t" + tumorGt + ":.:" + pileupDepthTumor + ":" + tumorReads1 + ":" + tumorReads2 + ":" + tumorFreq;
+		    					}
+		    				}
+		    				// Print to master file for validation //
+
+		    				if(params.containsKey("validation"))
+		    				{
+		    					outValidation.println(chromNormal + "\t" + posNormal + "\t" + compareResult);
+		    				}
+
+		    				if(!params.containsKey("validation") && (compareResult.contains("Reference") || compareResult.contains("SS=0") || compareResult.contains("Filter")))
+		    				{
+		    					// Don't print reference/indelfilter positions unless doing validation //
+		    				}
+		    				else if(params.containsKey("strand-filter") && strandednessDiff > 0.10 && (strandedness2 < 0.10 || strandedness2 > 0.90))
+		    				{
+		    					// If filter is set, ignore variants that are supported largely by one strand //
+		    					compareResult = "StrandFilter";
+		    				}
+		    				else if(allele1.contains("-") || allele1.contains("+") || allele2.contains("-") || allele2.contains("+"))//if(compareResult.contains("INS") || compareResult.contains("DEL"))
+		    				{
+		    					outIndel.println(chromNormal + "\t" + posNormal + "\t" + compareResult);
+		    				}
+		    				else
+		    				{
+			    				outSnp.println(chromNormal + "\t" + posNormal + "\t" + compareResult);
+		    				}
+		    			}
+		    			else
+		    			{
+//		    				System.err.println("Uncalled" + chromNormal + "\t" + posNormal + "\t" + compareResult);
+		    			}
+
+		    			if(compareResult.contains("Reference"))
+		    				calledReference++; //stats.put("calledReference", (stats.get("calledReference") + 1));
+		    			else if(compareResult.contains("IndelFilter"))
+		    				indelFilter++;	//stats.put("indelFilter", (stats.get("indelFilter") + 1));
+		    			else if(compareResult.contains("StrandFilter"))
+		    				strandFilter++;
+		    			else if(compareResult.contains("Germline"))
+		    				calledGermline++;	//stats.put("calledGermline", (stats.get("calledGermline") + 1));
+		    			else if(compareResult.contains("Somatic"))
+		    				calledSomatic++;	//stats.put("calledSomatic", (stats.get("calledSomatic") + 1));
+		    			else if(compareResult.contains("LOH"))
+		    				calledLOH++;	//stats.put("calledLOH", (stats.get("calledLOH") + 1));
+		    			else if(compareResult.contains("Unknown"))
+		    				calledUnknown++;	//stats.put("calledUnknown", (stats.get("calledUnknown") + 1));
+		    			else if(compareResult.contains("Variant"))
+		    				calledVariant++;	//stats.put("calledVariant", (stats.get("calledVariant") + 1));
+
+				    	prevChromNormal = chromNormal;
+				    	prevChromTumor = chromTumor;
+		    		}
+		    		else
+		    		{
+		    			//System.err.println("Failed to match positions " + chromNormal + " " + posNormal + " to Tumor " + chromTumor + " " + posTumor);
+		    		}
+		    	}
+		    	// If they're in sort order, do nothing so that tumor can catch up //
+		    	else if(inSortOrder(chromNormal, chromTumor))
+		    	{
+		    		System.err.println("Not resetting normal file because " + chromNormal + " < " + chromTumor);
+		    	}
+		    	// If we reached the end of the normal file but never saw this chromosome, //
+		    	// fast-forward until tumor chromosome changes and reset normal file //
+		    	else if(flagEOF)
+		    	{
+		    		flagEOF = false;
+
+		    		while(prevChromTumor.equals(chromTumor) && !flagEOF)
+		    		{
+		    			if((lineTumor = tumor.readLine()) != null)
+		    			{
+			    			tumorContents = lineTumor.split("\t");
+
+					    	if(tumorContents.length > 1)
+					    	{
+						    	chromTumor = tumorContents[0];
+						    	posTumor = Integer.parseInt(tumorContents[1]);
+					    	}
+		    			}
+		    			else
+		    			{
+		    				flagEOF = true;
+		    			}
+		    		}
+
+		    		// Reset the normal file if we've already passed this chromosome in normal //
+
+		    		if(!flagEOF && !normalWasReset)
+		    		{
+		    			if(inSortOrder(chromNormal, chromTumor))
+		    			{
+		    				System.err.println("Not resetting normal file because " + chromNormal + " < " + chromTumor);
+		    			}
+		    			else
+		    			{
+		    				System.err.println("Resetting normal file because " + chromNormal + " > " + chromTumor);
+				    		normalWasReset = true;
+			    			normal.close();
+				    		normal = new BufferedReader(new FileReader(normalPileupFile));
+		    			}
+
+		    		}
+		    	}
+
+	    	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834607
+net/sf/varscan/Somatic.java 1019 1440
+net/sf/varscan/Somatic.java 343 660
+----------------------------------------
+	    	{
+	    		tumorPositions++;
+	    		String[] tumorContents = lineTumor.split("\t");
+
+		    	if(tumorContents.length > 1)
+		    	{
+			    	chromTumor = tumorContents[0];
+			    	posTumor = Integer.parseInt(tumorContents[1]);
+		    	}
+
+		    	// Parse normal lines until we get the same chromosome //
+		    	boolean flagEOF = false;
+		    	boolean normalWasReset = false;
+
+		    	//	Advance in normal file if tumor is changed but normal is not, or if tumor is higher //
+		    	while(!chromNormal.equals(chromTumor) && !chromTumor.equals(prevChromTumor) && !flagEOF && (chromNormal.equals(prevChromTumor) || inSortOrder(chromNormal, chromTumor)))
+		    	{
+		    		//System.err.println("Normal (" + chromNormal + ") catching up to " + chromTumor);
+		    		// Get next line from normal pileup //
+		    		if((lineNormal = normal.readLine()) != null)
+		    		{
+		    			String[] normalContents = lineNormal.split("\t");
+
+				    	if(normalContents.length > 1)
+				    	{
+					    	chromNormal = normalContents[0];
+					    	posNormal = Integer.parseInt(normalContents[1]);
+				    	}
+		    		}
+		    		else
+		    		{
+		    			flagEOF = true;
+		    		}
+
+
+		    	}
+
+		    	// If chromosomes match and are non-blank, attempt to get matching positions //
+		    	if(chromNormal.equals(chromTumor) && !chromNormal.equals(""))
+		    	{
+		    		normalWasReset = false;
+		    		// Seek to matching Normal Position //
+
+		    		while(chromNormal.equals(chromTumor) && posNormal < posTumor && ((lineNormal = normal.readLine()) != null))
+		    		{
+		    			String[] normalContents = lineNormal.split("\t");
+				    	if(normalContents.length > 1)
+				    	{
+					    	chromNormal = normalContents[0];
+					    	posNormal = Integer.parseInt(normalContents[1]);
+				    	}
+		    		}
+
+		    		// Seek to matching Tumor Position //
+
+		    		while(chromNormal.equals(chromTumor) && posTumor < posNormal && ((lineTumor = tumor.readLine()) != null))
+		    		{
+		    			tumorContents = lineTumor.split("\t");
+				    	if(tumorContents.length > 1)
+				    	{
+					    	chromTumor = tumorContents[0];
+					    	posTumor = Integer.parseInt(tumorContents[1]);
+				    	}
+		    		}
+
+		    		// Proceed if normal and tumor positions match //
+
+		    		if(chromNormal.equals(chromTumor) && chromNormal.equals(chromTumor) && posNormal == posTumor)
+		    		{
+		    			//stats.put("sharedPositions", (stats.get("sharedPositions") + 1));
+		    			sharedPositions++;
+		    			if(params.containsKey("verbose"))
+		    					System.err.println("Comparing calls at " + chromTumor + ":" + posTumor);
+
+		    			refBase = tumorContents[2];
+		    			String compareResult = comparePositions(lineNormal, lineTumor, minCoverage, minReads2, minVarFreq, minAvgQual, pValueThreshold, somaticPvalue, minFreqForHom, normalPurity, tumorPurity);
+
+		    			if(compareResult.length() > 0)
+		    			{
+		    				// Get the alleles to determine type //
+		    				String[] compareContents = compareResult.split("\t");
+			    			String allele1 = compareContents[0];
+			    			String allele2 = compareContents[1];
+
+			    			double strandedness1 = 0.50;
+			    			double strandedness2 = 0.50;
+			    			double strandednessDiff = 0.00;
+
+			    			if(compareContents.length >= 17)
+			    			{
+			    				try
+			    				{
+			    					int tumorReads1plus = Integer.parseInt(compareContents[13]);
+			    					int tumorReads1minus = Integer.parseInt(compareContents[14]);
+			    					int tumorReads2plus = Integer.parseInt(compareContents[15]);
+			    					int tumorReads2minus = Integer.parseInt(compareContents[16]);
+
+			    					if(tumorReads1plus > 0 || tumorReads1minus > 0)
+			    					{
+			    						strandedness1 = (double) tumorReads1plus / (double) (tumorReads1plus + tumorReads1minus);
+			    					}
+
+			    					if(tumorReads2plus > 0 || tumorReads2minus > 0)
+			    					{
+			    						strandedness2 = (double) tumorReads2plus / (double) (tumorReads2plus + tumorReads2minus);
+			    						if(tumorReads1plus > 0 || tumorReads1minus > 0)
+			    						{
+			    							strandednessDiff = java.lang.Math.abs(strandedness1 - strandedness2);
+			    						}
+			    					}
+			    				}
+			    				catch(Exception e)
+			    				{
+			    					// Exception parsing info from compareResult //
+			    				}
+			    			}
+
+		    				//stats.put("comparedPositions", (stats.get("comparedPositions") + 1));
+			    			comparedPositions++;
+
+		    				if(params.containsKey("verbose") && !compareResult.contains("Reference"))
+		    					System.err.println(chromNormal + "\t" + posNormal + "\t" + compareResult);
+
+		    				// If VCF format specified, supply it //
+
+		    				if(params.containsKey("output-vcf"))
+		    				{
+		    					int normalReads1 = Integer.parseInt(compareContents[2]);
+		    					int normalReads2 = Integer.parseInt(compareContents[3]);
+		    					String normalFreq = compareContents[4];
+		    					String normalCall = compareContents[5];
+		    					int tumorReads1 = Integer.parseInt(compareContents[6]);
+		    					int tumorReads2 = Integer.parseInt(compareContents[7]);
+		    					String tumorFreq = compareContents[8];
+		    					String tumorCall = compareContents[9];
+		    					String somStatus = compareContents[10];
+		    					Double germlineP = Double.parseDouble(compareContents[11]);
+		    					Double somaticP = Double.parseDouble(compareContents[12]);
+
+		    					String[] normalContents = lineNormal.split("\t");
+		    					//tumorContents = lineTumor.split("\t");
+		    					int pileupDepthNormal = Integer.parseInt(normalContents[3]);
+		    					int pileupDepthTumor = Integer.parseInt(tumorContents[3]);
+
+		    					int totalDepth = pileupDepthNormal + pileupDepthTumor;
+
+		    					if(allele2.startsWith("+"))
+		    					{
+		    						// INSERTION //
+		    						// Ref = ref base; Var = ref base followed by inserted bases //
+		    						String varColumn = allele1 + allele2.replace("+", "");
+		    						compareResult = "." + "\t" + allele1 + "\t" + varColumn + "\t" + ".";
+		    					}
+		    					else if(allele2.startsWith("-"))
+		    					{
+		    						// DELETION //
+		    						// Ref = ref base followed by deleted bases; var = ref base //
+		    						String refColumn = allele1 + allele2.replace("-", "");
+		    						compareResult = "." + "\t" + refColumn + "\t" + allele1 + "\t" + ".";
+		    					}
+		    					else
+		    					{
+			    					compareResult = "." + "\t" + allele1 + "\t" + allele2 + "\t" + ".";
+		    					}
+
+
+		    					// Decide on filter field //
+		    					if(params.containsKey("strand-filter") && strandednessDiff > 0.10 && (strandedness2 < 0.10 || strandedness2 > 0.90))
+		    					{
+		    						compareResult += "\t" + "str10";
+		    					}
+		    					else if(somStatus.equals("IndelFilter"))
+		    					{
+		    						compareResult += "\t" + "indelError";
+		    					}
+		    					else
+		    					{
+		    						compareResult += "\t" + "PASS";
+		    					}
+
+		    					// Determine somatic status id and score //
+		    					int ssCode = 0;
+		    					double somScore = 0;
+
+		    					if(somStatus.equals("Reference"))
+		    					{
+		    						// Wildtype //
+		    						ssCode = 0;
+		    						calledReference++;
+		    					}
+		    					else if(somStatus.equals("Germline"))
+		    					{
+		    						// Germline //
+		    						ssCode = 1;
+		    						calledGermline++;
+		    						if(somaticP == 0)
+		    						{
+		    							somScore = 0;
+		    						}
+		    						else
+		    						{
+		    							somScore = 0 - (10 * java.lang.Math.log10(somaticP));
+		    						}
+		    					}
+		    					else if(somStatus.equals("Somatic"))
+		    					{
+		    						// Somatic //
+		    						ssCode = 2;
+		    						calledSomatic++;
+		    						if(somaticP == 0)
+		    						{
+		    							somScore = 255;
+		    						}
+		    						else
+		    						{
+		    							somScore = 0 - (10 * java.lang.Math.log10(somaticP));
+		    						}
+		    					}
+		    					else if(somStatus.equals("LOH"))
+		    					{
+		    						// LOH //
+		    						ssCode = 3;
+		    						calledLOH++;
+		    						if(somaticP == 0)
+		    						{
+		    							somScore = 255;
+		    						}
+		    						else
+		    						{
+		    							somScore = 0 - (10 * java.lang.Math.log10(somaticP));
+		    						}
+		    					}
+		    					else
+		    					{
+		    						// Unknown //
+		    						calledUnknown++;
+		    						ssCode = 5;
+		    					}
+
+		    					// Adjust somatic score //
+		    					if(somScore > 255)
+		    						somScore = 255;
+
+		    					// Print the info field //
+
+		    					compareResult += "\t" + "DP=" + totalDepth;
+		    					if(somStatus.equals("Somatic"))
+		    						compareResult += ";SOMATIC";
+		    					compareResult += ";" + "SS=" + ssCode;
+		    					compareResult += ";" + "SSC=" + (int) somScore;
+		    					compareResult += ";" + "GPV=" + pvalueFormat.format(germlineP);
+		    					compareResult += ";" + "SPV=" + pvalueFormat.format(somaticP);
+
+		    					// Print the format field //
+
+		    					String tumorDP4 = "";
+		    					String normalDP4 = "";
+
+				    			if(compareContents.length >= 17)
+				    			{
+				    				try
+				    				{
+				    					tumorDP4 = compareContents[13] + "," + compareContents[14] + "," + compareContents[15] + "," + compareContents[16];
+				    					normalDP4 = compareContents[17] + "," + compareContents[18] + "," + compareContents[19] + "," + compareContents[20];
+				    				}
+				    				catch(Exception e)
+				    				{
+				    					// Exception parsing info from compareResult //
+				    					tumorDP4 = "";
+				    					normalDP4 = "";
+				    				}
+				    			}
+
+				    			if(tumorDP4.length() > 0)
+				    				compareResult += "\tGT:GQ:DP:RD:AD:FREQ:DP4";
+				    			else
+				    				compareResult += "\tGT:GQ:DP:RD:AD:FREQ";
+
+		    					// Determine normal genotype //
+		    					String normalGt = ".";
+		    					String tumorGt = ".";
+		    					if(normalCall.equals(refBase))
+		    					{
+		    						normalGt = "0/0";
+		    					}
+		    					else if(VarScan.isHeterozygous(normalCall))
+		    					{
+		    						normalGt = "0/1";
+		    					}
+		    					else
+		    					{
+		    						normalGt = "1/1";
+		    					}
+
+		    					if(tumorCall.equals(refBase))
+		    					{
+		    						tumorGt = "0/0";
+		    					}
+		    					else if(VarScan.isHeterozygous(tumorCall))
+		    					{
+		    						tumorGt = "0/1";
+		    					}
+		    					else
+		    					{
+		    						tumorGt = "1/1";
+		    					}
+
+		    					if(tumorDP4.length() > 0)
+		    					{
+			    					compareResult += "\t" + normalGt + ":.:" + pileupDepthNormal + ":" + normalReads1 + ":" + normalReads2 + ":" + normalFreq + ":" + normalDP4;
+			    					compareResult += "\t" + tumorGt + ":.:" + pileupDepthTumor + ":" + tumorReads1 + ":" + tumorReads2 + ":" + tumorFreq + ":" + tumorDP4;
+		    					}
+		    					else
+		    					{
+			    					compareResult += "\t" + normalGt + ":.:" + pileupDepthNormal + ":" + normalReads1 + ":" + normalReads2 + ":" + normalFreq;
+			    					compareResult += "\t" + tumorGt + ":.:" + pileupDepthTumor + ":" + tumorReads1 + ":" + tumorReads2 + ":" + tumorFreq;
+		    					}
+		    				}
+		    				// Print to master file for validation //
+
+		    				if(params.containsKey("validation"))
+		    				{
+		    					outValidation.println(chromNormal + "\t" + posNormal + "\t" + compareResult);
+		    				}
+
+		    				if(!params.containsKey("validation") && (compareResult.contains("Reference") || compareResult.contains("SS=0") || compareResult.contains("Filter")))
+		    				{
+		    					// Don't print reference/indelfilter positions unless doing validation //
+		    				}
+		    				else if(params.containsKey("strand-filter") && strandednessDiff > 0.10 && (strandedness2 < 0.10 || strandedness2 > 0.90))
+		    				{
+		    					// If filter is set, ignore variants that are supported largely by one strand //
+		    					compareResult = "StrandFilter";
+		    				}
+		    				else if(allele1.contains("-") || allele1.contains("+") || allele2.contains("-") || allele2.contains("+"))//if(compareResult.contains("INS") || compareResult.contains("DEL"))
+		    				{
+		    					outIndel.println(chromNormal + "\t" + posNormal + "\t" + compareResult);
+		    				}
+		    				else
+		    				{
+			    				outSnp.println(chromNormal + "\t" + posNormal + "\t" + compareResult);
+		    				}
+		    			}
+		    			else
+		    			{
+//		    				System.err.println("Uncalled" + chromNormal + "\t" + posNormal + "\t" + compareResult);
+		    			}
+
+		    			if(compareResult.contains("Reference"))
+		    				calledReference++; //stats.put("calledReference", (stats.get("calledReference") + 1));
+		    			else if(compareResult.contains("IndelFilter"))
+		    				indelFilter++;	//stats.put("indelFilter", (stats.get("indelFilter") + 1));
+		    			else if(compareResult.contains("StrandFilter"))
+		    				strandFilter++;
+		    			else if(compareResult.contains("Germline"))
+		    				calledGermline++;	//stats.put("calledGermline", (stats.get("calledGermline") + 1));
+		    			else if(compareResult.contains("Somatic"))
+		    				calledSomatic++;	//stats.put("calledSomatic", (stats.get("calledSomatic") + 1));
+		    			else if(compareResult.contains("LOH"))
+		    				calledLOH++;	//stats.put("calledLOH", (stats.get("calledLOH") + 1));
+		    			else if(compareResult.contains("Unknown"))
+		    				calledUnknown++;	//stats.put("calledUnknown", (stats.get("calledUnknown") + 1));
+		    			else if(compareResult.contains("Variant"))
+		    				calledVariant++;	//stats.put("calledVariant", (stats.get("calledVariant") + 1));
+
+				    	prevChromNormal = chromNormal;
+				    	prevChromTumor = chromTumor;
+		    		}
+		    		else
+		    		{
+		    			//System.err.println("Failed to match positions " + chromNormal + " " + posNormal + " to Tumor " + chromTumor + " " + posTumor);
+		    		}
+		    	}
+		    	// If they're in sort order, do nothing so that tumor can catch up //
+		    	else if(inSortOrder(chromNormal, chromTumor))
+		    	{
+		    		System.err.println("Not resetting normal file because " + chromNormal + " < " + chromTumor);
+		    	}
+		    	// If we reached the end of the normal file but never saw this chromosome, //
+		    	// fast-forward until tumor chromosome changes and reset normal file //
+		    	else if(flagEOF)
+		    	{
+		    		flagEOF = false;
+
+		    		while(prevChromTumor.equals(chromTumor) && !flagEOF)
+		    		{
+		    			if((lineTumor = tumor.readLine()) != null)
+		    			{
+			    			tumorContents = lineTumor.split("\t");
+
+					    	if(tumorContents.length > 1)
+					    	{
+						    	chromTumor = tumorContents[0];
+						    	posTumor = Integer.parseInt(tumorContents[1]);
+					    	}
+		    			}
+		    			else
+		    			{
+		    				flagEOF = true;
+		    			}
+		    		}
+
+		    		// Reset the normal file if we've already passed this chromosome in normal //
+
+		    		if(!flagEOF && !normalWasReset)
+		    		{
+		    			if(inSortOrder(chromNormal, chromTumor))
+		    			{
+		    				System.err.println("Not resetting normal file because " + chromNormal + " < " + chromTumor);
+		    			}
+		    			else
+		    			{
+		    				System.err.println("Resetting normal file because " + chromNormal + " > " + chromTumor);
+				    		normalWasReset = true;
+			    			normal.close();
+				    		normal = new BufferedReader(new FileReader(normalPileupFile));
+		    			}
+
+		    		}
+		    	}
+
+	    	}
+
+----------------------------------------
+	    				{
+	    					sharedPositions++;
+
+	    					// Parse common fields from line //
+	    					String refName = lineContents[0];
+	    					int position = Integer.parseInt(lineContents[1]);
+	    					refBase = lineContents[2].toUpperCase();
+
+	    					chromNormal = refName;
+	    					chromTumor = refName;
+	    					posNormal = position;
+	    					posTumor = position;
+
+	    					// Parse normal, which should be first sample //
+	    					int normalOffset = 3;
+	    					int pileupDepthNormal = Integer.parseInt(lineContents[normalOffset]);
+		    	        	String normalBases = lineContents[normalOffset + 1];
+		    	        	String normalQualities = lineContents[normalOffset + 2];
+
+	    					// Parse tumor, which should be second sample //
+	    					int tumorOffset = 6;
+	    					int pileupDepthTumor = Integer.parseInt(lineContents[tumorOffset]);
+		    	        	String tumorBases = lineContents[tumorOffset + 1];
+		    	        	String tumorQualities = lineContents[tumorOffset + 2];
+
+	    					lineNormal = refName + "\t" + position + "\t" + refBase + "\t" + pileupDepthNormal + "\t" + normalBases + "\t" + normalQualities;
+	    					lineTumor = refName + "\t" + position + "\t" + refBase + "\t" + pileupDepthTumor + "\t" + tumorBases + "\t" + tumorQualities;
+
+	    					String compareResult = comparePositions(lineNormal, lineTumor, minCoverage, minReads2, minVarFreq, minAvgQual, pValueThreshold, somaticPvalue, minFreqForHom, normalPurity, tumorPurity);
+
+			    			if(compareResult.length() > 0)
+			    			{
+			    				// Get the alleles to determine type //
+			    				String[] compareContents = compareResult.split("\t");
+				    			String allele1 = compareContents[0];
+				    			String allele2 = compareContents[1];
+
+				    			double strandedness1 = 0.50;
+				    			double strandedness2 = 0.50;
+				    			double strandednessDiff = 0.00;
+
+				    			if(compareContents.length >= 17)
+				    			{
+				    				try
+				    				{
+				    					int tumorReads1plus = Integer.parseInt(compareContents[13]);
+				    					int tumorReads1minus = Integer.parseInt(compareContents[14]);
+				    					int tumorReads2plus = Integer.parseInt(compareContents[15]);
+				    					int tumorReads2minus = Integer.parseInt(compareContents[16]);
+
+				    					if(tumorReads1plus > 0 || tumorReads1minus > 0)
+				    					{
+				    						strandedness1 = (double) tumorReads1plus / (double) (tumorReads1plus + tumorReads1minus);
+				    					}
+
+				    					if(tumorReads2plus > 0 || tumorReads2minus > 0)
+				    					{
+				    						strandedness2 = (double) tumorReads2plus / (double) (tumorReads2plus + tumorReads2minus);
+				    						if(tumorReads1plus > 0 || tumorReads1minus > 0)
+				    						{
+				    							strandednessDiff = java.lang.Math.abs(strandedness1 - strandedness2);
+				    						}
+				    					}
+				    				}
+				    				catch(Exception e)
+				    				{
+				    					// Exception parsing info from compareResult //
+				    				}
+				    			}
+
+			    				//stats.put("comparedPositions", (stats.get("comparedPositions") + 1));
+				    			comparedPositions++;
+
+			    				if(params.containsKey("verbose") && !compareResult.contains("Reference"))
+			    					System.err.println(chromNormal + "\t" + posNormal + "\t" + compareResult);
+
+			    				// If VCF format specified, supply it //
+
+			    				if(params.containsKey("output-vcf"))
+			    				{
+			    					int normalReads1 = Integer.parseInt(compareContents[2]);
+			    					int normalReads2 = Integer.parseInt(compareContents[3]);
+			    					String normalFreq = compareContents[4];
+			    					String normalCall = compareContents[5];
+			    					int tumorReads1 = Integer.parseInt(compareContents[6]);
+			    					int tumorReads2 = Integer.parseInt(compareContents[7]);
+			    					String tumorFreq = compareContents[8];
+			    					String tumorCall = compareContents[9];
+			    					String somStatus = compareContents[10];
+			    					Double germlineP = Double.parseDouble(compareContents[11]);
+			    					Double somaticP = Double.parseDouble(compareContents[12]);
+
+			    					int totalDepth = pileupDepthNormal + pileupDepthTumor;
+
+			    					if(allele2.startsWith("+"))
+			    					{
+			    						// INSERTION //
+			    						// Ref = ref base; Var = ref base followed by inserted bases //
+			    						String varColumn = allele1 + allele2.replace("+", "");
+			    						compareResult = "." + "\t" + allele1 + "\t" + varColumn + "\t" + ".";
+			    					}
+			    					else if(allele2.startsWith("-"))
+			    					{
+			    						// DELETION //
+			    						// Ref = ref base followed by deleted bases; var = ref base //
+			    						String refColumn = allele1 + allele2.replace("-", "");
+			    						compareResult = "." + "\t" + refColumn + "\t" + allele1 + "\t" + ".";
+			    					}
+			    					else
+			    					{
+				    					compareResult = "." + "\t" + allele1 + "\t" + allele2 + "\t" + ".";
+			    					}
+
+
+			    					// Decide on filter field //
+			    					if(doStrandFilter && strandednessDiff > 0.10 && (strandedness2 < 0.10 || strandedness2 > 0.90))
+			    					{
+			    						compareResult += "\t" + "str10";
+			    					}
+			    					else if(somStatus.equals("IndelFilter"))
+			    					{
+			    						compareResult += "\t" + "indelError";
+			    					}
+			    					else
+			    					{
+			    						compareResult += "\t" + "PASS";
+			    					}
+
+			    					// Determine somatic status id and score //
+			    					int ssCode = 0;
+			    					double somScore = 0;
+
+			    					if(somStatus.equals("Reference"))
+			    					{
+			    						// Wildtype //
+			    						ssCode = 0;
+			    						calledReference++;
+			    					}
+			    					else if(somStatus.equals("Germline"))
+			    					{
+			    						// Germline //
+			    						ssCode = 1;
+			    						calledGermline++;
+			    						if(somaticP == 0)
+			    						{
+			    							somScore = 0;
+			    						}
+			    						else
+			    						{
+			    							somScore = 0 - (10 * java.lang.Math.log10(somaticP));
+			    						}
+			    					}
+			    					else if(somStatus.equals("Somatic"))
+			    					{
+			    						// Somatic //
+			    						ssCode = 2;
+			    						calledSomatic++;
+			    						if(somaticP == 0)
+			    						{
+			    							somScore = 255;
+			    						}
+			    						else
+			    						{
+			    							somScore = 0 - (10 * java.lang.Math.log10(somaticP));
+			    						}
+			    					}
+			    					else if(somStatus.equals("LOH"))
+			    					{
+			    						// LOH //
+			    						ssCode = 3;
+			    						calledLOH++;
+			    						if(somaticP == 0)
+			    						{
+			    							somScore = 255;
+			    						}
+			    						else
+			    						{
+			    							somScore = 0 - (10 * java.lang.Math.log10(somaticP));
+			    						}
+			    					}
+			    					else
+			    					{
+			    						// Unknown //
+			    						calledUnknown++;
+			    						ssCode = 5;
+			    					}
+
+			    					// Adjust somatic score //
+			    					if(somScore > 255)
+			    						somScore = 255;
+
+			    					// Print the info field //
+
+			    					compareResult += "\t" + "DP=" + totalDepth;
+			    					if(somStatus.equals("Somatic"))
+			    						compareResult += ";SOMATIC";
+			    					compareResult += ";" + "SS=" + ssCode;
+			    					compareResult += ";" + "SSC=" + (int) somScore;
+			    					compareResult += ";" + "GPV=" + pvalueFormat.format(germlineP);
+			    					compareResult += ";" + "SPV=" + pvalueFormat.format(somaticP);
+
+			    					// Print the format field //
+
+			    					String tumorDP4 = "";
+			    					String normalDP4 = "";
+
+					    			if(compareContents.length >= 17)
+					    			{
+					    				try
+					    				{
+					    					tumorDP4 = compareContents[13] + "," + compareContents[14] + "," + compareContents[15] + "," + compareContents[16];
+					    					normalDP4 = compareContents[17] + "," + compareContents[18] + "," + compareContents[19] + "," + compareContents[20];
+					    				}
+					    				catch(Exception e)
+					    				{
+					    					// Exception parsing info from compareResult //
+					    					tumorDP4 = "";
+					    					normalDP4 = "";
+					    				}
+					    			}
+
+					    			if(tumorDP4.length() > 0)
+					    				compareResult += "\tGT:GQ:DP:RD:AD:FREQ:DP4";
+					    			else
+					    				compareResult += "\tGT:GQ:DP:RD:AD:FREQ";
+
+			    					// Determine normal genotype //
+			    					String normalGt = ".";
+			    					String tumorGt = ".";
+			    					if(normalCall.equals(refBase))
+			    					{
+			    						normalGt = "0/0";
+			    					}
+			    					else if(VarScan.isHeterozygous(normalCall))
+			    					{
+			    						normalGt = "0/1";
+			    					}
+			    					else
+			    					{
+			    						normalGt = "1/1";
+			    					}
+
+			    					if(tumorCall.equals(refBase))
+			    					{
+			    						tumorGt = "0/0";
+			    					}
+			    					else if(VarScan.isHeterozygous(tumorCall))
+			    					{
+			    						tumorGt = "0/1";
+			    					}
+			    					else
+			    					{
+			    						tumorGt = "1/1";
+			    					}
+
+			    					if(tumorDP4.length() > 0)
+			    					{
+				    					compareResult += "\t" + normalGt + ":.:" + pileupDepthNormal + ":" + normalReads1 + ":" + normalReads2 + ":" + normalFreq + ":" + normalDP4;
+				    					compareResult += "\t" + tumorGt + ":.:" + pileupDepthTumor + ":" + tumorReads1 + ":" + tumorReads2 + ":" + tumorFreq + ":" + tumorDP4;
+			    					}
+			    					else
+			    					{
+				    					compareResult += "\t" + normalGt + ":.:" + pileupDepthNormal + ":" + normalReads1 + ":" + normalReads2 + ":" + normalFreq;
+				    					compareResult += "\t" + tumorGt + ":.:" + pileupDepthTumor + ":" + tumorReads1 + ":" + tumorReads2 + ":" + tumorFreq;
+			    					}
+			    				}
+
+			    				// Print to master file for validation //
+
+			    				if(params.containsKey("validation"))
+			    				{
+			    					outValidation.println(chromNormal + "\t" + posNormal + "\t" + compareResult);
+			    				}
+
+			    				if(!params.containsKey("validation") && (compareResult.contains("Reference") || compareResult.contains("SS=0")  || compareResult.contains("Filter")))
+			    				{
+			    					// Don't print reference/indelfilter positions unless doing validation //
+			    				}
+			    				else if(doStrandFilter && strandednessDiff > 0.10 && (strandedness2 < 0.10 || strandedness2 > 0.90))
+			    				{
+			    					// If filter is set, ignore variants that are supported largely by one strand //
+			    					if(!params.containsKey("output-vcf"))
+			    						compareResult = "StrandFilter";
+			    				}
+			    				else if(allele1.contains("-") || allele1.contains("+") || allele2.contains("-") || allele2.contains("+"))//if(compareResult.contains("INS") || compareResult.contains("DEL"))
+			    				{
+			    					outIndel.println(chromNormal + "\t" + posNormal + "\t" + compareResult);
+			    				}
+			    				else
+			    				{
+				    				outSnp.println(chromNormal + "\t" + posNormal + "\t" + compareResult);
+			    				}
+			    			}
+			    			else
+			    			{
+//			    				System.err.println("Uncalled" + chromNormal + "\t" + posNormal + "\t" + compareResult);
+			    			}
+
+			    			if(compareResult.contains("Reference"))
+			    				calledReference++; //stats.put("calledReference", (stats.get("calledReference") + 1));
+			    			else if(compareResult.contains("IndelFilter"))
+			    				indelFilter++;	//stats.put("indelFilter", (stats.get("indelFilter") + 1));
+			    			else if(compareResult.contains("StrandFilter"))
+			    				strandFilter++;
+			    			else if(compareResult.contains("Germline"))
+			    				calledGermline++;	//stats.put("calledGermline", (stats.get("calledGermline") + 1));
+			    			else if(compareResult.contains("Somatic"))
+			    				calledSomatic++;	//stats.put("calledSomatic", (stats.get("calledSomatic") + 1));
+			    			else if(compareResult.contains("LOH"))
+			    				calledLOH++;	//stats.put("calledLOH", (stats.get("calledLOH") + 1));
+			    			else if(compareResult.contains("Unknown"))
+			    				calledUnknown++;	//stats.put("calledUnknown", (stats.get("calledUnknown") + 1));
+			    			else if(compareResult.contains("Variant"))
+			    				calledVariant++;	//stats.put("calledVariant", (stats.get("calledVariant") + 1));
+
+
+
+	    				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834608
+net/sf/varscan/Somatic.java 1019 1440
+net/sf/varscan/Somatic.java 332 678
+----------------------------------------
+	    	{
+	    		tumorPositions++;
+	    		String[] tumorContents = lineTumor.split("\t");
+
+		    	if(tumorContents.length > 1)
+		    	{
+			    	chromTumor = tumorContents[0];
+			    	posTumor = Integer.parseInt(tumorContents[1]);
+		    	}
+
+		    	// Parse normal lines until we get the same chromosome //
+		    	boolean flagEOF = false;
+		    	boolean normalWasReset = false;
+
+		    	//	Advance in normal file if tumor is changed but normal is not, or if tumor is higher //
+		    	while(!chromNormal.equals(chromTumor) && !chromTumor.equals(prevChromTumor) && !flagEOF && (chromNormal.equals(prevChromTumor) || inSortOrder(chromNormal, chromTumor)))
+		    	{
+		    		//System.err.println("Normal (" + chromNormal + ") catching up to " + chromTumor);
+		    		// Get next line from normal pileup //
+		    		if((lineNormal = normal.readLine()) != null)
+		    		{
+		    			String[] normalContents = lineNormal.split("\t");
+
+				    	if(normalContents.length > 1)
+				    	{
+					    	chromNormal = normalContents[0];
+					    	posNormal = Integer.parseInt(normalContents[1]);
+				    	}
+		    		}
+		    		else
+		    		{
+		    			flagEOF = true;
+		    		}
+
+
+		    	}
+
+		    	// If chromosomes match and are non-blank, attempt to get matching positions //
+		    	if(chromNormal.equals(chromTumor) && !chromNormal.equals(""))
+		    	{
+		    		normalWasReset = false;
+		    		// Seek to matching Normal Position //
+
+		    		while(chromNormal.equals(chromTumor) && posNormal < posTumor && ((lineNormal = normal.readLine()) != null))
+		    		{
+		    			String[] normalContents = lineNormal.split("\t");
+				    	if(normalContents.length > 1)
+				    	{
+					    	chromNormal = normalContents[0];
+					    	posNormal = Integer.parseInt(normalContents[1]);
+				    	}
+		    		}
+
+		    		// Seek to matching Tumor Position //
+
+		    		while(chromNormal.equals(chromTumor) && posTumor < posNormal && ((lineTumor = tumor.readLine()) != null))
+		    		{
+		    			tumorContents = lineTumor.split("\t");
+				    	if(tumorContents.length > 1)
+				    	{
+					    	chromTumor = tumorContents[0];
+					    	posTumor = Integer.parseInt(tumorContents[1]);
+				    	}
+		    		}
+
+		    		// Proceed if normal and tumor positions match //
+
+		    		if(chromNormal.equals(chromTumor) && chromNormal.equals(chromTumor) && posNormal == posTumor)
+		    		{
+		    			//stats.put("sharedPositions", (stats.get("sharedPositions") + 1));
+		    			sharedPositions++;
+		    			if(params.containsKey("verbose"))
+		    					System.err.println("Comparing calls at " + chromTumor + ":" + posTumor);
+
+		    			refBase = tumorContents[2];
+		    			String compareResult = comparePositions(lineNormal, lineTumor, minCoverage, minReads2, minVarFreq, minAvgQual, pValueThreshold, somaticPvalue, minFreqForHom, normalPurity, tumorPurity);
+
+		    			if(compareResult.length() > 0)
+		    			{
+		    				// Get the alleles to determine type //
+		    				String[] compareContents = compareResult.split("\t");
+			    			String allele1 = compareContents[0];
+			    			String allele2 = compareContents[1];
+
+			    			double strandedness1 = 0.50;
+			    			double strandedness2 = 0.50;
+			    			double strandednessDiff = 0.00;
+
+			    			if(compareContents.length >= 17)
+			    			{
+			    				try
+			    				{
+			    					int tumorReads1plus = Integer.parseInt(compareContents[13]);
+			    					int tumorReads1minus = Integer.parseInt(compareContents[14]);
+			    					int tumorReads2plus = Integer.parseInt(compareContents[15]);
+			    					int tumorReads2minus = Integer.parseInt(compareContents[16]);
+
+			    					if(tumorReads1plus > 0 || tumorReads1minus > 0)
+			    					{
+			    						strandedness1 = (double) tumorReads1plus / (double) (tumorReads1plus + tumorReads1minus);
+			    					}
+
+			    					if(tumorReads2plus > 0 || tumorReads2minus > 0)
+			    					{
+			    						strandedness2 = (double) tumorReads2plus / (double) (tumorReads2plus + tumorReads2minus);
+			    						if(tumorReads1plus > 0 || tumorReads1minus > 0)
+			    						{
+			    							strandednessDiff = java.lang.Math.abs(strandedness1 - strandedness2);
+			    						}
+			    					}
+			    				}
+			    				catch(Exception e)
+			    				{
+			    					// Exception parsing info from compareResult //
+			    				}
+			    			}
+
+		    				//stats.put("comparedPositions", (stats.get("comparedPositions") + 1));
+			    			comparedPositions++;
+
+		    				if(params.containsKey("verbose") && !compareResult.contains("Reference"))
+		    					System.err.println(chromNormal + "\t" + posNormal + "\t" + compareResult);
+
+		    				// If VCF format specified, supply it //
+
+		    				if(params.containsKey("output-vcf"))
+		    				{
+		    					int normalReads1 = Integer.parseInt(compareContents[2]);
+		    					int normalReads2 = Integer.parseInt(compareContents[3]);
+		    					String normalFreq = compareContents[4];
+		    					String normalCall = compareContents[5];
+		    					int tumorReads1 = Integer.parseInt(compareContents[6]);
+		    					int tumorReads2 = Integer.parseInt(compareContents[7]);
+		    					String tumorFreq = compareContents[8];
+		    					String tumorCall = compareContents[9];
+		    					String somStatus = compareContents[10];
+		    					Double germlineP = Double.parseDouble(compareContents[11]);
+		    					Double somaticP = Double.parseDouble(compareContents[12]);
+
+		    					String[] normalContents = lineNormal.split("\t");
+		    					//tumorContents = lineTumor.split("\t");
+		    					int pileupDepthNormal = Integer.parseInt(normalContents[3]);
+		    					int pileupDepthTumor = Integer.parseInt(tumorContents[3]);
+
+		    					int totalDepth = pileupDepthNormal + pileupDepthTumor;
+
+		    					if(allele2.startsWith("+"))
+		    					{
+		    						// INSERTION //
+		    						// Ref = ref base; Var = ref base followed by inserted bases //
+		    						String varColumn = allele1 + allele2.replace("+", "");
+		    						compareResult = "." + "\t" + allele1 + "\t" + varColumn + "\t" + ".";
+		    					}
+		    					else if(allele2.startsWith("-"))
+		    					{
+		    						// DELETION //
+		    						// Ref = ref base followed by deleted bases; var = ref base //
+		    						String refColumn = allele1 + allele2.replace("-", "");
+		    						compareResult = "." + "\t" + refColumn + "\t" + allele1 + "\t" + ".";
+		    					}
+		    					else
+		    					{
+			    					compareResult = "." + "\t" + allele1 + "\t" + allele2 + "\t" + ".";
+		    					}
+
+
+		    					// Decide on filter field //
+		    					if(params.containsKey("strand-filter") && strandednessDiff > 0.10 && (strandedness2 < 0.10 || strandedness2 > 0.90))
+		    					{
+		    						compareResult += "\t" + "str10";
+		    					}
+		    					else if(somStatus.equals("IndelFilter"))
+		    					{
+		    						compareResult += "\t" + "indelError";
+		    					}
+		    					else
+		    					{
+		    						compareResult += "\t" + "PASS";
+		    					}
+
+		    					// Determine somatic status id and score //
+		    					int ssCode = 0;
+		    					double somScore = 0;
+
+		    					if(somStatus.equals("Reference"))
+		    					{
+		    						// Wildtype //
+		    						ssCode = 0;
+		    						calledReference++;
+		    					}
+		    					else if(somStatus.equals("Germline"))
+		    					{
+		    						// Germline //
+		    						ssCode = 1;
+		    						calledGermline++;
+		    						if(somaticP == 0)
+		    						{
+		    							somScore = 0;
+		    						}
+		    						else
+		    						{
+		    							somScore = 0 - (10 * java.lang.Math.log10(somaticP));
+		    						}
+		    					}
+		    					else if(somStatus.equals("Somatic"))
+		    					{
+		    						// Somatic //
+		    						ssCode = 2;
+		    						calledSomatic++;
+		    						if(somaticP == 0)
+		    						{
+		    							somScore = 255;
+		    						}
+		    						else
+		    						{
+		    							somScore = 0 - (10 * java.lang.Math.log10(somaticP));
+		    						}
+		    					}
+		    					else if(somStatus.equals("LOH"))
+		    					{
+		    						// LOH //
+		    						ssCode = 3;
+		    						calledLOH++;
+		    						if(somaticP == 0)
+		    						{
+		    							somScore = 255;
+		    						}
+		    						else
+		    						{
+		    							somScore = 0 - (10 * java.lang.Math.log10(somaticP));
+		    						}
+		    					}
+		    					else
+		    					{
+		    						// Unknown //
+		    						calledUnknown++;
+		    						ssCode = 5;
+		    					}
+
+		    					// Adjust somatic score //
+		    					if(somScore > 255)
+		    						somScore = 255;
+
+		    					// Print the info field //
+
+		    					compareResult += "\t" + "DP=" + totalDepth;
+		    					if(somStatus.equals("Somatic"))
+		    						compareResult += ";SOMATIC";
+		    					compareResult += ";" + "SS=" + ssCode;
+		    					compareResult += ";" + "SSC=" + (int) somScore;
+		    					compareResult += ";" + "GPV=" + pvalueFormat.format(germlineP);
+		    					compareResult += ";" + "SPV=" + pvalueFormat.format(somaticP);
+
+		    					// Print the format field //
+
+		    					String tumorDP4 = "";
+		    					String normalDP4 = "";
+
+				    			if(compareContents.length >= 17)
+				    			{
+				    				try
+				    				{
+				    					tumorDP4 = compareContents[13] + "," + compareContents[14] + "," + compareContents[15] + "," + compareContents[16];
+				    					normalDP4 = compareContents[17] + "," + compareContents[18] + "," + compareContents[19] + "," + compareContents[20];
+				    				}
+				    				catch(Exception e)
+				    				{
+				    					// Exception parsing info from compareResult //
+				    					tumorDP4 = "";
+				    					normalDP4 = "";
+				    				}
+				    			}
+
+				    			if(tumorDP4.length() > 0)
+				    				compareResult += "\tGT:GQ:DP:RD:AD:FREQ:DP4";
+				    			else
+				    				compareResult += "\tGT:GQ:DP:RD:AD:FREQ";
+
+		    					// Determine normal genotype //
+		    					String normalGt = ".";
+		    					String tumorGt = ".";
+		    					if(normalCall.equals(refBase))
+		    					{
+		    						normalGt = "0/0";
+		    					}
+		    					else if(VarScan.isHeterozygous(normalCall))
+		    					{
+		    						normalGt = "0/1";
+		    					}
+		    					else
+		    					{
+		    						normalGt = "1/1";
+		    					}
+
+		    					if(tumorCall.equals(refBase))
+		    					{
+		    						tumorGt = "0/0";
+		    					}
+		    					else if(VarScan.isHeterozygous(tumorCall))
+		    					{
+		    						tumorGt = "0/1";
+		    					}
+		    					else
+		    					{
+		    						tumorGt = "1/1";
+		    					}
+
+		    					if(tumorDP4.length() > 0)
+		    					{
+			    					compareResult += "\t" + normalGt + ":.:" + pileupDepthNormal + ":" + normalReads1 + ":" + normalReads2 + ":" + normalFreq + ":" + normalDP4;
+			    					compareResult += "\t" + tumorGt + ":.:" + pileupDepthTumor + ":" + tumorReads1 + ":" + tumorReads2 + ":" + tumorFreq + ":" + tumorDP4;
+		    					}
+		    					else
+		    					{
+			    					compareResult += "\t" + normalGt + ":.:" + pileupDepthNormal + ":" + normalReads1 + ":" + normalReads2 + ":" + normalFreq;
+			    					compareResult += "\t" + tumorGt + ":.:" + pileupDepthTumor + ":" + tumorReads1 + ":" + tumorReads2 + ":" + tumorFreq;
+		    					}
+		    				}
+		    				// Print to master file for validation //
+
+		    				if(params.containsKey("validation"))
+		    				{
+		    					outValidation.println(chromNormal + "\t" + posNormal + "\t" + compareResult);
+		    				}
+
+		    				if(!params.containsKey("validation") && (compareResult.contains("Reference") || compareResult.contains("SS=0") || compareResult.contains("Filter")))
+		    				{
+		    					// Don't print reference/indelfilter positions unless doing validation //
+		    				}
+		    				else if(params.containsKey("strand-filter") && strandednessDiff > 0.10 && (strandedness2 < 0.10 || strandedness2 > 0.90))
+		    				{
+		    					// If filter is set, ignore variants that are supported largely by one strand //
+		    					compareResult = "StrandFilter";
+		    				}
+		    				else if(allele1.contains("-") || allele1.contains("+") || allele2.contains("-") || allele2.contains("+"))//if(compareResult.contains("INS") || compareResult.contains("DEL"))
+		    				{
+		    					outIndel.println(chromNormal + "\t" + posNormal + "\t" + compareResult);
+		    				}
+		    				else
+		    				{
+			    				outSnp.println(chromNormal + "\t" + posNormal + "\t" + compareResult);
+		    				}
+		    			}
+		    			else
+		    			{
+//		    				System.err.println("Uncalled" + chromNormal + "\t" + posNormal + "\t" + compareResult);
+		    			}
+
+		    			if(compareResult.contains("Reference"))
+		    				calledReference++; //stats.put("calledReference", (stats.get("calledReference") + 1));
+		    			else if(compareResult.contains("IndelFilter"))
+		    				indelFilter++;	//stats.put("indelFilter", (stats.get("indelFilter") + 1));
+		    			else if(compareResult.contains("StrandFilter"))
+		    				strandFilter++;
+		    			else if(compareResult.contains("Germline"))
+		    				calledGermline++;	//stats.put("calledGermline", (stats.get("calledGermline") + 1));
+		    			else if(compareResult.contains("Somatic"))
+		    				calledSomatic++;	//stats.put("calledSomatic", (stats.get("calledSomatic") + 1));
+		    			else if(compareResult.contains("LOH"))
+		    				calledLOH++;	//stats.put("calledLOH", (stats.get("calledLOH") + 1));
+		    			else if(compareResult.contains("Unknown"))
+		    				calledUnknown++;	//stats.put("calledUnknown", (stats.get("calledUnknown") + 1));
+		    			else if(compareResult.contains("Variant"))
+		    				calledVariant++;	//stats.put("calledVariant", (stats.get("calledVariant") + 1));
+
+				    	prevChromNormal = chromNormal;
+				    	prevChromTumor = chromTumor;
+		    		}
+		    		else
+		    		{
+		    			//System.err.println("Failed to match positions " + chromNormal + " " + posNormal + " to Tumor " + chromTumor + " " + posTumor);
+		    		}
+		    	}
+		    	// If they're in sort order, do nothing so that tumor can catch up //
+		    	else if(inSortOrder(chromNormal, chromTumor))
+		    	{
+		    		System.err.println("Not resetting normal file because " + chromNormal + " < " + chromTumor);
+		    	}
+		    	// If we reached the end of the normal file but never saw this chromosome, //
+		    	// fast-forward until tumor chromosome changes and reset normal file //
+		    	else if(flagEOF)
+		    	{
+		    		flagEOF = false;
+
+		    		while(prevChromTumor.equals(chromTumor) && !flagEOF)
+		    		{
+		    			if((lineTumor = tumor.readLine()) != null)
+		    			{
+			    			tumorContents = lineTumor.split("\t");
+
+					    	if(tumorContents.length > 1)
+					    	{
+						    	chromTumor = tumorContents[0];
+						    	posTumor = Integer.parseInt(tumorContents[1]);
+					    	}
+		    			}
+		    			else
+		    			{
+		    				flagEOF = true;
+		    			}
+		    		}
+
+		    		// Reset the normal file if we've already passed this chromosome in normal //
+
+		    		if(!flagEOF && !normalWasReset)
+		    		{
+		    			if(inSortOrder(chromNormal, chromTumor))
+		    			{
+		    				System.err.println("Not resetting normal file because " + chromNormal + " < " + chromTumor);
+		    			}
+		    			else
+		    			{
+		    				System.err.println("Resetting normal file because " + chromNormal + " > " + chromTumor);
+				    		normalWasReset = true;
+			    			normal.close();
+				    		normal = new BufferedReader(new FileReader(normalPileupFile));
+		    			}
+
+		    		}
+		    	}
+
+	    	}
+
+----------------------------------------
+	    		{
+
+	    			// Begin try-catch for line parsing //
+
+	    			try
+	    			{
+	    				String[] lineContents = line.split("\t", -1);
+
+	    				// Verify expected pileup format //
+
+	    				if(lineContents.length > 5 && lineContents[0].length() > 0 && lineContents[1].length() > 0 && lineContents[2].length() > 0 && lineContents[3].length() > 0)
+	    				{
+	    					sharedPositions++;
+
+	    					// Parse common fields from line //
+	    					String refName = lineContents[0];
+	    					int position = Integer.parseInt(lineContents[1]);
+	    					refBase = lineContents[2].toUpperCase();
+
+	    					chromNormal = refName;
+	    					chromTumor = refName;
+	    					posNormal = position;
+	    					posTumor = position;
+
+	    					// Parse normal, which should be first sample //
+	    					int normalOffset = 3;
+	    					int pileupDepthNormal = Integer.parseInt(lineContents[normalOffset]);
+		    	        	String normalBases = lineContents[normalOffset + 1];
+		    	        	String normalQualities = lineContents[normalOffset + 2];
+
+	    					// Parse tumor, which should be second sample //
+	    					int tumorOffset = 6;
+	    					int pileupDepthTumor = Integer.parseInt(lineContents[tumorOffset]);
+		    	        	String tumorBases = lineContents[tumorOffset + 1];
+		    	        	String tumorQualities = lineContents[tumorOffset + 2];
+
+	    					lineNormal = refName + "\t" + position + "\t" + refBase + "\t" + pileupDepthNormal + "\t" + normalBases + "\t" + normalQualities;
+	    					lineTumor = refName + "\t" + position + "\t" + refBase + "\t" + pileupDepthTumor + "\t" + tumorBases + "\t" + tumorQualities;
+
+	    					String compareResult = comparePositions(lineNormal, lineTumor, minCoverage, minReads2, minVarFreq, minAvgQual, pValueThreshold, somaticPvalue, minFreqForHom, normalPurity, tumorPurity);
+
+			    			if(compareResult.length() > 0)
+			    			{
+			    				// Get the alleles to determine type //
+			    				String[] compareContents = compareResult.split("\t");
+				    			String allele1 = compareContents[0];
+				    			String allele2 = compareContents[1];
+
+				    			double strandedness1 = 0.50;
+				    			double strandedness2 = 0.50;
+				    			double strandednessDiff = 0.00;
+
+				    			if(compareContents.length >= 17)
+				    			{
+				    				try
+				    				{
+				    					int tumorReads1plus = Integer.parseInt(compareContents[13]);
+				    					int tumorReads1minus = Integer.parseInt(compareContents[14]);
+				    					int tumorReads2plus = Integer.parseInt(compareContents[15]);
+				    					int tumorReads2minus = Integer.parseInt(compareContents[16]);
+
+				    					if(tumorReads1plus > 0 || tumorReads1minus > 0)
+				    					{
+				    						strandedness1 = (double) tumorReads1plus / (double) (tumorReads1plus + tumorReads1minus);
+				    					}
+
+				    					if(tumorReads2plus > 0 || tumorReads2minus > 0)
+				    					{
+				    						strandedness2 = (double) tumorReads2plus / (double) (tumorReads2plus + tumorReads2minus);
+				    						if(tumorReads1plus > 0 || tumorReads1minus > 0)
+				    						{
+				    							strandednessDiff = java.lang.Math.abs(strandedness1 - strandedness2);
+				    						}
+				    					}
+				    				}
+				    				catch(Exception e)
+				    				{
+				    					// Exception parsing info from compareResult //
+				    				}
+				    			}
+
+			    				//stats.put("comparedPositions", (stats.get("comparedPositions") + 1));
+				    			comparedPositions++;
+
+			    				if(params.containsKey("verbose") && !compareResult.contains("Reference"))
+			    					System.err.println(chromNormal + "\t" + posNormal + "\t" + compareResult);
+
+			    				// If VCF format specified, supply it //
+
+			    				if(params.containsKey("output-vcf"))
+			    				{
+			    					int normalReads1 = Integer.parseInt(compareContents[2]);
+			    					int normalReads2 = Integer.parseInt(compareContents[3]);
+			    					String normalFreq = compareContents[4];
+			    					String normalCall = compareContents[5];
+			    					int tumorReads1 = Integer.parseInt(compareContents[6]);
+			    					int tumorReads2 = Integer.parseInt(compareContents[7]);
+			    					String tumorFreq = compareContents[8];
+			    					String tumorCall = compareContents[9];
+			    					String somStatus = compareContents[10];
+			    					Double germlineP = Double.parseDouble(compareContents[11]);
+			    					Double somaticP = Double.parseDouble(compareContents[12]);
+
+			    					int totalDepth = pileupDepthNormal + pileupDepthTumor;
+
+			    					if(allele2.startsWith("+"))
+			    					{
+			    						// INSERTION //
+			    						// Ref = ref base; Var = ref base followed by inserted bases //
+			    						String varColumn = allele1 + allele2.replace("+", "");
+			    						compareResult = "." + "\t" + allele1 + "\t" + varColumn + "\t" + ".";
+			    					}
+			    					else if(allele2.startsWith("-"))
+			    					{
+			    						// DELETION //
+			    						// Ref = ref base followed by deleted bases; var = ref base //
+			    						String refColumn = allele1 + allele2.replace("-", "");
+			    						compareResult = "." + "\t" + refColumn + "\t" + allele1 + "\t" + ".";
+			    					}
+			    					else
+			    					{
+				    					compareResult = "." + "\t" + allele1 + "\t" + allele2 + "\t" + ".";
+			    					}
+
+
+			    					// Decide on filter field //
+			    					if(doStrandFilter && strandednessDiff > 0.10 && (strandedness2 < 0.10 || strandedness2 > 0.90))
+			    					{
+			    						compareResult += "\t" + "str10";
+			    					}
+			    					else if(somStatus.equals("IndelFilter"))
+			    					{
+			    						compareResult += "\t" + "indelError";
+			    					}
+			    					else
+			    					{
+			    						compareResult += "\t" + "PASS";
+			    					}
+
+			    					// Determine somatic status id and score //
+			    					int ssCode = 0;
+			    					double somScore = 0;
+
+			    					if(somStatus.equals("Reference"))
+			    					{
+			    						// Wildtype //
+			    						ssCode = 0;
+			    						calledReference++;
+			    					}
+			    					else if(somStatus.equals("Germline"))
+			    					{
+			    						// Germline //
+			    						ssCode = 1;
+			    						calledGermline++;
+			    						if(somaticP == 0)
+			    						{
+			    							somScore = 0;
+			    						}
+			    						else
+			    						{
+			    							somScore = 0 - (10 * java.lang.Math.log10(somaticP));
+			    						}
+			    					}
+			    					else if(somStatus.equals("Somatic"))
+			    					{
+			    						// Somatic //
+			    						ssCode = 2;
+			    						calledSomatic++;
+			    						if(somaticP == 0)
+			    						{
+			    							somScore = 255;
+			    						}
+			    						else
+			    						{
+			    							somScore = 0 - (10 * java.lang.Math.log10(somaticP));
+			    						}
+			    					}
+			    					else if(somStatus.equals("LOH"))
+			    					{
+			    						// LOH //
+			    						ssCode = 3;
+			    						calledLOH++;
+			    						if(somaticP == 0)
+			    						{
+			    							somScore = 255;
+			    						}
+			    						else
+			    						{
+			    							somScore = 0 - (10 * java.lang.Math.log10(somaticP));
+			    						}
+			    					}
+			    					else
+			    					{
+			    						// Unknown //
+			    						calledUnknown++;
+			    						ssCode = 5;
+			    					}
+
+			    					// Adjust somatic score //
+			    					if(somScore > 255)
+			    						somScore = 255;
+
+			    					// Print the info field //
+
+			    					compareResult += "\t" + "DP=" + totalDepth;
+			    					if(somStatus.equals("Somatic"))
+			    						compareResult += ";SOMATIC";
+			    					compareResult += ";" + "SS=" + ssCode;
+			    					compareResult += ";" + "SSC=" + (int) somScore;
+			    					compareResult += ";" + "GPV=" + pvalueFormat.format(germlineP);
+			    					compareResult += ";" + "SPV=" + pvalueFormat.format(somaticP);
+
+			    					// Print the format field //
+
+			    					String tumorDP4 = "";
+			    					String normalDP4 = "";
+
+					    			if(compareContents.length >= 17)
+					    			{
+					    				try
+					    				{
+					    					tumorDP4 = compareContents[13] + "," + compareContents[14] + "," + compareContents[15] + "," + compareContents[16];
+					    					normalDP4 = compareContents[17] + "," + compareContents[18] + "," + compareContents[19] + "," + compareContents[20];
+					    				}
+					    				catch(Exception e)
+					    				{
+					    					// Exception parsing info from compareResult //
+					    					tumorDP4 = "";
+					    					normalDP4 = "";
+					    				}
+					    			}
+
+					    			if(tumorDP4.length() > 0)
+					    				compareResult += "\tGT:GQ:DP:RD:AD:FREQ:DP4";
+					    			else
+					    				compareResult += "\tGT:GQ:DP:RD:AD:FREQ";
+
+			    					// Determine normal genotype //
+			    					String normalGt = ".";
+			    					String tumorGt = ".";
+			    					if(normalCall.equals(refBase))
+			    					{
+			    						normalGt = "0/0";
+			    					}
+			    					else if(VarScan.isHeterozygous(normalCall))
+			    					{
+			    						normalGt = "0/1";
+			    					}
+			    					else
+			    					{
+			    						normalGt = "1/1";
+			    					}
+
+			    					if(tumorCall.equals(refBase))
+			    					{
+			    						tumorGt = "0/0";
+			    					}
+			    					else if(VarScan.isHeterozygous(tumorCall))
+			    					{
+			    						tumorGt = "0/1";
+			    					}
+			    					else
+			    					{
+			    						tumorGt = "1/1";
+			    					}
+
+			    					if(tumorDP4.length() > 0)
+			    					{
+				    					compareResult += "\t" + normalGt + ":.:" + pileupDepthNormal + ":" + normalReads1 + ":" + normalReads2 + ":" + normalFreq + ":" + normalDP4;
+				    					compareResult += "\t" + tumorGt + ":.:" + pileupDepthTumor + ":" + tumorReads1 + ":" + tumorReads2 + ":" + tumorFreq + ":" + tumorDP4;
+			    					}
+			    					else
+			    					{
+				    					compareResult += "\t" + normalGt + ":.:" + pileupDepthNormal + ":" + normalReads1 + ":" + normalReads2 + ":" + normalFreq;
+				    					compareResult += "\t" + tumorGt + ":.:" + pileupDepthTumor + ":" + tumorReads1 + ":" + tumorReads2 + ":" + tumorFreq;
+			    					}
+			    				}
+
+			    				// Print to master file for validation //
+
+			    				if(params.containsKey("validation"))
+			    				{
+			    					outValidation.println(chromNormal + "\t" + posNormal + "\t" + compareResult);
+			    				}
+
+			    				if(!params.containsKey("validation") && (compareResult.contains("Reference") || compareResult.contains("SS=0")  || compareResult.contains("Filter")))
+			    				{
+			    					// Don't print reference/indelfilter positions unless doing validation //
+			    				}
+			    				else if(doStrandFilter && strandednessDiff > 0.10 && (strandedness2 < 0.10 || strandedness2 > 0.90))
+			    				{
+			    					// If filter is set, ignore variants that are supported largely by one strand //
+			    					if(!params.containsKey("output-vcf"))
+			    						compareResult = "StrandFilter";
+			    				}
+			    				else if(allele1.contains("-") || allele1.contains("+") || allele2.contains("-") || allele2.contains("+"))//if(compareResult.contains("INS") || compareResult.contains("DEL"))
+			    				{
+			    					outIndel.println(chromNormal + "\t" + posNormal + "\t" + compareResult);
+			    				}
+			    				else
+			    				{
+				    				outSnp.println(chromNormal + "\t" + posNormal + "\t" + compareResult);
+			    				}
+			    			}
+			    			else
+			    			{
+//			    				System.err.println("Uncalled" + chromNormal + "\t" + posNormal + "\t" + compareResult);
+			    			}
+
+			    			if(compareResult.contains("Reference"))
+			    				calledReference++; //stats.put("calledReference", (stats.get("calledReference") + 1));
+			    			else if(compareResult.contains("IndelFilter"))
+			    				indelFilter++;	//stats.put("indelFilter", (stats.get("indelFilter") + 1));
+			    			else if(compareResult.contains("StrandFilter"))
+			    				strandFilter++;
+			    			else if(compareResult.contains("Germline"))
+			    				calledGermline++;	//stats.put("calledGermline", (stats.get("calledGermline") + 1));
+			    			else if(compareResult.contains("Somatic"))
+			    				calledSomatic++;	//stats.put("calledSomatic", (stats.get("calledSomatic") + 1));
+			    			else if(compareResult.contains("LOH"))
+			    				calledLOH++;	//stats.put("calledLOH", (stats.get("calledLOH") + 1));
+			    			else if(compareResult.contains("Unknown"))
+			    				calledUnknown++;	//stats.put("calledUnknown", (stats.get("calledUnknown") + 1));
+			    			else if(compareResult.contains("Variant"))
+			    				calledVariant++;	//stats.put("calledVariant", (stats.get("calledVariant") + 1));
+
+
+
+	    				}
+	    				else
+	    				{
+	    					System.err.println("Error: Invalid format or not enough samples in mpileup: " + line + "\n");
+	    					return;
+	    				}
+	    			}
+	    			catch(Exception e)
+	    		    {
+	    		    	System.err.println("Parsing Exception on line:\n" + line + "\n" + e.getLocalizedMessage());
+	    				numParsingExceptions++;
+	    				if(numParsingExceptions >= 5)
+	    				{
+	    					System.err.println("Too many parsing exceptions encountered; exiting");
+	    					return;
+	    				}
+	    		    	return;
+	    		    }
+	    		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834616
+net/sf/varscan/Trio.java 151 156
+net/sf/varscan/CallMpileup.java 127 135
+----------------------------------------
+	    				{
+	    					String sampleName = line;
+	    					if(sampleList.length() > 0)
+	    						sampleList += "\t";
+	    					sampleList += sampleName;
+	    				}
+
+----------------------------------------
+	    			{
+	    				while ((line = in.readLine()) != null)
+	    				{
+	    					String sampleName = line;
+	    					if(sampleList.length() > 0)
+	    						sampleList += "\t";
+	    					sampleList += sampleName;
+	    				}
+	    			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834627
+net/sf/varscan/Coverage.java 111 126
+net/sf/varscan/Trio.java 253 269
+----------------------------------------
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 10)
+			    	{
+			    		System.err.println("Input file was not ready after 10 5-second cycles!");
+			    		return;
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+
+		    	}
+	    	}
+
+----------------------------------------
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.err.println("Exception while trying to get input" + e.getMessage());
+		    		System.exit(1);
+		    	}
+	    	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834618
+net/sf/varscan/CallMpileup.java 233 249
+net/sf/varscan/Trio.java 253 269
+----------------------------------------
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.err.println("Exception while trying to get input" + e.getMessage());
+		    		System.exit(1);
+		    	}
+	    	}
+
+----------------------------------------
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.err.println("Exception while trying to get input" + e.getMessage());
+		    		System.exit(1);
+		    	}
+	    	}
+
+----------------------------------------

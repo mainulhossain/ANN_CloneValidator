@@ -1,0 +1,1671 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22834989
+src/com/levelonelabs/aimbot/modules/MegaHalModule.java 158 164
+src/com/levelonelabs/aimbot/modules/TVListingsModule.java 116 124
+----------------------------------------
+	public String help() {
+		StringBuffer sb = new StringBuffer();
+		sb.append("<B>MEGAHAL</B> commands:\n");
+		sb.append("<b>megahaladmin save</b> (saves the megahal brain *ADMIN ONLY*)\n");
+		sb.append("<b>megahaladmin think <i>N</i></b>  (sets the think time to <N> seconds *ADMIN ONLY*)\n");
+		return sb.toString();
+	}
+
+----------------------------------------
+	public String help() {
+		StringBuffer sb = new StringBuffer();
+		sb.append("<B>tvlist <i>ZIPCODE</i></B> (displays the tv providers in the area of the zipcode)\n");
+		sb.append("* If the preference \"zipcode\" is set, you can omit the zipcode to use your default.\n");
+		sb
+			.append("<B>tv <i>SHOW<i></B> (displays the synopsis of the next upcomming episode of the specified show in your area)\n");
+		sb.append("* The preference \"tvprovider\" must be set!");
+		return sb.toString();
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22834993
+src/com/levelonelabs/aimbot/modules/DefaultModule.java 96 103
+src/com/levelonelabs/aimbot/modules/TVListingsModule.java 116 124
+----------------------------------------
+    public String help() {
+        StringBuffer sb=new StringBuffer();
+        sb.append("Default Module\nThis will output default text if the input \n");
+        sb.append("is not recognized\n");
+        sb.append("<B>addTerm <i>TEXT</i></B> "+
+            "(add possible lines for the module to output) *Admin only*");
+        return sb.toString();
+    }
+
+----------------------------------------
+	public String help() {
+		StringBuffer sb = new StringBuffer();
+		sb.append("<B>tvlist <i>ZIPCODE</i></B> (displays the tv providers in the area of the zipcode)\n");
+		sb.append("* If the preference \"zipcode\" is set, you can omit the zipcode to use your default.\n");
+		sb
+			.append("<B>tv <i>SHOW<i></B> (displays the synopsis of the next upcomming episode of the specified show in your area)\n");
+		sb.append("* The preference \"tvprovider\" must be set!");
+		return sb.toString();
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22834977
+src/com/levelonelabs/aimbot/modules/MoviesModule.java 107 118
+src/com/levelonelabs/aimbot/modules/TVListingsModule.java 116 124
+----------------------------------------
+    public String help() {
+        StringBuffer sb=new StringBuffer();
+        sb.append("<B>theaters <i>ZIPCODE<i></B> (displays a list of theaters in your area)\n");
+        sb.append(
+            "* If the preference \"zipcode\" is set, you can omit the zipcode to use your default.\n");
+        sb.append(
+            "<B>movies <i>ZIPCODE [Theater Number]</i></B> (displays movie times for the theater closest to your zipcode if a theater number is not provided)\n");
+        sb.append(
+            "* If the preference \"zipcode\" is set, you can omit the zipcode to use your default.\n");
+        sb.append("<B>movieslegend</B> (displays the legend for movie times)");
+        return sb.toString();
+    }
+
+----------------------------------------
+	public String help() {
+		StringBuffer sb = new StringBuffer();
+		sb.append("<B>tvlist <i>ZIPCODE</i></B> (displays the tv providers in the area of the zipcode)\n");
+		sb.append("* If the preference \"zipcode\" is set, you can omit the zipcode to use your default.\n");
+		sb
+			.append("<B>tv <i>SHOW<i></B> (displays the synopsis of the next upcomming episode of the specified show in your area)\n");
+		sb.append("* The preference \"tvprovider\" must be set!");
+		return sb.toString();
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22834978
+src/com/levelonelabs/aimbot/modules/UserInformationModule.java 77 90
+src/com/levelonelabs/aimbot/modules/ReminderModule.java 81 92
+----------------------------------------
+	public UserInformationModule(AIMBot bot) {
+		super(bot);
+		//register to here about signon events
+		super.addAIMListener(new AIMAdapter() {
+			public void handleBuddySignOn(AIMBuddy buddy, String info) {
+				handleBuddyEvent(buddy, "Signed on: ");
+			}
+
+
+			public void handleBuddySignOff(AIMBuddy buddy, String info) {
+				handleBuddyEvent(buddy, "Signed off: ");
+			}
+		});
+	}
+
+----------------------------------------
+    public ReminderModule(AIMBot bot) {
+        super(bot);
+        // register to here about signon events
+        super.addAIMListener(new AIMAdapter() {
+            public void handleBuddySignOn(AIMBuddy buddy, String info) {
+                String savePref = buddy.getPreference("reminderatsignon");
+                if ((savePref != null) && savePref.equals("true")) {
+                    retrieveReminders(buddy);
+                }
+            }
+        });
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22834981
+src/com/levelonelabs/aimbot/modules/MegaHalModule.java 158 164
+src/com/levelonelabs/aimbot/modules/ReminderModule.java 120 129
+----------------------------------------
+	public String help() {
+		StringBuffer sb = new StringBuffer();
+		sb.append("<B>MEGAHAL</B> commands:\n");
+		sb.append("<b>megahaladmin save</b> (saves the megahal brain *ADMIN ONLY*)\n");
+		sb.append("<b>megahaladmin think <i>N</i></b>  (sets the think time to <N> seconds *ADMIN ONLY*)\n");
+		return sb.toString();
+	}
+
+----------------------------------------
+    public String help() {
+        StringBuffer sb = new StringBuffer();
+        sb.append("<B>remember <i>TEXT</i></B> (stores text in the system for retrieval later)\n");
+        sb.append("<B>forget <i>All or #</i></B> (removes all items or a specific item)\n");
+        sb.append("<B>remind</B> (lists all reminders)\n");
+        sb
+            .append("* If the preference \"reminderatsignon\" is set to true, you will automatically get a list when you login to aim.\n");
+
+        return sb.toString();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22834980
+src/com/levelonelabs/aimbot/modules/BuddyManagementModule.java 101 107
+src/com/levelonelabs/aimbot/modules/ReminderModule.java 120 129
+----------------------------------------
+    public String help() {
+        StringBuffer sb = new StringBuffer();
+        sb.append("<B>makeusers</B> (converts all non-user buddies to users *ADMIN ONLY*)\n");
+        sb.append("<B>prune buddies</B> (removes all non-user buddies *ADMIN ONLY*)\n");
+        sb.append("<B>prune inactive</B> (removes \"inactive\" users *ADMIN ONLY*)\n");
+        return sb.toString();
+    }
+
+----------------------------------------
+    public String help() {
+        StringBuffer sb = new StringBuffer();
+        sb.append("<B>remember <i>TEXT</i></B> (stores text in the system for retrieval later)\n");
+        sb.append("<B>forget <i>All or #</i></B> (removes all items or a specific item)\n");
+        sb.append("<B>remind</B> (lists all reminders)\n");
+        sb
+            .append("* If the preference \"reminderatsignon\" is set to true, you will automatically get a list when you login to aim.\n");
+
+        return sb.toString();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22834990
+src/com/levelonelabs/aimbot/modules/TVListingsModule.java 116 124
+src/com/levelonelabs/aimbot/modules/ReminderModule.java 120 129
+----------------------------------------
+	public String help() {
+		StringBuffer sb = new StringBuffer();
+		sb.append("<B>tvlist <i>ZIPCODE</i></B> (displays the tv providers in the area of the zipcode)\n");
+		sb.append("* If the preference \"zipcode\" is set, you can omit the zipcode to use your default.\n");
+		sb
+			.append("<B>tv <i>SHOW<i></B> (displays the synopsis of the next upcomming episode of the specified show in your area)\n");
+		sb.append("* The preference \"tvprovider\" must be set!");
+		return sb.toString();
+	}
+
+----------------------------------------
+    public String help() {
+        StringBuffer sb = new StringBuffer();
+        sb.append("<B>remember <i>TEXT</i></B> (stores text in the system for retrieval later)\n");
+        sb.append("<B>forget <i>All or #</i></B> (removes all items or a specific item)\n");
+        sb.append("<B>remind</B> (lists all reminders)\n");
+        sb
+            .append("* If the preference \"reminderatsignon\" is set to true, you will automatically get a list when you login to aim.\n");
+
+        return sb.toString();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22834979
+src/com/levelonelabs/aimbot/modules/MoviesModule.java 107 118
+src/com/levelonelabs/aimbot/modules/ReminderModule.java 120 129
+----------------------------------------
+    public String help() {
+        StringBuffer sb=new StringBuffer();
+        sb.append("<B>theaters <i>ZIPCODE<i></B> (displays a list of theaters in your area)\n");
+        sb.append(
+            "* If the preference \"zipcode\" is set, you can omit the zipcode to use your default.\n");
+        sb.append(
+            "<B>movies <i>ZIPCODE [Theater Number]</i></B> (displays movie times for the theater closest to your zipcode if a theater number is not provided)\n");
+        sb.append(
+            "* If the preference \"zipcode\" is set, you can omit the zipcode to use your default.\n");
+        sb.append("<B>movieslegend</B> (displays the legend for movie times)");
+        return sb.toString();
+    }
+
+----------------------------------------
+    public String help() {
+        StringBuffer sb = new StringBuffer();
+        sb.append("<B>remember <i>TEXT</i></B> (stores text in the system for retrieval later)\n");
+        sb.append("<B>forget <i>All or #</i></B> (removes all items or a specific item)\n");
+        sb.append("<B>remind</B> (lists all reminders)\n");
+        sb
+            .append("* If the preference \"reminderatsignon\" is set to true, you will automatically get a list when you login to aim.\n");
+
+        return sb.toString();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22834984
+src/com/levelonelabs/aimbot/modules/DefaultModule.java 96 103
+src/com/levelonelabs/aimbot/modules/ReminderModule.java 120 129
+----------------------------------------
+    public String help() {
+        StringBuffer sb=new StringBuffer();
+        sb.append("Default Module\nThis will output default text if the input \n");
+        sb.append("is not recognized\n");
+        sb.append("<B>addTerm <i>TEXT</i></B> "+
+            "(add possible lines for the module to output) *Admin only*");
+        return sb.toString();
+    }
+
+----------------------------------------
+    public String help() {
+        StringBuffer sb = new StringBuffer();
+        sb.append("<B>remember <i>TEXT</i></B> (stores text in the system for retrieval later)\n");
+        sb.append("<B>forget <i>All or #</i></B> (removes all items or a specific item)\n");
+        sb.append("<B>remind</B> (lists all reminders)\n");
+        sb
+            .append("* If the preference \"reminderatsignon\" is set to true, you will automatically get a list when you login to aim.\n");
+
+        return sb.toString();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22834982
+src/com/levelonelabs/aimbot/modules/UserInformationModule.java 125 132
+src/com/levelonelabs/aimbot/modules/ReminderModule.java 120 129
+----------------------------------------
+	public String help() {
+		StringBuffer sb = new StringBuffer();
+		sb.append("<B>history <i>USER</i></B> (displays user's recent sign on and off history)\n");
+		sb.append("<B>users</B> (displays status of all users)\n");
+		sb.append("A=" + AIMBot.ROLE_ADMINISTRATOR + ", M = messages pending, * = new user, E = Enemy, - = banned\n");
+		sb.append("<B>enemies</B> (displays status of all enemies)\n");
+		return sb.toString();
+	}
+
+----------------------------------------
+    public String help() {
+        StringBuffer sb = new StringBuffer();
+        sb.append("<B>remember <i>TEXT</i></B> (stores text in the system for retrieval later)\n");
+        sb.append("<B>forget <i>All or #</i></B> (removes all items or a specific item)\n");
+        sb.append("<B>remind</B> (lists all reminders)\n");
+        sb
+            .append("* If the preference \"reminderatsignon\" is set to true, you will automatically get a list when you login to aim.\n");
+
+        return sb.toString();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22834983
+src/com/levelonelabs/aimbot/modules/ScheduleModule.java 156 165
+src/com/levelonelabs/aimbot/modules/ReminderModule.java 120 129
+----------------------------------------
+    public String help() {
+        StringBuffer sb = new StringBuffer();
+        sb.append("<B>schedule <i>TEXT</i></B> (stores text in the system for retrieval later)\n");
+        sb.append("<B>cancel <i>All or #</i></B> (removes all items or a specific item)\n");
+        sb.append("<B>events</B> (lists all reminders)\n");
+        sb
+            .append("* If the preference \"reminderatsignon\" is set to true, you will automatically get a list when you login to aim.\n");
+
+        return sb.toString();
+    }
+
+----------------------------------------
+    public String help() {
+        StringBuffer sb = new StringBuffer();
+        sb.append("<B>remember <i>TEXT</i></B> (stores text in the system for retrieval later)\n");
+        sb.append("<B>forget <i>All or #</i></B> (removes all items or a specific item)\n");
+        sb.append("<B>remind</B> (lists all reminders)\n");
+        sb
+            .append("* If the preference \"reminderatsignon\" is set to true, you will automatically get a list when you login to aim.\n");
+
+        return sb.toString();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22834985
+src/com/levelonelabs/aimbot/modules/ScheduleModule.java 174 194
+src/com/levelonelabs/aimbot/modules/ReminderModule.java 138 156
+----------------------------------------
+    public boolean retrieveEvents(AIMBuddy buddy) {
+        // check for messages
+        ArrayList br = (ArrayList) events.get(buddy.getName());
+        if (br != null) {
+            String eventlist = "Events:<BR>";
+
+            if (br.size() != 0) {
+                // collect the messages
+                for (int i = 0; i < br.size(); i++) {
+                    SchedulerTask st = (SchedulerTask) br.get(i);
+                    eventlist += ((i + 1) + ")" + (st.getCommand() + " scheduled " + st.getCreateDate() + "<BR>"));
+                }
+            } else
+                eventlist = "No events scheduled.";
+
+            // send the list
+            super.sendMessage(buddy, eventlist);
+            return true;
+        }
+        return false;
+    }
+
+----------------------------------------
+    public boolean retrieveReminders(AIMBuddy buddy) {
+        // check for messages
+        ArrayList br = (ArrayList) reminders.get(buddy.getName());
+        if (br != null) {
+            if (br.size() > 0) {
+                String reminder = "Reminders:<BR>";
+
+                // collect the messages
+                for (int i = 0; i < br.size(); i++) {
+                    reminder += ((i + 1) + ")" + (br.get(i) + "<BR>"));
+                }
+
+                // send the list
+                super.sendMessage(buddy, reminder);
+                return true;
+            }
+        }
+        return false;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22834986
+src/com/levelonelabs/aimbot/modules/ScheduleModule.java 203 213
+src/com/levelonelabs/aimbot/modules/ReminderModule.java 165 175
+----------------------------------------
+    public void performService(AIMBuddy buddy, String query) {
+        if (query.toLowerCase().startsWith("schedule")) {
+            handleSchedule(buddy, query);
+        } else if (query.toLowerCase().startsWith("cancel")) {
+            handleCancel(buddy, query);
+        } else if (query.toLowerCase().startsWith("events")) {
+            if (!retrieveEvents(buddy)) {
+                sendMessage(buddy, "No events scheduled.");
+            }
+        }
+    }
+
+----------------------------------------
+    public void performService(AIMBuddy buddy, String query) {
+        if (query.toLowerCase().startsWith("remember")) {
+            handleRemember(buddy, query);
+        } else if (query.toLowerCase().startsWith("forget")) {
+            handleForget(buddy, query);
+        } else if (query.toLowerCase().startsWith("remind")) {
+            if (!retrieveReminders(buddy)) {
+                sendMessage(buddy, "No reminders available.");
+            }
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22834987
+src/com/levelonelabs/aimbot/modules/ScheduleModule.java 387 414
+src/com/levelonelabs/aimbot/modules/ReminderModule.java 203 230
+----------------------------------------
+    private void handleCancel(AIMBuddy buddy, String query) {
+        // handle offline request
+        StringTokenizer st = new StringTokenizer(query, " ");
+
+        // check for proper params
+        if (st.countTokens() != 2) {
+            sendMessage(buddy, "ERROR:\n" + help());
+            return;
+        }
+        st.nextToken();
+        String tok = st.nextToken();
+        if (tok.equalsIgnoreCase("all")) {
+            clearEvents(buddy);
+            sendMessage(buddy, "All events removed.");
+        } else {
+            try {
+                int loc = Integer.parseInt(tok) - 1;
+                if (removeEvent(buddy, loc)) {
+                    sendMessage(buddy, "Event cancelled.");
+                } else {
+                    sendMessage(buddy, "ERROR: number " + tok + " not valid.");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                sendMessage(buddy, "ERROR: number invalid: " + tok);
+            }
+        }
+    }
+
+----------------------------------------
+    private void handleForget(AIMBuddy buddy, String query) {
+        // handle offline request
+        StringTokenizer st = new StringTokenizer(query, " ");
+
+        // check for proper params
+        if (st.countTokens() != 2) {
+            sendMessage(buddy, "ERROR:\n" + help());
+            return;
+        }
+        st.nextToken();
+        String tok = st.nextToken();
+        if (tok.equalsIgnoreCase("all")) {
+            clearReminders(buddy);
+            sendMessage(buddy, "All reminders removed.");
+        } else {
+            try {
+                int loc = Integer.parseInt(tok) - 1;
+                if (removeReminder(buddy, loc)) {
+                    sendMessage(buddy, "Reminder removed.");
+                } else {
+                    sendMessage(buddy, "ERROR: number " + tok + " not valid.");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                sendMessage(buddy, "ERROR: number invalid: " + tok);
+            }
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22834994
+src/com/levelonelabs/aimbot/modules/ListModule.java 247 257
+src/com/levelonelabs/aimbot/modules/ListModule.java 295 305
+----------------------------------------
+        } else {
+            String list = st.nextToken();
+            list = st.nextToken();
+            AIMGroup group = super.bot.getGroup(list);
+            if (group != null) {
+                super.bot.removeGroup(group);
+                super.sendMessage(buddy, "The list " + list + " has been removed");
+            } else {
+                super.sendMessage(buddy, "The list " + list + " does not exist");
+            }
+        }
+
+----------------------------------------
+        } else {
+            String imcommand = st.nextToken();
+            String list = st.nextToken();
+            AIMGroup group = super.bot.getGroup(list);
+            if (group != null) {
+                super.sendMessage(buddy, "The list, " + list + ", already exists.");
+            } else {
+                super.bot.addGroup(new AIMGroup(list));
+                super.sendMessage(buddy, "The list, " + list + ", was created with no members.");
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22834995
+src/com/levelonelabs/aimbot/modules/ListModule.java 292 306
+src/com/levelonelabs/aimbot/modules/ListModule.java 313 326
+----------------------------------------
+    private void processMakeList(AIMBuddy buddy, StringTokenizer st) {
+        if (!buddy.hasRole(AIMBot.ROLE_ADMINISTRATOR)) {
+            super.sendMessage(buddy, "Sorry. This command is for admins only.");
+        } else {
+            String imcommand = st.nextToken();
+            String list = st.nextToken();
+            AIMGroup group = super.bot.getGroup(list);
+            if (group != null) {
+                super.sendMessage(buddy, "The list, " + list + ", already exists.");
+            } else {
+                super.bot.addGroup(new AIMGroup(list));
+                super.sendMessage(buddy, "The list, " + list + ", was created with no members.");
+            }
+        }
+    }
+
+----------------------------------------
+    private void processMembers(AIMBuddy buddy, StringTokenizer st) {
+        if (!buddy.hasRole(AIMBot.ROLE_ADMINISTRATOR)) {
+            super.sendMessage(buddy, "Sorry. This command is for admins only.");
+        } else {
+            String imcommand = st.nextToken();
+            String list = st.nextToken();
+            AIMGroup group = super.bot.getGroup(list);
+            if (group != null) {
+                super.sendMessage(buddy, "The list, " + list + ", contains: " + group.toString());
+            } else {
+                super.sendMessage(buddy, "The list, " + list + ", does not exist.");
+            }
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835035
+src/com/levelonelabs/aimbot/modules/ListModule.java 292 306
+src/com/levelonelabs/aimbot/modules/ListModule.java 184 201
+----------------------------------------
+    private void processMakeList(AIMBuddy buddy, StringTokenizer st) {
+        if (!buddy.hasRole(AIMBot.ROLE_ADMINISTRATOR)) {
+            super.sendMessage(buddy, "Sorry. This command is for admins only.");
+        } else {
+            String imcommand = st.nextToken();
+            String list = st.nextToken();
+            AIMGroup group = super.bot.getGroup(list);
+            if (group != null) {
+                super.sendMessage(buddy, "The list, " + list + ", already exists.");
+            } else {
+                super.bot.addGroup(new AIMGroup(list));
+                super.sendMessage(buddy, "The list, " + list + ", was created with no members.");
+            }
+        }
+    }
+
+----------------------------------------
+        } else {
+            String imcommand = st.nextToken();
+            String list = st.nextToken();
+            String buddyname = st.nextToken();
+
+            AIMGroup group = super.bot.getGroup(list);
+
+            if (group != null) {
+                if (group.remove(buddyname)) {
+                    super.sendMessage(buddy, buddyname + " was successfully removed from list:" + list);
+                } else {
+                    super.sendMessage(buddy, buddyname + " was not a member of list:" + list);
+                }
+            } else {
+                super.sendMessage(buddy, "The list, " + list + ", does not exist.");
+            }
+
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22834996
+src/com/levelonelabs/aimbot/modules/ListModule.java 313 326
+src/com/levelonelabs/aimbot/modules/ListModule.java 184 201
+----------------------------------------
+    private void processMembers(AIMBuddy buddy, StringTokenizer st) {
+        if (!buddy.hasRole(AIMBot.ROLE_ADMINISTRATOR)) {
+            super.sendMessage(buddy, "Sorry. This command is for admins only.");
+        } else {
+            String imcommand = st.nextToken();
+            String list = st.nextToken();
+            AIMGroup group = super.bot.getGroup(list);
+            if (group != null) {
+                super.sendMessage(buddy, "The list, " + list + ", contains: " + group.toString());
+            } else {
+                super.sendMessage(buddy, "The list, " + list + ", does not exist.");
+            }
+        }
+    }
+
+----------------------------------------
+        } else {
+            String imcommand = st.nextToken();
+            String list = st.nextToken();
+            String buddyname = st.nextToken();
+
+            AIMGroup group = super.bot.getGroup(list);
+
+            if (group != null) {
+                if (group.remove(buddyname)) {
+                    super.sendMessage(buddy, buddyname + " was successfully removed from list:" + list);
+                } else {
+                    super.sendMessage(buddy, buddyname + " was not a member of list:" + list);
+                }
+            } else {
+                super.sendMessage(buddy, "The list, " + list + ", does not exist.");
+            }
+
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22834997
+src/com/levelonelabs/aimbot/modules/ListModule.java 313 326
+src/com/levelonelabs/aimbot/modules/ListModule.java 242 258
+----------------------------------------
+    private void processMembers(AIMBuddy buddy, StringTokenizer st) {
+        if (!buddy.hasRole(AIMBot.ROLE_ADMINISTRATOR)) {
+            super.sendMessage(buddy, "Sorry. This command is for admins only.");
+        } else {
+            String imcommand = st.nextToken();
+            String list = st.nextToken();
+            AIMGroup group = super.bot.getGroup(list);
+            if (group != null) {
+                super.sendMessage(buddy, "The list, " + list + ", contains: " + group.toString());
+            } else {
+                super.sendMessage(buddy, "The list, " + list + ", does not exist.");
+            }
+        }
+    }
+
+----------------------------------------
+    private void processRemoveList(AIMBuddy buddy, StringTokenizer st) {
+        if (!buddy.hasRole(AIMBot.ROLE_ADMINISTRATOR)) {
+            super.sendMessage(buddy, "Sorry. This command is for admins only.");
+        } else if (st.countTokens() < 1) {
+            super.sendMessage(buddy, "Error: \n" + help());
+        } else {
+            String list = st.nextToken();
+            list = st.nextToken();
+            AIMGroup group = super.bot.getGroup(list);
+            if (group != null) {
+                super.bot.removeGroup(group);
+                super.sendMessage(buddy, "The list " + list + " has been removed");
+            } else {
+                super.sendMessage(buddy, "The list " + list + " does not exist");
+            }
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835036
+src/com/levelonelabs/aimbot/modules/ListModule.java 292 306
+src/com/levelonelabs/aimbot/modules/ListModule.java 242 258
+----------------------------------------
+    private void processMakeList(AIMBuddy buddy, StringTokenizer st) {
+        if (!buddy.hasRole(AIMBot.ROLE_ADMINISTRATOR)) {
+            super.sendMessage(buddy, "Sorry. This command is for admins only.");
+        } else {
+            String imcommand = st.nextToken();
+            String list = st.nextToken();
+            AIMGroup group = super.bot.getGroup(list);
+            if (group != null) {
+                super.sendMessage(buddy, "The list, " + list + ", already exists.");
+            } else {
+                super.bot.addGroup(new AIMGroup(list));
+                super.sendMessage(buddy, "The list, " + list + ", was created with no members.");
+            }
+        }
+    }
+
+----------------------------------------
+    private void processRemoveList(AIMBuddy buddy, StringTokenizer st) {
+        if (!buddy.hasRole(AIMBot.ROLE_ADMINISTRATOR)) {
+            super.sendMessage(buddy, "Sorry. This command is for admins only.");
+        } else if (st.countTokens() < 1) {
+            super.sendMessage(buddy, "Error: \n" + help());
+        } else {
+            String list = st.nextToken();
+            list = st.nextToken();
+            AIMGroup group = super.bot.getGroup(list);
+            if (group != null) {
+                super.bot.removeGroup(group);
+                super.sendMessage(buddy, "The list " + list + " has been removed");
+            } else {
+                super.sendMessage(buddy, "The list " + list + " does not exist");
+            }
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22834998
+src/com/levelonelabs/aimbot/modules/ListModule.java 295 305
+src/com/levelonelabs/aimbot/modules/ListModule.java 316 325
+----------------------------------------
+        } else {
+            String imcommand = st.nextToken();
+            String list = st.nextToken();
+            AIMGroup group = super.bot.getGroup(list);
+            if (group != null) {
+                super.sendMessage(buddy, "The list, " + list + ", already exists.");
+            } else {
+                super.bot.addGroup(new AIMGroup(list));
+                super.sendMessage(buddy, "The list, " + list + ", was created with no members.");
+            }
+        }
+
+----------------------------------------
+        } else {
+            String imcommand = st.nextToken();
+            String list = st.nextToken();
+            AIMGroup group = super.bot.getGroup(list);
+            if (group != null) {
+                super.sendMessage(buddy, "The list, " + list + ", contains: " + group.toString());
+            } else {
+                super.sendMessage(buddy, "The list, " + list + ", does not exist.");
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22834999
+src/com/levelonelabs/aimbot/modules/ListModule.java 247 257
+src/com/levelonelabs/aimbot/modules/ListModule.java 316 325
+----------------------------------------
+        } else {
+            String list = st.nextToken();
+            list = st.nextToken();
+            AIMGroup group = super.bot.getGroup(list);
+            if (group != null) {
+                super.bot.removeGroup(group);
+                super.sendMessage(buddy, "The list " + list + " has been removed");
+            } else {
+                super.sendMessage(buddy, "The list " + list + " does not exist");
+            }
+        }
+
+----------------------------------------
+        } else {
+            String imcommand = st.nextToken();
+            String list = st.nextToken();
+            AIMGroup group = super.bot.getGroup(list);
+            if (group != null) {
+                super.sendMessage(buddy, "The list, " + list + ", contains: " + group.toString());
+            } else {
+                super.sendMessage(buddy, "The list, " + list + ", does not exist.");
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835032
+src/com/levelonelabs/aimbot/modules/ListModule.java 184 201
+src/com/levelonelabs/aimbot/modules/ListModule.java 222 233
+----------------------------------------
+        } else {
+            String imcommand = st.nextToken();
+            String list = st.nextToken();
+            String buddyname = st.nextToken();
+
+            AIMGroup group = super.bot.getGroup(list);
+
+            if (group != null) {
+                if (group.remove(buddyname)) {
+                    super.sendMessage(buddy, buddyname + " was successfully removed from list:" + list);
+                } else {
+                    super.sendMessage(buddy, buddyname + " was not a member of list:" + list);
+                }
+            } else {
+                super.sendMessage(buddy, "The list, " + list + ", does not exist.");
+            }
+
+        }
+
+----------------------------------------
+            } else {
+                AIMGroup group = super.bot.getGroup(list);
+                if (group != null) {
+                    if (group.add(ibuddy.getName())) {
+                        super.sendMessage(buddy, buddyname + " was successfully added to list:" + list);
+                    } else {
+                        super.sendMessage(buddy, buddyname + " was already a member of list:" + list);
+                    }
+                } else {
+                    super.sendMessage(buddy, "The list, " + list + ", does not exist.");
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835000
+src/com/levelonelabs/aimbot/modules/ListModule.java 222 233
+src/com/levelonelabs/aimbot/modules/ListModule.java 333 346
+----------------------------------------
+            } else {
+                AIMGroup group = super.bot.getGroup(list);
+                if (group != null) {
+                    if (group.add(ibuddy.getName())) {
+                        super.sendMessage(buddy, buddyname + " was successfully added to list:" + list);
+                    } else {
+                        super.sendMessage(buddy, buddyname + " was already a member of list:" + list);
+                    }
+                } else {
+                    super.sendMessage(buddy, "The list, " + list + ", does not exist.");
+                }
+            }
+
+----------------------------------------
+    private void processUnsubscribe(AIMBuddy buddy, StringTokenizer st) {
+        String imcommand = st.nextToken();
+        String list = st.nextToken();
+        AIMGroup group = super.bot.getGroup(list);
+        if (group != null) {
+            if (group.remove(buddy.getName())) {
+                super.sendMessage(buddy, "You were successfully removed from list:" + list);
+            } else {
+                super.sendMessage(buddy, "You were not a member of list:" + list);
+            }
+        } else {
+            super.sendMessage(buddy, "The list, " + list + ", does not exist.");
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835003
+src/com/levelonelabs/aimbot/modules/ListModule.java 313 326
+src/com/levelonelabs/aimbot/modules/ListModule.java 333 346
+----------------------------------------
+    private void processMembers(AIMBuddy buddy, StringTokenizer st) {
+        if (!buddy.hasRole(AIMBot.ROLE_ADMINISTRATOR)) {
+            super.sendMessage(buddy, "Sorry. This command is for admins only.");
+        } else {
+            String imcommand = st.nextToken();
+            String list = st.nextToken();
+            AIMGroup group = super.bot.getGroup(list);
+            if (group != null) {
+                super.sendMessage(buddy, "The list, " + list + ", contains: " + group.toString());
+            } else {
+                super.sendMessage(buddy, "The list, " + list + ", does not exist.");
+            }
+        }
+    }
+
+----------------------------------------
+    private void processUnsubscribe(AIMBuddy buddy, StringTokenizer st) {
+        String imcommand = st.nextToken();
+        String list = st.nextToken();
+        AIMGroup group = super.bot.getGroup(list);
+        if (group != null) {
+            if (group.remove(buddy.getName())) {
+                super.sendMessage(buddy, "You were successfully removed from list:" + list);
+            } else {
+                super.sendMessage(buddy, "You were not a member of list:" + list);
+            }
+        } else {
+            super.sendMessage(buddy, "The list, " + list + ", does not exist.");
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835001
+src/com/levelonelabs/aimbot/modules/ListModule.java 292 306
+src/com/levelonelabs/aimbot/modules/ListModule.java 333 346
+----------------------------------------
+    private void processMakeList(AIMBuddy buddy, StringTokenizer st) {
+        if (!buddy.hasRole(AIMBot.ROLE_ADMINISTRATOR)) {
+            super.sendMessage(buddy, "Sorry. This command is for admins only.");
+        } else {
+            String imcommand = st.nextToken();
+            String list = st.nextToken();
+            AIMGroup group = super.bot.getGroup(list);
+            if (group != null) {
+                super.sendMessage(buddy, "The list, " + list + ", already exists.");
+            } else {
+                super.bot.addGroup(new AIMGroup(list));
+                super.sendMessage(buddy, "The list, " + list + ", was created with no members.");
+            }
+        }
+    }
+
+----------------------------------------
+    private void processUnsubscribe(AIMBuddy buddy, StringTokenizer st) {
+        String imcommand = st.nextToken();
+        String list = st.nextToken();
+        AIMGroup group = super.bot.getGroup(list);
+        if (group != null) {
+            if (group.remove(buddy.getName())) {
+                super.sendMessage(buddy, "You were successfully removed from list:" + list);
+            } else {
+                super.sendMessage(buddy, "You were not a member of list:" + list);
+            }
+        } else {
+            super.sendMessage(buddy, "The list, " + list + ", does not exist.");
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835002
+src/com/levelonelabs/aimbot/modules/ListModule.java 184 201
+src/com/levelonelabs/aimbot/modules/ListModule.java 333 346
+----------------------------------------
+        } else {
+            String imcommand = st.nextToken();
+            String list = st.nextToken();
+            String buddyname = st.nextToken();
+
+            AIMGroup group = super.bot.getGroup(list);
+
+            if (group != null) {
+                if (group.remove(buddyname)) {
+                    super.sendMessage(buddy, buddyname + " was successfully removed from list:" + list);
+                } else {
+                    super.sendMessage(buddy, buddyname + " was not a member of list:" + list);
+                }
+            } else {
+                super.sendMessage(buddy, "The list, " + list + ", does not exist.");
+            }
+
+        }
+
+----------------------------------------
+    private void processUnsubscribe(AIMBuddy buddy, StringTokenizer st) {
+        String imcommand = st.nextToken();
+        String list = st.nextToken();
+        AIMGroup group = super.bot.getGroup(list);
+        if (group != null) {
+            if (group.remove(buddy.getName())) {
+                super.sendMessage(buddy, "You were successfully removed from list:" + list);
+            } else {
+                super.sendMessage(buddy, "You were not a member of list:" + list);
+            }
+        } else {
+            super.sendMessage(buddy, "The list, " + list + ", does not exist.");
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835004
+src/com/levelonelabs/aimbot/modules/ListModule.java 224 230
+src/com/levelonelabs/aimbot/modules/ListModule.java 337 343
+----------------------------------------
+                if (group != null) {
+                    if (group.add(ibuddy.getName())) {
+                        super.sendMessage(buddy, buddyname + " was successfully added to list:" + list);
+                    } else {
+                        super.sendMessage(buddy, buddyname + " was already a member of list:" + list);
+                    }
+                } else {
+
+----------------------------------------
+        if (group != null) {
+            if (group.remove(buddy.getName())) {
+                super.sendMessage(buddy, "You were successfully removed from list:" + list);
+            } else {
+                super.sendMessage(buddy, "You were not a member of list:" + list);
+            }
+        } else {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835006
+src/com/levelonelabs/aimbot/modules/ListModule.java 292 306
+src/com/levelonelabs/aimbot/modules/ListModule.java 353 366
+----------------------------------------
+    private void processMakeList(AIMBuddy buddy, StringTokenizer st) {
+        if (!buddy.hasRole(AIMBot.ROLE_ADMINISTRATOR)) {
+            super.sendMessage(buddy, "Sorry. This command is for admins only.");
+        } else {
+            String imcommand = st.nextToken();
+            String list = st.nextToken();
+            AIMGroup group = super.bot.getGroup(list);
+            if (group != null) {
+                super.sendMessage(buddy, "The list, " + list + ", already exists.");
+            } else {
+                super.bot.addGroup(new AIMGroup(list));
+                super.sendMessage(buddy, "The list, " + list + ", was created with no members.");
+            }
+        }
+    }
+
+----------------------------------------
+    private void processSubscribe(AIMBuddy buddy, StringTokenizer st) {
+        String imcommand = st.nextToken();
+        String list = st.nextToken();
+        AIMGroup group = super.bot.getGroup(list);
+        if (group != null) {
+            if (group.add(buddy.getName())) {
+                super.sendMessage(buddy, "You were successfully added to list:" + list);
+            } else {
+                super.sendMessage(buddy, "You were already a member of list:" + list);
+            }
+        } else {
+            super.sendMessage(buddy, "The list, " + list + ", does not exist.");
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835007
+src/com/levelonelabs/aimbot/modules/ListModule.java 184 201
+src/com/levelonelabs/aimbot/modules/ListModule.java 353 366
+----------------------------------------
+        } else {
+            String imcommand = st.nextToken();
+            String list = st.nextToken();
+            String buddyname = st.nextToken();
+
+            AIMGroup group = super.bot.getGroup(list);
+
+            if (group != null) {
+                if (group.remove(buddyname)) {
+                    super.sendMessage(buddy, buddyname + " was successfully removed from list:" + list);
+                } else {
+                    super.sendMessage(buddy, buddyname + " was not a member of list:" + list);
+                }
+            } else {
+                super.sendMessage(buddy, "The list, " + list + ", does not exist.");
+            }
+
+        }
+
+----------------------------------------
+    private void processSubscribe(AIMBuddy buddy, StringTokenizer st) {
+        String imcommand = st.nextToken();
+        String list = st.nextToken();
+        AIMGroup group = super.bot.getGroup(list);
+        if (group != null) {
+            if (group.add(buddy.getName())) {
+                super.sendMessage(buddy, "You were successfully added to list:" + list);
+            } else {
+                super.sendMessage(buddy, "You were already a member of list:" + list);
+            }
+        } else {
+            super.sendMessage(buddy, "The list, " + list + ", does not exist.");
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835009
+src/com/levelonelabs/aimbot/modules/ListModule.java 333 346
+src/com/levelonelabs/aimbot/modules/ListModule.java 353 366
+----------------------------------------
+    private void processUnsubscribe(AIMBuddy buddy, StringTokenizer st) {
+        String imcommand = st.nextToken();
+        String list = st.nextToken();
+        AIMGroup group = super.bot.getGroup(list);
+        if (group != null) {
+            if (group.remove(buddy.getName())) {
+                super.sendMessage(buddy, "You were successfully removed from list:" + list);
+            } else {
+                super.sendMessage(buddy, "You were not a member of list:" + list);
+            }
+        } else {
+            super.sendMessage(buddy, "The list, " + list + ", does not exist.");
+        }
+    }
+
+----------------------------------------
+    private void processSubscribe(AIMBuddy buddy, StringTokenizer st) {
+        String imcommand = st.nextToken();
+        String list = st.nextToken();
+        AIMGroup group = super.bot.getGroup(list);
+        if (group != null) {
+            if (group.add(buddy.getName())) {
+                super.sendMessage(buddy, "You were successfully added to list:" + list);
+            } else {
+                super.sendMessage(buddy, "You were already a member of list:" + list);
+            }
+        } else {
+            super.sendMessage(buddy, "The list, " + list + ", does not exist.");
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835008
+src/com/levelonelabs/aimbot/modules/ListModule.java 313 326
+src/com/levelonelabs/aimbot/modules/ListModule.java 353 366
+----------------------------------------
+    private void processMembers(AIMBuddy buddy, StringTokenizer st) {
+        if (!buddy.hasRole(AIMBot.ROLE_ADMINISTRATOR)) {
+            super.sendMessage(buddy, "Sorry. This command is for admins only.");
+        } else {
+            String imcommand = st.nextToken();
+            String list = st.nextToken();
+            AIMGroup group = super.bot.getGroup(list);
+            if (group != null) {
+                super.sendMessage(buddy, "The list, " + list + ", contains: " + group.toString());
+            } else {
+                super.sendMessage(buddy, "The list, " + list + ", does not exist.");
+            }
+        }
+    }
+
+----------------------------------------
+    private void processSubscribe(AIMBuddy buddy, StringTokenizer st) {
+        String imcommand = st.nextToken();
+        String list = st.nextToken();
+        AIMGroup group = super.bot.getGroup(list);
+        if (group != null) {
+            if (group.add(buddy.getName())) {
+                super.sendMessage(buddy, "You were successfully added to list:" + list);
+            } else {
+                super.sendMessage(buddy, "You were already a member of list:" + list);
+            }
+        } else {
+            super.sendMessage(buddy, "The list, " + list + ", does not exist.");
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835005
+src/com/levelonelabs/aimbot/modules/ListModule.java 222 233
+src/com/levelonelabs/aimbot/modules/ListModule.java 353 366
+----------------------------------------
+            } else {
+                AIMGroup group = super.bot.getGroup(list);
+                if (group != null) {
+                    if (group.add(ibuddy.getName())) {
+                        super.sendMessage(buddy, buddyname + " was successfully added to list:" + list);
+                    } else {
+                        super.sendMessage(buddy, buddyname + " was already a member of list:" + list);
+                    }
+                } else {
+                    super.sendMessage(buddy, "The list, " + list + ", does not exist.");
+                }
+            }
+
+----------------------------------------
+    private void processSubscribe(AIMBuddy buddy, StringTokenizer st) {
+        String imcommand = st.nextToken();
+        String list = st.nextToken();
+        AIMGroup group = super.bot.getGroup(list);
+        if (group != null) {
+            if (group.add(buddy.getName())) {
+                super.sendMessage(buddy, "You were successfully added to list:" + list);
+            } else {
+                super.sendMessage(buddy, "You were already a member of list:" + list);
+            }
+        } else {
+            super.sendMessage(buddy, "The list, " + list + ", does not exist.");
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835010
+src/com/levelonelabs/aimbot/modules/ListModule.java 224 230
+src/com/levelonelabs/aimbot/modules/ListModule.java 357 363
+----------------------------------------
+                if (group != null) {
+                    if (group.add(ibuddy.getName())) {
+                        super.sendMessage(buddy, buddyname + " was successfully added to list:" + list);
+                    } else {
+                        super.sendMessage(buddy, buddyname + " was already a member of list:" + list);
+                    }
+                } else {
+
+----------------------------------------
+        if (group != null) {
+            if (group.add(buddy.getName())) {
+                super.sendMessage(buddy, "You were successfully added to list:" + list);
+            } else {
+                super.sendMessage(buddy, "You were already a member of list:" + list);
+            }
+        } else {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835011
+src/com/levelonelabs/aimbot/modules/ListModule.java 337 343
+src/com/levelonelabs/aimbot/modules/ListModule.java 357 363
+----------------------------------------
+        if (group != null) {
+            if (group.remove(buddy.getName())) {
+                super.sendMessage(buddy, "You were successfully removed from list:" + list);
+            } else {
+                super.sendMessage(buddy, "You were not a member of list:" + list);
+            }
+        } else {
+
+----------------------------------------
+        if (group != null) {
+            if (group.add(buddy.getName())) {
+                super.sendMessage(buddy, "You were successfully added to list:" + list);
+            } else {
+                super.sendMessage(buddy, "You were already a member of list:" + list);
+            }
+        } else {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835016
+src/com/levelonelabs/aimbot/modules/MoviesModule.java 72 77
+src/com/levelonelabs/aimbot/modules/UserAdminModule.java 55 62
+----------------------------------------
+    static {
+        services=new ArrayList();
+        services.add("movies");
+        services.add("movieslegend");
+        services.add("theaters");
+    }
+
+----------------------------------------
+    static {
+        services = new ArrayList();
+        services.add("adduser");
+        services.add("rmuser");
+        services.add("denyuser");
+        services.add("permituser");
+        services.add("permitmode");
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835013
+src/com/levelonelabs/aimbot/modules/MoviesModule.java 107 118
+src/com/levelonelabs/aimbot/modules/UserAdminModule.java 55 62
+----------------------------------------
+    public String help() {
+        StringBuffer sb=new StringBuffer();
+        sb.append("<B>theaters <i>ZIPCODE<i></B> (displays a list of theaters in your area)\n");
+        sb.append(
+            "* If the preference \"zipcode\" is set, you can omit the zipcode to use your default.\n");
+        sb.append(
+            "<B>movies <i>ZIPCODE [Theater Number]</i></B> (displays movie times for the theater closest to your zipcode if a theater number is not provided)\n");
+        sb.append(
+            "* If the preference \"zipcode\" is set, you can omit the zipcode to use your default.\n");
+        sb.append("<B>movieslegend</B> (displays the legend for movie times)");
+        return sb.toString();
+    }
+
+----------------------------------------
+    static {
+        services = new ArrayList();
+        services.add("adduser");
+        services.add("rmuser");
+        services.add("denyuser");
+        services.add("permituser");
+        services.add("permitmode");
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835017
+src/com/levelonelabs/aimbot/modules/ScheduleModule.java 111 118
+src/com/levelonelabs/aimbot/modules/UserAdminModule.java 55 62
+----------------------------------------
+    static {
+        services = new ArrayList();
+        services.add("schedule");
+        services.add("cancel");
+        services.add("events");
+        // Create the timer to handle timed reminding events
+        timer = new Timer();
+    }
+
+----------------------------------------
+    static {
+        services = new ArrayList();
+        services.add("adduser");
+        services.add("rmuser");
+        services.add("denyuser");
+        services.add("permituser");
+        services.add("permitmode");
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835012
+src/com/levelonelabs/aimbot/modules/UserInformationModule.java 62 67
+src/com/levelonelabs/aimbot/modules/UserAdminModule.java 55 62
+----------------------------------------
+	static {
+		services = new ArrayList();
+		services.add("history");
+		services.add("users");
+		services.add("enemies");
+	}
+
+----------------------------------------
+    static {
+        services = new ArrayList();
+        services.add("adduser");
+        services.add("rmuser");
+        services.add("denyuser");
+        services.add("permituser");
+        services.add("permitmode");
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835039
+src/com/levelonelabs/aimbot/modules/ReminderModule.java 68 73
+src/com/levelonelabs/aimbot/modules/UserAdminModule.java 55 62
+----------------------------------------
+    static {
+        services = new ArrayList();
+        services.add("remind");
+        services.add("remember");
+        services.add("forget");
+    }
+
+----------------------------------------
+    static {
+        services = new ArrayList();
+        services.add("adduser");
+        services.add("rmuser");
+        services.add("denyuser");
+        services.add("permituser");
+        services.add("permitmode");
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835015
+src/com/levelonelabs/aimbot/modules/ReminderModule.java 120 129
+src/com/levelonelabs/aimbot/modules/UserAdminModule.java 55 62
+----------------------------------------
+    public String help() {
+        StringBuffer sb = new StringBuffer();
+        sb.append("<B>remember <i>TEXT</i></B> (stores text in the system for retrieval later)\n");
+        sb.append("<B>forget <i>All or #</i></B> (removes all items or a specific item)\n");
+        sb.append("<B>remind</B> (lists all reminders)\n");
+        sb
+            .append("* If the preference \"reminderatsignon\" is set to true, you will automatically get a list when you login to aim.\n");
+
+        return sb.toString();
+    }
+
+----------------------------------------
+    static {
+        services = new ArrayList();
+        services.add("adduser");
+        services.add("rmuser");
+        services.add("denyuser");
+        services.add("permituser");
+        services.add("permitmode");
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835014
+src/com/levelonelabs/aimbot/modules/TVListingsModule.java 116 124
+src/com/levelonelabs/aimbot/modules/UserAdminModule.java 55 62
+----------------------------------------
+	public String help() {
+		StringBuffer sb = new StringBuffer();
+		sb.append("<B>tvlist <i>ZIPCODE</i></B> (displays the tv providers in the area of the zipcode)\n");
+		sb.append("* If the preference \"zipcode\" is set, you can omit the zipcode to use your default.\n");
+		sb
+			.append("<B>tv <i>SHOW<i></B> (displays the synopsis of the next upcomming episode of the specified show in your area)\n");
+		sb.append("* The preference \"tvprovider\" must be set!");
+		return sb.toString();
+	}
+
+----------------------------------------
+    static {
+        services = new ArrayList();
+        services.add("adduser");
+        services.add("rmuser");
+        services.add("denyuser");
+        services.add("permituser");
+        services.add("permitmode");
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835038
+src/com/levelonelabs/aimbot/modules/ScheduleModule.java 156 165
+src/com/levelonelabs/aimbot/modules/UserAdminModule.java 55 62
+----------------------------------------
+    public String help() {
+        StringBuffer sb = new StringBuffer();
+        sb.append("<B>schedule <i>TEXT</i></B> (stores text in the system for retrieval later)\n");
+        sb.append("<B>cancel <i>All or #</i></B> (removes all items or a specific item)\n");
+        sb.append("<B>events</B> (lists all reminders)\n");
+        sb
+            .append("* If the preference \"reminderatsignon\" is set to true, you will automatically get a list when you login to aim.\n");
+
+        return sb.toString();
+    }
+
+----------------------------------------
+    static {
+        services = new ArrayList();
+        services.add("adduser");
+        services.add("rmuser");
+        services.add("denyuser");
+        services.add("permituser");
+        services.add("permitmode");
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835019
+src/com/levelonelabs/aimbot/modules/ListModule.java 59 70
+src/com/levelonelabs/aimbot/modules/ListModule.java 108 121
+----------------------------------------
+    static {
+        services = new ArrayList();
+        services.add("subscribe");
+        services.add("unsubscribe");
+        services.add("post");
+        services.add("members");
+        services.add("makelist");
+        services.add("lists");
+        services.add("removelist");
+        services.add("addlistmember");
+        services.add("rmlistmember");
+    }
+
+----------------------------------------
+    public String help() {
+        StringBuffer sb = new StringBuffer();
+        sb.append("<B>lists</B> (shows all the current lists.)\n");
+        sb.append("<B>subscribe <i>LISTNAME</i> </B> (subscribe yourself to the named list.)\n");
+        sb.append("<B>unsubscribe <i>LISTNAME</i> </B> (unsubscribe yourself from the named list.)\n");
+        sb.append("<B>post <i>LISTNAME</i> <i>MESSAGE</i></B> (will post the message to everyone in the list."
+            + "  Offline members will be told when they sign on.)\n");
+        sb.append("<B>members <i>LISTNAME</i></B> (will show the members of everyone in the list. *ADMIN ONLY*)\n");
+        sb.append("<B>makelist <i>LISTNAME</i></B> (creates a new list. *ADMIN ONLY*)\n");
+        sb.append("<B>removelist <i>LISTNAME</i></B> (Removes a list *ADMIN ONLY*)\n");
+        sb.append("<B>addlistmember <i>LISTNAME BUDDYNAME</i></B> (adds a user to a list) *ADMIN ONLY*)\n");
+        sb.append("<B>rmlistmember <i>LISTNAME BUDDYNAME</i> </B> (removes a user from a list) *ADMIN ONLY*)\n");
+        return sb.toString();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835020
+src/com/levelonelabs/aimbot/modules/TVListingsModule.java 265 271
+src/com/levelonelabs/aimbot/modules/TVListingsModule.java 551 558
+----------------------------------------
+	public void handleEndTag(Tag t, int pos) {
+		if (t == HTML.Tag.SELECT) {
+			validSelect = false;
+		} else if (t == HTML.Tag.OPTION) {
+			validText = false;
+		}
+	}
+
+----------------------------------------
+	public void handleEndTag(Tag t, int pos) {
+		if (t == HTML.Tag.A) {
+			if (foundURL && grabURL) {
+				grabURL = false;
+				grabChannel = true;
+			}
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835021
+src/com/levelonelabs/aimbot/modules/TVListingsModule.java 301 320
+src/com/levelonelabs/aimbot/modules/SkiReportModule.java 302 321
+----------------------------------------
+	public Map getProviders() {
+		HashMap result = new HashMap();
+		try {
+			URL url = new URL(BASE_URL + this.zipcode);
+			logger.fine("Looking for prividers for:" + zipcode + " using URL= " + url);
+			URLConnection conn = url.openConnection();
+			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			ParserDelegator pd = new ParserDelegator();
+			pd.parse(br, this, true);
+			if (codes.size() == names.size()) {
+				for (int i = 0; i < codes.size(); i++) {
+					result.put(codes.get(i), names.get(i));
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new HashMap();
+		}
+		return result;
+	}
+
+----------------------------------------
+    public Map getMountains() {
+        HashMap result = new HashMap();
+        try {
+            URL url = new URL(BASE_URL + this.state + "/index.html");
+            logger.fine("Looking for mountains in:" + state + " using URL= " + url);
+            URLConnection conn = url.openConnection();
+            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            ParserDelegator pd = new ParserDelegator();
+            pd.parse(br, this, true);
+            if (codes.size() == names.size()) {
+                for (int i = 0; i < codes.size(); i++) {
+                    result.put(codes.get(i), names.get(i));
+                }
+            }
+        } catch (Exception e) {
+            logger.fine("Error looking for mountains, ERROR:" + e.getStackTrace());
+            return new HashMap();
+        }
+        return result;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835022
+src/com/levelonelabs/aimbot/modules/TVListingsModule.java 303 315
+src/com/levelonelabs/aimbot/modules/SkiReportModule.java 304 316
+----------------------------------------
+		try {
+			URL url = new URL(BASE_URL + this.zipcode);
+			logger.fine("Looking for prividers for:" + zipcode + " using URL= " + url);
+			URLConnection conn = url.openConnection();
+			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			ParserDelegator pd = new ParserDelegator();
+			pd.parse(br, this, true);
+			if (codes.size() == names.size()) {
+				for (int i = 0; i < codes.size(); i++) {
+					result.put(codes.get(i), names.get(i));
+				}
+			}
+		} catch (Exception e) {
+
+----------------------------------------
+        try {
+            URL url = new URL(BASE_URL + this.state + "/index.html");
+            logger.fine("Looking for mountains in:" + state + " using URL= " + url);
+            URLConnection conn = url.openConnection();
+            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            ParserDelegator pd = new ParserDelegator();
+            pd.parse(br, this, true);
+            if (codes.size() == names.size()) {
+                for (int i = 0; i < codes.size(); i++) {
+                    result.put(codes.get(i), names.get(i));
+                }
+            }
+        } catch (Exception e) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835209
+src/com/levelonelabs/aimbot/modules/UserInformationModule.java 125 132
+src/com/levelonelabs/aimbot/modules/UserAdminModule.java 100 109
+----------------------------------------
+	public String help() {
+		StringBuffer sb = new StringBuffer();
+		sb.append("<B>history <i>USER</i></B> (displays user's recent sign on and off history)\n");
+		sb.append("<B>users</B> (displays status of all users)\n");
+		sb.append("A=" + AIMBot.ROLE_ADMINISTRATOR + ", M = messages pending, * = new user, E = Enemy, - = banned\n");
+		sb.append("<B>enemies</B> (displays status of all enemies)\n");
+		return sb.toString();
+	}
+
+----------------------------------------
+    public String help() {
+        StringBuffer sb = new StringBuffer();
+        sb
+            .append("<B>adduser <i>BUDDY</i> <ADMIN></B> (adds a user to the list, along with allowing for admin perms)\n");
+        sb.append("<B>rmuser <i>BUDDY</i></B> (removes a user from the list)\n");
+        sb.append("<B>denyuser <i>BUDDY</i></B> (deny a user *ADMIN ONLY*)\n");
+        sb.append("<B>permituser <i>BUDDY</i></B> (permit a user *ADMIN ONLY*)\n");
+        sb.append("<B>permitmode <i>[MODE]</i></B> (set or display the permitmode*ADMIN ONLY*)\n");
+        return sb.toString();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835025
+src/com/levelonelabs/aimbot/modules/BuddyManagementModule.java 101 107
+src/com/levelonelabs/aimbot/modules/UserAdminModule.java 100 109
+----------------------------------------
+    public String help() {
+        StringBuffer sb = new StringBuffer();
+        sb.append("<B>makeusers</B> (converts all non-user buddies to users *ADMIN ONLY*)\n");
+        sb.append("<B>prune buddies</B> (removes all non-user buddies *ADMIN ONLY*)\n");
+        sb.append("<B>prune inactive</B> (removes \"inactive\" users *ADMIN ONLY*)\n");
+        return sb.toString();
+    }
+
+----------------------------------------
+    public String help() {
+        StringBuffer sb = new StringBuffer();
+        sb
+            .append("<B>adduser <i>BUDDY</i> <ADMIN></B> (adds a user to the list, along with allowing for admin perms)\n");
+        sb.append("<B>rmuser <i>BUDDY</i></B> (removes a user from the list)\n");
+        sb.append("<B>denyuser <i>BUDDY</i></B> (deny a user *ADMIN ONLY*)\n");
+        sb.append("<B>permituser <i>BUDDY</i></B> (permit a user *ADMIN ONLY*)\n");
+        sb.append("<B>permitmode <i>[MODE]</i></B> (set or display the permitmode*ADMIN ONLY*)\n");
+        return sb.toString();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835211
+src/com/levelonelabs/aimbot/modules/UserAdminModule.java 55 62
+src/com/levelonelabs/aimbot/modules/UserAdminModule.java 100 109
+----------------------------------------
+    static {
+        services = new ArrayList();
+        services.add("adduser");
+        services.add("rmuser");
+        services.add("denyuser");
+        services.add("permituser");
+        services.add("permitmode");
+    }
+
+----------------------------------------
+    public String help() {
+        StringBuffer sb = new StringBuffer();
+        sb
+            .append("<B>adduser <i>BUDDY</i> <ADMIN></B> (adds a user to the list, along with allowing for admin perms)\n");
+        sb.append("<B>rmuser <i>BUDDY</i></B> (removes a user from the list)\n");
+        sb.append("<B>denyuser <i>BUDDY</i></B> (deny a user *ADMIN ONLY*)\n");
+        sb.append("<B>permituser <i>BUDDY</i></B> (permit a user *ADMIN ONLY*)\n");
+        sb.append("<B>permitmode <i>[MODE]</i></B> (set or display the permitmode*ADMIN ONLY*)\n");
+        return sb.toString();
+    }
+
+----------------------------------------

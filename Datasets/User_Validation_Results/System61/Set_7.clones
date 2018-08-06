@@ -1,0 +1,1434 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24217933
+src/com/_17od/upm/gui/MainWindow.java 295 303
+src/com/_17od/upm/gui/MainWindow.java 357 365
+----------------------------------------
+		c.gridx = 0;
+		c.gridy = 2;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(5, 1, 5, 1);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+		getContentPane().add(searchIcon, c);
+
+----------------------------------------
+		c.gridx = 2;
+		c.gridy = 2;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(5, 1, 5, 1);
+		c.weightx = 1;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+		getContentPane().add(resetSearchButton, c);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24217939
+src/com/_17od/upm/gui/OpenDatabaseFromURLDialog.java 58 86
+src/com/_17od/upm/gui/OptionsDialog.java 88 120
+----------------------------------------
+        super(frame, Translator.translate("openDatabaseFromURL"), true);
+
+        Container container = getContentPane();
+
+        // Create a pane with an empty border for spacing
+        Border emptyBorder = BorderFactory.createEmptyBorder(2, 5, 5, 5);
+        JPanel emptyBorderPanel = new JPanel();
+        emptyBorderPanel.setLayout(new BoxLayout(emptyBorderPanel, BoxLayout.Y_AXIS));
+        emptyBorderPanel.setBorder(emptyBorder);
+        container.add(emptyBorderPanel);
+
+        // Create a pane with an title etched border
+        Border etchedBorder = BorderFactory.createEtchedBorder(EtchedBorder.LOWERED);
+        Border etchedTitleBorder = BorderFactory.createTitledBorder(etchedBorder, ' ' + Translator.translate("remoteLocation") + ' ');
+        JPanel mainPanel = new JPanel(new GridBagLayout());
+        mainPanel.setBorder(etchedTitleBorder);
+        emptyBorderPanel.add(mainPanel);
+        
+        GridBagConstraints c = new GridBagConstraints();
+
+        // The URL Label row
+        JLabel urlLabel = new JLabel(Translator.translate("url"));
+        c.gridx = 0;
+        c.gridy = 0;
+        c.anchor = GridBagConstraints.LINE_START;
+        c.insets = new Insets(0, 5, 0, 0);
+        c.weightx = 1;
+        c.weighty = 0;
+        c.gridwidth = 1;
+
+----------------------------------------
+		super(frame, Translator.translate("options"), true);
+
+		Container container = getContentPane();
+
+		// Create a pane with an empty border for spacing
+		Border emptyBorder = BorderFactory.createEmptyBorder(2, 5, 5, 5);
+		JPanel emptyBorderPanel = new JPanel();
+		emptyBorderPanel.setLayout(new BoxLayout(emptyBorderPanel, BoxLayout.Y_AXIS));
+		emptyBorderPanel.setBorder(emptyBorder);
+		container.add(emptyBorderPanel);
+
+		// ******************
+		// *** The DB TO Load On Startup Section
+		// ******************
+		// Create a pane with an title etched border
+		Border etchedBorder = BorderFactory.createEtchedBorder(EtchedBorder.LOWERED);
+		Border etchedTitleBorder = BorderFactory.createTitledBorder(etchedBorder,
+				' ' + Translator.translate("general") + ' ');
+		JPanel mainPanel = new JPanel(new GridBagLayout());
+		mainPanel.setBorder(etchedTitleBorder);
+		emptyBorderPanel.add(mainPanel);
+
+		GridBagConstraints c = new GridBagConstraints();
+
+		// The "Database to Load on Startup" row
+		JLabel urlLabel = new JLabel(Translator.translate("dbToLoadOnStartup"));
+		c.gridx = 0;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 5, 3, 0);
+		c.weightx = 1;
+		c.weighty = 0;
+		c.gridwidth = 2;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24217942
+src/com/_17od/upm/gui/OptionsDialog.java 461 467
+src/com/_17od/upm/gui/OpenDatabaseFromURLDialog.java 81 87
+----------------------------------------
+		c.gridy = 6;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 5, 5, 5);
+		c.weightx = 1;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+
+----------------------------------------
+        c.gridy = 0;
+        c.anchor = GridBagConstraints.LINE_START;
+        c.insets = new Insets(0, 5, 0, 0);
+        c.weightx = 1;
+        c.weighty = 0;
+        c.gridwidth = 1;
+        c.fill = GridBagConstraints.HORIZONTAL;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24217940
+src/com/_17od/upm/gui/OptionsDialog.java 408 414
+src/com/_17od/upm/gui/OpenDatabaseFromURLDialog.java 81 87
+----------------------------------------
+		c.gridy = 2;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 5, 5, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+
+----------------------------------------
+        c.gridy = 0;
+        c.anchor = GridBagConstraints.LINE_START;
+        c.insets = new Insets(0, 5, 0, 0);
+        c.weightx = 1;
+        c.weighty = 0;
+        c.gridwidth = 1;
+        c.fill = GridBagConstraints.HORIZONTAL;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24217962
+src/com/_17od/upm/gui/OptionsDialog.java 461 467
+src/com/_17od/upm/gui/OptionsDialog.java 397 403
+----------------------------------------
+		c.gridy = 6;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 5, 5, 5);
+		c.weightx = 1;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+
+----------------------------------------
+		c.gridy = 2;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 5, 5, 0);
+		c.weightx = 1;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24217957
+src/com/_17od/upm/gui/OpenDatabaseFromURLDialog.java 93 99
+src/com/_17od/upm/gui/OptionsDialog.java 397 403
+----------------------------------------
+        c.gridy = 1;
+        c.anchor = GridBagConstraints.LINE_START;
+        c.insets = new Insets(0, 5, 5, 5);
+        c.weightx = 1;
+        c.weighty = 0;
+        c.gridwidth = 1;
+        c.fill = GridBagConstraints.HORIZONTAL;
+
+----------------------------------------
+		c.gridy = 2;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 5, 5, 0);
+		c.weightx = 1;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24217959
+src/com/_17od/upm/gui/OptionsDialog.java 128 134
+src/com/_17od/upm/gui/OptionsDialog.java 397 403
+----------------------------------------
+		c.gridy = 1;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 5, 5, 5);
+		c.weightx = 1;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+
+----------------------------------------
+		c.gridy = 2;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 5, 5, 0);
+		c.weightx = 1;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24217941
+src/com/_17od/upm/gui/OpenDatabaseFromURLDialog.java 81 87
+src/com/_17od/upm/gui/OptionsDialog.java 397 403
+----------------------------------------
+        c.gridy = 0;
+        c.anchor = GridBagConstraints.LINE_START;
+        c.insets = new Insets(0, 5, 0, 0);
+        c.weightx = 1;
+        c.weighty = 0;
+        c.gridwidth = 1;
+        c.fill = GridBagConstraints.HORIZONTAL;
+
+----------------------------------------
+		c.gridy = 2;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 5, 5, 0);
+		c.weightx = 1;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24217943
+src/com/_17od/upm/gui/OptionsDialog.java 327 335
+src/com/_17od/upm/gui/OpenDatabaseFromURLDialog.java 79 87
+----------------------------------------
+				acceptSelfSignedCerts.booleanValue());
+		c.gridx = 0;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 2, 5, 0);
+		c.weightx = 1;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+
+----------------------------------------
+        JLabel urlLabel = new JLabel(Translator.translate("url"));
+        c.gridx = 0;
+        c.gridy = 0;
+        c.anchor = GridBagConstraints.LINE_START;
+        c.insets = new Insets(0, 5, 0, 0);
+        c.weightx = 1;
+        c.weighty = 0;
+        c.gridwidth = 1;
+        c.fill = GridBagConstraints.HORIZONTAL;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24217944
+src/com/_17od/upm/gui/OpenDatabaseFromURLDialog.java 79 95
+src/com/_17od/upm/gui/OptionsDialog.java 359 375
+----------------------------------------
+        JLabel urlLabel = new JLabel(Translator.translate("url"));
+        c.gridx = 0;
+        c.gridy = 0;
+        c.anchor = GridBagConstraints.LINE_START;
+        c.insets = new Insets(0, 5, 0, 0);
+        c.weightx = 1;
+        c.weighty = 0;
+        c.gridwidth = 1;
+        c.fill = GridBagConstraints.HORIZONTAL;
+        mainPanel.add(urlLabel, c);
+
+        // The Remote URL input field row
+        urlTextField = new JTextField(20);
+        c.gridx = 0;
+        c.gridy = 1;
+        c.anchor = GridBagConstraints.LINE_START;
+        c.insets = new Insets(0, 5, 5, 5);
+
+----------------------------------------
+		});
+		c.gridx = 0;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 2, 5, 0);
+		c.weightx = 1;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+		proxyPanel.add(enableProxyCheckbox, c);
+
+		// The "HTTP Proxy" label row
+		proxyLabel = new JLabel(Translator.translate("httpProxy"));
+		c.gridx = 0;
+		c.gridy = 1;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 5, 3, 0);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24217945
+src/com/_17od/upm/gui/OpenDatabaseFromURLDialog.java 91 100
+src/com/_17od/upm/gui/OptionsDialog.java 126 135
+----------------------------------------
+        urlTextField = new JTextField(20);
+        c.gridx = 0;
+        c.gridy = 1;
+        c.anchor = GridBagConstraints.LINE_START;
+        c.insets = new Insets(0, 5, 5, 5);
+        c.weightx = 1;
+        c.weighty = 0;
+        c.gridwidth = 1;
+        c.fill = GridBagConstraints.HORIZONTAL;
+        mainPanel.add(urlTextField, c);
+
+----------------------------------------
+		dbToLoadOnStartup.setHorizontalAlignment(JTextField.LEFT);
+		c.gridx = 0;
+		c.gridy = 1;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 5, 5, 5);
+		c.weightx = 1;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		mainPanel.add(dbToLoadOnStartup, c);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24217946
+src/com/_17od/upm/gui/OptionsDialog.java 154 161
+src/com/_17od/upm/gui/OpenDatabaseFromURLDialog.java 103 110
+----------------------------------------
+		JLabel localeLabel = new JLabel(Translator.translate("language"));
+		c.gridx = 0;
+		c.gridy = 2;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 5, 3, 0);
+		c.weightx = 1;
+		c.weighty = 0;
+		c.gridwidth = 2;
+
+----------------------------------------
+        JLabel usernameLabel = new JLabel(Translator.translate("username"));
+        c.gridx = 0;
+        c.gridy = 2;
+        c.anchor = GridBagConstraints.LINE_START;
+        c.insets = new Insets(5, 5, 0, 0);
+        c.weightx = 1;
+        c.weighty = 0;
+        c.gridwidth = 1;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24217947
+src/com/_17od/upm/gui/OpenDatabaseFromURLDialog.java 92 111
+src/com/_17od/upm/gui/OptionsDialog.java 384 403
+----------------------------------------
+        c.gridx = 0;
+        c.gridy = 1;
+        c.anchor = GridBagConstraints.LINE_START;
+        c.insets = new Insets(0, 5, 5, 5);
+        c.weightx = 1;
+        c.weighty = 0;
+        c.gridwidth = 1;
+        c.fill = GridBagConstraints.HORIZONTAL;
+        mainPanel.add(urlTextField, c);
+
+        // The username label field
+        JLabel usernameLabel = new JLabel(Translator.translate("username"));
+        c.gridx = 0;
+        c.gridy = 2;
+        c.anchor = GridBagConstraints.LINE_START;
+        c.insets = new Insets(5, 5, 0, 0);
+        c.weightx = 1;
+        c.weighty = 0;
+        c.gridwidth = 1;
+        c.fill = GridBagConstraints.HORIZONTAL;
+
+----------------------------------------
+		c.gridx = 1;
+		c.gridy = 1;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 5, 3, 5);
+		c.weightx = 1;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+		proxyPanel.add(proxyPortLabel, c);
+
+		// The "HTTP Proxy" field row
+		httpProxyHost = new JTextField(Preferences.get(Preferences.ApplicationOptions.HTTP_PROXY_HOST), 20);
+		c.gridx = 0;
+		c.gridy = 2;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 5, 5, 0);
+		c.weightx = 1;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24217948
+src/com/_17od/upm/gui/OpenDatabaseFromURLDialog.java 104 119
+src/com/_17od/upm/gui/OptionsDialog.java 407 422
+----------------------------------------
+        c.gridx = 0;
+        c.gridy = 2;
+        c.anchor = GridBagConstraints.LINE_START;
+        c.insets = new Insets(5, 5, 0, 0);
+        c.weightx = 1;
+        c.weighty = 0;
+        c.gridwidth = 1;
+        c.fill = GridBagConstraints.HORIZONTAL;
+        mainPanel.add(usernameLabel, c);
+
+        // The username inpur field
+        usernameTextField = new JTextField(10);
+        c.gridx = 0;
+        c.gridy = 3;
+        c.anchor = GridBagConstraints.LINE_START;
+        c.insets = new Insets(0, 5, 5, 5);
+
+----------------------------------------
+		c.gridx = 1;
+		c.gridy = 2;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 5, 5, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		proxyPanel.add(httpProxyPort, c);
+
+		// The "HTTP Proxy Username" label row
+		proxyUsernameLabel = new JLabel(Translator.translate("httpProxyUsername"));
+		c.gridx = 0;
+		c.gridy = 3;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 5, 3, 0);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24217949
+src/com/_17od/upm/gui/OpenDatabaseFromURLDialog.java 116 122
+src/com/_17od/upm/gui/OptionsDialog.java 183 189
+----------------------------------------
+        c.gridx = 0;
+        c.gridy = 3;
+        c.anchor = GridBagConstraints.LINE_START;
+        c.insets = new Insets(0, 5, 5, 5);
+        c.weightx = 1;
+        c.weighty = 0;
+        c.gridwidth = 1;
+
+----------------------------------------
+		c.gridx = 0;
+		c.gridy = 3;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 5, 8, 5);
+		c.weightx = 1;
+		c.weighty = 0;
+		c.gridwidth = 2;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24217950
+src/com/_17od/upm/gui/OpenDatabaseFromURLDialog.java 127 135
+src/com/_17od/upm/gui/OptionsDialog.java 197 205
+----------------------------------------
+        JLabel passwordLabel = new JLabel(Translator.translate("password"));
+        c.gridx = 0;
+        c.gridy = 4;
+        c.anchor = GridBagConstraints.LINE_START;
+        c.insets = new Insets(5, 5, 0, 0);
+        c.weightx = 1;
+        c.weighty = 0;
+        c.gridwidth = 1;
+        c.fill = GridBagConstraints.HORIZONTAL;
+
+----------------------------------------
+				hideAccountPassword.booleanValue());
+		c.gridx = 0;
+		c.gridy = 4;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 2, 5, 0);
+		c.weightx = 1;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24217951
+src/com/_17od/upm/gui/OptionsDialog.java 231 238
+src/com/_17od/upm/gui/OpenDatabaseFromURLDialog.java 140 147
+----------------------------------------
+		c.gridx = 1;
+		c.gridy = 5;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 5, 5, 0);
+		c.weightx = 1;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+
+----------------------------------------
+        c.gridx = 0;
+        c.gridy = 5;
+        c.anchor = GridBagConstraints.LINE_START;
+        c.insets = new Insets(0, 5, 5, 5);
+        c.weightx = 1;
+        c.weighty = 0;
+        c.gridwidth = 1;
+        c.fill = GridBagConstraints.NONE;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24217952
+src/com/_17od/upm/gui/OpenDatabaseFromURLDialog.java 139 148
+src/com/_17od/upm/gui/OptionsDialog.java 212 221
+----------------------------------------
+        passwordTextField = new JPasswordField(10);
+        c.gridx = 0;
+        c.gridy = 5;
+        c.anchor = GridBagConstraints.LINE_START;
+        c.insets = new Insets(0, 5, 5, 5);
+        c.weightx = 1;
+        c.weighty = 0;
+        c.gridwidth = 1;
+        c.fill = GridBagConstraints.NONE;
+        mainPanel.add(passwordTextField, c);
+
+----------------------------------------
+				databaseAutoLock.booleanValue());
+		c.gridx = 0;
+		c.gridy = 5;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 2, 5, 0);
+		c.weightx = 1;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+		mainPanel.add(databaseAutoLockCheckbox, c);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24217953
+src/com/_17od/upm/gui/OpenDatabaseFromURLDialog.java 164 176
+src/com/_17od/upm/gui/OptionsDialog.java 502 514
+----------------------------------------
+                dispose();
+            }
+        });
+        buttonPanel.add(okButton);
+        
+        JButton cancelButton = new JButton(Translator.translate("cancel"));
+        cancelButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                setVisible(false);
+                dispose();
+            }
+        });
+        buttonPanel.add(cancelButton);
+
+----------------------------------------
+				okButtonAction();
+			}
+		});
+		buttonPanel.add(okButton);
+
+		JButton cancelButton = new JButton(Translator.translate("cancel"));
+		cancelButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				dispose();
+			}
+		});
+		buttonPanel.add(cancelButton);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24217954
+src/com/_17od/upm/gui/OpenDatabaseFromURLDialog.java 79 87
+src/com/_17od/upm/gui/AccountDialog.java 353 361
+----------------------------------------
+        JLabel urlLabel = new JLabel(Translator.translate("url"));
+        c.gridx = 0;
+        c.gridy = 0;
+        c.anchor = GridBagConstraints.LINE_START;
+        c.insets = new Insets(0, 5, 0, 0);
+        c.weightx = 1;
+        c.weighty = 0;
+        c.gridwidth = 1;
+        c.fill = GridBagConstraints.HORIZONTAL;
+
+----------------------------------------
+		});
+		c.gridx = 0;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 1;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24218043
+src/com/_17od/upm/gui/OptionsDialog.java 327 335
+src/com/_17od/upm/gui/AccountDialog.java 353 361
+----------------------------------------
+				acceptSelfSignedCerts.booleanValue());
+		c.gridx = 0;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 2, 5, 0);
+		c.weightx = 1;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+
+----------------------------------------
+		});
+		c.gridx = 0;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 1;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24217955
+src/com/_17od/upm/gui/AccountDialog.java 478 497
+src/com/_17od/upm/gui/OpenDatabaseFromURLDialog.java 104 123
+----------------------------------------
+		c.gridx = 1;
+		c.gridy = 2;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(10, 10, 10, 10);
+		c.weightx = 1;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		container.add(passwordPanel, c);
+
+		// URL Row
+		JLabel urlLabel = new JLabel(Translator.translate("url"));
+		c.gridx = 0;
+		c.gridy = 3;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(10, 10, 10, 10);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+
+----------------------------------------
+        c.gridx = 0;
+        c.gridy = 2;
+        c.anchor = GridBagConstraints.LINE_START;
+        c.insets = new Insets(5, 5, 0, 0);
+        c.weightx = 1;
+        c.weighty = 0;
+        c.gridwidth = 1;
+        c.fill = GridBagConstraints.HORIZONTAL;
+        mainPanel.add(usernameLabel, c);
+
+        // The username inpur field
+        usernameTextField = new JTextField(10);
+        c.gridx = 0;
+        c.gridy = 3;
+        c.anchor = GridBagConstraints.LINE_START;
+        c.insets = new Insets(0, 5, 5, 5);
+        c.weightx = 1;
+        c.weighty = 0;
+        c.gridwidth = 1;
+        c.fill = GridBagConstraints.NONE;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24217960
+src/com/_17od/upm/gui/OptionsDialog.java 397 403
+src/com/_17od/upm/gui/OptionsDialog.java 232 238
+----------------------------------------
+		c.gridy = 2;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 5, 5, 0);
+		c.weightx = 1;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+
+----------------------------------------
+		c.gridy = 5;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 5, 5, 0);
+		c.weightx = 1;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24217961
+src/com/_17od/upm/gui/OptionsDialog.java 461 467
+src/com/_17od/upm/gui/OptionsDialog.java 232 238
+----------------------------------------
+		c.gridy = 6;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 5, 5, 5);
+		c.weightx = 1;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+
+----------------------------------------
+		c.gridy = 5;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 5, 5, 0);
+		c.weightx = 1;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24218032
+src/com/_17od/upm/gui/OptionsDialog.java 408 414
+src/com/_17od/upm/gui/OptionsDialog.java 232 238
+----------------------------------------
+		c.gridy = 2;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 5, 5, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+
+----------------------------------------
+		c.gridy = 5;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 5, 5, 0);
+		c.weightx = 1;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24217956
+src/com/_17od/upm/gui/OpenDatabaseFromURLDialog.java 93 99
+src/com/_17od/upm/gui/OptionsDialog.java 232 238
+----------------------------------------
+        c.gridy = 1;
+        c.anchor = GridBagConstraints.LINE_START;
+        c.insets = new Insets(0, 5, 5, 5);
+        c.weightx = 1;
+        c.weighty = 0;
+        c.gridwidth = 1;
+        c.fill = GridBagConstraints.HORIZONTAL;
+
+----------------------------------------
+		c.gridy = 5;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 5, 5, 0);
+		c.weightx = 1;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24217958
+src/com/_17od/upm/gui/OptionsDialog.java 128 134
+src/com/_17od/upm/gui/OptionsDialog.java 232 238
+----------------------------------------
+		c.gridy = 1;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 5, 5, 5);
+		c.weightx = 1;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+
+----------------------------------------
+		c.gridy = 5;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 5, 5, 0);
+		c.weightx = 1;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24217963
+src/com/_17od/upm/gui/MainWindow.java 357 364
+src/com/_17od/upm/gui/OpenDatabaseFromURLDialog.java 104 111
+----------------------------------------
+		c.gridx = 2;
+		c.gridy = 2;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(5, 1, 5, 1);
+		c.weightx = 1;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+
+----------------------------------------
+        c.gridx = 0;
+        c.gridy = 2;
+        c.anchor = GridBagConstraints.LINE_START;
+        c.insets = new Insets(5, 5, 0, 0);
+        c.weightx = 1;
+        c.weighty = 0;
+        c.gridwidth = 1;
+        c.fill = GridBagConstraints.HORIZONTAL;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24217964
+src/com/_17od/upm/gui/MainWindow.java 357 364
+src/com/_17od/upm/gui/OptionsDialog.java 396 403
+----------------------------------------
+		c.gridx = 2;
+		c.gridy = 2;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(5, 1, 5, 1);
+		c.weightx = 1;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+
+----------------------------------------
+		c.gridx = 0;
+		c.gridy = 2;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 5, 5, 0);
+		c.weightx = 1;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24217965
+src/com/_17od/upm/gui/OpenDatabaseFromURLDialog.java 104 111
+src/com/_17od/upm/gui/OptionsDialog.java 396 403
+----------------------------------------
+        c.gridx = 0;
+        c.gridy = 2;
+        c.anchor = GridBagConstraints.LINE_START;
+        c.insets = new Insets(5, 5, 0, 0);
+        c.weightx = 1;
+        c.weighty = 0;
+        c.gridwidth = 1;
+        c.fill = GridBagConstraints.HORIZONTAL;
+
+----------------------------------------
+		c.gridx = 0;
+		c.gridy = 2;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 5, 5, 0);
+		c.weightx = 1;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24217966
+src/com/_17od/upm/gui/AccountDialog.java 401 408
+src/com/_17od/upm/gui/OpenDatabaseFromURLDialog.java 80 87
+----------------------------------------
+		c.gridx = 1;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+
+----------------------------------------
+        c.gridx = 0;
+        c.gridy = 0;
+        c.anchor = GridBagConstraints.LINE_START;
+        c.insets = new Insets(0, 5, 0, 0);
+        c.weightx = 1;
+        c.weighty = 0;
+        c.gridwidth = 1;
+        c.fill = GridBagConstraints.HORIZONTAL;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24217967
+src/com/_17od/upm/gui/AccountDialog.java 421 428
+src/com/_17od/upm/gui/OpenDatabaseFromURLDialog.java 80 87
+----------------------------------------
+		c.gridx = 2;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+
+----------------------------------------
+        c.gridx = 0;
+        c.gridy = 0;
+        c.anchor = GridBagConstraints.LINE_START;
+        c.insets = new Insets(0, 5, 0, 0);
+        c.weightx = 1;
+        c.weighty = 0;
+        c.gridwidth = 1;
+        c.fill = GridBagConstraints.HORIZONTAL;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24217968
+src/com/_17od/upm/gui/AccountDialog.java 441 448
+src/com/_17od/upm/gui/OpenDatabaseFromURLDialog.java 80 87
+----------------------------------------
+		c.gridx = 3;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+
+----------------------------------------
+        c.gridx = 0;
+        c.gridy = 0;
+        c.anchor = GridBagConstraints.LINE_START;
+        c.insets = new Insets(0, 5, 0, 0);
+        c.weightx = 1;
+        c.weighty = 0;
+        c.gridwidth = 1;
+        c.fill = GridBagConstraints.HORIZONTAL;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24218140
+src/com/_17od/upm/gui/AccountDialog.java 401 408
+src/com/_17od/upm/gui/AccountDialog.java 591 598
+----------------------------------------
+		c.gridx = 1;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+
+----------------------------------------
+		c.gridx = 3;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24217973
+src/com/_17od/upm/gui/AccountDialog.java 204 211
+src/com/_17od/upm/gui/AccountDialog.java 591 598
+----------------------------------------
+		c.gridx = 1;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+
+----------------------------------------
+		c.gridx = 3;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24217977
+src/com/_17od/upm/gui/AccountDialog.java 224 231
+src/com/_17od/upm/gui/AccountDialog.java 591 598
+----------------------------------------
+		c.gridx = 2;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+
+----------------------------------------
+		c.gridx = 3;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24217985
+src/com/_17od/upm/gui/AccountDialog.java 309 316
+src/com/_17od/upm/gui/AccountDialog.java 591 598
+----------------------------------------
+		c.gridx = 2;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+
+----------------------------------------
+		c.gridx = 3;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24218143
+src/com/_17od/upm/gui/AccountDialog.java 421 428
+src/com/_17od/upm/gui/AccountDialog.java 591 598
+----------------------------------------
+		c.gridx = 2;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+
+----------------------------------------
+		c.gridx = 3;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24217988
+src/com/_17od/upm/gui/AccountDialog.java 551 558
+src/com/_17od/upm/gui/AccountDialog.java 591 598
+----------------------------------------
+		c.gridx = 1;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+
+----------------------------------------
+		c.gridx = 3;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24217981
+src/com/_17od/upm/gui/AccountDialog.java 289 296
+src/com/_17od/upm/gui/AccountDialog.java 591 598
+----------------------------------------
+		c.gridx = 1;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+
+----------------------------------------
+		c.gridx = 3;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24218146
+src/com/_17od/upm/gui/AccountDialog.java 441 448
+src/com/_17od/upm/gui/AccountDialog.java 591 598
+----------------------------------------
+		c.gridx = 3;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+
+----------------------------------------
+		c.gridx = 3;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24217990
+src/com/_17od/upm/gui/AccountDialog.java 571 578
+src/com/_17od/upm/gui/AccountDialog.java 591 598
+----------------------------------------
+		c.gridx = 2;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+
+----------------------------------------
+		c.gridx = 3;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24217978
+src/com/_17od/upm/gui/AccountDialog.java 224 231
+src/com/_17od/upm/gui/OptionsDialog.java 360 367
+----------------------------------------
+		c.gridx = 2;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+
+----------------------------------------
+		c.gridx = 0;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 2, 5, 0);
+		c.weightx = 1;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24217992
+src/com/_17od/upm/gui/AccountDialog.java 591 598
+src/com/_17od/upm/gui/OptionsDialog.java 360 367
+----------------------------------------
+		c.gridx = 3;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+
+----------------------------------------
+		c.gridx = 0;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 2, 5, 0);
+		c.weightx = 1;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24217989
+src/com/_17od/upm/gui/AccountDialog.java 551 558
+src/com/_17od/upm/gui/OptionsDialog.java 360 367
+----------------------------------------
+		c.gridx = 1;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+
+----------------------------------------
+		c.gridx = 0;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 2, 5, 0);
+		c.weightx = 1;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24217982
+src/com/_17od/upm/gui/AccountDialog.java 289 296
+src/com/_17od/upm/gui/OptionsDialog.java 360 367
+----------------------------------------
+		c.gridx = 1;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+
+----------------------------------------
+		c.gridx = 0;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 2, 5, 0);
+		c.weightx = 1;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24217991
+src/com/_17od/upm/gui/AccountDialog.java 571 578
+src/com/_17od/upm/gui/OptionsDialog.java 360 367
+----------------------------------------
+		c.gridx = 2;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+
+----------------------------------------
+		c.gridx = 0;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 2, 5, 0);
+		c.weightx = 1;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24217974
+src/com/_17od/upm/gui/AccountDialog.java 204 211
+src/com/_17od/upm/gui/OptionsDialog.java 360 367
+----------------------------------------
+		c.gridx = 1;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+
+----------------------------------------
+		c.gridx = 0;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 2, 5, 0);
+		c.weightx = 1;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24217986
+src/com/_17od/upm/gui/AccountDialog.java 309 316
+src/com/_17od/upm/gui/OptionsDialog.java 360 367
+----------------------------------------
+		c.gridx = 2;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 0, 0, 5);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+
+----------------------------------------
+		c.gridx = 0;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 2, 5, 0);
+		c.weightx = 1;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+61
+24218040
+src/com/_17od/upm/gui/OptionsDialog.java 359 367
+src/com/_17od/upm/gui/AccountDialog.java 160 168
+----------------------------------------
+		});
+		c.gridx = 0;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(0, 2, 5, 0);
+		c.weightx = 1;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+
+----------------------------------------
+		JLabel accountLabel = new JLabel(Translator.translate("account"));
+		c.gridx = 0;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.insets = new Insets(10, 10, 10, 10);
+		c.weightx = 0;
+		c.weighty = 0;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.NONE;
+
+----------------------------------------

@@ -1,0 +1,1927 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24039124
+src/jse/org/luaj/vm2/luajc/ProtoInfo.java 186 193
+src/jse/org/luaj/vm2/luajc/JavaGen.java 162 169
+----------------------------------------
+					break;
+					
+				case Lua.OP_ADD: /*	A B C	R(A) := RK(B) + RK(C)				*/
+				case Lua.OP_SUB: /*	A B C	R(A) := RK(B) - RK(C)				*/
+				case Lua.OP_MUL: /*	A B C	R(A) := RK(B) * RK(C)				*/
+				case Lua.OP_DIV: /*	A B C	R(A) := RK(B) / RK(C)				*/
+				case Lua.OP_MOD: /*	A B C	R(A) := RK(B) % RK(C)				*/
+				case Lua.OP_POW: /*	A B C	R(A) := RK(B) ^ RK(C)				*/
+
+----------------------------------------
+					break;
+					
+				case Lua.OP_ADD: /*	A B C	R(A):= RK(B) + RK(C)				*/
+				case Lua.OP_SUB: /*	A B C	R(A):= RK(B) - RK(C)				*/
+				case Lua.OP_MUL: /*	A B C	R(A):= RK(B) * RK(C)				*/
+				case Lua.OP_DIV: /*	A B C	R(A):= RK(B) / RK(C)				*/
+				case Lua.OP_MOD: /*	A B C	R(A):= RK(B) % RK(C)				*/
+				case Lua.OP_POW: /*	A B C	R(A):= RK(B) ^ RK(C)				*/
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24039125
+src/jse/org/luaj/vm2/parser/LuaParserTokenManager.java 196 204
+src/jse/org/luaj/vm2/parser/LuaParserTokenManager.java 1582 1590
+----------------------------------------
+   if (((active0 &= old0)) == 0L)
+      return 4;
+   try { curChar = input_stream.readChar(); }
+   catch(java.io.IOException e) {
+      return 4;
+   }
+   switch(curChar)
+   {
+      case 93:
+
+----------------------------------------
+   if (((active0 &= old0)) == 0L)
+      return 4;
+   try { curChar = input_stream.readChar(); }
+   catch(java.io.IOException e) {
+      return 4;
+   }
+   switch(curChar)
+   {
+      case 93:
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24039126
+src/jse/org/luaj/vm2/lib/jse/JseIoLib.java 156 164
+src/jme/org/luaj/vm2/lib/jme/JmeIoLib.java 154 162
+----------------------------------------
+			else
+				notimplemented();
+			if ( nobuffer )
+				flush();
+		}
+		public boolean isclosed() {
+			return closed;
+		}
+		public int seek(String option, int pos) throws IOException {
+
+----------------------------------------
+			else
+				notimplemented();
+			if ( nobuffer )
+				flush();
+		}
+		public boolean isclosed() {
+			return closed;
+		}
+		public int seek(String option, int pos) throws IOException {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24039127
+src/jme/org/luaj/vm2/lib/jme/JmePlatform.java 117 133
+src/jse/org/luaj/vm2/lib/jse/JsePlatform.java 106 122
+----------------------------------------
+		LoadState.install(globals);
+		LuaC.install(globals);
+		return globals;		
+	}
+	
+	/** Create standard globals including the {@link DebugLib} library.
+	 * 
+	 * @return Table of globals initialized with the standard JSE and debug libraries
+	 * @see #standardGlobals()
+	 * @see org.luaj.vm2.lib.jse.JsePlatform
+	 * @see org.luaj.vm2.lib.jme.JmePlatform
+	 * @see DebugLib
+	 */
+	public static Globals debugGlobals() {
+		Globals globals = standardGlobals();
+		globals.load(new DebugLib());
+		return globals;
+
+----------------------------------------
+		LoadState.install(globals);
+		LuaC.install(globals);
+		return globals;		
+	}
+
+	/** Create standard globals including the {@link DebugLib} library.
+	 * 
+	 * @return Table of globals initialized with the standard JSE and debug libraries
+	 * @see #standardGlobals()
+	 * @see org.luaj.vm2.lib.jse.JsePlatform
+	 * @see org.luaj.vm2.lib.jme.JmePlatform
+	 * @see DebugLib
+	 */
+	public static Globals debugGlobals() {
+		Globals globals = standardGlobals();
+		globals.load(new DebugLib());
+		return globals;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24039128
+src/jse/org/luaj/vm2/lib/jse/JseIoLib.java 129 138
+src/jme/org/luaj/vm2/lib/jme/JmeIoLib.java 129 138
+----------------------------------------
+		private FileImpl( InputStream i ) {
+			this( null, i, null );
+		}
+		private FileImpl( OutputStream o ) {
+			this( null, null, o );
+		}
+		public String tojstring() {
+			return "file ("+this.hashCode()+")";
+		}
+		public boolean isstdfile() {
+
+----------------------------------------
+		private FileImpl( InputStream i ) {
+			this( null, i, null );
+		}
+		private FileImpl( OutputStream o ) {
+			this( null, null, o );
+		}
+		public String tojstring() {
+			return "file ("+this.hashCode()+")";
+		}
+		public boolean isstdfile() {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24039129
+examples/android/src/android/LuajView.java 65 73
+examples/android/src/android/LuajView.java 51 59
+----------------------------------------
+		if (!f.isnil())
+			try {
+				return f.call(CoerceJavaToLua.coerce(keyCode),
+						CoerceJavaToLua.coerce(event)).toboolean();
+			} catch (Exception e) {
+				e.printStackTrace();
+				return true;
+			}
+		else
+
+----------------------------------------
+		if (!f.isnil())
+			try {
+				return f.call(CoerceJavaToLua.coerce(keyCode),
+						CoerceJavaToLua.coerce(event)).toboolean();
+			} catch (Exception e) {
+				e.printStackTrace();
+				return true;
+			}
+		else
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24039130
+src/jse/org/luaj/vm2/parser/LuaParserTokenManager.java 239 247
+src/jse/org/luaj/vm2/parser/LuaParserTokenManager.java 1625 1633
+----------------------------------------
+   if (((active0 &= old0)) == 0L)
+      return 2;
+   try { curChar = input_stream.readChar(); }
+   catch(java.io.IOException e) {
+      return 2;
+   }
+   switch(curChar)
+   {
+      case 61:
+
+----------------------------------------
+   if (((active0 &= old0)) == 0L)
+      return 2;
+   try { curChar = input_stream.readChar(); }
+   catch(java.io.IOException e) {
+      return 2;
+   }
+   switch(curChar)
+   {
+      case 61:
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24039131
+src/jse/org/luaj/vm2/parser/LuaParserTokenManager.java 239 247
+src/jse/org/luaj/vm2/parser/LuaParserTokenManager.java 1550 1558
+----------------------------------------
+   if (((active0 &= old0)) == 0L)
+      return 2;
+   try { curChar = input_stream.readChar(); }
+   catch(java.io.IOException e) {
+      return 2;
+   }
+   switch(curChar)
+   {
+      case 61:
+
+----------------------------------------
+   if (((active0 &= old0)) == 0L)
+      return 2;
+   try { curChar = input_stream.readChar(); }
+   catch(java.io.IOException e) {
+      return 2;
+   }
+   switch(curChar)
+   {
+      case 61:
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24039132
+src/jse/org/luaj/vm2/parser/LuaParserTokenManager.java 239 247
+src/jse/org/luaj/vm2/parser/LuaParserTokenManager.java 164 172
+----------------------------------------
+   if (((active0 &= old0)) == 0L)
+      return 2;
+   try { curChar = input_stream.readChar(); }
+   catch(java.io.IOException e) {
+      return 2;
+   }
+   switch(curChar)
+   {
+      case 61:
+
+----------------------------------------
+   if (((active0 &= old0)) == 0L)
+      return 2;
+   try { curChar = input_stream.readChar(); }
+   catch(java.io.IOException e) {
+      return 2;
+   }
+   switch(curChar)
+   {
+      case 61:
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24039133
+src/jse/org/luaj/vm2/parser/LuaParserTokenManager.java 255 263
+src/jse/org/luaj/vm2/parser/LuaParserTokenManager.java 1641 1649
+----------------------------------------
+   if (((active0 &= old0)) == 0L)
+      return 3;
+   try { curChar = input_stream.readChar(); }
+   catch(java.io.IOException e) {
+      return 3;
+   }
+   switch(curChar)
+   {
+      case 93:
+
+----------------------------------------
+   if (((active0 &= old0)) == 0L)
+      return 3;
+   try { curChar = input_stream.readChar(); }
+   catch(java.io.IOException e) {
+      return 3;
+   }
+   switch(curChar)
+   {
+      case 93:
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24039134
+src/jse/org/luaj/vm2/parser/LuaParserTokenManager.java 1377 1387
+src/jse/org/luaj/vm2/parser/LuaParserTokenManager.java 86 96
+----------------------------------------
+                  break;
+               default : break;
+            }
+         } while(i != startsAt);
+      }
+      else if (curChar < 128)
+      {
+         long l = 1L << (curChar & 077);
+         do
+         {
+            switch(jjstateSet[--i])
+
+----------------------------------------
+                  break;
+               default : break;
+            }
+         } while(i != startsAt);
+      }
+      else if (curChar < 128)
+      {
+         long l = 1L << (curChar & 077);
+         do
+         {
+            switch(jjstateSet[--i])
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24039135
+src/jse/org/luaj/vm2/parser/LuaParserTokenManager.java 1377 1387
+src/jse/org/luaj/vm2/parser/LuaParserTokenManager.java 1129 1139
+----------------------------------------
+                  break;
+               default : break;
+            }
+         } while(i != startsAt);
+      }
+      else if (curChar < 128)
+      {
+         long l = 1L << (curChar & 077);
+         do
+         {
+            switch(jjstateSet[--i])
+
+----------------------------------------
+                  break;
+               default : break;
+            }
+         } while(i != startsAt);
+      }
+      else if (curChar < 128)
+      {
+         long l = 1L << (curChar & 077);
+         do
+         {
+            switch(jjstateSet[--i])
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24039136
+src/jse/org/luaj/vm2/parser/LuaParserTokenManager.java 1377 1387
+src/jse/org/luaj/vm2/parser/LuaParserTokenManager.java 1472 1482
+----------------------------------------
+                  break;
+               default : break;
+            }
+         } while(i != startsAt);
+      }
+      else if (curChar < 128)
+      {
+         long l = 1L << (curChar & 077);
+         do
+         {
+            switch(jjstateSet[--i])
+
+----------------------------------------
+                  break;
+               default : break;
+            }
+         } while(i != startsAt);
+      }
+      else if (curChar < 128)
+      {
+         long l = 1L << (curChar & 077);
+         do
+         {
+            switch(jjstateSet[--i])
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24039137
+src/jse/org/luaj/vm2/parser/LuaParserTokenManager.java 1566 1574
+src/jse/org/luaj/vm2/parser/LuaParserTokenManager.java 180 188
+----------------------------------------
+   if (((active0 &= old0)) == 0L)
+      return 3;
+   try { curChar = input_stream.readChar(); }
+   catch(java.io.IOException e) {
+      return 3;
+   }
+   switch(curChar)
+   {
+      case 61:
+
+----------------------------------------
+   if (((active0 &= old0)) == 0L)
+      return 3;
+   try { curChar = input_stream.readChar(); }
+   catch(java.io.IOException e) {
+      return 3;
+   }
+   switch(curChar)
+   {
+      case 61:
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24039138
+src/jse/org/luaj/vm2/parser/LuaParser.java 552 559
+src/jse/org/luaj/vm2/parser/LuaParser.java 490 497
+----------------------------------------
+      break;
+    case LONGSTRING0:
+    case LONGSTRING1:
+    case LONGSTRING2:
+    case LONGSTRING3:
+    case LONGSTRINGN:
+    case STRING:
+    case CHARSTRING:
+
+----------------------------------------
+      break;
+    case LONGSTRING0:
+    case LONGSTRING1:
+    case LONGSTRING2:
+    case LONGSTRING3:
+    case LONGSTRINGN:
+    case STRING:
+    case CHARSTRING:
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24039139
+src/jse/org/luaj/vm2/parser/LuaParser.java 552 559
+src/jse/org/luaj/vm2/parser/LuaParser.java 637 644
+----------------------------------------
+      break;
+    case LONGSTRING0:
+    case LONGSTRING1:
+    case LONGSTRING2:
+    case LONGSTRING3:
+    case LONGSTRINGN:
+    case STRING:
+    case CHARSTRING:
+
+----------------------------------------
+      break;
+    case LONGSTRING0:
+    case LONGSTRING1:
+    case LONGSTRING2:
+    case LONGSTRING3:
+    case LONGSTRINGN:
+    case STRING:
+    case CHARSTRING:
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24039140
+src/jse/org/luaj/vm2/parser/LuaParserTokenManager.java 1305 1316
+src/jse/org/luaj/vm2/parser/LuaParserTokenManager.java 1416 1427
+----------------------------------------
+                  break;
+               default : break;
+            }
+         } while(i != startsAt);
+      }
+      if (kind != 0x7fffffff)
+      {
+         jjmatchedKind = kind;
+         jjmatchedPos = curPos;
+         kind = 0x7fffffff;
+      }
+      ++curPos;
+
+----------------------------------------
+                  break;
+               default : break;
+            }
+         } while(i != startsAt);
+      }
+      if (kind != 0x7fffffff)
+      {
+         jjmatchedKind = kind;
+         jjmatchedPos = curPos;
+         kind = 0x7fffffff;
+      }
+      ++curPos;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24039141
+examples/jse/SampleApplet.java 75 83
+src/jse/org/luaj/vm2/lib/jse/JsePlatform.java 96 104
+----------------------------------------
+		globals.load(new JseBaseLib());
+		globals.load(new PackageLib());
+		globals.load(new Bit32Lib());
+		globals.load(new TableLib());
+		globals.load(new StringLib());
+		globals.load(new CoroutineLib());
+		globals.load(new JseMathLib());
+		globals.load(new JseIoLib());
+		globals.load(new JseOsLib());
+
+----------------------------------------
+		globals.load(new JseBaseLib());
+		globals.load(new PackageLib());
+		globals.load(new Bit32Lib());
+		globals.load(new TableLib());
+		globals.load(new StringLib());
+		globals.load(new CoroutineLib());
+		globals.load(new JseMathLib());
+		globals.load(new JseIoLib());
+		globals.load(new JseOsLib());
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24039142
+src/core/org/luaj/vm2/lib/BaseLib.java 379 387
+src/core/org/luaj/vm2/lib/BaseLib.java 226 234
+----------------------------------------
+				} catch ( LuaError le ) {
+					final LuaValue m = le.getMessageObject();
+					return varargsOf(FALSE, m!=null? m: NIL);
+				} catch ( Exception e ) {
+					final String m = e.getMessage();
+					return varargsOf(FALSE, valueOf(m!=null? m: e.toString()));
+				} finally {
+					if (globals != null && globals.debuglib != null)
+						globals.debuglib.onReturn();
+
+----------------------------------------
+			} catch ( LuaError le ) {
+				final LuaValue m = le.getMessageObject();
+				return varargsOf(FALSE, m!=null? m: NIL);
+			} catch ( Exception e ) {
+				final String m = e.getMessage();
+				return varargsOf(FALSE, valueOf(m!=null? m: e.toString()));
+			} finally {
+				if (globals != null && globals.debuglib != null)
+					globals.debuglib.onReturn();
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24039143
+src/jse/org/luaj/vm2/parser/LuaParser.java 637 645
+src/jse/org/luaj/vm2/parser/LuaParser.java 552 560
+----------------------------------------
+      break;
+    case LONGSTRING0:
+    case LONGSTRING1:
+    case LONGSTRING2:
+    case LONGSTRING3:
+    case LONGSTRINGN:
+    case STRING:
+    case CHARSTRING:
+      s = Str();
+
+----------------------------------------
+      break;
+    case LONGSTRING0:
+    case LONGSTRING1:
+    case LONGSTRING2:
+    case LONGSTRING3:
+    case LONGSTRINGN:
+    case STRING:
+    case CHARSTRING:
+      s = Str();
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24039144
+src/jse/org/luaj/vm2/parser/LuaParser.java 520 528
+src/jse/org/luaj/vm2/parser/LuaParser.java 294 302
+----------------------------------------
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case LONGSTRING0:
+      case LONGSTRING1:
+      case LONGSTRING2:
+      case LONGSTRING3:
+      case LONGSTRINGN:
+      case FALSE:
+      case FUNCTION:
+      case NIL:
+
+----------------------------------------
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case LONGSTRING0:
+    case LONGSTRING1:
+    case LONGSTRING2:
+    case LONGSTRING3:
+    case LONGSTRINGN:
+    case FALSE:
+    case FUNCTION:
+    case NIL:
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24039145
+src/jse/org/luaj/vm2/parser/LuaParser.java 520 528
+src/jse/org/luaj/vm2/parser/LuaParser.java 913 921
+----------------------------------------
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case LONGSTRING0:
+      case LONGSTRING1:
+      case LONGSTRING2:
+      case LONGSTRING3:
+      case LONGSTRINGN:
+      case FALSE:
+      case FUNCTION:
+      case NIL:
+
+----------------------------------------
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case LONGSTRING0:
+        case LONGSTRING1:
+        case LONGSTRING2:
+        case LONGSTRING3:
+        case LONGSTRINGN:
+        case FALSE:
+        case FUNCTION:
+        case NIL:
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24039146
+src/jse/org/luaj/vm2/parser/LuaParser.java 520 528
+src/jse/org/luaj/vm2/parser/LuaParser.java 715 723
+----------------------------------------
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case LONGSTRING0:
+      case LONGSTRING1:
+      case LONGSTRING2:
+      case LONGSTRING3:
+      case LONGSTRINGN:
+      case FALSE:
+      case FUNCTION:
+      case NIL:
+
+----------------------------------------
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case LONGSTRING0:
+    case LONGSTRING1:
+    case LONGSTRING2:
+    case LONGSTRING3:
+    case LONGSTRINGN:
+    case FALSE:
+    case FUNCTION:
+    case NIL:
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24039147
+src/jse/org/luaj/vm2/parser/LuaParser.java 520 528
+src/jse/org/luaj/vm2/parser/LuaParser.java 829 837
+----------------------------------------
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case LONGSTRING0:
+      case LONGSTRING1:
+      case LONGSTRING2:
+      case LONGSTRING3:
+      case LONGSTRINGN:
+      case FALSE:
+      case FUNCTION:
+      case NIL:
+
+----------------------------------------
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case LONGSTRING0:
+    case LONGSTRING1:
+    case LONGSTRING2:
+    case LONGSTRING3:
+    case LONGSTRINGN:
+    case FALSE:
+    case FUNCTION:
+    case NIL:
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24039148
+src/jse/org/luaj/vm2/parser/LuaParserTokenManager.java 56 68
+src/jse/org/luaj/vm2/parser/LuaParserTokenManager.java 1442 1454
+----------------------------------------
+   int i = 1;
+   jjstateSet[0] = startState;
+   int kind = 0x7fffffff;
+   for (;;)
+   {
+      if (++jjround == 0x7fffffff)
+         ReInitRounds();
+      if (curChar < 64)
+      {
+         long l = 1L << curChar;
+         do
+         {
+            switch(jjstateSet[--i])
+
+----------------------------------------
+   int i = 1;
+   jjstateSet[0] = startState;
+   int kind = 0x7fffffff;
+   for (;;)
+   {
+      if (++jjround == 0x7fffffff)
+         ReInitRounds();
+      if (curChar < 64)
+      {
+         long l = 1L << curChar;
+         do
+         {
+            switch(jjstateSet[--i])
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24039149
+src/jse/org/luaj/vm2/parser/LuaParserTokenManager.java 56 68
+src/jse/org/luaj/vm2/parser/LuaParserTokenManager.java 1331 1343
+----------------------------------------
+   int i = 1;
+   jjstateSet[0] = startState;
+   int kind = 0x7fffffff;
+   for (;;)
+   {
+      if (++jjround == 0x7fffffff)
+         ReInitRounds();
+      if (curChar < 64)
+      {
+         long l = 1L << curChar;
+         do
+         {
+            switch(jjstateSet[--i])
+
+----------------------------------------
+   int i = 1;
+   jjstateSet[0] = startState;
+   int kind = 0x7fffffff;
+   for (;;)
+   {
+      if (++jjround == 0x7fffffff)
+         ReInitRounds();
+      if (curChar < 64)
+      {
+         long l = 1L << curChar;
+         do
+         {
+            switch(jjstateSet[--i])
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24039150
+src/jse/org/luaj/vm2/parser/LuaParserTokenManager.java 56 68
+src/jse/org/luaj/vm2/parser/LuaParserTokenManager.java 861 873
+----------------------------------------
+   int i = 1;
+   jjstateSet[0] = startState;
+   int kind = 0x7fffffff;
+   for (;;)
+   {
+      if (++jjround == 0x7fffffff)
+         ReInitRounds();
+      if (curChar < 64)
+      {
+         long l = 1L << curChar;
+         do
+         {
+            switch(jjstateSet[--i])
+
+----------------------------------------
+   int i = 1;
+   jjstateSet[0] = startState;
+   int kind = 0x7fffffff;
+   for (;;)
+   {
+      if (++jjround == 0x7fffffff)
+         ReInitRounds();
+      if (curChar < 64)
+      {
+         long l = 1L << curChar;
+         do
+         {
+            switch(jjstateSet[--i])
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24039151
+src/core/org/luaj/vm2/Print.java 236 245
+src/core/org/luaj/vm2/Print.java 264 274
+----------------------------------------
+			if (ISK(b))
+				printConstant(ps, f, INDEXK(b));
+			else
+				ps.print("-");
+			ps.print(" ");
+			if (ISK(c))
+				printConstant(ps, f, INDEXK(c));
+			else
+				ps.print("-");
+			break;
+
+----------------------------------------
+				if (ISK(b))
+					printConstant(ps, f, INDEXK(b));
+				else
+					ps.print("-");
+				ps.print(" ");
+				if (ISK(c))
+					printConstant(ps, f, INDEXK(c));
+				else
+					ps.print("-");
+			}
+			break;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24039152
+src/jse/org/luaj/vm2/parser/LuaParserTokenManager.java 1491 1505
+src/jse/org/luaj/vm2/parser/LuaParserTokenManager.java 105 119
+----------------------------------------
+                  break;
+               default : break;
+            }
+         } while(i != startsAt);
+      }
+      else
+      {
+         int hiByte = (int)(curChar >> 8);
+         int i1 = hiByte >> 6;
+         long l1 = 1L << (hiByte & 077);
+         int i2 = (curChar & 0xff) >> 6;
+         long l2 = 1L << (curChar & 077);
+         do
+         {
+            switch(jjstateSet[--i])
+
+----------------------------------------
+                  break;
+               default : break;
+            }
+         } while(i != startsAt);
+      }
+      else
+      {
+         int hiByte = (int)(curChar >> 8);
+         int i1 = hiByte >> 6;
+         long l1 = 1L << (hiByte & 077);
+         int i2 = (curChar & 0xff) >> 6;
+         long l2 = 1L << (curChar & 077);
+         do
+         {
+            switch(jjstateSet[--i])
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24039153
+src/jse/org/luaj/vm2/parser/LuaParserTokenManager.java 1491 1505
+src/jse/org/luaj/vm2/parser/LuaParserTokenManager.java 1393 1407
+----------------------------------------
+                  break;
+               default : break;
+            }
+         } while(i != startsAt);
+      }
+      else
+      {
+         int hiByte = (int)(curChar >> 8);
+         int i1 = hiByte >> 6;
+         long l1 = 1L << (hiByte & 077);
+         int i2 = (curChar & 0xff) >> 6;
+         long l2 = 1L << (curChar & 077);
+         do
+         {
+            switch(jjstateSet[--i])
+
+----------------------------------------
+                  break;
+               default : break;
+            }
+         } while(i != startsAt);
+      }
+      else
+      {
+         int hiByte = (int)(curChar >> 8);
+         int i1 = hiByte >> 6;
+         long l1 = 1L << (hiByte & 077);
+         int i2 = (curChar & 0xff) >> 6;
+         long l2 = 1L << (curChar & 077);
+         do
+         {
+            switch(jjstateSet[--i])
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24039154
+src/jse/org/luaj/vm2/parser/LuaParserTokenManager.java 1491 1505
+src/jse/org/luaj/vm2/parser/LuaParserTokenManager.java 1280 1294
+----------------------------------------
+                  break;
+               default : break;
+            }
+         } while(i != startsAt);
+      }
+      else
+      {
+         int hiByte = (int)(curChar >> 8);
+         int i1 = hiByte >> 6;
+         long l1 = 1L << (hiByte & 077);
+         int i2 = (curChar & 0xff) >> 6;
+         long l2 = 1L << (curChar & 077);
+         do
+         {
+            switch(jjstateSet[--i])
+
+----------------------------------------
+                  break;
+               default : break;
+            }
+         } while(i != startsAt);
+      }
+      else
+      {
+         int hiByte = (int)(curChar >> 8);
+         int i1 = hiByte >> 6;
+         long l1 = 1L << (hiByte & 077);
+         int i2 = (curChar & 0xff) >> 6;
+         long l2 = 1L << (curChar & 077);
+         do
+         {
+            switch(jjstateSet[--i])
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24039155
+src/jse/org/luaj/vm2/lib/jse/JseIoLib.java 253 276
+src/jse/org/luaj/vm2/lib/jse/JseIoLib.java 304 327
+----------------------------------------
+		public boolean isstdfile() {
+			return true;
+		}
+
+		public void close() throws IOException {
+			// do not close std files.
+		}
+
+		public boolean isclosed() {
+			return false;
+		}
+
+		public int seek(String option, int bytecount) throws IOException {
+			return 0;
+		}
+
+		public void setvbuf(String mode, int size) {
+		}
+
+		public int remaining() throws IOException {
+			return 0;
+		}
+
+		public int peek() throws IOException, EOFException {
+
+----------------------------------------
+		public boolean isstdfile() {
+			return true;
+		}
+
+		public void close() throws IOException {
+			// do not close std files.
+		}
+
+		public boolean isclosed() {
+			return false;
+		}
+
+		public int seek(String option, int bytecount) throws IOException {
+			return 0;
+		}
+
+		public void setvbuf(String mode, int size) {
+		}
+
+		public int remaining() throws IOException {
+			return 0;
+		}
+
+		public int peek() throws IOException, EOFException {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24039156
+src/core/org/luaj/vm2/LuaInteger.java 160 172
+src/core/org/luaj/vm2/LuaDouble.java 136 148
+----------------------------------------
+	public LuaValue   pow( LuaValue rhs )        { return rhs.powWith(v); }
+	public LuaValue   pow( double rhs )        { return MathLib.dpow(v,rhs); }
+	public LuaValue   pow( int rhs )        { return MathLib.dpow(v,rhs); }
+	public LuaValue   powWith( double lhs )   { return MathLib.dpow(lhs,v); }
+	public LuaValue   powWith( int lhs )      { return MathLib.dpow(lhs,v); }
+	public LuaValue   div( LuaValue rhs )        { return rhs.divInto(v); }
+	public LuaValue   div( double rhs )        { return LuaDouble.ddiv(v,rhs); }
+	public LuaValue   div( int rhs )        { return LuaDouble.ddiv(v,rhs); }
+	public LuaValue   divInto( double lhs )   { return LuaDouble.ddiv(lhs,v); }
+	public LuaValue   mod( LuaValue rhs )        { return rhs.modFrom(v); }
+	public LuaValue   mod( double rhs )        { return LuaDouble.dmod(v,rhs); }
+	public LuaValue   mod( int rhs )        { return LuaDouble.dmod(v,rhs); }
+	public LuaValue   modFrom( double lhs )   { return LuaDouble.dmod(lhs,v); }
+
+----------------------------------------
+	public LuaValue   pow( LuaValue rhs )        { return rhs.powWith(v); }
+	public LuaValue   pow( double rhs )        { return MathLib.dpow(v,rhs); }
+	public LuaValue   pow( int rhs )        { return MathLib.dpow(v,rhs); }
+	public LuaValue   powWith( double lhs )   { return MathLib.dpow(lhs,v); }
+	public LuaValue   powWith( int lhs )      { return MathLib.dpow(lhs,v); }
+	public LuaValue   div( LuaValue rhs )        { return rhs.divInto(v); }
+	public LuaValue   div( double rhs )        { return LuaDouble.ddiv(v,rhs); }
+	public LuaValue   div( int rhs )        { return LuaDouble.ddiv(v,rhs); }
+	public LuaValue   divInto( double lhs )   { return LuaDouble.ddiv(lhs,v); }
+	public LuaValue   mod( LuaValue rhs )        { return rhs.modFrom(v); }
+	public LuaValue   mod( double rhs )        { return LuaDouble.dmod(v,rhs); }
+	public LuaValue   mod( int rhs )        { return LuaDouble.dmod(v,rhs); }
+	public LuaValue   modFrom( double lhs )   { return LuaDouble.dmod(lhs,v); }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24039157
+src/jse/lua.java 116 136
+src/jse/luac.java 114 134
+----------------------------------------
+						break;
+					case 'c':
+						if ( ++i >= args.length )
+							usageExit();
+						encoding = args[i];
+						break;
+					case '-':
+						if ( args[i].length() > 2 )
+							usageExit();
+						processing = false;
+						break;
+					default:
+						usageExit();
+						break;
+					}
+				}
+			}
+
+			// echo version
+			if ( versioninfo )
+				System.out.println(version);
+
+----------------------------------------
+						break;
+					case 'c':
+						if ( ++i >= args.length )
+							usageExit();
+						encoding = args[i];
+						break;
+					case '-':
+						if ( args[i].length() > 2 )
+							usageExit();
+						processing = false;
+						break;
+					default:
+						usageExit();
+						break;
+					}
+				}
+			}
+			
+			// echo version
+			if ( versioninfo )
+				System.out.println(version);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24039158
+src/jse/org/luaj/vm2/parser/LuaParser.java 520 536
+src/jse/org/luaj/vm2/parser/LuaParser.java 294 310
+----------------------------------------
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case LONGSTRING0:
+      case LONGSTRING1:
+      case LONGSTRING2:
+      case LONGSTRING3:
+      case LONGSTRINGN:
+      case FALSE:
+      case FUNCTION:
+      case NIL:
+      case NOT:
+      case TRUE:
+      case NAME:
+      case NUMBER:
+      case STRING:
+      case CHARSTRING:
+      case 69:
+      case 75:
+
+----------------------------------------
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case LONGSTRING0:
+    case LONGSTRING1:
+    case LONGSTRING2:
+    case LONGSTRING3:
+    case LONGSTRINGN:
+    case FALSE:
+    case FUNCTION:
+    case NIL:
+    case NOT:
+    case TRUE:
+    case NAME:
+    case NUMBER:
+    case STRING:
+    case CHARSTRING:
+    case 69:
+    case 75:
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24039159
+src/jse/org/luaj/vm2/parser/LuaParser.java 520 536
+src/jse/org/luaj/vm2/parser/LuaParser.java 829 845
+----------------------------------------
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case LONGSTRING0:
+      case LONGSTRING1:
+      case LONGSTRING2:
+      case LONGSTRING3:
+      case LONGSTRINGN:
+      case FALSE:
+      case FUNCTION:
+      case NIL:
+      case NOT:
+      case TRUE:
+      case NAME:
+      case NUMBER:
+      case STRING:
+      case CHARSTRING:
+      case 69:
+      case 75:
+
+----------------------------------------
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case LONGSTRING0:
+    case LONGSTRING1:
+    case LONGSTRING2:
+    case LONGSTRING3:
+    case LONGSTRINGN:
+    case FALSE:
+    case FUNCTION:
+    case NIL:
+    case NOT:
+    case TRUE:
+    case NAME:
+    case NUMBER:
+    case STRING:
+    case CHARSTRING:
+    case 69:
+    case 75:
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24039160
+src/jse/org/luaj/vm2/parser/LuaParser.java 520 536
+src/jse/org/luaj/vm2/parser/LuaParser.java 913 929
+----------------------------------------
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case LONGSTRING0:
+      case LONGSTRING1:
+      case LONGSTRING2:
+      case LONGSTRING3:
+      case LONGSTRINGN:
+      case FALSE:
+      case FUNCTION:
+      case NIL:
+      case NOT:
+      case TRUE:
+      case NAME:
+      case NUMBER:
+      case STRING:
+      case CHARSTRING:
+      case 69:
+      case 75:
+
+----------------------------------------
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case LONGSTRING0:
+        case LONGSTRING1:
+        case LONGSTRING2:
+        case LONGSTRING3:
+        case LONGSTRINGN:
+        case FALSE:
+        case FUNCTION:
+        case NIL:
+        case NOT:
+        case TRUE:
+        case NAME:
+        case NUMBER:
+        case STRING:
+        case CHARSTRING:
+        case 69:
+        case 75:
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24039161
+src/jse/org/luaj/vm2/parser/LuaParserTokenManager.java 893 909
+src/jse/org/luaj/vm2/parser/LuaParserTokenManager.java 70 86
+----------------------------------------
+               case 0:
+               case 1:
+                  if (curChar == 61)
+                     jjCheckNAddTwoStates(1, 2);
+                  break;
+               case 3:
+                  if (curChar == 61)
+                     jjstateSet[jjnewStateCnt++] = 0;
+                  break;
+               case 4:
+                  if (curChar == 61)
+                     jjstateSet[jjnewStateCnt++] = 3;
+                  break;
+               case 5:
+                  if (curChar == 61)
+                     jjstateSet[jjnewStateCnt++] = 4;
+                  break;
+
+----------------------------------------
+               case 0:
+               case 1:
+                  if (curChar == 61)
+                     jjCheckNAddTwoStates(1, 2);
+                  break;
+               case 3:
+                  if (curChar == 61)
+                     jjstateSet[jjnewStateCnt++] = 0;
+                  break;
+               case 4:
+                  if (curChar == 61)
+                     jjstateSet[jjnewStateCnt++] = 3;
+                  break;
+               case 5:
+                  if (curChar == 61)
+                     jjstateSet[jjnewStateCnt++] = 4;
+                  break;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24039162
+src/jse/org/luaj/vm2/parser/LuaParserTokenManager.java 893 909
+src/jse/org/luaj/vm2/parser/LuaParserTokenManager.java 1456 1472
+----------------------------------------
+               case 0:
+               case 1:
+                  if (curChar == 61)
+                     jjCheckNAddTwoStates(1, 2);
+                  break;
+               case 3:
+                  if (curChar == 61)
+                     jjstateSet[jjnewStateCnt++] = 0;
+                  break;
+               case 4:
+                  if (curChar == 61)
+                     jjstateSet[jjnewStateCnt++] = 3;
+                  break;
+               case 5:
+                  if (curChar == 61)
+                     jjstateSet[jjnewStateCnt++] = 4;
+                  break;
+
+----------------------------------------
+               case 0:
+               case 1:
+                  if (curChar == 61)
+                     jjCheckNAddTwoStates(1, 2);
+                  break;
+               case 3:
+                  if (curChar == 61)
+                     jjstateSet[jjnewStateCnt++] = 0;
+                  break;
+               case 4:
+                  if (curChar == 61)
+                     jjstateSet[jjnewStateCnt++] = 3;
+                  break;
+               case 5:
+                  if (curChar == 61)
+                     jjstateSet[jjnewStateCnt++] = 4;
+                  break;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24202547
+src/jse/org/luaj/vm2/parser/LuaParserTokenManager.java 70 86
+src/jse/org/luaj/vm2/parser/LuaParserTokenManager.java 1456 1472
+----------------------------------------
+               case 0:
+               case 1:
+                  if (curChar == 61)
+                     jjCheckNAddTwoStates(1, 2);
+                  break;
+               case 3:
+                  if (curChar == 61)
+                     jjstateSet[jjnewStateCnt++] = 0;
+                  break;
+               case 4:
+                  if (curChar == 61)
+                     jjstateSet[jjnewStateCnt++] = 3;
+                  break;
+               case 5:
+                  if (curChar == 61)
+                     jjstateSet[jjnewStateCnt++] = 4;
+                  break;
+
+----------------------------------------
+               case 0:
+               case 1:
+                  if (curChar == 61)
+                     jjCheckNAddTwoStates(1, 2);
+                  break;
+               case 3:
+                  if (curChar == 61)
+                     jjstateSet[jjnewStateCnt++] = 0;
+                  break;
+               case 4:
+                  if (curChar == 61)
+                     jjstateSet[jjnewStateCnt++] = 3;
+                  break;
+               case 5:
+                  if (curChar == 61)
+                     jjstateSet[jjnewStateCnt++] = 4;
+                  break;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24039163
+src/jse/org/luaj/vm2/parser/LuaParser.java 913 932
+src/jse/org/luaj/vm2/parser/LuaParser.java 294 313
+----------------------------------------
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case LONGSTRING0:
+        case LONGSTRING1:
+        case LONGSTRING2:
+        case LONGSTRING3:
+        case LONGSTRINGN:
+        case FALSE:
+        case FUNCTION:
+        case NIL:
+        case NOT:
+        case TRUE:
+        case NAME:
+        case NUMBER:
+        case STRING:
+        case CHARSTRING:
+        case 69:
+        case 75:
+        case 79:
+        case 80:
+        case 83:
+
+----------------------------------------
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case LONGSTRING0:
+    case LONGSTRING1:
+    case LONGSTRING2:
+    case LONGSTRING3:
+    case LONGSTRINGN:
+    case FALSE:
+    case FUNCTION:
+    case NIL:
+    case NOT:
+    case TRUE:
+    case NAME:
+    case NUMBER:
+    case STRING:
+    case CHARSTRING:
+    case 69:
+    case 75:
+    case 79:
+    case 80:
+    case 83:
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24039164
+src/jse/org/luaj/vm2/parser/LuaParser.java 913 932
+src/jse/org/luaj/vm2/parser/LuaParser.java 520 539
+----------------------------------------
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case LONGSTRING0:
+        case LONGSTRING1:
+        case LONGSTRING2:
+        case LONGSTRING3:
+        case LONGSTRINGN:
+        case FALSE:
+        case FUNCTION:
+        case NIL:
+        case NOT:
+        case TRUE:
+        case NAME:
+        case NUMBER:
+        case STRING:
+        case CHARSTRING:
+        case 69:
+        case 75:
+        case 79:
+        case 80:
+        case 83:
+
+----------------------------------------
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case LONGSTRING0:
+      case LONGSTRING1:
+      case LONGSTRING2:
+      case LONGSTRING3:
+      case LONGSTRINGN:
+      case FALSE:
+      case FUNCTION:
+      case NIL:
+      case NOT:
+      case TRUE:
+      case NAME:
+      case NUMBER:
+      case STRING:
+      case CHARSTRING:
+      case 69:
+      case 75:
+      case 79:
+      case 80:
+      case 83:
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24202669
+src/jse/org/luaj/vm2/parser/LuaParser.java 294 313
+src/jse/org/luaj/vm2/parser/LuaParser.java 520 539
+----------------------------------------
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case LONGSTRING0:
+    case LONGSTRING1:
+    case LONGSTRING2:
+    case LONGSTRING3:
+    case LONGSTRINGN:
+    case FALSE:
+    case FUNCTION:
+    case NIL:
+    case NOT:
+    case TRUE:
+    case NAME:
+    case NUMBER:
+    case STRING:
+    case CHARSTRING:
+    case 69:
+    case 75:
+    case 79:
+    case 80:
+    case 83:
+
+----------------------------------------
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case LONGSTRING0:
+      case LONGSTRING1:
+      case LONGSTRING2:
+      case LONGSTRING3:
+      case LONGSTRINGN:
+      case FALSE:
+      case FUNCTION:
+      case NIL:
+      case NOT:
+      case TRUE:
+      case NAME:
+      case NUMBER:
+      case STRING:
+      case CHARSTRING:
+      case 69:
+      case 75:
+      case 79:
+      case 80:
+      case 83:
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24039165
+src/jse/org/luaj/vm2/parser/LuaParser.java 294 316
+src/jse/org/luaj/vm2/parser/LuaParser.java 520 542
+----------------------------------------
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case LONGSTRING0:
+    case LONGSTRING1:
+    case LONGSTRING2:
+    case LONGSTRING3:
+    case LONGSTRINGN:
+    case FALSE:
+    case FUNCTION:
+    case NIL:
+    case NOT:
+    case TRUE:
+    case NAME:
+    case NUMBER:
+    case STRING:
+    case CHARSTRING:
+    case 69:
+    case 75:
+    case 79:
+    case 80:
+    case 83:
+      el = ExpList();
+      break;
+    default:
+
+----------------------------------------
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case LONGSTRING0:
+      case LONGSTRING1:
+      case LONGSTRING2:
+      case LONGSTRING3:
+      case LONGSTRINGN:
+      case FALSE:
+      case FUNCTION:
+      case NIL:
+      case NOT:
+      case TRUE:
+      case NAME:
+      case NUMBER:
+      case STRING:
+      case CHARSTRING:
+      case 69:
+      case 75:
+      case 79:
+      case 80:
+      case 83:
+        el = ExpList();
+        break;
+      default:
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24039166
+src/jse/org/luaj/vm2/parser/LuaParserTokenManager.java 1487 1521
+src/jse/org/luaj/vm2/parser/LuaParserTokenManager.java 101 135
+----------------------------------------
+                  break;
+               case 6:
+                  if (curChar == 93)
+                     jjstateSet[jjnewStateCnt++] = 5;
+                  break;
+               default : break;
+            }
+         } while(i != startsAt);
+      }
+      else
+      {
+         int hiByte = (int)(curChar >> 8);
+         int i1 = hiByte >> 6;
+         long l1 = 1L << (hiByte & 077);
+         int i2 = (curChar & 0xff) >> 6;
+         long l2 = 1L << (curChar & 077);
+         do
+         {
+            switch(jjstateSet[--i])
+            {
+               default : break;
+            }
+         } while(i != startsAt);
+      }
+      if (kind != 0x7fffffff)
+      {
+         jjmatchedKind = kind;
+         jjmatchedPos = curPos;
+         kind = 0x7fffffff;
+      }
+      ++curPos;
+      if ((i = jjnewStateCnt) == (startsAt = 7 - (jjnewStateCnt = startsAt)))
+         return curPos;
+      try { curChar = input_stream.readChar(); }
+      catch(java.io.IOException e) { return curPos; }
+
+----------------------------------------
+                  break;
+               case 6:
+                  if (curChar == 93)
+                     jjstateSet[jjnewStateCnt++] = 5;
+                  break;
+               default : break;
+            }
+         } while(i != startsAt);
+      }
+      else
+      {
+         int hiByte = (int)(curChar >> 8);
+         int i1 = hiByte >> 6;
+         long l1 = 1L << (hiByte & 077);
+         int i2 = (curChar & 0xff) >> 6;
+         long l2 = 1L << (curChar & 077);
+         do
+         {
+            switch(jjstateSet[--i])
+            {
+               default : break;
+            }
+         } while(i != startsAt);
+      }
+      if (kind != 0x7fffffff)
+      {
+         jjmatchedKind = kind;
+         jjmatchedPos = curPos;
+         kind = 0x7fffffff;
+      }
+      ++curPos;
+      if ((i = jjnewStateCnt) == (startsAt = 7 - (jjnewStateCnt = startsAt)))
+         return curPos;
+      try { curChar = input_stream.readChar(); }
+      catch(java.io.IOException e) { return curPos; }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24039167
+src/jse/org/luaj/vm2/parser/LuaParserTokenManager.java 1440 1484
+src/jse/org/luaj/vm2/parser/LuaParserTokenManager.java 54 98
+----------------------------------------
+   int startsAt = 0;
+   jjnewStateCnt = 7;
+   int i = 1;
+   jjstateSet[0] = startState;
+   int kind = 0x7fffffff;
+   for (;;)
+   {
+      if (++jjround == 0x7fffffff)
+         ReInitRounds();
+      if (curChar < 64)
+      {
+         long l = 1L << curChar;
+         do
+         {
+            switch(jjstateSet[--i])
+            {
+               case 0:
+               case 1:
+                  if (curChar == 61)
+                     jjCheckNAddTwoStates(1, 2);
+                  break;
+               case 3:
+                  if (curChar == 61)
+                     jjstateSet[jjnewStateCnt++] = 0;
+                  break;
+               case 4:
+                  if (curChar == 61)
+                     jjstateSet[jjnewStateCnt++] = 3;
+                  break;
+               case 5:
+                  if (curChar == 61)
+                     jjstateSet[jjnewStateCnt++] = 4;
+                  break;
+               default : break;
+            }
+         } while(i != startsAt);
+      }
+      else if (curChar < 128)
+      {
+         long l = 1L << (curChar & 077);
+         do
+         {
+            switch(jjstateSet[--i])
+            {
+               case 2:
+
+----------------------------------------
+   int startsAt = 0;
+   jjnewStateCnt = 7;
+   int i = 1;
+   jjstateSet[0] = startState;
+   int kind = 0x7fffffff;
+   for (;;)
+   {
+      if (++jjround == 0x7fffffff)
+         ReInitRounds();
+      if (curChar < 64)
+      {
+         long l = 1L << curChar;
+         do
+         {
+            switch(jjstateSet[--i])
+            {
+               case 0:
+               case 1:
+                  if (curChar == 61)
+                     jjCheckNAddTwoStates(1, 2);
+                  break;
+               case 3:
+                  if (curChar == 61)
+                     jjstateSet[jjnewStateCnt++] = 0;
+                  break;
+               case 4:
+                  if (curChar == 61)
+                     jjstateSet[jjnewStateCnt++] = 3;
+                  break;
+               case 5:
+                  if (curChar == 61)
+                     jjstateSet[jjnewStateCnt++] = 4;
+                  break;
+               default : break;
+            }
+         } while(i != startsAt);
+      }
+      else if (curChar < 128)
+      {
+         long l = 1L << (curChar & 077);
+         do
+         {
+            switch(jjstateSet[--i])
+            {
+               case 2:
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24039168
+src/jse/org/luaj/vm2/parser/ParseException.java 142 183
+src/jse/org/luaj/vm2/parser/TokenMgrError.java 51 92
+----------------------------------------
+      StringBuffer retval = new StringBuffer();
+      char ch;
+      for (int i = 0; i < str.length(); i++) {
+        switch (str.charAt(i))
+        {
+           case 0 :
+              continue;
+           case '\b':
+              retval.append("\\b");
+              continue;
+           case '\t':
+              retval.append("\\t");
+              continue;
+           case '\n':
+              retval.append("\\n");
+              continue;
+           case '\f':
+              retval.append("\\f");
+              continue;
+           case '\r':
+              retval.append("\\r");
+              continue;
+           case '\"':
+              retval.append("\\\"");
+              continue;
+           case '\'':
+              retval.append("\\\'");
+              continue;
+           case '\\':
+              retval.append("\\\\");
+              continue;
+           default:
+              if ((ch = str.charAt(i)) < 0x20 || ch > 0x7e) {
+                 String s = "0000" + Integer.toString(ch, 16);
+                 retval.append("\\u" + s.substring(s.length() - 4, s.length()));
+              } else {
+                 retval.append(ch);
+              }
+              continue;
+        }
+      }
+      return retval.toString();
+
+----------------------------------------
+    StringBuffer retval = new StringBuffer();
+    char ch;
+    for (int i = 0; i < str.length(); i++) {
+      switch (str.charAt(i))
+      {
+        case 0 :
+          continue;
+        case '\b':
+          retval.append("\\b");
+          continue;
+        case '\t':
+          retval.append("\\t");
+          continue;
+        case '\n':
+          retval.append("\\n");
+          continue;
+        case '\f':
+          retval.append("\\f");
+          continue;
+        case '\r':
+          retval.append("\\r");
+          continue;
+        case '\"':
+          retval.append("\\\"");
+          continue;
+        case '\'':
+          retval.append("\\\'");
+          continue;
+        case '\\':
+          retval.append("\\\\");
+          continue;
+        default:
+          if ((ch = str.charAt(i)) < 0x20 || ch > 0x7e) {
+            String s = "0000" + Integer.toString(ch, 16);
+            retval.append("\\u" + s.substring(s.length() - 4, s.length()));
+          } else {
+            retval.append(ch);
+          }
+          continue;
+      }
+    }
+    return retval.toString();
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24202509
+src/jme/org/luaj/vm2/lib/jme/JmePlatform.java 106 116
+src/jse/org/luaj/vm2/lib/jse/JsePlatform.java 94 102
+----------------------------------------
+	public static Globals standardGlobals() {
+		Globals globals = new Globals();
+		globals.load(new BaseLib());
+		globals.load(new PackageLib());
+		globals.load(new Bit32Lib());
+		globals.load(new OsLib());
+		globals.load(new MathLib());
+		globals.load(new TableLib());
+		globals.load(new StringLib());
+		globals.load(new CoroutineLib());
+		globals.load(new JmeIoLib());
+
+----------------------------------------
+	public static Globals standardGlobals() {
+		Globals globals = new Globals();
+		globals.load(new JseBaseLib());
+		globals.load(new PackageLib());
+		globals.load(new Bit32Lib());
+		globals.load(new TableLib());
+		globals.load(new StringLib());
+		globals.load(new CoroutineLib());
+		globals.load(new JseMathLib());
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24202510
+src/core/org/luaj/vm2/LuaTable.java 460 464
+src/core/org/luaj/vm2/LuaTable.java 526 530
+----------------------------------------
+				index = hashSlot( key );
+				for ( Slot slot = hash[ index ]; slot != null; slot = slot.rest() ) {
+					StrongSlot foundSlot;
+					if ( ( foundSlot = slot.find( key ) ) != null ) {
+						hash[index] = hash[index].set( foundSlot, value );
+
+----------------------------------------
+			int index = hashSlot(key);
+			for ( Slot slot = hash[index]; slot != null; slot = slot.rest() ) {
+				StrongSlot foundSlot;
+				if ( ( foundSlot = slot.find( key ) ) != null ) {
+					hash[index] = hash[index].remove( foundSlot );
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+24202511
+src/core/org/luaj/vm2/lib/StringLib.java 366 376
+src/core/org/luaj/vm2/lib/StringLib.java 378 382
+----------------------------------------
+				width = c - '0';
+				c = ( (p < n) ? strfrmt.luaByte( p++ ) : 0 );
+				if ( Character.isDigit( (char) c ) ) {
+					width = width * 10 + (c - '0');
+					c = ( (p < n) ? strfrmt.luaByte( p++ ) : 0 );
+				}
+			}
+			
+			precision = -1;
+			if ( c == '.' ) {
+				c = ( (p < n) ? strfrmt.luaByte( p++ ) : 0 );
+
+----------------------------------------
+					precision = c - '0';
+					c = ( (p < n) ? strfrmt.luaByte( p++ ) : 0 );
+					if ( Character.isDigit( (char) c ) ) {
+						precision = precision * 10 + (c - '0');
+						c = ( (p < n) ? strfrmt.luaByte( p++ ) : 0 );
+
+----------------------------------------

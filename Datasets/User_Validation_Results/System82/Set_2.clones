@@ -1,0 +1,1220 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513714
+src/jmemorize/gui/swing/panels/DeckTablePanel.java 120 133
+src/jmemorize/gui/swing/actions/edit/CopyAction.java 44 49
+----------------------------------------
+    {
+        m_frame = mainFrame;
+        
+        m_cardTable = new CardTable(m_frame, 
+            Main.USER_PREFS.node("main.table"), //$NON-NLS-1$ 
+            new int[]{ 
+                CardTable.COLUMN_FRONTSIDE, 
+                CardTable.COLUMN_DECK, 
+                CardTable.COLUMN_CATEGORY, 
+                CardTable.COLUMN_TESTED, 
+                CardTable.COLUMN_EXPIRES});
+        
+        initComponents();
+    }
+
+----------------------------------------
+    {
+        m_selectionProvider = selectionProvider;
+        m_selectionProvider.addSelectionObserver(this);
+        
+        setValues();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513740
+src/jmemorize/gui/swing/frames/MainFrame.java 310 315
+src/jmemorize/gui/swing/actions/edit/CopyAction.java 44 49
+----------------------------------------
+    {
+        m_deck = level;
+        
+        m_deckTablePanel.setDeck(level);
+        m_deckChartPanel.setDeck(level);
+    }
+
+----------------------------------------
+    {
+        m_selectionProvider = selectionProvider;
+        m_selectionProvider.addSelectionObserver(this);
+        
+        setValues();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513737
+src/jmemorize/gui/swing/actions/RenameCategoryAction.java 46 54
+src/jmemorize/gui/swing/actions/edit/CopyAction.java 44 49
+----------------------------------------
+    {
+        Main.getInstance().addLearnSessionObserver(this);
+        
+        m_selectionProvider = selectionProvider;
+        m_selectionProvider.addSelectionObserver(this);
+        
+        setValues();
+        updateEnablement();
+    }
+
+----------------------------------------
+    {
+        m_selectionProvider = selectionProvider;
+        m_selectionProvider.addSelectionObserver(this);
+        
+        setValues();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513742
+src/jmemorize/core/Lesson.java 163 168
+src/jmemorize/gui/swing/actions/edit/CopyAction.java 44 49
+----------------------------------------
+    {
+        assert m_rootCategory == null;
+        
+        m_rootCategory = rootCategory;
+        m_rootCategory.addObserver(this);
+    }
+
+----------------------------------------
+    {
+        m_selectionProvider = selectionProvider;
+        m_selectionProvider.addSelectionObserver(this);
+        
+        setValues();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513713
+src/jmemorize/util/RecentItems.java 47 52
+src/jmemorize/gui/swing/actions/edit/CopyAction.java 44 49
+----------------------------------------
+    {
+        m_maxItems = maxItems;
+        m_prefNode = prefNode;
+        
+        loadFromPreferences();
+    }
+
+----------------------------------------
+    {
+        m_selectionProvider = selectionProvider;
+        m_selectionProvider.addSelectionObserver(this);
+        
+        setValues();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513739
+src/jmemorize/gui/swing/actions/edit/RemoveAction.java 46 52
+src/jmemorize/gui/swing/actions/edit/CopyAction.java 44 49
+----------------------------------------
+    {
+        m_selectionProvider = selectionProvider;
+        m_selectionProvider.addSelectionObserver(this);
+        selectionChanged(m_selectionProvider);
+        
+        setValues();
+    }
+
+----------------------------------------
+    {
+        m_selectionProvider = selectionProvider;
+        m_selectionProvider.addSelectionObserver(this);
+        
+        setValues();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513624
+src/jmemorize/gui/swing/actions/edit/EditCardAction.java 43 49
+src/jmemorize/gui/swing/actions/edit/CutAction.java 44 49
+----------------------------------------
+    {
+        m_selectionProvider = selectionProvider;
+        m_selectionProvider.addSelectionObserver(this);
+        
+        setValues();
+        updateEnablement();
+    }
+
+----------------------------------------
+    {
+        m_selectionProvider = selectionProvider;
+        m_selectionProvider.addSelectionObserver(this);
+        
+        setValues();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513706
+src/jmemorize/core/Lesson.java 163 168
+src/jmemorize/gui/swing/actions/edit/CutAction.java 44 49
+----------------------------------------
+    {
+        assert m_rootCategory == null;
+        
+        m_rootCategory = rootCategory;
+        m_rootCategory.addObserver(this);
+    }
+
+----------------------------------------
+    {
+        m_selectionProvider = selectionProvider;
+        m_selectionProvider.addSelectionObserver(this);
+        
+        setValues();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513630
+src/jmemorize/gui/swing/actions/edit/ResetCardAction.java 43 49
+src/jmemorize/gui/swing/actions/edit/CutAction.java 44 49
+----------------------------------------
+    {
+        m_selectionProvider = selectionProvider;
+        m_selectionProvider.addSelectionObserver(this);
+        
+        setValues();
+        updateEnablement();
+    }
+
+----------------------------------------
+    {
+        m_selectionProvider = selectionProvider;
+        m_selectionProvider.addSelectionObserver(this);
+        
+        setValues();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513736
+src/jmemorize/gui/swing/actions/edit/CopyAction.java 44 49
+src/jmemorize/gui/swing/actions/edit/CutAction.java 44 49
+----------------------------------------
+    {
+        m_selectionProvider = selectionProvider;
+        m_selectionProvider.addSelectionObserver(this);
+        
+        setValues();
+    }
+
+----------------------------------------
+    {
+        m_selectionProvider = selectionProvider;
+        m_selectionProvider.addSelectionObserver(this);
+        
+        setValues();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513633
+src/jmemorize/gui/swing/actions/edit/RemoveAction.java 46 52
+src/jmemorize/gui/swing/actions/edit/CutAction.java 44 49
+----------------------------------------
+    {
+        m_selectionProvider = selectionProvider;
+        m_selectionProvider.addSelectionObserver(this);
+        selectionChanged(m_selectionProvider);
+        
+        setValues();
+    }
+
+----------------------------------------
+    {
+        m_selectionProvider = selectionProvider;
+        m_selectionProvider.addSelectionObserver(this);
+        
+        setValues();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513635
+src/jmemorize/gui/swing/actions/LearnAction.java 47 52
+src/jmemorize/gui/swing/actions/edit/CutAction.java 44 49
+----------------------------------------
+    {
+        setValues();
+        
+        m_selectionProvider = selectionProvider;
+        selectionProvider.addSelectionObserver(this);
+    }
+
+----------------------------------------
+    {
+        m_selectionProvider = selectionProvider;
+        m_selectionProvider.addSelectionObserver(this);
+        
+        setValues();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513629
+src/jmemorize/gui/swing/panels/DeckTablePanel.java 120 133
+src/jmemorize/gui/swing/actions/edit/CutAction.java 44 49
+----------------------------------------
+    {
+        m_frame = mainFrame;
+        
+        m_cardTable = new CardTable(m_frame, 
+            Main.USER_PREFS.node("main.table"), //$NON-NLS-1$ 
+            new int[]{ 
+                CardTable.COLUMN_FRONTSIDE, 
+                CardTable.COLUMN_DECK, 
+                CardTable.COLUMN_CATEGORY, 
+                CardTable.COLUMN_TESTED, 
+                CardTable.COLUMN_EXPIRES});
+        
+        initComponents();
+    }
+
+----------------------------------------
+    {
+        m_selectionProvider = selectionProvider;
+        m_selectionProvider.addSelectionObserver(this);
+        
+        setValues();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513631
+src/jmemorize/gui/swing/actions/RenameCategoryAction.java 46 54
+src/jmemorize/gui/swing/actions/edit/CutAction.java 44 49
+----------------------------------------
+    {
+        Main.getInstance().addLearnSessionObserver(this);
+        
+        m_selectionProvider = selectionProvider;
+        m_selectionProvider.addSelectionObserver(this);
+        
+        setValues();
+        updateEnablement();
+    }
+
+----------------------------------------
+    {
+        m_selectionProvider = selectionProvider;
+        m_selectionProvider.addSelectionObserver(this);
+        
+        setValues();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513707
+src/jmemorize/gui/swing/panels/QuizPanel.java 179 184
+src/jmemorize/gui/swing/actions/edit/CutAction.java 44 49
+----------------------------------------
+    {
+        m_session = session;
+        session.addObserver(this);
+        
+        m_session.getCategory().addObserver(this);
+    }
+
+----------------------------------------
+    {
+        m_selectionProvider = selectionProvider;
+        m_selectionProvider.addSelectionObserver(this);
+        
+        setValues();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513628
+src/jmemorize/util/RecentItems.java 47 52
+src/jmemorize/gui/swing/actions/edit/CutAction.java 44 49
+----------------------------------------
+    {
+        m_maxItems = maxItems;
+        m_prefNode = prefNode;
+        
+        loadFromPreferences();
+    }
+
+----------------------------------------
+    {
+        m_selectionProvider = selectionProvider;
+        m_selectionProvider.addSelectionObserver(this);
+        
+        setValues();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513634
+src/jmemorize/gui/swing/frames/MainFrame.java 310 315
+src/jmemorize/gui/swing/actions/edit/CutAction.java 44 49
+----------------------------------------
+    {
+        m_deck = level;
+        
+        m_deckTablePanel.setDeck(level);
+        m_deckChartPanel.setDeck(level);
+    }
+
+----------------------------------------
+    {
+        m_selectionProvider = selectionProvider;
+        m_selectionProvider.addSelectionObserver(this);
+        
+        setValues();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513625
+src/jmemorize/gui/swing/actions/edit/EditCardAction.java 43 49
+src/jmemorize/gui/swing/widgets/CardTable.java 551 559
+----------------------------------------
+    {
+        m_selectionProvider = selectionProvider;
+        m_selectionProvider.addSelectionObserver(this);
+        
+        setValues();
+        updateEnablement();
+    }
+
+----------------------------------------
+    {
+        m_statusBar = statusBar;
+        
+        if (m_statusBar != null)
+        {
+            updateCardCountStatusBar();
+            updateSelectedCardCountStatusBar();
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513642
+src/jmemorize/gui/swing/actions/edit/ResetCardAction.java 43 49
+src/jmemorize/gui/swing/widgets/CardTable.java 551 559
+----------------------------------------
+    {
+        m_selectionProvider = selectionProvider;
+        m_selectionProvider.addSelectionObserver(this);
+        
+        setValues();
+        updateEnablement();
+    }
+
+----------------------------------------
+    {
+        m_statusBar = statusBar;
+        
+        if (m_statusBar != null)
+        {
+            updateCardCountStatusBar();
+            updateSelectedCardCountStatusBar();
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513643
+src/jmemorize/gui/swing/actions/RenameCategoryAction.java 46 54
+src/jmemorize/gui/swing/widgets/CardTable.java 551 559
+----------------------------------------
+    {
+        Main.getInstance().addLearnSessionObserver(this);
+        
+        m_selectionProvider = selectionProvider;
+        m_selectionProvider.addSelectionObserver(this);
+        
+        setValues();
+        updateEnablement();
+    }
+
+----------------------------------------
+    {
+        m_statusBar = statusBar;
+        
+        if (m_statusBar != null)
+        {
+            updateCardCountStatusBar();
+            updateSelectedCardCountStatusBar();
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513641
+src/jmemorize/gui/swing/widgets/CardTable.java 283 289
+src/jmemorize/gui/swing/widgets/CardTable.java 551 559
+----------------------------------------
+        {
+            m_cards = cards;
+            m_category = category;
+            resort();
+            
+            updateCardCountStatusBar();
+        }
+
+----------------------------------------
+    {
+        m_statusBar = statusBar;
+        
+        if (m_statusBar != null)
+        {
+            updateCardCountStatusBar();
+            updateSelectedCardCountStatusBar();
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513644
+src/jmemorize/gui/swing/widgets/CategoryComboBox.java 80 89
+src/jmemorize/gui/swing/widgets/CardTable.java 551 559
+----------------------------------------
+    {
+        if (m_rootCategory != null)
+        {
+            m_rootCategory.removeObserver(this);
+        }
+        m_rootCategory = category;
+        m_rootCategory.addObserver(this);
+        
+        updateModel();
+    }
+
+----------------------------------------
+    {
+        m_statusBar = statusBar;
+        
+        if (m_statusBar != null)
+        {
+            updateCardCountStatusBar();
+            updateSelectedCardCountStatusBar();
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513636
+src/jmemorize/util/RecentItems.java 47 52
+src/jmemorize/gui/swing/widgets/CardTable.java 299 304
+----------------------------------------
+    {
+        m_maxItems = maxItems;
+        m_prefNode = prefNode;
+        
+        loadFromPreferences();
+    }
+
+----------------------------------------
+        {
+            m_orderModelIndex = modelIndex;
+            m_orderDir = direction;
+            
+            resort();
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513738
+src/jmemorize/gui/swing/actions/edit/CopyAction.java 44 49
+src/jmemorize/gui/swing/widgets/CardTable.java 299 304
+----------------------------------------
+    {
+        m_selectionProvider = selectionProvider;
+        m_selectionProvider.addSelectionObserver(this);
+        
+        setValues();
+    }
+
+----------------------------------------
+        {
+            m_orderModelIndex = modelIndex;
+            m_orderDir = direction;
+            
+            resort();
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513638
+src/jmemorize/gui/swing/actions/LearnAction.java 47 52
+src/jmemorize/gui/swing/widgets/CardTable.java 299 304
+----------------------------------------
+    {
+        setValues();
+        
+        m_selectionProvider = selectionProvider;
+        selectionProvider.addSelectionObserver(this);
+    }
+
+----------------------------------------
+        {
+            m_orderModelIndex = modelIndex;
+            m_orderDir = direction;
+            
+            resort();
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513637
+src/jmemorize/gui/swing/widgets/CardTable.java 283 289
+src/jmemorize/gui/swing/widgets/CardTable.java 299 304
+----------------------------------------
+        {
+            m_cards = cards;
+            m_category = category;
+            resort();
+            
+            updateCardCountStatusBar();
+        }
+
+----------------------------------------
+        {
+            m_orderModelIndex = modelIndex;
+            m_orderDir = direction;
+            
+            resort();
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513632
+src/jmemorize/gui/swing/actions/edit/CutAction.java 44 49
+src/jmemorize/gui/swing/widgets/CardTable.java 299 304
+----------------------------------------
+    {
+        m_selectionProvider = selectionProvider;
+        m_selectionProvider.addSelectionObserver(this);
+        
+        setValues();
+    }
+
+----------------------------------------
+        {
+            m_orderModelIndex = modelIndex;
+            m_orderDir = direction;
+            
+            resort();
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513639
+src/jmemorize/gui/swing/panels/DeckTablePanel.java 120 133
+src/jmemorize/gui/swing/widgets/CardTable.java 299 304
+----------------------------------------
+    {
+        m_frame = mainFrame;
+        
+        m_cardTable = new CardTable(m_frame, 
+            Main.USER_PREFS.node("main.table"), //$NON-NLS-1$ 
+            new int[]{ 
+                CardTable.COLUMN_FRONTSIDE, 
+                CardTable.COLUMN_DECK, 
+                CardTable.COLUMN_CATEGORY, 
+                CardTable.COLUMN_TESTED, 
+                CardTable.COLUMN_EXPIRES});
+        
+        initComponents();
+    }
+
+----------------------------------------
+        {
+            m_orderModelIndex = modelIndex;
+            m_orderDir = direction;
+            
+            resort();
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513640
+src/jmemorize/gui/swing/widgets/CardTable.java 551 559
+src/jmemorize/gui/swing/widgets/CardTable.java 369 378
+----------------------------------------
+    {
+        m_statusBar = statusBar;
+        
+        if (m_statusBar != null)
+        {
+            updateCardCountStatusBar();
+            updateSelectedCardCountStatusBar();
+        }
+    }
+
+----------------------------------------
+        {
+            if (m_cards != null) //CHECK
+            {
+                Comparator<Card> comparator = new CardComparator(m_orderModelIndex);
+                Collections.sort(m_cards, m_orderDir == ASCENDING ? 
+                    comparator : new ReverseOrder<Card>(comparator));
+                
+                fireTableDataChanged();
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513645
+src/jmemorize/gui/swing/panels/LearnPanel.java 163 174
+src/jmemorize/gui/swing/widgets/CardTable.java 653 667
+----------------------------------------
+    {
+        m_currentCard = card;
+        m_flippedLabel.setVisible(flipped);
+        
+        for (SelectionObserver listener : m_selectionListeners)
+        {
+            listener.selectionChanged(this);
+        }
+        
+        updateStatusBar();
+        updateProgressBars();
+    }
+
+----------------------------------------
+    {
+        super.valueChanged(e);
+        
+        updateSelectedCardCountStatusBar();
+        
+        // this can be called while constructing super class. in that case our 
+        // variables wouldn't yet be set. 
+        if (!e.getValueIsAdjusting() && m_selectionListeners != null)
+        {
+            for (SelectionObserver listener : m_selectionListeners)
+            {
+                listener.selectionChanged(this);
+            }
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513666
+src/jmemorize/gui/swing/frames/NewCardFrame.java 82 88
+src/jmemorize/gui/swing/actions/edit/RemoveAction.java 130 135
+----------------------------------------
+        {
+            setName(Localization.get(LC.NEW_CARD_EDIT_RECENTLY));
+            setDescription(Localization.get(LC.NEW_CARD_EDIT_RECENTLY_DESC));
+            setIcon("/resource/icons/card_edit.gif"); //$NON-NLS-1$
+            setAccelerator(KeyEvent.VK_ENTER, 0);
+            setMnemonic(1);
+        }
+
+----------------------------------------
+    {
+        setName(Localization.get("MainFrame.DELETE")); //$NON-NLS-1$
+        setIcon("/resource/icons/remove.gif"); //$NON-NLS-1$
+        setAccelerator(KeyEvent.VK_DELETE, 0);
+        setMnemonic(1);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513667
+src/jmemorize/gui/swing/actions/file/SaveLessonAsAction.java 50 56
+src/jmemorize/gui/swing/actions/edit/RemoveAction.java 130 135
+----------------------------------------
+    {
+        setName(Localization.get("MainFrame.SAVE_AS")); //$NON-NLS-1$
+        setDescription(Localization.get("MainFrame.SAVE_AS_DESC")); //$NON-NLS-1$
+        setIcon("/resource/icons/file_saveas.gif"); //$NON-NLS-1$
+        setAccelerator(KeyEvent.VK_S, SHORTCUT_KEY + InputEvent.SHIFT_MASK);
+        setMnemonic(2);
+    }
+
+----------------------------------------
+    {
+        setName(Localization.get("MainFrame.DELETE")); //$NON-NLS-1$
+        setIcon("/resource/icons/remove.gif"); //$NON-NLS-1$
+        setAccelerator(KeyEvent.VK_DELETE, 0);
+        setMnemonic(1);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513668
+src/jmemorize/gui/swing/actions/ShowCategoryTreeAction.java 51 56
+src/jmemorize/gui/swing/actions/edit/RemoveAction.java 130 135
+----------------------------------------
+    {
+        setName(Localization.get("MainFrame.CATEGORY_TREE")); //$NON-NLS-1$
+        setDescription(Localization.get("MainFrame.CATEGORY_TREE_DESC")); //$NON-NLS-1$
+        setIcon("/resource/icons/tree.gif"); //$NON-NLS-1$
+        setAccelerator(KeyEvent.VK_T, 0);
+    }
+
+----------------------------------------
+    {
+        setName(Localization.get("MainFrame.DELETE")); //$NON-NLS-1$
+        setIcon("/resource/icons/remove.gif"); //$NON-NLS-1$
+        setAccelerator(KeyEvent.VK_DELETE, 0);
+        setMnemonic(1);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513669
+src/jmemorize/gui/swing/actions/file/PreferencesAction.java 51 57
+src/jmemorize/gui/swing/actions/edit/RemoveAction.java 130 135
+----------------------------------------
+    {
+        setName(Localization.get("MainFrame.PREFERENCES") + ".."); //$NON-NLS-1$ //$NON-NLS-2$ 
+        setDescription(Localization.get("MainFrame.PREFERENCES_DESC")); //$NON-NLS-1$ 
+        setIcon("/resource/icons/settings.gif"); //$NON-NLS-1$ 
+        setAccelerator(KeyEvent.VK_P, SHORTCUT_KEY);
+        setMnemonic(1);
+    }
+
+----------------------------------------
+    {
+        setName(Localization.get("MainFrame.DELETE")); //$NON-NLS-1$
+        setIcon("/resource/icons/remove.gif"); //$NON-NLS-1$
+        setAccelerator(KeyEvent.VK_DELETE, 0);
+        setMnemonic(1);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513655
+src/jmemorize/gui/swing/actions/file/PreferencesAction.java 51 57
+src/jmemorize/gui/swing/actions/edit/EditCardAction.java 79 85
+----------------------------------------
+    {
+        setName(Localization.get("MainFrame.PREFERENCES") + ".."); //$NON-NLS-1$ //$NON-NLS-2$ 
+        setDescription(Localization.get("MainFrame.PREFERENCES_DESC")); //$NON-NLS-1$ 
+        setIcon("/resource/icons/settings.gif"); //$NON-NLS-1$ 
+        setAccelerator(KeyEvent.VK_P, SHORTCUT_KEY);
+        setMnemonic(1);
+    }
+
+----------------------------------------
+    {
+        setName(Localization.get("MainFrame.EDIT_CARD")); //$NON-NLS-1$
+        setDescription(Localization.get("MainFrame.EDIT_CARD_DESC")); //$NON-NLS-1$
+        setIcon("/resource/icons/card_edit.gif"); //$NON-NLS-1$
+        setMnemonic(1);
+        setAccelerator(KeyEvent.VK_ENTER, 0);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513652
+src/jmemorize/gui/swing/frames/NewCardFrame.java 82 88
+src/jmemorize/gui/swing/actions/edit/EditCardAction.java 79 85
+----------------------------------------
+        {
+            setName(Localization.get(LC.NEW_CARD_EDIT_RECENTLY));
+            setDescription(Localization.get(LC.NEW_CARD_EDIT_RECENTLY_DESC));
+            setIcon("/resource/icons/card_edit.gif"); //$NON-NLS-1$
+            setAccelerator(KeyEvent.VK_ENTER, 0);
+            setMnemonic(1);
+        }
+
+----------------------------------------
+    {
+        setName(Localization.get("MainFrame.EDIT_CARD")); //$NON-NLS-1$
+        setDescription(Localization.get("MainFrame.EDIT_CARD_DESC")); //$NON-NLS-1$
+        setIcon("/resource/icons/card_edit.gif"); //$NON-NLS-1$
+        setMnemonic(1);
+        setAccelerator(KeyEvent.VK_ENTER, 0);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513651
+src/jmemorize/gui/swing/actions/edit/RemoveAction.java 130 135
+src/jmemorize/gui/swing/actions/edit/EditCardAction.java 79 85
+----------------------------------------
+    {
+        setName(Localization.get("MainFrame.DELETE")); //$NON-NLS-1$
+        setIcon("/resource/icons/remove.gif"); //$NON-NLS-1$
+        setAccelerator(KeyEvent.VK_DELETE, 0);
+        setMnemonic(1);
+    }
+
+----------------------------------------
+    {
+        setName(Localization.get("MainFrame.EDIT_CARD")); //$NON-NLS-1$
+        setDescription(Localization.get("MainFrame.EDIT_CARD_DESC")); //$NON-NLS-1$
+        setIcon("/resource/icons/card_edit.gif"); //$NON-NLS-1$
+        setMnemonic(1);
+        setAccelerator(KeyEvent.VK_ENTER, 0);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513653
+src/jmemorize/gui/swing/actions/file/SaveLessonAsAction.java 50 56
+src/jmemorize/gui/swing/actions/edit/EditCardAction.java 79 85
+----------------------------------------
+    {
+        setName(Localization.get("MainFrame.SAVE_AS")); //$NON-NLS-1$
+        setDescription(Localization.get("MainFrame.SAVE_AS_DESC")); //$NON-NLS-1$
+        setIcon("/resource/icons/file_saveas.gif"); //$NON-NLS-1$
+        setAccelerator(KeyEvent.VK_S, SHORTCUT_KEY + InputEvent.SHIFT_MASK);
+        setMnemonic(2);
+    }
+
+----------------------------------------
+    {
+        setName(Localization.get("MainFrame.EDIT_CARD")); //$NON-NLS-1$
+        setDescription(Localization.get("MainFrame.EDIT_CARD_DESC")); //$NON-NLS-1$
+        setIcon("/resource/icons/card_edit.gif"); //$NON-NLS-1$
+        setMnemonic(1);
+        setAccelerator(KeyEvent.VK_ENTER, 0);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513654
+src/jmemorize/gui/swing/actions/ShowCategoryTreeAction.java 51 56
+src/jmemorize/gui/swing/actions/edit/EditCardAction.java 79 85
+----------------------------------------
+    {
+        setName(Localization.get("MainFrame.CATEGORY_TREE")); //$NON-NLS-1$
+        setDescription(Localization.get("MainFrame.CATEGORY_TREE_DESC")); //$NON-NLS-1$
+        setIcon("/resource/icons/tree.gif"); //$NON-NLS-1$
+        setAccelerator(KeyEvent.VK_T, 0);
+    }
+
+----------------------------------------
+    {
+        setName(Localization.get("MainFrame.EDIT_CARD")); //$NON-NLS-1$
+        setDescription(Localization.get("MainFrame.EDIT_CARD_DESC")); //$NON-NLS-1$
+        setIcon("/resource/icons/card_edit.gif"); //$NON-NLS-1$
+        setMnemonic(1);
+        setAccelerator(KeyEvent.VK_ENTER, 0);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513658
+src/jmemorize/gui/swing/frames/FindFrame.java 431 436
+src/jmemorize/gui/swing/panels/DeckTablePanel.java 233 238
+----------------------------------------
+            {
+                if (evt.getClickCount() == 2)
+                {
+                    editCards();
+                }
+            }
+
+----------------------------------------
+    {
+        if (SwingUtilities.isLeftMouseButton(evt) && evt.getClickCount() == 2)
+        {
+            editCards();
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513659
+src/jmemorize/gui/swing/panels/DeckTablePanel.java 233 238
+src/jmemorize/gui/swing/frames/FindFrame.java 328 333
+----------------------------------------
+    {
+        if (SwingUtilities.isLeftMouseButton(evt) && evt.getClickCount() == 2)
+        {
+            editCards();
+        }
+    }
+
+----------------------------------------
+            {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER)
+                {
+                    search();
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513836
+src/jmemorize/gui/swing/frames/FindFrame.java 431 436
+src/jmemorize/gui/swing/frames/FindFrame.java 328 333
+----------------------------------------
+            {
+                if (evt.getClickCount() == 2)
+                {
+                    editCards();
+                }
+            }
+
+----------------------------------------
+            {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER)
+                {
+                    search();
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513661
+src/jmemorize/gui/swing/frames/MainFrame.java 460 467
+src/jmemorize/gui/swing/actions/file/AbstractImportAction.java 91 98
+----------------------------------------
+        {
+            Object[] args = {file != null ? file.getName() : "?"};
+            MessageFormat form = new MessageFormat(Localization.get(LC.ERROR_LOAD));
+            String msg = form.format(args);
+            Main.logThrowable(msg, e);
+            
+            new ErrorDialog(this, msg, e).setVisible(true);
+        }
+
+----------------------------------------
+        {
+            Object[] args = {file != null ? file.getName() : "?"};
+            MessageFormat form = new MessageFormat(Localization.get(LC.ERROR_LOAD));
+            String msg = form.format(args);
+            Main.logThrowable(msg, e);
+
+            new ErrorDialog(main.getFrame(), msg, e).setVisible(true);
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513660
+src/jmemorize/gui/swing/frames/MainFrame.java 493 500
+src/jmemorize/gui/swing/actions/file/AbstractImportAction.java 91 98
+----------------------------------------
+        {
+            Object[] args = {file != null ? file.getName() : "?"};
+            MessageFormat form = new MessageFormat(Localization.get(LC.ERROR_SAVE));
+            String msg = form.format(args);
+            Main.logThrowable(msg, e);
+           
+            new ErrorDialog(this, msg, e).setVisible(true);
+        }
+
+----------------------------------------
+        {
+            Object[] args = {file != null ? file.getName() : "?"};
+            MessageFormat form = new MessageFormat(Localization.get(LC.ERROR_LOAD));
+            String msg = form.format(args);
+            Main.logThrowable(msg, e);
+
+            new ErrorDialog(main.getFrame(), msg, e).setVisible(true);
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513701
+src/jmemorize/gui/swing/frames/MainFrame.java 460 467
+src/jmemorize/gui/swing/actions/file/AbstractExportAction.java 121 129
+----------------------------------------
+        {
+            Object[] args = {file != null ? file.getName() : "?"};
+            MessageFormat form = new MessageFormat(Localization.get(LC.ERROR_LOAD));
+            String msg = form.format(args);
+            Main.logThrowable(msg, e);
+            
+            new ErrorDialog(this, msg, e).setVisible(true);
+        }
+
+----------------------------------------
+        {
+            Object[] args = {file != null ? file.getName() : "?"};
+            MessageFormat form = new MessageFormat(
+                Localization.get(LC.ERROR_SAVE));
+            String msg = form.format(args);
+            Main.logThrowable(msg, e);
+
+            new ErrorDialog(main.getFrame(), msg, e).setVisible(true);
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513700
+src/jmemorize/gui/swing/frames/MainFrame.java 493 500
+src/jmemorize/gui/swing/actions/file/AbstractExportAction.java 121 129
+----------------------------------------
+        {
+            Object[] args = {file != null ? file.getName() : "?"};
+            MessageFormat form = new MessageFormat(Localization.get(LC.ERROR_SAVE));
+            String msg = form.format(args);
+            Main.logThrowable(msg, e);
+           
+            new ErrorDialog(this, msg, e).setVisible(true);
+        }
+
+----------------------------------------
+        {
+            Object[] args = {file != null ? file.getName() : "?"};
+            MessageFormat form = new MessageFormat(
+                Localization.get(LC.ERROR_SAVE));
+            String msg = form.format(args);
+            Main.logThrowable(msg, e);
+
+            new ErrorDialog(main.getFrame(), msg, e).setVisible(true);
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513662
+src/jmemorize/gui/swing/actions/file/AbstractImportAction.java 91 98
+src/jmemorize/gui/swing/actions/file/AbstractExportAction.java 121 129
+----------------------------------------
+        {
+            Object[] args = {file != null ? file.getName() : "?"};
+            MessageFormat form = new MessageFormat(Localization.get(LC.ERROR_LOAD));
+            String msg = form.format(args);
+            Main.logThrowable(msg, e);
+
+            new ErrorDialog(main.getFrame(), msg, e).setVisible(true);
+        }
+
+----------------------------------------
+        {
+            Object[] args = {file != null ? file.getName() : "?"};
+            MessageFormat form = new MessageFormat(
+                Localization.get(LC.ERROR_SAVE));
+            String msg = form.format(args);
+            Main.logThrowable(msg, e);
+
+            new ErrorDialog(main.getFrame(), msg, e).setVisible(true);
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513676
+src/jmemorize/gui/swing/actions/RenameCategoryAction.java 46 54
+src/jmemorize/gui/swing/actions/file/SaveLessonAction.java 39 44
+----------------------------------------
+    {
+        Main.getInstance().addLearnSessionObserver(this);
+        
+        m_selectionProvider = selectionProvider;
+        m_selectionProvider.addSelectionObserver(this);
+        
+        setValues();
+        updateEnablement();
+    }
+
+----------------------------------------
+    {
+        setValues();
+        
+        Main.getInstance().addLessonObserver(this);
+        updateEnablement();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513718
+src/jmemorize/gui/swing/actions/edit/EditCardAction.java 43 49
+src/jmemorize/gui/swing/actions/edit/PasteAction.java 45 50
+----------------------------------------
+    {
+        m_selectionProvider = selectionProvider;
+        m_selectionProvider.addSelectionObserver(this);
+        
+        setValues();
+        updateEnablement();
+    }
+
+----------------------------------------
+    {
+        m_selectionProvider = selectionProvider;
+        
+        setValues();
+        updateEnablement();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21513693
+src/jmemorize/gui/swing/actions/edit/CutAction.java 44 49
+src/jmemorize/gui/swing/actions/edit/PasteAction.java 45 50
+----------------------------------------
+    {
+        m_selectionProvider = selectionProvider;
+        m_selectionProvider.addSelectionObserver(this);
+        
+        setValues();
+    }
+
+----------------------------------------
+    {
+        m_selectionProvider = selectionProvider;
+        
+        setValues();
+        updateEnablement();
+    }
+
+----------------------------------------

@@ -1,0 +1,1362 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+21467626
+plugins/awt/src/main/java/net/sourceforge/javaocr/ocrPlugins/charTracer/CharacterTracer.java 69 80
+plugins/awt/src/main/java/net/sourceforge/javaocr/ocrPlugins/charTracer/CharacterTracer.java 84 95
+----------------------------------------
+    {
+        try
+        {
+            bfImageGraphics.setStroke(new BasicStroke(4));
+            bfImageGraphics.setColor(Color.red);
+            bfImageGraphics.drawRect(x1, y1, x2 - x1, y2 - y1);
+        }
+        catch (Exception ex)
+        {
+            LOG.log(Level.SEVERE, null, ex);
+        }
+    }
+
+----------------------------------------
+    {
+        try
+        {
+            bfImageGraphics.setStroke(new BasicStroke(4));
+            bfImageGraphics.setColor(Color.yellow);
+            bfImageGraphics.drawRect(x1, y1, x2 - x1, y2 - y1);
+        }
+        catch (Exception ex)
+        {
+           LOG.log(Level.SEVERE, null, ex);
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+21467627
+plugins/awt/src/main/java/net/sourceforge/javaocr/ocrPlugins/charExtractor/CharacterExtractor.java 82 89
+plugins/awt/src/main/java/net/sourceforge/javaocr/ocrPlugins/charExtractor/CharacterExtractor.java 92 99
+----------------------------------------
+            {
+                //Make image always std_width wide
+                double scaleAmount = (double) std_width / (double) characterImage.getWidth();
+                AffineTransform tx = new AffineTransform();
+                tx.scale(scaleAmount, scaleAmount);
+                AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
+                characterImage = op.filter(characterImage, null);
+            }
+
+----------------------------------------
+            {
+                //Make image always std_height tall
+                double scaleAmount = (double) std_height / (double) characterImage.getHeight();
+                AffineTransform tx = new AffineTransform();
+                tx.scale(scaleAmount, scaleAmount);
+                AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
+                characterImage = op.filter(characterImage, null);
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+21467628
+core/src/main/java/net/sourceforge/javaocr/matcher/Match.java 36 41
+core/src/main/java/net/sourceforge/javaocr/scanner/PixelImage.java 83 89
+----------------------------------------
+    public Match(Character chr, double distance, double yellow, double red) {
+        this.chr = chr;
+        this.distance = distance;
+        this.red = red;
+        this.yellow = yellow;
+    }
+
+----------------------------------------
+    {
+        this.pixels = pixels;
+        this.width = width;
+        this.height = height;
+        npix = width * height;
+        aspectRatio = ((float) width) / ((float) height);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+21467629
+core/src/main/java/net/sourceforge/javaocr/scanner/PixelImage.java 175 180
+core/src/main/java/net/sourceforge/javaocr/scanner/PixelImage.java 194 199
+----------------------------------------
+        {
+            for (int i = 0; i < npix; i++)
+            {
+                pixels[i] = rgbToGrayScale(pixels[i]);
+            }
+        }
+
+----------------------------------------
+            {
+                for (int i = 0; i < npix; i++)
+                {
+                    pixels[i] = 255;
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+21467631
+core/src/main/java/net/sourceforge/javaocr/scanner/PixelImage.java 194 199
+core/src/main/java/net/sourceforge/javaocr/scanner/PixelImage.java 201 210
+----------------------------------------
+            {
+                for (int i = 0; i < npix; i++)
+                {
+                    pixels[i] = 255;
+                }
+            }
+
+----------------------------------------
+            {
+                for (int i = 0; i < npix; i++)
+                {
+                    pixels[i] =
+                            Math.min(255,
+                            Math.max(0,
+                            ((pixels[i]
+                            - min) * 255) / range));
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+21467630
+core/src/main/java/net/sourceforge/javaocr/scanner/PixelImage.java 175 180
+core/src/main/java/net/sourceforge/javaocr/scanner/PixelImage.java 201 210
+----------------------------------------
+        {
+            for (int i = 0; i < npix; i++)
+            {
+                pixels[i] = rgbToGrayScale(pixels[i]);
+            }
+        }
+
+----------------------------------------
+            {
+                for (int i = 0; i < npix; i++)
+                {
+                    pixels[i] =
+                            Math.min(255,
+                            Math.max(0,
+                            ((pixels[i]
+                            - min) * 255) / range));
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+21467632
+core/src/main/java/net/sourceforge/javaocr/filter/NormaliseGrayscaleFilter.java 33 39
+core/src/main/java/net/sourceforge/javaocr/filter/GrayscaleToRGBA.java 29 34
+----------------------------------------
+    public NormaliseGrayscaleFilter(int min, int max) {
+        super(new int[256]);
+        int range = max - min;
+        for(int i = 0; i < 256; i++){
+            lut[i] = Math.min(255, Math.max(0, ((i - min) * 255) / range));           
+        }
+    }
+
+----------------------------------------
+    public GrayscaleToRGBA() {
+       super(new int[256]);
+        for(int i = 0; i < 256; i++) {
+            lut[i] = 0xff000000 | i << 16 | i <<8 | i;
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+21467633
+core/src/main/java/net/sourceforge/javaocr/scanner/DocumentScanner.java 439 445
+core/src/main/java/net/sourceforge/javaocr/ocr/DocumentScanner.java 379 385
+----------------------------------------
+                {
+                    if (!liberalWhitespacePolicy)
+                    {
+                        isWhiteSpace = false;
+                        break;
+                    }
+                }
+
+----------------------------------------
+            while (cy1 < y2) {
+                boolean isWhiteSpace = pixelImage.horizontalSpanEquals(cy1,cx1,cx2-1, 0);
+                if (!isWhiteSpace) {
+                    break;
+                }
+                cy1++;
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+21467634
+core/src/main/java/net/sourceforge/javaocr/scanner/DocumentScanner.java 439 445
+core/src/main/java/net/sourceforge/javaocr/scanner/DocumentScanner.java 328 335
+----------------------------------------
+                {
+                    if (!liberalWhitespacePolicy)
+                    {
+                        isWhiteSpace = false;
+                        break;
+                    }
+                }
+
+----------------------------------------
+            {
+                if (!whiteLine)
+                {
+                    whiteLine = true;
+                    al.add(new Integer(y1));
+                    al.add(new Integer(y));
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+21467635
+core/src/main/java/net/sourceforge/javaocr/scanner/DocumentScanner.java 439 445
+core/src/main/java/net/sourceforge/javaocr/scanner/DocumentScanner.java 320 326
+----------------------------------------
+                {
+                    if (!liberalWhitespacePolicy)
+                    {
+                        isWhiteSpace = false;
+                        break;
+                    }
+                }
+
+----------------------------------------
+            {
+                if (pixels[idx] < whiteThreshold)
+                {
+                    isWhiteSpace = false;
+                    break;
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+21467636
+demos/sampler/src/net/sf/javaocr/demos/android/sampler/Sampler.java 167 174
+demos/sampler/src/net/sf/javaocr/demos/android/sampler/Sampler.java 328 336
+----------------------------------------
+        if (haveSurface) {
+            try {
+                Log.d(LOG_TAG, "existing surface - start camera now");
+                startCamera();
+            } catch (IOException e) {
+                Log.e(LOG_TAG, "error starting preview in on resume", e);
+            }
+        }
+
+----------------------------------------
+        } else if (view == save) {
+            // do it only once
+            save.setEnabled(false);
+            try {
+                saveSample();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+21467637
+plugins/moment/src/main/java/net/sourceforge/javaocr/plugin/moment/RawMomentFilter.java 50 55
+plugins/moment/src/main/java/net/sourceforge/javaocr/plugin/moment/CentralMomentFilter.java 46 51
+----------------------------------------
+    protected double[] precomputeY(Image image) {
+        final double[] doubles = new double[image.getHeight()];
+        for (int i = 0; i < doubles.length; i++)
+            doubles[i] = Math.pow(i, q);
+        return doubles;
+    }
+
+----------------------------------------
+    protected double[] precomputeX(Image image) {
+        final double[] doubles = new double[image.getWidth()];
+        for (int i = 0; i < doubles.length; i++)
+            doubles[i] = Math.pow(i - xMean, p);
+        return doubles;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+21467638
+plugins/moment/src/main/java/net/sourceforge/javaocr/plugin/moment/CentralMomentFilter.java 46 51
+plugins/moment/src/main/java/net/sourceforge/javaocr/plugin/moment/RawMomentFilter.java 42 47
+----------------------------------------
+    protected double[] precomputeX(Image image) {
+        final double[] doubles = new double[image.getWidth()];
+        for (int i = 0; i < doubles.length; i++)
+            doubles[i] = Math.pow(i - xMean, p);
+        return doubles;
+    }
+
+----------------------------------------
+    protected double[] precomputeX(Image image) {
+        final double[] doubles = new double[image.getWidth()];
+        for (int i = 0; i < doubles.length; i++)
+            doubles[i] = Math.pow(i, p);
+        return doubles;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+21467676
+plugins/moment/src/main/java/net/sourceforge/javaocr/plugin/moment/RawMomentFilter.java 50 55
+plugins/moment/src/main/java/net/sourceforge/javaocr/plugin/moment/RawMomentFilter.java 42 47
+----------------------------------------
+    protected double[] precomputeY(Image image) {
+        final double[] doubles = new double[image.getHeight()];
+        for (int i = 0; i < doubles.length; i++)
+            doubles[i] = Math.pow(i, q);
+        return doubles;
+    }
+
+----------------------------------------
+    protected double[] precomputeX(Image image) {
+        final double[] doubles = new double[image.getWidth()];
+        for (int i = 0; i < doubles.length; i++)
+            doubles[i] = Math.pow(i, p);
+        return doubles;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+21467639
+plugins/moment/src/main/java/net/sourceforge/javaocr/plugin/moment/CentralMomentFilter.java 46 51
+plugins/moment/src/main/java/net/sourceforge/javaocr/plugin/moment/CentralMomentFilter.java 54 59
+----------------------------------------
+    protected double[] precomputeX(Image image) {
+        final double[] doubles = new double[image.getWidth()];
+        for (int i = 0; i < doubles.length; i++)
+            doubles[i] = Math.pow(i - xMean, p);
+        return doubles;
+    }
+
+----------------------------------------
+    protected double[] precomputeY(Image image) {
+        final double[] doubles = new double[image.getHeight()];
+        for (int i = 0; i < doubles.length; i++)
+            doubles[i] = Math.pow(i - yMean, q);
+        return doubles;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+21467640
+plugins/moment/src/main/java/net/sourceforge/javaocr/plugin/moment/RawMomentFilter.java 50 55
+plugins/moment/src/main/java/net/sourceforge/javaocr/plugin/moment/CentralMomentFilter.java 54 59
+----------------------------------------
+    protected double[] precomputeY(Image image) {
+        final double[] doubles = new double[image.getHeight()];
+        for (int i = 0; i < doubles.length; i++)
+            doubles[i] = Math.pow(i, q);
+        return doubles;
+    }
+
+----------------------------------------
+    protected double[] precomputeY(Image image) {
+        final double[] doubles = new double[image.getHeight()];
+        for (int i = 0; i < doubles.length; i++)
+            doubles[i] = Math.pow(i - yMean, q);
+        return doubles;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+21467641
+plugins/moment/src/main/java/net/sourceforge/javaocr/plugin/moment/RawMomentFilter.java 42 47
+plugins/moment/src/main/java/net/sourceforge/javaocr/plugin/moment/CentralMomentFilter.java 54 59
+----------------------------------------
+    protected double[] precomputeX(Image image) {
+        final double[] doubles = new double[image.getWidth()];
+        for (int i = 0; i < doubles.length; i++)
+            doubles[i] = Math.pow(i, p);
+        return doubles;
+    }
+
+----------------------------------------
+    protected double[] precomputeY(Image image) {
+        final double[] doubles = new double[image.getHeight()];
+        for (int i = 0; i < doubles.length; i++)
+            doubles[i] = Math.pow(i - yMean, q);
+        return doubles;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+21467642
+plugins/fir/src/main/java/net/sourceforge/javaocr/plugin/fir/AbstractNeighborhoodFilter.java 54 71
+plugins/morphology/src/main/java/net/sourceforge/javaocr/plugin/morphology/DilationFilter.java 61 80
+----------------------------------------
+  public void process(Image image) {
+		final int imageW = image.getWidth();
+		final int imageH = image.getHeight();
+		
+		// process valid area of the image
+		for (int y = sizeT; y < imageH-sizeB; ++y) {
+			for (int x = sizeL; x < imageW-sizeR; ++x) {
+				Image nImage = image.chisel(x-sizeL, y-sizeT, filterW, filterH);
+				destImage.put(x, y, processNeighborhood(nImage));
+			}
+		}
+		
+		// and copy four borders as they are
+		image.chisel(0, 0, imageW, sizeT).copy(destImage.chisel(0, 0, imageW, sizeT));
+		image.chisel(0, imageH-sizeB, imageW, sizeB).copy(destImage.chisel(0, imageH-sizeB, imageW, sizeB));
+		image.chisel(0, 0, sizeL, imageH).copy(destImage.chisel(0, 0, sizeL, imageH));
+		image.chisel(imageW-sizeR, 0, sizeR, imageH).copy(destImage.chisel(imageW-sizeR, 0, sizeR, imageH));
+  }
+
+----------------------------------------
+  public void process(Image image) {
+    final int imageW = image.getWidth();
+    final int imageH = image.getHeight();
+    
+    // copy four borders as they are
+    image.chisel(0, 0, imageW, sizeT).copy(destImage.chisel(0, 0, imageW, sizeT));
+    image.chisel(0, imageH-sizeB, imageW, sizeB).copy(destImage.chisel(0, imageH-sizeB, imageW, sizeB));
+    image.chisel(0, 0, sizeL, imageH).copy(destImage.chisel(0, 0, sizeL, imageH));
+    image.chisel(imageW-sizeR, 0, sizeR, imageH).copy(destImage.chisel(imageW-sizeR, 0, sizeR, imageH));
+    
+    // process valid area of the image
+    for (int y = sizeT; y < imageH-sizeB; ++y) {
+      for (int x = sizeL; x < imageW-sizeR; ++x) {
+        if (image.get(x, y) == full) {
+          Image nImage = destImage.chisel(x-sizeL, y-sizeT, seImageW, seImageH);
+          processNeighborhood(nImage);
+        }
+      }
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+21467643
+plugins/awt/src/main/java/net/sourceforge/javaocr/ocrPlugins/charExtractor/CharacterExtractor.java 49 66
+plugins/awt/src/main/java/net/sourceforge/javaocr/ocrPlugins/lineExtractor/LineExtractor.java 45 60
+----------------------------------------
+    {
+        try
+        {
+            this.std_width = std_width;
+            this.std_height = std_height;
+            this.inputImage = inputImage;
+            this.outputDir = outputDir;
+            Image img = ImageIO.read(inputImage);
+            PixelImage pixelImage = new PixelImage(img);
+            pixelImage.toGrayScale(true);
+            pixelImage.filter();
+            documentScanner.scan(pixelImage, this, 0, 0, pixelImage.width, pixelImage.height);
+        }
+        catch (IOException ex)
+        {
+            Logger.getLogger(CharacterExtractor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+----------------------------------------
+    {
+        try
+        {
+            this.inputImage = inputImage;
+            this.outputDir = outputDir;
+            Image img = ImageIO.read(inputImage);
+            PixelImage pixelImage = new PixelImage(img);
+            pixelImage.toGrayScale(true);
+            pixelImage.filter();
+            documentScanner.scan(pixelImage, this, 0, 0, pixelImage.width, pixelImage.height);
+        }
+        catch (IOException ex)
+        {
+            LOG.log(Level.SEVERE, null, ex);
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+21467644
+plugins/awt/src/main/java/net/sourceforge/javaocr/ocrPlugins/lineExtractor/LineExtractor.java 45 60
+plugins/awt/src/main/java/net/sourceforge/javaocr/ocrPlugins/charTracer/CharacterTracer.java 46 65
+----------------------------------------
+    {
+        try
+        {
+            this.inputImage = inputImage;
+            this.outputDir = outputDir;
+            Image img = ImageIO.read(inputImage);
+            PixelImage pixelImage = new PixelImage(img);
+            pixelImage.toGrayScale(true);
+            pixelImage.filter();
+            documentScanner.scan(pixelImage, this, 0, 0, pixelImage.width, pixelImage.height);
+        }
+        catch (IOException ex)
+        {
+            LOG.log(Level.SEVERE, null, ex);
+        }
+    }
+
+----------------------------------------
+    {
+        try
+        {
+            bfImage = ImageIO.read(inputImage);
+            bfImageGraphics = bfImage.createGraphics();
+
+            Image img = ImageIO.read(inputImage);
+            PixelImage pixelImage = new PixelImage(img);
+            pixelImage.toGrayScale(true);
+            pixelImage.filter();
+            documentScanner.scan(pixelImage, this, 0, 0, pixelImage.width, pixelImage.height);
+        }
+        catch (IOException ex)
+        {
+            LOG.log(Level.SEVERE, null, ex);
+        }
+        bfImageGraphics.dispose();
+
+        return bfImage;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+28798828
+plugins/awt/src/main/java/net/sourceforge/javaocr/ocrPlugins/lineExtractor/LineExtractor.java 45 60
+plugins/awt/src/main/java/net/sourceforge/javaocr/ocrPlugins/lineExtractor/LineExtractor.java 47 55
+----------------------------------------
+    {
+        try
+        {
+            this.inputImage = inputImage;
+            this.outputDir = outputDir;
+            Image img = ImageIO.read(inputImage);
+            PixelImage pixelImage = new PixelImage(img);
+            pixelImage.toGrayScale(true);
+            pixelImage.filter();
+            documentScanner.scan(pixelImage, this, 0, 0, pixelImage.width, pixelImage.height);
+        }
+        catch (IOException ex)
+        {
+            LOG.log(Level.SEVERE, null, ex);
+        }
+    }
+
+----------------------------------------
+        {
+            this.inputImage = inputImage;
+            this.outputDir = outputDir;
+            Image img = ImageIO.read(inputImage);
+            PixelImage pixelImage = new PixelImage(img);
+            pixelImage.toGrayScale(true);
+            pixelImage.filter();
+            documentScanner.scan(pixelImage, this, 0, 0, pixelImage.width, pixelImage.height);
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+21467645
+plugins/awt/src/main/java/net/sourceforge/javaocr/ocrPlugins/charExtractor/CharacterExtractor.java 51 61
+plugins/awt/src/main/java/net/sourceforge/javaocr/ocrPlugins/lineExtractor/LineExtractor.java 47 55
+----------------------------------------
+        {
+            this.std_width = std_width;
+            this.std_height = std_height;
+            this.inputImage = inputImage;
+            this.outputDir = outputDir;
+            Image img = ImageIO.read(inputImage);
+            PixelImage pixelImage = new PixelImage(img);
+            pixelImage.toGrayScale(true);
+            pixelImage.filter();
+            documentScanner.scan(pixelImage, this, 0, 0, pixelImage.width, pixelImage.height);
+        }
+
+----------------------------------------
+        {
+            this.inputImage = inputImage;
+            this.outputDir = outputDir;
+            Image img = ImageIO.read(inputImage);
+            PixelImage pixelImage = new PixelImage(img);
+            pixelImage.toGrayScale(true);
+            pixelImage.filter();
+            documentScanner.scan(pixelImage, this, 0, 0, pixelImage.width, pixelImage.height);
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+21467719
+core/src/main/java/net/sourceforge/javaocr/scanner/DocumentScanner.java 328 335
+core/src/main/java/net/sourceforge/javaocr/ocr/DocumentScanner.java 324 330
+----------------------------------------
+            {
+                if (!whiteLine)
+                {
+                    whiteLine = true;
+                    al.add(new Integer(y1));
+                    al.add(new Integer(y));
+                }
+            }
+
+----------------------------------------
+                if (numConsecutiveWhite >= minCharBreakWidth) {
+                    if (!inCharSeparator) {
+                        inCharSeparator = true;
+                        al.add(new Integer(charX1));
+                        al.add(new Integer(x - (numConsecutiveWhite - 1)));
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+21467646
+core/src/main/java/net/sourceforge/javaocr/scanner/DocumentScanner.java 439 445
+core/src/main/java/net/sourceforge/javaocr/ocr/DocumentScanner.java 324 330
+----------------------------------------
+                {
+                    if (!liberalWhitespacePolicy)
+                    {
+                        isWhiteSpace = false;
+                        break;
+                    }
+                }
+
+----------------------------------------
+                if (numConsecutiveWhite >= minCharBreakWidth) {
+                    if (!inCharSeparator) {
+                        inCharSeparator = true;
+                        al.add(new Integer(charX1));
+                        al.add(new Integer(x - (numConsecutiveWhite - 1)));
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+21467666
+core/src/main/java/net/sourceforge/javaocr/ocr/DocumentScanner.java 324 330
+core/src/main/java/net/sourceforge/javaocr/ocr/DocumentScanner.java 227 233
+----------------------------------------
+                if (numConsecutiveWhite >= minCharBreakWidth) {
+                    if (!inCharSeparator) {
+                        inCharSeparator = true;
+                        al.add(new Integer(charX1));
+                        al.add(new Integer(x - (numConsecutiveWhite - 1)));
+                    }
+                }
+
+----------------------------------------
+            if (isWhiteSpace) {
+                if (!whiteLine) {
+                    whiteLine = true;
+                    al.add(new Integer(y1));
+                    al.add(new Integer(y));
+                }
+            } else {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+21467720
+core/src/main/java/net/sourceforge/javaocr/scanner/DocumentScanner.java 328 335
+core/src/main/java/net/sourceforge/javaocr/ocr/DocumentScanner.java 227 233
+----------------------------------------
+            {
+                if (!whiteLine)
+                {
+                    whiteLine = true;
+                    al.add(new Integer(y1));
+                    al.add(new Integer(y));
+                }
+            }
+
+----------------------------------------
+            if (isWhiteSpace) {
+                if (!whiteLine) {
+                    whiteLine = true;
+                    al.add(new Integer(y1));
+                    al.add(new Integer(y));
+                }
+            } else {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+21467647
+core/src/main/java/net/sourceforge/javaocr/scanner/DocumentScanner.java 439 445
+core/src/main/java/net/sourceforge/javaocr/ocr/DocumentScanner.java 227 233
+----------------------------------------
+                {
+                    if (!liberalWhitespacePolicy)
+                    {
+                        isWhiteSpace = false;
+                        break;
+                    }
+                }
+
+----------------------------------------
+            if (isWhiteSpace) {
+                if (!whiteLine) {
+                    whiteLine = true;
+                    al.add(new Integer(y1));
+                    al.add(new Integer(y));
+                }
+            } else {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+21467648
+core/src/main/java/net/sourceforge/javaocr/scanner/DocumentScanner.java 439 445
+core/src/main/java/net/sourceforge/javaocr/ocr/AbstractBaseSlicer.java 67 72
+----------------------------------------
+                {
+                    if (!liberalWhitespacePolicy)
+                    {
+                        isWhiteSpace = false;
+                        break;
+                    }
+                }
+
+----------------------------------------
+        for (currentPosition = from; currentPosition < border; currentPosition++) {
+            rowEmpty = spanEmpty();          
+            if (!rowEmpty) {
+                break;
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+21467659
+core/src/main/java/net/sourceforge/javaocr/ocr/DocumentScanner.java 379 385
+core/src/main/java/net/sourceforge/javaocr/ocr/AbstractBaseSlicer.java 67 72
+----------------------------------------
+            while (cy1 < y2) {
+                boolean isWhiteSpace = pixelImage.horizontalSpanEquals(cy1,cx1,cx2-1, 0);
+                if (!isWhiteSpace) {
+                    break;
+                }
+                cy1++;
+            }
+
+----------------------------------------
+        for (currentPosition = from; currentPosition < border; currentPosition++) {
+            rowEmpty = spanEmpty();          
+            if (!rowEmpty) {
+                break;
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+21467704
+core/src/main/java/net/sourceforge/javaocr/ocr/DocumentScanner.java 379 385
+core/src/main/java/net/sourceforge/javaocr/ocr/DocumentScanner.java 389 396
+----------------------------------------
+            while (cy1 < y2) {
+                boolean isWhiteSpace = pixelImage.horizontalSpanEquals(cy1,cx1,cx2-1, 0);
+                if (!isWhiteSpace) {
+                    break;
+                }
+                cy1++;
+            }
+
+----------------------------------------
+            while (cy2 > cy1) {
+                boolean isWhiteSpace = pixelImage.horizontalSpanEquals(cy2-1,cx1,cx2-1, 0);
+   
+                if (!isWhiteSpace) {
+                    break;
+                }
+                cy2--;
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+21467660
+core/src/main/java/net/sourceforge/javaocr/ocr/AbstractBaseSlicer.java 67 72
+core/src/main/java/net/sourceforge/javaocr/ocr/DocumentScanner.java 389 396
+----------------------------------------
+        for (currentPosition = from; currentPosition < border; currentPosition++) {
+            rowEmpty = spanEmpty();          
+            if (!rowEmpty) {
+                break;
+            }
+        }
+
+----------------------------------------
+            while (cy2 > cy1) {
+                boolean isWhiteSpace = pixelImage.horizontalSpanEquals(cy2-1,cx1,cx2-1, 0);
+   
+                if (!isWhiteSpace) {
+                    break;
+                }
+                cy2--;
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+21467649
+core/src/main/java/net/sourceforge/javaocr/scanner/DocumentScanner.java 439 445
+core/src/main/java/net/sourceforge/javaocr/ocr/DocumentScanner.java 389 396
+----------------------------------------
+                {
+                    if (!liberalWhitespacePolicy)
+                    {
+                        isWhiteSpace = false;
+                        break;
+                    }
+                }
+
+----------------------------------------
+            while (cy2 > cy1) {
+                boolean isWhiteSpace = pixelImage.horizontalSpanEquals(cy2-1,cx1,cx2-1, 0);
+   
+                if (!isWhiteSpace) {
+                    break;
+                }
+                cy2--;
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+21467651
+core/src/main/java/net/sourceforge/javaocr/ocr/DocumentScanner.java 324 330
+core/src/main/java/net/sourceforge/javaocr/scanner/DocumentScanner.java 454 465
+----------------------------------------
+                if (numConsecutiveWhite >= minCharBreakWidth) {
+                    if (!inCharSeparator) {
+                        inCharSeparator = true;
+                        al.add(new Integer(charX1));
+                        al.add(new Integer(x - (numConsecutiveWhite - 1)));
+                    }
+                }
+
+----------------------------------------
+            {
+                numConsecutiveWhite++;
+                if (numConsecutiveWhite >= minCharBreakWidth)
+                {
+                    if (!inCharSeparator)
+                    {
+                        inCharSeparator = true;
+                        al.add(new Integer(charX1));
+                        al.add(new Integer(x - (numConsecutiveWhite - 1)));
+                    }
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+21467650
+core/src/main/java/net/sourceforge/javaocr/scanner/DocumentScanner.java 454 465
+core/src/main/java/net/sourceforge/javaocr/ocr/DocumentScanner.java 322 331
+----------------------------------------
+            {
+                numConsecutiveWhite++;
+                if (numConsecutiveWhite >= minCharBreakWidth)
+                {
+                    if (!inCharSeparator)
+                    {
+                        inCharSeparator = true;
+                        al.add(new Integer(charX1));
+                        al.add(new Integer(x - (numConsecutiveWhite - 1)));
+                    }
+                }
+            }
+
+----------------------------------------
+            if (isWhiteSpace) {
+                numConsecutiveWhite++;
+                if (numConsecutiveWhite >= minCharBreakWidth) {
+                    if (!inCharSeparator) {
+                        inCharSeparator = true;
+                        al.add(new Integer(charX1));
+                        al.add(new Integer(x - (numConsecutiveWhite - 1)));
+                    }
+                }
+            } else {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+21467653
+core/src/main/java/net/sourceforge/javaocr/scanner/DocumentScanner.java 328 335
+core/src/main/java/net/sourceforge/javaocr/scanner/DocumentScanner.java 457 464
+----------------------------------------
+            {
+                if (!whiteLine)
+                {
+                    whiteLine = true;
+                    al.add(new Integer(y1));
+                    al.add(new Integer(y));
+                }
+            }
+
+----------------------------------------
+                {
+                    if (!inCharSeparator)
+                    {
+                        inCharSeparator = true;
+                        al.add(new Integer(charX1));
+                        al.add(new Integer(x - (numConsecutiveWhite - 1)));
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+21467655
+core/src/main/java/net/sourceforge/javaocr/ocr/DocumentScanner.java 324 330
+core/src/main/java/net/sourceforge/javaocr/scanner/DocumentScanner.java 457 464
+----------------------------------------
+                if (numConsecutiveWhite >= minCharBreakWidth) {
+                    if (!inCharSeparator) {
+                        inCharSeparator = true;
+                        al.add(new Integer(charX1));
+                        al.add(new Integer(x - (numConsecutiveWhite - 1)));
+                    }
+                }
+
+----------------------------------------
+                {
+                    if (!inCharSeparator)
+                    {
+                        inCharSeparator = true;
+                        al.add(new Integer(charX1));
+                        al.add(new Integer(x - (numConsecutiveWhite - 1)));
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+21467652
+core/src/main/java/net/sourceforge/javaocr/scanner/DocumentScanner.java 439 445
+core/src/main/java/net/sourceforge/javaocr/scanner/DocumentScanner.java 457 464
+----------------------------------------
+                {
+                    if (!liberalWhitespacePolicy)
+                    {
+                        isWhiteSpace = false;
+                        break;
+                    }
+                }
+
+----------------------------------------
+                {
+                    if (!inCharSeparator)
+                    {
+                        inCharSeparator = true;
+                        al.add(new Integer(charX1));
+                        al.add(new Integer(x - (numConsecutiveWhite - 1)));
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+21467654
+core/src/main/java/net/sourceforge/javaocr/ocr/DocumentScanner.java 322 331
+core/src/main/java/net/sourceforge/javaocr/scanner/DocumentScanner.java 457 464
+----------------------------------------
+            if (isWhiteSpace) {
+                numConsecutiveWhite++;
+                if (numConsecutiveWhite >= minCharBreakWidth) {
+                    if (!inCharSeparator) {
+                        inCharSeparator = true;
+                        al.add(new Integer(charX1));
+                        al.add(new Integer(x - (numConsecutiveWhite - 1)));
+                    }
+                }
+            } else {
+
+----------------------------------------
+                {
+                    if (!inCharSeparator)
+                    {
+                        inCharSeparator = true;
+                        al.add(new Integer(charX1));
+                        al.add(new Integer(x - (numConsecutiveWhite - 1)));
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+21467694
+core/src/main/java/net/sourceforge/javaocr/ocr/DocumentScanner.java 227 233
+core/src/main/java/net/sourceforge/javaocr/scanner/DocumentScanner.java 457 464
+----------------------------------------
+            if (isWhiteSpace) {
+                if (!whiteLine) {
+                    whiteLine = true;
+                    al.add(new Integer(y1));
+                    al.add(new Integer(y));
+                }
+            } else {
+
+----------------------------------------
+                {
+                    if (!inCharSeparator)
+                    {
+                        inCharSeparator = true;
+                        al.add(new Integer(charX1));
+                        al.add(new Integer(x - (numConsecutiveWhite - 1)));
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+21467656
+core/src/main/java/net/sourceforge/javaocr/ocr/AbstractLinearImage.java 186 193
+core/src/main/java/net/sourceforge/javaocr/ocr/AbstractLinearImage.java 202 208
+----------------------------------------
+    public boolean horizontalSpanEquals(final int y, final int from, final int to, final int value) {
+        iterateH(y, from, to);
+        while (hasNext()) {
+            if (next() != value) return false;
+        }
+        return true;
+
+    }
+
+----------------------------------------
+    public boolean verticalSpanEquals(final int x, final int from, final int to, final int value) {
+        iterateV(x, from, to);
+        while (hasNext()) {
+            if (next() != value) return false;
+        }
+        return true;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+21467657
+core/src/main/java/net/sourceforge/javaocr/ocr/AbstractLinearImage.java 259 266
+core/src/main/java/net/sourceforge/javaocr/ocr/AbstractLinearImage.java 273 280
+----------------------------------------
+    public void copy(Image dst) {
+        final int height = getHeight();
+        for (int i = 0; i < height; i++) {
+            for (iterateH(i), dst.iterateH(i); hasNext();) {
+                dst.next(next());
+            }
+        }
+    }
+
+----------------------------------------
+    public void flip(Image dst) {
+        final int width = getWidth();
+        for (int i = 0; i < width; i++) {
+            for (iterateV(i), dst.iterateH(i); hasNext();) {
+                dst.next(next());
+            }
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+21467658
+plugins/awt/src/main/java/net/sourceforge/javaocr/ocrPlugins/aspectRatio/AspectRatioOCR.java 69 77
+plugins/awt/src/main/java/net/sourceforge/javaocr/ocrPlugins/aspectRatio/AspectRatioOCR.java 95 102
+----------------------------------------
+    {
+        //Send accuracy of this identification to the listener
+        if (listener != null)
+        {
+            OCRIdentification identAccuracy = new OCRIdentification(OCRComp.ASPECT_RATIO);
+            identAccuracy.addChar('\n', 0.0);
+            listener.processCharOrSpace(identAccuracy);
+        }
+    }
+
+----------------------------------------
+    {
+        if (listener != null)
+        {
+            OCRIdentification identAccuracy = new OCRIdentification(OCRComp.ASPECT_RATIO);
+            identAccuracy.addChar(' ', 0.0);
+            listener.processCharOrSpace(identAccuracy);
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+21467661
+demos/camera-utils/src/main/java/net/sf/javaocr/demos/android/utils/camera/CameraManager.java 94 101
+demos/camera-utils/src/main/java/net/sf/javaocr/demos/android/utils/camera/CameraManager.java 181 187
+----------------------------------------
+        if (cameraActive) {
+            if (camera != null) {
+                stopPreview();
+                camera.release();
+                camera = null;
+            }
+            cameraActive = false;
+        }
+
+----------------------------------------
+    private void stopPreview() {
+        if (previewActive) {
+            camera.stopPreview();
+            previewActive = false;
+            previewSize = null;
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+28798827
+core/src/main/java/net/sourceforge/javaocr/ocr/AbstractBaseSlicer.java 67 72
+demos/camera-utils/src/main/java/net/sf/javaocr/demos/android/utils/camera/CameraManager.java 181 187
+----------------------------------------
+        for (currentPosition = from; currentPosition < border; currentPosition++) {
+            rowEmpty = spanEmpty();          
+            if (!rowEmpty) {
+                break;
+            }
+        }
+
+----------------------------------------
+    private void stopPreview() {
+        if (previewActive) {
+            camera.stopPreview();
+            previewActive = false;
+            previewSize = null;
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+21467662
+demos/camera-utils/src/main/java/net/sf/javaocr/demos/android/utils/camera/CameraManager.java 181 187
+demos/camera-utils/src/main/java/net/sf/javaocr/demos/android/utils/camera/CameraManager.java 93 102
+----------------------------------------
+    private void stopPreview() {
+        if (previewActive) {
+            camera.stopPreview();
+            previewActive = false;
+            previewSize = null;
+        }
+    }
+
+----------------------------------------
+    public synchronized void stop() {
+        if (cameraActive) {
+            if (camera != null) {
+                stopPreview();
+                camera.release();
+                camera = null;
+            }
+            cameraActive = false;
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+21467663
+demos/camera-utils/src/main/java/net/sf/javaocr/demos/android/utils/camera/CameraManager.java 181 187
+core/src/main/java/net/sourceforge/javaocr/ocr/DocumentScanner.java 233 238
+----------------------------------------
+    private void stopPreview() {
+        if (previewActive) {
+            camera.stopPreview();
+            previewActive = false;
+            previewSize = null;
+        }
+    }
+
+----------------------------------------
+            } else {
+                if (whiteLine) {
+                    whiteLine = false;
+                    y1 = y;
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+21467664
+demos/camera-utils/src/main/java/net/sf/javaocr/demos/android/utils/camera/CameraManager.java 213 242
+demos/camera-utils/src/main/java/net/sf/javaocr/demos/android/utils/camera/CameraManager.java 250 274
+----------------------------------------
+    public synchronized boolean doAutofocus() {
+
+        Log.d(LOG_TAG, "autofocus requested");
+        // if camera is not active, no autofocus possible
+        if (!isCameraActive())
+            return false;
+
+        // if we are already waiting for focus,  return false on the spot
+        // ( is it possible at all?)
+        if (waitingForFocus)
+            return false;
+
+        focusState = false;
+
+        // start autofocus attempt
+        camera.autoFocus(this);
+
+        // wait till autofocus callback
+
+        try {
+            wait();
+        } catch (InterruptedException e) {
+            // we were interrupted. no autofocus
+            focusState = false;
+        }
+        //
+        waitingForFocus = false;
+        Log.d(LOG_TAG, "autofocus ready");
+        return focusState;
+    }
+
+----------------------------------------
+    public synchronized byte[] getPreviewFrame() {
+        Log.d(LOG_TAG, "preview frame requested");
+        // if camera is not active, no autofocus possible
+        if (!isCameraActive())
+            return null;
+
+        // if we are already waiting for focus,  return false on the spot
+        // ( is it possible at all?)
+        if (waitingForPreview)
+            return null;
+
+        waitingForPreview = true;
+
+        previewImage = null;
+        // request snapshot right now
+        camera.setOneShotPreviewCallback(this);
+        try {
+            wait();
+        } catch (InterruptedException e) {
+            // we were interrupted.no preview image
+            return previewImage = null;
+        }
+        waitingForPreview = false;
+        return previewImage;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+21467665
+plugins/cluster/src/main/java/net/sourceforge/javaocr/plugin/cluster/MahalanobisDistanceCluster.java 92 100
+plugins/cluster/src/main/java/net/sourceforge/javaocr/plugin/cluster/NormalDistributionCluster.java 83 89
+----------------------------------------
+    public void train(double[] samples) {
+        super.train(samples);
+        // invalidate cumulated covariance
+        invcov = null;
+        for (int i = 0; i < getDimensions(); i++)
+            for (int j = 0; j < getDimensions(); j++) {
+                sumxy[i][j] += samples[i] * samples[j];
+            }
+    }
+
+----------------------------------------
+    public void train(double samples[]) {
+        super.train(samples);
+        var = null;
+        for (int i = 0; i < getDimensions(); i++) {
+            quads[i] += samples[i] * samples[i];
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+21467667
+core/src/main/java/net/sourceforge/javaocr/scanner/DocumentScanner.java 439 445
+core/src/main/java/net/sourceforge/javaocr/scanner/DocumentScanner.java 528 534
+----------------------------------------
+                {
+                    if (!liberalWhitespacePolicy)
+                    {
+                        isWhiteSpace = false;
+                        break;
+                    }
+                }
+
+----------------------------------------
+                {
+                    if (pixels[idx] < whiteThreshold)
+                    {
+                        isWhiteSpace = false;
+                        break;
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+78
+21467668
+core/src/main/java/net/sourceforge/javaocr/scanner/DocumentScanner.java 320 326
+core/src/main/java/net/sourceforge/javaocr/scanner/DocumentScanner.java 528 534
+----------------------------------------
+            {
+                if (pixels[idx] < whiteThreshold)
+                {
+                    isWhiteSpace = false;
+                    break;
+                }
+            }
+
+----------------------------------------
+                {
+                    if (pixels[idx] < whiteThreshold)
+                    {
+                        isWhiteSpace = false;
+                        break;
+                    }
+                }
+
+----------------------------------------

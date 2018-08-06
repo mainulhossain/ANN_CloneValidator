@@ -1,0 +1,1664 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+27364748
+pdfsam-extract/src/main/java/org/pdfsam/extract/ExtractModule.java 103 115
+pdfsam-rotate/src/main/java/org/pdfsam/rotate/RotateModule.java 108 120
+----------------------------------------
+        return builder;
+    }
+
+    @Override
+    public void onSaveWorkspace(Map<String, String> data) {
+        selectionPane.saveStateTo(data);
+        extractOptions.saveStateTo(data);
+        destinationPane.saveStateTo(data);
+        destinationDirectoryField.saveStateTo(data);
+        prefix.saveStateTo(data);
+    }
+
+    @Override
+
+----------------------------------------
+        prefix.saveStateTo(data);
+    }
+
+    @Override
+    public void onLoadWorkspace(Map<String, String> data) {
+        selectionPane.restoreStateFrom(data);
+        rotateOptions.restoreStateFrom(data);
+        destinationPane.restoreStateFrom(data);
+        destinationDirectoryField.restoreStateFrom(data);
+        prefix.restoreStateFrom(data);
+    }
+
+    @Override
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+27364754
+pdfsam-rotate/src/main/java/org/pdfsam/rotate/RotateModule.java 92 102
+pdfsam-split-by-bookmarks/src/main/java/org/pdfsam/splitbybookmarks/SplitByBookmarksModule.java 120 130
+----------------------------------------
+    protected RotateParametersBuilder getBuilder(Consumer<String> onError) {
+        RotateParametersBuilder builder = new RotateParametersBuilder();
+        rotateOptions.apply(builder, onError);
+        selectionPane.apply(builder, onError);
+        destinationDirectoryField.apply(builder, onError);
+        destinationPane.apply(builder, onError);
+        prefix.apply(builder, onError);
+        return builder;
+    }
+
+    @Override
+
+----------------------------------------
+    protected Builder<SplitByOutlineLevelParameters> getBuilder(Consumer<String> onError) {
+        SplitByOutlineLevelParametersBuilder builder = new SplitByOutlineLevelParametersBuilder();
+        splitOptions.apply(builder, onError);
+        selectionPane.apply(builder, onError);
+        destinationDirectoryField.apply(builder, onError);
+        destinationPane.apply(builder, onError);
+        prefix.apply(builder, onError);
+        return builder;
+    }
+
+    @Override
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+27364749
+pdfsam-extract/src/main/java/org/pdfsam/extract/ExtractModule.java 96 106
+pdfsam-split-by-bookmarks/src/main/java/org/pdfsam/splitbybookmarks/SplitByBookmarksModule.java 120 130
+----------------------------------------
+    protected ExtractParametersBuilder getBuilder(Consumer<String> onError) {
+        ExtractParametersBuilder builder = new ExtractParametersBuilder();
+        extractOptions.apply(builder, onError);
+        selectionPane.apply(builder, onError);
+        destinationDirectoryField.apply(builder, onError);
+        destinationPane.apply(builder, onError);
+        prefix.apply(builder, onError);
+        return builder;
+    }
+
+    @Override
+
+----------------------------------------
+    protected Builder<SplitByOutlineLevelParameters> getBuilder(Consumer<String> onError) {
+        SplitByOutlineLevelParametersBuilder builder = new SplitByOutlineLevelParametersBuilder();
+        splitOptions.apply(builder, onError);
+        selectionPane.apply(builder, onError);
+        destinationDirectoryField.apply(builder, onError);
+        destinationPane.apply(builder, onError);
+        prefix.apply(builder, onError);
+        return builder;
+    }
+
+    @Override
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+27364753
+pdfsam-split-by-bookmarks/src/main/java/org/pdfsam/splitbybookmarks/SplitByBookmarksModule.java 92 114
+pdfsam-rotate/src/main/java/org/pdfsam/rotate/RotateModule.java 99 120
+----------------------------------------
+        this.selectionPane.addOnLoaded(d -> splitOptions.setValidBookmarkLevels(d.getValidBookmarksLevels()));
+
+    }
+
+    @Override
+    public void onSaveWorkspace(Map<String, String> data) {
+        selectionPane.saveStateTo(data);
+        splitOptions.saveStateTo(data);
+        destinationDirectoryField.saveStateTo(data);
+        destinationPane.saveStateTo(data);
+        prefix.saveStateTo(data);
+    }
+
+    @Override
+    public void onLoadWorkspace(Map<String, String> data) {
+        selectionPane.restoreStateFrom(data);
+        splitOptions.restoreStateFrom(data);
+        destinationDirectoryField.restoreStateFrom(data);
+        destinationPane.restoreStateFrom(data);
+        prefix.restoreStateFrom(data);
+    }
+
+    @Override
+
+----------------------------------------
+        return builder;
+    }
+
+    @Override
+    public void onSaveWorkspace(Map<String, String> data) {
+        selectionPane.saveStateTo(data);
+        rotateOptions.saveStateTo(data);
+        destinationPane.saveStateTo(data);
+        destinationDirectoryField.saveStateTo(data);
+        prefix.saveStateTo(data);
+    }
+
+    @Override
+    public void onLoadWorkspace(Map<String, String> data) {
+        selectionPane.restoreStateFrom(data);
+        rotateOptions.restoreStateFrom(data);
+        destinationPane.restoreStateFrom(data);
+        destinationDirectoryField.restoreStateFrom(data);
+        prefix.restoreStateFrom(data);
+    }
+
+    @Override
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+27364755
+pdfsam-rotate/src/main/java/org/pdfsam/rotate/RotateParametersBuilder.java 92 98
+pdfsam-simple-split/src/main/java/org/pdfsam/split/SplitAfterRadioButton.java 101 107
+----------------------------------------
+        BulkRotateParameters params = new BulkRotateParameters();
+        params.setCompress(isCompress());
+        params.setExistingOutputPolicy(existingOutput());
+        params.setVersion(getVersion());
+        params.setOutput(getOutput());
+        params.setOutputPrefix(getPrefix());
+        inputs.forEach(params::addInput);
+
+----------------------------------------
+            params.addPages(pages);
+            params.setCompress(isCompress());
+            params.setExistingOutputPolicy(existingOutput());
+            params.setVersion(getVersion());
+            params.setOutput(getOutput());
+            params.setOutputPrefix(getPrefix());
+            params.setSource(getSource());
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+27364756
+pdfsam-rotate/src/main/java/org/pdfsam/rotate/RotateParametersBuilder.java 92 98
+pdfsam-simple-split/src/main/java/org/pdfsam/split/SplitAfterPredefinedSetOfPagesRadioButton.java 99 105
+----------------------------------------
+        BulkRotateParameters params = new BulkRotateParameters();
+        params.setCompress(isCompress());
+        params.setExistingOutputPolicy(existingOutput());
+        params.setVersion(getVersion());
+        params.setOutput(getOutput());
+        params.setOutputPrefix(getPrefix());
+        inputs.forEach(params::addInput);
+
+----------------------------------------
+            SimpleSplitParameters params = new SimpleSplitParameters(pages);
+            params.setCompress(isCompress());
+            params.setExistingOutputPolicy(existingOutput());
+            params.setVersion(getVersion());
+            params.setOutput(getOutput());
+            params.setOutputPrefix(getPrefix());
+            params.setSource(getSource());
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+27364757
+pdfsam-rotate/src/main/java/org/pdfsam/rotate/RotateParametersBuilder.java 92 98
+pdfsam-simple-split/src/main/java/org/pdfsam/split/SplitByEveryRadioButton.java 104 110
+----------------------------------------
+        BulkRotateParameters params = new BulkRotateParameters();
+        params.setCompress(isCompress());
+        params.setExistingOutputPolicy(existingOutput());
+        params.setVersion(getVersion());
+        params.setOutput(getOutput());
+        params.setOutputPrefix(getPrefix());
+        inputs.forEach(params::addInput);
+
+----------------------------------------
+            SplitByEveryXPagesParameters params = new SplitByEveryXPagesParameters(step);
+            params.setCompress(isCompress());
+            params.setExistingOutputPolicy(existingOutput());
+            params.setVersion(getVersion());
+            params.setOutput(getOutput());
+            params.setOutputPrefix(getPrefix());
+            params.setSource(getSource());
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+27364758
+pdfsam-simple-split/src/main/java/org/pdfsam/split/SplitModule.java 127 140
+pdfsam-split-by-bookmarks/src/main/java/org/pdfsam/splitbybookmarks/SplitByBookmarksModule.java 127 139
+----------------------------------------
+        return builder.orElse(null);
+    }
+
+    @Override
+    protected VBox getInnerPanel() {
+        VBox pane = new VBox();
+        pane.setAlignment(Pos.TOP_CENTER);
+
+        TitledPane prefixTitled = Views.titledPane(DefaultI18nContext.getInstance().i18n("File names settings"),
+                prefix);
+        prefix.addMenuItemFor(Prefix.CURRENTPAGE);
+        prefix.addMenuItemFor(Prefix.FILENUMBER);
+
+        pane.getChildren().addAll(selectionPane,
+
+----------------------------------------
+        return builder;
+    }
+
+    @Override
+    protected VBox getInnerPanel() {
+        VBox pane = new VBox();
+        pane.setAlignment(Pos.TOP_CENTER);
+
+        TitledPane prefixTitled = Views.titledPane(DefaultI18nContext.getInstance().i18n("File names settings"),
+                prefix);
+        prefix.addMenuItemFor(Prefix.CURRENTPAGE);
+        prefix.addMenuItemFor(Prefix.FILENUMBER);
+        prefix.addMenuItemFor(Prefix.BOOKMARK);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+27364759
+pdfsam-split-by-bookmarks/src/main/java/org/pdfsam/splitbybookmarks/SplitByBookmarksModule.java 92 114
+pdfsam-simple-split/src/main/java/org/pdfsam/split/SplitModule.java 96 117
+----------------------------------------
+        this.selectionPane.addOnLoaded(d -> splitOptions.setValidBookmarkLevels(d.getValidBookmarksLevels()));
+
+    }
+
+    @Override
+    public void onSaveWorkspace(Map<String, String> data) {
+        selectionPane.saveStateTo(data);
+        splitOptions.saveStateTo(data);
+        destinationDirectoryField.saveStateTo(data);
+        destinationPane.saveStateTo(data);
+        prefix.saveStateTo(data);
+    }
+
+    @Override
+    public void onLoadWorkspace(Map<String, String> data) {
+        selectionPane.restoreStateFrom(data);
+        splitOptions.restoreStateFrom(data);
+        destinationDirectoryField.restoreStateFrom(data);
+        destinationPane.restoreStateFrom(data);
+        prefix.restoreStateFrom(data);
+    }
+
+    @Override
+
+----------------------------------------
+        return descriptor;
+    }
+
+    @Override
+    public void onSaveWorkspace(Map<String, String> data) {
+        selectionPane.saveStateTo(data);
+        splitOptions.saveStateTo(data);
+        destinationDirectoryField.saveStateTo(data);
+        destinationPane.saveStateTo(data);
+        prefix.saveStateTo(data);
+    }
+
+    @Override
+    public void onLoadWorkspace(Map<String, String> data) {
+        selectionPane.restoreStateFrom(data);
+        splitOptions.restoreStateFrom(data);
+        destinationDirectoryField.restoreStateFrom(data);
+        destinationPane.restoreStateFrom(data);
+        prefix.restoreStateFrom(data);
+    }
+
+    @Override
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+27364761
+pdfsam-split-by-bookmarks/src/main/java/org/pdfsam/splitbybookmarks/SplitByBookmarksModule.java 102 115
+pdfsam-simple-split/src/main/java/org/pdfsam/split/SplitModule.java 96 109
+----------------------------------------
+        prefix.saveStateTo(data);
+    }
+
+    @Override
+    public void onLoadWorkspace(Map<String, String> data) {
+        selectionPane.restoreStateFrom(data);
+        splitOptions.restoreStateFrom(data);
+        destinationDirectoryField.restoreStateFrom(data);
+        destinationPane.restoreStateFrom(data);
+        prefix.restoreStateFrom(data);
+    }
+
+    @Override
+    public ModuleDescriptor descriptor() {
+
+----------------------------------------
+        return descriptor;
+    }
+
+    @Override
+    public void onSaveWorkspace(Map<String, String> data) {
+        selectionPane.saveStateTo(data);
+        splitOptions.saveStateTo(data);
+        destinationDirectoryField.saveStateTo(data);
+        destinationPane.saveStateTo(data);
+        prefix.saveStateTo(data);
+    }
+
+    @Override
+    public void onLoadWorkspace(Map<String, String> data) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+27364762
+pdfsam-simple-split/src/main/java/org/pdfsam/split/SplitByEveryRadioButton.java 98 117
+pdfsam-simple-split/src/main/java/org/pdfsam/split/SplitAfterPredefinedSetOfPagesRadioButton.java 93 111
+----------------------------------------
+        SplitByEveryXPagesParametersBuilder(int step) {
+            this.step = step;
+        }
+
+        @Override
+        public SplitByEveryXPagesParameters build() {
+            SplitByEveryXPagesParameters params = new SplitByEveryXPagesParameters(step);
+            params.setCompress(isCompress());
+            params.setExistingOutputPolicy(existingOutput());
+            params.setVersion(getVersion());
+            params.setOutput(getOutput());
+            params.setOutputPrefix(getPrefix());
+            params.setSource(getSource());
+            params.setOptimizationPolicy(getOptimizationPolicy());
+            params.discardOutline(isDiscardBookmarks());
+            return params;
+        }
+    }
+
+}
+
+----------------------------------------
+        SimpleSplitParametersBuilder(PredefinedSetOfPages pages) {
+            this.pages = pages;
+        }
+
+        @Override
+        public SimpleSplitParameters build() {
+            SimpleSplitParameters params = new SimpleSplitParameters(pages);
+            params.setCompress(isCompress());
+            params.setExistingOutputPolicy(existingOutput());
+            params.setVersion(getVersion());
+            params.setOutput(getOutput());
+            params.setOutputPrefix(getPrefix());
+            params.setSource(getSource());
+            params.setOptimizationPolicy(getOptimizationPolicy());
+            params.discardOutline(isDiscardBookmarks());
+            return params;
+        }
+    }
+}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+27364763
+pdfsam-simple-split/src/main/java/org/pdfsam/split/SplitByEveryRadioButton.java 104 117
+pdfsam-simple-split/src/main/java/org/pdfsam/split/SplitAfterRadioButton.java 101 113
+----------------------------------------
+            SplitByEveryXPagesParameters params = new SplitByEveryXPagesParameters(step);
+            params.setCompress(isCompress());
+            params.setExistingOutputPolicy(existingOutput());
+            params.setVersion(getVersion());
+            params.setOutput(getOutput());
+            params.setOutputPrefix(getPrefix());
+            params.setSource(getSource());
+            params.setOptimizationPolicy(getOptimizationPolicy());
+            params.discardOutline(isDiscardBookmarks());
+            return params;
+        }
+    }
+
+}
+
+----------------------------------------
+            params.addPages(pages);
+            params.setCompress(isCompress());
+            params.setExistingOutputPolicy(existingOutput());
+            params.setVersion(getVersion());
+            params.setOutput(getOutput());
+            params.setOutputPrefix(getPrefix());
+            params.setSource(getSource());
+            params.setOptimizationPolicy(getOptimizationPolicy());
+            params.discardOutline(isDiscardBookmarks());
+            return params;
+        }
+    }
+}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+27364764
+pdfsam-split-by-bookmarks/src/main/java/org/pdfsam/splitbybookmarks/SplitByOutlineLevelParametersBuilder.java 49 57
+pdfsam-simple-split/src/main/java/org/pdfsam/split/SplitByEveryRadioButton.java 107 115
+----------------------------------------
+        params.setMatchingTitleRegEx(regexp);
+        params.setOutput(getOutput());
+        params.setOutputPrefix(getPrefix());
+        params.setSource(getSource());
+        params.setOptimizationPolicy(getOptimizationPolicy());
+        params.discardOutline(isDiscardBookmarks());
+        return params;
+    }
+}
+
+----------------------------------------
+            params.setVersion(getVersion());
+            params.setOutput(getOutput());
+            params.setOutputPrefix(getPrefix());
+            params.setSource(getSource());
+            params.setOptimizationPolicy(getOptimizationPolicy());
+            params.discardOutline(isDiscardBookmarks());
+            return params;
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+27364765
+pdfsam-simple-split/src/main/java/org/pdfsam/split/SplitByEveryRadioButton.java 19 26
+pdfsam-simple-split/src/main/java/org/pdfsam/split/SplitAfterRadioButton.java 19 26
+----------------------------------------
+package org.pdfsam.split;
+
+import static org.apache.commons.lang3.StringUtils.EMPTY;
+import static org.apache.commons.lang3.StringUtils.defaultString;
+
+import java.util.Map;
+import java.util.Optional;
+import java.util.function.Consumer;
+
+----------------------------------------
+package org.pdfsam.split;
+
+import static org.apache.commons.lang3.StringUtils.EMPTY;
+import static org.apache.commons.lang3.StringUtils.defaultString;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+27364766
+pdfsam-simple-split/src/main/java/org/pdfsam/split/SplitAfterRadioButton.java 101 113
+pdfsam-simple-split/src/main/java/org/pdfsam/split/SplitAfterPredefinedSetOfPagesRadioButton.java 99 111
+----------------------------------------
+            params.addPages(pages);
+            params.setCompress(isCompress());
+            params.setExistingOutputPolicy(existingOutput());
+            params.setVersion(getVersion());
+            params.setOutput(getOutput());
+            params.setOutputPrefix(getPrefix());
+            params.setSource(getSource());
+            params.setOptimizationPolicy(getOptimizationPolicy());
+            params.discardOutline(isDiscardBookmarks());
+            return params;
+        }
+    }
+}
+
+----------------------------------------
+            SimpleSplitParameters params = new SimpleSplitParameters(pages);
+            params.setCompress(isCompress());
+            params.setExistingOutputPolicy(existingOutput());
+            params.setVersion(getVersion());
+            params.setOutput(getOutput());
+            params.setOutputPrefix(getPrefix());
+            params.setSource(getSource());
+            params.setOptimizationPolicy(getOptimizationPolicy());
+            params.discardOutline(isDiscardBookmarks());
+            return params;
+        }
+    }
+}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+27364767
+pdfsam-split-by-bookmarks/src/main/java/org/pdfsam/splitbybookmarks/SplitByOutlineLevelParametersBuilder.java 49 57
+pdfsam-simple-split/src/main/java/org/pdfsam/split/SplitAfterPredefinedSetOfPagesRadioButton.java 102 110
+----------------------------------------
+        params.setMatchingTitleRegEx(regexp);
+        params.setOutput(getOutput());
+        params.setOutputPrefix(getPrefix());
+        params.setSource(getSource());
+        params.setOptimizationPolicy(getOptimizationPolicy());
+        params.discardOutline(isDiscardBookmarks());
+        return params;
+    }
+}
+
+----------------------------------------
+            params.setVersion(getVersion());
+            params.setOutput(getOutput());
+            params.setOutputPrefix(getPrefix());
+            params.setSource(getSource());
+            params.setOptimizationPolicy(getOptimizationPolicy());
+            params.discardOutline(isDiscardBookmarks());
+            return params;
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+27364768
+pdfsam-split-by-bookmarks/src/main/java/org/pdfsam/splitbybookmarks/SplitByOutlineLevelParametersBuilder.java 49 57
+pdfsam-simple-split/src/main/java/org/pdfsam/split/SplitAfterRadioButton.java 104 112
+----------------------------------------
+        params.setMatchingTitleRegEx(regexp);
+        params.setOutput(getOutput());
+        params.setOutputPrefix(getPrefix());
+        params.setSource(getSource());
+        params.setOptimizationPolicy(getOptimizationPolicy());
+        params.discardOutline(isDiscardBookmarks());
+        return params;
+    }
+}
+
+----------------------------------------
+            params.setVersion(getVersion());
+            params.setOutput(getOutput());
+            params.setOutputPrefix(getPrefix());
+            params.setSource(getSource());
+            params.setOptimizationPolicy(getOptimizationPolicy());
+            params.discardOutline(isDiscardBookmarks());
+            return params;
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+27364769
+pdfsam-core/src/main/java/org/pdfsam/task/PdfRotationInput.java 89 101
+pdfsam-core/src/main/java/org/pdfsam/support/LocaleKeyValueItem.java 61 73
+----------------------------------------
+        return new HashCodeBuilder().append(source).append(pageSelection).append(rotation).toHashCode();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (!(other instanceof PdfRotationInput)) {
+            return false;
+        }
+        PdfRotationInput input = (PdfRotationInput) other;
+        return new EqualsBuilder().append(source, input.source).append(rotation, input.rotation)
+
+----------------------------------------
+        return new HashCodeBuilder().append(getKey()).toHashCode();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (!(other instanceof LocaleKeyValueItem)) {
+            return false;
+        }
+        LocaleKeyValueItem item = (LocaleKeyValueItem) other;
+        return new EqualsBuilder().append(getKey(), item.getKey()).isEquals();
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+27364770
+pdfsam-core/src/main/java/org/pdfsam/support/LocaleKeyValueItem.java 61 73
+pdfsam-core/src/main/java/org/pdfsam/task/BulkRotateParameters.java 84 97
+----------------------------------------
+        return new HashCodeBuilder().append(getKey()).toHashCode();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (!(other instanceof LocaleKeyValueItem)) {
+            return false;
+        }
+        LocaleKeyValueItem item = (LocaleKeyValueItem) other;
+        return new EqualsBuilder().append(getKey(), item.getKey()).isEquals();
+
+----------------------------------------
+        return new HashCodeBuilder().appendSuper(super.hashCode()).append(outputPrefix).append(output).append(inputSet)
+                .toHashCode();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (!(other instanceof BulkRotateParameters)) {
+            return false;
+        }
+        BulkRotateParameters params = (BulkRotateParameters) other;
+        return new EqualsBuilder().appendSuper(super.equals(other)).append(outputPrefix, params.outputPrefix)
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+27364771
+pdfsam-core/src/main/java/org/pdfsam/support/KeyStringValueItem.java 78 94
+pdfsam-fx/src/main/java/org/pdfsam/ui/io/PdfVersionCombo.java 151 167
+----------------------------------------
+        return value.toString();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder().append(key).toHashCode();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (!(other instanceof KeyStringValueItem)) {
+            return false;
+        }
+        KeyStringValueItem<?> item = (KeyStringValueItem<?>) other;
+
+----------------------------------------
+            return DefaultI18nContext.getInstance().i18n("Version {0}", version.getVersionString());
+        }
+
+        @Override
+        public int hashCode() {
+            return new HashCodeBuilder().append(version).toHashCode();
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            if (this == other) {
+                return true;
+            }
+            if (!(other instanceof DefaultPdfVersionComboItem)) {
+                return false;
+            }
+            DefaultPdfVersionComboItem otherItem = (DefaultPdfVersionComboItem) other;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+27364772
+pdfsam-core/src/main/java/org/pdfsam/support/LocaleKeyValueItem.java 61 73
+pdfsam-fx/src/main/java/org/pdfsam/ui/io/PdfVersionCombo.java 156 168
+----------------------------------------
+        return new HashCodeBuilder().append(getKey()).toHashCode();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (!(other instanceof LocaleKeyValueItem)) {
+            return false;
+        }
+        LocaleKeyValueItem item = (LocaleKeyValueItem) other;
+        return new EqualsBuilder().append(getKey(), item.getKey()).isEquals();
+
+----------------------------------------
+            return new HashCodeBuilder().append(version).toHashCode();
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            if (this == other) {
+                return true;
+            }
+            if (!(other instanceof DefaultPdfVersionComboItem)) {
+                return false;
+            }
+            DefaultPdfVersionComboItem otherItem = (DefaultPdfVersionComboItem) other;
+            return new EqualsBuilder().append(version, otherItem.version).isEquals();
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+27364773
+pdfsam-core/src/main/java/org/pdfsam/support/LocaleKeyValueItem.java 61 73
+pdfsam-core/src/main/java/org/pdfsam/ui/StageStatus.java 128 140
+----------------------------------------
+        return new HashCodeBuilder().append(getKey()).toHashCode();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (!(other instanceof LocaleKeyValueItem)) {
+            return false;
+        }
+        LocaleKeyValueItem item = (LocaleKeyValueItem) other;
+        return new EqualsBuilder().append(getKey(), item.getKey()).isEquals();
+
+----------------------------------------
+        return new HashCodeBuilder().append(x).append(y).append(width).append(height).append(mode).toHashCode();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (!(other instanceof StageStatus)) {
+            return false;
+        }
+        StageStatus item = (StageStatus) other;
+        return new EqualsBuilder().append(x, item.getX()).append(y, item.getY()).append(width, item.getWidth())
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+27364774
+pdfsam-core/src/main/java/org/pdfsam/module/PdfsamEnterpriseModule.java 19 39
+pdfsam-core/src/main/java/org/pdfsam/module/PdfsamModule.java 19 38
+----------------------------------------
+package org.pdfsam.module;
+
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+/**
+ * Indicates that the annotated type is a pdfsam module available in the Enterprise version. Annotated classes can be picked up by the an IOC container and used at runtime to
+ * create a modules system.
+ * 
+ * @author Andrea Vacondio
+ * 
+ */
+@Target(ElementType.TYPE)
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+public @interface PdfsamEnterpriseModule {
+    // nothing
+}
+
+----------------------------------------
+package org.pdfsam.module;
+
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+/**
+ * Indicates that the annotated type is a pdfsam module. Annotated classes can be picked up by the an IOC container and used at runtime to create a plugin system.
+ * 
+ * @author Andrea Vacondio
+ * 
+ */
+@Target(ElementType.TYPE)
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+public @interface PdfsamModule {
+    // nothing
+}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+27364775
+pdfsam-gui/src/main/java/org/pdfsam/ui/info/KeywordsTab.java 65 75
+pdfsam-gui/src/main/java/org/pdfsam/ui/info/SummaryTab.java 92 102
+----------------------------------------
+        setContent(scroll);
+        eventStudio().addAnnotatedListeners(this);
+    }
+
+    @EventListener
+    void requestShow(ShowPdfDescriptorRequest event) {
+        if (current != event.getDescriptor()) {
+            current = event.getDescriptor();
+            current.loadingStatus().addListener(new WeakChangeListener<>(this));
+        }
+        keywords.setText(event.getDescriptor().getInformation(PdfMetadataKey.KEYWORDS.getKey()));
+
+----------------------------------------
+        grid().add(subject, 1, 10);
+        eventStudio().addAnnotatedListeners(this);
+    }
+
+    @EventListener
+    void requestShow(ShowPdfDescriptorRequest event) {
+        if (current != event.getDescriptor()) {
+            current = event.getDescriptor();
+            current.loadingStatus().addListener(new WeakChangeListener<>(this));
+        }
+        setFileProperties(current.getFile());
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+27364776
+pdfsam-gui/src/main/java/org/pdfsam/ui/dashboard/preference/PreferencePane.java 59 67
+pdfsam-gui/src/main/java/org/pdfsam/ui/dashboard/about/AboutDashboardPane.java 125 133
+----------------------------------------
+        right.getChildren().add(output);
+        getChildren().addAll(left, right);
+    }
+
+    private void addSectionTitle(String title, Pane pane) {
+        Label label = new Label(title);
+        label.getStyleClass().add("section-title");
+        pane.getChildren().add(label);
+    }
+
+----------------------------------------
+                DefaultI18nContext.getInstance().i18n("Like us on Facebook"), right);
+        getChildren().addAll(left, right);
+    }
+
+    private void addSectionTitle(String title, Pane pane) {
+        Label label = new Label(title);
+        label.getStyleClass().add("section-title");
+        pane.getChildren().add(label);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+27364777
+pdfsam-gui/src/main/java/org/pdfsam/ui/dashboard/preference/PreferenceRadioButton.java 19 51
+pdfsam-gui/src/main/java/org/pdfsam/ui/dashboard/preference/PreferenceCheckBox.java 19 51
+----------------------------------------
+package org.pdfsam.ui.dashboard.preference;
+
+import static org.pdfsam.support.RequireUtils.requireNotNull;
+import javafx.scene.control.RadioButton;
+
+import org.pdfsam.context.BooleanUserPreference;
+import org.pdfsam.context.UserContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+/**
+ * RadioButton updating the relative preference on item selection/deselection
+ * 
+ * @author Andrea Vacondio
+ *
+ */
+class PreferenceRadioButton extends RadioButton {
+    private static final Logger LOG = LoggerFactory.getLogger(PreferenceRadioButton.class);
+    private final BooleanUserPreference preference;
+
+    PreferenceRadioButton(BooleanUserPreference preference, String label, boolean selected, UserContext userContext) {
+        super(label);
+        requireNotNull(preference, "Preference cannot be null");
+        requireNotNull(userContext, "UserContext cannot be null");
+        setSelected(selected);
+        this.preference = preference;
+        selectedProperty().addListener((ov, oldVal, newVal) -> {
+            userContext.setBooleanPreference(PreferenceRadioButton.this.preference, newVal);
+            LOG.trace("Preference {} set to {}", PreferenceRadioButton.this.preference, newVal);
+        });
+
+    }
+}
+
+----------------------------------------
+package org.pdfsam.ui.dashboard.preference;
+
+import static org.pdfsam.support.RequireUtils.requireNotNull;
+import javafx.scene.control.CheckBox;
+
+import org.pdfsam.context.BooleanUserPreference;
+import org.pdfsam.context.UserContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+/**
+ * Checkbox updating the relative preference on item selection/deselection
+ * 
+ * @author Andrea Vacondio
+ * 
+ */
+class PreferenceCheckBox extends CheckBox {
+
+    private static final Logger LOG = LoggerFactory.getLogger(PreferenceCheckBox.class);
+    private final BooleanUserPreference preference;
+
+    PreferenceCheckBox(BooleanUserPreference preference, String label, boolean selected, UserContext userContext) {
+        super(label);
+        requireNotNull(preference, "Preference cannot be null");
+        requireNotNull(userContext, "UserContext cannot be null");
+        setSelected(selected);
+        this.preference = preference;
+        selectedProperty().addListener((ov, oldVal, newVal) -> {
+            userContext.setBooleanPreference(PreferenceCheckBox.this.preference, newVal);
+            LOG.trace("Preference {} set to {}", PreferenceCheckBox.this.preference, newVal);
+        });
+    }
+}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+27364778
+pdfsam-fx/src/main/java/org/pdfsam/ui/selection/single/SingleSelectionPane.java 216 219
+pdfsam-fx/src/main/java/org/pdfsam/ui/selection/multiple/SelectionTable.java 434 437
+----------------------------------------
+                        encryptionIndicator.getHeight() / 1.5);
+                double anchorX = Math.round(owner.getX() + scene.getX() + nodeCoord.getX() + 2);
+                double anchorY = Math.round(owner.getY() + scene.getY() + nodeCoord.getY() + 2);
+                passwordPopup.showFor(this, descriptor, anchorX, anchorY);
+
+----------------------------------------
+                        request.getRequestingNode().getHeight() / 1.5);
+                double anchorX = Math.round(owner.getX() + scene.getX() + nodeCoord.getX() + 2);
+                double anchorY = Math.round(owner.getY() + scene.getY() + nodeCoord.getY() + 2);
+                passwordPopup.showFor(this, request.getPdfDescriptor(), anchorX, anchorY);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+27364779
+pdfsam-fx/src/main/java/org/pdfsam/ui/selection/multiple/SelectionTable.java 334 345
+pdfsam-fx/src/main/java/org/pdfsam/ui/io/BrowsableFileField.java 132 143
+----------------------------------------
+        if (e.getDragboard().hasFiles()) {
+            c.accept(e);
+        }
+        e.consume();
+    }
+
+    private Consumer<DragEvent> onDragOverConsumer() {
+        return (DragEvent e) -> e.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+    }
+
+    private Consumer<DragEvent> onDragEnteredConsumer() {
+        return (DragEvent e) -> placeHolder.setDisable(false);
+
+----------------------------------------
+        if (files != null && !files.isEmpty()) {
+            c.accept(e);
+        }
+        e.consume();
+    }
+
+    private Consumer<DragEvent> onDragOverConsumer() {
+        return (DragEvent e) -> e.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+    }
+
+    private Consumer<DragEvent> onDragDropped() {
+        return (DragEvent e) -> {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+27364780
+pdfsam-fx/src/main/java/org/pdfsam/ui/selection/multiple/SelectionTable.java 334 345
+pdfsam-fx/src/main/java/org/pdfsam/ui/io/BrowsableDirectoryField.java 94 105
+----------------------------------------
+        if (e.getDragboard().hasFiles()) {
+            c.accept(e);
+        }
+        e.consume();
+    }
+
+    private Consumer<DragEvent> onDragOverConsumer() {
+        return (DragEvent e) -> e.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+    }
+
+    private Consumer<DragEvent> onDragEnteredConsumer() {
+        return (DragEvent e) -> placeHolder.setDisable(false);
+
+----------------------------------------
+        if (files != null && !files.isEmpty()) {
+            c.accept(e);
+        }
+        e.consume();
+    }
+
+    private Consumer<DragEvent> onDragOverConsumer() {
+        return (DragEvent e) -> e.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+    }
+
+    private Consumer<DragEvent> onDragDropped() {
+        return (DragEvent e) -> {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+27364781
+pdfsam-fx/src/main/java/org/pdfsam/ui/selection/multiple/PageRangesColumn.java 79 88
+pdfsam-fx/src/main/java/org/pdfsam/ui/selection/multiple/PaceColumn.java 70 79
+----------------------------------------
+                t -> t.getTableView().getItems().get(t.getTablePosition().getRow()).pageSelection.set(t.getNewValue()));
+        return tableColumn;
+    }
+
+    @Override
+    public Callback<TableColumn<SelectionTableRowData, String>, TableCell<SelectionTableRowData, String>> cellFactory() {
+        return new Callback<TableColumn<SelectionTableRowData, String>, TableCell<SelectionTableRowData, String>>() {
+            @Override
+            public TableCell<SelectionTableRowData, String> call(TableColumn<SelectionTableRowData, String> param) {
+                return new TooltippedTextFieldTableCell(tooltipMessage);
+
+----------------------------------------
+                .set(defaultIfBlank(t.getNewValue(), "1")));
+        return tableColumn;
+    }
+
+    @Override
+    public Callback<TableColumn<SelectionTableRowData, String>, TableCell<SelectionTableRowData, String>> cellFactory() {
+        return new Callback<TableColumn<SelectionTableRowData, String>, TableCell<SelectionTableRowData, String>>() {
+            @Override
+            public TableCell<SelectionTableRowData, String> call(TableColumn<SelectionTableRowData, String> param) {
+                return new TooltippedTextFieldTableCell(DefaultI18nContext.getInstance().i18n(
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+27364782
+pdfsam-fx/src/main/java/org/pdfsam/ui/selection/multiple/PageRangesColumn.java 80 88
+pdfsam-fx/src/main/java/org/pdfsam/ui/selection/multiple/LoadingColumn.java 75 84
+----------------------------------------
+        return tableColumn;
+    }
+
+    @Override
+    public Callback<TableColumn<SelectionTableRowData, String>, TableCell<SelectionTableRowData, String>> cellFactory() {
+        return new Callback<TableColumn<SelectionTableRowData, String>, TableCell<SelectionTableRowData, String>>() {
+            @Override
+            public TableCell<SelectionTableRowData, String> call(TableColumn<SelectionTableRowData, String> param) {
+                return new TooltippedTextFieldTableCell(tooltipMessage);
+
+----------------------------------------
+        return (item != null && item.getIcon() != null) ? item.getIcon().toString() : "";
+    }
+
+    @Override
+    public Callback<TableColumn<SelectionTableRowData, PdfDescriptorLoadingStatus>, TableCell<SelectionTableRowData, PdfDescriptorLoadingStatus>> cellFactory() {
+        return new Callback<TableColumn<SelectionTableRowData, PdfDescriptorLoadingStatus>, TableCell<SelectionTableRowData, PdfDescriptorLoadingStatus>>() {
+            @Override
+            public TableCell<SelectionTableRowData, PdfDescriptorLoadingStatus> call(
+                    TableColumn<SelectionTableRowData, PdfDescriptorLoadingStatus> param) {
+                return new LoadingStatusCell();
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+27364788
+pdfsam-fx/src/main/java/org/pdfsam/ui/selection/multiple/LoadingColumn.java 75 84
+pdfsam-fx/src/main/java/org/pdfsam/ui/selection/multiple/FileColumn.java 55 63
+----------------------------------------
+        return (item != null && item.getIcon() != null) ? item.getIcon().toString() : "";
+    }
+
+    @Override
+    public Callback<TableColumn<SelectionTableRowData, PdfDescriptorLoadingStatus>, TableCell<SelectionTableRowData, PdfDescriptorLoadingStatus>> cellFactory() {
+        return new Callback<TableColumn<SelectionTableRowData, PdfDescriptorLoadingStatus>, TableCell<SelectionTableRowData, PdfDescriptorLoadingStatus>>() {
+            @Override
+            public TableCell<SelectionTableRowData, PdfDescriptorLoadingStatus> call(
+                    TableColumn<SelectionTableRowData, PdfDescriptorLoadingStatus> param) {
+                return new LoadingStatusCell();
+
+----------------------------------------
+            return (item != null) ? item.getName() : "";
+        }
+
+        @Override
+        public Callback<TableColumn<SelectionTableRowData, File>, TableCell<SelectionTableRowData, File>> cellFactory() {
+            return new Callback<TableColumn<SelectionTableRowData, File>, TableCell<SelectionTableRowData, File>>() {
+                @Override
+                public TableCell<SelectionTableRowData, File> call(TableColumn<SelectionTableRowData, File> param) {
+                    return new TableCell<SelectionTableRowData, File>() {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+27364783
+pdfsam-fx/src/main/java/org/pdfsam/ui/selection/multiple/PageRangesColumn.java 80 88
+pdfsam-fx/src/main/java/org/pdfsam/ui/selection/multiple/FileColumn.java 55 63
+----------------------------------------
+        return tableColumn;
+    }
+
+    @Override
+    public Callback<TableColumn<SelectionTableRowData, String>, TableCell<SelectionTableRowData, String>> cellFactory() {
+        return new Callback<TableColumn<SelectionTableRowData, String>, TableCell<SelectionTableRowData, String>>() {
+            @Override
+            public TableCell<SelectionTableRowData, String> call(TableColumn<SelectionTableRowData, String> param) {
+                return new TooltippedTextFieldTableCell(tooltipMessage);
+
+----------------------------------------
+            return (item != null) ? item.getName() : "";
+        }
+
+        @Override
+        public Callback<TableColumn<SelectionTableRowData, File>, TableCell<SelectionTableRowData, File>> cellFactory() {
+            return new Callback<TableColumn<SelectionTableRowData, File>, TableCell<SelectionTableRowData, File>>() {
+                @Override
+                public TableCell<SelectionTableRowData, File> call(TableColumn<SelectionTableRowData, File> param) {
+                    return new TableCell<SelectionTableRowData, File>() {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+27364792
+pdfsam-fx/src/main/java/org/pdfsam/ui/selection/multiple/PaceColumn.java 75 79
+pdfsam-fx/src/main/java/org/pdfsam/ui/selection/multiple/SelectionTableColumn.java 51 55
+----------------------------------------
+    public Callback<TableColumn<SelectionTableRowData, String>, TableCell<SelectionTableRowData, String>> cellFactory() {
+        return new Callback<TableColumn<SelectionTableRowData, String>, TableCell<SelectionTableRowData, String>>() {
+            @Override
+            public TableCell<SelectionTableRowData, String> call(TableColumn<SelectionTableRowData, String> param) {
+                return new TooltippedTextFieldTableCell(DefaultI18nContext.getInstance().i18n(
+
+----------------------------------------
+    default Callback<TableColumn<SelectionTableRowData, T>, TableCell<SelectionTableRowData, T>> cellFactory() {
+        return new Callback<TableColumn<SelectionTableRowData, T>, TableCell<SelectionTableRowData, T>>() {
+            @Override
+            public TableCell<SelectionTableRowData, T> call(TableColumn<SelectionTableRowData, T> param) {
+                return new TableCell<SelectionTableRowData, T>() {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+27364784
+pdfsam-fx/src/main/java/org/pdfsam/ui/selection/multiple/PageRangesColumn.java 84 88
+pdfsam-fx/src/main/java/org/pdfsam/ui/selection/multiple/SelectionTableColumn.java 51 55
+----------------------------------------
+    public Callback<TableColumn<SelectionTableRowData, String>, TableCell<SelectionTableRowData, String>> cellFactory() {
+        return new Callback<TableColumn<SelectionTableRowData, String>, TableCell<SelectionTableRowData, String>>() {
+            @Override
+            public TableCell<SelectionTableRowData, String> call(TableColumn<SelectionTableRowData, String> param) {
+                return new TooltippedTextFieldTableCell(tooltipMessage);
+
+----------------------------------------
+    default Callback<TableColumn<SelectionTableRowData, T>, TableCell<SelectionTableRowData, T>> cellFactory() {
+        return new Callback<TableColumn<SelectionTableRowData, T>, TableCell<SelectionTableRowData, T>>() {
+            @Override
+            public TableCell<SelectionTableRowData, T> call(TableColumn<SelectionTableRowData, T> param) {
+                return new TableCell<SelectionTableRowData, T>() {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+27364785
+pdfsam-fx/src/main/java/org/pdfsam/ui/selection/multiple/PageRangesColumn.java 66 79
+pdfsam-fx/src/main/java/org/pdfsam/ui/selection/multiple/PaceColumn.java 57 70
+----------------------------------------
+        return defaultString(item, EMPTY);
+    }
+
+    @Override
+    public Comparator<String> comparator() {
+        return Comparator.naturalOrder();
+    }
+
+    @Override
+    public TableColumn<SelectionTableRowData, String> getTableColumn() {
+        TableColumn<SelectionTableRowData, String> tableColumn = SelectionTableColumn.super.getTableColumn();
+        tableColumn.setEditable(true);
+        tableColumn.setOnEditCommit(
+                t -> t.getTableView().getItems().get(t.getTablePosition().getRow()).pageSelection.set(t.getNewValue()));
+
+----------------------------------------
+        return defaultString(item, "1");
+    }
+
+    @Override
+    public Comparator<String> comparator() {
+        return Comparator.naturalOrder();
+    }
+
+    @Override
+    public TableColumn<SelectionTableRowData, String> getTableColumn() {
+        TableColumn<SelectionTableRowData, String> tableColumn = SelectionTableColumn.super.getTableColumn();
+        tableColumn.setEditable(true);
+        tableColumn.setOnEditCommit(t -> t.getTableView().getItems().get(t.getTablePosition().getRow()).pace
+                .set(defaultIfBlank(t.getNewValue(), "1")));
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+27364786
+pdfsam-fx/src/main/java/org/pdfsam/ui/selection/multiple/LoadingColumn.java 95 99
+pdfsam-fx/src/main/java/org/pdfsam/ui/selection/multiple/SelectionTableColumn.java 98 102
+----------------------------------------
+    public TableColumn<SelectionTableRowData, PdfDescriptorLoadingStatus> getTableColumn() {
+        TableColumn<SelectionTableRowData, PdfDescriptorLoadingStatus> tableColumn = new TableColumn<>(getColumnTitle());
+        tableColumn.setCellFactory(cellFactory());
+        tableColumn.setCellValueFactory(cellValueFactory());
+        tableColumn.setComparator(null);
+
+----------------------------------------
+    default TableColumn<SelectionTableRowData, T> getTableColumn() {
+        TableColumn<SelectionTableRowData, T> tableColumn = new TableColumn<>(getColumnTitle());
+        tableColumn.setCellFactory(cellFactory());
+        tableColumn.setCellValueFactory(cellValueFactory());
+        tableColumn.setComparator(comparator());
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+27364791
+pdfsam-fx/src/main/java/org/pdfsam/ui/selection/multiple/FileColumn.java 55 63
+pdfsam-fx/src/main/java/org/pdfsam/ui/selection/multiple/PaceColumn.java 71 79
+----------------------------------------
+            return (item != null) ? item.getName() : "";
+        }
+
+        @Override
+        public Callback<TableColumn<SelectionTableRowData, File>, TableCell<SelectionTableRowData, File>> cellFactory() {
+            return new Callback<TableColumn<SelectionTableRowData, File>, TableCell<SelectionTableRowData, File>>() {
+                @Override
+                public TableCell<SelectionTableRowData, File> call(TableColumn<SelectionTableRowData, File> param) {
+                    return new TableCell<SelectionTableRowData, File>() {
+
+----------------------------------------
+        return tableColumn;
+    }
+
+    @Override
+    public Callback<TableColumn<SelectionTableRowData, String>, TableCell<SelectionTableRowData, String>> cellFactory() {
+        return new Callback<TableColumn<SelectionTableRowData, String>, TableCell<SelectionTableRowData, String>>() {
+            @Override
+            public TableCell<SelectionTableRowData, String> call(TableColumn<SelectionTableRowData, String> param) {
+                return new TooltippedTextFieldTableCell(DefaultI18nContext.getInstance().i18n(
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+27364787
+pdfsam-fx/src/main/java/org/pdfsam/ui/selection/multiple/LoadingColumn.java 75 84
+pdfsam-fx/src/main/java/org/pdfsam/ui/selection/multiple/PaceColumn.java 71 79
+----------------------------------------
+        return (item != null && item.getIcon() != null) ? item.getIcon().toString() : "";
+    }
+
+    @Override
+    public Callback<TableColumn<SelectionTableRowData, PdfDescriptorLoadingStatus>, TableCell<SelectionTableRowData, PdfDescriptorLoadingStatus>> cellFactory() {
+        return new Callback<TableColumn<SelectionTableRowData, PdfDescriptorLoadingStatus>, TableCell<SelectionTableRowData, PdfDescriptorLoadingStatus>>() {
+            @Override
+            public TableCell<SelectionTableRowData, PdfDescriptorLoadingStatus> call(
+                    TableColumn<SelectionTableRowData, PdfDescriptorLoadingStatus> param) {
+                return new LoadingStatusCell();
+
+----------------------------------------
+        return tableColumn;
+    }
+
+    @Override
+    public Callback<TableColumn<SelectionTableRowData, String>, TableCell<SelectionTableRowData, String>> cellFactory() {
+        return new Callback<TableColumn<SelectionTableRowData, String>, TableCell<SelectionTableRowData, String>>() {
+            @Override
+            public TableCell<SelectionTableRowData, String> call(TableColumn<SelectionTableRowData, String> param) {
+                return new TooltippedTextFieldTableCell(DefaultI18nContext.getInstance().i18n(
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+27364789
+pdfsam-fx/src/main/java/org/pdfsam/ui/selection/multiple/SelectionTableColumn.java 51 55
+pdfsam-fx/src/main/java/org/pdfsam/ui/selection/multiple/LoadingColumn.java 79 84
+----------------------------------------
+    default Callback<TableColumn<SelectionTableRowData, T>, TableCell<SelectionTableRowData, T>> cellFactory() {
+        return new Callback<TableColumn<SelectionTableRowData, T>, TableCell<SelectionTableRowData, T>>() {
+            @Override
+            public TableCell<SelectionTableRowData, T> call(TableColumn<SelectionTableRowData, T> param) {
+                return new TableCell<SelectionTableRowData, T>() {
+
+----------------------------------------
+    public Callback<TableColumn<SelectionTableRowData, PdfDescriptorLoadingStatus>, TableCell<SelectionTableRowData, PdfDescriptorLoadingStatus>> cellFactory() {
+        return new Callback<TableColumn<SelectionTableRowData, PdfDescriptorLoadingStatus>, TableCell<SelectionTableRowData, PdfDescriptorLoadingStatus>>() {
+            @Override
+            public TableCell<SelectionTableRowData, PdfDescriptorLoadingStatus> call(
+                    TableColumn<SelectionTableRowData, PdfDescriptorLoadingStatus> param) {
+                return new LoadingStatusCell();
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+27364790
+pdfsam-fx/src/main/java/org/pdfsam/ui/selection/multiple/FileColumn.java 59 66
+pdfsam-fx/src/main/java/org/pdfsam/ui/selection/multiple/SelectionTableColumn.java 51 58
+----------------------------------------
+        public Callback<TableColumn<SelectionTableRowData, File>, TableCell<SelectionTableRowData, File>> cellFactory() {
+            return new Callback<TableColumn<SelectionTableRowData, File>, TableCell<SelectionTableRowData, File>>() {
+                @Override
+                public TableCell<SelectionTableRowData, File> call(TableColumn<SelectionTableRowData, File> param) {
+                    return new TableCell<SelectionTableRowData, File>() {
+                        @Override
+                        public void updateItem(final File item, boolean empty) {
+                            super.updateItem(item, empty);
+
+----------------------------------------
+    default Callback<TableColumn<SelectionTableRowData, T>, TableCell<SelectionTableRowData, T>> cellFactory() {
+        return new Callback<TableColumn<SelectionTableRowData, T>, TableCell<SelectionTableRowData, T>>() {
+            @Override
+            public TableCell<SelectionTableRowData, T> call(TableColumn<SelectionTableRowData, T> param) {
+                return new TableCell<SelectionTableRowData, T>() {
+                    @Override
+                    public void updateItem(final T item, boolean empty) {
+                        super.updateItem(item, empty);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+27364793
+pdfsam-fx/src/main/java/org/pdfsam/ui/selection/PasswordFieldPopupSkin.java 31 46
+pdfsam-fx/src/main/java/org/pdfsam/ui/help/HelpPopupSkin.java 32 47
+----------------------------------------
+class PasswordFieldPopupSkin implements Skin<PasswordFieldPopup> {
+    private PasswordFieldPopup popup;
+
+    public PasswordFieldPopupSkin(final PasswordFieldPopup popup) {
+        this.popup = popup;
+        getNode().styleProperty().bind(popup.styleProperty());
+        getNode().getStyleClass().addAll(popup.getStyleClass());
+    }
+
+    @Override
+    public PasswordFieldPopup getSkinnable() {
+        return popup;
+    }
+
+    @Override
+    public Node getNode() {
+
+----------------------------------------
+public class HelpPopupSkin implements Skin<HelpPopup> {
+    private HelpPopup popup;
+
+    public HelpPopupSkin(final HelpPopup popup) {
+        this.popup = popup;
+        getNode().styleProperty().bind(popup.styleProperty());
+        getNode().getStyleClass().addAll(popup.getStyleClass());
+    }
+
+    @Override
+    public HelpPopup getSkinnable() {
+        return popup;
+    }
+
+    @Override
+    public Node getNode() {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+27364794
+pdfsam-fx/src/main/java/org/pdfsam/ui/commons/ClosePane.java 19 27
+pdfsam-fx/src/main/java/org/pdfsam/ui/commons/HidingPane.java 19 27
+----------------------------------------
+package org.pdfsam.ui.commons;
+
+import org.pdfsam.i18n.DefaultI18nContext;
+import org.pdfsam.ui.support.Style;
+
+import javafx.geometry.Pos;
+import javafx.scene.control.Button;
+import javafx.scene.layout.HBox;
+import javafx.scene.text.TextAlignment;
+
+----------------------------------------
+package org.pdfsam.ui.commons;
+
+import org.pdfsam.i18n.DefaultI18nContext;
+import org.pdfsam.ui.support.Style;
+
+import javafx.geometry.Pos;
+import javafx.scene.control.Button;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+27364795
+pdfsam-fx/src/main/java/org/pdfsam/ui/io/BrowsableDirectoryField.java 88 106
+pdfsam-fx/src/main/java/org/pdfsam/ui/io/BrowsableFileField.java 126 144
+----------------------------------------
+            getTextField().validate();
+        }
+    }
+
+    private void dragConsume(DragEvent e, Consumer<DragEvent> c) {
+        List<File> files = e.getDragboard().getFiles();
+        if (files != null && !files.isEmpty()) {
+            c.accept(e);
+        }
+        e.consume();
+    }
+
+    private Consumer<DragEvent> onDragOverConsumer() {
+        return (DragEvent e) -> e.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+    }
+
+    private Consumer<DragEvent> onDragDropped() {
+        return (DragEvent e) -> {
+            e.getDragboard().getFiles().stream().filter(f -> f.isDirectory()).findFirst()
+
+----------------------------------------
+            getTextField().validate();
+        }
+    }
+
+    private void dragConsume(DragEvent e, Consumer<DragEvent> c) {
+        List<File> files = e.getDragboard().getFiles();
+        if (files != null && !files.isEmpty()) {
+            c.accept(e);
+        }
+        e.consume();
+    }
+
+    private Consumer<DragEvent> onDragOverConsumer() {
+        return (DragEvent e) -> e.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+    }
+
+    private Consumer<DragEvent> onDragDropped() {
+        return (DragEvent e) -> {
+            e.getDragboard().getFiles().stream().filter(f -> fileType.matches(f.getName())).findFirst()
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+27364796
+pdfsam-fx/src/main/java/org/pdfsam/ui/io/BrowsableDirectoryField.java 68 73
+pdfsam-fx/src/main/java/org/pdfsam/ui/io/BrowsableFileField.java 109 114
+----------------------------------------
+                    .getDirectoryChooser(getBrowseWindowTitle());
+            String currentSelection = getTextField().getText();
+            if (isNotBlank(currentSelection)) {
+                Path path = Paths.get(currentSelection);
+                if (Files.exists(path)) {
+                    fileChooser.setInitialDirectory(path.toFile());
+
+----------------------------------------
+                    getBrowseWindowTitle());
+            String currentSelection = getTextField().getText();
+            if (isNotBlank(currentSelection)) {
+                Path path = Paths.get(currentSelection);
+                if (Files.exists(path)) {
+                    fileChooser.setInitialDirectory(path.getParent().toFile());
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+27364797
+pdfsam-fx/src/main/java/org/pdfsam/ui/io/RemovePdfVersionConstraintEvent.java 19 37
+pdfsam-fx/src/main/java/org/pdfsam/ui/io/AddPdfVersionConstraintEvent.java 19 37
+----------------------------------------
+package org.pdfsam.ui.io;
+
+import static org.pdfsam.support.RequireUtils.requireNotNull;
+
+import org.sejda.model.pdf.PdfVersion;
+
+/**
+ * Event to notify subscribers that some selected option removes a constraint on the output pdf version.
+ * 
+ * @author Andrea Vacondio
+ * 
+ */
+class RemovePdfVersionConstraintEvent extends BasePdfVersionEvent {
+
+    public RemovePdfVersionConstraintEvent(PdfVersion pdfVersion) {
+        super(pdfVersion);
+        requireNotNull(pdfVersion, "Unable to create a pdf version event on a null pdf version");
+    }
+}
+
+----------------------------------------
+package org.pdfsam.ui.io;
+
+import static org.pdfsam.support.RequireUtils.requireNotNull;
+
+import org.sejda.model.pdf.PdfVersion;
+
+/**
+ * Event to notify subscribers that some selected option imposes a constraint on the output pdf version.
+ * 
+ * @author Andrea Vacondio
+ * 
+ */
+class AddPdfVersionConstraintEvent extends BasePdfVersionEvent {
+
+    public AddPdfVersionConstraintEvent(PdfVersion pdfVersion) {
+        super(pdfVersion);
+        requireNotNull(pdfVersion, "Unable to create a pdf version event on a null pdf version");
+    }
+}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+28820973
+pdfsam-alternate-mix/src/main/java/org/pdfsam/alternatemix/AlternateMixModule.java 97 110
+pdfsam-alternate-mix/src/main/java/org/pdfsam/alternatemix/AlternateMixModule.java 103 109
+----------------------------------------
+        if (data.containsKey("firstDocumentMixinput")) {
+            data.put("input.0", data.get("firstDocumentMixinput"));
+            data.put("input.password.0", data.get("firstDocumentMixinputinput.password"));
+            data.put("input.step.0", data.get("firstStep"));
+            data.put("input.reverse.0", data.get("reverseFirst"));
+            data.put("input.size", "1");
+            if (data.containsKey("secondDocumentMixinput")) {
+                data.put("input.1", data.get("secondDocumentMixinput"));
+                data.put("input.password.1", data.get("secondDocumentMixinput.password"));
+                data.put("input.step.1", data.get("secondStep"));
+                data.put("input.reverse.1", data.get("reverseSecond"));
+                data.put("input.size", "2");
+            }
+        }
+
+----------------------------------------
+            if (data.containsKey("secondDocumentMixinput")) {
+                data.put("input.1", data.get("secondDocumentMixinput"));
+                data.put("input.password.1", data.get("secondDocumentMixinput.password"));
+                data.put("input.step.1", data.get("secondStep"));
+                data.put("input.reverse.1", data.get("reverseSecond"));
+                data.put("input.size", "2");
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+28820974
+pdfsam-gui/src/main/java/org/pdfsam/ui/dialog/CreateOutputDirectoryDialogController.java 54 63
+pdfsam-gui/src/main/java/org/pdfsam/ui/dialog/CreateOutputDirectoryDialogController.java 55 60
+----------------------------------------
+    public void request(NonExistingOutputDirectoryEvent event) {
+        try {
+            if (dialog.response()) {
+                Files.createDirectories(event.outputDirectory);
+                LOG.debug("Created output directory {}", event.outputDirectory);
+            }
+        } catch (IOException e) {
+            LOG.warn("Unable to create output directory", e);
+        }
+    }
+
+----------------------------------------
+        try {
+            if (dialog.response()) {
+                Files.createDirectories(event.outputDirectory);
+                LOG.debug("Created output directory {}", event.outputDirectory);
+            }
+        } catch (IOException e) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+28820975
+pdfsam-split-by-bookmarks/src/main/java/org/pdfsam/splitbybookmarks/SplitOptionsPane.java 77 82
+pdfsam-gui/src/main/java/org/pdfsam/ui/notification/NotificationsController.java 81 89
+----------------------------------------
+    private HBox createLine(Node... items) {
+        HBox item = new HBox(items);
+        item.getStyleClass().addAll(Style.VITEM.css());
+        item.getStyleClass().addAll(Style.HCONTAINER.css());
+        return item;
+    }
+
+----------------------------------------
+    private Label buildLabel(String message, NotificationType type) {
+        Label textLabel = new Label(message);
+        textLabel.getStyleClass().add("notification-text");
+        if (type != null) {
+            textLabel.getStyleClass().add(type.getStyleClass());
+            textLabel.setGraphic(type.getGraphic());
+        }
+        return textLabel;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+28820976
+pdfsam-fx/src/main/java/org/pdfsam/ui/selection/multiple/SelectionTableRowData.java 50 57
+pdfsam-service/src/main/java/org/pdfsam/module/ModuleUsage.java 70 76
+----------------------------------------
+    public SelectionTableRowData duplicate() {
+        descriptor.retain();
+        SelectionTableRowData dupe = new SelectionTableRowData(descriptor);
+        dupe.pageSelection.set(pageSelection.get());
+        dupe.reverse.set(reverse.get());
+        dupe.pace.set(pace.get());
+        return dupe;
+    }
+
+----------------------------------------
+    static ModuleUsage usage(String moduleId, long lastSeen) {
+        requireNotBlank(moduleId, "ModuleId cannot be blank");
+        ModuleUsage retVal = new ModuleUsage();
+        retVal.setModuleId(moduleId);
+        retVal.setLastSeen(lastSeen);
+        return retVal;
+    }
+
+----------------------------------------

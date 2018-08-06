@@ -1,0 +1,1479 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977527
+src/net/azib/ipscan/config/Version.java 46 51
+src/net/azib/ipscan/config/Version.java 56 61
+----------------------------------------
+	public static String getVersion() {
+		if (version == null) {
+			loadVersionFromJar();
+		}
+		return version;
+	}
+
+----------------------------------------
+	public static String getBuildDate() {
+		if (buildDate == null) {
+			loadVersionFromJar();
+		}
+		return buildDate;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977532
+src/net/azib/ipscan/gui/actions/CommandsMenuActions.java 231 236
+src/net/azib/ipscan/gui/actions/ScanMenuActions.java 52 59
+----------------------------------------
+		public SelectOpener(OpenersConfig openersConfig, StatusBar statusBar, ResultTable resultTable, OpenerLauncher openerLauncher) {
+			this.openersConfig = openersConfig;
+			this.statusBar = statusBar;
+			this.resultTable = resultTable;
+			this.openerLauncher = openerLauncher;
+		}
+
+----------------------------------------
+		public LoadFromFile(TXTExporter txtExporter, ExporterRegistry exporterRegistry, FeederGUIRegistry feederRegistry, ScanningResultList scanningResults, ResultTable resultTable, StateMachine stateMachine) {
+			this.txtExporter = txtExporter;
+			this.exporterRegistry = exporterRegistry;
+			this.feederRegistry = feederRegistry;
+			this.scanningResults = scanningResults;
+			this.resultTable = resultTable;
+			this.stateMachine = stateMachine;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977531
+src/net/azib/ipscan/core/ScannerDispatcherThreadFactory.java 30 35
+src/net/azib/ipscan/gui/actions/ScanMenuActions.java 52 59
+----------------------------------------
+	@Inject public ScannerDispatcherThreadFactory(ScanningResultList scanningResults, Scanner scanner, StateMachine stateMachine, ScannerConfig scannerConfig) {
+		this.scanningResults = scanningResults;
+		this.scanner = scanner;
+		this.stateMachine = stateMachine;
+		this.scannerConfig = scannerConfig;
+	}
+
+----------------------------------------
+		public LoadFromFile(TXTExporter txtExporter, ExporterRegistry exporterRegistry, FeederGUIRegistry feederRegistry, ScanningResultList scanningResults, ResultTable resultTable, StateMachine stateMachine) {
+			this.txtExporter = txtExporter;
+			this.exporterRegistry = exporterRegistry;
+			this.feederRegistry = feederRegistry;
+			this.scanningResults = scanningResults;
+			this.resultTable = resultTable;
+			this.stateMachine = stateMachine;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977534
+src/net/azib/ipscan/gui/util/LayoutHelper.java 29 36
+src/net/azib/ipscan/gui/actions/ScanMenuActions.java 52 59
+----------------------------------------
+	public static FormData formData(int width, int height, FormAttachment left, FormAttachment right, FormAttachment top, FormAttachment bottom) {
+		FormData formData = new FormData(width, height);
+		formData.left = left;
+		formData.right = right;
+		formData.top = top;
+		formData.bottom = bottom;
+		return formData;
+	}
+
+----------------------------------------
+		public LoadFromFile(TXTExporter txtExporter, ExporterRegistry exporterRegistry, FeederGUIRegistry feederRegistry, ScanningResultList scanningResults, ResultTable resultTable, StateMachine stateMachine) {
+			this.txtExporter = txtExporter;
+			this.exporterRegistry = exporterRegistry;
+			this.feederRegistry = feederRegistry;
+			this.scanningResults = scanningResults;
+			this.resultTable = resultTable;
+			this.stateMachine = stateMachine;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977533
+src/net/azib/ipscan/gui/PreferencesDialog.java 72 77
+src/net/azib/ipscan/gui/actions/ScanMenuActions.java 52 59
+----------------------------------------
+	@Inject public PreferencesDialog(PingerRegistry pingerRegistry, Config globalConfig, ScannerConfig scannerConfig, GUIConfig guiConfig) {
+		this.pingerRegistry = pingerRegistry;
+		this.globalConfig = globalConfig;
+		this.scannerConfig = scannerConfig;
+		this.guiConfig = guiConfig;
+	}
+
+----------------------------------------
+		public LoadFromFile(TXTExporter txtExporter, ExporterRegistry exporterRegistry, FeederGUIRegistry feederRegistry, ScanningResultList scanningResults, ResultTable resultTable, StateMachine stateMachine) {
+			this.txtExporter = txtExporter;
+			this.exporterRegistry = exporterRegistry;
+			this.feederRegistry = feederRegistry;
+			this.scanningResults = scanningResults;
+			this.resultTable = resultTable;
+			this.stateMachine = stateMachine;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977539
+src/net/azib/ipscan/gui/actions/FavoritesMenuActions.java 110 115
+src/net/azib/ipscan/gui/actions/ScanMenuActions.java 137 143
+----------------------------------------
+		public ShowMenu(FavoritesConfig favoritesConfig, Select favoritesSelectListener, StateMachine stateMachine) {
+			this.favoritesConfig = favoritesConfig;
+			// the listener for favorites selections from the menu
+			this.favoritesSelectListener = favoritesSelectListener;
+			this.stateMachine = stateMachine;
+		}
+
+----------------------------------------
+		SaveResults(ExporterRegistry exporterRegistry, ResultTable resultTable, StatusBar statusBar, StateMachine stateMachine, boolean isSelection) {
+			this.exporterRegistry = exporterRegistry;
+			this.resultTable = resultTable;
+			this.statusBar = statusBar;
+			this.stateMachine = stateMachine;
+			this.isSelection = isSelection;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977538
+src/net/azib/ipscan/gui/actions/ScanMenuActions.java 52 59
+src/net/azib/ipscan/gui/actions/ScanMenuActions.java 137 143
+----------------------------------------
+		public LoadFromFile(TXTExporter txtExporter, ExporterRegistry exporterRegistry, FeederGUIRegistry feederRegistry, ScanningResultList scanningResults, ResultTable resultTable, StateMachine stateMachine) {
+			this.txtExporter = txtExporter;
+			this.exporterRegistry = exporterRegistry;
+			this.feederRegistry = feederRegistry;
+			this.scanningResults = scanningResults;
+			this.resultTable = resultTable;
+			this.stateMachine = stateMachine;
+		}
+
+----------------------------------------
+		SaveResults(ExporterRegistry exporterRegistry, ResultTable resultTable, StatusBar statusBar, StateMachine stateMachine, boolean isSelection) {
+			this.exporterRegistry = exporterRegistry;
+			this.resultTable = resultTable;
+			this.statusBar = statusBar;
+			this.stateMachine = stateMachine;
+			this.isSelection = isSelection;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977535
+src/net/azib/ipscan/core/ScannerDispatcherThreadFactory.java 30 35
+src/net/azib/ipscan/gui/actions/ScanMenuActions.java 137 143
+----------------------------------------
+	@Inject public ScannerDispatcherThreadFactory(ScanningResultList scanningResults, Scanner scanner, StateMachine stateMachine, ScannerConfig scannerConfig) {
+		this.scanningResults = scanningResults;
+		this.scanner = scanner;
+		this.stateMachine = stateMachine;
+		this.scannerConfig = scannerConfig;
+	}
+
+----------------------------------------
+		SaveResults(ExporterRegistry exporterRegistry, ResultTable resultTable, StatusBar statusBar, StateMachine stateMachine, boolean isSelection) {
+			this.exporterRegistry = exporterRegistry;
+			this.resultTable = resultTable;
+			this.statusBar = statusBar;
+			this.stateMachine = stateMachine;
+			this.isSelection = isSelection;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977537
+src/net/azib/ipscan/gui/PreferencesDialog.java 72 77
+src/net/azib/ipscan/gui/actions/ScanMenuActions.java 137 143
+----------------------------------------
+	@Inject public PreferencesDialog(PingerRegistry pingerRegistry, Config globalConfig, ScannerConfig scannerConfig, GUIConfig guiConfig) {
+		this.pingerRegistry = pingerRegistry;
+		this.globalConfig = globalConfig;
+		this.scannerConfig = scannerConfig;
+		this.guiConfig = guiConfig;
+	}
+
+----------------------------------------
+		SaveResults(ExporterRegistry exporterRegistry, ResultTable resultTable, StatusBar statusBar, StateMachine stateMachine, boolean isSelection) {
+			this.exporterRegistry = exporterRegistry;
+			this.resultTable = resultTable;
+			this.statusBar = statusBar;
+			this.stateMachine = stateMachine;
+			this.isSelection = isSelection;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977540
+src/net/azib/ipscan/gui/util/LayoutHelper.java 29 36
+src/net/azib/ipscan/gui/actions/ScanMenuActions.java 137 143
+----------------------------------------
+	public static FormData formData(int width, int height, FormAttachment left, FormAttachment right, FormAttachment top, FormAttachment bottom) {
+		FormData formData = new FormData(width, height);
+		formData.left = left;
+		formData.right = right;
+		formData.top = top;
+		formData.bottom = bottom;
+		return formData;
+	}
+
+----------------------------------------
+		SaveResults(ExporterRegistry exporterRegistry, ResultTable resultTable, StatusBar statusBar, StateMachine stateMachine, boolean isSelection) {
+			this.exporterRegistry = exporterRegistry;
+			this.resultTable = resultTable;
+			this.statusBar = statusBar;
+			this.stateMachine = stateMachine;
+			this.isSelection = isSelection;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977541
+src/net/azib/ipscan/gui/util/LayoutHelper.java 21 27
+src/net/azib/ipscan/gui/actions/ScanMenuActions.java 137 143
+----------------------------------------
+	public static FormLayout formLayout(int marginWidth, int marginHeight, int spacing) {
+		FormLayout formLayout = new FormLayout();
+		formLayout.marginWidth = marginWidth;
+		formLayout.marginHeight = marginHeight;
+		formLayout.spacing = spacing;
+		return formLayout;
+	}
+
+----------------------------------------
+		SaveResults(ExporterRegistry exporterRegistry, ResultTable resultTable, StatusBar statusBar, StateMachine stateMachine, boolean isSelection) {
+			this.exporterRegistry = exporterRegistry;
+			this.resultTable = resultTable;
+			this.statusBar = statusBar;
+			this.stateMachine = stateMachine;
+			this.isSelection = isSelection;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977536
+src/net/azib/ipscan/gui/actions/CommandsMenuActions.java 231 236
+src/net/azib/ipscan/gui/actions/ScanMenuActions.java 137 143
+----------------------------------------
+		public SelectOpener(OpenersConfig openersConfig, StatusBar statusBar, ResultTable resultTable, OpenerLauncher openerLauncher) {
+			this.openersConfig = openersConfig;
+			this.statusBar = statusBar;
+			this.resultTable = resultTable;
+			this.openerLauncher = openerLauncher;
+		}
+
+----------------------------------------
+		SaveResults(ExporterRegistry exporterRegistry, ResultTable resultTable, StatusBar statusBar, StateMachine stateMachine, boolean isSelection) {
+			this.exporterRegistry = exporterRegistry;
+			this.resultTable = resultTable;
+			this.statusBar = statusBar;
+			this.stateMachine = stateMachine;
+			this.isSelection = isSelection;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+24055565
+src/net/azib/ipscan/gui/actions/StartStopScanningAction.java 175 182
+src/net/azib/ipscan/gui/actions/StartStopScanningAction.java 162 169
+----------------------------------------
+					stateMachine.startScanning();
+					mainWindowTitle = statusBar.getShell().getText();
+				}
+				catch (RuntimeException e) {
+					stateMachine.reset();
+					throw e;
+				}
+				break;
+
+----------------------------------------
+					stateMachine.startScanning();
+					mainWindowTitle = statusBar.getShell().getText();
+				}
+				catch (RuntimeException e) {
+					stateMachine.reset();
+					throw e;
+				}
+				break;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+24055566
+ext/rocksaw/src/java/org/savarese/rocksaw/net/RawSocket.java 544 551
+ext/rocksaw/src/java/org/savarese/rocksaw/net/RawSocket.java 600 607
+----------------------------------------
+    if(result < 0) {
+      if(__isErrorEAGAIN())
+        __throwInterruptedIOException();
+      else
+        __throwIOException();
+    }
+
+    return result;
+
+----------------------------------------
+    if(result < 0) {
+      if(__isErrorEAGAIN())
+        __throwInterruptedIOException();
+      else
+        __throwIOException();
+    }
+
+    return result;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+24055567
+src/net/azib/ipscan/core/net/ICMPPinger.java 57 64
+src/net/azib/ipscan/core/net/ICMPSharedPinger.java 86 93
+----------------------------------------
+		ICMPEchoPacket packet = new ICMPEchoPacket(1);
+		byte[] data = new byte[84];
+		packet.setData(data);
+		packet.setIPHeaderLength(5);
+		packet.setICMPDataByteLength(56);
+		packet.setType(ICMPPacket.TYPE_ECHO_REQUEST);
+		packet.setCode(0);
+		packet.setIdentifier(hashCode() & 0xFFFF); // some identification stuff
+
+----------------------------------------
+		ICMPEchoPacket packet = new ICMPEchoPacket(1);
+		byte[] data = new byte[84];
+		packet.setData(data);
+		packet.setIPHeaderLength(5);
+		packet.setICMPDataByteLength(56);
+		packet.setType(ICMPPacket.TYPE_ECHO_REQUEST);
+		packet.setCode(0);
+		packet.setIdentifier(hashCode() & 0xFFFF); // some identification stuff
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+24055568
+src/net/azib/ipscan/gui/actions/ScanMenuActions.java 195 204
+src/net/azib/ipscan/gui/actions/ScanMenuActions.java 117 126
+----------------------------------------
+		private void addFileExtensions(List<String> extensions, List<String> descriptions, StringBuffer sb) {
+			sb.append(" (");
+			for (Exporter exporter : exporterRegistry) {
+				extensions.add("*." + exporter.getFilenameExtension());
+				sb.append(exporter.getFilenameExtension()).append(", ");
+				descriptions.add(Labels.getLabel(exporter.getId()));
+			}
+			// strip the last comma
+			sb.delete(sb.length() - 2, sb.length());
+			sb.append(")");
+
+----------------------------------------
+		private void addFileExtensions(List<String> extensions, List<String> descriptions, StringBuffer sb) {
+			sb.append(" (");
+			for (Exporter exporter : exporterRegistry) {
+				extensions.add("*." + exporter.getFilenameExtension());
+				sb.append(exporter.getFilenameExtension()).append(", ");
+				descriptions.add(Labels.getLabel(exporter.getId()));
+			}
+			// strip the last comma
+			sb.delete(sb.length() - 2, sb.length());
+			sb.append(")");
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+24055569
+ext/vserv-tcpip/src/java/org/savarese/vserv/tcpip/UDPPacket.java 93 134
+ext/vserv-tcpip/src/java/org/savarese/vserv/tcpip/TCPPacket.java 244 285
+----------------------------------------
+  public void setData(byte[] data) {
+    super.setData(data);
+    __offset = getIPHeaderByteLength();
+  }
+
+
+  /**
+   * Sets the source port.
+   *
+   * @param port The new source port.
+   */
+  public final void setSourcePort(int port) {
+    _data_[__offset + OFFSET_SOURCE_PORT]     = (byte)((port >> 8) & 0xff);
+    _data_[__offset + OFFSET_SOURCE_PORT + 1] = (byte)(port & 0xff);
+  }
+
+
+  /**
+   * Sets the destination port.
+   *
+   * @param port The new destination port.
+   */
+  public final void setDestinationPort(int port) {
+    _data_[__offset + OFFSET_DESTINATION_PORT]  = (byte)((port >> 8) & 0xff);
+    _data_[__offset + OFFSET_DESTINATION_PORT + 1] = (byte)(port & 0xff);
+  }
+
+
+  /**
+   * @return The source port.
+   */
+  public final int getSourcePort() {
+    return (((_data_[__offset + OFFSET_SOURCE_PORT] & 0xff) << 8) |
+            (_data_[__offset + OFFSET_SOURCE_PORT + 1] & 0xff)); 
+  }
+
+
+  /**
+   * @return The destination port.
+   */
+  public final int getDestinationPort() {
+    return (((_data_[__offset + OFFSET_DESTINATION_PORT] & 0xff) << 8) |
+
+----------------------------------------
+  public void setData(byte[] data) {
+    super.setData(data);
+    __offset = getIPHeaderByteLength();
+  }
+
+
+  /**
+   * Sets the source port.
+   *
+   * @param port The new source port.
+   */
+  public final void setSourcePort(int port) {
+    _data_[__offset + OFFSET_SOURCE_PORT]     = (byte)((port >> 8) & 0xff);
+    _data_[__offset + OFFSET_SOURCE_PORT + 1] = (byte)(port & 0xff);
+  }
+
+
+  /**
+   * Sets the destination port.
+   *
+   * @param port The new destination port.
+   */
+  public final void setDestinationPort(int port) {
+    _data_[__offset + OFFSET_DESTINATION_PORT]  = (byte)((port >> 8) & 0xff);
+    _data_[__offset + OFFSET_DESTINATION_PORT + 1] = (byte)(port & 0xff);
+  }
+
+
+  /**
+   * @return The source port.
+   */
+  public final int getSourcePort() {
+    return (((_data_[__offset + OFFSET_SOURCE_PORT] & 0xff) << 8) |
+            (_data_[__offset + OFFSET_SOURCE_PORT + 1] & 0xff)); 
+  }
+
+
+  /**
+   * @return The destination port.
+   */
+  public final int getDestinationPort() {
+    return (((_data_[__offset + OFFSET_DESTINATION_PORT] & 0xff) << 8) |
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+24055570
+ext/vserv-tcpip/src/java/org/savarese/vserv/tcpip/UDPPacket.java 207 223
+ext/vserv-tcpip/src/java/org/savarese/vserv/tcpip/TCPPacket.java 447 463
+----------------------------------------
+    return getIPPacketLength() - getCombinedHeaderByteLength();
+  }
+
+
+  private final int __getVirtualHeaderTotal() {
+    int s1 =
+      ((_data_[OFFSET_SOURCE_ADDRESS] & 0xff) << 8) |
+      (_data_[OFFSET_SOURCE_ADDRESS + 1] & 0xff);
+    int s2 =
+      ((_data_[OFFSET_SOURCE_ADDRESS + 2] & 0xff) << 8) |
+      (_data_[OFFSET_SOURCE_ADDRESS + 3] & 0xff);
+    int d1 =
+      ((_data_[OFFSET_DESTINATION_ADDRESS] & 0xff) << 8) |
+      (_data_[OFFSET_DESTINATION_ADDRESS + 1] & 0xff);
+    int d2 =
+      ((_data_[OFFSET_DESTINATION_ADDRESS + 2] & 0xff) << 8) |
+      (_data_[OFFSET_DESTINATION_ADDRESS + 3] & 0xff);
+
+----------------------------------------
+    return getIPPacketLength() - getCombinedHeaderByteLength();
+  }
+
+
+  private final int __getVirtualHeaderTotal() {
+    int s1 =
+      ((_data_[OFFSET_SOURCE_ADDRESS] & 0xff) << 8) |
+      (_data_[OFFSET_SOURCE_ADDRESS + 1] & 0xff);
+    int s2 =
+      ((_data_[OFFSET_SOURCE_ADDRESS + 2] & 0xff) << 8) |
+      (_data_[OFFSET_SOURCE_ADDRESS + 3] & 0xff);
+    int d1 =
+      ((_data_[OFFSET_DESTINATION_ADDRESS] & 0xff) << 8) |
+      (_data_[OFFSET_DESTINATION_ADDRESS + 1] & 0xff);
+    int d2 =
+      ((_data_[OFFSET_DESTINATION_ADDRESS + 2] & 0xff) << 8) |
+      (_data_[OFFSET_DESTINATION_ADDRESS + 3] & 0xff);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+24218161
+src/net/azib/ipscan/gui/AboutDialog.java 32 40
+src/net/azib/ipscan/gui/GettingStartedDialog.java 48 58
+----------------------------------------
+		shell.setSize(new Point(400, 393));
+
+		Label iconLabel = new Label(shell, SWT.ICON);
+		iconLabel.setLocation(10, 10);
+		if (shell.getImage() != null) {
+			iconLabel.setImage(shell.getImage());
+		}		
+		iconLabel.pack();
+		int leftBound = iconLabel.getBounds().width + 20;
+
+----------------------------------------
+		shell.setSize(new Point(500, 300));
+
+		Label iconLabel = new Label(shell, SWT.ICON);
+		iconLabel.setLocation(10, 10);
+		
+		if (parent != null) {
+			iconLabel.setImage(parent.getImage());
+			shell.setImage(parent.getImage());
+		}		
+		iconLabel.pack();
+		int leftBound = iconLabel.getBounds().width + 20;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+24218162
+ext/rocksaw/src/java/org/savarese/rocksaw/net/RawSocket.java 522 552
+ext/rocksaw/src/java/org/savarese/rocksaw/net/RawSocket.java 583 608
+----------------------------------------
+  public int read(InetAddress address, byte[] data, int offset,
+                  int length)
+    throws IllegalArgumentException, IOException, InterruptedIOException
+  {
+    if(offset < 0 || length < 0 || length > data.length - offset)
+      throw new IllegalArgumentException("Invalid offset or length.");
+
+    int result = 0;
+
+    if(getUseSelectTimeout() && !__rtimeout.isZero())
+      result =
+        __select(__socket, true, __rtimeout.seconds, __rtimeout.microseconds);
+	//System.out.println("s" + System.currentTimeMillis());
+	
+	// ??? setsockopt(ssock, IPPROTO_IP, IP_HDRINCL, (char *)&bOpt, sizeof(bOpt));
+
+    if(result == 0)
+      result =
+        __recvfrom(__socket, data, offset, length, __family,
+                   address.getAddress());
+	//System.out.println("e" + System.currentTimeMillis());
+
+    if(result < 0) {
+      if(__isErrorEAGAIN())
+        __throwInterruptedIOException();
+      else
+        __throwIOException();
+    }
+
+    return result;
+  }
+
+----------------------------------------
+  public int write(InetAddress address, byte[] data, int offset, int length)
+    throws IllegalArgumentException, IOException, InterruptedIOException 
+  {
+    if(offset < 0 || length < 0 || length > data.length - offset)
+      throw new IllegalArgumentException("Invalid offset or length.");
+
+    int result = 0;
+
+    if(getUseSelectTimeout() && !__stimeout.isZero())
+      result =
+        __select(__socket, false, __stimeout.seconds, __stimeout.microseconds);
+
+    if(result == 0)
+      result =
+        __sendto(__socket, data, offset, length, __family,
+                 address.getAddress());
+
+    if(result < 0) {
+      if(__isErrorEAGAIN())
+        __throwInterruptedIOException();
+      else
+        __throwIOException();
+    }
+
+    return result;
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+24218163
+ext/vserv-tcpip/src/java/org/savarese/vserv/tcpip/ICMPPacket.java 138 146
+ext/vserv-tcpip/src/java/org/savarese/vserv/tcpip/TCPPacket.java 167 175
+----------------------------------------
+  public final void copyData(ICMPPacket packet) {
+    if(_data_.length < packet._data_.length) {
+      byte[] data = new byte[packet._data_.length];
+      System.arraycopy(_data_, 0, data, 0, getCombinedHeaderByteLength());
+      _data_ = data;
+    }
+    int length = packet.getICMPDataByteLength();
+    System.arraycopy(packet._data_, packet.getCombinedHeaderByteLength(),
+                     _data_, getCombinedHeaderByteLength(), length);
+
+----------------------------------------
+  public final void copyData(TCPPacket packet) {
+    if(_data_.length < packet._data_.length) {
+      byte[] data = new byte[packet._data_.length];
+      System.arraycopy(_data_, 0, data, 0, getCombinedHeaderByteLength());
+      _data_ = data;
+    }
+    int length = packet.getTCPDataByteLength();
+    System.arraycopy(packet._data_, packet.getCombinedHeaderByteLength(),
+                     _data_, getCombinedHeaderByteLength(), length);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+24218165
+ext/vserv-tcpip/src/java/org/savarese/vserv/tcpip/TCPPacket.java 167 175
+ext/vserv-tcpip/src/java/org/savarese/vserv/tcpip/UDPPacket.java 80 88
+----------------------------------------
+  public final void copyData(TCPPacket packet) {
+    if(_data_.length < packet._data_.length) {
+      byte[] data = new byte[packet._data_.length];
+      System.arraycopy(_data_, 0, data, 0, getCombinedHeaderByteLength());
+      _data_ = data;
+    }
+    int length = packet.getTCPDataByteLength();
+    System.arraycopy(packet._data_, packet.getCombinedHeaderByteLength(),
+                     _data_, getCombinedHeaderByteLength(), length);
+
+----------------------------------------
+  public final void copyData(UDPPacket packet) {
+    if(_data_.length < packet._data_.length) {
+      byte[] data = new byte[packet._data_.length];
+      System.arraycopy(_data_, 0, data, 0, getCombinedHeaderByteLength());
+      _data_ = data;
+    }
+    int length = packet.getUDPDataByteLength();
+    System.arraycopy(packet._data_, packet.getCombinedHeaderByteLength(),
+                     _data_, getCombinedHeaderByteLength(), length);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+24218164
+ext/vserv-tcpip/src/java/org/savarese/vserv/tcpip/ICMPPacket.java 138 146
+ext/vserv-tcpip/src/java/org/savarese/vserv/tcpip/UDPPacket.java 80 88
+----------------------------------------
+  public final void copyData(ICMPPacket packet) {
+    if(_data_.length < packet._data_.length) {
+      byte[] data = new byte[packet._data_.length];
+      System.arraycopy(_data_, 0, data, 0, getCombinedHeaderByteLength());
+      _data_ = data;
+    }
+    int length = packet.getICMPDataByteLength();
+    System.arraycopy(packet._data_, packet.getCombinedHeaderByteLength(),
+                     _data_, getCombinedHeaderByteLength(), length);
+
+----------------------------------------
+  public final void copyData(UDPPacket packet) {
+    if(_data_.length < packet._data_.length) {
+      byte[] data = new byte[packet._data_.length];
+      System.arraycopy(_data_, 0, data, 0, getCombinedHeaderByteLength());
+      _data_ = data;
+    }
+    int length = packet.getUDPDataByteLength();
+    System.arraycopy(packet._data_, packet.getCombinedHeaderByteLength(),
+                     _data_, getCombinedHeaderByteLength(), length);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+24218166
+src/net/azib/ipscan/gui/EditFavoritesDialog.java 69 75
+src/net/azib/ipscan/gui/EditOpenersDialog.java 133 139
+----------------------------------------
+		Button okButton = new Button(shell, SWT.NONE);
+		okButton.setText(Labels.getLabel("button.OK"));		
+		
+		Button cancelButton = new Button(shell, SWT.NONE);
+		cancelButton.setText(Labels.getLabel("button.cancel"));		
+
+		positionButtonsInFormLayout(okButton, cancelButton, favoritesList);
+
+----------------------------------------
+		Button okButton = new Button(shell, SWT.NONE);
+		okButton.setText(Labels.getLabel("button.OK"));
+
+		Button cancelButton = new Button(shell, SWT.NONE);
+		cancelButton.setText(Labels.getLabel("button.cancel"));
+
+		positionButtonsInFormLayout(okButton, cancelButton, editFieldsGroup);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+24218167
+src/net/azib/ipscan/gui/EditFavoritesDialog.java 69 75
+src/net/azib/ipscan/gui/SelectFetchersDialog.java 102 108
+----------------------------------------
+		Button okButton = new Button(shell, SWT.NONE);
+		okButton.setText(Labels.getLabel("button.OK"));		
+		
+		Button cancelButton = new Button(shell, SWT.NONE);
+		cancelButton.setText(Labels.getLabel("button.cancel"));		
+
+		positionButtonsInFormLayout(okButton, cancelButton, favoritesList);
+
+----------------------------------------
+		Button okButton = new Button(shell, SWT.NONE);
+		okButton.setText(Labels.getLabel("button.OK"));
+		
+		Button cancelButton = new Button(shell, SWT.NONE);
+		cancelButton.setText(Labels.getLabel("button.cancel"));
+		
+		positionButtonsInFormLayout(okButton, cancelButton, registeredFetchersList);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+24218169
+src/net/azib/ipscan/gui/EditOpenersDialog.java 133 139
+src/net/azib/ipscan/gui/SelectFetchersDialog.java 102 108
+----------------------------------------
+		Button okButton = new Button(shell, SWT.NONE);
+		okButton.setText(Labels.getLabel("button.OK"));
+
+		Button cancelButton = new Button(shell, SWT.NONE);
+		cancelButton.setText(Labels.getLabel("button.cancel"));
+
+		positionButtonsInFormLayout(okButton, cancelButton, editFieldsGroup);
+
+----------------------------------------
+		Button okButton = new Button(shell, SWT.NONE);
+		okButton.setText(Labels.getLabel("button.OK"));
+		
+		Button cancelButton = new Button(shell, SWT.NONE);
+		cancelButton.setText(Labels.getLabel("button.cancel"));
+		
+		positionButtonsInFormLayout(okButton, cancelButton, registeredFetchersList);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+24218171
+src/net/azib/ipscan/gui/SelectFetchersDialog.java 102 108
+src/net/azib/ipscan/gui/fetchers/PortTextFetcherPrefs.java 79 85
+----------------------------------------
+		Button okButton = new Button(shell, SWT.NONE);
+		okButton.setText(Labels.getLabel("button.OK"));
+		
+		Button cancelButton = new Button(shell, SWT.NONE);
+		cancelButton.setText(Labels.getLabel("button.cancel"));
+		
+		positionButtonsInFormLayout(okButton, cancelButton, registeredFetchersList);
+
+----------------------------------------
+		Button okButton = new Button(shell, SWT.NONE);
+		okButton.setText(Labels.getLabel("button.OK"));
+
+		Button cancelButton = new Button(shell, SWT.NONE);
+		cancelButton.setText(Labels.getLabel("button.cancel"));
+
+		positionButtonsInFormLayout(okButton, cancelButton, extractGroup);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+24218168
+src/net/azib/ipscan/gui/EditFavoritesDialog.java 69 75
+src/net/azib/ipscan/gui/fetchers/PortTextFetcherPrefs.java 79 85
+----------------------------------------
+		Button okButton = new Button(shell, SWT.NONE);
+		okButton.setText(Labels.getLabel("button.OK"));		
+		
+		Button cancelButton = new Button(shell, SWT.NONE);
+		cancelButton.setText(Labels.getLabel("button.cancel"));		
+
+		positionButtonsInFormLayout(okButton, cancelButton, favoritesList);
+
+----------------------------------------
+		Button okButton = new Button(shell, SWT.NONE);
+		okButton.setText(Labels.getLabel("button.OK"));
+
+		Button cancelButton = new Button(shell, SWT.NONE);
+		cancelButton.setText(Labels.getLabel("button.cancel"));
+
+		positionButtonsInFormLayout(okButton, cancelButton, extractGroup);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+24218170
+src/net/azib/ipscan/gui/EditOpenersDialog.java 133 139
+src/net/azib/ipscan/gui/fetchers/PortTextFetcherPrefs.java 79 85
+----------------------------------------
+		Button okButton = new Button(shell, SWT.NONE);
+		okButton.setText(Labels.getLabel("button.OK"));
+
+		Button cancelButton = new Button(shell, SWT.NONE);
+		cancelButton.setText(Labels.getLabel("button.cancel"));
+
+		positionButtonsInFormLayout(okButton, cancelButton, editFieldsGroup);
+
+----------------------------------------
+		Button okButton = new Button(shell, SWT.NONE);
+		okButton.setText(Labels.getLabel("button.OK"));
+
+		Button cancelButton = new Button(shell, SWT.NONE);
+		cancelButton.setText(Labels.getLabel("button.cancel"));
+
+		positionButtonsInFormLayout(okButton, cancelButton, extractGroup);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+24218172
+src/net/azib/ipscan/gui/EditFavoritesDialog.java 29 34
+src/net/azib/ipscan/gui/EditOpenersDialog.java 45 50
+----------------------------------------
+	protected void populateShell() {
+		Display currentDisplay = Display.getCurrent();
+		Shell parent = currentDisplay != null ? currentDisplay.getActiveShell() : null;
+		shell = new Shell(parent, SWT.APPLICATION_MODAL | SWT.DIALOG_TRIM);
+
+		shell.setText(Labels.getLabel("title.favorite.edit"));
+
+----------------------------------------
+	protected void populateShell() {
+		Display currentDisplay = Display.getCurrent();
+		Shell parent = currentDisplay != null ? currentDisplay.getActiveShell() : null;
+		shell = new Shell(parent, SWT.APPLICATION_MODAL | SWT.DIALOG_TRIM);
+
+		shell.setText(Labels.getLabel("title.openers.edit"));
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+24218173
+src/net/azib/ipscan/gui/EditFavoritesDialog.java 29 34
+src/net/azib/ipscan/gui/GettingStartedDialog.java 42 47
+----------------------------------------
+	protected void populateShell() {
+		Display currentDisplay = Display.getCurrent();
+		Shell parent = currentDisplay != null ? currentDisplay.getActiveShell() : null;
+		shell = new Shell(parent, SWT.APPLICATION_MODAL | SWT.DIALOG_TRIM);
+
+		shell.setText(Labels.getLabel("title.favorite.edit"));
+
+----------------------------------------
+	protected void populateShell() {
+		Display currentDisplay = Display.getCurrent();
+		Shell parent = currentDisplay != null ? currentDisplay.getActiveShell() : null;
+		shell = new Shell(parent, SWT.APPLICATION_MODAL | SWT.DIALOG_TRIM);
+
+		shell.setText(Labels.getLabel("title.gettingStarted"));
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+24218175
+src/net/azib/ipscan/gui/EditOpenersDialog.java 45 50
+src/net/azib/ipscan/gui/GettingStartedDialog.java 42 47
+----------------------------------------
+	protected void populateShell() {
+		Display currentDisplay = Display.getCurrent();
+		Shell parent = currentDisplay != null ? currentDisplay.getActiveShell() : null;
+		shell = new Shell(parent, SWT.APPLICATION_MODAL | SWT.DIALOG_TRIM);
+
+		shell.setText(Labels.getLabel("title.openers.edit"));
+
+----------------------------------------
+	protected void populateShell() {
+		Display currentDisplay = Display.getCurrent();
+		Shell parent = currentDisplay != null ? currentDisplay.getActiveShell() : null;
+		shell = new Shell(parent, SWT.APPLICATION_MODAL | SWT.DIALOG_TRIM);
+
+		shell.setText(Labels.getLabel("title.gettingStarted"));
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+24218176
+src/net/azib/ipscan/gui/EditOpenersDialog.java 45 50
+src/net/azib/ipscan/gui/SelectFetchersDialog.java 40 45
+----------------------------------------
+	protected void populateShell() {
+		Display currentDisplay = Display.getCurrent();
+		Shell parent = currentDisplay != null ? currentDisplay.getActiveShell() : null;
+		shell = new Shell(parent, SWT.APPLICATION_MODAL | SWT.DIALOG_TRIM);
+
+		shell.setText(Labels.getLabel("title.openers.edit"));
+
+----------------------------------------
+	@Override protected void populateShell() {
+		Display currentDisplay = Display.getCurrent();
+		Shell parent = currentDisplay != null ? currentDisplay.getActiveShell() : null;
+		shell = new Shell(parent, SWT.APPLICATION_MODAL | SWT.DIALOG_TRIM);
+
+		shell.setText(Labels.getLabel("title.fetchers.select"));
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+24218174
+src/net/azib/ipscan/gui/EditFavoritesDialog.java 29 34
+src/net/azib/ipscan/gui/SelectFetchersDialog.java 40 45
+----------------------------------------
+	protected void populateShell() {
+		Display currentDisplay = Display.getCurrent();
+		Shell parent = currentDisplay != null ? currentDisplay.getActiveShell() : null;
+		shell = new Shell(parent, SWT.APPLICATION_MODAL | SWT.DIALOG_TRIM);
+
+		shell.setText(Labels.getLabel("title.favorite.edit"));
+
+----------------------------------------
+	@Override protected void populateShell() {
+		Display currentDisplay = Display.getCurrent();
+		Shell parent = currentDisplay != null ? currentDisplay.getActiveShell() : null;
+		shell = new Shell(parent, SWT.APPLICATION_MODAL | SWT.DIALOG_TRIM);
+
+		shell.setText(Labels.getLabel("title.fetchers.select"));
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+24218177
+src/net/azib/ipscan/gui/GettingStartedDialog.java 42 47
+src/net/azib/ipscan/gui/SelectFetchersDialog.java 40 45
+----------------------------------------
+	protected void populateShell() {
+		Display currentDisplay = Display.getCurrent();
+		Shell parent = currentDisplay != null ? currentDisplay.getActiveShell() : null;
+		shell = new Shell(parent, SWT.APPLICATION_MODAL | SWT.DIALOG_TRIM);
+
+		shell.setText(Labels.getLabel("title.gettingStarted"));
+
+----------------------------------------
+	@Override protected void populateShell() {
+		Display currentDisplay = Display.getCurrent();
+		Shell parent = currentDisplay != null ? currentDisplay.getActiveShell() : null;
+		shell = new Shell(parent, SWT.APPLICATION_MODAL | SWT.DIALOG_TRIM);
+
+		shell.setText(Labels.getLabel("title.fetchers.select"));
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+24218178
+src/net/azib/ipscan/gui/EditFavoritesDialog.java 67 75
+src/net/azib/ipscan/gui/EditOpenersDialog.java 131 139
+----------------------------------------
+		deleteButton.setLayoutData(LayoutHelper.formData(new FormAttachment(favoritesList), new FormAttachment(renameButton, 0, SWT.RIGHT), new FormAttachment(renameButton), null));
+		
+		Button okButton = new Button(shell, SWT.NONE);
+		okButton.setText(Labels.getLabel("button.OK"));		
+		
+		Button cancelButton = new Button(shell, SWT.NONE);
+		cancelButton.setText(Labels.getLabel("button.cancel"));		
+
+		positionButtonsInFormLayout(okButton, cancelButton, favoritesList);
+
+----------------------------------------
+		editFieldsGroup.pack();
+
+		Button okButton = new Button(shell, SWT.NONE);
+		okButton.setText(Labels.getLabel("button.OK"));
+
+		Button cancelButton = new Button(shell, SWT.NONE);
+		cancelButton.setText(Labels.getLabel("button.cancel"));
+
+		positionButtonsInFormLayout(okButton, cancelButton, editFieldsGroup);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+24218180
+src/net/azib/ipscan/gui/EditOpenersDialog.java 131 139
+src/net/azib/ipscan/gui/fetchers/PortTextFetcherPrefs.java 77 85
+----------------------------------------
+		editFieldsGroup.pack();
+
+		Button okButton = new Button(shell, SWT.NONE);
+		okButton.setText(Labels.getLabel("button.OK"));
+
+		Button cancelButton = new Button(shell, SWT.NONE);
+		cancelButton.setText(Labels.getLabel("button.cancel"));
+
+		positionButtonsInFormLayout(okButton, cancelButton, editFieldsGroup);
+
+----------------------------------------
+		extractGroup.setLayoutData(LayoutHelper.formData(new FormAttachment(0), new FormAttachment(textToSend, 0, SWT.RIGHT), new FormAttachment(replaceLabel), null));
+
+		Button okButton = new Button(shell, SWT.NONE);
+		okButton.setText(Labels.getLabel("button.OK"));
+
+		Button cancelButton = new Button(shell, SWT.NONE);
+		cancelButton.setText(Labels.getLabel("button.cancel"));
+
+		positionButtonsInFormLayout(okButton, cancelButton, extractGroup);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+24218179
+src/net/azib/ipscan/gui/EditFavoritesDialog.java 67 75
+src/net/azib/ipscan/gui/fetchers/PortTextFetcherPrefs.java 77 85
+----------------------------------------
+		deleteButton.setLayoutData(LayoutHelper.formData(new FormAttachment(favoritesList), new FormAttachment(renameButton, 0, SWT.RIGHT), new FormAttachment(renameButton), null));
+		
+		Button okButton = new Button(shell, SWT.NONE);
+		okButton.setText(Labels.getLabel("button.OK"));		
+		
+		Button cancelButton = new Button(shell, SWT.NONE);
+		cancelButton.setText(Labels.getLabel("button.cancel"));		
+
+		positionButtonsInFormLayout(okButton, cancelButton, favoritesList);
+
+----------------------------------------
+		extractGroup.setLayoutData(LayoutHelper.formData(new FormAttachment(0), new FormAttachment(textToSend, 0, SWT.RIGHT), new FormAttachment(replaceLabel), null));
+
+		Button okButton = new Button(shell, SWT.NONE);
+		okButton.setText(Labels.getLabel("button.OK"));
+
+		Button cancelButton = new Button(shell, SWT.NONE);
+		cancelButton.setText(Labels.getLabel("button.cancel"));
+
+		positionButtonsInFormLayout(okButton, cancelButton, extractGroup);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+24218181
+src/net/azib/ipscan/gui/EditFavoritesDialog.java 29 37
+src/net/azib/ipscan/gui/EditOpenersDialog.java 45 53
+----------------------------------------
+	protected void populateShell() {
+		Display currentDisplay = Display.getCurrent();
+		Shell parent = currentDisplay != null ? currentDisplay.getActiveShell() : null;
+		shell = new Shell(parent, SWT.APPLICATION_MODAL | SWT.DIALOG_TRIM);
+
+		shell.setText(Labels.getLabel("title.favorite.edit"));
+		shell.setLayout(LayoutHelper.formLayout(10, 10, 4));		
+		
+		Label messageLabel = new Label(shell, SWT.NONE);
+
+----------------------------------------
+	protected void populateShell() {
+		Display currentDisplay = Display.getCurrent();
+		Shell parent = currentDisplay != null ? currentDisplay.getActiveShell() : null;
+		shell = new Shell(parent, SWT.APPLICATION_MODAL | SWT.DIALOG_TRIM);
+
+		shell.setText(Labels.getLabel("title.openers.edit"));
+		shell.setLayout(LayoutHelper.formLayout(10, 10, 4));		
+		
+		Label messageLabel = new Label(shell, SWT.NONE);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+24218182
+src/net/azib/ipscan/gui/EditFavoritesDialog.java 29 37
+src/net/azib/ipscan/gui/SelectFetchersDialog.java 40 48
+----------------------------------------
+	protected void populateShell() {
+		Display currentDisplay = Display.getCurrent();
+		Shell parent = currentDisplay != null ? currentDisplay.getActiveShell() : null;
+		shell = new Shell(parent, SWT.APPLICATION_MODAL | SWT.DIALOG_TRIM);
+
+		shell.setText(Labels.getLabel("title.favorite.edit"));
+		shell.setLayout(LayoutHelper.formLayout(10, 10, 4));		
+		
+		Label messageLabel = new Label(shell, SWT.NONE);
+
+----------------------------------------
+	@Override protected void populateShell() {
+		Display currentDisplay = Display.getCurrent();
+		Shell parent = currentDisplay != null ? currentDisplay.getActiveShell() : null;
+		shell = new Shell(parent, SWT.APPLICATION_MODAL | SWT.DIALOG_TRIM);
+
+		shell.setText(Labels.getLabel("title.fetchers.select"));
+		shell.setLayout(LayoutHelper.formLayout(10, 10, 4));
+		
+		Label messageLabel = new Label(shell, SWT.WRAP);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+24218183
+src/net/azib/ipscan/gui/EditOpenersDialog.java 45 53
+src/net/azib/ipscan/gui/SelectFetchersDialog.java 40 48
+----------------------------------------
+	protected void populateShell() {
+		Display currentDisplay = Display.getCurrent();
+		Shell parent = currentDisplay != null ? currentDisplay.getActiveShell() : null;
+		shell = new Shell(parent, SWT.APPLICATION_MODAL | SWT.DIALOG_TRIM);
+
+		shell.setText(Labels.getLabel("title.openers.edit"));
+		shell.setLayout(LayoutHelper.formLayout(10, 10, 4));		
+		
+		Label messageLabel = new Label(shell, SWT.NONE);
+
+----------------------------------------
+	@Override protected void populateShell() {
+		Display currentDisplay = Display.getCurrent();
+		Shell parent = currentDisplay != null ? currentDisplay.getActiveShell() : null;
+		shell = new Shell(parent, SWT.APPLICATION_MODAL | SWT.DIALOG_TRIM);
+
+		shell.setText(Labels.getLabel("title.fetchers.select"));
+		shell.setLayout(LayoutHelper.formLayout(10, 10, 4));
+		
+		Label messageLabel = new Label(shell, SWT.WRAP);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+24218184
+src/net/azib/ipscan/gui/PreferencesDialog.java 109 130
+src/net/azib/ipscan/gui/fetchers/PortTextFetcherPrefs.java 79 97
+----------------------------------------
+		okButton = new Button(shell, SWT.NONE);
+		okButton.setText(Labels.getLabel("button.OK"));
+		
+		cancelButton = new Button(shell, SWT.NONE);
+		cancelButton.setText(Labels.getLabel("button.cancel"));
+		
+		positionButtonsInFormLayout(okButton, cancelButton, tabFolder);
+		
+		shell.pack();
+		okButton.setFocus();
+
+		okButton.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				savePreferences();
+				shell.close();
+			}
+		});
+		cancelButton.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				shell.close();
+			}
+		});
+
+----------------------------------------
+		Button okButton = new Button(shell, SWT.NONE);
+		okButton.setText(Labels.getLabel("button.OK"));
+
+		Button cancelButton = new Button(shell, SWT.NONE);
+		cancelButton.setText(Labels.getLabel("button.cancel"));
+
+		positionButtonsInFormLayout(okButton, cancelButton, extractGroup);
+
+		okButton.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				savePreferences();
+				shell.close();
+			}
+		});
+		cancelButton.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				shell.close();
+			}
+		});
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+24218185
+src/net/azib/ipscan/gui/InputDialog.java 46 52
+src/net/azib/ipscan/gui/PreferencesDialog.java 107 113
+----------------------------------------
+		text = new Text(shell, SWT.BORDER);
+		
+		okButton = new Button(shell, SWT.NONE);
+		okButton.setText(Labels.getLabel("button.OK"));
+
+		cancelButton = new Button(shell, SWT.NONE);
+		cancelButton.setText(Labels.getLabel("button.cancel"));
+
+----------------------------------------
+		createTabFolder();
+
+		okButton = new Button(shell, SWT.NONE);
+		okButton.setText(Labels.getLabel("button.OK"));
+		
+		cancelButton = new Button(shell, SWT.NONE);
+		cancelButton.setText(Labels.getLabel("button.cancel"));
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+24218186
+src/net/azib/ipscan/gui/actions/ScanMenuActions.java 71 78
+src/net/azib/ipscan/gui/actions/ScanMenuActions.java 165 172
+----------------------------------------
+			extensions.add(extensions2.get(0));
+
+			fileDialog.setText(labelBuffer.toString());
+			fileDialog.setFilterExtensions(extensions.toArray(new String[extensions.size()]));
+			fileDialog.setFilterNames(descriptions.toArray(new String[descriptions.size()]));
+
+			String fileName = fileDialog.open();
+			if (fileName == null) return;
+
+----------------------------------------
+			addFileExtensions(extensions, descriptions, labelBuffer);
+
+			fileDialog.setText(labelBuffer.toString());
+			fileDialog.setFilterExtensions(extensions.toArray(new String[extensions.size()]));
+			fileDialog.setFilterNames(descriptions.toArray(new String[descriptions.size()]));
+
+			String fileName = fileDialog.open();
+			if (fileName == null) return;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+24218187
+src/net/azib/ipscan/gui/EditFavoritesDialog.java 69 86
+src/net/azib/ipscan/gui/EditOpenersDialog.java 133 150
+----------------------------------------
+		Button okButton = new Button(shell, SWT.NONE);
+		okButton.setText(Labels.getLabel("button.OK"));		
+		
+		Button cancelButton = new Button(shell, SWT.NONE);
+		cancelButton.setText(Labels.getLabel("button.cancel"));		
+
+		positionButtonsInFormLayout(okButton, cancelButton, favoritesList);
+		
+		shell.pack();
+		
+		okButton.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
+				saveFavorites();
+				shell.close();
+			}
+		});
+		cancelButton.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
+
+----------------------------------------
+		Button okButton = new Button(shell, SWT.NONE);
+		okButton.setText(Labels.getLabel("button.OK"));
+
+		Button cancelButton = new Button(shell, SWT.NONE);
+		cancelButton.setText(Labels.getLabel("button.cancel"));
+
+		positionButtonsInFormLayout(okButton, cancelButton, editFieldsGroup);
+
+		shell.pack();
+
+		okButton.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
+				saveOpeners();
+				shell.close();
+			}
+		});
+		cancelButton.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+24218189
+src/net/azib/ipscan/gui/EditOpenersDialog.java 133 150
+src/net/azib/ipscan/gui/InputDialog.java 48 55
+----------------------------------------
+		Button okButton = new Button(shell, SWT.NONE);
+		okButton.setText(Labels.getLabel("button.OK"));
+
+		Button cancelButton = new Button(shell, SWT.NONE);
+		cancelButton.setText(Labels.getLabel("button.cancel"));
+
+		positionButtonsInFormLayout(okButton, cancelButton, editFieldsGroup);
+
+		shell.pack();
+
+		okButton.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
+				saveOpeners();
+				shell.close();
+			}
+		});
+		cancelButton.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
+
+----------------------------------------
+		okButton = new Button(shell, SWT.NONE);
+		okButton.setText(Labels.getLabel("button.OK"));
+
+		cancelButton = new Button(shell, SWT.NONE);
+		cancelButton.setText(Labels.getLabel("button.cancel"));
+				
+		okButton.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+			public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+24218188
+src/net/azib/ipscan/gui/EditFavoritesDialog.java 69 86
+src/net/azib/ipscan/gui/InputDialog.java 48 55
+----------------------------------------
+		Button okButton = new Button(shell, SWT.NONE);
+		okButton.setText(Labels.getLabel("button.OK"));		
+		
+		Button cancelButton = new Button(shell, SWT.NONE);
+		cancelButton.setText(Labels.getLabel("button.cancel"));		
+
+		positionButtonsInFormLayout(okButton, cancelButton, favoritesList);
+		
+		shell.pack();
+		
+		okButton.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
+				saveFavorites();
+				shell.close();
+			}
+		});
+		cancelButton.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
+
+----------------------------------------
+		okButton = new Button(shell, SWT.NONE);
+		okButton.setText(Labels.getLabel("button.OK"));
+
+		cancelButton = new Button(shell, SWT.NONE);
+		cancelButton.setText(Labels.getLabel("button.cancel"));
+				
+		okButton.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+			public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+24218190
+src/net/azib/ipscan/gui/EditFavoritesDialog.java 29 38
+src/net/azib/ipscan/gui/EditOpenersDialog.java 45 54
+----------------------------------------
+	protected void populateShell() {
+		Display currentDisplay = Display.getCurrent();
+		Shell parent = currentDisplay != null ? currentDisplay.getActiveShell() : null;
+		shell = new Shell(parent, SWT.APPLICATION_MODAL | SWT.DIALOG_TRIM);
+
+		shell.setText(Labels.getLabel("title.favorite.edit"));
+		shell.setLayout(LayoutHelper.formLayout(10, 10, 4));		
+		
+		Label messageLabel = new Label(shell, SWT.NONE);
+		messageLabel.setText(Labels.getLabel("text.favorite.edit"));
+
+----------------------------------------
+	protected void populateShell() {
+		Display currentDisplay = Display.getCurrent();
+		Shell parent = currentDisplay != null ? currentDisplay.getActiveShell() : null;
+		shell = new Shell(parent, SWT.APPLICATION_MODAL | SWT.DIALOG_TRIM);
+
+		shell.setText(Labels.getLabel("title.openers.edit"));
+		shell.setLayout(LayoutHelper.formLayout(10, 10, 4));		
+		
+		Label messageLabel = new Label(shell, SWT.NONE);
+		messageLabel.setText(Labels.getLabel("text.openers.edit"));
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+24218191
+src/net/azib/ipscan/gui/EditFavoritesDialog.java 46 52
+src/net/azib/ipscan/gui/EditOpenersDialog.java 65 76
+----------------------------------------
+		Button upButton = new Button(shell, SWT.NONE);
+		upButton.setText(Labels.getLabel("button.up"));		
+		upButton.addListener(SWT.Selection, new UpButtonListener(favoritesList));
+		
+		Button downButton = new Button(shell, SWT.NONE);
+		downButton.setText(Labels.getLabel("button.down"));
+		downButton.addListener(SWT.Selection, new DownButtonListener(favoritesList));
+
+----------------------------------------
+		Button upButton = new Button(shell, SWT.NONE);
+		upButton.setText(Labels.getLabel("button.up"));
+		upButton.addListener(SWT.Selection, new UpButtonListener(openersList) {
+			@Override public void handleEvent(Event event) {
+				super.handleEvent(event);
+				currentSelectionIndex = openersList.getSelectionIndex();
+			}
+		});
+		
+		Button downButton = new Button(shell, SWT.NONE);
+		downButton.setText(Labels.getLabel("button.down"));	
+		downButton.addListener(SWT.Selection, new DownButtonListener(openersList) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+24218192
+src/net/azib/ipscan/gui/EditFavoritesDialog.java 67 80
+src/net/azib/ipscan/gui/EditOpenersDialog.java 131 150
+----------------------------------------
+		deleteButton.setLayoutData(LayoutHelper.formData(new FormAttachment(favoritesList), new FormAttachment(renameButton, 0, SWT.RIGHT), new FormAttachment(renameButton), null));
+		
+		Button okButton = new Button(shell, SWT.NONE);
+		okButton.setText(Labels.getLabel("button.OK"));		
+		
+		Button cancelButton = new Button(shell, SWT.NONE);
+		cancelButton.setText(Labels.getLabel("button.cancel"));		
+
+		positionButtonsInFormLayout(okButton, cancelButton, favoritesList);
+		
+		shell.pack();
+		
+		okButton.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
+
+----------------------------------------
+		editFieldsGroup.pack();
+
+		Button okButton = new Button(shell, SWT.NONE);
+		okButton.setText(Labels.getLabel("button.OK"));
+
+		Button cancelButton = new Button(shell, SWT.NONE);
+		cancelButton.setText(Labels.getLabel("button.cancel"));
+
+		positionButtonsInFormLayout(okButton, cancelButton, editFieldsGroup);
+
+		shell.pack();
+
+		okButton.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
+				saveOpeners();
+				shell.close();
+			}
+		});
+		cancelButton.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
+
+----------------------------------------

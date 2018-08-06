@@ -1,0 +1,614 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+28820987
+src/org/jfm/po/MoveAction.java 218 227
+src/org/jfm/filesystems/JFMFile.java 403 409
+----------------------------------------
+      }finally{
+        try {
+          in.close();          
+        }
+        catch (Exception ignored) {}
+        try {
+            out.close();
+        }
+        catch (Exception ignored) {}
+      }
+
+----------------------------------------
+    public String toString() {
+      if(getDisplayName()==null){
+        return getName();
+      }else{
+        return getDisplayName();
+      }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+28821015
+src/org/jfm/po/FilePropertiesDialog.java 115 119
+src/org/jfm/po/copy/CopyProgressDialog.java 62 72
+----------------------------------------
+    if(!file.isDirectory()){
+      try{
+        contentTypeLabel.setText(file.getMimeType());
+      }catch(Exception ex){}
+    }else{
+
+----------------------------------------
+  public void startCopy(){
+    copyThread=new Thread(new Runnable(){
+      public void run(){
+        try{
+          copyFiles();
+        }catch(CopyCancelledException ex){}
+      }
+    });
+    copyThread.start();
+    this.setVisible(true);
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+28821001
+src/org/jfm/po/CommandOutputViewDialog.java 81 91
+src/org/jfm/po/copy/CopyProgressDialog.java 62 72
+----------------------------------------
+    public void run(){
+      try {
+          //i'm not interested in the return value of the process 
+          //i just want to know when it's over
+          process.waitFor();
+      }
+      catch (InterruptedException ex) {}
+      finally {
+        CommandOutputViewDialog.this.dispose();
+      }
+    }
+
+----------------------------------------
+  public void startCopy(){
+    copyThread=new Thread(new Runnable(){
+      public void run(){
+        try{
+          copyFiles();
+        }catch(CopyCancelledException ex){}
+      }
+    });
+    copyThread.start();
+    this.setVisible(true);
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+28820995
+src/org/jfm/po/CommandOutputViewDialog.java 23 32
+src/org/jfm/po/copy/CopyProgressDialog.java 62 72
+----------------------------------------
+  public CommandOutputViewDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+      //pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+  public void startCopy(){
+    copyThread=new Thread(new Runnable(){
+      public void run(){
+        try{
+          copyFiles();
+        }catch(CopyCancelledException ex){}
+      }
+    });
+    copyThread.start();
+    this.setVisible(true);
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+28821017
+src/org/jfm/views/fview/FileViewDialog.java 37 46
+src/org/jfm/po/copy/CopyProgressDialog.java 62 72
+----------------------------------------
+  public FileViewDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+    //  pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+  public void startCopy(){
+    copyThread=new Thread(new Runnable(){
+      public void run(){
+        try{
+          copyFiles();
+        }catch(CopyCancelledException ex){}
+      }
+    });
+    copyThread.start();
+    this.setVisible(true);
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+28821016
+src/org/jfm/filesystems/JFMFile.java 403 409
+src/org/jfm/po/copy/CopyProgressDialog.java 62 72
+----------------------------------------
+    public String toString() {
+      if(getDisplayName()==null){
+        return getName();
+      }else{
+        return getDisplayName();
+      }
+    }
+
+----------------------------------------
+  public void startCopy(){
+    copyThread=new Thread(new Runnable(){
+      public void run(){
+        try{
+          copyFiles();
+        }catch(CopyCancelledException ex){}
+      }
+    });
+    copyThread.start();
+    this.setVisible(true);
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+28820990
+src/org/jfm/po/MoveAction.java 218 227
+src/org/jfm/po/copy/CopyProgressDialog.java 62 72
+----------------------------------------
+      }finally{
+        try {
+          in.close();          
+        }
+        catch (Exception ignored) {}
+        try {
+            out.close();
+        }
+        catch (Exception ignored) {}
+      }
+
+----------------------------------------
+  public void startCopy(){
+    copyThread=new Thread(new Runnable(){
+      public void run(){
+        try{
+          copyFiles();
+        }catch(CopyCancelledException ex){}
+      }
+    });
+    copyThread.start();
+    this.setVisible(true);
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+28821008
+src/org/jfm/main/MainFrame.java 60 68
+src/org/jfm/po/copy/CopyProgressDialog.java 62 72
+----------------------------------------
+  public MainFrame() {
+    enableEvents(AWTEvent.WINDOW_EVENT_MASK);
+    try {
+      jbInit();
+    }
+    catch(Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+----------------------------------------
+  public void startCopy(){
+    copyThread=new Thread(new Runnable(){
+      public void run(){
+        try{
+          copyFiles();
+        }catch(CopyCancelledException ex){}
+      }
+    });
+    copyThread.start();
+    this.setVisible(true);
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+28821006
+src/org/jfm/po/CopyAction.java 209 218
+src/org/jfm/po/copy/CopyProgressDialog.java 62 72
+----------------------------------------
+      }finally{
+        try {
+          in.close();          
+        }
+        catch (Exception ignored) {}
+        try {
+            out.close();
+        }
+        catch (Exception ignored) {}
+      }
+
+----------------------------------------
+  public void startCopy(){
+    copyThread=new Thread(new Runnable(){
+      public void run(){
+        try{
+          copyFiles();
+        }catch(CopyCancelledException ex){}
+      }
+    });
+    copyThread.start();
+    this.setVisible(true);
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+28821010
+src/org/jfm/views/fview/FindTextDialog.java 38 47
+src/org/jfm/po/copy/CopyProgressDialog.java 62 72
+----------------------------------------
+  public FindTextDialog(Frame owner, String title, boolean modal) {
+    super(owner, title, modal);
+    try {
+      jbInit();
+      //pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+  public void startCopy(){
+    copyThread=new Thread(new Runnable(){
+      public void run(){
+        try{
+          copyFiles();
+        }catch(CopyCancelledException ex){}
+      }
+    });
+    copyThread.start();
+    this.setVisible(true);
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+28821007
+src/org/jfm/views/FontDialog.java 46 55
+src/org/jfm/po/copy/CopyProgressDialog.java 62 72
+----------------------------------------
+  public FontDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+//      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+  public void startCopy(){
+    copyThread=new Thread(new Runnable(){
+      public void run(){
+        try{
+          copyFiles();
+        }catch(CopyCancelledException ex){}
+      }
+    });
+    copyThread.start();
+    this.setVisible(true);
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+28821014
+src/org/jfm/main/configurationdialog/ConfigurationEventsQueue.java 34 39
+src/org/jfm/po/copy/CopyProgressDialog.java 62 72
+----------------------------------------
+	public static void addPendingEvent(BroadcastEvent ev){
+		events.add(ev);
+		if(dialog!=null){
+			dialog.configurationChanged();
+		}
+	}
+
+----------------------------------------
+  public void startCopy(){
+    copyThread=new Thread(new Runnable(){
+      public void run(){
+        try{
+          copyFiles();
+        }catch(CopyCancelledException ex){}
+      }
+    });
+    copyThread.start();
+    this.setVisible(true);
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+28820993
+src/org/jfm/po/copy/CopyProgressDialog.java 62 72
+src/org/jfm/main/Main.java 50 68
+----------------------------------------
+  public void startCopy(){
+    copyThread=new Thread(new Runnable(){
+      public void run(){
+        try{
+          copyFiles();
+        }catch(CopyCancelledException ex){}
+      }
+    });
+    copyThread.start();
+    this.setVisible(true);
+  }
+
+----------------------------------------
+  public static void main(String[] args) {    
+	try {    	
+      //UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
+      UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+      JFMView.registerViews();      
+      JFMFileSystem.registerFilesystems();
+	}
+    catch(Exception e) {
+      e.printStackTrace();
+    }    
+   // final SplashWindow splash=new SplashWindow("someimage.gif");
+    //splash.setVisible(true);
+    new Main();
+    EventQueue.invokeLater(new Runnable(){
+    	public void run() {
+    	//	splash.dispose();
+    	}
+    });
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+28820991
+src/org/jfm/main/Options.java 108 114
+src/org/jfm/main/Main.java 50 68
+----------------------------------------
+  public static void savePreferences(){
+  	try {
+		getPreferences().flush();
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+  }
+
+----------------------------------------
+  public static void main(String[] args) {    
+	try {    	
+      //UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
+      UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+      JFMView.registerViews();      
+      JFMFileSystem.registerFilesystems();
+	}
+    catch(Exception e) {
+      e.printStackTrace();
+    }    
+   // final SplashWindow splash=new SplashWindow("someimage.gif");
+    //splash.setVisible(true);
+    new Main();
+    EventQueue.invokeLater(new Runnable(){
+    	public void run() {
+    	//	splash.dispose();
+    	}
+    });
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+28820992
+src/org/jfm/main/Main.java 50 68
+src/org/jfm/views/JFMView.java 186 196
+----------------------------------------
+  public static void main(String[] args) {    
+	try {    	
+      //UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
+      UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+      JFMView.registerViews();      
+      JFMFileSystem.registerFilesystems();
+	}
+    catch(Exception e) {
+      e.printStackTrace();
+    }    
+   // final SplashWindow splash=new SplashWindow("someimage.gif");
+    //splash.setVisible(true);
+    new Main();
+    EventQueue.invokeLater(new Runnable(){
+    	public void run() {
+    	//	splash.dispose();
+    	}
+    });
+  }
+
+----------------------------------------
+  private void init(){
+    Broadcaster.addChangePanelListener(new ChangePanelListener(){
+      public void changePanel(ChangePanelEvent e){      	
+        if(!e.getSource().equals(JFMView.this)){
+          JFMView.this.requestFocus();          
+        }
+      }
+    });    
+    statusLabel=new javax.swing.JLabel();
+    statusLabel.setOpaque(false);
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+28820994
+src/org/jfm/po/copy/CopyProgressDialog.java 62 72
+src/org/jfm/views/JFMView.java 186 196
+----------------------------------------
+  public void startCopy(){
+    copyThread=new Thread(new Runnable(){
+      public void run(){
+        try{
+          copyFiles();
+        }catch(CopyCancelledException ex){}
+      }
+    });
+    copyThread.start();
+    this.setVisible(true);
+  }
+
+----------------------------------------
+  private void init(){
+    Broadcaster.addChangePanelListener(new ChangePanelListener(){
+      public void changePanel(ChangePanelEvent e){      	
+        if(!e.getSource().equals(JFMView.this)){
+          JFMView.this.requestFocus();          
+        }
+      }
+    });    
+    statusLabel=new javax.swing.JLabel();
+    statusLabel.setOpaque(false);
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+28821009
+src/org/jfm/main/SearchDialog.java 156 194
+src/org/jfm/views/list/detailview/DetailsTableCellRenderer.java 37 72
+----------------------------------------
+  void searchButton_actionPerformed(ActionEvent e) {
+    if(isSearching){
+      mustStop=true;
+      return;
+    }
+@SuppressWarnings("unused")
+    String startDir=null;
+    if(startFromField.getText()==null || startFromField.getText().length()<=0 || startFromField.getText().equals(".")){
+      startDir=System.getProperty("user.dir");
+    }else{
+      startDir=startFromField.getText();
+    }
+
+    final JFMFile startFileDir=null;//new File(startDir);
+    if(!startFileDir.isDirectory() || !startFileDir.exists()){
+      JOptionPane.showMessageDialog(this,"Invalid start directory specified.","Error",JOptionPane.ERROR_MESSAGE);
+      return;
+    }
+
+    if(filesSearchField.getText()==null || filesSearchField.getText().length()<=0){
+      JOptionPane.showMessageDialog(this,"Invalid search mask specified. Use *,? to specify more files.","Error",JOptionPane.ERROR_MESSAGE);
+      return;
+    }
+
+    listModel.clear();
+    //start the search
+    new Thread(new Runnable(){
+      public void run(){
+        searchButton.setText("Stop");
+        isSearching=true;
+        try{
+          search(startFileDir);
+        }catch(Exception ex){}
+        searchButton.setText("Search");
+        isSearching=false;
+        mustStop=false;
+      }
+    }).start();
+  }
+
+----------------------------------------
+  public Component getTableCellRendererComponent(JTable table, Object value,boolean isSelected, boolean hasFocus, int row, int column) {
+    //Component c=super.getTableCellRendererComponent(table,value,isSelected,hasFocus,row,column);
+    //if(!(c instanceof JLabel)) return c;
+  	setFont(table.getFont());
+  	setValue(value);
+  	DetailsTableModel model=(DetailsTableModel)table.getModel();
+  	
+  	JFMFile selectedFile=model.getFileAt(row);
+  	if(selectedFile!=null && selectedFile.isMarked()){
+  		setForeground(Options.getMarkedColor());  		
+  	}else{
+  		setForeground(table.getForeground());  		
+  	}
+  	
+  	setBackground(table.getBackground());  	
+  	if(column==0 && table.isRowSelected(row) && table.isFocusOwner()){
+  		border.setLineColor(Options.getForegroundColor());
+  		setBorder(border);
+  	}else{
+  		setBorder(noFocusBorder);
+  	}  		
+
+  	if(column==table.getTableHeader().getColumnModel().getColumnIndex("Size")){
+  		setHorizontalAlignment(JLabel.RIGHT);
+  	}else{
+  		setHorizontalAlignment(JLabel.LEFT);
+  	}
+  	
+  	if(!(value instanceof JFMFile)){
+  		setIcon(null);
+  	}else{
+  		JFMFile f=(JFMFile)value;
+  		setIcon(getIcon(f));
+  	}
+  	return this;
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+28821013
+src/org/jfm/filesystems/JFMFile.java 403 409
+src/org/jfm/filesystems/local/JFMLocalFile.java 192 199
+----------------------------------------
+    public String toString() {
+      if(getDisplayName()==null){
+        return getName();
+      }else{
+        return getDisplayName();
+      }
+    }
+
+----------------------------------------
+	public boolean isDirectory() {
+		
+		if(view.isFileSystem(theFile)){
+			return theFile.isDirectory();
+		}else{
+			return true;
+		}
+	}
+
+----------------------------------------

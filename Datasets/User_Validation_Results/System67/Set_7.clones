@@ -1,0 +1,1220 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995831
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 489 494
+src/de/joergjahnke/common/bluetooth/BluetoothOBEXClient.java 110 120
+----------------------------------------
+            } finally {
+                try {
+                    saveStream.close();
+                } catch (Exception e) {
+                }
+            }
+
+----------------------------------------
+    public void disconnect() {
+        super.stop();
+
+        try {
+            this.clientSession.disconnect(null);
+            this.clientSession.close();
+        } catch (IOException e) {
+            // we had a problem with closing the streams, what to do now?
+        }
+        this.clientSession = null;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995834
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 510 515
+src/de/joergjahnke/common/bluetooth/BluetoothOBEXClient.java 110 120
+----------------------------------------
+        } finally {
+            try {
+                romStream.close();
+            } catch (Exception e) {
+            }
+        }
+
+----------------------------------------
+    public void disconnect() {
+        super.stop();
+
+        try {
+            this.clientSession.disconnect(null);
+            this.clientSession.close();
+        } catch (IOException e) {
+            // we had a problem with closing the streams, what to do now?
+        }
+        this.clientSession = null;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995833
+src/de/joergjahnke/gameboy/core/Gameboy.java 207 216
+src/de/joergjahnke/common/bluetooth/BluetoothOBEXClient.java 110 120
+----------------------------------------
+        if (!isRunning()) {
+            this.logger.info("Gameboy starting");
+            super.run();
+            // we use this thread to run the CPU
+            try {
+                this.cpu.run();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+----------------------------------------
+    public void disconnect() {
+        super.stop();
+
+        try {
+            this.clientSession.disconnect(null);
+            this.clientSession.close();
+        } catch (IOException e) {
+            // we had a problem with closing the streams, what to do now?
+        }
+        this.clientSession = null;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995832
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 393 400
+src/de/joergjahnke/common/bluetooth/BluetoothOBEXClient.java 110 120
+----------------------------------------
+        if (status == STATUS_LOAD_OK || status == STATUS_LOAD_FAILED) {
+            try {
+                new File(SUSPENDFILE_NAME).delete();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Could not remove the suspend file! Please remove the suspend file '" + SUSPENDFILE_NAME + "' manually.", this.commonResources.getString("CouldNotRemoveSuspendData"), JOptionPane.ERROR_MESSAGE);
+                e.printStackTrace();
+            }
+        }
+
+----------------------------------------
+    public void disconnect() {
+        super.stop();
+
+        try {
+            this.clientSession.disconnect(null);
+            this.clientSession.close();
+        } catch (IOException e) {
+            // we had a problem with closing the streams, what to do now?
+        }
+        this.clientSession = null;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995837
+src/de/joergjahnke/gameboy/android/AndroidGB.java 499 507
+src/de/joergjahnke/common/bluetooth/BluetoothOBEXClient.java 110 120
+----------------------------------------
+			if(this.orientationSensorNotifier == null) {
+				try {
+					this.orientationSensorNotifier = new OrientationSensorNotifier();
+					this.orientationSensorNotifier.addListener(this.gameboyView);
+					this.orientationSensorNotifier.start();
+				} catch( Exception e ) {
+					// we could not attach the notifier, most probably no orientation sensor is available
+				}
+			}
+
+----------------------------------------
+    public void disconnect() {
+        super.stop();
+
+        try {
+            this.clientSession.disconnect(null);
+            this.clientSession.close();
+        } catch (IOException e) {
+            // we had a problem with closing the streams, what to do now?
+        }
+        this.clientSession = null;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995838
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 375 380
+src/de/joergjahnke/common/bluetooth/BluetoothOBEXClient.java 110 120
+----------------------------------------
+        } finally {
+            try {
+                in.close();
+            } catch (Exception e) {
+            }
+        }
+
+----------------------------------------
+    public void disconnect() {
+        super.stop();
+
+        try {
+            this.clientSession.disconnect(null);
+            this.clientSession.close();
+        } catch (IOException e) {
+            // we had a problem with closing the streams, what to do now?
+        }
+        this.clientSession = null;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995835
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 296 301
+src/de/joergjahnke/common/bluetooth/BluetoothOBEXClient.java 110 120
+----------------------------------------
+        } finally {
+            try {
+                out.close();
+            } catch (Exception e) {
+            }
+        }
+
+----------------------------------------
+    public void disconnect() {
+        super.stop();
+
+        try {
+            this.clientSession.disconnect(null);
+            this.clientSession.close();
+        } catch (IOException e) {
+            // we had a problem with closing the streams, what to do now?
+        }
+        this.clientSession = null;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995246
+src/de/joergjahnke/common/bluetooth/BluetoothOBEXClient.java 240 250
+src/de/joergjahnke/common/bluetooth/BluetoothOBEXClient.java 110 120
+----------------------------------------
+    public void abortFileReception() {
+        super.stop();
+
+        try {
+            this.local.setDiscoverable(DiscoveryAgent.NOT_DISCOVERABLE);
+            this.notifier.close();
+            this.notifier = null;
+        } catch (Exception e) {
+            // we could not completely shut down the service, what to do now?
+        }
+    }
+
+----------------------------------------
+    public void disconnect() {
+        super.stop();
+
+        try {
+            this.clientSession.disconnect(null);
+            this.clientSession.close();
+        } catch (IOException e) {
+            // we had a problem with closing the streams, what to do now?
+        }
+        this.clientSession = null;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995233
+src/de/joergjahnke/gameboy/android/AndroidGB.java 317 327
+src/de/joergjahnke/common/bluetooth/BluetoothOBEXClient.java 226 233
+----------------------------------------
+            {
+	            // try to open the online help page in a new browser window
+	            try {
+	            	final Intent help = new Intent( "android.intent.action.VIEW", Uri.parse( URL_ONLINE_HELP ) );
+	            	
+		            startActivity( help );
+	            } catch( Exception e ) {
+	                showAlert(getResources().getString(R.string.title_warning), 0, getResources().getString(R.string.msg_helpNotDisplayed), "OK", true);
+	            }
+	            break;
+            }
+
+----------------------------------------
+            public void run() {
+                try {
+                    notifier.acceptAndOpen(handler);
+                } catch (IOException e) {
+                    notifyErrorOccurred(e);
+                    abortFileReception();
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+28734541
+src/de/joergjahnke/common/extendeddevices/WavePlayer.java 64 70
+src/de/joergjahnke/common/bluetooth/BluetoothOBEXClient.java 226 233
+----------------------------------------
+                        synchronized (buffer) {
+                            buffer.reset();
+                            try {
+                                buffer.wait();
+                            } catch (InterruptedException e) {
+                            }
+                        }
+
+----------------------------------------
+            public void run() {
+                try {
+                    notifier.acceptAndOpen(handler);
+                } catch (IOException e) {
+                    notifyErrorOccurred(e);
+                    abortFileReception();
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995235
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 241 248
+src/de/joergjahnke/common/bluetooth/BluetoothOBEXClient.java 226 233
+----------------------------------------
+                    public void windowClosing(final WindowEvent evt) {
+                        try {
+                            settings.storeToXML(new FileOutputStream(new File(PROPERTIES_NAME)), "Properties for JSwingBoy");
+                            stopGame();
+                        } catch (Exception e) {
+                            // we can't save the settings, that's a pity, but we'll just use defaults on next startup
+                        }
+                    }
+
+----------------------------------------
+            public void run() {
+                try {
+                    notifier.acceptAndOpen(handler);
+                } catch (IOException e) {
+                    notifyErrorOccurred(e);
+                    abortFileReception();
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995234
+src/de/joergjahnke/common/bluetooth/BluetoothOBEXClient.java 226 233
+src/de/joergjahnke/common/android/FileDialog.java 40 49
+----------------------------------------
+            public void run() {
+                try {
+                    notifier.acceptAndOpen(handler);
+                } catch (IOException e) {
+                    notifyErrorOccurred(e);
+                    abortFileReception();
+                }
+            }
+
+----------------------------------------
+    public void onCreate(final Bundle icicle) {
+        super.onCreate(icicle);
+
+        // go to the root directory
+        try {
+            showDirectory(getIntent().getStringExtra("de.joergjahnke.c64.android.prgdir"));
+        } catch (NullPointerException e) {
+            showDirectory("/");
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+28734544
+src/de/joergjahnke/common/bluetooth/BluetoothClient.java 174 180
+src/de/joergjahnke/gameboy/android/AndroidGB.java 498 508
+----------------------------------------
+    public void servicesDiscovered(final int transID, final ServiceRecord[] servRecord) {
+        try {
+            this.serviceRecord = servRecord[0];
+        } catch (Exception e) {
+            // it may happen that no service record can be retrieved, in this case serviceRecord remains null
+        }
+    }
+
+----------------------------------------
+		if(active) {
+			if(this.orientationSensorNotifier == null) {
+				try {
+					this.orientationSensorNotifier = new OrientationSensorNotifier();
+					this.orientationSensorNotifier.addListener(this.gameboyView);
+					this.orientationSensorNotifier.start();
+				} catch( Exception e ) {
+					// we could not attach the notifier, most probably no orientation sensor is available
+				}
+			}
+		} else {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995245
+src/de/joergjahnke/common/bluetooth/BluetoothOBEXClient.java 240 250
+src/de/joergjahnke/gameboy/android/AndroidGB.java 498 508
+----------------------------------------
+    public void abortFileReception() {
+        super.stop();
+
+        try {
+            this.local.setDiscoverable(DiscoveryAgent.NOT_DISCOVERABLE);
+            this.notifier.close();
+            this.notifier = null;
+        } catch (Exception e) {
+            // we could not completely shut down the service, what to do now?
+        }
+    }
+
+----------------------------------------
+		if(active) {
+			if(this.orientationSensorNotifier == null) {
+				try {
+					this.orientationSensorNotifier = new OrientationSensorNotifier();
+					this.orientationSensorNotifier.addListener(this.gameboyView);
+					this.orientationSensorNotifier.start();
+				} catch( Exception e ) {
+					// we could not attach the notifier, most probably no orientation sensor is available
+				}
+			}
+		} else {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995249
+src/de/joergjahnke/common/io/SerializationUtils.java 49 54
+src/de/joergjahnke/common/io/SerializationUtils.java 165 170
+----------------------------------------
+    public static void serialize(final DataOutputStream out, final byte[] data) throws IOException {
+        out.writeInt(data.length);
+        for (int i = 0; i < data.length; ++i) {
+            out.writeByte(data[i]);
+        }
+    }
+
+----------------------------------------
+    public static void serialize(final DataOutputStream out, final boolean[] data) throws IOException {
+        out.writeInt(data.length);
+        for (int i = 0; i < data.length; ++i) {
+            out.writeBoolean(data[i]);
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995250
+src/de/joergjahnke/common/io/SerializationUtils.java 165 170
+src/de/joergjahnke/common/io/SerializationUtils.java 136 141
+----------------------------------------
+    public static void serialize(final DataOutputStream out, final boolean[] data) throws IOException {
+        out.writeInt(data.length);
+        for (int i = 0; i < data.length; ++i) {
+            out.writeBoolean(data[i]);
+        }
+    }
+
+----------------------------------------
+    public static void serialize(final DataOutputStream out, final long[] data) throws IOException {
+        out.writeInt(data.length);
+        for (int i = 0; i < data.length; ++i) {
+            out.writeLong(data[i]);
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995268
+src/de/joergjahnke/common/io/SerializationUtils.java 49 54
+src/de/joergjahnke/common/io/SerializationUtils.java 136 141
+----------------------------------------
+    public static void serialize(final DataOutputStream out, final byte[] data) throws IOException {
+        out.writeInt(data.length);
+        for (int i = 0; i < data.length; ++i) {
+            out.writeByte(data[i]);
+        }
+    }
+
+----------------------------------------
+    public static void serialize(final DataOutputStream out, final long[] data) throws IOException {
+        out.writeInt(data.length);
+        for (int i = 0; i < data.length; ++i) {
+            out.writeLong(data[i]);
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995251
+src/de/joergjahnke/common/io/SerializationUtils.java 165 170
+src/de/joergjahnke/common/io/SerializationUtils.java 78 83
+----------------------------------------
+    public static void serialize(final DataOutputStream out, final boolean[] data) throws IOException {
+        out.writeInt(data.length);
+        for (int i = 0; i < data.length; ++i) {
+            out.writeBoolean(data[i]);
+        }
+    }
+
+----------------------------------------
+    public static void serialize(final DataOutputStream out, final short[] data) throws IOException {
+        out.writeInt(data.length);
+        for (int i = 0; i < data.length; ++i) {
+            out.writeShort(data[i]);
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995269
+src/de/joergjahnke/common/io/SerializationUtils.java 136 141
+src/de/joergjahnke/common/io/SerializationUtils.java 78 83
+----------------------------------------
+    public static void serialize(final DataOutputStream out, final long[] data) throws IOException {
+        out.writeInt(data.length);
+        for (int i = 0; i < data.length; ++i) {
+            out.writeLong(data[i]);
+        }
+    }
+
+----------------------------------------
+    public static void serialize(final DataOutputStream out, final short[] data) throws IOException {
+        out.writeInt(data.length);
+        for (int i = 0; i < data.length; ++i) {
+            out.writeShort(data[i]);
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995262
+src/de/joergjahnke/common/io/SerializationUtils.java 49 54
+src/de/joergjahnke/common/io/SerializationUtils.java 78 83
+----------------------------------------
+    public static void serialize(final DataOutputStream out, final byte[] data) throws IOException {
+        out.writeInt(data.length);
+        for (int i = 0; i < data.length; ++i) {
+            out.writeByte(data[i]);
+        }
+    }
+
+----------------------------------------
+    public static void serialize(final DataOutputStream out, final short[] data) throws IOException {
+        out.writeInt(data.length);
+        for (int i = 0; i < data.length; ++i) {
+            out.writeShort(data[i]);
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995252
+src/de/joergjahnke/common/io/SerializationUtils.java 165 170
+src/de/joergjahnke/common/io/SerializationUtils.java 107 112
+----------------------------------------
+    public static void serialize(final DataOutputStream out, final boolean[] data) throws IOException {
+        out.writeInt(data.length);
+        for (int i = 0; i < data.length; ++i) {
+            out.writeBoolean(data[i]);
+        }
+    }
+
+----------------------------------------
+    public static void serialize(final DataOutputStream out, final int[] data) throws IOException {
+        out.writeInt(data.length);
+        for (int i = 0; i < data.length; ++i) {
+            out.writeInt(data[i]);
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995265
+src/de/joergjahnke/common/io/SerializationUtils.java 78 83
+src/de/joergjahnke/common/io/SerializationUtils.java 107 112
+----------------------------------------
+    public static void serialize(final DataOutputStream out, final short[] data) throws IOException {
+        out.writeInt(data.length);
+        for (int i = 0; i < data.length; ++i) {
+            out.writeShort(data[i]);
+        }
+    }
+
+----------------------------------------
+    public static void serialize(final DataOutputStream out, final int[] data) throws IOException {
+        out.writeInt(data.length);
+        for (int i = 0; i < data.length; ++i) {
+            out.writeInt(data[i]);
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995264
+src/de/joergjahnke/common/io/SerializationUtils.java 49 54
+src/de/joergjahnke/common/io/SerializationUtils.java 107 112
+----------------------------------------
+    public static void serialize(final DataOutputStream out, final byte[] data) throws IOException {
+        out.writeInt(data.length);
+        for (int i = 0; i < data.length; ++i) {
+            out.writeByte(data[i]);
+        }
+    }
+
+----------------------------------------
+    public static void serialize(final DataOutputStream out, final int[] data) throws IOException {
+        out.writeInt(data.length);
+        for (int i = 0; i < data.length; ++i) {
+            out.writeInt(data[i]);
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995270
+src/de/joergjahnke/common/io/SerializationUtils.java 136 141
+src/de/joergjahnke/common/io/SerializationUtils.java 107 112
+----------------------------------------
+    public static void serialize(final DataOutputStream out, final long[] data) throws IOException {
+        out.writeInt(data.length);
+        for (int i = 0; i < data.length; ++i) {
+            out.writeLong(data[i]);
+        }
+    }
+
+----------------------------------------
+    public static void serialize(final DataOutputStream out, final int[] data) throws IOException {
+        out.writeInt(data.length);
+        for (int i = 0; i < data.length; ++i) {
+            out.writeInt(data[i]);
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995253
+src/de/joergjahnke/common/io/SerializationUtils.java 92 98
+src/de/joergjahnke/common/io/SerializationUtils.java 179 185
+----------------------------------------
+    public static void deserialize(final DataInputStream in, final short[] data) throws IOException {
+        final int size = in.readInt();
+
+        for (int i = 0; i < size; ++i) {
+            data[i] = in.readShort();
+        }
+    }
+
+----------------------------------------
+    public static void deserialize(final DataInputStream in, final boolean[] data) throws IOException {
+        final int size = in.readInt();
+
+        for (int i = 0; i < size; ++i) {
+            data[i] = in.readBoolean();
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995266
+src/de/joergjahnke/common/io/SerializationUtils.java 92 98
+src/de/joergjahnke/common/io/SerializationUtils.java 121 127
+----------------------------------------
+    public static void deserialize(final DataInputStream in, final short[] data) throws IOException {
+        final int size = in.readInt();
+
+        for (int i = 0; i < size; ++i) {
+            data[i] = in.readShort();
+        }
+    }
+
+----------------------------------------
+    public static void deserialize(final DataInputStream in, final int[] data) throws IOException {
+        final int size = in.readInt();
+
+        for (int i = 0; i < size; ++i) {
+            data[i] = in.readInt();
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995254
+src/de/joergjahnke/common/io/SerializationUtils.java 179 185
+src/de/joergjahnke/common/io/SerializationUtils.java 121 127
+----------------------------------------
+    public static void deserialize(final DataInputStream in, final boolean[] data) throws IOException {
+        final int size = in.readInt();
+
+        for (int i = 0; i < size; ++i) {
+            data[i] = in.readBoolean();
+        }
+    }
+
+----------------------------------------
+    public static void deserialize(final DataInputStream in, final int[] data) throws IOException {
+        final int size = in.readInt();
+
+        for (int i = 0; i < size; ++i) {
+            data[i] = in.readInt();
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995391
+src/de/joergjahnke/common/io/SerializationUtils.java 92 98
+src/de/joergjahnke/common/io/SerializationUtils.java 150 156
+----------------------------------------
+    public static void deserialize(final DataInputStream in, final short[] data) throws IOException {
+        final int size = in.readInt();
+
+        for (int i = 0; i < size; ++i) {
+            data[i] = in.readShort();
+        }
+    }
+
+----------------------------------------
+    public static void deserialize(final DataInputStream in, final long[] data) throws IOException {
+        final int size = in.readInt();
+
+        for (int i = 0; i < size; ++i) {
+            data[i] = in.readLong();
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995255
+src/de/joergjahnke/common/io/SerializationUtils.java 179 185
+src/de/joergjahnke/common/io/SerializationUtils.java 150 156
+----------------------------------------
+    public static void deserialize(final DataInputStream in, final boolean[] data) throws IOException {
+        final int size = in.readInt();
+
+        for (int i = 0; i < size; ++i) {
+            data[i] = in.readBoolean();
+        }
+    }
+
+----------------------------------------
+    public static void deserialize(final DataInputStream in, final long[] data) throws IOException {
+        final int size = in.readInt();
+
+        for (int i = 0; i < size; ++i) {
+            data[i] = in.readLong();
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995392
+src/de/joergjahnke/common/io/SerializationUtils.java 121 127
+src/de/joergjahnke/common/io/SerializationUtils.java 150 156
+----------------------------------------
+    public static void deserialize(final DataInputStream in, final int[] data) throws IOException {
+        final int size = in.readInt();
+
+        for (int i = 0; i < size; ++i) {
+            data[i] = in.readInt();
+        }
+    }
+
+----------------------------------------
+    public static void deserialize(final DataInputStream in, final long[] data) throws IOException {
+        final int size = in.readInt();
+
+        for (int i = 0; i < size; ++i) {
+            data[i] = in.readLong();
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995263
+src/de/joergjahnke/common/io/SerializationUtils.java 92 98
+src/de/joergjahnke/common/io/SerializationUtils.java 63 69
+----------------------------------------
+    public static void deserialize(final DataInputStream in, final short[] data) throws IOException {
+        final int size = in.readInt();
+
+        for (int i = 0; i < size; ++i) {
+            data[i] = in.readShort();
+        }
+    }
+
+----------------------------------------
+    public static void deserialize(final DataInputStream in, final byte[] data) throws IOException {
+        final int size = in.readInt();
+
+        for (int i = 0; i < size; ++i) {
+            data[i] = in.readByte();
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995393
+src/de/joergjahnke/common/io/SerializationUtils.java 150 156
+src/de/joergjahnke/common/io/SerializationUtils.java 63 69
+----------------------------------------
+    public static void deserialize(final DataInputStream in, final long[] data) throws IOException {
+        final int size = in.readInt();
+
+        for (int i = 0; i < size; ++i) {
+            data[i] = in.readLong();
+        }
+    }
+
+----------------------------------------
+    public static void deserialize(final DataInputStream in, final byte[] data) throws IOException {
+        final int size = in.readInt();
+
+        for (int i = 0; i < size; ++i) {
+            data[i] = in.readByte();
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995256
+src/de/joergjahnke/common/io/SerializationUtils.java 179 185
+src/de/joergjahnke/common/io/SerializationUtils.java 63 69
+----------------------------------------
+    public static void deserialize(final DataInputStream in, final boolean[] data) throws IOException {
+        final int size = in.readInt();
+
+        for (int i = 0; i < size; ++i) {
+            data[i] = in.readBoolean();
+        }
+    }
+
+----------------------------------------
+    public static void deserialize(final DataInputStream in, final byte[] data) throws IOException {
+        final int size = in.readInt();
+
+        for (int i = 0; i < size; ++i) {
+            data[i] = in.readByte();
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995267
+src/de/joergjahnke/common/io/SerializationUtils.java 121 127
+src/de/joergjahnke/common/io/SerializationUtils.java 63 69
+----------------------------------------
+    public static void deserialize(final DataInputStream in, final int[] data) throws IOException {
+        final int size = in.readInt();
+
+        for (int i = 0; i < size; ++i) {
+            data[i] = in.readInt();
+        }
+    }
+
+----------------------------------------
+    public static void deserialize(final DataInputStream in, final byte[] data) throws IOException {
+        final int size = in.readInt();
+
+        for (int i = 0; i < size; ++i) {
+            data[i] = in.readByte();
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995259
+src/de/joergjahnke/common/io/SerializationUtils.java 78 83
+src/de/joergjahnke/common/io/SerializationUtils.java 194 199
+----------------------------------------
+    public static void serialize(final DataOutputStream out, final short[] data) throws IOException {
+        out.writeInt(data.length);
+        for (int i = 0; i < data.length; ++i) {
+            out.writeShort(data[i]);
+        }
+    }
+
+----------------------------------------
+    public static void serialize(final DataOutputStream out, final String[] data) throws IOException {
+        out.writeInt(data.length);
+        for (int i = 0; i < data.length; ++i) {
+            out.writeUTF(data[i]);
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995271
+src/de/joergjahnke/common/io/SerializationUtils.java 165 170
+src/de/joergjahnke/common/io/SerializationUtils.java 194 199
+----------------------------------------
+    public static void serialize(final DataOutputStream out, final boolean[] data) throws IOException {
+        out.writeInt(data.length);
+        for (int i = 0; i < data.length; ++i) {
+            out.writeBoolean(data[i]);
+        }
+    }
+
+----------------------------------------
+    public static void serialize(final DataOutputStream out, final String[] data) throws IOException {
+        out.writeInt(data.length);
+        for (int i = 0; i < data.length; ++i) {
+            out.writeUTF(data[i]);
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995257
+src/de/joergjahnke/common/io/SerializationUtils.java 49 54
+src/de/joergjahnke/common/io/SerializationUtils.java 194 199
+----------------------------------------
+    public static void serialize(final DataOutputStream out, final byte[] data) throws IOException {
+        out.writeInt(data.length);
+        for (int i = 0; i < data.length; ++i) {
+            out.writeByte(data[i]);
+        }
+    }
+
+----------------------------------------
+    public static void serialize(final DataOutputStream out, final String[] data) throws IOException {
+        out.writeInt(data.length);
+        for (int i = 0; i < data.length; ++i) {
+            out.writeUTF(data[i]);
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995258
+src/de/joergjahnke/common/io/SerializationUtils.java 136 141
+src/de/joergjahnke/common/io/SerializationUtils.java 194 199
+----------------------------------------
+    public static void serialize(final DataOutputStream out, final long[] data) throws IOException {
+        out.writeInt(data.length);
+        for (int i = 0; i < data.length; ++i) {
+            out.writeLong(data[i]);
+        }
+    }
+
+----------------------------------------
+    public static void serialize(final DataOutputStream out, final String[] data) throws IOException {
+        out.writeInt(data.length);
+        for (int i = 0; i < data.length; ++i) {
+            out.writeUTF(data[i]);
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995260
+src/de/joergjahnke/common/io/SerializationUtils.java 107 112
+src/de/joergjahnke/common/io/SerializationUtils.java 194 199
+----------------------------------------
+    public static void serialize(final DataOutputStream out, final int[] data) throws IOException {
+        out.writeInt(data.length);
+        for (int i = 0; i < data.length; ++i) {
+            out.writeInt(data[i]);
+        }
+    }
+
+----------------------------------------
+    public static void serialize(final DataOutputStream out, final String[] data) throws IOException {
+        out.writeInt(data.length);
+        for (int i = 0; i < data.length; ++i) {
+            out.writeUTF(data[i]);
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995273
+src/de/joergjahnke/common/io/SerializationUtils.java 121 127
+src/de/joergjahnke/common/io/SerializationUtils.java 208 214
+----------------------------------------
+    public static void deserialize(final DataInputStream in, final int[] data) throws IOException {
+        final int size = in.readInt();
+
+        for (int i = 0; i < size; ++i) {
+            data[i] = in.readInt();
+        }
+    }
+
+----------------------------------------
+    public static void deserialize(final DataInputStream in, final String[] data) throws IOException {
+        final int size = in.readInt();
+
+        for (int i = 0; i < size; ++i) {
+            data[i] = in.readUTF();
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995276
+src/de/joergjahnke/common/io/SerializationUtils.java 179 185
+src/de/joergjahnke/common/io/SerializationUtils.java 208 214
+----------------------------------------
+    public static void deserialize(final DataInputStream in, final boolean[] data) throws IOException {
+        final int size = in.readInt();
+
+        for (int i = 0; i < size; ++i) {
+            data[i] = in.readBoolean();
+        }
+    }
+
+----------------------------------------
+    public static void deserialize(final DataInputStream in, final String[] data) throws IOException {
+        final int size = in.readInt();
+
+        for (int i = 0; i < size; ++i) {
+            data[i] = in.readUTF();
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995272
+src/de/joergjahnke/common/io/SerializationUtils.java 92 98
+src/de/joergjahnke/common/io/SerializationUtils.java 208 214
+----------------------------------------
+    public static void deserialize(final DataInputStream in, final short[] data) throws IOException {
+        final int size = in.readInt();
+
+        for (int i = 0; i < size; ++i) {
+            data[i] = in.readShort();
+        }
+    }
+
+----------------------------------------
+    public static void deserialize(final DataInputStream in, final String[] data) throws IOException {
+        final int size = in.readInt();
+
+        for (int i = 0; i < size; ++i) {
+            data[i] = in.readUTF();
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995275
+src/de/joergjahnke/common/io/SerializationUtils.java 63 69
+src/de/joergjahnke/common/io/SerializationUtils.java 208 214
+----------------------------------------
+    public static void deserialize(final DataInputStream in, final byte[] data) throws IOException {
+        final int size = in.readInt();
+
+        for (int i = 0; i < size; ++i) {
+            data[i] = in.readByte();
+        }
+    }
+
+----------------------------------------
+    public static void deserialize(final DataInputStream in, final String[] data) throws IOException {
+        final int size = in.readInt();
+
+        for (int i = 0; i < size; ++i) {
+            data[i] = in.readUTF();
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995274
+src/de/joergjahnke/common/io/SerializationUtils.java 150 156
+src/de/joergjahnke/common/io/SerializationUtils.java 208 214
+----------------------------------------
+    public static void deserialize(final DataInputStream in, final long[] data) throws IOException {
+        final int size = in.readInt();
+
+        for (int i = 0; i < size; ++i) {
+            data[i] = in.readLong();
+        }
+    }
+
+----------------------------------------
+    public static void deserialize(final DataInputStream in, final String[] data) throws IOException {
+        final int size = in.readInt();
+
+        for (int i = 0; i < size; ++i) {
+            data[i] = in.readUTF();
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995342
+src/de/joergjahnke/common/io/SerializationUtils.java 136 141
+src/de/joergjahnke/common/io/SerializationUtils.java 223 228
+----------------------------------------
+    public static void serialize(final DataOutputStream out, final long[] data) throws IOException {
+        out.writeInt(data.length);
+        for (int i = 0; i < data.length; ++i) {
+            out.writeLong(data[i]);
+        }
+    }
+
+----------------------------------------
+    public static void serialize(final DataOutputStream out, final Serializable[] data) throws IOException {
+        out.writeInt(data.length);
+        for (int i = 0; i < data.length; ++i) {
+            data[i].serialize(out);
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995278
+src/de/joergjahnke/common/io/SerializationUtils.java 194 199
+src/de/joergjahnke/common/io/SerializationUtils.java 223 228
+----------------------------------------
+    public static void serialize(final DataOutputStream out, final String[] data) throws IOException {
+        out.writeInt(data.length);
+        for (int i = 0; i < data.length; ++i) {
+            out.writeUTF(data[i]);
+        }
+    }
+
+----------------------------------------
+    public static void serialize(final DataOutputStream out, final Serializable[] data) throws IOException {
+        out.writeInt(data.length);
+        for (int i = 0; i < data.length; ++i) {
+            data[i].serialize(out);
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995277
+src/de/joergjahnke/common/io/SerializationUtils.java 78 83
+src/de/joergjahnke/common/io/SerializationUtils.java 223 228
+----------------------------------------
+    public static void serialize(final DataOutputStream out, final short[] data) throws IOException {
+        out.writeInt(data.length);
+        for (int i = 0; i < data.length; ++i) {
+            out.writeShort(data[i]);
+        }
+    }
+
+----------------------------------------
+    public static void serialize(final DataOutputStream out, final Serializable[] data) throws IOException {
+        out.writeInt(data.length);
+        for (int i = 0; i < data.length; ++i) {
+            data[i].serialize(out);
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995341
+src/de/joergjahnke/common/io/SerializationUtils.java 165 170
+src/de/joergjahnke/common/io/SerializationUtils.java 223 228
+----------------------------------------
+    public static void serialize(final DataOutputStream out, final boolean[] data) throws IOException {
+        out.writeInt(data.length);
+        for (int i = 0; i < data.length; ++i) {
+            out.writeBoolean(data[i]);
+        }
+    }
+
+----------------------------------------
+    public static void serialize(final DataOutputStream out, final Serializable[] data) throws IOException {
+        out.writeInt(data.length);
+        for (int i = 0; i < data.length; ++i) {
+            data[i].serialize(out);
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995279
+src/de/joergjahnke/common/io/SerializationUtils.java 49 54
+src/de/joergjahnke/common/io/SerializationUtils.java 223 228
+----------------------------------------
+    public static void serialize(final DataOutputStream out, final byte[] data) throws IOException {
+        out.writeInt(data.length);
+        for (int i = 0; i < data.length; ++i) {
+            out.writeByte(data[i]);
+        }
+    }
+
+----------------------------------------
+    public static void serialize(final DataOutputStream out, final Serializable[] data) throws IOException {
+        out.writeInt(data.length);
+        for (int i = 0; i < data.length; ++i) {
+            data[i].serialize(out);
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995280
+src/de/joergjahnke/common/io/SerializationUtils.java 107 112
+src/de/joergjahnke/common/io/SerializationUtils.java 223 228
+----------------------------------------
+    public static void serialize(final DataOutputStream out, final int[] data) throws IOException {
+        out.writeInt(data.length);
+        for (int i = 0; i < data.length; ++i) {
+            out.writeInt(data[i]);
+        }
+    }
+
+----------------------------------------
+    public static void serialize(final DataOutputStream out, final Serializable[] data) throws IOException {
+        out.writeInt(data.length);
+        for (int i = 0; i < data.length; ++i) {
+            data[i].serialize(out);
+        }
+    }
+
+----------------------------------------

@@ -1,0 +1,1291 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830281
+source/net/filebot/ui/LanguageComboBoxModel.java 152 159
+source/net/filebot/ui/sfv/ChecksumTableModel.java 270 277
+----------------------------------------
+		public Language remove(int index) {
+			Language old = data.remove(index);
+
+			// update view
+			fireFavoritesRemoved(index, index);
+
+			return old;
+		}
+
+----------------------------------------
+		public int getIndexByKey(K key) {
+			Integer index = indexMap.get(key);
+
+			if (index == null)
+				return -1;
+
+			return index;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830282
+source/net/filebot/ui/AbstractSearchPanel.java 184 192
+source/net/filebot/ui/AbstractSearchPanel.java 248 256
+----------------------------------------
+		protected Collection<? extends SearchResult> doInBackground() throws Exception {
+			long start = System.currentTimeMillis();
+
+			try {
+				return requestProcessor.search();
+			} finally {
+				requestProcessor.duration += (System.currentTimeMillis() - start);
+			}
+		}
+
+----------------------------------------
+		protected final Collection<E> doInBackground() throws Exception {
+			long start = System.currentTimeMillis();
+
+			try {
+				return requestProcessor.fetch();
+			} finally {
+				requestProcessor.duration += (System.currentTimeMillis() - start);
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830283
+source/net/filebot/ui/sfv/ChecksumTableModel.java 38 48
+source/net/filebot/ui/sfv/ChecksumTableModel.java 51 60
+----------------------------------------
+	public String getColumnName(int columnIndex) {
+		switch (columnIndex) {
+		case 0:
+			return "State";
+		case 1:
+			return "Name";
+		default:
+			// works for files too and simply returns the name unchanged
+			return FileUtilities.getFolderName(getColumnRoot(columnIndex));
+		}
+	}
+
+----------------------------------------
+	public Class<?> getColumnClass(int columnIndex) {
+		switch (columnIndex) {
+		case 0:
+			return ChecksumRow.State.class;
+		case 1:
+			return String.class;
+		default:
+			return ChecksumCell.class;
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917575
+source/net/filebot/ui/AbstractSearchPanel.java 184 192
+source/net/filebot/hash/VerificationFileReader.java 46 58
+----------------------------------------
+		protected Collection<? extends SearchResult> doInBackground() throws Exception {
+			long start = System.currentTimeMillis();
+
+			try {
+				return requestProcessor.search();
+			} finally {
+				requestProcessor.duration += (System.currentTimeMillis() - start);
+			}
+		}
+
+----------------------------------------
+	public Entry<File, String> next() {
+		// cache next entry
+		if (!hasNext()) {
+			throw new NoSuchElementException();
+		}
+
+		try {
+			return buffer;
+		} finally {
+			// invalidate cache
+			buffer = null;
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917576
+source/net/filebot/ui/AbstractSearchPanel.java 248 256
+source/net/filebot/hash/VerificationFileReader.java 46 58
+----------------------------------------
+		protected final Collection<E> doInBackground() throws Exception {
+			long start = System.currentTimeMillis();
+
+			try {
+				return requestProcessor.fetch();
+			} finally {
+				requestProcessor.duration += (System.currentTimeMillis() - start);
+			}
+		}
+
+----------------------------------------
+	public Entry<File, String> next() {
+		// cache next entry
+		if (!hasNext()) {
+			throw new NoSuchElementException();
+		}
+
+		try {
+			return buffer;
+		} finally {
+			// invalidate cache
+			buffer = null;
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830284
+source/net/filebot/hash/VerificationFileReader.java 46 58
+source/net/filebot/archive/ExtractCallback.java 65 73
+----------------------------------------
+	public Entry<File, String> next() {
+		// cache next entry
+		if (!hasNext()) {
+			throw new NoSuchElementException();
+		}
+
+		try {
+			return buffer;
+		} finally {
+			// invalidate cache
+			buffer = null;
+		}
+	}
+
+----------------------------------------
+		if (output != null) {
+			try {
+				output.close();
+			} catch (IOException e) {
+				throw new SevenZipException(e);
+			} finally {
+				output = null;
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830285
+source/net/filebot/ui/rename/HighlightListCellRenderer.java 61 68
+source/net/filebot/hash/VerificationFileReader.java 69 76
+----------------------------------------
+		while (matcher.find()) {
+			try {
+				textComponent.getHighlighter().addHighlight(matcher.start(0), matcher.end(0), highlightPainter);
+			} catch (BadLocationException e) {
+				// should not happen
+				debug.log(Level.SEVERE, e.getMessage(), e);
+			}
+		}
+
+----------------------------------------
+			if (!isComment(line)) {
+				try {
+					entry = format.parseObject(line);
+				} catch (ParseException e) {
+					// log and ignore
+					debug.warning(format("Illegal format on line %d: %s", lineNumber, line));
+				}
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830286
+source/net/filebot/hash/VerificationFileReader.java 69 76
+source/net/filebot/similarity/CrossPropertyMetric.java 45 51
+----------------------------------------
+			if (!isComment(line)) {
+				try {
+					entry = format.parseObject(line);
+				} catch (ParseException e) {
+					// log and ignore
+					debug.warning(format("Illegal format on line %d: %s", lineNumber, line));
+				}
+			}
+
+----------------------------------------
+		for (String k : keys) {
+			try {
+				feedback += metric.getSimilarity(m1.get(k), m2.get(k));
+			} catch (Exception e) {
+				// ignore
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830314
+source/net/filebot/ui/rename/HighlightListCellRenderer.java 61 68
+source/net/filebot/similarity/CrossPropertyMetric.java 45 51
+----------------------------------------
+		while (matcher.find()) {
+			try {
+				textComponent.getHighlighter().addHighlight(matcher.start(0), matcher.end(0), highlightPainter);
+			} catch (BadLocationException e) {
+				// should not happen
+				debug.log(Level.SEVERE, e.getMessage(), e);
+			}
+		}
+
+----------------------------------------
+		for (String k : keys) {
+			try {
+				feedback += metric.getSimilarity(m1.get(k), m2.get(k));
+			} catch (Exception e) {
+				// ignore
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830287
+source/net/filebot/hash/VerificationFileReader.java 69 76
+source/net/filebot/ui/list/ListItem.java 27 33
+----------------------------------------
+			if (!isComment(line)) {
+				try {
+					entry = format.parseObject(line);
+				} catch (ParseException e) {
+					// log and ignore
+					debug.warning(format("Illegal format on line %d: %s", lineNumber, line));
+				}
+			}
+
+----------------------------------------
+		if (value == null) {
+			try {
+				value = format.format(bindings);
+			} catch (Exception e) {
+				value = e;
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830302
+source/net/filebot/ui/rename/HighlightListCellRenderer.java 61 68
+source/net/filebot/ui/list/ListItem.java 27 33
+----------------------------------------
+		while (matcher.find()) {
+			try {
+				textComponent.getHighlighter().addHighlight(matcher.start(0), matcher.end(0), highlightPainter);
+			} catch (BadLocationException e) {
+				// should not happen
+				debug.log(Level.SEVERE, e.getMessage(), e);
+			}
+		}
+
+----------------------------------------
+		if (value == null) {
+			try {
+				value = format.format(bindings);
+			} catch (Exception e) {
+				value = e;
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830315
+source/net/filebot/similarity/CrossPropertyMetric.java 45 51
+source/net/filebot/ui/list/ListItem.java 27 33
+----------------------------------------
+		for (String k : keys) {
+			try {
+				feedback += metric.getSimilarity(m1.get(k), m2.get(k));
+			} catch (Exception e) {
+				// ignore
+			}
+		}
+
+----------------------------------------
+		if (value == null) {
+			try {
+				value = format.format(bindings);
+			} catch (Exception e) {
+				value = e;
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830331
+source/net/filebot/similarity/CrossPropertyMetric.java 45 51
+source/net/filebot/Settings.java 30 36
+----------------------------------------
+		for (String k : keys) {
+			try {
+				feedback += metric.getSimilarity(m1.get(k), m2.get(k));
+			} catch (Exception e) {
+				// ignore
+			}
+		}
+
+----------------------------------------
+	public static int getApplicationRevisionNumber() {
+		try {
+			return Integer.parseInt(getApplicationProperty("application.revision"));
+		} catch (Exception e) {
+			return 0;
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830290
+source/net/filebot/hash/VerificationFileReader.java 69 76
+source/net/filebot/Settings.java 30 36
+----------------------------------------
+			if (!isComment(line)) {
+				try {
+					entry = format.parseObject(line);
+				} catch (ParseException e) {
+					// log and ignore
+					debug.warning(format("Illegal format on line %d: %s", lineNumber, line));
+				}
+			}
+
+----------------------------------------
+	public static int getApplicationRevisionNumber() {
+		try {
+			return Integer.parseInt(getApplicationProperty("application.revision"));
+		} catch (Exception e) {
+			return 0;
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830289
+source/net/filebot/ui/rename/HighlightListCellRenderer.java 61 68
+source/net/filebot/Settings.java 30 36
+----------------------------------------
+		while (matcher.find()) {
+			try {
+				textComponent.getHighlighter().addHighlight(matcher.start(0), matcher.end(0), highlightPainter);
+			} catch (BadLocationException e) {
+				// should not happen
+				debug.log(Level.SEVERE, e.getMessage(), e);
+			}
+		}
+
+----------------------------------------
+	public static int getApplicationRevisionNumber() {
+		try {
+			return Integer.parseInt(getApplicationProperty("application.revision"));
+		} catch (Exception e) {
+			return 0;
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830332
+source/net/filebot/ui/list/ListItem.java 27 33
+source/net/filebot/Settings.java 30 36
+----------------------------------------
+		if (value == null) {
+			try {
+				value = format.format(bindings);
+			} catch (Exception e) {
+				value = e;
+			}
+		}
+
+----------------------------------------
+	public static int getApplicationRevisionNumber() {
+		try {
+			return Integer.parseInt(getApplicationProperty("application.revision"));
+		} catch (Exception e) {
+			return 0;
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830288
+source/net/filebot/ui/sfv/ChecksumTable.java 51 62
+source/net/filebot/Settings.java 30 36
+----------------------------------------
+			public String getToolTipText(MouseEvent evt) {
+				try {
+					int columnIndex = columnModel.getColumnIndexAtX(evt.getX());
+					int modelIndex = columnModel.getColumn(columnIndex).getModelIndex();
+
+					// display column root of checksum column
+					return getModel().getColumnRoot(modelIndex).getPath();
+				} catch (Exception e) {
+					// ignore, column is not a checksum column
+					return null;
+				}
+			};
+
+----------------------------------------
+	public static int getApplicationRevisionNumber() {
+		try {
+			return Integer.parseInt(getApplicationProperty("application.revision"));
+		} catch (Exception e) {
+			return 0;
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830291
+source/net/filebot/ui/sfv/ChecksumCell.java 44 52
+source/net/filebot/ui/rename/RenameModel.java 318 323
+----------------------------------------
+	public ChecksumCell(String name, File root, ChecksumComputationTask task) {
+		this.name = name;
+		this.root = root;
+		this.hashes = new EnumMap<HashType, String>(HashType.class);
+		this.task = task;
+
+		// forward property change events
+		task.addPropertyChangeListener(taskListener);
+	}
+
+----------------------------------------
+		private FormattedFuture(Match<Object, File> match, boolean extension, MatchFormatter formatter, Map<File, Object> context) {
+			this.match = match;
+			this.extension = extension;
+			this.formatter = formatter;
+			this.context = context;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830372
+source/net/filebot/ui/sfv/ChecksumCell.java 44 52
+source/net/filebot/ui/subtitle/upload/SubtitleMapping.java 20 26
+----------------------------------------
+	public ChecksumCell(String name, File root, ChecksumComputationTask task) {
+		this.name = name;
+		this.root = root;
+		this.hashes = new EnumMap<HashType, String>(HashType.class);
+		this.task = task;
+
+		// forward property change events
+		task.addPropertyChangeListener(taskListener);
+	}
+
+----------------------------------------
+	public SubtitleMapping(File subtitle, File video, Language language) {
+		this.subtitle = subtitle;
+		this.video = video;
+		this.language = language;
+
+		this.status = (video == null || subtitle == null) ? Status.IllegalInput : Status.CheckPending;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830292
+source/net/filebot/ui/rename/RenameModel.java 318 323
+source/net/filebot/ui/subtitle/upload/SubtitleMapping.java 20 26
+----------------------------------------
+		private FormattedFuture(Match<Object, File> match, boolean extension, MatchFormatter formatter, Map<File, Object> context) {
+			this.match = match;
+			this.extension = extension;
+			this.formatter = formatter;
+			this.context = context;
+		}
+
+----------------------------------------
+	public SubtitleMapping(File subtitle, File video, Language language) {
+		this.subtitle = subtitle;
+		this.video = video;
+		this.language = language;
+
+		this.status = (video == null || subtitle == null) ? Status.IllegalInput : Status.CheckPending;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830293
+source/net/filebot/ui/rename/RenameModel.java 344 354
+source/net/filebot/cli/ScriptShell.java 62 71
+----------------------------------------
+			if (isDone()) {
+				try {
+					return get(0, TimeUnit.SECONDS);
+				} catch (Throwable t) {
+					// find the original exception
+					if (t.getCause() != null && t instanceof ExecutionException) {
+						t = t.getCause();
+					}
+					return String.format("[%s] %s", getMessage(t), preview());
+				}
+			}
+
+----------------------------------------
+	public Object evaluate(String script, Bindings bindings) throws Throwable {
+		try {
+			return engine.eval(script, bindings);
+		} catch (Throwable e) {
+			while (e.getClass() == ScriptException.class && e.getCause() != null) {
+				e = e.getCause();
+			}
+			throw StackTraceUtils.deepSanitize(e); // make Groovy stacktrace human-readable
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830294
+source/net/filebot/ui/rename/HighlightListCellRenderer.java 72 79
+source/net/filebot/similarity/Matcher.java 59 65
+----------------------------------------
+	public void setForeground(Color fg) {
+		super.setForeground(fg);
+
+		// textComponent is null while in super constructor
+		if (textComponent != null) {
+			textComponent.setForeground(fg);
+		}
+	}
+
+----------------------------------------
+		for (V value : values) {
+			Match<V, C> match = disjointMatchCollection.getByValue(value);
+
+			if (match != null) {
+				result.add(match);
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830295
+source/net/filebot/ui/sfv/ChecksumButton.java 45 50
+source/net/filebot/similarity/Matcher.java 111 117
+----------------------------------------
+	public void setEnabled(boolean enabled) {
+		super.setEnabled(enabled);
+
+		// set appropriate cursor
+		setCursor(getPredefinedCursor(enabled ? HAND_CURSOR : DEFAULT_CURSOR));
+	}
+
+----------------------------------------
+			if (!disjointMatches.isEmpty()) {
+				// collect disjoint matches
+				disjointMatchCollection.addAll(disjointMatches);
+
+				// no need for further matching
+				matchesWithEqualSimilarity.removeAll(disjointMatches);
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830296
+source/net/filebot/similarity/Matcher.java 111 117
+source/net/filebot/ui/sfv/ChecksumTableModel.java 165 170
+----------------------------------------
+			if (!disjointMatches.isEmpty()) {
+				// collect disjoint matches
+				disjointMatchCollection.addAll(disjointMatches);
+
+				// no need for further matching
+				matchesWithEqualSimilarity.removeAll(disjointMatches);
+			}
+
+----------------------------------------
+			} else {
+				// add new row
+				row = new ChecksumRow(cell.getName());
+				row.addPropertyChangeListener(stateListener);
+				rows.add(row);
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830297
+source/net/filebot/ui/filter/FileTreeCellRenderer.java 35 40
+source/net/filebot/ui/transfer/TransferablePolicy.java 25 31
+----------------------------------------
+	private boolean isFolder(Object value) {
+		if (((TreeNode) value).getAllowsChildren())
+			return true;
+
+		return false;
+	}
+
+----------------------------------------
+		} catch (InvalidDnDOperationException e) {
+			// final drop may cause this exception because, the transfer data can only be accessed
+			// *after* the drop has been accepted, but canImport is called before that
+
+			// just assume that the transferable will be accepted, accept will be called in importData again anyway
+			return true;
+		} catch (Exception e) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830298
+source/net/filebot/ui/rename/HighlightListCellRenderer.java 61 68
+source/net/filebot/cli/FolderWatchService.java 146 153
+----------------------------------------
+		while (matcher.find()) {
+			try {
+				textComponent.getHighlighter().addHighlight(matcher.start(0), matcher.end(0), highlightPainter);
+			} catch (BadLocationException e) {
+				// should not happen
+				debug.log(Level.SEVERE, e.getMessage(), e);
+			}
+		}
+
+----------------------------------------
+					if (watchTree) {
+						try {
+							commitSet.addAll(listFiles(file, FILES));
+							watchFolder(file);
+						} catch (IOException e) {
+							debug.log(Level.SEVERE, e.getMessage(), e);
+						}
+					}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830321
+source/net/filebot/ui/rename/HighlightListCellRenderer.java 61 68
+source/net/filebot/ui/AbstractSearchPanel.java 93 100
+----------------------------------------
+		while (matcher.find()) {
+			try {
+				textComponent.getHighlighter().addHighlight(matcher.start(0), matcher.end(0), highlightPainter);
+			} catch (BadLocationException e) {
+				// should not happen
+				debug.log(Level.SEVERE, e.getMessage(), e);
+			}
+		}
+
+----------------------------------------
+						if (engine == searchTextField.getSelectButton().getSelectedValue()) {
+							try {
+								searchHistory.clear();
+								searchHistory.addAll(get());
+							} catch (Exception e) {
+								debug.log(Level.WARNING, e.getMessage(), e);
+							}
+						}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830299
+source/net/filebot/cli/FolderWatchService.java 146 153
+source/net/filebot/ui/AbstractSearchPanel.java 93 100
+----------------------------------------
+					if (watchTree) {
+						try {
+							commitSet.addAll(listFiles(file, FILES));
+							watchFolder(file);
+						} catch (IOException e) {
+							debug.log(Level.SEVERE, e.getMessage(), e);
+						}
+					}
+
+----------------------------------------
+						if (engine == searchTextField.getSelectButton().getSelectedValue()) {
+							try {
+								searchHistory.clear();
+								searchHistory.addAll(get());
+							} catch (Exception e) {
+								debug.log(Level.WARNING, e.getMessage(), e);
+							}
+						}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830300
+source/net/filebot/cli/FolderWatchService.java 93 99
+source/net/filebot/cli/FolderWatchService.java 158 164
+----------------------------------------
+			public void run() {
+				synchronized (processor) {
+					for (Entry<File, ? extends Collection<File>> it : commitBatches.entrySet()) {
+						processCommitSet(it.getValue().toArray(new File[0]), it.getKey());
+					}
+				}
+			}
+
+----------------------------------------
+			protected void modified(File file) {
+				synchronized (commitSet) {
+					if (!file.isDirectory()) {
+						commitSet.add(file);
+					}
+				}
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917601
+source/net/filebot/archive/ExtractCallback.java 65 73
+source/net/filebot/ui/list/ListItem.java 26 35
+----------------------------------------
+		if (output != null) {
+			try {
+				output.close();
+			} catch (IOException e) {
+				throw new SevenZipException(e);
+			} finally {
+				output = null;
+			}
+		}
+
+----------------------------------------
+	public Object getFormattedValue() {
+		if (value == null) {
+			try {
+				value = format.format(bindings);
+			} catch (Exception e) {
+				value = e;
+			}
+		}
+		return value;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830355
+source/net/filebot/archive/ExtractCallback.java 65 73
+source/net/filebot/ui/transfer/ByteBufferTransferable.java 32 43
+----------------------------------------
+		if (output != null) {
+			try {
+				output.close();
+			} catch (IOException e) {
+				throw new SevenZipException(e);
+			} finally {
+				output = null;
+			}
+		}
+
+----------------------------------------
+		if (FileTransferable.isFileListFlavor(flavor)) {
+			try {
+				// create file for transfer on demand
+				if (transferable == null) {
+					transferable = createFileTransferable();
+				}
+
+				return transferable.getTransferData(flavor);
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830301
+source/net/filebot/ui/list/ListItem.java 26 35
+source/net/filebot/ui/transfer/ByteBufferTransferable.java 32 43
+----------------------------------------
+	public Object getFormattedValue() {
+		if (value == null) {
+			try {
+				value = format.format(bindings);
+			} catch (Exception e) {
+				value = e;
+			}
+		}
+		return value;
+	}
+
+----------------------------------------
+		if (FileTransferable.isFileListFlavor(flavor)) {
+			try {
+				// create file for transfer on demand
+				if (transferable == null) {
+					transferable = createFileTransferable();
+				}
+
+				return transferable.getTransferData(flavor);
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830303
+source/net/filebot/ui/episodelist/SeasonSpinnerModel.java 51 58
+source/net/filebot/ui/transfer/SaveAction.java 51 57
+----------------------------------------
+	public void unlock() {
+		setList(getSeasonValues());
+
+		if (valueBeforeLock != null) {
+			setValue(valueBeforeLock);
+		}
+		valueBeforeLock = null;
+	}
+
+----------------------------------------
+			if (canExport()) {
+				File file = showSaveDialogSelectFile(false, getDefaultFile(), (String) getValue(Action.NAME), evt);
+
+				if (file != null) {
+					export(file);
+				}
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830304
+source/net/filebot/ui/sfv/ChecksumCell.java 44 52
+source/net/filebot/ui/rename/TextColorizer.java 28 33
+----------------------------------------
+	public ChecksumCell(String name, File root, ChecksumComputationTask task) {
+		this.name = name;
+		this.root = root;
+		this.hashes = new EnumMap<HashType, String>(HashType.class);
+		this.task = task;
+
+		// forward property change events
+		task.addPropertyChangeListener(taskListener);
+	}
+
+----------------------------------------
+	public TextColorizer(String before, String after, Color pathRainbowBeginColor, Color pathRainbowEndColor) {
+		this.before = before;
+		this.after = after;
+		this.pathRainbowBeginColor = pathRainbowBeginColor;
+		this.pathRainbowEndColor = pathRainbowEndColor;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830305
+source/net/filebot/ui/subtitle/upload/SubtitleMapping.java 20 26
+source/net/filebot/ui/rename/TextColorizer.java 28 33
+----------------------------------------
+	public SubtitleMapping(File subtitle, File video, Language language) {
+		this.subtitle = subtitle;
+		this.video = video;
+		this.language = language;
+
+		this.status = (video == null || subtitle == null) ? Status.IllegalInput : Status.CheckPending;
+	}
+
+----------------------------------------
+	public TextColorizer(String before, String after, Color pathRainbowBeginColor, Color pathRainbowEndColor) {
+		this.before = before;
+		this.after = after;
+		this.pathRainbowBeginColor = pathRainbowBeginColor;
+		this.pathRainbowEndColor = pathRainbowEndColor;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830306
+source/net/filebot/ui/rename/RenameModel.java 318 323
+source/net/filebot/ui/rename/TextColorizer.java 28 33
+----------------------------------------
+		private FormattedFuture(Match<Object, File> match, boolean extension, MatchFormatter formatter, Map<File, Object> context) {
+			this.match = match;
+			this.extension = extension;
+			this.formatter = formatter;
+			this.context = context;
+		}
+
+----------------------------------------
+	public TextColorizer(String before, String after, Color pathRainbowBeginColor, Color pathRainbowEndColor) {
+		this.before = before;
+		this.after = after;
+		this.pathRainbowBeginColor = pathRainbowBeginColor;
+		this.pathRainbowEndColor = pathRainbowEndColor;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830307
+source/net/filebot/ui/sfv/ChecksumTableExportHandler.java 62 68
+source/net/filebot/ui/rename/TextColorizer.java 47 53
+----------------------------------------
+			if (cell != null) {
+				String hash = cell.getChecksum(type);
+
+				if (hash != null) {
+					out.write(cell.getName(), hash);
+				}
+			}
+
+----------------------------------------
+		if (hasExtension) {
+			html.append(escapeHTML(FileUtilities.getName(file)));
+			String extension = FileUtilities.getExtension(file);
+			if (extension != null) {
+				html.append(String.format("<span style='color:#607080'>.%s</span>", escapeHTML(extension))); // highlight extension
+			}
+		} else {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830308
+source/net/filebot/ui/rename/TextColorizer.java 47 53
+source/net/filebot/ui/sfv/ChecksumRow.java 128 134
+----------------------------------------
+		if (hasExtension) {
+			html.append(escapeHTML(FileUtilities.getName(file)));
+			String extension = FileUtilities.getExtension(file);
+			if (extension != null) {
+				html.append(String.format("<span style='color:#607080'>.%s</span>", escapeHTML(extension))); // highlight extension
+			}
+		} else {
+
+----------------------------------------
+			for (ChecksumCell cell : cells) {
+				String checksum = cell.getChecksum(type);
+
+				if (checksum != null) {
+					checksumSet.add(checksum.toLowerCase());
+				}
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830457
+source/net/filebot/ui/sfv/ChecksumTableExportHandler.java 62 68
+source/net/filebot/ui/sfv/ChecksumRow.java 128 134
+----------------------------------------
+			if (cell != null) {
+				String hash = cell.getChecksum(type);
+
+				if (hash != null) {
+					out.write(cell.getName(), hash);
+				}
+			}
+
+----------------------------------------
+			for (ChecksumCell cell : cells) {
+				String checksum = cell.getChecksum(type);
+
+				if (checksum != null) {
+					checksumSet.add(checksum.toLowerCase());
+				}
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830309
+source/net/filebot/MetaAttributeView.java 77 84
+source/net/filebot/MetaAttributeView.java 86 93
+----------------------------------------
+			if (xattr instanceof UserDefinedFileAttributeView) {
+				UserDefinedFileAttributeView attributeView = (UserDefinedFileAttributeView) xattr;
+				if (value == null || value.isEmpty()) {
+					attributeView.delete(key);
+				} else {
+					attributeView.write(key, encoding.encode(value));
+				}
+			}
+
+----------------------------------------
+			if (xattr instanceof MacXattrView) {
+				MacXattrView macXattr = (MacXattrView) xattr;
+				if (value == null || value.isEmpty()) {
+					macXattr.delete(key);
+				} else {
+					macXattr.write(key, value);
+				}
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830310
+source/net/filebot/MetaAttributeView.java 86 93
+source/net/filebot/ui/rename/RenameModel.java 118 127
+----------------------------------------
+			if (xattr instanceof MacXattrView) {
+				MacXattrView macXattr = (MacXattrView) xattr;
+				if (value == null || value.isEmpty()) {
+					macXattr.delete(key);
+				} else {
+					macXattr.write(key, value);
+				}
+			}
+
+----------------------------------------
+	public void useFormatter(Object key, MatchFormatter formatter) {
+		if (formatter != null) {
+			formatters.put(key, formatter);
+		} else {
+			formatters.remove(key);
+		}
+
+		// reformat matches
+		names.refresh();
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830311
+source/net/filebot/ui/rename/RenameModel.java 189 195
+source/net/filebot/ui/rename/RenameModel.java 198 204
+----------------------------------------
+		public FormattedFuture set(int index, FormattedFuture value) {
+			FormattedFuture obsolete = get(index);
+
+			source.set(index, value.getMatch().getValue());
+
+			return obsolete;
+		}
+
+----------------------------------------
+		public FormattedFuture remove(int index) {
+			FormattedFuture obsolete = get(index);
+
+			source.remove(index);
+
+			return obsolete;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830312
+source/net/filebot/cli/FolderWatchService.java 93 99
+source/net/filebot/ui/sfv/ChecksumComputationService.java 76 82
+----------------------------------------
+			public void run() {
+				synchronized (processor) {
+					for (Entry<File, ? extends Collection<File>> it : commitBatches.entrySet()) {
+						processCommitSet(it.getValue().toArray(new File[0]), it.getKey());
+					}
+				}
+			}
+
+----------------------------------------
+	public void purge() {
+		synchronized (executors) {
+			for (ThreadPoolExecutor executor : executors) {
+				executor.purge();
+			}
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830341
+source/net/filebot/cli/FolderWatchService.java 158 164
+source/net/filebot/ui/sfv/ChecksumComputationService.java 76 82
+----------------------------------------
+			protected void modified(File file) {
+				synchronized (commitSet) {
+					if (!file.isDirectory()) {
+						commitSet.add(file);
+					}
+				}
+			}
+
+----------------------------------------
+	public void purge() {
+		synchronized (executors) {
+			for (ThreadPoolExecutor executor : executors) {
+				executor.purge();
+			}
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830313
+source/net/filebot/ui/sfv/ChecksumComputationService.java 76 82
+source/net/filebot/cli/FolderWatchService.java 74 81
+----------------------------------------
+	public void purge() {
+		synchronized (executors) {
+			for (ThreadPoolExecutor executor : executors) {
+				executor.purge();
+			}
+		}
+	}
+
+----------------------------------------
+		synchronized (commitSet) {
+			for (File it : commitSet) {
+				if (it.isFile()) {
+					files.add(it);
+				}
+			}
+			commitSet.clear();
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28917645
+source/net/filebot/ui/sfv/ChecksumTable.java 51 62
+source/net/filebot/ui/transfer/ByteBufferTransferable.java 33 40
+----------------------------------------
+			public String getToolTipText(MouseEvent evt) {
+				try {
+					int columnIndex = columnModel.getColumnIndexAtX(evt.getX());
+					int modelIndex = columnModel.getColumn(columnIndex).getModelIndex();
+
+					// display column root of checksum column
+					return getModel().getColumnRoot(modelIndex).getPath();
+				} catch (Exception e) {
+					// ignore, column is not a checksum column
+					return null;
+				}
+			};
+
+----------------------------------------
+			try {
+				// create file for transfer on demand
+				if (transferable == null) {
+					transferable = createFileTransferable();
+				}
+
+				return transferable.getTransferData(flavor);
+			} catch (IOException e) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830316
+source/net/filebot/ui/transfer/ByteBufferTransferable.java 33 40
+source/net/filebot/MediaTypes.java 24 29
+----------------------------------------
+			try {
+				// create file for transfer on demand
+				if (transferable == null) {
+					transferable = createFileTransferable();
+				}
+
+				return transferable.getTransferData(flavor);
+			} catch (IOException e) {
+
+----------------------------------------
+	public static synchronized MediaTypes getDefault() {
+		if (defaultInstance == null) {
+			defaultInstance = parseDefault();
+		}
+		return defaultInstance;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830317
+source/net/filebot/MediaTypes.java 24 29
+source/net/filebot/cli/PseudoConsole.java 24 29
+----------------------------------------
+	public static synchronized MediaTypes getDefault() {
+		if (defaultInstance == null) {
+			defaultInstance = parseDefault();
+		}
+		return defaultInstance;
+	}
+
+----------------------------------------
+	public static synchronized PseudoConsole getSystemConsole() {
+		if (STDIO == null) {
+			STDIO = new PseudoConsole(System.in, System.out, StandardCharsets.UTF_8);
+		}
+		return STDIO;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830318
+source/net/filebot/ui/subtitle/upload/SubtitleMappingTableModel.java 25 31
+source/net/filebot/similarity/Normalization.java 94 99
+----------------------------------------
+	public SubtitleMappingTableModel(Collection<SubtitleMapping> rows) {
+		this.data = rows.toArray(new SubtitleMapping[rows.size()]);
+
+		for (int i = 0; i < data.length; i++) {
+			data[i].addPropertyChangeListener(new UpdateRowListener(i));
+		}
+	}
+
+----------------------------------------
+	private static String normalize(String name, Pattern[] pattern, String replacement) {
+		for (int i = 0; i < pattern.length; i++) {
+			name = normalize(name, pattern[i], replacement);
+		}
+		return name;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+22830319
+source/net/filebot/ui/subtitle/upload/SubtitleMappingTableModel.java 25 31
+source/net/filebot/similarity/Normalization.java 101 106
+----------------------------------------
+	public SubtitleMappingTableModel(Collection<SubtitleMapping> rows) {
+		this.data = rows.toArray(new SubtitleMapping[rows.size()]);
+
+		for (int i = 0; i < data.length; i++) {
+			data[i].addPropertyChangeListener(new UpdateRowListener(i));
+		}
+	}
+
+----------------------------------------
+	private static String normalize(String name, Pattern[] pattern, String[] replacement) {
+		for (int i = 0; i < pattern.length; i++) {
+			name = normalize(name, pattern[i], replacement[i]);
+		}
+		return name;
+	}
+
+----------------------------------------

@@ -1,0 +1,2028 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+28821048
+src/jmemorize/gui/swing/dialogs/AboutDialog.java 167 182
+src/jmemorize/gui/swing/dialogs/ErrorDialog.java 170 207
+----------------------------------------
+    {
+        JButton okayButton = new JButton(Localization.get(LC.OKAY));
+        okayButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e)
+            {
+                dispose();
+            }
+        });
+        
+        JPanel buttonPanel = ButtonBarFactory.buildOKBar(okayButton);
+        buttonPanel.setBorder(new EmptyBorder(3, 3, 3, 3));
+        
+        getRootPane().setDefaultButton(okayButton);
+        
+        return buttonPanel;
+    }
+
+----------------------------------------
+    {
+        // buttons
+        m_okayButton = new JButton(Localization.get(LC.OKAY));
+        m_okayButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) 
+            {
+                dispose();
+            }
+        });
+        
+        m_moreButton = new JButton("Show debug information");
+        m_moreButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) 
+            {
+                extendDialog();
+            }
+        });
+        
+        m_copyButton = new JButton("Copy to clipboard");
+        m_copyButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) 
+            {
+                copyDebugTextToClipboard();
+            }
+        });
+
+        ButtonBarBuilder builder = new ButtonBarBuilder();
+        builder.addFixed(m_moreButton);
+        builder.addRelatedGap();
+        builder.addGridded(m_copyButton);
+        builder.addRelatedGap();
+        builder.addGlue();
+        builder.addUnrelatedGap();
+        builder.addGridded(m_okayButton);
+        builder.setBorder(new EmptyBorder(3, 3, 3, 3));
+        
+        return builder.getPanel();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21514031
+src/jmemorize/gui/swing/frames/NewCardFrame.java 183 224
+src/jmemorize/gui/swing/dialogs/ErrorDialog.java 170 207
+----------------------------------------
+    {
+        // buttons
+        m_createMoreButton = new JButton(
+            Localization.get("NewCard.ADD_AND_NEXT")); //$NON-NLS-1$
+        m_createMoreButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) 
+            {
+                createCard(true);
+            }
+        });
+
+        JButton createButton = new JButton(
+            Localization.get("NewCard.ADD")); //$NON-NLS-1$
+        createButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) 
+            {
+                createCard(false);
+            }
+        });
+
+        JButton cancelButton = new JButton(
+            Localization.get(LC.CANCEL));
+        cancelButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) 
+            {
+                // directly close without confirmation
+                closeWindow();
+            }
+        });
+        
+        // button bar
+        ButtonBarBuilder builder = new ButtonBarBuilder();
+        builder.addGlue();
+        builder.addFixedNarrow(m_createMoreButton);
+        builder.addRelatedGap();
+        builder.addGridded(createButton);
+        builder.addRelatedGap();
+        builder.addGridded(cancelButton);
+        builder.setBorder(new EmptyBorder(5, 5, 5, 5));
+        
+        return builder.getPanel();
+    }
+
+----------------------------------------
+    {
+        // buttons
+        m_okayButton = new JButton(Localization.get(LC.OKAY));
+        m_okayButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) 
+            {
+                dispose();
+            }
+        });
+        
+        m_moreButton = new JButton("Show debug information");
+        m_moreButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) 
+            {
+                extendDialog();
+            }
+        });
+        
+        m_copyButton = new JButton("Copy to clipboard");
+        m_copyButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) 
+            {
+                copyDebugTextToClipboard();
+            }
+        });
+
+        ButtonBarBuilder builder = new ButtonBarBuilder();
+        builder.addFixed(m_moreButton);
+        builder.addRelatedGap();
+        builder.addGridded(m_copyButton);
+        builder.addRelatedGap();
+        builder.addGlue();
+        builder.addUnrelatedGap();
+        builder.addGridded(m_okayButton);
+        builder.setBorder(new EmptyBorder(3, 3, 3, 3));
+        
+        return builder.getPanel();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+21514032
+src/jmemorize/core/FormattedText.java 92 98
+src/jmemorize/core/FormattedText.java 120 126
+----------------------------------------
+    {
+        FormattedText text = new FormattedText();
+        text.m_formattedText = formatted;
+        text.m_unformattedText = unescape(formatted.replaceAll(TAGS, "").replaceAll("<img .*?/>", ""));
+        
+        return text;
+    }
+
+----------------------------------------
+    {
+        FormattedText text = new FormattedText();
+        text.m_formattedText = unformatted;
+        text.m_unformattedText = unformatted;
+        
+        return text;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+24062077
+src/jmemorize/gui/swing/actions/file/AbstractImportAction.java 72 84
+src/jmemorize/gui/swing/actions/file/AbstractExportAction.java 99 113
+----------------------------------------
+        Settings.storeLastDirectory(file);
+        return file;
+    }
+    
+    /* (non-Javadoc)
+     * @see java.awt.event.ActionListener
+     */
+    public void actionPerformed(ActionEvent event)
+    {
+        Main main = Main.getInstance();
+        
+        File file = null;
+        try
+
+----------------------------------------
+            Settings.storeLastDirectory(file);
+            return file;
+        }
+    }
+    
+
+    /* (non-Javadoc)
+     * @see java.awt.event.ActionListener
+     */
+    public void actionPerformed(ActionEvent event)
+    {
+        Main main = Main.getInstance();
+        
+        File file = null;
+        try
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+24062078
+src/jmemorize/gui/swing/actions/file/AbstractExportAction.java 52 61
+src/jmemorize/gui/swing/actions/file/AbstractImportAction.java 52 61
+----------------------------------------
+        JFileChooser chooser = new JFileChooser();
+        
+        try 
+        {
+            chooser.setCurrentDirectory(Settings.loadLastDirectory());
+        }
+        catch (Exception ioe)
+        {
+            Main.logThrowable("Could not load last directory", ioe);
+            chooser.setCurrentDirectory(null);
+
+----------------------------------------
+        JFileChooser chooser = new JFileChooser();
+        
+        try 
+        {
+            chooser.setCurrentDirectory(Settings.loadLastDirectory());
+        }
+        catch (Exception ioe)
+        {
+            Main.logThrowable("Could not load last directory", ioe);
+            chooser.setCurrentDirectory(null);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+24062079
+src/jmemorize/gui/swing/actions/file/AbstractExportAction.java 52 61
+src/jmemorize/gui/swing/frames/MainFrame.java 427 435
+----------------------------------------
+        JFileChooser chooser = new JFileChooser();
+        
+        try 
+        {
+            chooser.setCurrentDirectory(Settings.loadLastDirectory());
+        }
+        catch (Exception ioe)
+        {
+            Main.logThrowable("Could not load last directory", ioe);
+            chooser.setCurrentDirectory(null);
+
+----------------------------------------
+                JFileChooser chooser = new JFileChooser();
+                try 
+                {
+                    chooser.setCurrentDirectory(Settings.loadLastDirectory());
+                }
+                catch (Exception ioe)
+                {
+                    Main.logThrowable("Could not load last directory", ioe);
+                    chooser.setCurrentDirectory(null);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+24062080
+src/jmemorize/gui/Localization.java 80 90
+src/jmemorize/gui/Localization.java 123 133
+----------------------------------------
+            if (val != null)
+                return val;
+        }
+        
+        if (m_fallbackBundle != null)
+        {
+            String val = (String)m_fallbackBundle.get(key);
+            return val != null ? val : '!' + key + '!';
+        }
+        
+        return '#' + key + '#';
+
+----------------------------------------
+            if (val != null)
+                return val;
+        }
+        
+        if (m_fallbackBundle != null)
+        {
+            String val = (String)m_fallbackBundle.get(key);
+            return val != null ? val : '!' + key + '!';
+        }
+        
+        return '#' + key + '#';
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+24062081
+src/jmemorize/gui/swing/actions/edit/CutAction.java 64 82
+src/jmemorize/gui/swing/actions/edit/CopyAction.java 65 83
+----------------------------------------
+    public void selectionChanged(SelectionProvider source)
+    {
+        updateEnablement();
+    }
+    
+    /* (non-Javadoc)
+     * @see jmemorize.gui.swing.actions.AbstractSessionDisabledAction
+     */
+    protected void updateEnablement()
+    {
+        // HACK
+        SelectionProvider src = m_selectionProvider;
+        MainFrame frame = Main.getInstance().getFrame();
+        setEnabled(frame != null && src != null && !Main.getInstance().isSessionRunning() && 
+            ((src.getSelectedCards() != null && src.getSelectedCards().size() > 0) ||
+            (src.getSelectedCategories() != null && src.getSelectedCategories().size() > 0)));
+    }
+
+    private void setValues()
+
+----------------------------------------
+    public void selectionChanged(SelectionProvider source)
+    {
+        updateEnablement();
+    }
+    
+    /* (non-Javadoc)
+     * @see jmemorize.gui.swing.actions.AbstractSessionDisabledAction
+     */
+    protected void updateEnablement()
+    {
+        // HACK
+        SelectionProvider src = m_selectionProvider;
+        MainFrame frame = Main.getInstance().getFrame();
+        setEnabled(frame != null && src != null && !Main.getInstance().isSessionRunning() && 
+            ((src.getSelectedCards() != null && src.getSelectedCards().size() > 0) ||
+            (src.getSelectedCategories() != null && src.getSelectedCategories().size() > 0)));
+    }
+
+    private void setValues()
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+24062082
+src/jmemorize/gui/swing/dialogs/AboutDialog.java 166 181
+src/jmemorize/gui/swing/dialogs/OkayButtonDialog.java 55 70
+----------------------------------------
+    private JPanel buildButtonBar()
+    {
+        JButton okayButton = new JButton(Localization.get(LC.OKAY));
+        okayButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e)
+            {
+                dispose();
+            }
+        });
+        
+        JPanel buttonPanel = ButtonBarFactory.buildOKBar(okayButton);
+        buttonPanel.setBorder(new EmptyBorder(3, 3, 3, 3));
+        
+        getRootPane().setDefaultButton(okayButton);
+        
+        return buttonPanel;
+
+----------------------------------------
+    private JPanel buildButtonBar()
+    {
+        JButton okayButton = new JButton(Localization.get(LC.OKAY));
+        okayButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e)
+            {
+                dispose();
+            }
+        });
+        
+        JPanel buttonPanel = ButtonBarFactory.buildOKBar(okayButton);
+        buttonPanel.setBorder(new EmptyBorder(3, 3, 3, 3));
+        
+        getRootPane().setDefaultButton(okayButton);
+        
+        return buttonPanel;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+24062083
+src/jmemorize/gui/swing/dialogs/LearnSettingsDialog.java 226 253
+src/jmemorize/gui/swing/dialogs/PreferencesDialog.java 401 428
+----------------------------------------
+        JButton cancelButton = new JButton(Localization.get(LC.CANCEL));
+        cancelButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) 
+            {
+                dispose();
+            }
+        });
+        
+        m_applyButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) 
+            {
+                apply();
+            }
+        });
+        
+        JPanel buttonPanel = ButtonBarFactory.buildOKCancelApplyBar(
+            okayButton, cancelButton, m_applyButton);
+        buttonPanel.setBorder(new EmptyBorder(3, 3, 3, 3));
+        
+        getRootPane().setDefaultButton(okayButton);
+        
+        return buttonPanel;
+    }
+    
+    /**
+     * Applies the entered settings to the LearnSettings object.
+     */
+    private void apply()
+
+----------------------------------------
+        JButton cancelButton = new JButton(Localization.get(LC.CANCEL));
+        cancelButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) 
+            {
+                dispose();
+            }
+        });
+        
+        m_applyButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) 
+            {
+                apply();
+            }
+        });
+        
+        JPanel buttonPanel = ButtonBarFactory.buildOKCancelApplyBar(
+            okayButton, cancelButton, m_applyButton);
+        buttonPanel.setBorder(new EmptyBorder(3, 3, 3, 3));
+        
+        getRootPane().setDefaultButton(okayButton);
+        
+        return buttonPanel;
+    }
+    
+    /**
+     * Apply all currently set preferences so that they take effect in jMemorize.
+     */
+    private void apply()
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+24259644
+src/jmemorize/gui/Localization.java 78 91
+src/jmemorize/gui/Localization.java 122 134
+----------------------------------------
+            String val = (String)m_defaultBundle.get(key);
+            
+            if (val != null)
+                return val;
+        }
+        
+        if (m_fallbackBundle != null)
+        {
+            String val = (String)m_fallbackBundle.get(key);
+            return val != null ? val : '!' + key + '!';
+        }
+        
+        return '#' + key + '#';
+    }
+
+----------------------------------------
+            val = (String)m_defaultBundle.get(alternateKey);
+            if (val != null)
+                return val;
+        }
+        
+        if (m_fallbackBundle != null)
+        {
+            String val = (String)m_fallbackBundle.get(key);
+            return val != null ? val : '!' + key + '!';
+        }
+        
+        return '#' + key + '#';
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+24259645
+src/jmemorize/gui/swing/dialogs/LearnSettingsDialog.java 162 173
+src/jmemorize/gui/swing/dialogs/LearnSettingsDialog.java 179 190
+----------------------------------------
+            "p, 15dlu, p"); // rows //$NON-NLS-1$
+        
+        CellConstraints cc = new CellConstraints();
+        
+        DefaultFormBuilder builder = new DefaultFormBuilder(layout);
+        builder.setDefaultDialogBorder();
+        
+        builder.add(m_learnSettingsPanels.buildCardsPanel(),   cc.xy(1, 1));
+        builder.add(m_learnSettingsPanels.buildLimiterPanel(), cc.xy(1, 3));
+        
+        return builder.getPanel();
+    }
+
+----------------------------------------
+            "p, 9dlu, p"); // rows //$NON-NLS-1$
+        
+        CellConstraints cc = new CellConstraints();
+        
+        DefaultFormBuilder builder = new DefaultFormBuilder(layout);
+        builder.setDefaultDialogBorder();
+        
+        builder.add(m_learnSettingsPanels.buildCardOrderPanel(), cc.xy(1, 1));
+        builder.add(m_learnSettingsPanels.buildSidesModePanel(), cc.xy(1, 3));
+        
+        return builder.getPanel();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+24259646
+src/jmemorize/gui/swing/dialogs/LearnSettingsDialog.java 162 173
+src/jmemorize/gui/swing/dialogs/LearnSettingsDialog.java 196 207
+----------------------------------------
+            "p, 15dlu, p"); // rows //$NON-NLS-1$
+        
+        CellConstraints cc = new CellConstraints();
+        
+        DefaultFormBuilder builder = new DefaultFormBuilder(layout);
+        builder.setDefaultDialogBorder();
+        
+        builder.add(m_learnSettingsPanels.buildCardsPanel(),   cc.xy(1, 1));
+        builder.add(m_learnSettingsPanels.buildLimiterPanel(), cc.xy(1, 3));
+        
+        return builder.getPanel();
+    }
+
+----------------------------------------
+            "p, 9dlu, p"); // rows //$NON-NLS-1$
+        
+        CellConstraints cc = new CellConstraints();
+        
+        DefaultFormBuilder builder = new DefaultFormBuilder(layout);
+        builder.setDefaultDialogBorder();
+        
+        builder.add(m_learnSettingsPanels.buildSchedulePanel(),      cc.xy(1, 1));
+        builder.add(m_learnSettingsPanels.buildFixedDueTimePanel(), cc.xy(1, 3));
+        
+        return builder.getPanel();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+24259647
+src/jmemorize/gui/swing/dialogs/LearnSettingsDialog.java 179 190
+src/jmemorize/gui/swing/dialogs/LearnSettingsDialog.java 196 207
+----------------------------------------
+            "p, 9dlu, p"); // rows //$NON-NLS-1$
+        
+        CellConstraints cc = new CellConstraints();
+        
+        DefaultFormBuilder builder = new DefaultFormBuilder(layout);
+        builder.setDefaultDialogBorder();
+        
+        builder.add(m_learnSettingsPanels.buildCardOrderPanel(), cc.xy(1, 1));
+        builder.add(m_learnSettingsPanels.buildSidesModePanel(), cc.xy(1, 3));
+        
+        return builder.getPanel();
+    }
+
+----------------------------------------
+            "p, 9dlu, p"); // rows //$NON-NLS-1$
+        
+        CellConstraints cc = new CellConstraints();
+        
+        DefaultFormBuilder builder = new DefaultFormBuilder(layout);
+        builder.setDefaultDialogBorder();
+        
+        builder.add(m_learnSettingsPanels.buildSchedulePanel(),      cc.xy(1, 1));
+        builder.add(m_learnSettingsPanels.buildFixedDueTimePanel(), cc.xy(1, 3));
+        
+        return builder.getPanel();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+24259648
+src/jmemorize/gui/swing/dialogs/LearnSettingsDialog.java 107 111
+src/jmemorize/gui/swing/dialogs/PreferencesDialog.java 144 148
+----------------------------------------
+        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(
+            KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "Cancel"); //$NON-NLS-1$
+        getRootPane().getActionMap().put("Cancel", new AbstractAction(){ //$NON-NLS-1$
+            public void actionPerformed(ActionEvent e)
+            {
+
+----------------------------------------
+        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(
+            KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "Cancel");    //$NON-NLS-1$
+        getRootPane().getActionMap().put("Cancel", new AbstractAction(){ //$NON-NLS-1$
+            public void actionPerformed(ActionEvent e)
+            {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+24259650
+src/jmemorize/gui/swing/dialogs/PreferencesDialog.java 144 148
+src/jmemorize/util/EscapableFrame.java 41 45
+----------------------------------------
+        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(
+            KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "Cancel");    //$NON-NLS-1$
+        getRootPane().getActionMap().put("Cancel", new AbstractAction(){ //$NON-NLS-1$
+            public void actionPerformed(ActionEvent e)
+            {
+
+----------------------------------------
+        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(
+            KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "Cancel"); //$NON-NLS-1$
+        getRootPane().getActionMap().put("Cancel", new AbstractAction(){ //$NON-NLS-1$
+            public void actionPerformed(ActionEvent e)
+            {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+24259649
+src/jmemorize/gui/swing/dialogs/LearnSettingsDialog.java 107 111
+src/jmemorize/util/EscapableFrame.java 41 45
+----------------------------------------
+        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(
+            KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "Cancel"); //$NON-NLS-1$
+        getRootPane().getActionMap().put("Cancel", new AbstractAction(){ //$NON-NLS-1$
+            public void actionPerformed(ActionEvent e)
+            {
+
+----------------------------------------
+        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(
+            KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "Cancel"); //$NON-NLS-1$
+        getRootPane().getActionMap().put("Cancel", new AbstractAction(){ //$NON-NLS-1$
+            public void actionPerformed(ActionEvent e)
+            {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+24259651
+src/jmemorize/gui/swing/actions/file/AbstractExportAction.java 50 74
+src/jmemorize/gui/swing/actions/file/AbstractImportAction.java 50 71
+----------------------------------------
+    public static File showSaveDialog(JFrame frame, ExtensionFileFilter fileFilter)
+    {
+        JFileChooser chooser = new JFileChooser();
+        
+        try 
+        {
+            chooser.setCurrentDirectory(Settings.loadLastDirectory());
+        }
+        catch (Exception ioe)
+        {
+            Main.logThrowable("Could not load last directory", ioe);
+            chooser.setCurrentDirectory(null);
+        }                
+        
+        chooser.setFileFilter(fileFilter);
+        
+        // Loop so we can prompt again if they choose not to overwrite
+        while (true)
+        {
+            // Do the actual Save As prompt
+            int choice = chooser.showSaveDialog(frame);
+            if (choice != JFileChooser.APPROVE_OPTION)
+                return null;
+
+            File file = chooser.getSelectedFile();
+
+----------------------------------------
+    public static File showOpenDialog(JFrame frame, FileFilter fileFilter)
+    {
+        JFileChooser chooser = new JFileChooser();
+        
+        try 
+        {
+            chooser.setCurrentDirectory(Settings.loadLastDirectory());
+        }
+        catch (Exception ioe)
+        {
+            Main.logThrowable("Could not load last directory", ioe);
+            chooser.setCurrentDirectory(null);
+        }                
+        
+        if (fileFilter != null)
+            chooser.setFileFilter(fileFilter);
+        
+        int choice = chooser.showOpenDialog(frame);
+        if (choice != JFileChooser.APPROVE_OPTION)
+            return null;
+
+        File file = chooser.getSelectedFile();
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+24259652
+src/jmemorize/gui/swing/actions/file/AbstractExportAction.java 120 130
+src/jmemorize/gui/swing/actions/file/AbstractImportAction.java 90 99
+----------------------------------------
+        catch (IOException e)
+        {
+            Object[] args = {file != null ? file.getName() : "?"};
+            MessageFormat form = new MessageFormat(
+                Localization.get(LC.ERROR_SAVE));
+            String msg = form.format(args);
+            Main.logThrowable(msg, e);
+
+            new ErrorDialog(main.getFrame(), msg, e).setVisible(true);
+        }
+    }
+
+----------------------------------------
+        catch (Exception e)
+        {
+            Object[] args = {file != null ? file.getName() : "?"};
+            MessageFormat form = new MessageFormat(Localization.get(LC.ERROR_LOAD));
+            String msg = form.format(args);
+            Main.logThrowable(msg, e);
+
+            new ErrorDialog(main.getFrame(), msg, e).setVisible(true);
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+24259653
+src/jmemorize/gui/swing/actions/file/AbstractExportAction.java 50 64
+src/jmemorize/gui/swing/frames/MainFrame.java 425 438
+----------------------------------------
+    public static File showSaveDialog(JFrame frame, ExtensionFileFilter fileFilter)
+    {
+        JFileChooser chooser = new JFileChooser();
+        
+        try 
+        {
+            chooser.setCurrentDirectory(Settings.loadLastDirectory());
+        }
+        catch (Exception ioe)
+        {
+            Main.logThrowable("Could not load last directory", ioe);
+            chooser.setCurrentDirectory(null);
+        }                
+        
+        chooser.setFileFilter(fileFilter);
+
+----------------------------------------
+            if (file == null)
+            {
+                JFileChooser chooser = new JFileChooser();
+                try 
+                {
+                    chooser.setCurrentDirectory(Settings.loadLastDirectory());
+                }
+                catch (Exception ioe)
+                {
+                    Main.logThrowable("Could not load last directory", ioe);
+                    chooser.setCurrentDirectory(null);
+                }                
+                
+                chooser.setFileFilter(MainFrame.FILE_FILTER);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+24259654
+src/jmemorize/gui/swing/dialogs/LearnSettingsDialog.java 103 116
+src/jmemorize/gui/swing/dialogs/PreferencesDialog.java 140 153
+----------------------------------------
+        getContentPane().add(buildMainPanel(), BorderLayout.CENTER);
+        getContentPane().add(buildButtonBar(), BorderLayout.SOUTH);
+        
+        // on ESC key close dialog
+        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(
+            KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "Cancel"); //$NON-NLS-1$
+        getRootPane().getActionMap().put("Cancel", new AbstractAction(){ //$NON-NLS-1$
+            public void actionPerformed(ActionEvent e)
+            {
+                dispose();
+            }
+        });
+        
+        setTitle(Localization.get(LC.LEARN_SETTINGS_TITLE));
+
+----------------------------------------
+        getContentPane().add(buildMainPanel(), BorderLayout.CENTER);
+        getContentPane().add(buildButtonBar(), BorderLayout.SOUTH);
+        
+        // on ESC key close dialog
+        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(
+            KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "Cancel");    //$NON-NLS-1$
+        getRootPane().getActionMap().put("Cancel", new AbstractAction(){ //$NON-NLS-1$
+            public void actionPerformed(ActionEvent e)
+            {
+                dispose();
+            }
+        });
+        
+        setTitle(Localization.get(LC.MAINFRAME_PREFERENCES));
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+24259655
+src/jmemorize/gui/swing/dialogs/LearnSettingsDialog.java 222 248
+src/jmemorize/gui/swing/dialogs/PreferencesDialog.java 397 423
+----------------------------------------
+                m_frame.startLearning(category, m_selectedCards, learnUnlearned, learnExpired);
+            }
+        });
+        
+        JButton cancelButton = new JButton(Localization.get(LC.CANCEL));
+        cancelButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) 
+            {
+                dispose();
+            }
+        });
+        
+        m_applyButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) 
+            {
+                apply();
+            }
+        });
+        
+        JPanel buttonPanel = ButtonBarFactory.buildOKCancelApplyBar(
+            okayButton, cancelButton, m_applyButton);
+        buttonPanel.setBorder(new EmptyBorder(3, 3, 3, 3));
+        
+        getRootPane().setDefaultButton(okayButton);
+        
+        return buttonPanel;
+    }
+
+----------------------------------------
+                dispose();
+            }
+        });
+        
+        JButton cancelButton = new JButton(Localization.get(LC.CANCEL));
+        cancelButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) 
+            {
+                dispose();
+            }
+        });
+        
+        m_applyButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) 
+            {
+                apply();
+            }
+        });
+        
+        JPanel buttonPanel = ButtonBarFactory.buildOKCancelApplyBar(
+            okayButton, cancelButton, m_applyButton);
+        buttonPanel.setBorder(new EmptyBorder(3, 3, 3, 3));
+        
+        getRootPane().setDefaultButton(okayButton);
+        
+        return buttonPanel;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+24259656
+src/jmemorize/gui/swing/frames/FindFrame.java 440 446
+src/jmemorize/gui/swing/panels/DeckTablePanel.java 146 152
+----------------------------------------
+    private void editCards()
+    {
+        Card card = (Card)m_cardTable.getSelectedCards().get(0);
+        List<Card> cards = m_cardTable.getView().getCards();
+        Category category = m_cardTable.getView().getCategory();
+
+        EditCardFrame.getInstance().showCard(card, cards, category, 
+
+----------------------------------------
+    public void editCards() //HACK
+    {
+        Card card = (Card)m_cardTable.getSelectedCards().get(0);
+        List<Card> cards = m_cardTable.getView().getCards();
+        Category category = m_cardTable.getView().getCategory();
+        
+        EditCardFrame.getInstance().showCard(card, cards, category);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+24259657
+src/jmemorize/core/Settings.java 396 402
+src/jmemorize/core/Settings.java 420 426
+----------------------------------------
+        String str = PREFS.get(frameId + '.' + FRAME_POSITION, null);
+        if (str == null)
+            return null;
+        
+        String[] pos = str.split(",");
+        return new Point(Integer.parseInt(pos[0]), Integer.parseInt(pos[1]));
+    }
+
+----------------------------------------
+        String str = PREFS.get(frameId + '.' + FRAME_SIZE, null);
+        if (str == null)
+            return null;
+        
+        String[] pos = str.split(",");
+        return new Dimension(Integer.parseInt(pos[0]), Integer.parseInt(pos[1]));
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+24259658
+src/jmemorize/gui/swing/frames/MainFrame.java 456 468
+src/jmemorize/gui/swing/frames/MainFrame.java 490 501
+----------------------------------------
+                importGlobalLearnHistory(history);
+            
+        }
+        catch (Exception e)
+        {
+            Object[] args = {file != null ? file.getName() : "?"};
+            MessageFormat form = new MessageFormat(Localization.get(LC.ERROR_LOAD));
+            String msg = form.format(args);
+            Main.logThrowable(msg, e);
+            
+            new ErrorDialog(this, msg, e).setVisible(true);
+        }
+    }
+
+----------------------------------------
+            updateFrameTitle();
+        }
+        catch (Exception e)
+        {
+            Object[] args = {file != null ? file.getName() : "?"};
+            MessageFormat form = new MessageFormat(Localization.get(LC.ERROR_SAVE));
+            String msg = form.format(args);
+            Main.logThrowable(msg, e);
+           
+            new ErrorDialog(this, msg, e).setVisible(true);
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+24259659
+src/jmemorize/gui/swing/dialogs/LearnSettingsDialog.java 175 190
+src/jmemorize/gui/swing/dialogs/LearnSettingsDialog.java 192 207
+----------------------------------------
+    private JPanel buildAdvancedPanel()
+    {
+        FormLayout layout = new FormLayout(
+            "p:grow", // columns //$NON-NLS-1$
+            "p, 9dlu, p"); // rows //$NON-NLS-1$
+        
+        CellConstraints cc = new CellConstraints();
+        
+        DefaultFormBuilder builder = new DefaultFormBuilder(layout);
+        builder.setDefaultDialogBorder();
+        
+        builder.add(m_learnSettingsPanels.buildCardOrderPanel(), cc.xy(1, 1));
+        builder.add(m_learnSettingsPanels.buildSidesModePanel(), cc.xy(1, 3));
+        
+        return builder.getPanel();
+    }
+
+----------------------------------------
+    private JPanel buildSchedulesPanel()
+    {
+        FormLayout layout = new FormLayout(
+            "p:grow", // columns //$NON-NLS-1$
+            "p, 9dlu, p"); // rows //$NON-NLS-1$
+        
+        CellConstraints cc = new CellConstraints();
+        
+        DefaultFormBuilder builder = new DefaultFormBuilder(layout);
+        builder.setDefaultDialogBorder();
+        
+        builder.add(m_learnSettingsPanels.buildSchedulePanel(),      cc.xy(1, 1));
+        builder.add(m_learnSettingsPanels.buildFixedDueTimePanel(), cc.xy(1, 3));
+        
+        return builder.getPanel();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+24259660
+src/jmemorize/gui/swing/actions/file/AbstractImportAction.java 88 97
+src/jmemorize/gui/swing/frames/MainFrame.java 456 466
+----------------------------------------
+                doImport(file, main.getLesson());
+        } 
+        catch (Exception e)
+        {
+            Object[] args = {file != null ? file.getName() : "?"};
+            MessageFormat form = new MessageFormat(Localization.get(LC.ERROR_LOAD));
+            String msg = form.format(args);
+            Main.logThrowable(msg, e);
+
+            new ErrorDialog(main.getFrame(), msg, e).setVisible(true);
+
+----------------------------------------
+                importGlobalLearnHistory(history);
+            
+        }
+        catch (Exception e)
+        {
+            Object[] args = {file != null ? file.getName() : "?"};
+            MessageFormat form = new MessageFormat(Localization.get(LC.ERROR_LOAD));
+            String msg = form.format(args);
+            Main.logThrowable(msg, e);
+            
+            new ErrorDialog(this, msg, e).setVisible(true);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+24259661
+src/jmemorize/gui/swing/actions/file/AbstractImportAction.java 88 97
+src/jmemorize/gui/swing/frames/MainFrame.java 490 499
+----------------------------------------
+                doImport(file, main.getLesson());
+        } 
+        catch (Exception e)
+        {
+            Object[] args = {file != null ? file.getName() : "?"};
+            MessageFormat form = new MessageFormat(Localization.get(LC.ERROR_LOAD));
+            String msg = form.format(args);
+            Main.logThrowable(msg, e);
+
+            new ErrorDialog(main.getFrame(), msg, e).setVisible(true);
+
+----------------------------------------
+            updateFrameTitle();
+        }
+        catch (Exception e)
+        {
+            Object[] args = {file != null ? file.getName() : "?"};
+            MessageFormat form = new MessageFormat(Localization.get(LC.ERROR_SAVE));
+            String msg = form.format(args);
+            Main.logThrowable(msg, e);
+           
+            new ErrorDialog(this, msg, e).setVisible(true);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+24259662
+src/jmemorize/gui/swing/actions/edit/RemoveAction.java 62 76
+src/jmemorize/gui/swing/actions/edit/RemoveAction.java 92 106
+----------------------------------------
+        if (selectedCards != null && selectedCards.size() > 0)
+        {
+            Object[] args = {new Integer(selectedCards.size())};
+            MessageFormat form = new MessageFormat(
+                Localization.get("MainFrame.DELETE_CARDS_WARN"));      //$NON-NLS-1$
+
+            int n = JOptionPane.showConfirmDialog(
+                m_selectionProvider.getFrame(), 
+                form.format(args), 
+                Localization.get("MainFrame.DELETE_CARDS_WARN_TITLE"), //$NON-NLS-1$
+                JOptionPane.YES_NO_OPTION, 
+                JOptionPane.QUESTION_MESSAGE);
+
+            if (n != JOptionPane.OK_OPTION)
+            {
+
+----------------------------------------
+                if (cardCount > 0)
+                {
+                    Object[] args = {category.getName(), new Integer(cardCount)};
+                    MessageFormat form = new MessageFormat(
+                        Localization.get("MainFrame.DELETE_CATEGORY_WARN")); //$NON-NLS-1$
+                    
+                    int n = JOptionPane.showConfirmDialog(
+                        m_selectionProvider.getFrame(), 
+                        form.format(args), 
+                        Localization.get("MainFrame.REMOVE_CATEGORY_TITLE"), //$NON-NLS-1$
+                        JOptionPane.YES_NO_OPTION, 
+                        JOptionPane.QUESTION_MESSAGE);
+
+                    if (n != JOptionPane.OK_OPTION)
+                    {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+24259663
+src/jmemorize/gui/swing/actions/edit/CopyAction.java 73 81
+src/jmemorize/gui/swing/actions/edit/CutAction.java 72 80
+----------------------------------------
+    protected void updateEnablement()
+    {
+        // HACK
+        SelectionProvider src = m_selectionProvider;
+        MainFrame frame = Main.getInstance().getFrame();
+        setEnabled(frame != null && src != null && !Main.getInstance().isSessionRunning() && 
+            ((src.getSelectedCards() != null && src.getSelectedCards().size() > 0) ||
+            (src.getSelectedCategories() != null && src.getSelectedCategories().size() > 0)));
+    }
+
+----------------------------------------
+    protected void updateEnablement()
+    {
+        // HACK
+        SelectionProvider src = m_selectionProvider;
+        MainFrame frame = Main.getInstance().getFrame();
+        setEnabled(frame != null && src != null && !Main.getInstance().isSessionRunning() && 
+            ((src.getSelectedCards() != null && src.getSelectedCards().size() > 0) ||
+            (src.getSelectedCategories() != null && src.getSelectedCategories().size() > 0)));
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+24259664
+src/jmemorize/gui/swing/dialogs/PreferencesDialog.java 390 423
+src/jmemorize/gui/swing/frames/EditCardFrame.java 623 656
+----------------------------------------
+    private JPanel buildButtonBar()
+    {
+        JButton okayButton = new JButton(Localization.get(LC.OKAY));
+        okayButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) 
+            {
+                apply();
+                dispose();
+            }
+        });
+        
+        JButton cancelButton = new JButton(Localization.get(LC.CANCEL));
+        cancelButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) 
+            {
+                dispose();
+            }
+        });
+        
+        m_applyButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) 
+            {
+                apply();
+            }
+        });
+        
+        JPanel buttonPanel = ButtonBarFactory.buildOKCancelApplyBar(
+            okayButton, cancelButton, m_applyButton);
+        buttonPanel.setBorder(new EmptyBorder(3, 3, 3, 3));
+        
+        getRootPane().setDefaultButton(okayButton);
+        
+        return buttonPanel;
+    }
+
+----------------------------------------
+    private JPanel buildBottomButtonBar()
+    {
+        JButton okayButton = new JButton(Localization.get(LC.OKAY));
+        okayButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) 
+            {
+                saveCard();
+                close();
+            }
+        });
+        
+        JButton cancelButton = new JButton(Localization.get(LC.CANCEL));
+        cancelButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) 
+            {
+                hideFrame();
+            }
+        });
+        
+        m_applyButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) 
+            {
+                saveCard();
+            }
+        });
+        
+        JPanel buttonPanel = ButtonBarFactory.buildOKCancelApplyBar(
+            okayButton, cancelButton, m_applyButton);
+        buttonPanel.setBorder(new EmptyBorder(3, 3, 3, 3));
+        
+        getRootPane().setDefaultButton(okayButton);
+        
+        return buttonPanel;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+24259665
+src/jmemorize/core/Category.java 235 247
+src/jmemorize/core/Category.java 255 267
+----------------------------------------
+        List<Card> expiredCards = getCards();
+        
+        for (Iterator<Card> it = expiredCards.iterator(); it.hasNext();)
+        {
+            Card card = it.next();
+            if (!card.isExpired())
+            {
+                it.remove();
+            }
+        }
+        
+        return expiredCards;
+    }
+
+----------------------------------------
+        List<Card> expiredCards = getCards(level);
+        
+        for (Iterator<Card> it = expiredCards.iterator(); it.hasNext();)
+        {
+            Card card = (Card)it.next();
+            if (!card.isExpired())
+            {
+                it.remove();
+            }
+        }
+        
+        return expiredCards;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+24259666
+src/jmemorize/core/Category.java 275 287
+src/jmemorize/core/Category.java 303 314
+----------------------------------------
+        List<Card> learnedCards = getCards();
+        
+        for (Iterator<Card> it = learnedCards.iterator(); it.hasNext();)
+        {
+            Card card = (Card)it.next();
+            if (!card.isLearned())
+            {
+                it.remove();
+            }
+        }
+        
+        return learnedCards;
+    }
+
+----------------------------------------
+        List<Card> learnedCards = getCards(level);        
+        for (Iterator<Card> it = learnedCards.iterator(); it.hasNext();)
+        {
+            Card card = (Card)it.next();
+            if (!card.isLearned())
+            {
+                it.remove();
+            }
+        }
+        
+        return learnedCards;        
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+24259667
+src/jmemorize/gui/swing/dialogs/LearnSettingsDialog.java 237 248
+src/jmemorize/gui/swing/dialogs/PreferencesDialog.java 412 423
+----------------------------------------
+                apply();
+            }
+        });
+        
+        JPanel buttonPanel = ButtonBarFactory.buildOKCancelApplyBar(
+            okayButton, cancelButton, m_applyButton);
+        buttonPanel.setBorder(new EmptyBorder(3, 3, 3, 3));
+        
+        getRootPane().setDefaultButton(okayButton);
+        
+        return buttonPanel;
+    }
+
+----------------------------------------
+                apply();
+            }
+        });
+        
+        JPanel buttonPanel = ButtonBarFactory.buildOKCancelApplyBar(
+            okayButton, cancelButton, m_applyButton);
+        buttonPanel.setBorder(new EmptyBorder(3, 3, 3, 3));
+        
+        getRootPane().setDefaultButton(okayButton);
+        
+        return buttonPanel;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+24259669
+src/jmemorize/gui/swing/dialogs/PreferencesDialog.java 412 423
+src/jmemorize/gui/swing/frames/EditCardFrame.java 645 656
+----------------------------------------
+                apply();
+            }
+        });
+        
+        JPanel buttonPanel = ButtonBarFactory.buildOKCancelApplyBar(
+            okayButton, cancelButton, m_applyButton);
+        buttonPanel.setBorder(new EmptyBorder(3, 3, 3, 3));
+        
+        getRootPane().setDefaultButton(okayButton);
+        
+        return buttonPanel;
+    }
+
+----------------------------------------
+                saveCard();
+            }
+        });
+        
+        JPanel buttonPanel = ButtonBarFactory.buildOKCancelApplyBar(
+            okayButton, cancelButton, m_applyButton);
+        buttonPanel.setBorder(new EmptyBorder(3, 3, 3, 3));
+        
+        getRootPane().setDefaultButton(okayButton);
+        
+        return buttonPanel;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+24259668
+src/jmemorize/gui/swing/dialogs/LearnSettingsDialog.java 237 248
+src/jmemorize/gui/swing/frames/EditCardFrame.java 645 656
+----------------------------------------
+                apply();
+            }
+        });
+        
+        JPanel buttonPanel = ButtonBarFactory.buildOKCancelApplyBar(
+            okayButton, cancelButton, m_applyButton);
+        buttonPanel.setBorder(new EmptyBorder(3, 3, 3, 3));
+        
+        getRootPane().setDefaultButton(okayButton);
+        
+        return buttonPanel;
+    }
+
+----------------------------------------
+                saveCard();
+            }
+        });
+        
+        JPanel buttonPanel = ButtonBarFactory.buildOKCancelApplyBar(
+            okayButton, cancelButton, m_applyButton);
+        buttonPanel.setBorder(new EmptyBorder(3, 3, 3, 3));
+        
+        getRootPane().setDefaultButton(okayButton);
+        
+        return buttonPanel;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+24259670
+src/jmemorize/gui/swing/dialogs/LearnSettingsDialog.java 222 248
+src/jmemorize/gui/swing/frames/EditCardFrame.java 630 656
+----------------------------------------
+                m_frame.startLearning(category, m_selectedCards, learnUnlearned, learnExpired);
+            }
+        });
+        
+        JButton cancelButton = new JButton(Localization.get(LC.CANCEL));
+        cancelButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) 
+            {
+                dispose();
+            }
+        });
+        
+        m_applyButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) 
+            {
+                apply();
+            }
+        });
+        
+        JPanel buttonPanel = ButtonBarFactory.buildOKCancelApplyBar(
+            okayButton, cancelButton, m_applyButton);
+        buttonPanel.setBorder(new EmptyBorder(3, 3, 3, 3));
+        
+        getRootPane().setDefaultButton(okayButton);
+        
+        return buttonPanel;
+    }
+
+----------------------------------------
+                close();
+            }
+        });
+        
+        JButton cancelButton = new JButton(Localization.get(LC.CANCEL));
+        cancelButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) 
+            {
+                hideFrame();
+            }
+        });
+        
+        m_applyButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) 
+            {
+                saveCard();
+            }
+        });
+        
+        JPanel buttonPanel = ButtonBarFactory.buildOKCancelApplyBar(
+            okayButton, cancelButton, m_applyButton);
+        buttonPanel.setBorder(new EmptyBorder(3, 3, 3, 3));
+        
+        getRootPane().setDefaultButton(okayButton);
+        
+        return buttonPanel;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+24259671
+src/jmemorize/gui/swing/dialogs/AboutDialog.java 166 182
+src/jmemorize/gui/swing/dialogs/OkayButtonDialog.java 55 71
+----------------------------------------
+    private JPanel buildButtonBar()
+    {
+        JButton okayButton = new JButton(Localization.get(LC.OKAY));
+        okayButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e)
+            {
+                dispose();
+            }
+        });
+        
+        JPanel buttonPanel = ButtonBarFactory.buildOKBar(okayButton);
+        buttonPanel.setBorder(new EmptyBorder(3, 3, 3, 3));
+        
+        getRootPane().setDefaultButton(okayButton);
+        
+        return buttonPanel;
+    }
+
+----------------------------------------
+    private JPanel buildButtonBar()
+    {
+        JButton okayButton = new JButton(Localization.get(LC.OKAY));
+        okayButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e)
+            {
+                dispose();
+            }
+        });
+        
+        JPanel buttonPanel = ButtonBarFactory.buildOKBar(okayButton);
+        buttonPanel.setBorder(new EmptyBorder(3, 3, 3, 3));
+        
+        getRootPane().setDefaultButton(okayButton);
+        
+        return buttonPanel;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+27364927
+src/jmemorize/gui/swing/dialogs/OkayButtonDialog.java 53 71
+src/jmemorize/gui/swing/dialogs/AboutDialog.java 164 182
+----------------------------------------
+    }
+    
+    private JPanel buildButtonBar()
+    {
+        JButton okayButton = new JButton(Localization.get(LC.OKAY));
+        okayButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e)
+            {
+                dispose();
+            }
+        });
+        
+        JPanel buttonPanel = ButtonBarFactory.buildOKBar(okayButton);
+        buttonPanel.setBorder(new EmptyBorder(3, 3, 3, 3));
+        
+        getRootPane().setDefaultButton(okayButton);
+        
+        return buttonPanel;
+    }
+
+----------------------------------------
+    }
+    
+    private JPanel buildButtonBar()
+    {
+        JButton okayButton = new JButton(Localization.get(LC.OKAY));
+        okayButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e)
+            {
+                dispose();
+            }
+        });
+        
+        JPanel buttonPanel = ButtonBarFactory.buildOKBar(okayButton);
+        buttonPanel.setBorder(new EmptyBorder(3, 3, 3, 3));
+        
+        getRootPane().setDefaultButton(okayButton);
+        
+        return buttonPanel;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+27364928
+src/jmemorize/gui/swing/dialogs/PreferencesDialog.java 397 430
+src/jmemorize/gui/swing/dialogs/LearnSettingsDialog.java 222 255
+----------------------------------------
+                dispose();
+            }
+        });
+        
+        JButton cancelButton = new JButton(Localization.get(LC.CANCEL));
+        cancelButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) 
+            {
+                dispose();
+            }
+        });
+        
+        m_applyButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) 
+            {
+                apply();
+            }
+        });
+        
+        JPanel buttonPanel = ButtonBarFactory.buildOKCancelApplyBar(
+            okayButton, cancelButton, m_applyButton);
+        buttonPanel.setBorder(new EmptyBorder(3, 3, 3, 3));
+        
+        getRootPane().setDefaultButton(okayButton);
+        
+        return buttonPanel;
+    }
+    
+    /**
+     * Apply all currently set preferences so that they take effect in jMemorize.
+     */
+    private void apply()
+    {
+        Locale locale = getSelectedLocale();
+
+----------------------------------------
+                m_frame.startLearning(category, m_selectedCards, learnUnlearned, learnExpired);
+            }
+        });
+        
+        JButton cancelButton = new JButton(Localization.get(LC.CANCEL));
+        cancelButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) 
+            {
+                dispose();
+            }
+        });
+        
+        m_applyButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) 
+            {
+                apply();
+            }
+        });
+        
+        JPanel buttonPanel = ButtonBarFactory.buildOKCancelApplyBar(
+            okayButton, cancelButton, m_applyButton);
+        buttonPanel.setBorder(new EmptyBorder(3, 3, 3, 3));
+        
+        getRootPane().setDefaultButton(okayButton);
+        
+        return buttonPanel;
+    }
+    
+    /**
+     * Applies the entered settings to the LearnSettings object.
+     */
+    private void apply()
+    {
+        m_learnSettingsPanels.applySettings();
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+27364929
+src/jmemorize/gui/swing/dialogs/PreferencesDialog.java 387 397
+src/jmemorize/gui/swing/dialogs/LearnSettingsDialog.java 206 216
+----------------------------------------
+        return m_fonts.get(m_fontSideBox.getSelectedIndex());
+    }
+    
+    private JPanel buildButtonBar()
+    {
+        JButton okayButton = new JButton(Localization.get(LC.OKAY));
+        okayButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) 
+            {
+                apply();
+                dispose();
+
+----------------------------------------
+        return builder.getPanel();
+    }
+    
+    private JPanel buildButtonBar()
+    {
+        JButton okayButton = new JButton(Localization.get(LC.LEARN_SETTINGS_START));
+        okayButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) 
+            {
+                apply();
+                dispose();
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+27364930
+src/jmemorize/gui/swing/dialogs/PreferencesDialog.java 140 154
+src/jmemorize/gui/swing/dialogs/LearnSettingsDialog.java 103 117
+----------------------------------------
+        getContentPane().add(buildMainPanel(), BorderLayout.CENTER);
+        getContentPane().add(buildButtonBar(), BorderLayout.SOUTH);
+        
+        // on ESC key close dialog
+        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(
+            KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "Cancel");    //$NON-NLS-1$
+        getRootPane().getActionMap().put("Cancel", new AbstractAction(){ //$NON-NLS-1$
+            public void actionPerformed(ActionEvent e)
+            {
+                dispose();
+            }
+        });
+        
+        setTitle(Localization.get(LC.MAINFRAME_PREFERENCES));
+        pack();
+
+----------------------------------------
+        getContentPane().add(buildMainPanel(), BorderLayout.CENTER);
+        getContentPane().add(buildButtonBar(), BorderLayout.SOUTH);
+        
+        // on ESC key close dialog
+        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(
+            KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "Cancel"); //$NON-NLS-1$
+        getRootPane().getActionMap().put("Cancel", new AbstractAction(){ //$NON-NLS-1$
+            public void actionPerformed(ActionEvent e)
+            {
+                dispose();
+            }
+        });
+        
+        setTitle(Localization.get(LC.LEARN_SETTINGS_TITLE));
+        setResizable(false);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+27364932
+src/jmemorize/gui/swing/frames/MainFrame.java 456 466
+src/jmemorize/gui/swing/actions/file/AbstractExportAction.java 117 128
+----------------------------------------
+                importGlobalLearnHistory(history);
+            
+        }
+        catch (Exception e)
+        {
+            Object[] args = {file != null ? file.getName() : "?"};
+            MessageFormat form = new MessageFormat(Localization.get(LC.ERROR_LOAD));
+            String msg = form.format(args);
+            Main.logThrowable(msg, e);
+            
+            new ErrorDialog(this, msg, e).setVisible(true);
+
+----------------------------------------
+                doExport(main.getLesson(), file);
+            
+        }
+        catch (IOException e)
+        {
+            Object[] args = {file != null ? file.getName() : "?"};
+            MessageFormat form = new MessageFormat(
+                Localization.get(LC.ERROR_SAVE));
+            String msg = form.format(args);
+            Main.logThrowable(msg, e);
+
+            new ErrorDialog(main.getFrame(), msg, e).setVisible(true);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+27364931
+src/jmemorize/gui/swing/frames/MainFrame.java 490 499
+src/jmemorize/gui/swing/actions/file/AbstractExportAction.java 117 128
+----------------------------------------
+            updateFrameTitle();
+        }
+        catch (Exception e)
+        {
+            Object[] args = {file != null ? file.getName() : "?"};
+            MessageFormat form = new MessageFormat(Localization.get(LC.ERROR_SAVE));
+            String msg = form.format(args);
+            Main.logThrowable(msg, e);
+           
+            new ErrorDialog(this, msg, e).setVisible(true);
+
+----------------------------------------
+                doExport(main.getLesson(), file);
+            
+        }
+        catch (IOException e)
+        {
+            Object[] args = {file != null ? file.getName() : "?"};
+            MessageFormat form = new MessageFormat(
+                Localization.get(LC.ERROR_SAVE));
+            String msg = form.format(args);
+            Main.logThrowable(msg, e);
+
+            new ErrorDialog(main.getFrame(), msg, e).setVisible(true);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+27364933
+src/jmemorize/gui/swing/frames/NewCardFrame.java 147 156
+src/jmemorize/gui/swing/frames/EditCardFrame.java 583 592
+----------------------------------------
+        return true;
+    }
+    
+    private void initComponents() 
+    {        
+        getContentPane().add(buildToolBar(),   BorderLayout.NORTH);
+        getContentPane().add(buildMainPanel(), BorderLayout.CENTER);
+        getContentPane().add(buildButtonBar(), BorderLayout.SOUTH);
+        
+        getRootPane().setDefaultButton(m_createMoreButton);
+
+----------------------------------------
+        m_headerPanel.setCard(m_currentCard);
+    }
+
+    private void initComponents() 
+    {
+        getContentPane().add(buildToolBar(), BorderLayout.NORTH);
+        getContentPane().add(buildHeaderPanel(), BorderLayout.CENTER);
+        getContentPane().add(buildBottomButtonBar(), BorderLayout.SOUTH);
+
+        setIconImage(Toolkit.getDefaultToolkit().getImage(
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+27364934
+src/jmemorize/gui/swing/actions/edit/EditCardAction.java 62 80
+src/jmemorize/gui/swing/actions/edit/ResetCardAction.java 73 91
+----------------------------------------
+    }
+
+    /* (non-Javadoc)
+     * @see jmemorize.gui.swing.SelectionProvider.SelectionObserver
+     */
+    public void selectionChanged(SelectionProvider source)
+    {
+        updateEnablement();
+    }
+    
+    private void updateEnablement()
+    {
+        setEnabled(m_selectionProvider.getSelectedCards() != null && 
+            m_selectionProvider.getSelectedCards().size() > 0);
+    }
+
+    private void setValues()
+    {
+        setName(Localization.get("MainFrame.EDIT_CARD")); //$NON-NLS-1$
+
+----------------------------------------
+    }
+
+    /* (non-Javadoc)
+     * @see jmemorize.gui.swing.SelectionProvider.SelectionObserver
+     */
+    public void selectionChanged(SelectionProvider source)
+    {
+        updateEnablement();
+    }
+    
+    private void updateEnablement()
+    {
+        setEnabled(m_selectionProvider.getSelectedCards() != null && 
+            m_selectionProvider.getSelectedCards().size() > 0);
+    }
+
+    private void setValues()
+    {
+        setName(Localization.get(LC.RESET));
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+27364935
+src/jmemorize/gui/swing/actions/edit/CopyAction.java 19 40
+src/jmemorize/gui/swing/actions/edit/CutAction.java 19 40
+----------------------------------------
+package jmemorize.gui.swing.actions.edit;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+
+import jmemorize.core.Main;
+import jmemorize.gui.LC;
+import jmemorize.gui.Localization;
+import jmemorize.gui.swing.GeneralTransferHandler;
+import jmemorize.gui.swing.SelectionProvider;
+import jmemorize.gui.swing.SelectionProvider.SelectionObserver;
+import jmemorize.gui.swing.actions.AbstractSessionDisabledAction;
+import jmemorize.gui.swing.frames.MainFrame;
+
+/**
+ * An action that invokes the generic Swing COPY action on the current focus
+ * owner.
+ * 
+ * @author djemili
+ */
+public class CopyAction extends AbstractSessionDisabledAction implements SelectionObserver
+{
+
+----------------------------------------
+package jmemorize.gui.swing.actions.edit;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+
+import jmemorize.core.Main;
+import jmemorize.gui.LC;
+import jmemorize.gui.Localization;
+import jmemorize.gui.swing.GeneralTransferHandler;
+import jmemorize.gui.swing.SelectionProvider;
+import jmemorize.gui.swing.SelectionProvider.SelectionObserver;
+import jmemorize.gui.swing.actions.AbstractSessionDisabledAction;
+import jmemorize.gui.swing.frames.MainFrame;
+
+/** 
+ * An action that invokes the generic Swing CUT action on the current focus
+ * owner.
+ * 
+ * @author djemili
+ */
+public class CutAction extends AbstractSessionDisabledAction implements SelectionObserver
+{
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+27364936
+src/jmemorize/gui/swing/actions/file/SaveLessonAsAction.java 19 26
+src/jmemorize/gui/swing/actions/file/NewLessonAction.java 19 26
+----------------------------------------
+package jmemorize.gui.swing.actions.file;
+
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
+
+import jmemorize.core.Main;
+import jmemorize.gui.Localization;
+import jmemorize.gui.swing.actions.AbstractSessionDisabledAction;
+
+----------------------------------------
+package jmemorize.gui.swing.actions.file;
+
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
+
+import jmemorize.core.Main;
+import jmemorize.gui.Localization;
+import jmemorize.gui.swing.actions.AbstractSessionDisabledAction;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+27364937
+src/jmemorize/gui/swing/actions/file/PreferencesAction.java 19 45
+src/jmemorize/gui/swing/actions/file/OpenLessonAction.java 19 48
+----------------------------------------
+package jmemorize.gui.swing.actions.file;
+
+import java.awt.event.KeyEvent;
+
+import jmemorize.core.Main;
+import jmemorize.gui.Localization;
+import jmemorize.gui.swing.actions.AbstractSessionDisabledAction;
+import jmemorize.gui.swing.dialogs.PreferencesDialog;
+
+/**
+ * An action that shows the preferences dialog.
+ * 
+ * @author djemili
+ */
+public class PreferencesAction extends AbstractSessionDisabledAction
+{
+    public PreferencesAction()
+    {
+        setValues();
+    }
+
+    /* (non-Javadoc)
+     * @see java.awt.event.ActionListener
+     */
+    public void actionPerformed(java.awt.event.ActionEvent e)
+    {
+        Main main = Main.getInstance();
+
+----------------------------------------
+package jmemorize.gui.swing.actions.file;
+
+import java.awt.event.KeyEvent;
+
+import jmemorize.core.Main;
+import jmemorize.gui.Localization;
+import jmemorize.gui.swing.actions.AbstractSessionDisabledAction;
+import jmemorize.gui.swing.frames.MainFrame;
+
+/**
+ * An action that opens another lesson. Before dismissing the current lesson,
+ * the user is asked for confirmation.
+ * 
+ * @see MainFrame#confirmCloseLesson()
+ * 
+ * @author djemili
+ */
+public class OpenLessonAction extends AbstractSessionDisabledAction
+{
+    public OpenLessonAction()
+    {
+        setValues();
+    }
+
+    /* (non-Javadoc)
+     * @see java.awt.event.ActionListener
+     */
+    public void actionPerformed(java.awt.event.ActionEvent e)
+    {
+        Main.getInstance().getFrame().loadLesson(null);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+82
+27364938
+src/jmemorize/gui/swing/actions/file/AbstractImportAction.java 88 99
+src/jmemorize/gui/swing/actions/file/AbstractExportAction.java 117 130
+----------------------------------------
+                doImport(file, main.getLesson());
+        } 
+        catch (Exception e)
+        {
+            Object[] args = {file != null ? file.getName() : "?"};
+            MessageFormat form = new MessageFormat(Localization.get(LC.ERROR_LOAD));
+            String msg = form.format(args);
+            Main.logThrowable(msg, e);
+
+            new ErrorDialog(main.getFrame(), msg, e).setVisible(true);
+        }
+    }
+
+----------------------------------------
+                doExport(main.getLesson(), file);
+            
+        }
+        catch (IOException e)
+        {
+            Object[] args = {file != null ? file.getName() : "?"};
+            MessageFormat form = new MessageFormat(
+                Localization.get(LC.ERROR_SAVE));
+            String msg = form.format(args);
+            Main.logThrowable(msg, e);
+
+            new ErrorDialog(main.getFrame(), msg, e).setVisible(true);
+        }
+    }
+
+----------------------------------------

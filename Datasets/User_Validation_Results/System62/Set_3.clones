@@ -1,0 +1,1269 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977511
+src/net/azib/ipscan/gui/ResultTable.java 188 193
+src/net/azib/ipscan/core/ScanningResultList.java 150 155
+----------------------------------------
+	public void removeAll() {
+		// remove all items from the real storage first
+		scanningResults.clear();
+		super.removeAll();
+		setSortColumn(null);
+	}
+
+----------------------------------------
+	public synchronized void clear() {
+		// clear the results
+		resultList.clear();
+		resultIndexes.clear();
+		selectedFetchers = null;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977464
+src/net/azib/ipscan/gui/feeders/RandomFeederGUI.java 98 104
+src/net/azib/ipscan/core/ScanningResultList.java 150 155
+----------------------------------------
+			public void keyTraversed(TraverseEvent e) {
+				// this due to a bug either in SWT or GTK:
+				// spinner getText() returns the new value only if
+				// it has lost the focus first
+				ipPrototypeText.forceFocus();
+				countSpinner.forceFocus();
+			}
+
+----------------------------------------
+	public synchronized void clear() {
+		// clear the results
+		resultList.clear();
+		resultIndexes.clear();
+		selectedFetchers = null;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977500
+src/net/azib/ipscan/core/ScannerDispatcherThreadFactory.java 30 35
+src/net/azib/ipscan/gui/actions/CommandsMenuActions.java 231 236
+----------------------------------------
+	@Inject public ScannerDispatcherThreadFactory(ScanningResultList scanningResults, Scanner scanner, StateMachine stateMachine, ScannerConfig scannerConfig) {
+		this.scanningResults = scanningResults;
+		this.scanner = scanner;
+		this.stateMachine = stateMachine;
+		this.scannerConfig = scannerConfig;
+	}
+
+----------------------------------------
+		public SelectOpener(OpenersConfig openersConfig, StatusBar statusBar, ResultTable resultTable, OpenerLauncher openerLauncher) {
+			this.openersConfig = openersConfig;
+			this.statusBar = statusBar;
+			this.resultTable = resultTable;
+			this.openerLauncher = openerLauncher;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977504
+src/net/azib/ipscan/gui/actions/FavoritesMenuActions.java 110 115
+src/net/azib/ipscan/gui/actions/CommandsMenuActions.java 231 236
+----------------------------------------
+		public ShowMenu(FavoritesConfig favoritesConfig, Select favoritesSelectListener, StateMachine stateMachine) {
+			this.favoritesConfig = favoritesConfig;
+			// the listener for favorites selections from the menu
+			this.favoritesSelectListener = favoritesSelectListener;
+			this.stateMachine = stateMachine;
+		}
+
+----------------------------------------
+		public SelectOpener(OpenersConfig openersConfig, StatusBar statusBar, ResultTable resultTable, OpenerLauncher openerLauncher) {
+			this.openersConfig = openersConfig;
+			this.statusBar = statusBar;
+			this.resultTable = resultTable;
+			this.openerLauncher = openerLauncher;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977501
+src/net/azib/ipscan/gui/PreferencesDialog.java 72 77
+src/net/azib/ipscan/gui/actions/CommandsMenuActions.java 231 236
+----------------------------------------
+	@Inject public PreferencesDialog(PingerRegistry pingerRegistry, Config globalConfig, ScannerConfig scannerConfig, GUIConfig guiConfig) {
+		this.pingerRegistry = pingerRegistry;
+		this.globalConfig = globalConfig;
+		this.scannerConfig = scannerConfig;
+		this.guiConfig = guiConfig;
+	}
+
+----------------------------------------
+		public SelectOpener(OpenersConfig openersConfig, StatusBar statusBar, ResultTable resultTable, OpenerLauncher openerLauncher) {
+			this.openersConfig = openersConfig;
+			this.statusBar = statusBar;
+			this.resultTable = resultTable;
+			this.openerLauncher = openerLauncher;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977467
+src/net/azib/ipscan/gui/actions/FavoritesMenuActions.java 110 115
+src/net/azib/ipscan/gui/util/LayoutHelper.java 21 27
+----------------------------------------
+		public ShowMenu(FavoritesConfig favoritesConfig, Select favoritesSelectListener, StateMachine stateMachine) {
+			this.favoritesConfig = favoritesConfig;
+			// the listener for favorites selections from the menu
+			this.favoritesSelectListener = favoritesSelectListener;
+			this.stateMachine = stateMachine;
+		}
+
+----------------------------------------
+	public static FormLayout formLayout(int marginWidth, int marginHeight, int spacing) {
+		FormLayout formLayout = new FormLayout();
+		formLayout.marginWidth = marginWidth;
+		formLayout.marginHeight = marginHeight;
+		formLayout.spacing = spacing;
+		return formLayout;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977465
+src/net/azib/ipscan/gui/actions/CommandsMenuActions.java 231 236
+src/net/azib/ipscan/gui/util/LayoutHelper.java 21 27
+----------------------------------------
+		public SelectOpener(OpenersConfig openersConfig, StatusBar statusBar, ResultTable resultTable, OpenerLauncher openerLauncher) {
+			this.openersConfig = openersConfig;
+			this.statusBar = statusBar;
+			this.resultTable = resultTable;
+			this.openerLauncher = openerLauncher;
+		}
+
+----------------------------------------
+	public static FormLayout formLayout(int marginWidth, int marginHeight, int spacing) {
+		FormLayout formLayout = new FormLayout();
+		formLayout.marginWidth = marginWidth;
+		formLayout.marginHeight = marginHeight;
+		formLayout.spacing = spacing;
+		return formLayout;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977468
+src/net/azib/ipscan/core/ScannerDispatcherThreadFactory.java 30 35
+src/net/azib/ipscan/gui/util/LayoutHelper.java 21 27
+----------------------------------------
+	@Inject public ScannerDispatcherThreadFactory(ScanningResultList scanningResults, Scanner scanner, StateMachine stateMachine, ScannerConfig scannerConfig) {
+		this.scanningResults = scanningResults;
+		this.scanner = scanner;
+		this.stateMachine = stateMachine;
+		this.scannerConfig = scannerConfig;
+	}
+
+----------------------------------------
+	public static FormLayout formLayout(int marginWidth, int marginHeight, int spacing) {
+		FormLayout formLayout = new FormLayout();
+		formLayout.marginWidth = marginWidth;
+		formLayout.marginHeight = marginHeight;
+		formLayout.spacing = spacing;
+		return formLayout;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977466
+src/net/azib/ipscan/gui/PreferencesDialog.java 72 77
+src/net/azib/ipscan/gui/util/LayoutHelper.java 21 27
+----------------------------------------
+	@Inject public PreferencesDialog(PingerRegistry pingerRegistry, Config globalConfig, ScannerConfig scannerConfig, GUIConfig guiConfig) {
+		this.pingerRegistry = pingerRegistry;
+		this.globalConfig = globalConfig;
+		this.scannerConfig = scannerConfig;
+		this.guiConfig = guiConfig;
+	}
+
+----------------------------------------
+	public static FormLayout formLayout(int marginWidth, int marginHeight, int spacing) {
+		FormLayout formLayout = new FormLayout();
+		formLayout.marginWidth = marginWidth;
+		formLayout.marginHeight = marginHeight;
+		formLayout.spacing = spacing;
+		return formLayout;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977470
+src/net/azib/ipscan/gui/PreferencesDialog.java 72 77
+src/net/azib/ipscan/gui/util/LayoutHelper.java 29 36
+----------------------------------------
+	@Inject public PreferencesDialog(PingerRegistry pingerRegistry, Config globalConfig, ScannerConfig scannerConfig, GUIConfig guiConfig) {
+		this.pingerRegistry = pingerRegistry;
+		this.globalConfig = globalConfig;
+		this.scannerConfig = scannerConfig;
+		this.guiConfig = guiConfig;
+	}
+
+----------------------------------------
+	public static FormData formData(int width, int height, FormAttachment left, FormAttachment right, FormAttachment top, FormAttachment bottom) {
+		FormData formData = new FormData(width, height);
+		formData.left = left;
+		formData.right = right;
+		formData.top = top;
+		formData.bottom = bottom;
+		return formData;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977471
+src/net/azib/ipscan/gui/util/LayoutHelper.java 21 27
+src/net/azib/ipscan/gui/util/LayoutHelper.java 29 36
+----------------------------------------
+	public static FormLayout formLayout(int marginWidth, int marginHeight, int spacing) {
+		FormLayout formLayout = new FormLayout();
+		formLayout.marginWidth = marginWidth;
+		formLayout.marginHeight = marginHeight;
+		formLayout.spacing = spacing;
+		return formLayout;
+	}
+
+----------------------------------------
+	public static FormData formData(int width, int height, FormAttachment left, FormAttachment right, FormAttachment top, FormAttachment bottom) {
+		FormData formData = new FormData(width, height);
+		formData.left = left;
+		formData.right = right;
+		formData.top = top;
+		formData.bottom = bottom;
+		return formData;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977519
+src/net/azib/ipscan/core/ScannerDispatcherThreadFactory.java 30 35
+src/net/azib/ipscan/gui/util/LayoutHelper.java 29 36
+----------------------------------------
+	@Inject public ScannerDispatcherThreadFactory(ScanningResultList scanningResults, Scanner scanner, StateMachine stateMachine, ScannerConfig scannerConfig) {
+		this.scanningResults = scanningResults;
+		this.scanner = scanner;
+		this.stateMachine = stateMachine;
+		this.scannerConfig = scannerConfig;
+	}
+
+----------------------------------------
+	public static FormData formData(int width, int height, FormAttachment left, FormAttachment right, FormAttachment top, FormAttachment bottom) {
+		FormData formData = new FormData(width, height);
+		formData.left = left;
+		formData.right = right;
+		formData.top = top;
+		formData.bottom = bottom;
+		return formData;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977469
+src/net/azib/ipscan/gui/actions/CommandsMenuActions.java 231 236
+src/net/azib/ipscan/gui/util/LayoutHelper.java 29 36
+----------------------------------------
+		public SelectOpener(OpenersConfig openersConfig, StatusBar statusBar, ResultTable resultTable, OpenerLauncher openerLauncher) {
+			this.openersConfig = openersConfig;
+			this.statusBar = statusBar;
+			this.resultTable = resultTable;
+			this.openerLauncher = openerLauncher;
+		}
+
+----------------------------------------
+	public static FormData formData(int width, int height, FormAttachment left, FormAttachment right, FormAttachment top, FormAttachment bottom) {
+		FormData formData = new FormData(width, height);
+		formData.left = left;
+		formData.right = right;
+		formData.top = top;
+		formData.bottom = bottom;
+		return formData;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977479
+src/net/azib/ipscan/Main.java 108 113
+src/net/azib/ipscan/gui/InputDialog.java 28 33
+----------------------------------------
+	private static void showMessage(Shell parent, int flags, String title, String localizedMessage) {
+		MessageBox messageBox = new MessageBox(parent, SWT.OK | SWT.SHEET | flags);
+		messageBox.setText(title);
+		messageBox.setMessage(localizedMessage);
+		messageBox.open();
+	}
+
+----------------------------------------
+	public InputDialog(String title, String message) {
+		populateShell();
+		shell.setText(title);
+		messageLabel.setText(message);
+		messageLabel.pack();
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977480
+src/net/azib/ipscan/gui/actions/GotoMenuActions.java 54 63
+src/net/azib/ipscan/gui/feeders/FeederGUIRegistry.java 76 84
+----------------------------------------
+			for (int i = inc(startIndex); i < numElements && i >= 0; i = inc(i)) {
+				ScanningResult scanningResult = results.getResult(i);
+				
+				if (whatToSearchFor.matches(scanningResult.getType())) {
+					resultTable.setSelection(i);
+					resultTable.setFocus();
+					return;
+				}
+				
+			}
+
+----------------------------------------
+		for (int i = 0; i < feederGUIList.size(); i++) {
+			AbstractFeederGUI guiFeeder = feederGUIList.get(i);
+			if (guiFeeder.getFeederId().equals(feederId) || guiFeeder.getFeederName().equals(feederId)) {
+				// select the feeder if found
+				feederSelectionCombo.select(i);
+				feederSelectionCombo.notifyListeners(SWT.Selection, null);
+				return;
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977481
+src/net/azib/ipscan/gui/actions/GotoMenuActions.java 168 173
+src/net/azib/ipscan/gui/feeders/FeederGUIRegistry.java 78 83
+----------------------------------------
+			if (foundIndex >= 0) {
+				// if found, then select and finish
+				resultTable.setSelection(foundIndex);
+				resultTable.setFocus();
+				return;
+			}
+
+----------------------------------------
+			if (guiFeeder.getFeederId().equals(feederId) || guiFeeder.getFeederName().equals(feederId)) {
+				// select the feeder if found
+				feederSelectionCombo.select(i);
+				feederSelectionCombo.notifyListeners(SWT.Selection, null);
+				return;
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977512
+src/net/azib/ipscan/gui/MainWindow.java 136 141
+src/net/azib/ipscan/gui/actions/ToolsActions.java 77 83
+----------------------------------------
+	private void initFeederArea(Composite feederArea, FeederGUIRegistry feederRegistry) {
+		// feederArea is the placeholder for the visible feeder
+		this.feederArea = feederArea;
+		feederArea.setLayoutData(formData(new FormAttachment(0), null, new FormAttachment(0), null));
+		this.feederRegistry = feederRegistry;
+	}
+
+----------------------------------------
+		public ScanStatistics(GUIConfig guiConfig, StatisticsDialog statisticsDialog, StateMachine stateMachine, CommandLineProcessor commandProcessor) {
+			this.guiConfig = guiConfig;
+			this.statisticsDialog = statisticsDialog;
+			// register for state changes
+			if (!commandProcessor.shouldAutoQuit())
+				stateMachine.addTransitionListener(this);
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977513
+src/net/azib/ipscan/gui/actions/FavoritesMenuActions.java 110 115
+src/net/azib/ipscan/gui/actions/ToolsActions.java 77 83
+----------------------------------------
+		public ShowMenu(FavoritesConfig favoritesConfig, Select favoritesSelectListener, StateMachine stateMachine) {
+			this.favoritesConfig = favoritesConfig;
+			// the listener for favorites selections from the menu
+			this.favoritesSelectListener = favoritesSelectListener;
+			this.stateMachine = stateMachine;
+		}
+
+----------------------------------------
+		public ScanStatistics(GUIConfig guiConfig, StatisticsDialog statisticsDialog, StateMachine stateMachine, CommandLineProcessor commandProcessor) {
+			this.guiConfig = guiConfig;
+			this.statisticsDialog = statisticsDialog;
+			// register for state changes
+			if (!commandProcessor.shouldAutoQuit())
+				stateMachine.addTransitionListener(this);
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977484
+src/net/azib/ipscan/gui/MainWindow.java 136 141
+src/net/azib/ipscan/core/ScanningResultComparator.java 57 63
+----------------------------------------
+	private void initFeederArea(Composite feederArea, FeederGUIRegistry feederRegistry) {
+		// feederArea is the placeholder for the visible feeder
+		this.feederArea = feederArea;
+		feederArea.setLayoutData(formData(new FormAttachment(0), null, new FormAttachment(0), null));
+		this.feederRegistry = feederRegistry;
+	}
+
+----------------------------------------
+	public void byIndex(int index, boolean ascending) {
+		this.index = index;
+		this.ascending = ascending;
+
+		// this ensures that all Empty objects are always at the end
+		Empty.setSortDirection(ascending);
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977483
+src/net/azib/ipscan/gui/actions/ToolsActions.java 77 83
+src/net/azib/ipscan/core/ScanningResultComparator.java 57 63
+----------------------------------------
+		public ScanStatistics(GUIConfig guiConfig, StatisticsDialog statisticsDialog, StateMachine stateMachine, CommandLineProcessor commandProcessor) {
+			this.guiConfig = guiConfig;
+			this.statisticsDialog = statisticsDialog;
+			// register for state changes
+			if (!commandProcessor.shouldAutoQuit())
+				stateMachine.addTransitionListener(this);
+		}
+
+----------------------------------------
+	public void byIndex(int index, boolean ascending) {
+		this.index = index;
+		this.ascending = ascending;
+
+		// this ensures that all Empty objects are always at the end
+		Empty.setSortDirection(ascending);
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977485
+src/net/azib/ipscan/gui/actions/FavoritesMenuActions.java 110 115
+src/net/azib/ipscan/core/ScanningResultComparator.java 57 63
+----------------------------------------
+		public ShowMenu(FavoritesConfig favoritesConfig, Select favoritesSelectListener, StateMachine stateMachine) {
+			this.favoritesConfig = favoritesConfig;
+			// the listener for favorites selections from the menu
+			this.favoritesSelectListener = favoritesSelectListener;
+			this.stateMachine = stateMachine;
+		}
+
+----------------------------------------
+	public void byIndex(int index, boolean ascending) {
+		this.index = index;
+		this.ascending = ascending;
+
+		// this ensures that all Empty objects are always at the end
+		Empty.setSortDirection(ascending);
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977487
+src/net/azib/ipscan/gui/GettingStartedDialog.java 26 34
+src/net/azib/ipscan/core/net/ICMPPinger.java 122 132
+----------------------------------------
+	public GettingStartedDialog() {
+		int num = 1;
+		try {
+			while (true) {
+				texts.add(Labels.getLabel("text.gettingStarted" + num++));
+			}
+		}
+		catch (Exception noMoreTexts) {}
+	}
+
+----------------------------------------
+		try {
+			// send a bunch of packets
+			for (int i = 0; i < count && !Thread.currentThread().isInterrupted(); i++) {
+				try {
+					sendReceiveEchoPacket(socket, subject.getAddress(), i, result);
+				}
+				catch (InterruptedIOException e) {
+					// ignore timeouts
+				}
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977488
+src/net/azib/ipscan/exporters/ExportProcessor.java 73 80
+src/net/azib/ipscan/core/net/ICMPPinger.java 122 132
+----------------------------------------
+		finally {
+			if (outputStream != null) {
+				try {
+					outputStream.close();
+				}
+				catch (Exception ignore) {}
+			}
+		}
+
+----------------------------------------
+		try {
+			// send a bunch of packets
+			for (int i = 0; i < count && !Thread.currentThread().isInterrupted(); i++) {
+				try {
+					sendReceiveEchoPacket(socket, subject.getAddress(), i, result);
+				}
+				catch (InterruptedIOException e) {
+					// ignore timeouts
+				}
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977502
+src/net/azib/ipscan/gui/menu/ToolsMenu.java 44 52
+src/net/azib/ipscan/gui/ResultTable.java 94 100
+----------------------------------------
+	private static Menu initMenu(Menu menu, String label) {
+		MenuItem menuItem = new MenuItem(menu, SWT.CASCADE);
+		menuItem.setText(Labels.getLabel(label));
+
+		Menu subMenu = new Menu(menu.getShell(), SWT.DROP_DOWN);
+		menuItem.setMenu(subMenu);
+
+		return subMenu;
+	}
+
+----------------------------------------
+		for (Fetcher fetcher : fetcherRegistry.getSelectedFetchers()) {
+			TableColumn tableColumn = new TableColumn(this, SWT.NONE);
+			tableColumn.setWidth(guiConfig.getColumnWidth(fetcher));
+			tableColumn.setData(fetcher);	// this is used in some listeners in ColumnsActions
+			tableColumn.addListener(SWT.Selection, columnClickListener);
+			tableColumn.addListener(SWT.Resize, columnResizeListener);
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977503
+src/net/azib/ipscan/gui/actions/StartStopScanningAction.java 204 213
+src/net/azib/ipscan/gui/actions/StartStopScanningAction.java 214 223
+----------------------------------------
+		if (guiConfig.displayMethod == DisplayMethod.ALL || state == ScanningState.RESTARTING) {
+			return new ScanningResultCallback() {
+				public void prepareForResults(ScanningResult result) {
+					resultTable.addOrUpdateResultRow(result);
+				}
+				public void consumeResults(ScanningResult result) {
+					resultTable.addOrUpdateResultRow(result);
+				}
+			};
+		}
+
+----------------------------------------
+		if (guiConfig.displayMethod == DisplayMethod.ALIVE) {
+			return new ScanningResultCallback() {
+				public void prepareForResults(ScanningResult result) {
+				}
+				public void consumeResults(ScanningResult result) {
+					if (result.getType().ordinal() >= ResultType.ALIVE.ordinal())
+						resultTable.addOrUpdateResultRow(result);
+				}
+			};
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977505
+src/net/azib/ipscan/gui/EditOpenersDialog.java 168 175
+src/net/azib/ipscan/gui/EditOpenersDialog.java 250 255
+----------------------------------------
+	private void saveCurrentFields() {
+		if (currentSelectionIndex < 0) return;
+
+		String openerName = openerNameText.getText();
+		File workingDir = workingDirText.getText().length() > 0 ? new File(workingDirText.getText()) : null;
+		openersConfig.add(openerName, new OpenersConfig.Opener(openerStringText.getText(), isInTerminalCheckbox.getSelection(), workingDir));
+		openersList.setItem(currentSelectionIndex, openerName);
+	}
+
+----------------------------------------
+		public void handleEvent(Event event) {
+			if (currentSelectionIndex < 0) return;
+			String name = openerNameText.getText();
+			editFieldsGroup.setText(name);
+			openersList.setItem(currentSelectionIndex, name);
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977506
+src/net/azib/ipscan/gui/actions/StartStopScanningAction.java 214 223
+src/net/azib/ipscan/gui/actions/StartStopScanningAction.java 224 233
+----------------------------------------
+		if (guiConfig.displayMethod == DisplayMethod.ALIVE) {
+			return new ScanningResultCallback() {
+				public void prepareForResults(ScanningResult result) {
+				}
+				public void consumeResults(ScanningResult result) {
+					if (result.getType().ordinal() >= ResultType.ALIVE.ordinal())
+						resultTable.addOrUpdateResultRow(result);
+				}
+			};
+		}
+
+----------------------------------------
+		if (guiConfig.displayMethod == DisplayMethod.PORTS) {
+			return new ScanningResultCallback() {
+				public void prepareForResults(ScanningResult result) {
+				}
+				public void consumeResults(ScanningResult result) {
+					if (result.getType() == ResultType.WITH_PORTS)
+						resultTable.addOrUpdateResultRow(result);
+				}
+			};
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977507
+src/net/azib/ipscan/gui/actions/StartStopScanningAction.java 204 213
+src/net/azib/ipscan/gui/actions/StartStopScanningAction.java 224 233
+----------------------------------------
+		if (guiConfig.displayMethod == DisplayMethod.ALL || state == ScanningState.RESTARTING) {
+			return new ScanningResultCallback() {
+				public void prepareForResults(ScanningResult result) {
+					resultTable.addOrUpdateResultRow(result);
+				}
+				public void consumeResults(ScanningResult result) {
+					resultTable.addOrUpdateResultRow(result);
+				}
+			};
+		}
+
+----------------------------------------
+		if (guiConfig.displayMethod == DisplayMethod.PORTS) {
+			return new ScanningResultCallback() {
+				public void prepareForResults(ScanningResult result) {
+				}
+				public void consumeResults(ScanningResult result) {
+					if (result.getType() == ResultType.WITH_PORTS)
+						resultTable.addOrUpdateResultRow(result);
+				}
+			};
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977508
+src/net/azib/ipscan/gui/actions/ScanMenuActions.java 117 127
+src/net/azib/ipscan/gui/actions/ScanMenuActions.java 195 205
+----------------------------------------
+		private void addFileExtensions(List<String> extensions, List<String> descriptions, StringBuffer sb) {
+			sb.append(" (");
+			for (Exporter exporter : exporterRegistry) {
+				extensions.add("*." + exporter.getFilenameExtension());
+				sb.append(exporter.getFilenameExtension()).append(", ");
+				descriptions.add(Labels.getLabel(exporter.getId()));
+			}
+			// strip the last comma
+			sb.delete(sb.length() - 2, sb.length());
+			sb.append(")");
+		}
+
+----------------------------------------
+		private void addFileExtensions(List<String> extensions, List<String> descriptions, StringBuffer sb) {
+			sb.append(" (");
+			for (Exporter exporter : exporterRegistry) {
+				extensions.add("*." + exporter.getFilenameExtension());
+				sb.append(exporter.getFilenameExtension()).append(", ");
+				descriptions.add(Labels.getLabel(exporter.getId()));
+			}
+			// strip the last comma
+			sb.delete(sb.length() - 2, sb.length());
+			sb.append(")");
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977514
+src/net/azib/ipscan/exporters/AbstractExporter.java 48 55
+src/net/azib/ipscan/fetchers/PingFetcher.java 94 102
+----------------------------------------
+	public Exporter clone() {
+		try {
+			return (Exporter) super.clone();
+		}
+		catch (CloneNotSupportedException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+	public void cleanup() {
+		try {
+			if (pinger != null) pinger.close();
+		}
+		catch (IOException e) {
+			throw new FetcherException(e);
+		}
+		pinger = null;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+28730884
+src/net/azib/ipscan/util/IOUtils.java 31 37
+src/net/azib/ipscan/fetchers/PingFetcher.java 94 102
+----------------------------------------
+  public static void closeQuietly(Closeable closeable) {
+    if (closeable != null) try {
+      closeable.close();
+    }
+    catch (IOException ignore) {
+    }
+  }
+
+----------------------------------------
+	public void cleanup() {
+		try {
+			if (pinger != null) pinger.close();
+		}
+		catch (IOException e) {
+			throw new FetcherException(e);
+		}
+		pinger = null;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+28730880
+src/net/azib/ipscan/util/IOUtils.java 11 17
+src/net/azib/ipscan/fetchers/PingFetcher.java 94 102
+----------------------------------------
+  public static void closeQuietly(Socket socket) {
+    if (socket != null) try {
+      socket.close();
+    }
+    catch (IOException ignore) {
+    }
+  }
+
+----------------------------------------
+	public void cleanup() {
+		try {
+			if (pinger != null) pinger.close();
+		}
+		catch (IOException e) {
+			throw new FetcherException(e);
+		}
+		pinger = null;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+28730878
+src/net/azib/ipscan/exporters/ExportProcessor.java 73 80
+src/net/azib/ipscan/fetchers/PingFetcher.java 94 102
+----------------------------------------
+		finally {
+			if (outputStream != null) {
+				try {
+					outputStream.close();
+				}
+				catch (Exception ignore) {}
+			}
+		}
+
+----------------------------------------
+	public void cleanup() {
+		try {
+			if (pinger != null) pinger.close();
+		}
+		catch (IOException e) {
+			throw new FetcherException(e);
+		}
+		pinger = null;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977515
+src/net/azib/ipscan/core/PortIterator.java 94 101
+src/net/azib/ipscan/fetchers/PingFetcher.java 94 102
+----------------------------------------
+	public PortIterator copy() {
+		try {
+			return (PortIterator) super.clone();
+		}
+		catch (CloneNotSupportedException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+----------------------------------------
+	public void cleanup() {
+		try {
+			if (pinger != null) pinger.close();
+		}
+		catch (IOException e) {
+			throw new FetcherException(e);
+		}
+		pinger = null;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+28730882
+src/net/azib/ipscan/util/IOUtils.java 23 29
+src/net/azib/ipscan/fetchers/PingFetcher.java 94 102
+----------------------------------------
+  public static void closeQuietly(RawSocket socket) {
+    if (socket != null) try {
+      socket.close();
+    }
+    catch (IOException ignore) {
+    }
+  }
+
+----------------------------------------
+	public void cleanup() {
+		try {
+			if (pinger != null) pinger.close();
+		}
+		catch (IOException e) {
+			throw new FetcherException(e);
+		}
+		pinger = null;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977516
+src/net/azib/ipscan/util/NetBIOSResolver.java 51 56
+src/net/azib/ipscan/util/NetBIOSResolver.java 59 64
+----------------------------------------
+		for (int i = 1; i < nameCount; i++) {
+			if (nameType(response, i) == NAME_TYPE_DOMAIN && (nameFlag(response, i) & GROUP_NAME_FLAG) > 0) {
+				groupName = name(response, i);
+				break;
+			}
+		}
+
+----------------------------------------
+		for (int i = nameCount - 1; i > 0; i--) {
+			if (nameType(response, i) == NAME_TYPE_MESSENGER) {
+				userName = name(response, i);
+				break;
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977517
+src/net/azib/ipscan/fetchers/HostnameFetcher.java 72 89
+src/net/azib/ipscan/fetchers/HostnameFetcher.java 91 108
+----------------------------------------
+	private String resolveWithMulticastDNS(ScanningSubject subject) {
+		try {
+			MDNSResolver resolver = new MDNSResolver(subject.getAdaptedPortTimeout());
+			String name = resolver.resolve(subject.getAddress());
+			resolver.close();
+			return name;
+		}
+		catch (SocketTimeoutException e) {
+			return null;
+		}
+		catch (SocketException e) {
+			return null;
+		}
+		catch (Exception e) {
+			LOG.log(WARNING, "Failed to query mDNS for " + subject, e);
+			return null;
+		}
+	}
+
+----------------------------------------
+	private String resolveWithNetBIOS(ScanningSubject subject) {
+		try {
+			NetBIOSResolver resolver = new NetBIOSResolver(subject.getAdaptedPortTimeout());
+			String[] names = resolver.resolve(subject.getAddress());
+			resolver.close();
+			return names == null ? null : names[0];
+		}
+		catch (SocketTimeoutException e) {
+			return null;
+		}
+		catch (SocketException e) {
+			return null;
+		}
+		catch (Exception e) {
+			LOG.log(WARNING, "Failed to query NetBIOS for " + subject, e);
+			return null;
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+28730864
+src/net/azib/ipscan/gui/actions/ToolsActions.java 130 141
+src/net/azib/ipscan/config/GUIConfig.java 88 93
+----------------------------------------
+		public void handleEvent(Event event) {
+			int count = resultTable.getItemCount();
+			resultTable.deselectAll();
+			for (int i = 0; i < count; i++) {
+				if (isDesired(results.getResult(i).getType())) {
+					resultTable.select(i);
+				}
+			}
+			event.widget = resultTable;
+			resultTable.notifyListeners(SWT.Selection, event);
+			resultTable.forceFocus();
+		}
+
+----------------------------------------
+	public void setMainWindowSize(Point size, boolean isMaximized) {
+		if (!isMaximized) {
+			mainWindowSize = size;
+		}
+		isMainWindowMaximized = isMaximized;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977518
+src/net/azib/ipscan/core/values/NumericRangeList.java 61 66
+src/net/azib/ipscan/config/GUIConfig.java 88 93
+----------------------------------------
+			if (displayAsRanges && prevNumber + 1 == curNumber) {
+				if (!isRange) {
+					isRange = true;
+					rangeStartNumber = prevNumber;
+				}
+			}
+
+----------------------------------------
+	public void setMainWindowSize(Point size, boolean isMaximized) {
+		if (!isMaximized) {
+			mainWindowSize = size;
+		}
+		isMainWindowMaximized = isMaximized;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977520
+src/net/azib/ipscan/gui/MacApplicationMenu.java 24 30
+src/net/azib/ipscan/gui/SWTAwareStateMachine.java 32 42
+----------------------------------------
+	@Inject public MacApplicationMenu(final Display display) {
+		display.syncExec(new Runnable() {
+			public void run() {
+				initApplicationMenu(display);
+			}
+		});
+	}
+
+----------------------------------------
+	protected void notifyAboutTransition(final Transition transition) {
+		if (display.isDisposed())
+			return;
+
+		// call super asynchronously in the correct thread
+		display.asyncExec(new Runnable() {
+			public void run() {
+				SWTAwareStateMachine.super.notifyAboutTransition(transition);				
+			}
+		});
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977521
+src/net/azib/ipscan/exporters/CSVExporter.java 31 40
+src/net/azib/ipscan/exporters/CSVExporter.java 42 50
+----------------------------------------
+	public void setFetchers(String[] fetcherNames) throws IOException {
+		if (!append) {
+			output.write(csvSafeString(fetcherNames[0]));
+			for (int i = 1; i < fetcherNames.length; i++) {
+				output.write(DELIMETER);
+				output.write(csvSafeString(fetcherNames[i]));			
+			}
+			output.println();
+		}
+	}
+
+----------------------------------------
+	public void nextAddressResults(Object[] results) throws IOException {
+		output.write(csvSafeString(results[0]));
+		for (int i = 1; i < results.length; i++) {
+			Object result = results[i];
+			output.write(DELIMETER);
+			output.write(csvSafeString(result));
+		}
+		output.println();
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977522
+src/net/azib/ipscan/exporters/CSVExporter.java 42 50
+src/net/azib/ipscan/exporters/CSVExporter.java 32 39
+----------------------------------------
+	public void nextAddressResults(Object[] results) throws IOException {
+		output.write(csvSafeString(results[0]));
+		for (int i = 1; i < results.length; i++) {
+			Object result = results[i];
+			output.write(DELIMETER);
+			output.write(csvSafeString(result));
+		}
+		output.println();
+	}
+
+----------------------------------------
+		if (!append) {
+			output.write(csvSafeString(fetcherNames[0]));
+			for (int i = 1; i < fetcherNames.length; i++) {
+				output.write(DELIMETER);
+				output.write(csvSafeString(fetcherNames[i]));			
+			}
+			output.println();
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977523
+src/net/azib/ipscan/fetchers/FetcherRegistry.java 48 54
+src/net/azib/ipscan/exporters/ExporterRegistry.java 27 33
+----------------------------------------
+	private Map<String, Fetcher> createFetchersMap(List<Fetcher> fetchers) {
+		Map<String, Fetcher> registeredFetchers = new LinkedHashMap<String, Fetcher>(fetchers.size());
+		for (Fetcher fetcher : fetchers) {
+			registeredFetchers.put(fetcher.getId(), fetcher);
+		}
+		return Collections.unmodifiableMap(registeredFetchers);
+	}
+
+----------------------------------------
+	@Inject public ExporterRegistry(List<Exporter> registeredExporters) {
+		exporters = new LinkedHashMap<String, Exporter>();
+
+		for (Exporter exporter : registeredExporters) {
+			exporters.put(exporter.getFilenameExtension(), exporter);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977525
+src/net/azib/ipscan/exporters/CSVExporter.java 42 50
+src/net/azib/ipscan/exporters/TXTExporter.java 80 87
+----------------------------------------
+	public void nextAddressResults(Object[] results) throws IOException {
+		output.write(csvSafeString(results[0]));
+		for (int i = 1; i < results.length; i++) {
+			Object result = results[i];
+			output.write(DELIMETER);
+			output.write(csvSafeString(result));
+		}
+		output.println();
+	}
+
+----------------------------------------
+	public void nextAddressResults(Object[] results) throws IOException {
+		output.write(pad(results[0], padLengths[0]));
+		for (int i = 1; i < results.length; i++) {
+			Object result = results[i];
+			output.write(pad(result, padLengths[i]));			
+		}
+		output.println();
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+28730879
+src/net/azib/ipscan/util/IOUtils.java 11 17
+src/net/azib/ipscan/config/Config.java 51 56
+----------------------------------------
+  public static void closeQuietly(Socket socket) {
+    if (socket != null) try {
+      socket.close();
+    }
+    catch (IOException ignore) {
+    }
+  }
+
+----------------------------------------
+	public static Config getConfig() {
+		if (globalConfig == null) {
+			globalConfig = new Config();
+		}
+		return globalConfig;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+28730881
+src/net/azib/ipscan/util/IOUtils.java 23 29
+src/net/azib/ipscan/config/Config.java 51 56
+----------------------------------------
+  public static void closeQuietly(RawSocket socket) {
+    if (socket != null) try {
+      socket.close();
+    }
+    catch (IOException ignore) {
+    }
+  }
+
+----------------------------------------
+	public static Config getConfig() {
+		if (globalConfig == null) {
+			globalConfig = new Config();
+		}
+		return globalConfig;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+28730883
+src/net/azib/ipscan/util/IOUtils.java 31 37
+src/net/azib/ipscan/config/Config.java 51 56
+----------------------------------------
+  public static void closeQuietly(Closeable closeable) {
+    if (closeable != null) try {
+      closeable.close();
+    }
+    catch (IOException ignore) {
+    }
+  }
+
+----------------------------------------
+	public static Config getConfig() {
+		if (globalConfig == null) {
+			globalConfig = new Config();
+		}
+		return globalConfig;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+28730874
+src/net/azib/ipscan/exporters/ExportProcessor.java 73 80
+src/net/azib/ipscan/config/Config.java 51 56
+----------------------------------------
+		finally {
+			if (outputStream != null) {
+				try {
+					outputStream.close();
+				}
+				catch (Exception ignore) {}
+			}
+		}
+
+----------------------------------------
+	public static Config getConfig() {
+		if (globalConfig == null) {
+			globalConfig = new Config();
+		}
+		return globalConfig;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977526
+src/net/azib/ipscan/config/Config.java 51 56
+src/net/azib/ipscan/config/Version.java 46 51
+----------------------------------------
+	public static Config getConfig() {
+		if (globalConfig == null) {
+			globalConfig = new Config();
+		}
+		return globalConfig;
+	}
+
+----------------------------------------
+	public static String getVersion() {
+		if (version == null) {
+			loadVersionFromJar();
+		}
+		return version;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+17977528
+src/net/azib/ipscan/config/Config.java 51 56
+src/net/azib/ipscan/config/Version.java 56 61
+----------------------------------------
+	public static Config getConfig() {
+		if (globalConfig == null) {
+			globalConfig = new Config();
+		}
+		return globalConfig;
+	}
+
+----------------------------------------
+	public static String getBuildDate() {
+		if (buildDate == null) {
+			loadVersionFromJar();
+		}
+		return buildDate;
+	}
+
+----------------------------------------

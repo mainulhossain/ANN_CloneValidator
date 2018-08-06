@@ -1,0 +1,1270 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995919
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 510 515
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 286 294
+----------------------------------------
+        } finally {
+            try {
+                romStream.close();
+            } catch (Exception e) {
+            }
+        }
+
+----------------------------------------
+                public void run() {
+                    try {
+                        sender.sendFile(name, data);
+                        sender.disconnect();
+                        display.setCurrent(new Alert(LocalizationSupport.getMessage("TransferSuccessful"), LocalizationSupport.getMessage("FileWasSentTo") + " '" + name + "'", null, AlertType.INFO), previous);
+                    } catch (IOException e) {
+                        display.setCurrent(new Alert(LocalizationSupport.getMessage("FileTransferFailed"), LocalizationSupport.getMessage("TransferringFileFailed") + e, null, AlertType.WARNING), previous);
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995930
+src/de/joergjahnke/common/bluetooth/BluetoothOBEXClient.java 240 250
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 286 294
+----------------------------------------
+    public void abortFileReception() {
+        super.stop();
+
+        try {
+            this.local.setDiscoverable(DiscoveryAgent.NOT_DISCOVERABLE);
+            this.notifier.close();
+            this.notifier = null;
+        } catch (Exception e) {
+            // we could not completely shut down the service, what to do now?
+        }
+    }
+
+----------------------------------------
+                public void run() {
+                    try {
+                        sender.sendFile(name, data);
+                        sender.disconnect();
+                        display.setCurrent(new Alert(LocalizationSupport.getMessage("TransferSuccessful"), LocalizationSupport.getMessage("FileWasSentTo") + " '" + name + "'", null, AlertType.INFO), previous);
+                    } catch (IOException e) {
+                        display.setCurrent(new Alert(LocalizationSupport.getMessage("FileTransferFailed"), LocalizationSupport.getMessage("TransferringFileFailed") + e, null, AlertType.WARNING), previous);
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995942
+src/de/joergjahnke/common/bluetooth/BluetoothOBEXClient.java 110 120
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 286 294
+----------------------------------------
+    public void disconnect() {
+        super.stop();
+
+        try {
+            this.clientSession.disconnect(null);
+            this.clientSession.close();
+        } catch (IOException e) {
+            // we had a problem with closing the streams, what to do now?
+        }
+        this.clientSession = null;
+    }
+
+----------------------------------------
+                public void run() {
+                    try {
+                        sender.sendFile(name, data);
+                        sender.disconnect();
+                        display.setCurrent(new Alert(LocalizationSupport.getMessage("TransferSuccessful"), LocalizationSupport.getMessage("FileWasSentTo") + " '" + name + "'", null, AlertType.INFO), previous);
+                    } catch (IOException e) {
+                        display.setCurrent(new Alert(LocalizationSupport.getMessage("FileTransferFailed"), LocalizationSupport.getMessage("TransferringFileFailed") + e, null, AlertType.WARNING), previous);
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995795
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 390 396
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 286 294
+----------------------------------------
+                    } finally {
+                        try {
+                            rs.closeRecordStore();
+                        } catch (Exception e) {
+                            // we could not close the record store, that hopefully does not hinder other actions on it and it was closed anyway...
+                        }
+                    }
+
+----------------------------------------
+                public void run() {
+                    try {
+                        sender.sendFile(name, data);
+                        sender.disconnect();
+                        display.setCurrent(new Alert(LocalizationSupport.getMessage("TransferSuccessful"), LocalizationSupport.getMessage("FileWasSentTo") + " '" + name + "'", null, AlertType.INFO), previous);
+                    } catch (IOException e) {
+                        display.setCurrent(new Alert(LocalizationSupport.getMessage("FileTransferFailed"), LocalizationSupport.getMessage("TransferringFileFailed") + e, null, AlertType.WARNING), previous);
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995915
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 489 494
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 286 294
+----------------------------------------
+            } finally {
+                try {
+                    saveStream.close();
+                } catch (Exception e) {
+                }
+            }
+
+----------------------------------------
+                public void run() {
+                    try {
+                        sender.sendFile(name, data);
+                        sender.disconnect();
+                        display.setCurrent(new Alert(LocalizationSupport.getMessage("TransferSuccessful"), LocalizationSupport.getMessage("FileWasSentTo") + " '" + name + "'", null, AlertType.INFO), previous);
+                    } catch (IOException e) {
+                        display.setCurrent(new Alert(LocalizationSupport.getMessage("FileTransferFailed"), LocalizationSupport.getMessage("TransferringFileFailed") + e, null, AlertType.WARNING), previous);
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995920
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 772 779
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 286 294
+----------------------------------------
+                if (status == STATUS_LOAD_FAILED || status == STATUS_LOAD_OK) {
+                    try {
+                        RecordStore.deleteRecordStore(name);
+                    } catch (Exception e) {
+                        display.setCurrent(new Alert(LocalizationSupport.getMessage("CouldNotRemoveSuspendData"), LocalizationSupport.getMessage("FailedToRemoveSuspendData"), null, AlertType.WARNING));
+                        e.printStackTrace();
+                    }
+                }
+
+----------------------------------------
+                public void run() {
+                    try {
+                        sender.sendFile(name, data);
+                        sender.disconnect();
+                        display.setCurrent(new Alert(LocalizationSupport.getMessage("TransferSuccessful"), LocalizationSupport.getMessage("FileWasSentTo") + " '" + name + "'", null, AlertType.INFO), previous);
+                    } catch (IOException e) {
+                        display.setCurrent(new Alert(LocalizationSupport.getMessage("FileTransferFailed"), LocalizationSupport.getMessage("TransferringFileFailed") + e, null, AlertType.WARNING), previous);
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995923
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 723 729
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 286 294
+----------------------------------------
+            if (hasSuspendData) {
+                try {
+                    rs.closeRecordStore();
+                } catch (Exception e) {
+                    // we could not close the record store, that hopefully does not hinder other actions on it and it was closed anyway...
+                }
+            }
+
+----------------------------------------
+                public void run() {
+                    try {
+                        sender.sendFile(name, data);
+                        sender.disconnect();
+                        display.setCurrent(new Alert(LocalizationSupport.getMessage("TransferSuccessful"), LocalizationSupport.getMessage("FileWasSentTo") + " '" + name + "'", null, AlertType.INFO), previous);
+                    } catch (IOException e) {
+                        display.setCurrent(new Alert(LocalizationSupport.getMessage("FileTransferFailed"), LocalizationSupport.getMessage("TransferringFileFailed") + e, null, AlertType.WARNING), previous);
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995928
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 722 731
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 286 294
+----------------------------------------
+        } finally {
+            if (hasSuspendData) {
+                try {
+                    rs.closeRecordStore();
+                } catch (Exception e) {
+                    // we could not close the record store, that hopefully does not hinder other actions on it and it was closed anyway...
+                }
+            }
+            display.setCurrent(this.mainMenu);
+        }
+
+----------------------------------------
+                public void run() {
+                    try {
+                        sender.sendFile(name, data);
+                        sender.disconnect();
+                        display.setCurrent(new Alert(LocalizationSupport.getMessage("TransferSuccessful"), LocalizationSupport.getMessage("FileWasSentTo") + " '" + name + "'", null, AlertType.INFO), previous);
+                    } catch (IOException e) {
+                        display.setCurrent(new Alert(LocalizationSupport.getMessage("FileTransferFailed"), LocalizationSupport.getMessage("TransferringFileFailed") + e, null, AlertType.WARNING), previous);
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995917
+src/de/joergjahnke/gameboy/jme/MEGameboyMIDlet.java 1161 1173
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 286 294
+----------------------------------------
+            public void onSelect() {
+                super.onSelect();
+                // save the new default directory
+                fileSearchStartDir = getSelectedFile();
+                try {
+                    settings.setString(SETTING_FILESEARCH_STARTDIR, fileSearchStartDir);
+                } catch (Exception e) {
+                    // we couldn't save the settings, that's OK
+                }
+                // search for files in this directory and return to the main form
+                fsHandler.readProgramListFromFileSystem(fileSearchStartDir, programs, display);
+                display.setCurrent(mainMenu);
+            }
+
+----------------------------------------
+                public void run() {
+                    try {
+                        sender.sendFile(name, data);
+                        sender.disconnect();
+                        display.setCurrent(new Alert(LocalizationSupport.getMessage("TransferSuccessful"), LocalizationSupport.getMessage("FileWasSentTo") + " '" + name + "'", null, AlertType.INFO), previous);
+                    } catch (IOException e) {
+                        display.setCurrent(new Alert(LocalizationSupport.getMessage("FileTransferFailed"), LocalizationSupport.getMessage("TransferringFileFailed") + e, null, AlertType.WARNING), previous);
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995925
+src/de/joergjahnke/common/jme/WavePlayer.java 178 188
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 286 294
+----------------------------------------
+            if (!this.players.isEmpty()) {
+                // then use the next player from the queue and play it
+                this.currentPlayer = (Player) this.players.elementAt(0);
+                this.players.removeElementAt(0);
+                try {
+                    this.currentPlayer.start();
+                } catch (Exception e) {
+                    // we couldn't start the player, we stop the sound as it does not seem to work
+                    producer.deleteObservers();
+                }
+            } else {
+
+----------------------------------------
+                public void run() {
+                    try {
+                        sender.sendFile(name, data);
+                        sender.disconnect();
+                        display.setCurrent(new Alert(LocalizationSupport.getMessage("TransferSuccessful"), LocalizationSupport.getMessage("FileWasSentTo") + " '" + name + "'", null, AlertType.INFO), previous);
+                    } catch (IOException e) {
+                        display.setCurrent(new Alert(LocalizationSupport.getMessage("FileTransferFailed"), LocalizationSupport.getMessage("TransferringFileFailed") + e, null, AlertType.WARNING), previous);
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995927
+src/de/joergjahnke/common/extendeddevices/WavePlayer.java 64 70
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 286 294
+----------------------------------------
+                        synchronized (buffer) {
+                            buffer.reset();
+                            try {
+                                buffer.wait();
+                            } catch (InterruptedException e) {
+                            }
+                        }
+
+----------------------------------------
+                public void run() {
+                    try {
+                        sender.sendFile(name, data);
+                        sender.disconnect();
+                        display.setCurrent(new Alert(LocalizationSupport.getMessage("TransferSuccessful"), LocalizationSupport.getMessage("FileWasSentTo") + " '" + name + "'", null, AlertType.INFO), previous);
+                    } catch (IOException e) {
+                        display.setCurrent(new Alert(LocalizationSupport.getMessage("FileTransferFailed"), LocalizationSupport.getMessage("TransferringFileFailed") + e, null, AlertType.WARNING), previous);
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995922
+src/de/joergjahnke/gameboy/android/AndroidGB.java 476 484
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 286 294
+----------------------------------------
+            if (this.gameboy.getSoundChip().countObservers() == 0) {
+                try {
+                    this.gameboy.getSoundChip().addObserver(new WavePlayer(this.gameboy.getSoundChip()));
+                } catch (Throwable t) {
+                    // we could not add a player, that's OK
+                    this.gameboy.getLogger().warning("Could not create sound player! Sound output remains deactivated.");
+                    t.printStackTrace();
+                }
+            }
+
+----------------------------------------
+                public void run() {
+                    try {
+                        sender.sendFile(name, data);
+                        sender.disconnect();
+                        display.setCurrent(new Alert(LocalizationSupport.getMessage("TransferSuccessful"), LocalizationSupport.getMessage("FileWasSentTo") + " '" + name + "'", null, AlertType.INFO), previous);
+                    } catch (IOException e) {
+                        display.setCurrent(new Alert(LocalizationSupport.getMessage("FileTransferFailed"), LocalizationSupport.getMessage("TransferringFileFailed") + e, null, AlertType.WARNING), previous);
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995916
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 393 400
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 286 294
+----------------------------------------
+        if (status == STATUS_LOAD_OK || status == STATUS_LOAD_FAILED) {
+            try {
+                new File(SUSPENDFILE_NAME).delete();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Could not remove the suspend file! Please remove the suspend file '" + SUSPENDFILE_NAME + "' manually.", this.commonResources.getString("CouldNotRemoveSuspendData"), JOptionPane.ERROR_MESSAGE);
+                e.printStackTrace();
+            }
+        }
+
+----------------------------------------
+                public void run() {
+                    try {
+                        sender.sendFile(name, data);
+                        sender.disconnect();
+                        display.setCurrent(new Alert(LocalizationSupport.getMessage("TransferSuccessful"), LocalizationSupport.getMessage("FileWasSentTo") + " '" + name + "'", null, AlertType.INFO), previous);
+                    } catch (IOException e) {
+                        display.setCurrent(new Alert(LocalizationSupport.getMessage("FileTransferFailed"), LocalizationSupport.getMessage("TransferringFileFailed") + e, null, AlertType.WARNING), previous);
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995921
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 296 301
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 286 294
+----------------------------------------
+        } finally {
+            try {
+                out.close();
+            } catch (Exception e) {
+            }
+        }
+
+----------------------------------------
+                public void run() {
+                    try {
+                        sender.sendFile(name, data);
+                        sender.disconnect();
+                        display.setCurrent(new Alert(LocalizationSupport.getMessage("TransferSuccessful"), LocalizationSupport.getMessage("FileWasSentTo") + " '" + name + "'", null, AlertType.INFO), previous);
+                    } catch (IOException e) {
+                        display.setCurrent(new Alert(LocalizationSupport.getMessage("FileTransferFailed"), LocalizationSupport.getMessage("TransferringFileFailed") + e, null, AlertType.WARNING), previous);
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995926
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 150 156
+src/de/joergjahnke/gameboy/jme/BtMEGameboyMIDlet.java 286 294
+----------------------------------------
+                                } finally {
+                                    try {
+                                        rs.closeRecordStore();
+                                    } catch (Exception e) {
+                                        // we could not close the record store, that hopefully does not hinder other actions on it and it was closed anyway...
+                                    }
+                                }
+
+----------------------------------------
+                public void run() {
+                    try {
+                        sender.sendFile(name, data);
+                        sender.disconnect();
+                        display.setCurrent(new Alert(LocalizationSupport.getMessage("TransferSuccessful"), LocalizationSupport.getMessage("FileWasSentTo") + " '" + name + "'", null, AlertType.INFO), previous);
+                    } catch (IOException e) {
+                        display.setCurrent(new Alert(LocalizationSupport.getMessage("FileTransferFailed"), LocalizationSupport.getMessage("TransferringFileFailed") + e, null, AlertType.WARNING), previous);
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995810
+src/de/joergjahnke/common/jme/OrientationSensitiveCanvas.java 90 98
+src/de/joergjahnke/common/jme/OrientationSensitiveCanvas.java 106 116
+----------------------------------------
+        if (isAutoChangeOrientation != this.isAutoChangeOrientation) {
+            this.isAutoChangeOrientation = isAutoChangeOrientation;
+            // switch on the accelerometer support if needed or switch it off if no service needs it
+            if (isAutoChangeOrientation && !this.useAccelerometer) {
+                activateAccelerometer();
+            } else if (!this.useAccelerometer) {
+                ((OrientationSensitiveCanvasHelper) getSensorUtils()).deactivateAccelerometer();
+            }
+        }
+
+----------------------------------------
+    public void setUseAccelerometer(final boolean useAccelerometer) {
+        if (useAccelerometer != this.useAccelerometer) {
+            this.useAccelerometer = useAccelerometer;
+            // switch on the accelerometer support if needed or switch it off if no service needs it
+            if (useAccelerometer && !this.isAutoChangeOrientation) {
+                activateAccelerometer();
+            } else if (!this.isAutoChangeOrientation) {
+                ((OrientationSensitiveCanvasHelper) getSensorUtils()).deactivateAccelerometer();
+            }
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995840
+src/de/joergjahnke/gameboy/core/Cartridge.java 420 425
+src/de/joergjahnke/gameboy/jme/GameboyCanvas.java 304 309
+----------------------------------------
+    public void serialize(final DataOutputStream out) throws IOException {
+        this.cartridgeImpl.serialize(out);
+        for (int i = 0; i < this.ramBanks.length; ++i) {
+            SerializationUtils.serialize(out, this.ramBanks[i]);
+        }
+    }
+
+----------------------------------------
+        if (isShowButtons()) {
+            for (int i = 0; i < this.buttons.length; ++i) {
+                this.buttons[i].setTransform(this.transform);
+                this.buttons[i].paint(this.graphics);
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995861
+src/de/joergjahnke/gameboy/core/ColorPalette.java 57 63
+src/de/joergjahnke/gameboy/jme/GameboyCanvas.java 304 309
+----------------------------------------
+    public ColorPalette(final VideoChip video, final int color) {
+        this.video = video;
+        // initialize all colors with the given color
+        for (int i = 0; i < this.colors.length; ++i) {
+            this.colors[i] = color;
+        }
+    }
+
+----------------------------------------
+        if (isShowButtons()) {
+            for (int i = 0; i < this.buttons.length; ++i) {
+                this.buttons[i].setTransform(this.transform);
+                this.buttons[i].paint(this.graphics);
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995862
+src/de/joergjahnke/gameboy/core/Cartridge.java 427 432
+src/de/joergjahnke/gameboy/jme/GameboyCanvas.java 304 309
+----------------------------------------
+    public void deserialize(final DataInputStream in) throws IOException {
+        this.cartridgeImpl.deserialize(in);
+        for (int i = 0; i < this.ramBanks.length; ++i) {
+            SerializationUtils.deserialize(in, this.ramBanks[i]);
+        }
+    }
+
+----------------------------------------
+        if (isShowButtons()) {
+            for (int i = 0; i < this.buttons.length; ++i) {
+                this.buttons[i].setTransform(this.transform);
+                this.buttons[i].paint(this.graphics);
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995844
+src/de/joergjahnke/common/io/SerializationUtils.java 107 112
+src/de/joergjahnke/gameboy/jme/GameboyCanvas.java 685 691
+----------------------------------------
+    public static void serialize(final DataOutputStream out, final int[] data) throws IOException {
+        out.writeInt(data.length);
+        for (int i = 0; i < data.length; ++i) {
+            out.writeInt(data[i]);
+        }
+    }
+
+----------------------------------------
+            if (isShowButtons()) {
+                final int pressedButtons = ((Joypad) observable).getButtons();
+
+                for (int i = 0; i < BUTTON_JOYPAD_MAPPING.length; ++i) {
+                    this.buttons[i].setImage(this.buttonImages[(pressedButtons & BUTTON_JOYPAD_MAPPING[i]) != 0 ? i + BUTTON_IMAGES.length : i], this.buttons[i].getWidth(), this.buttons[i].getHeight());
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995841
+src/de/joergjahnke/common/io/SerializationUtils.java 78 83
+src/de/joergjahnke/gameboy/jme/GameboyCanvas.java 685 691
+----------------------------------------
+    public static void serialize(final DataOutputStream out, final short[] data) throws IOException {
+        out.writeInt(data.length);
+        for (int i = 0; i < data.length; ++i) {
+            out.writeShort(data[i]);
+        }
+    }
+
+----------------------------------------
+            if (isShowButtons()) {
+                final int pressedButtons = ((Joypad) observable).getButtons();
+
+                for (int i = 0; i < BUTTON_JOYPAD_MAPPING.length; ++i) {
+                    this.buttons[i].setImage(this.buttonImages[(pressedButtons & BUTTON_JOYPAD_MAPPING[i]) != 0 ? i + BUTTON_IMAGES.length : i], this.buttons[i].getWidth(), this.buttons[i].getHeight());
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995848
+src/de/joergjahnke/common/io/SerializationUtils.java 136 141
+src/de/joergjahnke/gameboy/jme/GameboyCanvas.java 685 691
+----------------------------------------
+    public static void serialize(final DataOutputStream out, final long[] data) throws IOException {
+        out.writeInt(data.length);
+        for (int i = 0; i < data.length; ++i) {
+            out.writeLong(data[i]);
+        }
+    }
+
+----------------------------------------
+            if (isShowButtons()) {
+                final int pressedButtons = ((Joypad) observable).getButtons();
+
+                for (int i = 0; i < BUTTON_JOYPAD_MAPPING.length; ++i) {
+                    this.buttons[i].setImage(this.buttonImages[(pressedButtons & BUTTON_JOYPAD_MAPPING[i]) != 0 ? i + BUTTON_IMAGES.length : i], this.buttons[i].getWidth(), this.buttons[i].getHeight());
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995843
+src/de/joergjahnke/common/io/SerializationUtils.java 49 54
+src/de/joergjahnke/gameboy/jme/GameboyCanvas.java 685 691
+----------------------------------------
+    public static void serialize(final DataOutputStream out, final byte[] data) throws IOException {
+        out.writeInt(data.length);
+        for (int i = 0; i < data.length; ++i) {
+            out.writeByte(data[i]);
+        }
+    }
+
+----------------------------------------
+            if (isShowButtons()) {
+                final int pressedButtons = ((Joypad) observable).getButtons();
+
+                for (int i = 0; i < BUTTON_JOYPAD_MAPPING.length; ++i) {
+                    this.buttons[i].setImage(this.buttonImages[(pressedButtons & BUTTON_JOYPAD_MAPPING[i]) != 0 ? i + BUTTON_IMAGES.length : i], this.buttons[i].getWidth(), this.buttons[i].getHeight());
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995847
+src/de/joergjahnke/common/io/SerializationUtils.java 223 228
+src/de/joergjahnke/gameboy/jme/GameboyCanvas.java 685 691
+----------------------------------------
+    public static void serialize(final DataOutputStream out, final Serializable[] data) throws IOException {
+        out.writeInt(data.length);
+        for (int i = 0; i < data.length; ++i) {
+            data[i].serialize(out);
+        }
+    }
+
+----------------------------------------
+            if (isShowButtons()) {
+                final int pressedButtons = ((Joypad) observable).getButtons();
+
+                for (int i = 0; i < BUTTON_JOYPAD_MAPPING.length; ++i) {
+                    this.buttons[i].setImage(this.buttonImages[(pressedButtons & BUTTON_JOYPAD_MAPPING[i]) != 0 ? i + BUTTON_IMAGES.length : i], this.buttons[i].getWidth(), this.buttons[i].getHeight());
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995842
+src/de/joergjahnke/common/io/SerializationUtils.java 194 199
+src/de/joergjahnke/gameboy/jme/GameboyCanvas.java 685 691
+----------------------------------------
+    public static void serialize(final DataOutputStream out, final String[] data) throws IOException {
+        out.writeInt(data.length);
+        for (int i = 0; i < data.length; ++i) {
+            out.writeUTF(data[i]);
+        }
+    }
+
+----------------------------------------
+            if (isShowButtons()) {
+                final int pressedButtons = ((Joypad) observable).getButtons();
+
+                for (int i = 0; i < BUTTON_JOYPAD_MAPPING.length; ++i) {
+                    this.buttons[i].setImage(this.buttonImages[(pressedButtons & BUTTON_JOYPAD_MAPPING[i]) != 0 ? i + BUTTON_IMAGES.length : i], this.buttons[i].getWidth(), this.buttons[i].getHeight());
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995846
+src/de/joergjahnke/common/io/SerializationUtils.java 165 170
+src/de/joergjahnke/gameboy/jme/GameboyCanvas.java 685 691
+----------------------------------------
+    public static void serialize(final DataOutputStream out, final boolean[] data) throws IOException {
+        out.writeInt(data.length);
+        for (int i = 0; i < data.length; ++i) {
+            out.writeBoolean(data[i]);
+        }
+    }
+
+----------------------------------------
+            if (isShowButtons()) {
+                final int pressedButtons = ((Joypad) observable).getButtons();
+
+                for (int i = 0; i < BUTTON_JOYPAD_MAPPING.length; ++i) {
+                    this.buttons[i].setImage(this.buttonImages[(pressedButtons & BUTTON_JOYPAD_MAPPING[i]) != 0 ? i + BUTTON_IMAGES.length : i], this.buttons[i].getWidth(), this.buttons[i].getHeight());
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995845
+src/de/joergjahnke/gameboy/core/WhiteNoiseChannel.java 25 31
+src/de/joergjahnke/gameboy/jme/GameboyCanvas.java 685 691
+----------------------------------------
+    static {
+        final Random rand = new Random();
+        
+        for(int i = 0 ; i < randoms.length;++i) {
+            randoms[i] = (rand.nextInt() & 1) == 1;
+        }
+    }
+
+----------------------------------------
+            if (isShowButtons()) {
+                final int pressedButtons = ((Joypad) observable).getButtons();
+
+                for (int i = 0; i < BUTTON_JOYPAD_MAPPING.length; ++i) {
+                    this.buttons[i].setImage(this.buttonImages[(pressedButtons & BUTTON_JOYPAD_MAPPING[i]) != 0 ? i + BUTTON_IMAGES.length : i], this.buttons[i].getWidth(), this.buttons[i].getHeight());
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995850
+src/de/joergjahnke/common/io/SerializationUtils.java 194 199
+src/de/joergjahnke/gameboy/jme/GameboyCanvas.java 693 699
+----------------------------------------
+    public static void serialize(final DataOutputStream out, final String[] data) throws IOException {
+        out.writeInt(data.length);
+        for (int i = 0; i < data.length; ++i) {
+            out.writeUTF(data[i]);
+        }
+    }
+
+----------------------------------------
+            if (isShowDirectionButtons()) {
+                final int selectedDirections = ((Joypad) observable).getDirections();
+
+                for (int i = 0; i < DIRECTION_JOYPAD_MAPPING.length; ++i) {
+                    this.directions[i].setImage(this.directionImages[(selectedDirections & DIRECTION_JOYPAD_MAPPING[i]) != 0 ? i + BUTTON_IMAGES.length : i], this.directions[i].getWidth(), this.directions[i].getHeight());
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995856
+src/de/joergjahnke/common/io/SerializationUtils.java 223 228
+src/de/joergjahnke/gameboy/jme/GameboyCanvas.java 693 699
+----------------------------------------
+    public static void serialize(final DataOutputStream out, final Serializable[] data) throws IOException {
+        out.writeInt(data.length);
+        for (int i = 0; i < data.length; ++i) {
+            data[i].serialize(out);
+        }
+    }
+
+----------------------------------------
+            if (isShowDirectionButtons()) {
+                final int selectedDirections = ((Joypad) observable).getDirections();
+
+                for (int i = 0; i < DIRECTION_JOYPAD_MAPPING.length; ++i) {
+                    this.directions[i].setImage(this.directionImages[(selectedDirections & DIRECTION_JOYPAD_MAPPING[i]) != 0 ? i + BUTTON_IMAGES.length : i], this.directions[i].getWidth(), this.directions[i].getHeight());
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995849
+src/de/joergjahnke/common/io/SerializationUtils.java 78 83
+src/de/joergjahnke/gameboy/jme/GameboyCanvas.java 693 699
+----------------------------------------
+    public static void serialize(final DataOutputStream out, final short[] data) throws IOException {
+        out.writeInt(data.length);
+        for (int i = 0; i < data.length; ++i) {
+            out.writeShort(data[i]);
+        }
+    }
+
+----------------------------------------
+            if (isShowDirectionButtons()) {
+                final int selectedDirections = ((Joypad) observable).getDirections();
+
+                for (int i = 0; i < DIRECTION_JOYPAD_MAPPING.length; ++i) {
+                    this.directions[i].setImage(this.directionImages[(selectedDirections & DIRECTION_JOYPAD_MAPPING[i]) != 0 ? i + BUTTON_IMAGES.length : i], this.directions[i].getWidth(), this.directions[i].getHeight());
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995857
+src/de/joergjahnke/common/io/SerializationUtils.java 136 141
+src/de/joergjahnke/gameboy/jme/GameboyCanvas.java 693 699
+----------------------------------------
+    public static void serialize(final DataOutputStream out, final long[] data) throws IOException {
+        out.writeInt(data.length);
+        for (int i = 0; i < data.length; ++i) {
+            out.writeLong(data[i]);
+        }
+    }
+
+----------------------------------------
+            if (isShowDirectionButtons()) {
+                final int selectedDirections = ((Joypad) observable).getDirections();
+
+                for (int i = 0; i < DIRECTION_JOYPAD_MAPPING.length; ++i) {
+                    this.directions[i].setImage(this.directionImages[(selectedDirections & DIRECTION_JOYPAD_MAPPING[i]) != 0 ? i + BUTTON_IMAGES.length : i], this.directions[i].getWidth(), this.directions[i].getHeight());
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995852
+src/de/joergjahnke/common/io/SerializationUtils.java 107 112
+src/de/joergjahnke/gameboy/jme/GameboyCanvas.java 693 699
+----------------------------------------
+    public static void serialize(final DataOutputStream out, final int[] data) throws IOException {
+        out.writeInt(data.length);
+        for (int i = 0; i < data.length; ++i) {
+            out.writeInt(data[i]);
+        }
+    }
+
+----------------------------------------
+            if (isShowDirectionButtons()) {
+                final int selectedDirections = ((Joypad) observable).getDirections();
+
+                for (int i = 0; i < DIRECTION_JOYPAD_MAPPING.length; ++i) {
+                    this.directions[i].setImage(this.directionImages[(selectedDirections & DIRECTION_JOYPAD_MAPPING[i]) != 0 ? i + BUTTON_IMAGES.length : i], this.directions[i].getWidth(), this.directions[i].getHeight());
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995853
+src/de/joergjahnke/gameboy/core/WhiteNoiseChannel.java 25 31
+src/de/joergjahnke/gameboy/jme/GameboyCanvas.java 693 699
+----------------------------------------
+    static {
+        final Random rand = new Random();
+        
+        for(int i = 0 ; i < randoms.length;++i) {
+            randoms[i] = (rand.nextInt() & 1) == 1;
+        }
+    }
+
+----------------------------------------
+            if (isShowDirectionButtons()) {
+                final int selectedDirections = ((Joypad) observable).getDirections();
+
+                for (int i = 0; i < DIRECTION_JOYPAD_MAPPING.length; ++i) {
+                    this.directions[i].setImage(this.directionImages[(selectedDirections & DIRECTION_JOYPAD_MAPPING[i]) != 0 ? i + BUTTON_IMAGES.length : i], this.directions[i].getWidth(), this.directions[i].getHeight());
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995854
+src/de/joergjahnke/common/io/SerializationUtils.java 165 170
+src/de/joergjahnke/gameboy/jme/GameboyCanvas.java 693 699
+----------------------------------------
+    public static void serialize(final DataOutputStream out, final boolean[] data) throws IOException {
+        out.writeInt(data.length);
+        for (int i = 0; i < data.length; ++i) {
+            out.writeBoolean(data[i]);
+        }
+    }
+
+----------------------------------------
+            if (isShowDirectionButtons()) {
+                final int selectedDirections = ((Joypad) observable).getDirections();
+
+                for (int i = 0; i < DIRECTION_JOYPAD_MAPPING.length; ++i) {
+                    this.directions[i].setImage(this.directionImages[(selectedDirections & DIRECTION_JOYPAD_MAPPING[i]) != 0 ? i + BUTTON_IMAGES.length : i], this.directions[i].getWidth(), this.directions[i].getHeight());
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995851
+src/de/joergjahnke/common/io/SerializationUtils.java 49 54
+src/de/joergjahnke/gameboy/jme/GameboyCanvas.java 693 699
+----------------------------------------
+    public static void serialize(final DataOutputStream out, final byte[] data) throws IOException {
+        out.writeInt(data.length);
+        for (int i = 0; i < data.length; ++i) {
+            out.writeByte(data[i]);
+        }
+    }
+
+----------------------------------------
+            if (isShowDirectionButtons()) {
+                final int selectedDirections = ((Joypad) observable).getDirections();
+
+                for (int i = 0; i < DIRECTION_JOYPAD_MAPPING.length; ++i) {
+                    this.directions[i].setImage(this.directionImages[(selectedDirections & DIRECTION_JOYPAD_MAPPING[i]) != 0 ? i + BUTTON_IMAGES.length : i], this.directions[i].getWidth(), this.directions[i].getHeight());
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995855
+src/de/joergjahnke/gameboy/jme/GameboyCanvas.java 685 691
+src/de/joergjahnke/gameboy/jme/GameboyCanvas.java 693 699
+----------------------------------------
+            if (isShowButtons()) {
+                final int pressedButtons = ((Joypad) observable).getButtons();
+
+                for (int i = 0; i < BUTTON_JOYPAD_MAPPING.length; ++i) {
+                    this.buttons[i].setImage(this.buttonImages[(pressedButtons & BUTTON_JOYPAD_MAPPING[i]) != 0 ? i + BUTTON_IMAGES.length : i], this.buttons[i].getWidth(), this.buttons[i].getHeight());
+                }
+            }
+
+----------------------------------------
+            if (isShowDirectionButtons()) {
+                final int selectedDirections = ((Joypad) observable).getDirections();
+
+                for (int i = 0; i < DIRECTION_JOYPAD_MAPPING.length; ++i) {
+                    this.directions[i].setImage(this.directionImages[(selectedDirections & DIRECTION_JOYPAD_MAPPING[i]) != 0 ? i + BUTTON_IMAGES.length : i], this.directions[i].getWidth(), this.directions[i].getHeight());
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995865
+src/de/joergjahnke/gameboy/core/ColorPalette.java 57 63
+src/de/joergjahnke/gameboy/jme/GameboyCanvas.java 310 315
+----------------------------------------
+    public ColorPalette(final VideoChip video, final int color) {
+        this.video = video;
+        // initialize all colors with the given color
+        for (int i = 0; i < this.colors.length; ++i) {
+            this.colors[i] = color;
+        }
+    }
+
+----------------------------------------
+        if (isShowDirectionButtons()) {
+            for (int i = 0; i < this.directions.length; ++i) {
+                this.directions[i].setTransform(this.transform);
+                this.directions[i].paint(this.graphics);
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995863
+src/de/joergjahnke/gameboy/jme/GameboyCanvas.java 304 309
+src/de/joergjahnke/gameboy/jme/GameboyCanvas.java 310 315
+----------------------------------------
+        if (isShowButtons()) {
+            for (int i = 0; i < this.buttons.length; ++i) {
+                this.buttons[i].setTransform(this.transform);
+                this.buttons[i].paint(this.graphics);
+            }
+        }
+
+----------------------------------------
+        if (isShowDirectionButtons()) {
+            for (int i = 0; i < this.directions.length; ++i) {
+                this.directions[i].setTransform(this.transform);
+                this.directions[i].paint(this.graphics);
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995866
+src/de/joergjahnke/gameboy/core/Cartridge.java 427 432
+src/de/joergjahnke/gameboy/jme/GameboyCanvas.java 310 315
+----------------------------------------
+    public void deserialize(final DataInputStream in) throws IOException {
+        this.cartridgeImpl.deserialize(in);
+        for (int i = 0; i < this.ramBanks.length; ++i) {
+            SerializationUtils.deserialize(in, this.ramBanks[i]);
+        }
+    }
+
+----------------------------------------
+        if (isShowDirectionButtons()) {
+            for (int i = 0; i < this.directions.length; ++i) {
+                this.directions[i].setTransform(this.transform);
+                this.directions[i].paint(this.graphics);
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995864
+src/de/joergjahnke/gameboy/core/Cartridge.java 420 425
+src/de/joergjahnke/gameboy/jme/GameboyCanvas.java 310 315
+----------------------------------------
+    public void serialize(final DataOutputStream out) throws IOException {
+        this.cartridgeImpl.serialize(out);
+        for (int i = 0; i < this.ramBanks.length; ++i) {
+            SerializationUtils.serialize(out, this.ramBanks[i]);
+        }
+    }
+
+----------------------------------------
+        if (isShowDirectionButtons()) {
+            for (int i = 0; i < this.directions.length; ++i) {
+                this.directions[i].setTransform(this.transform);
+                this.directions[i].paint(this.graphics);
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995859
+src/de/joergjahnke/gameboy/jme/GameboyCanvas.java 304 309
+src/de/joergjahnke/gameboy/android/GameboyView.java 100 105
+----------------------------------------
+        if (isShowButtons()) {
+            for (int i = 0; i < this.buttons.length; ++i) {
+                this.buttons[i].setTransform(this.transform);
+                this.buttons[i].paint(this.graphics);
+            }
+        }
+
+----------------------------------------
+        if(config.touchscreen != Resources.Configuration.TOUCHSCREEN_NOTOUCH) {
+        	this.buttons = new BitmapDrawable[BUTTON_RESOURCE_IDS.length];
+        	for(int i = 0 ; i < this.buttons.length ; ++i) {
+        		this.buttons[i] = new BitmapDrawable(BitmapFactory.decodeResource(getResources(), BUTTON_RESOURCE_IDS[i]));
+        	}
+        } else {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995911
+src/de/joergjahnke/gameboy/core/ColorPalette.java 57 63
+src/de/joergjahnke/gameboy/android/GameboyView.java 100 105
+----------------------------------------
+    public ColorPalette(final VideoChip video, final int color) {
+        this.video = video;
+        // initialize all colors with the given color
+        for (int i = 0; i < this.colors.length; ++i) {
+            this.colors[i] = color;
+        }
+    }
+
+----------------------------------------
+        if(config.touchscreen != Resources.Configuration.TOUCHSCREEN_NOTOUCH) {
+        	this.buttons = new BitmapDrawable[BUTTON_RESOURCE_IDS.length];
+        	for(int i = 0 ; i < this.buttons.length ; ++i) {
+        		this.buttons[i] = new BitmapDrawable(BitmapFactory.decodeResource(getResources(), BUTTON_RESOURCE_IDS[i]));
+        	}
+        } else {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995858
+src/de/joergjahnke/gameboy/jme/GameboyCanvas.java 310 315
+src/de/joergjahnke/gameboy/android/GameboyView.java 100 105
+----------------------------------------
+        if (isShowDirectionButtons()) {
+            for (int i = 0; i < this.directions.length; ++i) {
+                this.directions[i].setTransform(this.transform);
+                this.directions[i].paint(this.graphics);
+            }
+        }
+
+----------------------------------------
+        if(config.touchscreen != Resources.Configuration.TOUCHSCREEN_NOTOUCH) {
+        	this.buttons = new BitmapDrawable[BUTTON_RESOURCE_IDS.length];
+        	for(int i = 0 ; i < this.buttons.length ; ++i) {
+        		this.buttons[i] = new BitmapDrawable(BitmapFactory.decodeResource(getResources(), BUTTON_RESOURCE_IDS[i]));
+        	}
+        } else {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995860
+src/de/joergjahnke/gameboy/core/Cartridge.java 420 425
+src/de/joergjahnke/gameboy/android/GameboyView.java 100 105
+----------------------------------------
+    public void serialize(final DataOutputStream out) throws IOException {
+        this.cartridgeImpl.serialize(out);
+        for (int i = 0; i < this.ramBanks.length; ++i) {
+            SerializationUtils.serialize(out, this.ramBanks[i]);
+        }
+    }
+
+----------------------------------------
+        if(config.touchscreen != Resources.Configuration.TOUCHSCREEN_NOTOUCH) {
+        	this.buttons = new BitmapDrawable[BUTTON_RESOURCE_IDS.length];
+        	for(int i = 0 ; i < this.buttons.length ; ++i) {
+        		this.buttons[i] = new BitmapDrawable(BitmapFactory.decodeResource(getResources(), BUTTON_RESOURCE_IDS[i]));
+        	}
+        } else {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995912
+src/de/joergjahnke/gameboy/core/Cartridge.java 427 432
+src/de/joergjahnke/gameboy/android/GameboyView.java 100 105
+----------------------------------------
+    public void deserialize(final DataInputStream in) throws IOException {
+        this.cartridgeImpl.deserialize(in);
+        for (int i = 0; i < this.ramBanks.length; ++i) {
+            SerializationUtils.deserialize(in, this.ramBanks[i]);
+        }
+    }
+
+----------------------------------------
+        if(config.touchscreen != Resources.Configuration.TOUCHSCREEN_NOTOUCH) {
+        	this.buttons = new BitmapDrawable[BUTTON_RESOURCE_IDS.length];
+        	for(int i = 0 ; i < this.buttons.length ; ++i) {
+        		this.buttons[i] = new BitmapDrawable(BitmapFactory.decodeResource(getResources(), BUTTON_RESOURCE_IDS[i]));
+        	}
+        } else {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995874
+src/de/joergjahnke/gameboy/jme/GameboyCanvas.java 549 556
+src/de/joergjahnke/gameboy/jme/GameboyCanvas.java 557 564
+----------------------------------------
+        if (isShowButtons()) {
+            for (int i = 0; !wasEventProcessed && i < this.buttons.length; ++i) {
+                if (this.buttons[i].collidesWith(this.onePixel, x, y, true)) {
+                    this.gameboy.getJoypad().setButtons(this.gameboy.getJoypad().getButtons() | BUTTON_JOYPAD_MAPPING[i]);
+                    wasEventProcessed = true;
+                }
+            }
+        }
+
+----------------------------------------
+        if (isShowDirectionButtons()) {
+            for (int i = 0; !wasEventProcessed && i < this.directions.length; ++i) {
+                if (this.directions[i].collidesWith(this.onePixel, x, y, true)) {
+                    this.gameboy.getJoypad().setDirections(this.gameboy.getJoypad().getDirections() | DIRECTION_JOYPAD_MAPPING[i]);
+                    wasEventProcessed = true;
+                }
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995875
+src/de/joergjahnke/gameboy/jme/GameboyCanvas.java 550 555
+src/de/joergjahnke/gameboy/jme/GameboyCanvas.java 558 563
+----------------------------------------
+            for (int i = 0; !wasEventProcessed && i < this.buttons.length; ++i) {
+                if (this.buttons[i].collidesWith(this.onePixel, x, y, true)) {
+                    this.gameboy.getJoypad().setButtons(this.gameboy.getJoypad().getButtons() | BUTTON_JOYPAD_MAPPING[i]);
+                    wasEventProcessed = true;
+                }
+            }
+
+----------------------------------------
+            for (int i = 0; !wasEventProcessed && i < this.directions.length; ++i) {
+                if (this.directions[i].collidesWith(this.onePixel, x, y, true)) {
+                    this.gameboy.getJoypad().setDirections(this.gameboy.getJoypad().getDirections() | DIRECTION_JOYPAD_MAPPING[i]);
+                    wasEventProcessed = true;
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995876
+src/de/joergjahnke/gameboy/jme/GameboyCanvas.java 545 571
+src/de/joergjahnke/gameboy/jme/GameboyCanvas.java 579 608
+----------------------------------------
+    protected void pointerPressed(final int x, final int y) {
+        boolean wasEventProcessed = false;
+
+        // check whether an on-screen button was pressed, if these are active
+        if (isShowButtons()) {
+            for (int i = 0; !wasEventProcessed && i < this.buttons.length; ++i) {
+                if (this.buttons[i].collidesWith(this.onePixel, x, y, true)) {
+                    this.gameboy.getJoypad().setButtons(this.gameboy.getJoypad().getButtons() | BUTTON_JOYPAD_MAPPING[i]);
+                    wasEventProcessed = true;
+                }
+            }
+        }
+        if (isShowDirectionButtons()) {
+            for (int i = 0; !wasEventProcessed && i < this.directions.length; ++i) {
+                if (this.directions[i].collidesWith(this.onePixel, x, y, true)) {
+                    this.gameboy.getJoypad().setDirections(this.gameboy.getJoypad().getDirections() | DIRECTION_JOYPAD_MAPPING[i]);
+                    wasEventProcessed = true;
+                }
+            }
+        }
+
+        // if it was not an on-screen button then we record the position as possible start of a pointer drag operation
+        if (!wasEventProcessed && x >= this.x && x < this.x + this.paintWidth && y >= this.y && y < this.y + this.paintHeight) {
+            this.pStartX = x;
+            this.pStartY = y;
+        }
+    }
+
+----------------------------------------
+    protected void pointerReleased(final int x, final int y) {
+        boolean wasEventProcessed = false;
+
+        // check for the on-screen buttons if they are active
+        if (isShowButtons()) {
+            for (int i = 0; !wasEventProcessed && i < this.buttons.length; ++i) {
+                if (this.buttons[i].collidesWith(this.onePixel, x, y, true)) {
+                    this.gameboy.getJoypad().setButtons(this.gameboy.getJoypad().getButtons() & (0x0f - BUTTON_JOYPAD_MAPPING[i]));
+                    wasEventProcessed = true;
+                }
+            }
+        }
+        if (isShowDirectionButtons()) {
+            for (int i = 0; !wasEventProcessed && i < this.directions.length; ++i) {
+                if (this.directions[i].collidesWith(this.onePixel, x, y, true)) {
+                    this.gameboy.getJoypad().setDirections(this.gameboy.getJoypad().getDirections() & (0x0f - DIRECTION_JOYPAD_MAPPING[i]));
+                    wasEventProcessed = true;
+                }
+            }
+        }
+
+        // if it was not an on-screen button that was released then it might be the end of a drag operation
+        if (!wasEventProcessed && x >= this.x && x < this.x + this.paintWidth && y >= this.y && y < this.y + this.paintHeight) {
+            // in this case we cease all joypad movement
+            this.gameboy.getJoypad().setDirections(0);
+        }
+
+        // no pointer drag operation currently running
+        this.pStartX = this.pStartY = -1;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995877
+src/de/joergjahnke/gameboy/jme/GameboyCanvas.java 557 564
+src/de/joergjahnke/gameboy/jme/GameboyCanvas.java 583 590
+----------------------------------------
+        if (isShowDirectionButtons()) {
+            for (int i = 0; !wasEventProcessed && i < this.directions.length; ++i) {
+                if (this.directions[i].collidesWith(this.onePixel, x, y, true)) {
+                    this.gameboy.getJoypad().setDirections(this.gameboy.getJoypad().getDirections() | DIRECTION_JOYPAD_MAPPING[i]);
+                    wasEventProcessed = true;
+                }
+            }
+        }
+
+----------------------------------------
+        if (isShowButtons()) {
+            for (int i = 0; !wasEventProcessed && i < this.buttons.length; ++i) {
+                if (this.buttons[i].collidesWith(this.onePixel, x, y, true)) {
+                    this.gameboy.getJoypad().setButtons(this.gameboy.getJoypad().getButtons() & (0x0f - BUTTON_JOYPAD_MAPPING[i]));
+                    wasEventProcessed = true;
+                }
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995878
+src/de/joergjahnke/gameboy/jme/GameboyCanvas.java 549 556
+src/de/joergjahnke/gameboy/jme/GameboyCanvas.java 583 590
+----------------------------------------
+        if (isShowButtons()) {
+            for (int i = 0; !wasEventProcessed && i < this.buttons.length; ++i) {
+                if (this.buttons[i].collidesWith(this.onePixel, x, y, true)) {
+                    this.gameboy.getJoypad().setButtons(this.gameboy.getJoypad().getButtons() | BUTTON_JOYPAD_MAPPING[i]);
+                    wasEventProcessed = true;
+                }
+            }
+        }
+
+----------------------------------------
+        if (isShowButtons()) {
+            for (int i = 0; !wasEventProcessed && i < this.buttons.length; ++i) {
+                if (this.buttons[i].collidesWith(this.onePixel, x, y, true)) {
+                    this.gameboy.getJoypad().setButtons(this.gameboy.getJoypad().getButtons() & (0x0f - BUTTON_JOYPAD_MAPPING[i]));
+                    wasEventProcessed = true;
+                }
+            }
+        }
+
+----------------------------------------

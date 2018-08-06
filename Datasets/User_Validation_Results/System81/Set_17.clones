@@ -1,0 +1,2082 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27145474
+src/org/jfm/main/MainPanel.java 30 37
+src/org/jfm/po/CommandOutputViewDialog.java 73 77
+----------------------------------------
+  public MainPanel() {
+    try {
+      jbInit();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+     public void keyTyped(KeyEvent e) {
+      try{
+        process.getOutputStream().write(e.getKeyChar());
+      }catch(Exception ex){}
+     }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27145471
+src/org/jfm/po/copy/CopyProgressDialog.java 154 160
+src/org/jfm/po/CommandOutputViewDialog.java 73 77
+----------------------------------------
+      }finally{
+        try {
+          in.close();
+          out.close();
+        }
+        catch (Exception ignored) {}
+      }
+
+----------------------------------------
+     public void keyTyped(KeyEvent e) {
+      try{
+        process.getOutputStream().write(e.getKeyChar());
+      }catch(Exception ex){}
+     }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27145459
+src/org/jfm/filesystems/local/JFMLocalFilesystem.java 51 57
+src/org/jfm/po/CommandOutputViewDialog.java 73 77
+----------------------------------------
+		for(int i=0;i<files.length;i++){
+			try{
+				jfmFiles[i]=new JFMLocalFile(files[i].getAbsolutePath());
+			}catch(Exception ignored){
+				ignored.printStackTrace();
+			}
+		}
+
+----------------------------------------
+     public void keyTyped(KeyEvent e) {
+      try{
+        process.getOutputStream().write(e.getKeyChar());
+      }catch(Exception ex){}
+     }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27145462
+src/org/jfm/main/Options.java 108 114
+src/org/jfm/po/CommandOutputViewDialog.java 73 77
+----------------------------------------
+  public static void savePreferences(){
+  	try {
+		getPreferences().flush();
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+  }
+
+----------------------------------------
+     public void keyTyped(KeyEvent e) {
+      try{
+        process.getOutputStream().write(e.getKeyChar());
+      }catch(Exception ex){}
+     }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27145479
+src/org/jfm/po/copy/CopyProgressDialog.java 64 68
+src/org/jfm/po/CommandOutputViewDialog.java 73 77
+----------------------------------------
+      public void run(){
+        try{
+          copyFiles();
+        }catch(CopyCancelledException ex){}
+      }
+
+----------------------------------------
+     public void keyTyped(KeyEvent e) {
+      try{
+        process.getOutputStream().write(e.getKeyChar());
+      }catch(Exception ex){}
+     }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27145468
+src/org/jfm/filesystems/local/JFMLocalFile.java 181 187
+src/org/jfm/po/CommandOutputViewDialog.java 73 77
+----------------------------------------
+	public JFMFile getCanonicalFile() throws FSException {
+		try{
+			return new JFMLocalFile(theFile.getCanonicalPath());
+		}catch(IOException ex){
+			throw new FSException(ex.getMessage());
+		}
+	}
+
+----------------------------------------
+     public void keyTyped(KeyEvent e) {
+      try{
+        process.getOutputStream().write(e.getKeyChar());
+      }catch(Exception ex){}
+     }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27145477
+src/org/jfm/views/list/detailview/DetailView.java 138 143
+src/org/jfm/po/CommandOutputViewDialog.java 73 77
+----------------------------------------
+				if(selectedRow>=0 && selectedRow<model.getRowCount()){
+					try {
+						table.getSelectionModel().setSelectionInterval(selectedRow,selectedRow);
+					}
+					catch (Exception ignored) { }
+				}
+
+----------------------------------------
+     public void keyTyped(KeyEvent e) {
+      try{
+        process.getOutputStream().write(e.getKeyChar());
+      }catch(Exception ex){}
+     }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+28821003
+src/org/jfm/po/CopyAction.java 209 218
+src/org/jfm/po/FilePropertiesDialog.java 115 119
+----------------------------------------
+      }finally{
+        try {
+          in.close();          
+        }
+        catch (Exception ignored) {}
+        try {
+            out.close();
+        }
+        catch (Exception ignored) {}
+      }
+
+----------------------------------------
+    if(!file.isDirectory()){
+      try{
+        contentTypeLabel.setText(file.getMimeType());
+      }catch(Exception ex){}
+    }else{
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27145472
+src/org/jfm/po/copy/CopyProgressDialog.java 154 160
+src/org/jfm/po/FilePropertiesDialog.java 115 119
+----------------------------------------
+      }finally{
+        try {
+          in.close();
+          out.close();
+        }
+        catch (Exception ignored) {}
+      }
+
+----------------------------------------
+    if(!file.isDirectory()){
+      try{
+        contentTypeLabel.setText(file.getMimeType());
+      }catch(Exception ex){}
+    }else{
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27145480
+src/org/jfm/po/copy/CopyProgressDialog.java 64 68
+src/org/jfm/po/FilePropertiesDialog.java 115 119
+----------------------------------------
+      public void run(){
+        try{
+          copyFiles();
+        }catch(CopyCancelledException ex){}
+      }
+
+----------------------------------------
+    if(!file.isDirectory()){
+      try{
+        contentTypeLabel.setText(file.getMimeType());
+      }catch(Exception ex){}
+    }else{
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27145481
+src/org/jfm/po/CommandOutputViewDialog.java 73 77
+src/org/jfm/po/FilePropertiesDialog.java 115 119
+----------------------------------------
+     public void keyTyped(KeyEvent e) {
+      try{
+        process.getOutputStream().write(e.getKeyChar());
+      }catch(Exception ex){}
+     }
+
+----------------------------------------
+    if(!file.isDirectory()){
+      try{
+        contentTypeLabel.setText(file.getMimeType());
+      }catch(Exception ex){}
+    }else{
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27145460
+src/org/jfm/filesystems/local/JFMLocalFilesystem.java 51 57
+src/org/jfm/po/FilePropertiesDialog.java 115 119
+----------------------------------------
+		for(int i=0;i<files.length;i++){
+			try{
+				jfmFiles[i]=new JFMLocalFile(files[i].getAbsolutePath());
+			}catch(Exception ignored){
+				ignored.printStackTrace();
+			}
+		}
+
+----------------------------------------
+    if(!file.isDirectory()){
+      try{
+        contentTypeLabel.setText(file.getMimeType());
+      }catch(Exception ex){}
+    }else{
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27145475
+src/org/jfm/main/MainPanel.java 30 37
+src/org/jfm/po/FilePropertiesDialog.java 115 119
+----------------------------------------
+  public MainPanel() {
+    try {
+      jbInit();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+    if(!file.isDirectory()){
+      try{
+        contentTypeLabel.setText(file.getMimeType());
+      }catch(Exception ex){}
+    }else{
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+28820986
+src/org/jfm/po/MoveAction.java 218 227
+src/org/jfm/po/FilePropertiesDialog.java 115 119
+----------------------------------------
+      }finally{
+        try {
+          in.close();          
+        }
+        catch (Exception ignored) {}
+        try {
+            out.close();
+        }
+        catch (Exception ignored) {}
+      }
+
+----------------------------------------
+    if(!file.isDirectory()){
+      try{
+        contentTypeLabel.setText(file.getMimeType());
+      }catch(Exception ex){}
+    }else{
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27145466
+src/org/jfm/filesystems/local/JFMLocalFile.java 170 176
+src/org/jfm/po/FilePropertiesDialog.java 115 119
+----------------------------------------
+	public String getCanonicalPath() throws FSException {
+		try{
+			return theFile.getCanonicalPath();
+		}catch(IOException ex){
+			throw new FSException(ex.getMessage());
+		}
+	}
+
+----------------------------------------
+    if(!file.isDirectory()){
+      try{
+        contentTypeLabel.setText(file.getMimeType());
+      }catch(Exception ex){}
+    }else{
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27145469
+src/org/jfm/filesystems/local/JFMLocalFile.java 181 187
+src/org/jfm/po/FilePropertiesDialog.java 115 119
+----------------------------------------
+	public JFMFile getCanonicalFile() throws FSException {
+		try{
+			return new JFMLocalFile(theFile.getCanonicalPath());
+		}catch(IOException ex){
+			throw new FSException(ex.getMessage());
+		}
+	}
+
+----------------------------------------
+    if(!file.isDirectory()){
+      try{
+        contentTypeLabel.setText(file.getMimeType());
+      }catch(Exception ex){}
+    }else{
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+28820998
+src/org/jfm/po/CommandOutputViewDialog.java 81 91
+src/org/jfm/po/FilePropertiesDialog.java 115 119
+----------------------------------------
+    public void run(){
+      try {
+          //i'm not interested in the return value of the process 
+          //i just want to know when it's over
+          process.waitFor();
+      }
+      catch (InterruptedException ex) {}
+      finally {
+        CommandOutputViewDialog.this.dispose();
+      }
+    }
+
+----------------------------------------
+    if(!file.isDirectory()){
+      try{
+        contentTypeLabel.setText(file.getMimeType());
+      }catch(Exception ex){}
+    }else{
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27145478
+src/org/jfm/views/list/detailview/DetailView.java 138 143
+src/org/jfm/po/FilePropertiesDialog.java 115 119
+----------------------------------------
+				if(selectedRow>=0 && selectedRow<model.getRowCount()){
+					try {
+						table.getSelectionModel().setSelectionInterval(selectedRow,selectedRow);
+					}
+					catch (Exception ignored) { }
+				}
+
+----------------------------------------
+    if(!file.isDirectory()){
+      try{
+        contentTypeLabel.setText(file.getMimeType());
+      }catch(Exception ex){}
+    }else{
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27145463
+src/org/jfm/main/Options.java 108 114
+src/org/jfm/po/FilePropertiesDialog.java 115 119
+----------------------------------------
+  public static void savePreferences(){
+  	try {
+		getPreferences().flush();
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+  }
+
+----------------------------------------
+    if(!file.isDirectory()){
+      try{
+        contentTypeLabel.setText(file.getMimeType());
+      }catch(Exception ex){}
+    }else{
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27364798
+src/org/jfm/main/SearchDialog.java 42 57
+src/org/jfm/po/ProgressActionDialog.java 57 73
+----------------------------------------
+  public SearchDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+  public SearchDialog() {
+    this(null, "", false);
+  }
+  void jbInit() throws Exception {
+    panel1.setLayout(borderLayout1);
+
+----------------------------------------
+  public ProgressActionDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+  public ProgressActionDialog() {
+    this(null, "", false);
+  }
+  
+  void jbInit() throws Exception {
+    panel1.setLayout(new BorderLayout());
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27364799
+src/org/jfm/main/SearchDialog.java 42 57
+src/org/jfm/po/copy/CopyProgressDialog.java 179 194
+----------------------------------------
+  public SearchDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+  public SearchDialog() {
+    this(null, "", false);
+  }
+  void jbInit() throws Exception {
+    panel1.setLayout(borderLayout1);
+
+----------------------------------------
+  public CopyProgressDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+  public CopyProgressDialog() {
+    this(null, "", false);
+  }
+  void jbInit() throws Exception {
+    panel1.setLayout(new BorderLayout());
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27364800
+src/org/jfm/main/SearchDialog.java 40 55
+src/org/jfm/po/copy/CopyConfirmDialog.java 32 47
+----------------------------------------
+  private DefaultListModel listModel=new DefaultListModel();
+
+  public SearchDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+  public SearchDialog() {
+    this(null, "", false);
+  }
+
+----------------------------------------
+  private boolean cancelled=true;
+
+  public CopyConfirmDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+  public CopyConfirmDialog() {
+    this(null, "", false);
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27364801
+src/org/jfm/po/ViewFileAction.java 8 59
+src/org/jfm/po/EditFileAction.java 8 60
+----------------------------------------
+import org.jfm.views.fview.*;
+
+/**
+ * Title:        Java File Manager
+ * Description:
+ * Copyright:    Copyright (c) 2001
+ * Company:      Home
+ * @author Giurgiu Sergiu
+ * @version 1.0
+ */
+
+public class ViewFileAction implements Action {
+
+  public ViewFileAction() {
+  }
+  private boolean enabled=true;
+  public Object getValue(String key) {
+    return null;
+  }
+  public void putValue(String key, Object value) {
+  }
+  public void setEnabled(boolean b) {
+    enabled=b;
+  }
+  public boolean isEnabled() {
+    return enabled;
+  }
+  public void addPropertyChangeListener(PropertyChangeListener listener) {
+  }
+  public void removePropertyChangeListener(PropertyChangeListener listener) {
+  }
+
+  public void actionPerformed(ActionEvent e) {
+     JFMFile viewFile;
+     viewFile=Options.getActivePanel().getSelectedFile();
+     /*if(Options.getActivePanel()==Options.LEFT_PANEL){
+      int firstSelectedFileIndex=Options.getLeftPanelSelections()[0];
+      if(Options.getLeftFiles()==null || Options.getLeftFiles().size()<=0) return;
+      viewFile=(FileElement)Options.getLeftFiles().elementAt(firstSelectedFileIndex);
+     }else{
+      int firstSelectedFileIndex=Options.getRightPanelSelections()[0];
+      if(Options.getRightFiles()==null || Options.getRightFiles().size()<=0) return;
+      viewFile=(FileElement)Options.getRightFiles().elementAt(firstSelectedFileIndex);
+     }*/
+
+      FileViewDialog d=new FileViewDialog(Options.getMainFrame(),viewFile.getPath(),false);
+      d.setLocationRelativeTo(Options.getMainFrame());
+      d.setContent(viewFile,false);
+      d.setVisible(true);
+  }
+
+}
+
+----------------------------------------
+import org.jfm.filesystems.JFMFile;
+
+/**
+ * Title:        Java File Manager
+ * Description:
+ * Copyright:    Copyright (c) 2001
+ * Company:      Home
+ * @author Giurgiu Sergiu
+ * @version 1.0
+ */
+
+public class EditFileAction implements Action {
+
+  public EditFileAction() {
+  }
+  private boolean enabled=true;
+  public Object getValue(String key) {
+    return null;
+  }
+  public void putValue(String key, Object value) {
+  }
+  public void setEnabled(boolean b) {
+    enabled=b;
+  }
+  public boolean isEnabled() {
+    return enabled;
+  }
+  public void addPropertyChangeListener(PropertyChangeListener listener) {
+  }
+  public void removePropertyChangeListener(PropertyChangeListener listener) {
+  }
+
+  public void actionPerformed(ActionEvent e) {
+     JFMFile viewFile;
+     viewFile=Options.getActivePanel().getSelectedFile();
+     /*if(Options.getActivePanel()==Options.LEFT_PANEL){
+      int firstSelectedFileIndex=Options.getLeftPanelSelections()[0];
+      if(Options.getLeftFiles()==null || Options.getLeftFiles().size()<=0) return;
+
+      viewFile=(FileElement)Options.getLeftFiles().elementAt(firstSelectedFileIndex);
+     }else{
+      int firstSelectedFileIndex=Options.getRightPanelSelections()[0];
+      if(Options.getRightFiles()==null || Options.getRightFiles().size()<=0) return;
+      viewFile=(FileElement)Options.getRightFiles().elementAt(firstSelectedFileIndex);
+     }*/
+
+      FileViewDialog d=new FileViewDialog(Options.getMainFrame(),viewFile.getPath(),false);
+      d.setLocationRelativeTo(Options.getMainFrame());
+      d.setContent(viewFile,true);
+      d.setVisible(true);
+  }
+
+}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27364802
+src/org/jfm/po/ViewFileAction.java 8 42
+src/org/jfm/po/MkdirAction.java 9 46
+----------------------------------------
+import org.jfm.views.fview.*;
+
+/**
+ * Title:        Java File Manager
+ * Description:
+ * Copyright:    Copyright (c) 2001
+ * Company:      Home
+ * @author Giurgiu Sergiu
+ * @version 1.0
+ */
+
+public class ViewFileAction implements Action {
+
+  public ViewFileAction() {
+  }
+  private boolean enabled=true;
+  public Object getValue(String key) {
+    return null;
+  }
+  public void putValue(String key, Object value) {
+  }
+  public void setEnabled(boolean b) {
+    enabled=b;
+  }
+  public boolean isEnabled() {
+    return enabled;
+  }
+  public void addPropertyChangeListener(PropertyChangeListener listener) {
+  }
+  public void removePropertyChangeListener(PropertyChangeListener listener) {
+  }
+
+  public void actionPerformed(ActionEvent e) {
+     JFMFile viewFile;
+     viewFile=Options.getActivePanel().getSelectedFile();
+
+----------------------------------------
+import org.jfm.filesystems.JFMFile;
+
+
+/**
+ * Title:        Java File Manager
+ * Description:
+ * Copyright:    Copyright (c) 2001
+ * Company:      Home
+ * @author Giurgiu Sergiu
+ * @version 1.0
+ */
+
+public class MkdirAction implements Action {
+
+  public MkdirAction() {
+  }
+
+  private boolean enabled=true;
+  public Object getValue(String key) {
+    return null;
+  }
+
+  public void putValue(String key, Object value) {
+  }
+  public void setEnabled(boolean b) {
+    enabled=b;
+  }
+  public boolean isEnabled() {
+    return enabled;
+  }
+  public void addPropertyChangeListener(PropertyChangeListener listener) {
+  }
+  public void removePropertyChangeListener(PropertyChangeListener listener) {
+  }
+
+  public void actionPerformed(ActionEvent e) {
+     JFMFile file;
+     file=Options.getActivePanel().getCurrentWorkingDirectory();
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27364803
+src/org/jfm/po/ViewFileAction.java 8 41
+src/org/jfm/po/QuitAction.java 8 41
+----------------------------------------
+import org.jfm.views.fview.*;
+
+/**
+ * Title:        Java File Manager
+ * Description:
+ * Copyright:    Copyright (c) 2001
+ * Company:      Home
+ * @author Giurgiu Sergiu
+ * @version 1.0
+ */
+
+public class ViewFileAction implements Action {
+
+  public ViewFileAction() {
+  }
+  private boolean enabled=true;
+  public Object getValue(String key) {
+    return null;
+  }
+  public void putValue(String key, Object value) {
+  }
+  public void setEnabled(boolean b) {
+    enabled=b;
+  }
+  public boolean isEnabled() {
+    return enabled;
+  }
+  public void addPropertyChangeListener(PropertyChangeListener listener) {
+  }
+  public void removePropertyChangeListener(PropertyChangeListener listener) {
+  }
+
+  public void actionPerformed(ActionEvent e) {
+     JFMFile viewFile;
+
+----------------------------------------
+import java.awt.event.ActionEvent;
+
+/**
+ * Title:        Java File Manager
+ * Description:  
+ * Copyright:    Copyright (c) 2001
+ * Company:      Home
+ * @author Giurgiu Sergiu
+ * @version 1.0
+ */
+
+public class QuitAction implements Action {
+
+  public QuitAction() {
+  }
+  private boolean enabled=true;
+  public Object getValue(String key) {
+    return null;
+  }
+  public void putValue(String key, Object value) {
+  }
+  public void setEnabled(boolean b) {
+    enabled=b;
+  }
+  public boolean isEnabled() {
+    return enabled;
+  }
+  public void addPropertyChangeListener(PropertyChangeListener listener) {
+  }
+  public void removePropertyChangeListener(PropertyChangeListener listener) {
+  }
+ 
+  public void actionPerformed(ActionEvent e) {
+	 Options.savePreferences();
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27364804
+src/org/jfm/po/ViewFileAction.java 8 41
+src/org/jfm/po/DeleteAction.java 9 42
+----------------------------------------
+import org.jfm.views.fview.*;
+
+/**
+ * Title:        Java File Manager
+ * Description:
+ * Copyright:    Copyright (c) 2001
+ * Company:      Home
+ * @author Giurgiu Sergiu
+ * @version 1.0
+ */
+
+public class ViewFileAction implements Action {
+
+  public ViewFileAction() {
+  }
+  private boolean enabled=true;
+  public Object getValue(String key) {
+    return null;
+  }
+  public void putValue(String key, Object value) {
+  }
+  public void setEnabled(boolean b) {
+    enabled=b;
+  }
+  public boolean isEnabled() {
+    return enabled;
+  }
+  public void addPropertyChangeListener(PropertyChangeListener listener) {
+  }
+  public void removePropertyChangeListener(PropertyChangeListener listener) {
+  }
+
+  public void actionPerformed(ActionEvent e) {
+     JFMFile viewFile;
+
+----------------------------------------
+import org.jfm.filesystems.JFMFile;
+
+/**
+ * Title:        Java File Manager
+ * Description:
+ * Copyright:    Copyright (c) 2001
+ * Company:      Home
+ * @author Giurgiu Sergiu
+ * @version 1.0
+ */
+
+public class DeleteAction implements Action {
+
+  public DeleteAction() {
+  }
+  private boolean enabled=true;
+  public Object getValue(String key) {
+    return null;
+  }
+  public void putValue(String key, Object value) {
+  }
+  public void setEnabled(boolean b) {
+    enabled=b;
+  }
+  public boolean isEnabled() {
+    return enabled;
+  }
+  public void addPropertyChangeListener(PropertyChangeListener listener) {
+  }
+  public void removePropertyChangeListener(PropertyChangeListener listener) {
+  }
+
+  public void actionPerformed(ActionEvent e) {
+     JFMFile[] files=Options.getActivePanel().getSelectedFiles();
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27364805
+src/org/jfm/po/ViewFileAction.java 24 41
+src/org/jfm/po/PanelMenuAction.java 21 38
+----------------------------------------
+  public Object getValue(String key) {
+    return null;
+  }
+  public void putValue(String key, Object value) {
+  }
+  public void setEnabled(boolean b) {
+    enabled=b;
+  }
+  public boolean isEnabled() {
+    return enabled;
+  }
+  public void addPropertyChangeListener(PropertyChangeListener listener) {
+  }
+  public void removePropertyChangeListener(PropertyChangeListener listener) {
+  }
+
+  public void actionPerformed(ActionEvent e) {
+     JFMFile viewFile;
+
+----------------------------------------
+  public Object getValue(String key) {
+    return null;
+  }
+  public void putValue(String key, Object value) {
+  }
+  public void setEnabled(boolean b) {
+    enabled=b;
+  }
+  public boolean isEnabled() {
+    return enabled;
+  }
+  public void addPropertyChangeListener(PropertyChangeListener listener) {
+  }
+  public void removePropertyChangeListener(PropertyChangeListener listener) {
+  }
+ 
+  public void actionPerformed(ActionEvent e) {
+    javax.swing.JOptionPane.showMessageDialog(null,"Not yet implemented");
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27364806
+src/org/jfm/po/ViewFileAction.java 21 40
+src/org/jfm/po/CopyAction.java 31 51
+----------------------------------------
+  public ViewFileAction() {
+  }
+  private boolean enabled=true;
+  public Object getValue(String key) {
+    return null;
+  }
+  public void putValue(String key, Object value) {
+  }
+  public void setEnabled(boolean b) {
+    enabled=b;
+  }
+  public boolean isEnabled() {
+    return enabled;
+  }
+  public void addPropertyChangeListener(PropertyChangeListener listener) {
+  }
+  public void removePropertyChangeListener(PropertyChangeListener listener) {
+  }
+
+  public void actionPerformed(ActionEvent e) {
+
+----------------------------------------
+  public CopyAction() {
+  }
+  private boolean enabled=true;
+  public Object getValue(String key) {
+    return null;
+  }
+  public void putValue(String key, Object value) {
+  }
+
+  public void setEnabled(boolean b) {
+    enabled=b;
+  }
+  public boolean isEnabled() {
+    return enabled;
+  }
+  public void addPropertyChangeListener(PropertyChangeListener listener) {
+  }
+  public void removePropertyChangeListener(PropertyChangeListener listener) {
+  }
+
+  public void actionPerformed(ActionEvent e) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27364813
+src/org/jfm/po/EditFileAction.java 23 40
+src/org/jfm/po/MoveAction.java 36 54
+----------------------------------------
+  private boolean enabled=true;
+  public Object getValue(String key) {
+    return null;
+  }
+  public void putValue(String key, Object value) {
+  }
+  public void setEnabled(boolean b) {
+    enabled=b;
+  }
+  public boolean isEnabled() {
+    return enabled;
+  }
+  public void addPropertyChangeListener(PropertyChangeListener listener) {
+  }
+  public void removePropertyChangeListener(PropertyChangeListener listener) {
+  }
+
+  public void actionPerformed(ActionEvent e) {
+
+----------------------------------------
+  private boolean enabled=true;
+  public Object getValue(String key) {
+    //should return something else in here.
+    return null;
+  }
+  public void putValue(String key, Object value) {
+  }
+  public void setEnabled(boolean b) {
+    enabled=b;
+  }
+  public boolean isEnabled() {
+    return true;
+  }
+  public void addPropertyChangeListener(PropertyChangeListener listener) {
+  }
+  public void removePropertyChangeListener(PropertyChangeListener listener) {
+  }
+
+  public void actionPerformed(ActionEvent e) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27364826
+src/org/jfm/po/MkdirAction.java 26 44
+src/org/jfm/po/MoveAction.java 36 54
+----------------------------------------
+  private boolean enabled=true;
+  public Object getValue(String key) {
+    return null;
+  }
+
+  public void putValue(String key, Object value) {
+  }
+  public void setEnabled(boolean b) {
+    enabled=b;
+  }
+  public boolean isEnabled() {
+    return enabled;
+  }
+  public void addPropertyChangeListener(PropertyChangeListener listener) {
+  }
+  public void removePropertyChangeListener(PropertyChangeListener listener) {
+  }
+
+  public void actionPerformed(ActionEvent e) {
+
+----------------------------------------
+  private boolean enabled=true;
+  public Object getValue(String key) {
+    //should return something else in here.
+    return null;
+  }
+  public void putValue(String key, Object value) {
+  }
+  public void setEnabled(boolean b) {
+    enabled=b;
+  }
+  public boolean isEnabled() {
+    return true;
+  }
+  public void addPropertyChangeListener(PropertyChangeListener listener) {
+  }
+  public void removePropertyChangeListener(PropertyChangeListener listener) {
+  }
+
+  public void actionPerformed(ActionEvent e) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27364856
+src/org/jfm/po/QuitAction.java 23 40
+src/org/jfm/po/MoveAction.java 36 54
+----------------------------------------
+  private boolean enabled=true;
+  public Object getValue(String key) {
+    return null;
+  }
+  public void putValue(String key, Object value) {
+  }
+  public void setEnabled(boolean b) {
+    enabled=b;
+  }
+  public boolean isEnabled() {
+    return enabled;
+  }
+  public void addPropertyChangeListener(PropertyChangeListener listener) {
+  }
+  public void removePropertyChangeListener(PropertyChangeListener listener) {
+  }
+ 
+  public void actionPerformed(ActionEvent e) {
+
+----------------------------------------
+  private boolean enabled=true;
+  public Object getValue(String key) {
+    //should return something else in here.
+    return null;
+  }
+  public void putValue(String key, Object value) {
+  }
+  public void setEnabled(boolean b) {
+    enabled=b;
+  }
+  public boolean isEnabled() {
+    return true;
+  }
+  public void addPropertyChangeListener(PropertyChangeListener listener) {
+  }
+  public void removePropertyChangeListener(PropertyChangeListener listener) {
+  }
+
+  public void actionPerformed(ActionEvent e) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27364850
+src/org/jfm/po/DeleteAction.java 24 41
+src/org/jfm/po/MoveAction.java 36 54
+----------------------------------------
+  private boolean enabled=true;
+  public Object getValue(String key) {
+    return null;
+  }
+  public void putValue(String key, Object value) {
+  }
+  public void setEnabled(boolean b) {
+    enabled=b;
+  }
+  public boolean isEnabled() {
+    return enabled;
+  }
+  public void addPropertyChangeListener(PropertyChangeListener listener) {
+  }
+  public void removePropertyChangeListener(PropertyChangeListener listener) {
+  }
+
+  public void actionPerformed(ActionEvent e) {
+
+----------------------------------------
+  private boolean enabled=true;
+  public Object getValue(String key) {
+    //should return something else in here.
+    return null;
+  }
+  public void putValue(String key, Object value) {
+  }
+  public void setEnabled(boolean b) {
+    enabled=b;
+  }
+  public boolean isEnabled() {
+    return true;
+  }
+  public void addPropertyChangeListener(PropertyChangeListener listener) {
+  }
+  public void removePropertyChangeListener(PropertyChangeListener listener) {
+  }
+
+  public void actionPerformed(ActionEvent e) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27364855
+src/org/jfm/po/FilePropertiesAction.java 25 42
+src/org/jfm/po/MoveAction.java 36 54
+----------------------------------------
+  private boolean enabled=true;
+  public Object getValue(String key) {
+    return null;
+  }
+  public void putValue(String key, Object value) {
+  }
+  public void setEnabled(boolean b) {
+    enabled=b;
+  }
+  public boolean isEnabled() {
+    return enabled;
+  }
+  public void addPropertyChangeListener(PropertyChangeListener listener) {
+  }
+  public void removePropertyChangeListener(PropertyChangeListener listener) {
+  }
+
+  public void actionPerformed(ActionEvent e) {
+
+----------------------------------------
+  private boolean enabled=true;
+  public Object getValue(String key) {
+    //should return something else in here.
+    return null;
+  }
+  public void putValue(String key, Object value) {
+  }
+  public void setEnabled(boolean b) {
+    enabled=b;
+  }
+  public boolean isEnabled() {
+    return true;
+  }
+  public void addPropertyChangeListener(PropertyChangeListener listener) {
+  }
+  public void removePropertyChangeListener(PropertyChangeListener listener) {
+  }
+
+  public void actionPerformed(ActionEvent e) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27364807
+src/org/jfm/po/ViewFileAction.java 23 40
+src/org/jfm/po/MoveAction.java 36 54
+----------------------------------------
+  private boolean enabled=true;
+  public Object getValue(String key) {
+    return null;
+  }
+  public void putValue(String key, Object value) {
+  }
+  public void setEnabled(boolean b) {
+    enabled=b;
+  }
+  public boolean isEnabled() {
+    return enabled;
+  }
+  public void addPropertyChangeListener(PropertyChangeListener listener) {
+  }
+  public void removePropertyChangeListener(PropertyChangeListener listener) {
+  }
+
+  public void actionPerformed(ActionEvent e) {
+
+----------------------------------------
+  private boolean enabled=true;
+  public Object getValue(String key) {
+    //should return something else in here.
+    return null;
+  }
+  public void putValue(String key, Object value) {
+  }
+  public void setEnabled(boolean b) {
+    enabled=b;
+  }
+  public boolean isEnabled() {
+    return true;
+  }
+  public void addPropertyChangeListener(PropertyChangeListener listener) {
+  }
+  public void removePropertyChangeListener(PropertyChangeListener listener) {
+  }
+
+  public void actionPerformed(ActionEvent e) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27364837
+src/org/jfm/po/CopyAction.java 33 51
+src/org/jfm/views/fview/FileViewDialog.java 151 170
+----------------------------------------
+  private boolean enabled=true;
+  public Object getValue(String key) {
+    return null;
+  }
+  public void putValue(String key, Object value) {
+  }
+
+  public void setEnabled(boolean b) {
+    enabled=b;
+  }
+  public boolean isEnabled() {
+    return enabled;
+  }
+  public void addPropertyChangeListener(PropertyChangeListener listener) {
+  }
+  public void removePropertyChangeListener(PropertyChangeListener listener) {
+  }
+
+  public void actionPerformed(ActionEvent e) {
+
+----------------------------------------
+    private boolean enabled=true;
+    public Object getValue(String key) {
+      return null;
+    }
+
+    public void putValue(String key, Object value) {
+    }
+
+    public void setEnabled(boolean b) {
+      enabled=b;
+    }
+    public boolean isEnabled() {
+      return enabled;
+    }
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+    }
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+    }
+
+    public void actionPerformed(java.awt.event.ActionEvent e) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27364860
+src/org/jfm/po/FilePropertiesAction.java 25 42
+src/org/jfm/views/fview/FileViewDialog.java 151 170
+----------------------------------------
+  private boolean enabled=true;
+  public Object getValue(String key) {
+    return null;
+  }
+  public void putValue(String key, Object value) {
+  }
+  public void setEnabled(boolean b) {
+    enabled=b;
+  }
+  public boolean isEnabled() {
+    return enabled;
+  }
+  public void addPropertyChangeListener(PropertyChangeListener listener) {
+  }
+  public void removePropertyChangeListener(PropertyChangeListener listener) {
+  }
+
+  public void actionPerformed(ActionEvent e) {
+
+----------------------------------------
+    private boolean enabled=true;
+    public Object getValue(String key) {
+      return null;
+    }
+
+    public void putValue(String key, Object value) {
+    }
+
+    public void setEnabled(boolean b) {
+      enabled=b;
+    }
+    public boolean isEnabled() {
+      return enabled;
+    }
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+    }
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+    }
+
+    public void actionPerformed(java.awt.event.ActionEvent e) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27364828
+src/org/jfm/po/MkdirAction.java 26 44
+src/org/jfm/views/fview/FileViewDialog.java 151 170
+----------------------------------------
+  private boolean enabled=true;
+  public Object getValue(String key) {
+    return null;
+  }
+
+  public void putValue(String key, Object value) {
+  }
+  public void setEnabled(boolean b) {
+    enabled=b;
+  }
+  public boolean isEnabled() {
+    return enabled;
+  }
+  public void addPropertyChangeListener(PropertyChangeListener listener) {
+  }
+  public void removePropertyChangeListener(PropertyChangeListener listener) {
+  }
+
+  public void actionPerformed(ActionEvent e) {
+
+----------------------------------------
+    private boolean enabled=true;
+    public Object getValue(String key) {
+      return null;
+    }
+
+    public void putValue(String key, Object value) {
+    }
+
+    public void setEnabled(boolean b) {
+      enabled=b;
+    }
+    public boolean isEnabled() {
+      return enabled;
+    }
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+    }
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+    }
+
+    public void actionPerformed(java.awt.event.ActionEvent e) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27364859
+src/org/jfm/po/QuitAction.java 23 40
+src/org/jfm/views/fview/FileViewDialog.java 151 170
+----------------------------------------
+  private boolean enabled=true;
+  public Object getValue(String key) {
+    return null;
+  }
+  public void putValue(String key, Object value) {
+  }
+  public void setEnabled(boolean b) {
+    enabled=b;
+  }
+  public boolean isEnabled() {
+    return enabled;
+  }
+  public void addPropertyChangeListener(PropertyChangeListener listener) {
+  }
+  public void removePropertyChangeListener(PropertyChangeListener listener) {
+  }
+ 
+  public void actionPerformed(ActionEvent e) {
+
+----------------------------------------
+    private boolean enabled=true;
+    public Object getValue(String key) {
+      return null;
+    }
+
+    public void putValue(String key, Object value) {
+    }
+
+    public void setEnabled(boolean b) {
+      enabled=b;
+    }
+    public boolean isEnabled() {
+      return enabled;
+    }
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+    }
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+    }
+
+    public void actionPerformed(java.awt.event.ActionEvent e) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27364809
+src/org/jfm/po/ViewFileAction.java 23 40
+src/org/jfm/views/fview/FileViewDialog.java 151 170
+----------------------------------------
+  private boolean enabled=true;
+  public Object getValue(String key) {
+    return null;
+  }
+  public void putValue(String key, Object value) {
+  }
+  public void setEnabled(boolean b) {
+    enabled=b;
+  }
+  public boolean isEnabled() {
+    return enabled;
+  }
+  public void addPropertyChangeListener(PropertyChangeListener listener) {
+  }
+  public void removePropertyChangeListener(PropertyChangeListener listener) {
+  }
+
+  public void actionPerformed(ActionEvent e) {
+
+----------------------------------------
+    private boolean enabled=true;
+    public Object getValue(String key) {
+      return null;
+    }
+
+    public void putValue(String key, Object value) {
+    }
+
+    public void setEnabled(boolean b) {
+      enabled=b;
+    }
+    public boolean isEnabled() {
+      return enabled;
+    }
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+    }
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+    }
+
+    public void actionPerformed(java.awt.event.ActionEvent e) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27364815
+src/org/jfm/po/EditFileAction.java 23 40
+src/org/jfm/views/fview/FileViewDialog.java 151 170
+----------------------------------------
+  private boolean enabled=true;
+  public Object getValue(String key) {
+    return null;
+  }
+  public void putValue(String key, Object value) {
+  }
+  public void setEnabled(boolean b) {
+    enabled=b;
+  }
+  public boolean isEnabled() {
+    return enabled;
+  }
+  public void addPropertyChangeListener(PropertyChangeListener listener) {
+  }
+  public void removePropertyChangeListener(PropertyChangeListener listener) {
+  }
+
+  public void actionPerformed(ActionEvent e) {
+
+----------------------------------------
+    private boolean enabled=true;
+    public Object getValue(String key) {
+      return null;
+    }
+
+    public void putValue(String key, Object value) {
+    }
+
+    public void setEnabled(boolean b) {
+      enabled=b;
+    }
+    public boolean isEnabled() {
+      return enabled;
+    }
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+    }
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+    }
+
+    public void actionPerformed(java.awt.event.ActionEvent e) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27364857
+src/org/jfm/po/MoveAction.java 36 54
+src/org/jfm/views/fview/FileViewDialog.java 151 170
+----------------------------------------
+  private boolean enabled=true;
+  public Object getValue(String key) {
+    //should return something else in here.
+    return null;
+  }
+  public void putValue(String key, Object value) {
+  }
+  public void setEnabled(boolean b) {
+    enabled=b;
+  }
+  public boolean isEnabled() {
+    return true;
+  }
+  public void addPropertyChangeListener(PropertyChangeListener listener) {
+  }
+  public void removePropertyChangeListener(PropertyChangeListener listener) {
+  }
+
+  public void actionPerformed(ActionEvent e) {
+
+----------------------------------------
+    private boolean enabled=true;
+    public Object getValue(String key) {
+      return null;
+    }
+
+    public void putValue(String key, Object value) {
+    }
+
+    public void setEnabled(boolean b) {
+      enabled=b;
+    }
+    public boolean isEnabled() {
+      return enabled;
+    }
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+    }
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+    }
+
+    public void actionPerformed(java.awt.event.ActionEvent e) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27364851
+src/org/jfm/po/DeleteAction.java 24 41
+src/org/jfm/views/fview/FileViewDialog.java 151 170
+----------------------------------------
+  private boolean enabled=true;
+  public Object getValue(String key) {
+    return null;
+  }
+  public void putValue(String key, Object value) {
+  }
+  public void setEnabled(boolean b) {
+    enabled=b;
+  }
+  public boolean isEnabled() {
+    return enabled;
+  }
+  public void addPropertyChangeListener(PropertyChangeListener listener) {
+  }
+  public void removePropertyChangeListener(PropertyChangeListener listener) {
+  }
+
+  public void actionPerformed(ActionEvent e) {
+
+----------------------------------------
+    private boolean enabled=true;
+    public Object getValue(String key) {
+      return null;
+    }
+
+    public void putValue(String key, Object value) {
+    }
+
+    public void setEnabled(boolean b) {
+      enabled=b;
+    }
+    public boolean isEnabled() {
+      return enabled;
+    }
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+    }
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+    }
+
+    public void actionPerformed(java.awt.event.ActionEvent e) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27364810
+src/org/jfm/po/PanelMenuAction.java 21 38
+src/org/jfm/po/EditFileAction.java 24 41
+----------------------------------------
+  public Object getValue(String key) {
+    return null;
+  }
+  public void putValue(String key, Object value) {
+  }
+  public void setEnabled(boolean b) {
+    enabled=b;
+  }
+  public boolean isEnabled() {
+    return enabled;
+  }
+  public void addPropertyChangeListener(PropertyChangeListener listener) {
+  }
+  public void removePropertyChangeListener(PropertyChangeListener listener) {
+  }
+ 
+  public void actionPerformed(ActionEvent e) {
+    javax.swing.JOptionPane.showMessageDialog(null,"Not yet implemented");
+
+----------------------------------------
+  public Object getValue(String key) {
+    return null;
+  }
+  public void putValue(String key, Object value) {
+  }
+  public void setEnabled(boolean b) {
+    enabled=b;
+  }
+  public boolean isEnabled() {
+    return enabled;
+  }
+  public void addPropertyChangeListener(PropertyChangeListener listener) {
+  }
+  public void removePropertyChangeListener(PropertyChangeListener listener) {
+  }
+
+  public void actionPerformed(ActionEvent e) {
+     JFMFile viewFile;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27364811
+src/org/jfm/po/EditFileAction.java 8 40
+src/org/jfm/po/FilePropertiesAction.java 8 42
+----------------------------------------
+import org.jfm.filesystems.JFMFile;
+
+/**
+ * Title:        Java File Manager
+ * Description:
+ * Copyright:    Copyright (c) 2001
+ * Company:      Home
+ * @author Giurgiu Sergiu
+ * @version 1.0
+ */
+
+public class EditFileAction implements Action {
+
+  public EditFileAction() {
+  }
+  private boolean enabled=true;
+  public Object getValue(String key) {
+    return null;
+  }
+  public void putValue(String key, Object value) {
+  }
+  public void setEnabled(boolean b) {
+    enabled=b;
+  }
+  public boolean isEnabled() {
+    return enabled;
+  }
+  public void addPropertyChangeListener(PropertyChangeListener listener) {
+  }
+  public void removePropertyChangeListener(PropertyChangeListener listener) {
+  }
+
+  public void actionPerformed(ActionEvent e) {
+
+----------------------------------------
+import org.jfm.filesystems.*;
+
+
+/**
+ * <p>Title: Java File Manager</p>
+ * <p>Description: </p>
+ * <p>Copyright: Copyright (c) 2001</p>
+ * <p>Company: Home</p>
+ * @author Giurgiu Sergiu
+ * @version 1.0
+ */
+
+public class FilePropertiesAction implements Action {
+
+  public FilePropertiesAction() {
+  }
+
+  private boolean enabled=true;
+  public Object getValue(String key) {
+    return null;
+  }
+  public void putValue(String key, Object value) {
+  }
+  public void setEnabled(boolean b) {
+    enabled=b;
+  }
+  public boolean isEnabled() {
+    return enabled;
+  }
+  public void addPropertyChangeListener(PropertyChangeListener listener) {
+  }
+  public void removePropertyChangeListener(PropertyChangeListener listener) {
+  }
+
+  public void actionPerformed(ActionEvent e) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27364812
+src/org/jfm/po/CopyAction.java 31 51
+src/org/jfm/po/EditFileAction.java 21 40
+----------------------------------------
+  public CopyAction() {
+  }
+  private boolean enabled=true;
+  public Object getValue(String key) {
+    return null;
+  }
+  public void putValue(String key, Object value) {
+  }
+
+  public void setEnabled(boolean b) {
+    enabled=b;
+  }
+  public boolean isEnabled() {
+    return enabled;
+  }
+  public void addPropertyChangeListener(PropertyChangeListener listener) {
+  }
+  public void removePropertyChangeListener(PropertyChangeListener listener) {
+  }
+
+  public void actionPerformed(ActionEvent e) {
+
+----------------------------------------
+  public EditFileAction() {
+  }
+  private boolean enabled=true;
+  public Object getValue(String key) {
+    return null;
+  }
+  public void putValue(String key, Object value) {
+  }
+  public void setEnabled(boolean b) {
+    enabled=b;
+  }
+  public boolean isEnabled() {
+    return enabled;
+  }
+  public void addPropertyChangeListener(PropertyChangeListener listener) {
+  }
+  public void removePropertyChangeListener(PropertyChangeListener listener) {
+  }
+
+  public void actionPerformed(ActionEvent e) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27364816
+src/org/jfm/po/PanelMenuAction.java 21 38
+src/org/jfm/po/QuitAction.java 24 41
+----------------------------------------
+  public Object getValue(String key) {
+    return null;
+  }
+  public void putValue(String key, Object value) {
+  }
+  public void setEnabled(boolean b) {
+    enabled=b;
+  }
+  public boolean isEnabled() {
+    return enabled;
+  }
+  public void addPropertyChangeListener(PropertyChangeListener listener) {
+  }
+  public void removePropertyChangeListener(PropertyChangeListener listener) {
+  }
+ 
+  public void actionPerformed(ActionEvent e) {
+    javax.swing.JOptionPane.showMessageDialog(null,"Not yet implemented");
+
+----------------------------------------
+  public Object getValue(String key) {
+    return null;
+  }
+  public void putValue(String key, Object value) {
+  }
+  public void setEnabled(boolean b) {
+    enabled=b;
+  }
+  public boolean isEnabled() {
+    return enabled;
+  }
+  public void addPropertyChangeListener(PropertyChangeListener listener) {
+  }
+  public void removePropertyChangeListener(PropertyChangeListener listener) {
+  }
+ 
+  public void actionPerformed(ActionEvent e) {
+	 Options.savePreferences();
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27364817
+src/org/jfm/po/PanelMenuAction.java 21 38
+src/org/jfm/po/DeleteAction.java 25 42
+----------------------------------------
+  public Object getValue(String key) {
+    return null;
+  }
+  public void putValue(String key, Object value) {
+  }
+  public void setEnabled(boolean b) {
+    enabled=b;
+  }
+  public boolean isEnabled() {
+    return enabled;
+  }
+  public void addPropertyChangeListener(PropertyChangeListener listener) {
+  }
+  public void removePropertyChangeListener(PropertyChangeListener listener) {
+  }
+ 
+  public void actionPerformed(ActionEvent e) {
+    javax.swing.JOptionPane.showMessageDialog(null,"Not yet implemented");
+
+----------------------------------------
+  public Object getValue(String key) {
+    return null;
+  }
+  public void putValue(String key, Object value) {
+  }
+  public void setEnabled(boolean b) {
+    enabled=b;
+  }
+  public boolean isEnabled() {
+    return enabled;
+  }
+  public void addPropertyChangeListener(PropertyChangeListener listener) {
+  }
+  public void removePropertyChangeListener(PropertyChangeListener listener) {
+  }
+
+  public void actionPerformed(ActionEvent e) {
+     JFMFile[] files=Options.getActivePanel().getSelectedFiles();
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27364818
+src/org/jfm/po/PanelMenuAction.java 21 38
+src/org/jfm/po/MkdirAction.java 27 45
+----------------------------------------
+  public Object getValue(String key) {
+    return null;
+  }
+  public void putValue(String key, Object value) {
+  }
+  public void setEnabled(boolean b) {
+    enabled=b;
+  }
+  public boolean isEnabled() {
+    return enabled;
+  }
+  public void addPropertyChangeListener(PropertyChangeListener listener) {
+  }
+  public void removePropertyChangeListener(PropertyChangeListener listener) {
+  }
+ 
+  public void actionPerformed(ActionEvent e) {
+    javax.swing.JOptionPane.showMessageDialog(null,"Not yet implemented");
+
+----------------------------------------
+  public Object getValue(String key) {
+    return null;
+  }
+
+  public void putValue(String key, Object value) {
+  }
+  public void setEnabled(boolean b) {
+    enabled=b;
+  }
+  public boolean isEnabled() {
+    return enabled;
+  }
+  public void addPropertyChangeListener(PropertyChangeListener listener) {
+  }
+  public void removePropertyChangeListener(PropertyChangeListener listener) {
+  }
+
+  public void actionPerformed(ActionEvent e) {
+     JFMFile file;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27364819
+src/org/jfm/po/PanelMenuAction.java 17 37
+src/org/jfm/po/HelpAction.java 22 43
+----------------------------------------
+  boolean enabled=true;
+  
+  public PanelMenuAction() {
+  }
+  public Object getValue(String key) {
+    return null;
+  }
+  public void putValue(String key, Object value) {
+  }
+  public void setEnabled(boolean b) {
+    enabled=b;
+  }
+  public boolean isEnabled() {
+    return enabled;
+  }
+  public void addPropertyChangeListener(PropertyChangeListener listener) {
+  }
+  public void removePropertyChangeListener(PropertyChangeListener listener) {
+  }
+ 
+  public void actionPerformed(ActionEvent e) {
+
+----------------------------------------
+  private boolean enabled=true;
+  
+  public HelpAction() {
+  }
+  
+  public Object getValue(String key) {
+    return null;
+  }
+  public void putValue(String key, Object value) {
+  }
+  public void setEnabled(boolean b) {
+    enabled=b;
+  }
+  public boolean isEnabled() {
+    return enabled;
+  }
+  public void addPropertyChangeListener(PropertyChangeListener listener) {
+  }
+  public void removePropertyChangeListener(PropertyChangeListener listener) {
+  }
+
+  public void actionPerformed(ActionEvent e) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27364820
+src/org/jfm/po/PanelMenuAction.java 21 37
+src/org/jfm/po/MoveAction.java 37 54
+----------------------------------------
+  public Object getValue(String key) {
+    return null;
+  }
+  public void putValue(String key, Object value) {
+  }
+  public void setEnabled(boolean b) {
+    enabled=b;
+  }
+  public boolean isEnabled() {
+    return enabled;
+  }
+  public void addPropertyChangeListener(PropertyChangeListener listener) {
+  }
+  public void removePropertyChangeListener(PropertyChangeListener listener) {
+  }
+ 
+  public void actionPerformed(ActionEvent e) {
+
+----------------------------------------
+  public Object getValue(String key) {
+    //should return something else in here.
+    return null;
+  }
+  public void putValue(String key, Object value) {
+  }
+  public void setEnabled(boolean b) {
+    enabled=b;
+  }
+  public boolean isEnabled() {
+    return true;
+  }
+  public void addPropertyChangeListener(PropertyChangeListener listener) {
+  }
+  public void removePropertyChangeListener(PropertyChangeListener listener) {
+  }
+
+  public void actionPerformed(ActionEvent e) {
+
+----------------------------------------

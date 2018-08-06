@@ -1,0 +1,1595 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834365
+net/sf/varscan/FilterSomatic.java 487 502
+net/sf/varscan/FilterSomatic.java 425 439
+----------------------------------------
+	    			{
+		    			String[] lineContents = line.split("\t");
+		    			String chrom = lineContents[0];
+
+
+		    			if(chrom.equals("Chrom") || line.startsWith("#"))
+		    			{
+		    				// Ignore headers //
+		    			}
+		    			else
+		    			{
+			    			int position = Integer.parseInt(lineContents[1]);
+	    					String snpKey = chrom + "\t" + position;
+	    					snps.put(snpKey, Boolean.TRUE);
+		    			}
+	    			}
+
+----------------------------------------
+    				{
+    					String[] lineContents = line.split("\t");
+    					String chrom = lineContents[0];
+    					if(chrom.equals("Chrom") || line.startsWith("#"))
+    					{
+    						// Ignore headers //
+    					}
+    					else
+    					{
+	    					String position = lineContents[1];
+	    					String indelKey = chrom + "\t" + position;
+	    					indels.put(indelKey, Boolean.TRUE);
+    					}
+
+    				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834366
+net/sf/varscan/FilterSomatic.java 318 324
+net/sf/varscan/FilterSomatic.java 537 543
+----------------------------------------
+		    					{
+		    						String key = chrom + "\t" + thisPosition;
+		    						if(indelPositions.containsKey(key))
+		    						{
+		    							indelFlag = true;
+		    						}
+		    					}
+
+----------------------------------------
+    			{
+    				String thisKey = chrom + "\t" + thisPosition;
+    				if(snps.containsKey(thisKey))
+    				{
+    					numSNPsInWindow++;
+    				}
+    			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834368
+net/sf/varscan/FilterSomatic.java 318 324
+net/sf/varscan/FilterSomatic.java 552 559
+----------------------------------------
+		    					{
+		    						String key = chrom + "\t" + thisPosition;
+		    						if(indelPositions.containsKey(key))
+		    						{
+		    							indelFlag = true;
+		    						}
+		    					}
+
+----------------------------------------
+        			{
+        				String thisKey = chrom + "\t" + thisPosition;
+        				if(snps.containsKey(thisKey))
+        				{
+        					clusterSNPs.put(thisKey, true);
+        					numClusterSNPs++;
+        				}
+        			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834367
+net/sf/varscan/FilterSomatic.java 537 543
+net/sf/varscan/FilterSomatic.java 552 559
+----------------------------------------
+    			{
+    				String thisKey = chrom + "\t" + thisPosition;
+    				if(snps.containsKey(thisKey))
+    				{
+    					numSNPsInWindow++;
+    				}
+    			}
+
+----------------------------------------
+        			{
+        				String thisKey = chrom + "\t" + thisPosition;
+        				if(snps.containsKey(thisKey))
+        				{
+        					clusterSNPs.put(thisKey, true);
+        					numClusterSNPs++;
+        				}
+        			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834369
+net/sf/varscan/CallMpileup.java 233 249
+net/sf/varscan/Coverage.java 111 126
+----------------------------------------
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.err.println("Exception while trying to get input" + e.getMessage());
+		    		System.exit(1);
+		    	}
+	    	}
+
+----------------------------------------
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 10)
+			    	{
+			    		System.err.println("Input file was not ready after 10 5-second cycles!");
+			    		return;
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+
+		    	}
+	    	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834374
+net/sf/varscan/Somatic.java 255 271
+net/sf/varscan/Coverage.java 111 126
+----------------------------------------
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.err.println("Exception while trying to get input" + e.getMessage());
+		    		System.exit(1);
+		    	}
+	    	}
+
+----------------------------------------
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 10)
+			    	{
+			    		System.err.println("Input file was not ready after 10 5-second cycles!");
+			    		return;
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+
+		    	}
+	    	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834371
+net/sf/varscan/CallPileup.java 141 157
+net/sf/varscan/Coverage.java 111 126
+----------------------------------------
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.err.println("Exception while trying to get input" + e.getMessage());
+		    		System.exit(1);
+		    	}
+	    	}
+
+----------------------------------------
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 10)
+			    	{
+			    		System.err.println("Input file was not ready after 10 5-second cycles!");
+			    		return;
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+
+		    	}
+	    	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834373
+net/sf/varscan/ReadCounts.java 125 139
+net/sf/varscan/Coverage.java 111 126
+----------------------------------------
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+	    		}
+		    	catch(Exception e)
+		    	{
+
+		    	}
+	    	}
+
+----------------------------------------
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 10)
+			    	{
+			    		System.err.println("Input file was not ready after 10 5-second cycles!");
+			    		return;
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+
+		    	}
+	    	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834370
+net/sf/varscan/Somatic.java 964 979
+net/sf/varscan/Coverage.java 111 126
+----------------------------------------
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file(s) were not ready for parsing after 100 5-second cycles! Pileup output may be invalid or too slow");
+			    		System.exit(10);
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+
+		    	}
+	    	}
+
+----------------------------------------
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 10)
+			    	{
+			    		System.err.println("Input file was not ready after 10 5-second cycles!");
+			    		return;
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+
+		    	}
+	    	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834372
+net/sf/varscan/ProcessSomatic.java 79 95
+net/sf/varscan/Coverage.java 111 126
+----------------------------------------
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.err.println("Exception while trying to get input" + e.getMessage());
+		    		System.exit(1);
+		    	}
+	    	}
+
+----------------------------------------
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 10)
+			    	{
+			    		System.err.println("Input file was not ready after 10 5-second cycles!");
+			    		return;
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+
+		    	}
+	    	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834375
+net/sf/varscan/FilterSomatic.java 165 181
+net/sf/varscan/Coverage.java 111 126
+----------------------------------------
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.err.println("Exception while trying to get input" + e.getMessage());
+		    		System.exit(1);
+		    	}
+	    	}
+
+----------------------------------------
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 10)
+			    	{
+			    		System.err.println("Input file was not ready after 10 5-second cycles!");
+			    		return;
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+
+		    	}
+	    	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834510
+net/sf/varscan/Somatic.java 1039 1047
+net/sf/varscan/Copynumber.java 619 627
+----------------------------------------
+		    		{
+		    			String[] normalContents = lineNormal.split("\t");
+
+				    	if(normalContents.length > 1)
+				    	{
+					    	chromNormal = normalContents[0];
+					    	posNormal = Integer.parseInt(normalContents[1]);
+				    	}
+		    		}
+
+----------------------------------------
+		    {
+		    	String[] normalContents = lineNormal.split("\t");
+
+		    	if(normalContents.length > 1)
+		    	{
+			    	chromNormal = normalContents[0];
+			    	posNormal = Integer.parseInt(normalContents[1]);
+		    	}
+		    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834378
+net/sf/varscan/Somatic.java 1063 1070
+net/sf/varscan/Copynumber.java 619 627
+----------------------------------------
+		    		{
+		    			String[] normalContents = lineNormal.split("\t");
+				    	if(normalContents.length > 1)
+				    	{
+					    	chromNormal = normalContents[0];
+					    	posNormal = Integer.parseInt(normalContents[1]);
+				    	}
+		    		}
+
+----------------------------------------
+		    {
+		    	String[] normalContents = lineNormal.split("\t");
+
+		    	if(normalContents.length > 1)
+		    	{
+			    	chromNormal = normalContents[0];
+			    	posNormal = Integer.parseInt(normalContents[1]);
+		    	}
+		    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834379
+net/sf/varscan/Somatic.java 1406 1414
+net/sf/varscan/Copynumber.java 619 627
+----------------------------------------
+		    			{
+			    			tumorContents = lineTumor.split("\t");
+
+					    	if(tumorContents.length > 1)
+					    	{
+						    	chromTumor = tumorContents[0];
+						    	posTumor = Integer.parseInt(tumorContents[1]);
+					    	}
+		    			}
+
+----------------------------------------
+		    {
+		    	String[] normalContents = lineNormal.split("\t");
+
+		    	if(normalContents.length > 1)
+		    	{
+			    	chromNormal = normalContents[0];
+			    	posNormal = Integer.parseInt(normalContents[1]);
+		    	}
+		    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834376
+net/sf/varscan/Somatic.java 1075 1082
+net/sf/varscan/Copynumber.java 619 627
+----------------------------------------
+		    		{
+		    			tumorContents = lineTumor.split("\t");
+				    	if(tumorContents.length > 1)
+				    	{
+					    	chromTumor = tumorContents[0];
+					    	posTumor = Integer.parseInt(tumorContents[1]);
+				    	}
+		    		}
+
+----------------------------------------
+		    {
+		    	String[] normalContents = lineNormal.split("\t");
+
+		    	if(normalContents.length > 1)
+		    	{
+			    	chromNormal = normalContents[0];
+			    	posNormal = Integer.parseInt(normalContents[1]);
+		    	}
+		    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834377
+net/sf/varscan/Somatic.java 1006 1014
+net/sf/varscan/Copynumber.java 619 627
+----------------------------------------
+		    {
+		    	String[] normalContents = lineNormal.split("\t");
+
+		    	if(normalContents.length > 1)
+		    	{
+			    	chromNormal = normalContents[0];
+			    	posNormal = Integer.parseInt(normalContents[1]);
+		    	}
+		    }
+
+----------------------------------------
+		    {
+		    	String[] normalContents = lineNormal.split("\t");
+
+		    	if(normalContents.length > 1)
+		    	{
+			    	chromNormal = normalContents[0];
+			    	posNormal = Integer.parseInt(normalContents[1]);
+		    	}
+		    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834380
+net/sf/varscan/Somatic.java 550 562
+net/sf/varscan/Somatic.java 1278 1290
+----------------------------------------
+					    			{
+					    				try
+					    				{
+					    					tumorDP4 = compareContents[13] + "," + compareContents[14] + "," + compareContents[15] + "," + compareContents[16];
+					    					normalDP4 = compareContents[17] + "," + compareContents[18] + "," + compareContents[19] + "," + compareContents[20];
+					    				}
+					    				catch(Exception e)
+					    				{
+					    					// Exception parsing info from compareResult //
+					    					tumorDP4 = "";
+					    					normalDP4 = "";
+					    				}
+					    			}
+
+----------------------------------------
+				    			{
+				    				try
+				    				{
+				    					tumorDP4 = compareContents[13] + "," + compareContents[14] + "," + compareContents[15] + "," + compareContents[16];
+				    					normalDP4 = compareContents[17] + "," + compareContents[18] + "," + compareContents[19] + "," + compareContents[20];
+				    				}
+				    				catch(Exception e)
+				    				{
+				    					// Exception parsing info from compareResult //
+				    					tumorDP4 = "";
+				    					normalDP4 = "";
+				    				}
+				    			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+28918700
+net/sf/varscan/FpFilter.java 367 381
+net/sf/varscan/Somatic.java 1404 1419
+----------------------------------------
+        	    						{
+        	    							isIndel = true;
+        	    							// CONVERT INDEL //
+        	    							if(cns.contains("/"))
+        	    							{
+            	    							String[] indelContents = cns.split("/");
+            	    							if(indelContents.length > 1)
+            	    								alt = indelContents[1];
+        	    							}
+        	    							else
+        	    							{
+        	    								alt = cns;
+        	    							}
+
+        	    						}
+
+----------------------------------------
+		    		{
+		    			if((lineTumor = tumor.readLine()) != null)
+		    			{
+			    			tumorContents = lineTumor.split("\t");
+
+					    	if(tumorContents.length > 1)
+					    	{
+						    	chromTumor = tumorContents[0];
+						    	posTumor = Integer.parseInt(tumorContents[1]);
+					    	}
+		    			}
+		    			else
+		    			{
+		    				flagEOF = true;
+		    			}
+		    		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834381
+net/sf/varscan/Somatic.java 1035 1054
+net/sf/varscan/Somatic.java 1404 1419
+----------------------------------------
+		    	{
+		    		//System.err.println("Normal (" + chromNormal + ") catching up to " + chromTumor);
+		    		// Get next line from normal pileup //
+		    		if((lineNormal = normal.readLine()) != null)
+		    		{
+		    			String[] normalContents = lineNormal.split("\t");
+
+				    	if(normalContents.length > 1)
+				    	{
+					    	chromNormal = normalContents[0];
+					    	posNormal = Integer.parseInt(normalContents[1]);
+				    	}
+		    		}
+		    		else
+		    		{
+		    			flagEOF = true;
+		    		}
+
+
+		    	}
+
+----------------------------------------
+		    		{
+		    			if((lineTumor = tumor.readLine()) != null)
+		    			{
+			    			tumorContents = lineTumor.split("\t");
+
+					    	if(tumorContents.length > 1)
+					    	{
+						    	chromTumor = tumorContents[0];
+						    	posTumor = Integer.parseInt(tumorContents[1]);
+					    	}
+		    			}
+		    			else
+		    			{
+		    				flagEOF = true;
+		    			}
+		    		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834382
+net/sf/varscan/ProcessSomatic.java 182 189
+net/sf/varscan/ProcessSomatic.java 171 180
+----------------------------------------
+	    				{
+		    				outSomatic.println(line);
+		    				outSomaticHC.println(line);
+		    				outGermline.println(line);
+		    				outGermlineHC.println(line);
+		    				outLOH.println(line);
+		    				outLOHHC.println(line);
+	    				}
+
+----------------------------------------
+		    			{
+		    				// VCF header line //
+		    				isVCF = true;
+		    				outSomatic.println(line);
+		    				outSomaticHC.println(line);
+		    				outGermline.println(line);
+		    				outGermlineHC.println(line);
+		    				outLOH.println(line);
+		    				outLOHHC.println(line);
+		    			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834387
+net/sf/varscan/ReadCounts.java 303 312
+net/sf/varscan/CopyCaller.java 286 297
+----------------------------------------
+	    		    {
+	    		    	System.err.println("Parsing Exception on line:\n" + line + "\n" + e.getLocalizedMessage());
+	    				stats.put("numParsingExceptions", (stats.get("numParsingExceptions") + 1));
+	    				if(stats.get("numParsingExceptions") >= 5)
+	    				{
+	    					System.err.println("Too many parsing exceptions encountered; exiting");
+	    					return;
+	    				}
+	    		    	return;
+	    		    }
+
+----------------------------------------
+	    		    {
+	    		    	System.err.println("Parsing Exception on line:\n" + line + "\n" + e.getLocalizedMessage());
+
+	    				stats.put("numParsingExceptions", (stats.get("numParsingExceptions") + 1));
+
+	    				if(stats.get("numParsingExceptions") >= 5)
+	    				{
+	    					System.err.println("Too many parsing exceptions encountered; exiting");
+		    				System.exit(11);
+	    				}
+
+	    		    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834386
+net/sf/varscan/FilterSomatic.java 359 367
+net/sf/varscan/CopyCaller.java 286 297
+----------------------------------------
+	    				{
+		    				System.err.println("Parsing Exception on line:\n" + line + "\n" + e.getLocalizedMessage());
+		    				stats.put("numParsingExceptions", (stats.get("numParsingExceptions") + 1));
+		    				if(stats.get("numParsingExceptions") >= 5)
+		    				{
+		    					System.err.println("Too many parsing exceptions encountered; exiting");
+		    					return;
+		    				}
+	    				}
+
+----------------------------------------
+	    		    {
+	    		    	System.err.println("Parsing Exception on line:\n" + line + "\n" + e.getLocalizedMessage());
+
+	    				stats.put("numParsingExceptions", (stats.get("numParsingExceptions") + 1));
+
+	    				if(stats.get("numParsingExceptions") >= 5)
+	    				{
+	    					System.err.println("Too many parsing exceptions encountered; exiting");
+		    				System.exit(11);
+	    				}
+
+	    		    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834389
+net/sf/varscan/LimitVariants.java 134 139
+net/sf/varscan/FilterVariants.java 363 368
+----------------------------------------
+	    		{
+	    			// Handle native file headers //
+	    			outFile.println(line);
+	    			if(params.containsKey("not-file"))
+	    				notFile.println(line);
+	    		}
+
+----------------------------------------
+    							{
+    								if(params.containsKey("output-file"))
+    									outFile.println(vcfLine);
+    								else
+    									System.out.println(vcfLine);
+    							}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834473
+net/sf/varscan/FpFilter.java 264 269
+net/sf/varscan/FilterVariants.java 363 368
+----------------------------------------
+	    	    					{
+	    	    						if(line.startsWith("#CHROM"))
+	    	    							outFile.println(vcfHeaderInfo);
+
+	    	    						outFile.println(line);
+	    	    					}
+
+----------------------------------------
+    							{
+    								if(params.containsKey("output-file"))
+    									outFile.println(vcfLine);
+    								else
+    									System.out.println(vcfLine);
+    							}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834470
+net/sf/varscan/FilterSomatic.java 206 211
+net/sf/varscan/FilterVariants.java 363 368
+----------------------------------------
+		    			{
+
+		    				// Print header //
+	    					if(params.containsKey("output-file"))
+	    						outFile.println(line);
+		    			}
+
+----------------------------------------
+    							{
+    								if(params.containsKey("output-file"))
+    									outFile.println(vcfLine);
+    								else
+    									System.out.println(vcfLine);
+    							}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834388
+net/sf/varscan/FpFilter.java 272 277
+net/sf/varscan/FilterVariants.java 363 368
+----------------------------------------
+	    	    					{
+	    	    						if(line.startsWith("#CHROM"))
+	    	    							filteredFile.println(vcfHeaderInfo);
+
+	    	    						filteredFile.println(line);
+	    	    					}
+
+----------------------------------------
+    							{
+    								if(params.containsKey("output-file"))
+    									outFile.println(vcfLine);
+    								else
+    									System.out.println(vcfLine);
+    							}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834471
+net/sf/varscan/FilterSomatic.java 341 346
+net/sf/varscan/FilterVariants.java 363 368
+----------------------------------------
+		    				{
+		    					if(params.containsKey("output-file"))
+		    						outFile.println(line);
+
+		    					stats.put("numPassFilter", (stats.get("numPassFilter") + 1));
+		    				}
+
+----------------------------------------
+    							{
+    								if(params.containsKey("output-file"))
+    									outFile.println(vcfLine);
+    								else
+    									System.out.println(vcfLine);
+    							}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834396
+net/sf/varscan/FilterSomatic.java 318 324
+net/sf/varscan/Coverage.java 177 185
+----------------------------------------
+		    					{
+		    						String key = chrom + "\t" + thisPosition;
+		    						if(indelPositions.containsKey(key))
+		    						{
+		    							indelFlag = true;
+		    						}
+		    					}
+
+----------------------------------------
+		    				{
+		    					refPositions = targetHash.get(refName);
+
+		    					// Check to see if position set //
+		    					if(refPositions.get(position))
+		    					{
+		    						inTarget = true;
+		    					}
+		    				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834397
+net/sf/varscan/CallPileup.java 294 303
+net/sf/varscan/Coverage.java 227 236
+----------------------------------------
+	    		    {
+	    		    	System.err.println("Parsing Exception on line:\n" + line + "\n" + e.getLocalizedMessage());
+	    				numParsingExceptions++;
+	    				if(numParsingExceptions >= 5)
+	    				{
+	    					System.err.println("Too many parsing exceptions encountered; exiting");
+	    					return;
+	    				}
+	    		    	return;
+	    		    }
+
+----------------------------------------
+	    		    {
+	    		    	System.err.println("Parsing Exception on line:\n" + line + "\n" + e.getLocalizedMessage());
+	    				numParsingExceptions++;
+	    				if(numParsingExceptions >= 5)
+	    				{
+	    					System.err.println("Too many parsing exceptions encountered; exiting");
+	    					return;
+	    				}
+	    		    	return;
+	    		    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834399
+net/sf/varscan/CallMpileup.java 920 929
+net/sf/varscan/Coverage.java 227 236
+----------------------------------------
+	    		    {
+	    		    	System.err.println("Parsing Exception on line:\n" + line + "\n" + e.getLocalizedMessage());
+	    				numParsingExceptions++;
+	    				if(numParsingExceptions >= 5)
+	    				{
+	    					System.err.println("Too many parsing exceptions encountered; exiting");
+	    					return;
+	    				}
+	    		    	return;
+	    		    }
+
+----------------------------------------
+	    		    {
+	    		    	System.err.println("Parsing Exception on line:\n" + line + "\n" + e.getLocalizedMessage());
+	    				numParsingExceptions++;
+	    				if(numParsingExceptions >= 5)
+	    				{
+	    					System.err.println("Too many parsing exceptions encountered; exiting");
+	    					return;
+	    				}
+	    		    	return;
+	    		    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834398
+net/sf/varscan/Somatic.java 668 677
+net/sf/varscan/Coverage.java 227 236
+----------------------------------------
+	    		    {
+	    		    	System.err.println("Parsing Exception on line:\n" + line + "\n" + e.getLocalizedMessage());
+	    				numParsingExceptions++;
+	    				if(numParsingExceptions >= 5)
+	    				{
+	    					System.err.println("Too many parsing exceptions encountered; exiting");
+	    					return;
+	    				}
+	    		    	return;
+	    		    }
+
+----------------------------------------
+	    		    {
+	    		    	System.err.println("Parsing Exception on line:\n" + line + "\n" + e.getLocalizedMessage());
+	    				numParsingExceptions++;
+	    				if(numParsingExceptions >= 5)
+	    				{
+	    					System.err.println("Too many parsing exceptions encountered; exiting");
+	    					return;
+	    				}
+	    		    	return;
+	    		    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834430
+net/sf/varscan/ReadCounts.java 303 312
+net/sf/varscan/Coverage.java 227 236
+----------------------------------------
+	    		    {
+	    		    	System.err.println("Parsing Exception on line:\n" + line + "\n" + e.getLocalizedMessage());
+	    				stats.put("numParsingExceptions", (stats.get("numParsingExceptions") + 1));
+	    				if(stats.get("numParsingExceptions") >= 5)
+	    				{
+	    					System.err.println("Too many parsing exceptions encountered; exiting");
+	    					return;
+	    				}
+	    		    	return;
+	    		    }
+
+----------------------------------------
+	    		    {
+	    		    	System.err.println("Parsing Exception on line:\n" + line + "\n" + e.getLocalizedMessage());
+	    				numParsingExceptions++;
+	    				if(numParsingExceptions >= 5)
+	    				{
+	    					System.err.println("Too many parsing exceptions encountered; exiting");
+	    					return;
+	    				}
+	    		    	return;
+	    		    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834408
+net/sf/varscan/Copynumber.java 619 627
+net/sf/varscan/Copynumber.java 713 720
+----------------------------------------
+		    {
+		    	String[] normalContents = lineNormal.split("\t");
+
+		    	if(normalContents.length > 1)
+		    	{
+			    	chromNormal = normalContents[0];
+			    	posNormal = Integer.parseInt(normalContents[1]);
+		    	}
+		    }
+
+----------------------------------------
+		    		{
+		    			tumorContents = lineTumor.split("\t");
+				    	if(tumorContents.length > 1)
+				    	{
+					    	chromTumor = tumorContents[0];
+					    	posTumor = Integer.parseInt(tumorContents[1]);
+				    	}
+		    		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834405
+net/sf/varscan/Somatic.java 1075 1082
+net/sf/varscan/Copynumber.java 713 720
+----------------------------------------
+		    		{
+		    			tumorContents = lineTumor.split("\t");
+				    	if(tumorContents.length > 1)
+				    	{
+					    	chromTumor = tumorContents[0];
+					    	posTumor = Integer.parseInt(tumorContents[1]);
+				    	}
+		    		}
+
+----------------------------------------
+		    		{
+		    			tumorContents = lineTumor.split("\t");
+				    	if(tumorContents.length > 1)
+				    	{
+					    	chromTumor = tumorContents[0];
+					    	posTumor = Integer.parseInt(tumorContents[1]);
+				    	}
+		    		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834407
+net/sf/varscan/Somatic.java 1063 1070
+net/sf/varscan/Copynumber.java 713 720
+----------------------------------------
+		    		{
+		    			String[] normalContents = lineNormal.split("\t");
+				    	if(normalContents.length > 1)
+				    	{
+					    	chromNormal = normalContents[0];
+					    	posNormal = Integer.parseInt(normalContents[1]);
+				    	}
+		    		}
+
+----------------------------------------
+		    		{
+		    			tumorContents = lineTumor.split("\t");
+				    	if(tumorContents.length > 1)
+				    	{
+					    	chromTumor = tumorContents[0];
+					    	posTumor = Integer.parseInt(tumorContents[1]);
+				    	}
+		    		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834406
+net/sf/varscan/Somatic.java 1006 1014
+net/sf/varscan/Copynumber.java 713 720
+----------------------------------------
+		    {
+		    	String[] normalContents = lineNormal.split("\t");
+
+		    	if(normalContents.length > 1)
+		    	{
+			    	chromNormal = normalContents[0];
+			    	posNormal = Integer.parseInt(normalContents[1]);
+		    	}
+		    }
+
+----------------------------------------
+		    		{
+		    			tumorContents = lineTumor.split("\t");
+				    	if(tumorContents.length > 1)
+				    	{
+					    	chromTumor = tumorContents[0];
+					    	posTumor = Integer.parseInt(tumorContents[1]);
+				    	}
+		    		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834409
+net/sf/varscan/Somatic.java 1406 1414
+net/sf/varscan/Copynumber.java 713 720
+----------------------------------------
+		    			{
+			    			tumorContents = lineTumor.split("\t");
+
+					    	if(tumorContents.length > 1)
+					    	{
+						    	chromTumor = tumorContents[0];
+						    	posTumor = Integer.parseInt(tumorContents[1]);
+					    	}
+		    			}
+
+----------------------------------------
+		    		{
+		    			tumorContents = lineTumor.split("\t");
+				    	if(tumorContents.length > 1)
+				    	{
+					    	chromTumor = tumorContents[0];
+					    	posTumor = Integer.parseInt(tumorContents[1]);
+				    	}
+		    		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834441
+net/sf/varscan/Somatic.java 1039 1047
+net/sf/varscan/Copynumber.java 713 720
+----------------------------------------
+		    		{
+		    			String[] normalContents = lineNormal.split("\t");
+
+				    	if(normalContents.length > 1)
+				    	{
+					    	chromNormal = normalContents[0];
+					    	posNormal = Integer.parseInt(normalContents[1]);
+				    	}
+		    		}
+
+----------------------------------------
+		    		{
+		    			tumorContents = lineTumor.split("\t");
+				    	if(tumorContents.length > 1)
+				    	{
+					    	chromTumor = tumorContents[0];
+					    	posTumor = Integer.parseInt(tumorContents[1]);
+				    	}
+		    		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834410
+net/sf/varscan/LimitVariants.java 278 284
+net/sf/varscan/ProcessSomatic.java 399 405
+----------------------------------------
+    					{
+	    					// Mark every position //
+	    					for(int position = chrStart; position <= chrStop; position++)
+	    					{
+	    						refPositions.set(position, true);
+	    					}
+    					}
+
+----------------------------------------
+    					{
+	    					// Mark every position //
+	    					for(int position = chrStart; position <= chrStop; position++)
+	    					{
+	    						refPositions.set(position, true);
+	    					}
+    					}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834414
+net/sf/varscan/VarScan.java 718 728
+net/sf/varscan/VarScan.java 868 878
+----------------------------------------
+					{
+						// Plus strand //
+						if(readCountsPlus.containsKey(readBase))
+						{
+							readCountsPlus.put(readBase, (readCountsPlus.get(readBase) + 1));
+						}
+						else
+						{
+							readCountsPlus.put(readBase, 1);
+						}
+					}
+
+----------------------------------------
+				{
+					// Plus strand //
+					if(readCountsPlus.containsKey(indelKey))
+					{
+						readCountsPlus.put(indelKey, (readCountsPlus.get(indelKey) + 1));
+					}
+					else
+					{
+						readCountsPlus.put(indelKey, 1);
+					}
+				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834415
+net/sf/varscan/VarScan.java 730 740
+net/sf/varscan/VarScan.java 868 878
+----------------------------------------
+					{
+						// Minus Strand //
+						if(readCountsMinus.containsKey(readBase))
+						{
+							readCountsMinus.put(readBase, (readCountsMinus.get(readBase) + 1));
+						}
+						else
+						{
+							readCountsMinus.put(readBase, 1);
+						}
+					}
+
+----------------------------------------
+				{
+					// Plus strand //
+					if(readCountsPlus.containsKey(indelKey))
+					{
+						readCountsPlus.put(indelKey, (readCountsPlus.get(indelKey) + 1));
+					}
+					else
+					{
+						readCountsPlus.put(indelKey, 1);
+					}
+				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834418
+net/sf/varscan/VarScan.java 730 740
+net/sf/varscan/VarScan.java 880 890
+----------------------------------------
+					{
+						// Minus Strand //
+						if(readCountsMinus.containsKey(readBase))
+						{
+							readCountsMinus.put(readBase, (readCountsMinus.get(readBase) + 1));
+						}
+						else
+						{
+							readCountsMinus.put(readBase, 1);
+						}
+					}
+
+----------------------------------------
+				{
+					// Minus Strand //
+					if(readCountsMinus.containsKey(indelKey))
+					{
+						readCountsMinus.put(indelKey, (readCountsMinus.get(indelKey) + 1));
+					}
+					else
+					{
+						readCountsMinus.put(indelKey, 1);
+					}
+				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834417
+net/sf/varscan/VarScan.java 868 878
+net/sf/varscan/VarScan.java 880 890
+----------------------------------------
+				{
+					// Plus strand //
+					if(readCountsPlus.containsKey(indelKey))
+					{
+						readCountsPlus.put(indelKey, (readCountsPlus.get(indelKey) + 1));
+					}
+					else
+					{
+						readCountsPlus.put(indelKey, 1);
+					}
+				}
+
+----------------------------------------
+				{
+					// Minus Strand //
+					if(readCountsMinus.containsKey(indelKey))
+					{
+						readCountsMinus.put(indelKey, (readCountsMinus.get(indelKey) + 1));
+					}
+					else
+					{
+						readCountsMinus.put(indelKey, 1);
+					}
+				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834416
+net/sf/varscan/VarScan.java 718 728
+net/sf/varscan/VarScan.java 880 890
+----------------------------------------
+					{
+						// Plus strand //
+						if(readCountsPlus.containsKey(readBase))
+						{
+							readCountsPlus.put(readBase, (readCountsPlus.get(readBase) + 1));
+						}
+						else
+						{
+							readCountsPlus.put(readBase, 1);
+						}
+					}
+
+----------------------------------------
+				{
+					// Minus Strand //
+					if(readCountsMinus.containsKey(indelKey))
+					{
+						readCountsMinus.put(indelKey, (readCountsMinus.get(indelKey) + 1));
+					}
+					else
+					{
+						readCountsMinus.put(indelKey, 1);
+					}
+				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834419
+net/sf/varscan/VarScan.java 745 751
+net/sf/varscan/VarScan.java 895 901
+----------------------------------------
+					{
+						String alreadySeen = strandsSeen.get(readBase);
+						if(!(alreadySeen.length() >= 2 || alreadySeen.equals(strand)))
+						{
+							strandsSeen.put(readBase, (strandsSeen.get(readBase) + strand));
+						}
+					}
+
+----------------------------------------
+				{
+					String alreadySeen = strandsSeen.get(indelKey);
+					if(!(alreadySeen.length() >= 2 || alreadySeen.equals(strand)))
+					{
+						strandsSeen.put(indelKey, (strandsSeen.get(indelKey) + strand));
+					}
+				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834421
+net/sf/varscan/Somatic.java 964 979
+net/sf/varscan/CopyCaller.java 186 200
+----------------------------------------
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file(s) were not ready for parsing after 100 5-second cycles! Pileup output may be invalid or too slow");
+			    		System.exit(10);
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+
+		    	}
+	    	}
+
+----------------------------------------
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+	    		}
+		    	catch(Exception e)
+		    	{
+
+		    	}
+	    	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834422
+net/sf/varscan/CallPileup.java 141 157
+net/sf/varscan/CopyCaller.java 186 200
+----------------------------------------
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.err.println("Exception while trying to get input" + e.getMessage());
+		    		System.exit(1);
+		    	}
+	    	}
+
+----------------------------------------
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+	    		}
+		    	catch(Exception e)
+		    	{
+
+		    	}
+	    	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834427
+net/sf/varscan/Coverage.java 111 126
+net/sf/varscan/CopyCaller.java 186 200
+----------------------------------------
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 10)
+			    	{
+			    		System.err.println("Input file was not ready after 10 5-second cycles!");
+			    		return;
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+
+		    	}
+	    	}
+
+----------------------------------------
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+	    		}
+		    	catch(Exception e)
+		    	{
+
+		    	}
+	    	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834423
+net/sf/varscan/ProcessSomatic.java 79 95
+net/sf/varscan/CopyCaller.java 186 200
+----------------------------------------
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.err.println("Exception while trying to get input" + e.getMessage());
+		    		System.exit(1);
+		    	}
+	    	}
+
+----------------------------------------
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+	    		}
+		    	catch(Exception e)
+		    	{
+
+		    	}
+	    	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+96
+22834424
+net/sf/varscan/ReadCounts.java 125 139
+net/sf/varscan/CopyCaller.java 186 200
+----------------------------------------
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+	    		}
+		    	catch(Exception e)
+		    	{
+
+		    	}
+	    	}
+
+----------------------------------------
+	    	{
+	    		try {
+			    	Thread.sleep(5000);
+			    	numNaps++;
+			    	if(numNaps > 100)
+			    	{
+			    		System.err.println("Input file was not ready after 100 5-second cycles!");
+			    		System.exit(10);
+			    	}
+	    		}
+		    	catch(Exception e)
+		    	{
+
+		    	}
+	    	}
+
+----------------------------------------

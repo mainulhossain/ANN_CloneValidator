@@ -1,0 +1,1214 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512771
+pdfsam-fx/src/main/java/org/pdfsam/ui/notification/AddNotificationRequestEvent.java 35 41
+pdfsam-core/src/main/java/org/pdfsam/ui/StageStatus.java 72 78
+----------------------------------------
+    public AddNotificationRequestEvent(NotificationType type, String message, String title) {
+        requireNotNull(type, "Notification type cannot be null");
+        requireNotBlank(message, "Notification message cannot be blank");
+        this.type = type;
+        this.message = message;
+        this.title = title;
+    }
+
+----------------------------------------
+    public StageStatus(double x, double y, double width, double height) {
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+        this.mode = StageMode.DEFAULT;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512835
+pdfsam-fx/src/main/java/org/pdfsam/ui/notification/AddNotificationRequestEvent.java 35 41
+pdfsam-gui/src/main/java/org/pdfsam/ui/notification/NotificationsController.java 68 74
+----------------------------------------
+    public AddNotificationRequestEvent(NotificationType type, String message, String title) {
+        requireNotNull(type, "Notification type cannot be null");
+        requireNotBlank(message, "Notification message cannot be blank");
+        this.type = type;
+        this.message = message;
+        this.title = title;
+    }
+
+----------------------------------------
+            UserContext userContext) {
+        this.container = container;
+        this.service = service;
+        this.pdfsam = pdfsam;
+        this.userContext = userContext;
+        eventStudio().addAnnotatedListeners(this);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512772
+pdfsam-core/src/main/java/org/pdfsam/ui/StageStatus.java 72 78
+pdfsam-gui/src/main/java/org/pdfsam/ui/notification/NotificationsController.java 68 74
+----------------------------------------
+    public StageStatus(double x, double y, double width, double height) {
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+        this.mode = StageMode.DEFAULT;
+    }
+
+----------------------------------------
+            UserContext userContext) {
+        this.container = container;
+        this.service = service;
+        this.pdfsam = pdfsam;
+        this.userContext = userContext;
+        eventStudio().addAnnotatedListeners(this);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512773
+pdfsam-core/src/main/java/org/pdfsam/ui/StageStatus.java 132 142
+pdfsam-core/src/main/java/org/pdfsam/support/LocaleKeyValueItem.java 65 74
+----------------------------------------
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (!(other instanceof StageStatus)) {
+            return false;
+        }
+        StageStatus item = (StageStatus) other;
+        return new EqualsBuilder().append(x, item.getX()).append(y, item.getY()).append(width, item.getWidth())
+                .append(height, item.getHeight()).append(mode, item.getMode()).isEquals();
+    }
+
+----------------------------------------
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (!(other instanceof LocaleKeyValueItem)) {
+            return false;
+        }
+        LocaleKeyValueItem item = (LocaleKeyValueItem) other;
+        return new EqualsBuilder().append(getKey(), item.getKey()).isEquals();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512774
+pdfsam-fx/src/main/java/org/pdfsam/ui/selection/PasswordFieldPopupSkin.java 46 51
+pdfsam-core/src/main/java/org/pdfsam/support/XmlUtils.java 40 45
+----------------------------------------
+    public Node getNode() {
+        if (popup != null) {
+            return popup.getPopupContent();
+        }
+        return null;
+    }
+
+----------------------------------------
+        if (node != null) {
+            Node namedItem = node.getAttributes().getNamedItem(attributeName);
+            if (namedItem != null) {
+                return namedItem.getNodeValue();
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512775
+pdfsam-fx/src/main/java/org/pdfsam/ui/notification/AddNotificationRequestEvent.java 35 41
+pdfsam-fx/src/main/java/org/pdfsam/ui/selection/ShowPasswordFieldPopupRequest.java 37 42
+----------------------------------------
+    public AddNotificationRequestEvent(NotificationType type, String message, String title) {
+        requireNotNull(type, "Notification type cannot be null");
+        requireNotBlank(message, "Notification message cannot be blank");
+        this.type = type;
+        this.message = message;
+        this.title = title;
+    }
+
+----------------------------------------
+    public ShowPasswordFieldPopupRequest(PdfDocumentDescriptor pdfDescriptor, Region requestingNode) {
+        requireNotNull(pdfDescriptor, "Cannot show password field popup for a null document");
+        requireNotNull(requestingNode, "Cannot show password field popup for a null node");
+        this.pdfDescriptor = pdfDescriptor;
+        this.requestingNode = requestingNode;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512850
+pdfsam-fx/src/main/java/org/pdfsam/ui/notification/AddNotificationRequestEvent.java 35 41
+pdfsam-core/src/main/java/org/pdfsam/module/TaskExecutionRequestEvent.java 43 48
+----------------------------------------
+    public AddNotificationRequestEvent(NotificationType type, String message, String title) {
+        requireNotNull(type, "Notification type cannot be null");
+        requireNotBlank(message, "Notification message cannot be blank");
+        this.type = type;
+        this.message = message;
+        this.title = title;
+    }
+
+----------------------------------------
+    public TaskExecutionRequestEvent(String moduleId, AbstractParameters parameters) {
+        requireNotNull(parameters, "Task parameters cannot be null");
+        require(isNotBlank(moduleId), "Module id cannot be blank");
+        this.parameters = parameters;
+        this.moduleId = moduleId;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512776
+pdfsam-fx/src/main/java/org/pdfsam/ui/selection/ShowPasswordFieldPopupRequest.java 37 42
+pdfsam-core/src/main/java/org/pdfsam/module/TaskExecutionRequestEvent.java 43 48
+----------------------------------------
+    public ShowPasswordFieldPopupRequest(PdfDocumentDescriptor pdfDescriptor, Region requestingNode) {
+        requireNotNull(pdfDescriptor, "Cannot show password field popup for a null document");
+        requireNotNull(requestingNode, "Cannot show password field popup for a null node");
+        this.pdfDescriptor = pdfDescriptor;
+        this.requestingNode = requestingNode;
+    }
+
+----------------------------------------
+    public TaskExecutionRequestEvent(String moduleId, AbstractParameters parameters) {
+        requireNotNull(parameters, "Task parameters cannot be null");
+        require(isNotBlank(moduleId), "Module id cannot be blank");
+        this.parameters = parameters;
+        this.moduleId = moduleId;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512827
+pdfsam-gui/src/main/java/org/pdfsam/ui/notification/NotificationsController.java 68 74
+pdfsam-gui/src/main/java/org/pdfsam/sound/PlaySoundController.java 47 54
+----------------------------------------
+            UserContext userContext) {
+        this.container = container;
+        this.service = service;
+        this.pdfsam = pdfsam;
+        this.userContext = userContext;
+        eventStudio().addAnnotatedListeners(this);
+    }
+
+----------------------------------------
+            @Named("errorSound") String errorSoundURI) {
+        requireNotBlank(okSoundURI, "");
+        requireNotBlank(errorSoundURI, "");
+        this.userContext = userContext;
+        this.okSoundURI = okSoundURI;
+        this.errorSoundURI = errorSoundURI;
+        eventStudio().addAnnotatedListeners(this);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512777
+pdfsam-fx/src/main/java/org/pdfsam/ui/selection/ShowPasswordFieldPopupRequest.java 37 42
+pdfsam-gui/src/main/java/org/pdfsam/sound/PlaySoundController.java 47 54
+----------------------------------------
+    public ShowPasswordFieldPopupRequest(PdfDocumentDescriptor pdfDescriptor, Region requestingNode) {
+        requireNotNull(pdfDescriptor, "Cannot show password field popup for a null document");
+        requireNotNull(requestingNode, "Cannot show password field popup for a null node");
+        this.pdfDescriptor = pdfDescriptor;
+        this.requestingNode = requestingNode;
+    }
+
+----------------------------------------
+            @Named("errorSound") String errorSoundURI) {
+        requireNotBlank(okSoundURI, "");
+        requireNotBlank(errorSoundURI, "");
+        this.userContext = userContext;
+        this.okSoundURI = okSoundURI;
+        this.errorSoundURI = errorSoundURI;
+        eventStudio().addAnnotatedListeners(this);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512836
+pdfsam-fx/src/main/java/org/pdfsam/ui/notification/AddNotificationRequestEvent.java 35 41
+pdfsam-gui/src/main/java/org/pdfsam/sound/PlaySoundController.java 47 54
+----------------------------------------
+    public AddNotificationRequestEvent(NotificationType type, String message, String title) {
+        requireNotNull(type, "Notification type cannot be null");
+        requireNotBlank(message, "Notification message cannot be blank");
+        this.type = type;
+        this.message = message;
+        this.title = title;
+    }
+
+----------------------------------------
+            @Named("errorSound") String errorSoundURI) {
+        requireNotBlank(okSoundURI, "");
+        requireNotBlank(errorSoundURI, "");
+        this.userContext = userContext;
+        this.okSoundURI = okSoundURI;
+        this.errorSoundURI = errorSoundURI;
+        eventStudio().addAnnotatedListeners(this);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512778
+pdfsam-rotate/src/main/java/org/pdfsam/rotate/RotateModule.java 112 118
+pdfsam-split-by-size/src/main/java/org/pdfsam/splitbysize/SplitBySizeModule.java 107 113
+----------------------------------------
+    public void onLoadWorkspace(Map<String, String> data) {
+        selectionPane.restoreStateFrom(data);
+        rotateOptions.restoreStateFrom(data);
+        destinationPane.restoreStateFrom(data);
+        destinationDirectoryField.restoreStateFrom(data);
+        prefix.restoreStateFrom(data);
+    }
+
+----------------------------------------
+    public void onLoadWorkspace(Map<String, String> data) {
+        selectionPane.restoreStateFrom(data);
+        splitOptions.restoreStateFrom(data);
+        destinationDirectoryField.restoreStateFrom(data);
+        destinationPane.restoreStateFrom(data);
+        prefix.restoreStateFrom(data);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512786
+pdfsam-rotate/src/main/java/org/pdfsam/rotate/RotateModule.java 112 118
+pdfsam-merge/src/main/java/org/pdfsam/merge/MergeModule.java 88 93
+----------------------------------------
+    public void onLoadWorkspace(Map<String, String> data) {
+        selectionPane.restoreStateFrom(data);
+        rotateOptions.restoreStateFrom(data);
+        destinationPane.restoreStateFrom(data);
+        destinationDirectoryField.restoreStateFrom(data);
+        prefix.restoreStateFrom(data);
+    }
+
+----------------------------------------
+    public void onSaveWorkspace(Map<String, String> data) {
+        selectionPane.saveStateTo(data);
+        mergeOptions.saveStateTo(data);
+        destinationFileField.saveStateTo(data);
+        destinationPane.saveStateTo(data);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512779
+pdfsam-split-by-size/src/main/java/org/pdfsam/splitbysize/SplitBySizeModule.java 107 113
+pdfsam-merge/src/main/java/org/pdfsam/merge/MergeModule.java 88 93
+----------------------------------------
+    public void onLoadWorkspace(Map<String, String> data) {
+        selectionPane.restoreStateFrom(data);
+        splitOptions.restoreStateFrom(data);
+        destinationDirectoryField.restoreStateFrom(data);
+        destinationPane.restoreStateFrom(data);
+        prefix.restoreStateFrom(data);
+    }
+
+----------------------------------------
+    public void onSaveWorkspace(Map<String, String> data) {
+        selectionPane.saveStateTo(data);
+        mergeOptions.saveStateTo(data);
+        destinationFileField.saveStateTo(data);
+        destinationPane.saveStateTo(data);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512804
+pdfsam-merge/src/main/java/org/pdfsam/merge/MergeModule.java 88 93
+pdfsam-split-by-size/src/main/java/org/pdfsam/splitbysize/SplitBySizeModule.java 98 104
+----------------------------------------
+    public void onSaveWorkspace(Map<String, String> data) {
+        selectionPane.saveStateTo(data);
+        mergeOptions.saveStateTo(data);
+        destinationFileField.saveStateTo(data);
+        destinationPane.saveStateTo(data);
+    }
+
+----------------------------------------
+    public void onSaveWorkspace(Map<String, String> data) {
+        selectionPane.saveStateTo(data);
+        splitOptions.saveStateTo(data);
+        destinationDirectoryField.saveStateTo(data);
+        destinationPane.saveStateTo(data);
+        prefix.saveStateTo(data);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512803
+pdfsam-rotate/src/main/java/org/pdfsam/rotate/RotateModule.java 112 118
+pdfsam-split-by-size/src/main/java/org/pdfsam/splitbysize/SplitBySizeModule.java 98 104
+----------------------------------------
+    public void onLoadWorkspace(Map<String, String> data) {
+        selectionPane.restoreStateFrom(data);
+        rotateOptions.restoreStateFrom(data);
+        destinationPane.restoreStateFrom(data);
+        destinationDirectoryField.restoreStateFrom(data);
+        prefix.restoreStateFrom(data);
+    }
+
+----------------------------------------
+    public void onSaveWorkspace(Map<String, String> data) {
+        selectionPane.saveStateTo(data);
+        splitOptions.saveStateTo(data);
+        destinationDirectoryField.saveStateTo(data);
+        destinationPane.saveStateTo(data);
+        prefix.saveStateTo(data);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512780
+pdfsam-split-by-size/src/main/java/org/pdfsam/splitbysize/SplitBySizeModule.java 107 113
+pdfsam-split-by-size/src/main/java/org/pdfsam/splitbysize/SplitBySizeModule.java 98 104
+----------------------------------------
+    public void onLoadWorkspace(Map<String, String> data) {
+        selectionPane.restoreStateFrom(data);
+        splitOptions.restoreStateFrom(data);
+        destinationDirectoryField.restoreStateFrom(data);
+        destinationPane.restoreStateFrom(data);
+        prefix.restoreStateFrom(data);
+    }
+
+----------------------------------------
+    public void onSaveWorkspace(Map<String, String> data) {
+        selectionPane.saveStateTo(data);
+        splitOptions.saveStateTo(data);
+        destinationDirectoryField.saveStateTo(data);
+        destinationPane.saveStateTo(data);
+        prefix.saveStateTo(data);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512781
+pdfsam-rotate/src/main/java/org/pdfsam/rotate/RotateModule.java 92 100
+pdfsam-alternate-mix/src/main/java/org/pdfsam/alternatemix/AlternateMixModule.java 139 145
+----------------------------------------
+    protected RotateParametersBuilder getBuilder(Consumer<String> onError) {
+        RotateParametersBuilder builder = new RotateParametersBuilder();
+        rotateOptions.apply(builder, onError);
+        selectionPane.apply(builder, onError);
+        destinationDirectoryField.apply(builder, onError);
+        destinationPane.apply(builder, onError);
+        prefix.apply(builder, onError);
+        return builder;
+    }
+
+----------------------------------------
+    protected AlternateMixParametersBuilder getBuilder(Consumer<String> onError) {
+        AlternateMixParametersBuilder builder = new AlternateMixParametersBuilder();
+        selectionPane.apply(builder, onError);
+        destinationFileField.apply(builder, onError);
+        destinationPane.apply(builder, onError);
+        return builder;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512782
+pdfsam-alternate-mix/src/main/java/org/pdfsam/alternatemix/AlternateMixModule.java 139 145
+pdfsam-extract/src/main/java/org/pdfsam/extract/ExtractModule.java 96 104
+----------------------------------------
+    protected AlternateMixParametersBuilder getBuilder(Consumer<String> onError) {
+        AlternateMixParametersBuilder builder = new AlternateMixParametersBuilder();
+        selectionPane.apply(builder, onError);
+        destinationFileField.apply(builder, onError);
+        destinationPane.apply(builder, onError);
+        return builder;
+    }
+
+----------------------------------------
+    protected ExtractParametersBuilder getBuilder(Consumer<String> onError) {
+        ExtractParametersBuilder builder = new ExtractParametersBuilder();
+        extractOptions.apply(builder, onError);
+        selectionPane.apply(builder, onError);
+        destinationDirectoryField.apply(builder, onError);
+        destinationPane.apply(builder, onError);
+        prefix.apply(builder, onError);
+        return builder;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512817
+pdfsam-rotate/src/main/java/org/pdfsam/rotate/RotateModule.java 92 100
+pdfsam-extract/src/main/java/org/pdfsam/extract/ExtractModule.java 96 104
+----------------------------------------
+    protected RotateParametersBuilder getBuilder(Consumer<String> onError) {
+        RotateParametersBuilder builder = new RotateParametersBuilder();
+        rotateOptions.apply(builder, onError);
+        selectionPane.apply(builder, onError);
+        destinationDirectoryField.apply(builder, onError);
+        destinationPane.apply(builder, onError);
+        prefix.apply(builder, onError);
+        return builder;
+    }
+
+----------------------------------------
+    protected ExtractParametersBuilder getBuilder(Consumer<String> onError) {
+        ExtractParametersBuilder builder = new ExtractParametersBuilder();
+        extractOptions.apply(builder, onError);
+        selectionPane.apply(builder, onError);
+        destinationDirectoryField.apply(builder, onError);
+        destinationPane.apply(builder, onError);
+        prefix.apply(builder, onError);
+        return builder;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512783
+pdfsam-fx/src/main/java/org/pdfsam/ui/notification/AddNotificationRequestEvent.java 35 41
+pdfsam-community/src/main/java/org/pdfsam/community/PdfsamCommunity.java 38 45
+----------------------------------------
+    public AddNotificationRequestEvent(NotificationType type, String message, String title) {
+        requireNotNull(type, "Notification type cannot be null");
+        requireNotBlank(message, "Notification message cannot be blank");
+        this.type = type;
+        this.message = message;
+        this.title = title;
+    }
+
+----------------------------------------
+    public PdfsamCommunity(String name, String shortName, Environment env) {
+        requireNotBlank(name, "Application name cannot be blank");
+        requireNotBlank(shortName, "Application short name cannot be blank");
+        requireNotNull(env, "Environment cannot be null");
+        this.env = env;
+        this.name = name;
+        this.shortName = shortName;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512785
+pdfsam-gui/src/main/java/org/pdfsam/sound/PlaySoundController.java 47 54
+pdfsam-community/src/main/java/org/pdfsam/community/PdfsamCommunity.java 38 45
+----------------------------------------
+            @Named("errorSound") String errorSoundURI) {
+        requireNotBlank(okSoundURI, "");
+        requireNotBlank(errorSoundURI, "");
+        this.userContext = userContext;
+        this.okSoundURI = okSoundURI;
+        this.errorSoundURI = errorSoundURI;
+        eventStudio().addAnnotatedListeners(this);
+    }
+
+----------------------------------------
+    public PdfsamCommunity(String name, String shortName, Environment env) {
+        requireNotBlank(name, "Application name cannot be blank");
+        requireNotBlank(shortName, "Application short name cannot be blank");
+        requireNotNull(env, "Environment cannot be null");
+        this.env = env;
+        this.name = name;
+        this.shortName = shortName;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512784
+pdfsam-fx/src/main/java/org/pdfsam/ui/selection/ShowPasswordFieldPopupRequest.java 37 42
+pdfsam-community/src/main/java/org/pdfsam/community/PdfsamCommunity.java 38 45
+----------------------------------------
+    public ShowPasswordFieldPopupRequest(PdfDocumentDescriptor pdfDescriptor, Region requestingNode) {
+        requireNotNull(pdfDescriptor, "Cannot show password field popup for a null document");
+        requireNotNull(requestingNode, "Cannot show password field popup for a null node");
+        this.pdfDescriptor = pdfDescriptor;
+        this.requestingNode = requestingNode;
+    }
+
+----------------------------------------
+    public PdfsamCommunity(String name, String shortName, Environment env) {
+        requireNotBlank(name, "Application name cannot be blank");
+        requireNotBlank(shortName, "Application short name cannot be blank");
+        requireNotNull(env, "Environment cannot be null");
+        this.env = env;
+        this.name = name;
+        this.shortName = shortName;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512805
+pdfsam-split-by-size/src/main/java/org/pdfsam/splitbysize/SplitBySizeModule.java 98 104
+pdfsam-rotate/src/main/java/org/pdfsam/rotate/RotateModule.java 103 109
+----------------------------------------
+    public void onSaveWorkspace(Map<String, String> data) {
+        selectionPane.saveStateTo(data);
+        splitOptions.saveStateTo(data);
+        destinationDirectoryField.saveStateTo(data);
+        destinationPane.saveStateTo(data);
+        prefix.saveStateTo(data);
+    }
+
+----------------------------------------
+    public void onSaveWorkspace(Map<String, String> data) {
+        selectionPane.saveStateTo(data);
+        rotateOptions.saveStateTo(data);
+        destinationPane.saveStateTo(data);
+        destinationDirectoryField.saveStateTo(data);
+        prefix.saveStateTo(data);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512837
+pdfsam-split-by-size/src/main/java/org/pdfsam/splitbysize/SplitBySizeModule.java 107 113
+pdfsam-rotate/src/main/java/org/pdfsam/rotate/RotateModule.java 103 109
+----------------------------------------
+    public void onLoadWorkspace(Map<String, String> data) {
+        selectionPane.restoreStateFrom(data);
+        splitOptions.restoreStateFrom(data);
+        destinationDirectoryField.restoreStateFrom(data);
+        destinationPane.restoreStateFrom(data);
+        prefix.restoreStateFrom(data);
+    }
+
+----------------------------------------
+    public void onSaveWorkspace(Map<String, String> data) {
+        selectionPane.saveStateTo(data);
+        rotateOptions.saveStateTo(data);
+        destinationPane.saveStateTo(data);
+        destinationDirectoryField.saveStateTo(data);
+        prefix.saveStateTo(data);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512787
+pdfsam-merge/src/main/java/org/pdfsam/merge/MergeModule.java 88 93
+pdfsam-rotate/src/main/java/org/pdfsam/rotate/RotateModule.java 103 109
+----------------------------------------
+    public void onSaveWorkspace(Map<String, String> data) {
+        selectionPane.saveStateTo(data);
+        mergeOptions.saveStateTo(data);
+        destinationFileField.saveStateTo(data);
+        destinationPane.saveStateTo(data);
+    }
+
+----------------------------------------
+    public void onSaveWorkspace(Map<String, String> data) {
+        selectionPane.saveStateTo(data);
+        rotateOptions.saveStateTo(data);
+        destinationPane.saveStateTo(data);
+        destinationDirectoryField.saveStateTo(data);
+        prefix.saveStateTo(data);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512816
+pdfsam-rotate/src/main/java/org/pdfsam/rotate/RotateModule.java 112 118
+pdfsam-rotate/src/main/java/org/pdfsam/rotate/RotateModule.java 103 109
+----------------------------------------
+    public void onLoadWorkspace(Map<String, String> data) {
+        selectionPane.restoreStateFrom(data);
+        rotateOptions.restoreStateFrom(data);
+        destinationPane.restoreStateFrom(data);
+        destinationDirectoryField.restoreStateFrom(data);
+        prefix.restoreStateFrom(data);
+    }
+
+----------------------------------------
+    public void onSaveWorkspace(Map<String, String> data) {
+        selectionPane.saveStateTo(data);
+        rotateOptions.saveStateTo(data);
+        destinationPane.saveStateTo(data);
+        destinationDirectoryField.saveStateTo(data);
+        prefix.saveStateTo(data);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512807
+pdfsam-split-by-size/src/main/java/org/pdfsam/splitbysize/SplitBySizeModule.java 98 104
+pdfsam-extract/src/main/java/org/pdfsam/extract/ExtractModule.java 107 113
+----------------------------------------
+    public void onSaveWorkspace(Map<String, String> data) {
+        selectionPane.saveStateTo(data);
+        splitOptions.saveStateTo(data);
+        destinationDirectoryField.saveStateTo(data);
+        destinationPane.saveStateTo(data);
+        prefix.saveStateTo(data);
+    }
+
+----------------------------------------
+    public void onSaveWorkspace(Map<String, String> data) {
+        selectionPane.saveStateTo(data);
+        extractOptions.saveStateTo(data);
+        destinationPane.saveStateTo(data);
+        destinationDirectoryField.saveStateTo(data);
+        prefix.saveStateTo(data);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512832
+pdfsam-rotate/src/main/java/org/pdfsam/rotate/RotateModule.java 112 118
+pdfsam-extract/src/main/java/org/pdfsam/extract/ExtractModule.java 107 113
+----------------------------------------
+    public void onLoadWorkspace(Map<String, String> data) {
+        selectionPane.restoreStateFrom(data);
+        rotateOptions.restoreStateFrom(data);
+        destinationPane.restoreStateFrom(data);
+        destinationDirectoryField.restoreStateFrom(data);
+        prefix.restoreStateFrom(data);
+    }
+
+----------------------------------------
+    public void onSaveWorkspace(Map<String, String> data) {
+        selectionPane.saveStateTo(data);
+        extractOptions.saveStateTo(data);
+        destinationPane.saveStateTo(data);
+        destinationDirectoryField.saveStateTo(data);
+        prefix.saveStateTo(data);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512788
+pdfsam-merge/src/main/java/org/pdfsam/merge/MergeModule.java 88 93
+pdfsam-extract/src/main/java/org/pdfsam/extract/ExtractModule.java 107 113
+----------------------------------------
+    public void onSaveWorkspace(Map<String, String> data) {
+        selectionPane.saveStateTo(data);
+        mergeOptions.saveStateTo(data);
+        destinationFileField.saveStateTo(data);
+        destinationPane.saveStateTo(data);
+    }
+
+----------------------------------------
+    public void onSaveWorkspace(Map<String, String> data) {
+        selectionPane.saveStateTo(data);
+        extractOptions.saveStateTo(data);
+        destinationPane.saveStateTo(data);
+        destinationDirectoryField.saveStateTo(data);
+        prefix.saveStateTo(data);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512839
+pdfsam-split-by-size/src/main/java/org/pdfsam/splitbysize/SplitBySizeModule.java 107 113
+pdfsam-extract/src/main/java/org/pdfsam/extract/ExtractModule.java 107 113
+----------------------------------------
+    public void onLoadWorkspace(Map<String, String> data) {
+        selectionPane.restoreStateFrom(data);
+        splitOptions.restoreStateFrom(data);
+        destinationDirectoryField.restoreStateFrom(data);
+        destinationPane.restoreStateFrom(data);
+        prefix.restoreStateFrom(data);
+    }
+
+----------------------------------------
+    public void onSaveWorkspace(Map<String, String> data) {
+        selectionPane.saveStateTo(data);
+        extractOptions.saveStateTo(data);
+        destinationPane.saveStateTo(data);
+        destinationDirectoryField.saveStateTo(data);
+        prefix.saveStateTo(data);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512833
+pdfsam-rotate/src/main/java/org/pdfsam/rotate/RotateModule.java 103 109
+pdfsam-extract/src/main/java/org/pdfsam/extract/ExtractModule.java 107 113
+----------------------------------------
+    public void onSaveWorkspace(Map<String, String> data) {
+        selectionPane.saveStateTo(data);
+        rotateOptions.saveStateTo(data);
+        destinationPane.saveStateTo(data);
+        destinationDirectoryField.saveStateTo(data);
+        prefix.saveStateTo(data);
+    }
+
+----------------------------------------
+    public void onSaveWorkspace(Map<String, String> data) {
+        selectionPane.saveStateTo(data);
+        extractOptions.saveStateTo(data);
+        destinationPane.saveStateTo(data);
+        destinationDirectoryField.saveStateTo(data);
+        prefix.saveStateTo(data);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512790
+pdfsam-merge/src/main/java/org/pdfsam/merge/MergeModule.java 88 93
+pdfsam-merge/src/main/java/org/pdfsam/merge/MergeModule.java 96 101
+----------------------------------------
+    public void onSaveWorkspace(Map<String, String> data) {
+        selectionPane.saveStateTo(data);
+        mergeOptions.saveStateTo(data);
+        destinationFileField.saveStateTo(data);
+        destinationPane.saveStateTo(data);
+    }
+
+----------------------------------------
+    public void onLoadWorkspace(Map<String, String> data) {
+        selectionPane.restoreStateFrom(data);
+        mergeOptions.restoreStateFrom(data);
+        destinationFileField.restoreStateFrom(data);
+        destinationPane.restoreStateFrom(data);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512809
+pdfsam-extract/src/main/java/org/pdfsam/extract/ExtractModule.java 107 113
+pdfsam-merge/src/main/java/org/pdfsam/merge/MergeModule.java 96 101
+----------------------------------------
+    public void onSaveWorkspace(Map<String, String> data) {
+        selectionPane.saveStateTo(data);
+        extractOptions.saveStateTo(data);
+        destinationPane.saveStateTo(data);
+        destinationDirectoryField.saveStateTo(data);
+        prefix.saveStateTo(data);
+    }
+
+----------------------------------------
+    public void onLoadWorkspace(Map<String, String> data) {
+        selectionPane.restoreStateFrom(data);
+        mergeOptions.restoreStateFrom(data);
+        destinationFileField.restoreStateFrom(data);
+        destinationPane.restoreStateFrom(data);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512808
+pdfsam-rotate/src/main/java/org/pdfsam/rotate/RotateModule.java 103 109
+pdfsam-merge/src/main/java/org/pdfsam/merge/MergeModule.java 96 101
+----------------------------------------
+    public void onSaveWorkspace(Map<String, String> data) {
+        selectionPane.saveStateTo(data);
+        rotateOptions.saveStateTo(data);
+        destinationPane.saveStateTo(data);
+        destinationDirectoryField.saveStateTo(data);
+        prefix.saveStateTo(data);
+    }
+
+----------------------------------------
+    public void onLoadWorkspace(Map<String, String> data) {
+        selectionPane.restoreStateFrom(data);
+        mergeOptions.restoreStateFrom(data);
+        destinationFileField.restoreStateFrom(data);
+        destinationPane.restoreStateFrom(data);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512838
+pdfsam-split-by-size/src/main/java/org/pdfsam/splitbysize/SplitBySizeModule.java 107 113
+pdfsam-merge/src/main/java/org/pdfsam/merge/MergeModule.java 96 101
+----------------------------------------
+    public void onLoadWorkspace(Map<String, String> data) {
+        selectionPane.restoreStateFrom(data);
+        splitOptions.restoreStateFrom(data);
+        destinationDirectoryField.restoreStateFrom(data);
+        destinationPane.restoreStateFrom(data);
+        prefix.restoreStateFrom(data);
+    }
+
+----------------------------------------
+    public void onLoadWorkspace(Map<String, String> data) {
+        selectionPane.restoreStateFrom(data);
+        mergeOptions.restoreStateFrom(data);
+        destinationFileField.restoreStateFrom(data);
+        destinationPane.restoreStateFrom(data);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512789
+pdfsam-rotate/src/main/java/org/pdfsam/rotate/RotateModule.java 112 118
+pdfsam-merge/src/main/java/org/pdfsam/merge/MergeModule.java 96 101
+----------------------------------------
+    public void onLoadWorkspace(Map<String, String> data) {
+        selectionPane.restoreStateFrom(data);
+        rotateOptions.restoreStateFrom(data);
+        destinationPane.restoreStateFrom(data);
+        destinationDirectoryField.restoreStateFrom(data);
+        prefix.restoreStateFrom(data);
+    }
+
+----------------------------------------
+    public void onLoadWorkspace(Map<String, String> data) {
+        selectionPane.restoreStateFrom(data);
+        mergeOptions.restoreStateFrom(data);
+        destinationFileField.restoreStateFrom(data);
+        destinationPane.restoreStateFrom(data);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512806
+pdfsam-split-by-size/src/main/java/org/pdfsam/splitbysize/SplitBySizeModule.java 98 104
+pdfsam-merge/src/main/java/org/pdfsam/merge/MergeModule.java 96 101
+----------------------------------------
+    public void onSaveWorkspace(Map<String, String> data) {
+        selectionPane.saveStateTo(data);
+        splitOptions.saveStateTo(data);
+        destinationDirectoryField.saveStateTo(data);
+        destinationPane.saveStateTo(data);
+        prefix.saveStateTo(data);
+    }
+
+----------------------------------------
+    public void onLoadWorkspace(Map<String, String> data) {
+        selectionPane.restoreStateFrom(data);
+        mergeOptions.restoreStateFrom(data);
+        destinationFileField.restoreStateFrom(data);
+        destinationPane.restoreStateFrom(data);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512791
+pdfsam-gui/src/main/java/org/pdfsam/ui/notification/NotificationsController.java 114 123
+pdfsam-gui/src/main/java/org/pdfsam/ui/notification/NotificationsController.java 149 158
+----------------------------------------
+    private void addDonationNotification(long usages) {
+        VBox content = new VBox(3,
+                buildLabel(DefaultI18nContext.getInstance().i18n("You performed {0} tasks with PDFsam, did it help?",
+                        Long.toString(usages)), NotificationType.GO_PRO),
+                styledUrlButton(DefaultI18nContext.getInstance().i18n("Give something back"),
+                        pdfsam.property(ConfigurableProperty.DONATE_URL), null));
+        content.setAlignment(Pos.TOP_RIGHT);
+
+        container.addStickyNotification(DefaultI18nContext.getInstance().i18n("PDFsam worked hard!"), content);
+    }
+
+----------------------------------------
+    public void onUpdateAvailable(UpdateAvailableEvent event) {
+        VBox content = new VBox(3,
+                buildLabel(DefaultI18nContext.getInstance().i18n("PDFsam {0} is available for download",
+                        event.availableVersion), NotificationType.INFO),
+                styledUrlButton(DefaultI18nContext.getInstance().i18n("Download"),
+                        pdfsam.property(ConfigurableProperty.DOWNLOAD_URL), null));
+        content.setAlignment(Pos.TOP_RIGHT);
+
+        container.addStickyNotification(DefaultI18nContext.getInstance().i18n("New version available"), content);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512792
+pdfsam-core/src/main/java/org/pdfsam/support/XmlUtils.java 39 47
+pdfsam-core/src/main/java/org/pdfsam/support/filter/FileFilterType.java 60 68
+----------------------------------------
+    public static String nullSafeGetStringAttribute(Node node, String attributeName) {
+        if (node != null) {
+            Node namedItem = node.getAttributes().getNamedItem(attributeName);
+            if (namedItem != null) {
+                return namedItem.getNodeValue();
+            }
+        }
+        return null;
+    }
+
+----------------------------------------
+    boolean accept(File file) {
+        if (file != null) {
+            if (isNotEmpty(acceptedExtensions)) {
+                return isAccepted(file);
+            }
+            return file.isDirectory();
+        }
+        return false;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512793
+pdfsam-core/src/main/java/org/pdfsam/support/validation/PositiveIntegerStringValidator.java 30 37
+pdfsam-core/src/main/java/org/pdfsam/support/filter/FileFilterType.java 80 86
+----------------------------------------
+    public boolean isValid(String input) {
+        try {
+            return Integer.parseInt(input) > 0;
+        } catch (NumberFormatException e) {
+            // not a valid integer
+            return false;
+        }
+    }
+
+----------------------------------------
+    public boolean isValid(String input) {
+        try {
+            return StringUtils.isNotBlank(input) && accept(Paths.get(input).toFile());
+        } catch (InvalidPathException ipe) {
+            return false;
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512798
+pdfsam-core/src/main/java/org/pdfsam/module/TaskExecutionRequestEvent.java 43 48
+pdfsam-gui/src/main/java/org/pdfsam/ui/dashboard/preference/PreferenceSetterOnValidState.java 44 50
+----------------------------------------
+    public TaskExecutionRequestEvent(String moduleId, AbstractParameters parameters) {
+        requireNotNull(parameters, "Task parameters cannot be null");
+        require(isNotBlank(moduleId), "Module id cannot be blank");
+        this.parameters = parameters;
+        this.moduleId = moduleId;
+    }
+
+----------------------------------------
+    PreferenceSetterOnValidState(StringUserPreference preference, ValidableTextField textField, UserContext userContext) {
+        requireNotNull(preference, "Preference cannot be null");
+        requireNotNull(textField, "TextField cannot be null");
+        this.textField = textField;
+        this.preference = preference;
+        this.userContext = userContext;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512797
+pdfsam-gui/src/main/java/org/pdfsam/ui/notification/NotificationsController.java 68 74
+pdfsam-gui/src/main/java/org/pdfsam/ui/dashboard/preference/PreferenceSetterOnValidState.java 44 50
+----------------------------------------
+            UserContext userContext) {
+        this.container = container;
+        this.service = service;
+        this.pdfsam = pdfsam;
+        this.userContext = userContext;
+        eventStudio().addAnnotatedListeners(this);
+    }
+
+----------------------------------------
+    PreferenceSetterOnValidState(StringUserPreference preference, ValidableTextField textField, UserContext userContext) {
+        requireNotNull(preference, "Preference cannot be null");
+        requireNotNull(textField, "TextField cannot be null");
+        this.textField = textField;
+        this.preference = preference;
+        this.userContext = userContext;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512796
+pdfsam-fx/src/main/java/org/pdfsam/ui/selection/ShowPasswordFieldPopupRequest.java 37 42
+pdfsam-gui/src/main/java/org/pdfsam/ui/dashboard/preference/PreferenceSetterOnValidState.java 44 50
+----------------------------------------
+    public ShowPasswordFieldPopupRequest(PdfDocumentDescriptor pdfDescriptor, Region requestingNode) {
+        requireNotNull(pdfDescriptor, "Cannot show password field popup for a null document");
+        requireNotNull(requestingNode, "Cannot show password field popup for a null node");
+        this.pdfDescriptor = pdfDescriptor;
+        this.requestingNode = requestingNode;
+    }
+
+----------------------------------------
+    PreferenceSetterOnValidState(StringUserPreference preference, ValidableTextField textField, UserContext userContext) {
+        requireNotNull(preference, "Preference cannot be null");
+        requireNotNull(textField, "TextField cannot be null");
+        this.textField = textField;
+        this.preference = preference;
+        this.userContext = userContext;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512795
+pdfsam-community/src/main/java/org/pdfsam/community/PdfsamCommunity.java 38 45
+pdfsam-gui/src/main/java/org/pdfsam/ui/dashboard/preference/PreferenceSetterOnValidState.java 44 50
+----------------------------------------
+    public PdfsamCommunity(String name, String shortName, Environment env) {
+        requireNotBlank(name, "Application name cannot be blank");
+        requireNotBlank(shortName, "Application short name cannot be blank");
+        requireNotNull(env, "Environment cannot be null");
+        this.env = env;
+        this.name = name;
+        this.shortName = shortName;
+    }
+
+----------------------------------------
+    PreferenceSetterOnValidState(StringUserPreference preference, ValidableTextField textField, UserContext userContext) {
+        requireNotNull(preference, "Preference cannot be null");
+        requireNotNull(textField, "TextField cannot be null");
+        this.textField = textField;
+        this.preference = preference;
+        this.userContext = userContext;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512800
+pdfsam-core/src/main/java/org/pdfsam/ui/StageStatus.java 72 78
+pdfsam-gui/src/main/java/org/pdfsam/ui/dashboard/preference/PreferenceSetterOnValidState.java 44 50
+----------------------------------------
+    public StageStatus(double x, double y, double width, double height) {
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+        this.mode = StageMode.DEFAULT;
+    }
+
+----------------------------------------
+    PreferenceSetterOnValidState(StringUserPreference preference, ValidableTextField textField, UserContext userContext) {
+        requireNotNull(preference, "Preference cannot be null");
+        requireNotNull(textField, "TextField cannot be null");
+        this.textField = textField;
+        this.preference = preference;
+        this.userContext = userContext;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512794
+pdfsam-fx/src/main/java/org/pdfsam/ui/notification/AddNotificationRequestEvent.java 35 41
+pdfsam-gui/src/main/java/org/pdfsam/ui/dashboard/preference/PreferenceSetterOnValidState.java 44 50
+----------------------------------------
+    public AddNotificationRequestEvent(NotificationType type, String message, String title) {
+        requireNotNull(type, "Notification type cannot be null");
+        requireNotBlank(message, "Notification message cannot be blank");
+        this.type = type;
+        this.message = message;
+        this.title = title;
+    }
+
+----------------------------------------
+    PreferenceSetterOnValidState(StringUserPreference preference, ValidableTextField textField, UserContext userContext) {
+        requireNotNull(preference, "Preference cannot be null");
+        requireNotNull(textField, "TextField cannot be null");
+        this.textField = textField;
+        this.preference = preference;
+        this.userContext = userContext;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512799
+pdfsam-gui/src/main/java/org/pdfsam/sound/PlaySoundController.java 47 54
+pdfsam-gui/src/main/java/org/pdfsam/ui/dashboard/preference/PreferenceSetterOnValidState.java 44 50
+----------------------------------------
+            @Named("errorSound") String errorSoundURI) {
+        requireNotBlank(okSoundURI, "");
+        requireNotBlank(errorSoundURI, "");
+        this.userContext = userContext;
+        this.okSoundURI = okSoundURI;
+        this.errorSoundURI = errorSoundURI;
+        eventStudio().addAnnotatedListeners(this);
+    }
+
+----------------------------------------
+    PreferenceSetterOnValidState(StringUserPreference preference, ValidableTextField textField, UserContext userContext) {
+        requireNotNull(preference, "Preference cannot be null");
+        requireNotNull(textField, "TextField cannot be null");
+        this.textField = textField;
+        this.preference = preference;
+        this.userContext = userContext;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512801
+pdfsam-gui/src/main/java/org/pdfsam/ui/dashboard/preference/PreferenceBrowsableFileField.java 38 45
+pdfsam-gui/src/main/java/org/pdfsam/ui/dashboard/preference/PreferenceBrowsableDirectoryField.java 37 43
+----------------------------------------
+            UserContext userContext) {
+        super(type, openType);
+        requireNotNull(preference, "Preference cannot be null");
+        requireNotNull(userContext, "UserContext cannot be null");
+        enforceValidation(true, true);
+        getTextField().validProperty().addListener(
+                new PreferenceSetterOnValidState(preference, getTextField(), userContext));
+    }
+
+----------------------------------------
+    PreferenceBrowsableDirectoryField(StringUserPreference preference, UserContext userContext) {
+        getTextField().setValidator(validEmpty(existingDirectory()));
+        requireNotNull(preference, "Preference cannot be null");
+        requireNotNull(userContext, "UserContext cannot be null");
+        getTextField().validProperty()
+                .addListener(new PreferenceSetterOnValidState(preference, getTextField(), userContext));
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+80
+21512802
+pdfsam-split-by-size/src/main/java/org/pdfsam/splitbysize/SplitBySizeModule.java 83 90
+pdfsam-alternate-mix/src/main/java/org/pdfsam/alternatemix/AlternateMixModule.java 75 80
+----------------------------------------
+            @Named(MODULE_ID + "pane") PdfDestinationPane destinationPane, @Named(MODULE_ID + "footer") Footer footer) {
+        super(footer);
+        this.destinationDirectoryField = destinationDirectoryField;
+        this.destinationPane = destinationPane;
+        this.selectionPane = new TaskParametersBuilderSingleSelectionPane(id());
+        this.selectionPane.setPromptText(
+                DefaultI18nContext.getInstance().i18n("Select or drag and drop the PDF you want to split"));
+    }
+
+----------------------------------------
+            @Named(MODULE_ID + "pane") PdfDestinationPane destinationPane, @Named(MODULE_ID + "footer") Footer footer) {
+        super(footer);
+        this.destinationFileField = destinationFileField;
+        this.destinationPane = destinationPane;
+
+    }
+
+----------------------------------------

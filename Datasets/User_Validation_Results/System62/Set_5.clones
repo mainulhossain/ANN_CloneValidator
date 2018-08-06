@@ -1,0 +1,2038 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+24218193
+ext/vserv-tcpip/src/java/org/savarese/vserv/tcpip/TCPPacket.java 451 464
+ext/vserv-tcpip/src/java/org/savarese/vserv/tcpip/UDPPacket.java 211 224
+----------------------------------------
+  private final int __getVirtualHeaderTotal() {
+    int s1 =
+      ((_data_[OFFSET_SOURCE_ADDRESS] & 0xff) << 8) |
+      (_data_[OFFSET_SOURCE_ADDRESS + 1] & 0xff);
+    int s2 =
+      ((_data_[OFFSET_SOURCE_ADDRESS + 2] & 0xff) << 8) |
+      (_data_[OFFSET_SOURCE_ADDRESS + 3] & 0xff);
+    int d1 =
+      ((_data_[OFFSET_DESTINATION_ADDRESS] & 0xff) << 8) |
+      (_data_[OFFSET_DESTINATION_ADDRESS + 1] & 0xff);
+    int d2 =
+      ((_data_[OFFSET_DESTINATION_ADDRESS + 2] & 0xff) << 8) |
+      (_data_[OFFSET_DESTINATION_ADDRESS + 3] & 0xff);
+    return s1 + s2 + d1 + d2 + getProtocol() + getTCPPacketByteLength();
+
+----------------------------------------
+  private final int __getVirtualHeaderTotal() {
+    int s1 =
+      ((_data_[OFFSET_SOURCE_ADDRESS] & 0xff) << 8) |
+      (_data_[OFFSET_SOURCE_ADDRESS + 1] & 0xff);
+    int s2 =
+      ((_data_[OFFSET_SOURCE_ADDRESS + 2] & 0xff) << 8) |
+      (_data_[OFFSET_SOURCE_ADDRESS + 3] & 0xff);
+    int d1 =
+      ((_data_[OFFSET_DESTINATION_ADDRESS] & 0xff) << 8) |
+      (_data_[OFFSET_DESTINATION_ADDRESS + 1] & 0xff);
+    int d2 =
+      ((_data_[OFFSET_DESTINATION_ADDRESS + 2] & 0xff) << 8) |
+      (_data_[OFFSET_DESTINATION_ADDRESS + 3] & 0xff);
+    return s1 + s2 + d1 + d2 + getProtocol() + getUDPPacketByteLength();
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+24218194
+src/net/azib/ipscan/gui/EditFavoritesDialog.java 69 75
+src/net/azib/ipscan/gui/PreferencesDialog.java 109 115
+----------------------------------------
+		Button okButton = new Button(shell, SWT.NONE);
+		okButton.setText(Labels.getLabel("button.OK"));		
+		
+		Button cancelButton = new Button(shell, SWT.NONE);
+		cancelButton.setText(Labels.getLabel("button.cancel"));		
+
+		positionButtonsInFormLayout(okButton, cancelButton, favoritesList);
+
+----------------------------------------
+		okButton = new Button(shell, SWT.NONE);
+		okButton.setText(Labels.getLabel("button.OK"));
+		
+		cancelButton = new Button(shell, SWT.NONE);
+		cancelButton.setText(Labels.getLabel("button.cancel"));
+		
+		positionButtonsInFormLayout(okButton, cancelButton, tabFolder);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+24218196
+src/net/azib/ipscan/gui/SelectFetchersDialog.java 102 108
+src/net/azib/ipscan/gui/PreferencesDialog.java 109 115
+----------------------------------------
+		Button okButton = new Button(shell, SWT.NONE);
+		okButton.setText(Labels.getLabel("button.OK"));
+		
+		Button cancelButton = new Button(shell, SWT.NONE);
+		cancelButton.setText(Labels.getLabel("button.cancel"));
+		
+		positionButtonsInFormLayout(okButton, cancelButton, registeredFetchersList);
+
+----------------------------------------
+		okButton = new Button(shell, SWT.NONE);
+		okButton.setText(Labels.getLabel("button.OK"));
+		
+		cancelButton = new Button(shell, SWT.NONE);
+		cancelButton.setText(Labels.getLabel("button.cancel"));
+		
+		positionButtonsInFormLayout(okButton, cancelButton, tabFolder);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+24218195
+src/net/azib/ipscan/gui/EditOpenersDialog.java 133 139
+src/net/azib/ipscan/gui/PreferencesDialog.java 109 115
+----------------------------------------
+		Button okButton = new Button(shell, SWT.NONE);
+		okButton.setText(Labels.getLabel("button.OK"));
+
+		Button cancelButton = new Button(shell, SWT.NONE);
+		cancelButton.setText(Labels.getLabel("button.cancel"));
+
+		positionButtonsInFormLayout(okButton, cancelButton, editFieldsGroup);
+
+----------------------------------------
+		okButton = new Button(shell, SWT.NONE);
+		okButton.setText(Labels.getLabel("button.OK"));
+		
+		cancelButton = new Button(shell, SWT.NONE);
+		cancelButton.setText(Labels.getLabel("button.cancel"));
+		
+		positionButtonsInFormLayout(okButton, cancelButton, tabFolder);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+24218197
+src/net/azib/ipscan/gui/actions/StartStopScanningAction.java 161 170
+src/net/azib/ipscan/gui/actions/StartStopScanningAction.java 174 183
+----------------------------------------
+					scannerThread = scannerThreadFactory.createScannerThread(feederRegistry.createFeeder(), StartStopScanningAction.this, createResultsCallback(state));
+					stateMachine.startScanning();
+					mainWindowTitle = statusBar.getShell().getText();
+				}
+				catch (RuntimeException e) {
+					stateMachine.reset();
+					throw e;
+				}
+				break;
+			case RESTARTING:
+
+----------------------------------------
+					scannerThread = scannerThreadFactory.createScannerThread(feederRegistry.createRescanFeeder(resultTable.getSelection()), StartStopScanningAction.this, createResultsCallback(state));
+					stateMachine.startScanning();
+					mainWindowTitle = statusBar.getShell().getText();
+				}
+				catch (RuntimeException e) {
+					stateMachine.reset();
+					throw e;
+				}
+				break;
+			case SCANNING:
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+24218198
+src/net/azib/ipscan/core/net/ICMPPinger.java 118 124
+src/net/azib/ipscan/core/net/TCPPinger.java 39 44
+----------------------------------------
+	public PingResult ping(ScanningSubject subject, int count) throws IOException {
+		PingResult result = new PingResult(subject.getAddress());
+		RawSocket socket = createRawSocket();
+		
+		try {
+			// send a bunch of packets
+			for (int i = 0; i < count && !Thread.currentThread().isInterrupted(); i++) {
+
+----------------------------------------
+	public PingResult ping(ScanningSubject subject, int count) throws IOException {
+		PingResult result = new PingResult(subject.getAddress());
+		int workingPort = -1;
+
+		Socket socket;
+		for (int i = 0; i < count && !Thread.currentThread().isInterrupted(); i++) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+27327364
+src/net/azib/ipscan/exporters/ExporterException.java 6 25
+src/net/azib/ipscan/feeders/FeederException.java 6 26
+----------------------------------------
+package net.azib.ipscan.exporters;
+
+/**
+ * Exception for throwing in case of problems in Exporters.
+ * 
+ * @author Anton Keks
+ */
+public class ExporterException extends IllegalArgumentException {
+	
+	static final long serialVersionUID = 746237846273847L;
+
+	public ExporterException(String message) {
+		super(message);
+	}
+	
+	public ExporterException(String message, Throwable cause) {
+		super(message);
+		initCause(cause);
+	}
+}
+
+----------------------------------------
+package net.azib.ipscan.feeders;
+
+/**
+ * Exception for throwing in case of problems with Feeders.
+ * 
+ * @author Anton Keks
+ */
+public class FeederException extends IllegalArgumentException {
+	
+	static final long serialVersionUID = 746237846273847L;
+
+	public FeederException(String message) {
+		super(message);
+	}
+	
+	public FeederException(String message, Throwable cause) {
+		super(message);
+		initCause(cause);
+	}
+
+}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+27327365
+src/net/azib/ipscan/fetchers/PortTextFetcher.java 6 11
+src/net/azib/ipscan/core/ScanningSubject.java 6 11
+----------------------------------------
+package net.azib.ipscan.fetchers;
+
+import net.azib.ipscan.config.LoggerFactory;
+import net.azib.ipscan.config.ScannerConfig;
+import net.azib.ipscan.core.ScanningResult.ResultType;
+import net.azib.ipscan.core.ScanningSubject;
+
+----------------------------------------
+package net.azib.ipscan.core;
+
+import net.azib.ipscan.config.Config;
+import net.azib.ipscan.config.ScannerConfig;
+import net.azib.ipscan.core.ScanningResult.ResultType;
+import net.azib.ipscan.core.net.PingResult;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+27327366
+src/net/azib/ipscan/core/ScanningSubject.java 6 11
+src/net/azib/ipscan/fetchers/PingFetcher.java 5 10
+----------------------------------------
+package net.azib.ipscan.core;
+
+import net.azib.ipscan.config.Config;
+import net.azib.ipscan.config.ScannerConfig;
+import net.azib.ipscan.core.ScanningResult.ResultType;
+import net.azib.ipscan.core.net.PingResult;
+
+----------------------------------------
+package net.azib.ipscan.fetchers;
+
+import net.azib.ipscan.config.LoggerFactory;
+import net.azib.ipscan.config.ScannerConfig;
+import net.azib.ipscan.core.ScanningResult.ResultType;
+import net.azib.ipscan.core.ScanningSubject;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+27327367
+src/net/azib/ipscan/core/ScanningResultList.java 6 11
+src/net/azib/ipscan/gui/actions/StartStopScanningAction.java 11 15
+----------------------------------------
+package net.azib.ipscan.core;
+
+import net.azib.ipscan.core.ScanningResult.ResultType;
+import net.azib.ipscan.core.state.ScanningState;
+import net.azib.ipscan.core.state.StateMachine;
+import net.azib.ipscan.core.state.StateMachine.Transition;
+
+----------------------------------------
+import net.azib.ipscan.core.*;
+import net.azib.ipscan.core.ScanningResult.ResultType;
+import net.azib.ipscan.core.net.PingerRegistry;
+import net.azib.ipscan.core.state.ScanningState;
+import net.azib.ipscan.core.state.StateMachine;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+27327368
+src/net/azib/ipscan/core/net/ICMPPinger.java 6 20
+src/net/azib/ipscan/core/net/ICMPSharedPinger.java 6 20
+----------------------------------------
+package net.azib.ipscan.core.net;
+
+import net.azib.ipscan.config.LoggerFactory;
+import net.azib.ipscan.core.ScanningSubject;
+import org.savarese.rocksaw.net.RawSocket;
+import org.savarese.vserv.tcpip.ICMPEchoPacket;
+import org.savarese.vserv.tcpip.ICMPPacket;
+import org.savarese.vserv.tcpip.IPPacket;
+import org.savarese.vserv.tcpip.OctetConverter;
+
+import java.io.IOException;
+import java.io.InterruptedIOException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.logging.Level;
+
+----------------------------------------
+package net.azib.ipscan.core.net;
+
+import net.azib.ipscan.config.LoggerFactory;
+import net.azib.ipscan.core.ScanningSubject;
+import org.savarese.rocksaw.net.RawSocket;
+import org.savarese.vserv.tcpip.ICMPEchoPacket;
+import org.savarese.vserv.tcpip.ICMPPacket;
+import org.savarese.vserv.tcpip.IPPacket;
+import org.savarese.vserv.tcpip.OctetConverter;
+
+import java.io.IOException;
+import java.io.InterruptedIOException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.Map;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+27327369
+src/net/azib/ipscan/core/values/NotAvailable.java 4 30
+src/net/azib/ipscan/core/values/NotScanned.java 4 30
+----------------------------------------
+package net.azib.ipscan.core.values;
+
+import net.azib.ipscan.config.Config;
+
+/**
+ * The value for displaying in the result list, meaning that the actual value is unknown,
+ * because it wasn't resolved successfully.
+ *
+ * @author Anton Keks
+ */
+public class NotAvailable extends Empty {
+	public static final NotAvailable VALUE = new NotAvailable();
+	
+	private NotAvailable() {}
+
+	/**
+	 * Displays a user-friendly text string :-)
+	 */
+	public String toString() {
+		return Config.getConfig().forScanner().notAvailableText;
+	}
+
+	@Override
+	public int compareTo(Object that) {
+		// n/a < n/s
+		if (that == NotScanned.VALUE)
+			return -sortDirection;
+
+----------------------------------------
+package net.azib.ipscan.core.values;
+
+import net.azib.ipscan.config.Config;
+
+/**
+ * The value for displaying in the result list, meaning that the actual value is unknown,
+ * because it was not scanned.
+ *
+ * @author Anton Keks
+ */
+public class NotScanned extends Empty {
+	public static final NotScanned VALUE = new NotScanned();
+	
+	private NotScanned() {}
+
+	/**
+	 * Displays a user-friendly text string :-)
+	 */
+	public String toString() {
+		return Config.getConfig().forScanner().notScannedText;
+	}
+
+	@Override
+	public int compareTo(Object that) {
+		// n/s > n/a
+		if (that == NotAvailable.VALUE)
+			return sortDirection;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+27327370
+src/net/azib/ipscan/gui/SelectFetchersDialog.java 102 110
+src/net/azib/ipscan/gui/EditFavoritesDialog.java 69 77
+----------------------------------------
+		Button okButton = new Button(shell, SWT.NONE);
+		okButton.setText(Labels.getLabel("button.OK"));
+		
+		Button cancelButton = new Button(shell, SWT.NONE);
+		cancelButton.setText(Labels.getLabel("button.cancel"));
+		
+		positionButtonsInFormLayout(okButton, cancelButton, registeredFetchersList);
+
+		upButton.addListener(SWT.Selection, new UpButtonListener(selectedFetchersList));
+
+----------------------------------------
+		Button okButton = new Button(shell, SWT.NONE);
+		okButton.setText(Labels.getLabel("button.OK"));		
+		
+		Button cancelButton = new Button(shell, SWT.NONE);
+		cancelButton.setText(Labels.getLabel("button.cancel"));		
+
+		positionButtonsInFormLayout(okButton, cancelButton, favoritesList);
+		
+		shell.pack();
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+27327371
+src/net/azib/ipscan/gui/SelectFetchersDialog.java 102 110
+src/net/azib/ipscan/gui/fetchers/PortTextFetcherPrefs.java 79 87
+----------------------------------------
+		Button okButton = new Button(shell, SWT.NONE);
+		okButton.setText(Labels.getLabel("button.OK"));
+		
+		Button cancelButton = new Button(shell, SWT.NONE);
+		cancelButton.setText(Labels.getLabel("button.cancel"));
+		
+		positionButtonsInFormLayout(okButton, cancelButton, registeredFetchersList);
+
+		upButton.addListener(SWT.Selection, new UpButtonListener(selectedFetchersList));
+
+----------------------------------------
+		Button okButton = new Button(shell, SWT.NONE);
+		okButton.setText(Labels.getLabel("button.OK"));
+
+		Button cancelButton = new Button(shell, SWT.NONE);
+		cancelButton.setText(Labels.getLabel("button.cancel"));
+
+		positionButtonsInFormLayout(okButton, cancelButton, extractGroup);
+
+		okButton.addSelectionListener(new SelectionAdapter() {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+27327372
+src/net/azib/ipscan/gui/SelectFetchersDialog.java 102 110
+src/net/azib/ipscan/gui/EditOpenersDialog.java 133 141
+----------------------------------------
+		Button okButton = new Button(shell, SWT.NONE);
+		okButton.setText(Labels.getLabel("button.OK"));
+		
+		Button cancelButton = new Button(shell, SWT.NONE);
+		cancelButton.setText(Labels.getLabel("button.cancel"));
+		
+		positionButtonsInFormLayout(okButton, cancelButton, registeredFetchersList);
+
+		upButton.addListener(SWT.Selection, new UpButtonListener(selectedFetchersList));
+
+----------------------------------------
+		Button okButton = new Button(shell, SWT.NONE);
+		okButton.setText(Labels.getLabel("button.OK"));
+
+		Button cancelButton = new Button(shell, SWT.NONE);
+		cancelButton.setText(Labels.getLabel("button.cancel"));
+
+		positionButtonsInFormLayout(okButton, cancelButton, editFieldsGroup);
+
+		shell.pack();
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+27327373
+src/net/azib/ipscan/gui/SelectFetchersDialog.java 78 81
+src/net/azib/ipscan/gui/EditFavoritesDialog.java 62 65
+----------------------------------------
+		prefsButton.setToolTipText(Labels.getLabel("text.fetchers.preferences"));
+		
+		upButton.setLayoutData(LayoutHelper.formData(new FormAttachment(selectedFetchersList), new FormAttachment(downButton, 0, SWT.RIGHT), new FormAttachment(selectedLabel), null));
+		downButton.setLayoutData(LayoutHelper.formData(new FormAttachment(selectedFetchersList), null, new FormAttachment(upButton), null));
+
+----------------------------------------
+		deleteButton.addListener(SWT.Selection, new DeleteListener());
+		
+		upButton.setLayoutData(LayoutHelper.formData(new FormAttachment(favoritesList), new FormAttachment(renameButton, 0, SWT.RIGHT), new FormAttachment(messageLabel), null));
+		downButton.setLayoutData(LayoutHelper.formData(new FormAttachment(favoritesList), new FormAttachment(renameButton, 0, SWT.RIGHT), new FormAttachment(upButton), null));
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+27327374
+src/net/azib/ipscan/gui/SelectFetchersDialog.java 37 45
+src/net/azib/ipscan/gui/InputDialog.java 32 41
+----------------------------------------
+		this.fetcherRegistry = fetcherRegistry;
+	}
+	
+	@Override protected void populateShell() {
+		Display currentDisplay = Display.getCurrent();
+		Shell parent = currentDisplay != null ? currentDisplay.getActiveShell() : null;
+		shell = new Shell(parent, SWT.APPLICATION_MODAL | SWT.DIALOG_TRIM);
+
+		shell.setText(Labels.getLabel("title.fetchers.select"));
+
+----------------------------------------
+		messageLabel.pack();
+	}
+
+	@Override
+	protected void populateShell() {
+		Display currentDisplay = Display.getCurrent();
+		Shell parent = currentDisplay != null ? currentDisplay.getActiveShell() : null;
+		
+		shell = new Shell(parent, SWT.APPLICATION_MODAL | SWT.DIALOG_TRIM);
+		shell.setLayout(LayoutHelper.formLayout(10, 10, 4));
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+27327375
+src/net/azib/ipscan/gui/EditOpenersDialog.java 131 153
+src/net/azib/ipscan/gui/EditFavoritesDialog.java 67 89
+----------------------------------------
+		editFieldsGroup.pack();
+
+		Button okButton = new Button(shell, SWT.NONE);
+		okButton.setText(Labels.getLabel("button.OK"));
+
+		Button cancelButton = new Button(shell, SWT.NONE);
+		cancelButton.setText(Labels.getLabel("button.cancel"));
+
+		positionButtonsInFormLayout(okButton, cancelButton, editFieldsGroup);
+
+		shell.pack();
+
+		okButton.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
+				saveOpeners();
+				shell.close();
+			}
+		});
+		cancelButton.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
+				shell.close();
+			}
+		});
+
+----------------------------------------
+		deleteButton.setLayoutData(LayoutHelper.formData(new FormAttachment(favoritesList), new FormAttachment(renameButton, 0, SWT.RIGHT), new FormAttachment(renameButton), null));
+		
+		Button okButton = new Button(shell, SWT.NONE);
+		okButton.setText(Labels.getLabel("button.OK"));		
+		
+		Button cancelButton = new Button(shell, SWT.NONE);
+		cancelButton.setText(Labels.getLabel("button.cancel"));		
+
+		positionButtonsInFormLayout(okButton, cancelButton, favoritesList);
+		
+		shell.pack();
+		
+		okButton.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
+				saveFavorites();
+				shell.close();
+			}
+		});
+		cancelButton.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
+				shell.close();
+			}
+		});
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+27327376
+src/net/azib/ipscan/gui/EditOpenersDialog.java 131 141
+src/net/azib/ipscan/gui/fetchers/PortTextFetcherPrefs.java 77 87
+----------------------------------------
+		editFieldsGroup.pack();
+
+		Button okButton = new Button(shell, SWT.NONE);
+		okButton.setText(Labels.getLabel("button.OK"));
+
+		Button cancelButton = new Button(shell, SWT.NONE);
+		cancelButton.setText(Labels.getLabel("button.cancel"));
+
+		positionButtonsInFormLayout(okButton, cancelButton, editFieldsGroup);
+
+		shell.pack();
+
+----------------------------------------
+		extractGroup.setLayoutData(LayoutHelper.formData(new FormAttachment(0), new FormAttachment(textToSend, 0, SWT.RIGHT), new FormAttachment(replaceLabel), null));
+
+		Button okButton = new Button(shell, SWT.NONE);
+		okButton.setText(Labels.getLabel("button.OK"));
+
+		Button cancelButton = new Button(shell, SWT.NONE);
+		cancelButton.setText(Labels.getLabel("button.cancel"));
+
+		positionButtonsInFormLayout(okButton, cancelButton, extractGroup);
+
+		okButton.addSelectionListener(new SelectionAdapter() {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+27327377
+src/net/azib/ipscan/gui/InputDialog.java 32 41
+src/net/azib/ipscan/gui/EditOpenersDialog.java 41 50
+----------------------------------------
+		messageLabel.pack();
+	}
+
+	@Override
+	protected void populateShell() {
+		Display currentDisplay = Display.getCurrent();
+		Shell parent = currentDisplay != null ? currentDisplay.getActiveShell() : null;
+		
+		shell = new Shell(parent, SWT.APPLICATION_MODAL | SWT.DIALOG_TRIM);
+		shell.setLayout(LayoutHelper.formLayout(10, 10, 4));
+
+----------------------------------------
+		this.openersConfig = openersConfig;
+	}
+
+	@Override
+	protected void populateShell() {
+		Display currentDisplay = Display.getCurrent();
+		Shell parent = currentDisplay != null ? currentDisplay.getActiveShell() : null;
+		shell = new Shell(parent, SWT.APPLICATION_MODAL | SWT.DIALOG_TRIM);
+
+		shell.setText(Labels.getLabel("title.openers.edit"));
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+27327378
+src/net/azib/ipscan/gui/feeders/RandomFeederGUI.java 14 24
+src/net/azib/ipscan/gui/feeders/RangeFeederGUI.java 15 24
+----------------------------------------
+import org.eclipse.swt.events.TraverseListener;
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.*;
+
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+import static net.azib.ipscan.config.Labels.getLabel;
+
+----------------------------------------
+import org.eclipse.swt.events.*;
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.*;
+
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+import java.net.InetAddress;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+27327379
+src/net/azib/ipscan/gui/feeders/RangeFeederGUI.java 15 24
+src/net/azib/ipscan/gui/feeders/FileFeederGUI.java 11 21
+----------------------------------------
+import org.eclipse.swt.events.*;
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.*;
+
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+import java.net.InetAddress;
+
+----------------------------------------
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.*;
+
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+import static net.azib.ipscan.config.Labels.getLabel;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+27327380
+src/net/azib/ipscan/gui/fetchers/PortTextFetcherPrefs.java 85 97
+src/net/azib/ipscan/gui/PreferencesDialog.java 118 130
+----------------------------------------
+		positionButtonsInFormLayout(okButton, cancelButton, extractGroup);
+
+		okButton.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				savePreferences();
+				shell.close();
+			}
+		});
+		cancelButton.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				shell.close();
+			}
+		});
+
+----------------------------------------
+		okButton.setFocus();
+
+		okButton.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				savePreferences();
+				shell.close();
+			}
+		});
+		cancelButton.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				shell.close();
+			}
+		});
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+27327381
+src/net/azib/ipscan/gui/InputDialog.java 46 54
+src/net/azib/ipscan/gui/PreferencesDialog.java 107 115
+----------------------------------------
+		text = new Text(shell, SWT.BORDER);
+		
+		okButton = new Button(shell, SWT.NONE);
+		okButton.setText(Labels.getLabel("button.OK"));
+
+		cancelButton = new Button(shell, SWT.NONE);
+		cancelButton.setText(Labels.getLabel("button.cancel"));
+				
+		okButton.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+
+----------------------------------------
+		createTabFolder();
+
+		okButton = new Button(shell, SWT.NONE);
+		okButton.setText(Labels.getLabel("button.OK"));
+		
+		cancelButton = new Button(shell, SWT.NONE);
+		cancelButton.setText(Labels.getLabel("button.cancel"));
+		
+		positionButtonsInFormLayout(okButton, cancelButton, tabFolder);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+27327382
+src/net/azib/ipscan/gui/InputDialog.java 32 41
+src/net/azib/ipscan/gui/EditFavoritesDialog.java 25 34
+----------------------------------------
+		messageLabel.pack();
+	}
+
+	@Override
+	protected void populateShell() {
+		Display currentDisplay = Display.getCurrent();
+		Shell parent = currentDisplay != null ? currentDisplay.getActiveShell() : null;
+		
+		shell = new Shell(parent, SWT.APPLICATION_MODAL | SWT.DIALOG_TRIM);
+		shell.setLayout(LayoutHelper.formLayout(10, 10, 4));
+
+----------------------------------------
+		this.favoritesConfig = favoritesConfig;
+	}
+
+	@Override
+	protected void populateShell() {
+		Display currentDisplay = Display.getCurrent();
+		Shell parent = currentDisplay != null ? currentDisplay.getActiveShell() : null;
+		shell = new Shell(parent, SWT.APPLICATION_MODAL | SWT.DIALOG_TRIM);
+
+		shell.setText(Labels.getLabel("title.favorite.edit"));
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+27327383
+src/net/azib/ipscan/gui/InputDialog.java 32 41
+src/net/azib/ipscan/gui/GettingStartedDialog.java 38 47
+----------------------------------------
+		messageLabel.pack();
+	}
+
+	@Override
+	protected void populateShell() {
+		Display currentDisplay = Display.getCurrent();
+		Shell parent = currentDisplay != null ? currentDisplay.getActiveShell() : null;
+		
+		shell = new Shell(parent, SWT.APPLICATION_MODAL | SWT.DIALOG_TRIM);
+		shell.setLayout(LayoutHelper.formLayout(10, 10, 4));
+
+----------------------------------------
+		return this;
+	}
+
+	@Override
+	protected void populateShell() {
+		Display currentDisplay = Display.getCurrent();
+		Shell parent = currentDisplay != null ? currentDisplay.getActiveShell() : null;
+		shell = new Shell(parent, SWT.APPLICATION_MODAL | SWT.DIALOG_TRIM);
+
+		shell.setText(Labels.getLabel("title.gettingStarted"));
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+27327384
+src/net/azib/ipscan/gui/MainWindow.java 6 11
+src/net/azib/ipscan/gui/Startup.java 1 6
+----------------------------------------
+package net.azib.ipscan.gui;
+
+import net.azib.ipscan.config.GUIConfig;
+import net.azib.ipscan.config.Labels;
+import net.azib.ipscan.config.Version;
+import net.azib.ipscan.core.state.ScanningState;
+
+----------------------------------------
+package net.azib.ipscan.gui;
+
+import net.azib.ipscan.config.GUIConfig;
+import net.azib.ipscan.config.Labels;
+import net.azib.ipscan.config.Platform;
+import net.azib.ipscan.config.Version;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+27327385
+src/net/azib/ipscan/gui/actions/ToolsActions.java 18 26
+src/net/azib/ipscan/gui/menu/ToolsMenu.java 5 12
+----------------------------------------
+import net.azib.ipscan.gui.*;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Event;
+import org.eclipse.swt.widgets.Listener;
+import org.eclipse.swt.widgets.Table;
+
+import javax.inject.Inject;
+
+import static net.azib.ipscan.core.ScanningResult.ResultType.*;
+
+----------------------------------------
+import net.azib.ipscan.gui.actions.ToolsActions;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Menu;
+import org.eclipse.swt.widgets.MenuItem;
+import org.eclipse.swt.widgets.Shell;
+
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+27327386
+src/net/azib/ipscan/gui/menu/ToolsMenu.java 5 12
+src/net/azib/ipscan/gui/MainMenu.java 13 20
+----------------------------------------
+import net.azib.ipscan.gui.actions.ToolsActions;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Menu;
+import org.eclipse.swt.widgets.MenuItem;
+import org.eclipse.swt.widgets.Shell;
+
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
+----------------------------------------
+import net.azib.ipscan.gui.menu.*;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Menu;
+import org.eclipse.swt.widgets.MenuItem;
+import org.eclipse.swt.widgets.Shell;
+
+import javax.inject.Inject;
+import javax.inject.Named;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+27327387
+src/net/azib/ipscan/gui/menu/FavoritesMenu.java 1 18
+src/net/azib/ipscan/gui/menu/ResultsContextMenu.java 1 13
+----------------------------------------
+package net.azib.ipscan.gui.menu;
+
+import net.azib.ipscan.gui.actions.FavoritesMenuActions;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Shell;
+
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
+/**
+ * FavoritesMenu wrapper for type-safety
+ */
+@Singleton
+public class FavoritesMenu extends AbstractMenu {
+
+	@Inject
+	public FavoritesMenu(Shell parent,
+						 FavoritesMenuActions.Add addListener,
+
+----------------------------------------
+package net.azib.ipscan.gui.menu;
+
+import net.azib.ipscan.gui.actions.CommandsMenuActions;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Shell;
+
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
+@Singleton
+public class ResultsContextMenu extends CommandsMenu {
+
+	@Inject public ResultsContextMenu(Shell parent, CommandsMenuActions actions, OpenersMenu openersMenu) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+27327388
+src/net/azib/ipscan/gui/menu/OpenersMenu.java 1 8
+src/net/azib/ipscan/gui/menu/CommandsMenu.java 4 10
+----------------------------------------
+package net.azib.ipscan.gui.menu;
+
+import net.azib.ipscan.gui.actions.CommandsMenuActions;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Event;
+import org.eclipse.swt.widgets.Shell;
+
+import javax.inject.Inject;
+
+----------------------------------------
+import net.azib.ipscan.config.Platform;
+import net.azib.ipscan.gui.actions.CommandsMenuActions;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.MenuItem;
+import org.eclipse.swt.widgets.Shell;
+
+import javax.inject.Inject;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+27327389
+src/net/azib/ipscan/gui/menu/ResultsContextMenu.java 1 13
+src/net/azib/ipscan/gui/menu/GotoMenu.java 1 15
+----------------------------------------
+package net.azib.ipscan.gui.menu;
+
+import net.azib.ipscan.gui.actions.CommandsMenuActions;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Shell;
+
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
+@Singleton
+public class ResultsContextMenu extends CommandsMenu {
+
+	@Inject public ResultsContextMenu(Shell parent, CommandsMenuActions actions, OpenersMenu openersMenu) {
+
+----------------------------------------
+package net.azib.ipscan.gui.menu;
+
+import net.azib.ipscan.gui.actions.GotoMenuActions;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Shell;
+
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
+@Singleton
+public class GotoMenu extends AbstractMenu {
+
+	@Inject
+	public GotoMenu(Shell parent,
+					GotoMenuActions.NextAliveHost nextAliveHost,
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+27327390
+src/net/azib/ipscan/gui/menu/ResultsContextMenu.java 1 13
+src/net/azib/ipscan/gui/menu/ColumnsMenu.java 1 19
+----------------------------------------
+package net.azib.ipscan.gui.menu;
+
+import net.azib.ipscan.gui.actions.CommandsMenuActions;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Shell;
+
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
+@Singleton
+public class ResultsContextMenu extends CommandsMenu {
+
+	@Inject public ResultsContextMenu(Shell parent, CommandsMenuActions actions, OpenersMenu openersMenu) {
+
+----------------------------------------
+package net.azib.ipscan.gui.menu;
+
+import net.azib.ipscan.gui.actions.ColumnsActions;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Shell;
+
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
+/**
+ * ColumnsMenu wrapper for type-safety.
+ * This is the menu when clicking on a column header.
+ */
+@Singleton
+public class ColumnsMenu extends ExtendableMenu {
+
+	@Inject
+	public ColumnsMenu(Shell parent,
+					   ColumnsActions.SortBy sortByListener,
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+27327391
+ext/vserv-tcpip/src/java/org/savarese/vserv/tcpip/UDPPacket.java 218 223
+ext/vserv-tcpip/src/java/org/savarese/vserv/tcpip/TCPPacket.java 452 457
+----------------------------------------
+    int d1 =
+      ((_data_[OFFSET_DESTINATION_ADDRESS] & 0xff) << 8) |
+      (_data_[OFFSET_DESTINATION_ADDRESS + 1] & 0xff);
+    int d2 =
+      ((_data_[OFFSET_DESTINATION_ADDRESS + 2] & 0xff) << 8) |
+      (_data_[OFFSET_DESTINATION_ADDRESS + 3] & 0xff);
+
+----------------------------------------
+    int s1 =
+      ((_data_[OFFSET_SOURCE_ADDRESS] & 0xff) << 8) |
+      (_data_[OFFSET_SOURCE_ADDRESS + 1] & 0xff);
+    int s2 =
+      ((_data_[OFFSET_SOURCE_ADDRESS + 2] & 0xff) << 8) |
+      (_data_[OFFSET_SOURCE_ADDRESS + 3] & 0xff);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+27327392
+ext/vserv-tcpip/src/java/org/savarese/vserv/tcpip/UDPPacket.java 212 217
+ext/vserv-tcpip/src/java/org/savarese/vserv/tcpip/TCPPacket.java 458 463
+----------------------------------------
+    int s1 =
+      ((_data_[OFFSET_SOURCE_ADDRESS] & 0xff) << 8) |
+      (_data_[OFFSET_SOURCE_ADDRESS + 1] & 0xff);
+    int s2 =
+      ((_data_[OFFSET_SOURCE_ADDRESS + 2] & 0xff) << 8) |
+      (_data_[OFFSET_SOURCE_ADDRESS + 3] & 0xff);
+
+----------------------------------------
+    int d1 =
+      ((_data_[OFFSET_DESTINATION_ADDRESS] & 0xff) << 8) |
+      (_data_[OFFSET_DESTINATION_ADDRESS + 1] & 0xff);
+    int d2 =
+      ((_data_[OFFSET_DESTINATION_ADDRESS + 2] & 0xff) << 8) |
+      (_data_[OFFSET_DESTINATION_ADDRESS + 3] & 0xff);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+27327393
+ext/vserv-tcpip/src/java/org/savarese/vserv/tcpip/UDPPacket.java 161 181
+ext/vserv-tcpip/src/java/org/savarese/vserv/tcpip/TCPPacket.java 268 285
+----------------------------------------
+            (_data_[__offset + OFFSET_UDP_TOTAL_LENGTH + 1] & 0xff)); 
+  }
+
+
+  /**
+   * @return The UDP checksum.
+   */
+  public final int getUDPChecksum() {
+    return (((_data_[__offset + OFFSET_UDP_CHECKSUM] & 0xff) << 8) |
+            (_data_[__offset + OFFSET_UDP_CHECKSUM + 1] & 0xff)); 
+  }
+
+
+  /**
+   * @return The UDP packet length in bytes.  This is the size of the
+   * IP packet minus the size of the IP header.  Normally, you want
+   * this to equal the length stored in the UDP header
+   * (see {@link #getUDPPacketLength}).
+   */
+  public final int getUDPPacketByteLength() {
+    return getIPPacketLength() - __offset;
+
+----------------------------------------
+    _data_[__offset + OFFSET_DESTINATION_PORT + 1] = (byte)(port & 0xff);
+  }
+
+
+  /**
+   * @return The source port.
+   */
+  public final int getSourcePort() {
+    return (((_data_[__offset + OFFSET_SOURCE_PORT] & 0xff) << 8) |
+            (_data_[__offset + OFFSET_SOURCE_PORT + 1] & 0xff)); 
+  }
+
+
+  /**
+   * @return The destination port.
+   */
+  public final int getDestinationPort() {
+    return (((_data_[__offset + OFFSET_DESTINATION_PORT] & 0xff) << 8) |
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+27327394
+ext/vserv-tcpip/src/java/org/savarese/vserv/tcpip/UDPPacket.java 161 181
+ext/vserv-tcpip/src/java/org/savarese/vserv/tcpip/TCPPacket.java 394 411
+----------------------------------------
+            (_data_[__offset + OFFSET_UDP_TOTAL_LENGTH + 1] & 0xff)); 
+  }
+
+
+  /**
+   * @return The UDP checksum.
+   */
+  public final int getUDPChecksum() {
+    return (((_data_[__offset + OFFSET_UDP_CHECKSUM] & 0xff) << 8) |
+            (_data_[__offset + OFFSET_UDP_CHECKSUM + 1] & 0xff)); 
+  }
+
+
+  /**
+   * @return The UDP packet length in bytes.  This is the size of the
+   * IP packet minus the size of the IP header.  Normally, you want
+   * this to equal the length stored in the UDP header
+   * (see {@link #getUDPPacketLength}).
+   */
+  public final int getUDPPacketByteLength() {
+    return getIPPacketLength() - __offset;
+
+----------------------------------------
+    _data_[__offset + OFFSET_URG_POINTER + 1] = (byte)(pointer & 0xff);
+  }
+
+
+  /**
+   * @return The urgent pointer value.
+   */
+  public final int getUrgentPointer() {
+    return (((_data_[__offset + OFFSET_URG_POINTER] & 0xff) << 8) |
+            (_data_[__offset + OFFSET_URG_POINTER + 1] & 0xff)); 
+  }
+
+
+  /**
+   * @return The TCP checksum.
+   */
+  public final int getTCPChecksum() {
+    return (((_data_[__offset + OFFSET_TCP_CHECKSUM] & 0xff) << 8) |
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+27327395
+ext/vserv-tcpip/src/java/org/savarese/vserv/tcpip/UDPPacket.java 152 169
+ext/vserv-tcpip/src/java/org/savarese/vserv/tcpip/TCPPacket.java 403 421
+----------------------------------------
+    _data_[__offset + OFFSET_UDP_TOTAL_LENGTH + 1] = (byte)(length & 0xff);
+  }
+
+
+  /**
+   * @return The value of the UDP total length header field.
+   */
+  public final int getUDPPacketLength() {
+    return  (((_data_[__offset + OFFSET_UDP_TOTAL_LENGTH] & 0xff) << 8) |
+            (_data_[__offset + OFFSET_UDP_TOTAL_LENGTH + 1] & 0xff)); 
+  }
+
+
+  /**
+   * @return The UDP checksum.
+   */
+  public final int getUDPChecksum() {
+    return (((_data_[__offset + OFFSET_UDP_CHECKSUM] & 0xff) << 8) |
+
+----------------------------------------
+            (_data_[__offset + OFFSET_URG_POINTER + 1] & 0xff)); 
+  }
+
+
+  /**
+   * @return The TCP checksum.
+   */
+  public final int getTCPChecksum() {
+    return (((_data_[__offset + OFFSET_TCP_CHECKSUM] & 0xff) << 8) |
+            (_data_[__offset + OFFSET_TCP_CHECKSUM + 1] & 0xff)); 
+  }
+
+
+  /**
+   * @return The TCP packet length in bytes.  This is the size of the
+   * IP packet minus the size of the IP header.
+   */
+  public final int getTCPPacketByteLength() {
+    return getIPPacketLength() - __offset;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+27327396
+ext/vserv-tcpip/src/java/org/savarese/vserv/tcpip/UDPPacket.java 89 139
+ext/vserv-tcpip/src/java/org/savarese/vserv/tcpip/TCPPacket.java 240 295
+----------------------------------------
+    setUDPDataByteLength(length);
+  }
+
+
+  public void setData(byte[] data) {
+    super.setData(data);
+    __offset = getIPHeaderByteLength();
+  }
+
+
+  /**
+   * Sets the source port.
+   *
+   * @param port The new source port.
+   */
+  public final void setSourcePort(int port) {
+    _data_[__offset + OFFSET_SOURCE_PORT]     = (byte)((port >> 8) & 0xff);
+    _data_[__offset + OFFSET_SOURCE_PORT + 1] = (byte)(port & 0xff);
+  }
+
+
+  /**
+   * Sets the destination port.
+   *
+   * @param port The new destination port.
+   */
+  public final void setDestinationPort(int port) {
+    _data_[__offset + OFFSET_DESTINATION_PORT]  = (byte)((port >> 8) & 0xff);
+    _data_[__offset + OFFSET_DESTINATION_PORT + 1] = (byte)(port & 0xff);
+  }
+
+
+  /**
+   * @return The source port.
+   */
+  public final int getSourcePort() {
+    return (((_data_[__offset + OFFSET_SOURCE_PORT] & 0xff) << 8) |
+            (_data_[__offset + OFFSET_SOURCE_PORT + 1] & 0xff)); 
+  }
+
+
+  /**
+   * @return The destination port.
+   */
+  public final int getDestinationPort() {
+    return (((_data_[__offset + OFFSET_DESTINATION_PORT] & 0xff) << 8) |
+            (_data_[__offset + OFFSET_DESTINATION_PORT + 1] & 0xff)); 
+  }
+
+
+  public void setIPHeaderLength(int length) {
+
+----------------------------------------
+    _data_[__offset + OFFSET_CONTROL] = (byte)(mask & 0xff);
+  }
+
+
+  public void setData(byte[] data) {
+    super.setData(data);
+    __offset = getIPHeaderByteLength();
+  }
+
+
+  /**
+   * Sets the source port.
+   *
+   * @param port The new source port.
+   */
+  public final void setSourcePort(int port) {
+    _data_[__offset + OFFSET_SOURCE_PORT]     = (byte)((port >> 8) & 0xff);
+    _data_[__offset + OFFSET_SOURCE_PORT + 1] = (byte)(port & 0xff);
+  }
+
+
+  /**
+   * Sets the destination port.
+   *
+   * @param port The new destination port.
+   */
+  public final void setDestinationPort(int port) {
+    _data_[__offset + OFFSET_DESTINATION_PORT]  = (byte)((port >> 8) & 0xff);
+    _data_[__offset + OFFSET_DESTINATION_PORT + 1] = (byte)(port & 0xff);
+  }
+
+
+  /**
+   * @return The source port.
+   */
+  public final int getSourcePort() {
+    return (((_data_[__offset + OFFSET_SOURCE_PORT] & 0xff) << 8) |
+            (_data_[__offset + OFFSET_SOURCE_PORT + 1] & 0xff)); 
+  }
+
+
+  /**
+   * @return The destination port.
+   */
+  public final int getDestinationPort() {
+    return (((_data_[__offset + OFFSET_DESTINATION_PORT] & 0xff) << 8) |
+            (_data_[__offset + OFFSET_DESTINATION_PORT + 1] & 0xff)); 
+  }
+
+
+  /**
+   * Sets the sequence number.
+   *
+   * @param seq The new sequence number.
+   */
+  public final void setSequenceNumber(long seq) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+27327397
+ext/vserv-tcpip/src/java/org/savarese/vserv/tcpip/TCPPacket.java 403 421
+ext/vserv-tcpip/src/java/org/savarese/vserv/tcpip/UDPPacket.java 117 134
+----------------------------------------
+            (_data_[__offset + OFFSET_URG_POINTER + 1] & 0xff)); 
+  }
+
+
+  /**
+   * @return The TCP checksum.
+   */
+  public final int getTCPChecksum() {
+    return (((_data_[__offset + OFFSET_TCP_CHECKSUM] & 0xff) << 8) |
+            (_data_[__offset + OFFSET_TCP_CHECKSUM + 1] & 0xff)); 
+  }
+
+
+  /**
+   * @return The TCP packet length in bytes.  This is the size of the
+   * IP packet minus the size of the IP header.
+   */
+  public final int getTCPPacketByteLength() {
+    return getIPPacketLength() - __offset;
+
+----------------------------------------
+    _data_[__offset + OFFSET_DESTINATION_PORT + 1] = (byte)(port & 0xff);
+  }
+
+
+  /**
+   * @return The source port.
+   */
+  public final int getSourcePort() {
+    return (((_data_[__offset + OFFSET_SOURCE_PORT] & 0xff) << 8) |
+            (_data_[__offset + OFFSET_SOURCE_PORT + 1] & 0xff)); 
+  }
+
+
+  /**
+   * @return The destination port.
+   */
+  public final int getDestinationPort() {
+    return (((_data_[__offset + OFFSET_DESTINATION_PORT] & 0xff) << 8) |
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+27327398
+ext/vserv-tcpip/src/java/org/savarese/vserv/tcpip/UDPPacket.java 106 124
+ext/vserv-tcpip/src/java/org/savarese/vserv/tcpip/TCPPacket.java 246 266
+----------------------------------------
+    _data_[__offset + OFFSET_SOURCE_PORT + 1] = (byte)(port & 0xff);
+  }
+
+
+  /**
+   * Sets the destination port.
+   *
+   * @param port The new destination port.
+   */
+  public final void setDestinationPort(int port) {
+    _data_[__offset + OFFSET_DESTINATION_PORT]  = (byte)((port >> 8) & 0xff);
+    _data_[__offset + OFFSET_DESTINATION_PORT + 1] = (byte)(port & 0xff);
+  }
+
+
+  /**
+   * @return The source port.
+   */
+  public final int getSourcePort() {
+
+----------------------------------------
+    __offset = getIPHeaderByteLength();
+  }
+
+
+  /**
+   * Sets the source port.
+   *
+   * @param port The new source port.
+   */
+  public final void setSourcePort(int port) {
+    _data_[__offset + OFFSET_SOURCE_PORT]     = (byte)((port >> 8) & 0xff);
+    _data_[__offset + OFFSET_SOURCE_PORT + 1] = (byte)(port & 0xff);
+  }
+
+
+  /**
+   * Sets the destination port.
+   *
+   * @param port The new destination port.
+   */
+  public final void setDestinationPort(int port) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+27327399
+ext/vserv-tcpip/src/java/org/savarese/vserv/tcpip/UDPPacket.java 95 115
+ext/vserv-tcpip/src/java/org/savarese/vserv/tcpip/TCPPacket.java 257 275
+----------------------------------------
+    __offset = getIPHeaderByteLength();
+  }
+
+
+  /**
+   * Sets the source port.
+   *
+   * @param port The new source port.
+   */
+  public final void setSourcePort(int port) {
+    _data_[__offset + OFFSET_SOURCE_PORT]     = (byte)((port >> 8) & 0xff);
+    _data_[__offset + OFFSET_SOURCE_PORT + 1] = (byte)(port & 0xff);
+  }
+
+
+  /**
+   * Sets the destination port.
+   *
+   * @param port The new destination port.
+   */
+  public final void setDestinationPort(int port) {
+
+----------------------------------------
+    _data_[__offset + OFFSET_SOURCE_PORT + 1] = (byte)(port & 0xff);
+  }
+
+
+  /**
+   * Sets the destination port.
+   *
+   * @param port The new destination port.
+   */
+  public final void setDestinationPort(int port) {
+    _data_[__offset + OFFSET_DESTINATION_PORT]  = (byte)((port >> 8) & 0xff);
+    _data_[__offset + OFFSET_DESTINATION_PORT + 1] = (byte)(port & 0xff);
+  }
+
+
+  /**
+   * @return The source port.
+   */
+  public final int getSourcePort() {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+27327400
+ext/vserv-tcpip/src/java/org/savarese/vserv/tcpip/UDPPacket.java 95 115
+ext/vserv-tcpip/src/java/org/savarese/vserv/tcpip/TCPPacket.java 383 401
+----------------------------------------
+    __offset = getIPHeaderByteLength();
+  }
+
+
+  /**
+   * Sets the source port.
+   *
+   * @param port The new source port.
+   */
+  public final void setSourcePort(int port) {
+    _data_[__offset + OFFSET_SOURCE_PORT]     = (byte)((port >> 8) & 0xff);
+    _data_[__offset + OFFSET_SOURCE_PORT + 1] = (byte)(port & 0xff);
+  }
+
+
+  /**
+   * Sets the destination port.
+   *
+   * @param port The new destination port.
+   */
+  public final void setDestinationPort(int port) {
+
+----------------------------------------
+            (_data_[__offset + OFFSET_WINDOW_SIZE + 1] & 0xff)); 
+  }
+
+
+  /**
+   * Sets the urgent pointer.
+   *
+   * @param pointer The urgent pointer value.
+   */
+  public final void setUrgentPointer(int pointer) {
+    _data_[__offset + OFFSET_URG_POINTER]  = (byte)((pointer >> 8) & 0xff);
+    _data_[__offset + OFFSET_URG_POINTER + 1] = (byte)(pointer & 0xff);
+  }
+
+
+  /**
+   * @return The urgent pointer value.
+   */
+  public final int getUrgentPointer() {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+27327401
+ext/vserv-tcpip/src/java/org/savarese/vserv/tcpip/UDPPacket.java 95 115
+ext/vserv-tcpip/src/java/org/savarese/vserv/tcpip/TCPPacket.java 363 381
+----------------------------------------
+    __offset = getIPHeaderByteLength();
+  }
+
+
+  /**
+   * Sets the source port.
+   *
+   * @param port The new source port.
+   */
+  public final void setSourcePort(int port) {
+    _data_[__offset + OFFSET_SOURCE_PORT]     = (byte)((port >> 8) & 0xff);
+    _data_[__offset + OFFSET_SOURCE_PORT + 1] = (byte)(port & 0xff);
+  }
+
+
+  /**
+   * Sets the destination port.
+   *
+   * @param port The new destination port.
+   */
+  public final void setDestinationPort(int port) {
+
+----------------------------------------
+    return getTCPHeaderLength() << 2;
+  }
+
+
+  /**
+   * Sets the TCP window size.
+   *
+   * @param window The TCP window size.
+   */
+  public final void setWindowSize(int window) {
+    _data_[__offset + OFFSET_WINDOW_SIZE]  = (byte)((window >> 8) & 0xff);
+    _data_[__offset + OFFSET_WINDOW_SIZE + 1] = (byte)(window & 0xff);
+  }
+
+
+  /**
+   * @return The TCP window size.
+   */
+  public final int getWindowSize() {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+27327402
+ext/vserv-tcpip/src/java/org/savarese/vserv/tcpip/UDPPacket.java 70 93
+ext/vserv-tcpip/src/java/org/savarese/vserv/tcpip/TCPPacket.java 157 183
+----------------------------------------
+  }
+
+
+  /**
+   * Copies the contents of a UDPPacket.  If the current data array is
+   * of insufficient length to store the contents, a new array is
+   * allocated.
+   *
+   * @param packet The UDPPacket to copy.
+   */
+  public final void copyData(UDPPacket packet) {
+    if(_data_.length < packet._data_.length) {
+      byte[] data = new byte[packet._data_.length];
+      System.arraycopy(_data_, 0, data, 0, getCombinedHeaderByteLength());
+      _data_ = data;
+    }
+    int length = packet.getUDPDataByteLength();
+    System.arraycopy(packet._data_, packet.getCombinedHeaderByteLength(),
+                     _data_, getCombinedHeaderByteLength(), length);
+    setUDPDataByteLength(length);
+  }
+
+
+  public void setData(byte[] data) {
+
+----------------------------------------
+  }
+
+
+  /**
+   * Copies the contents of a TCPPacket.  If the current data array is
+   * of insufficient length to store the contents, a new array is
+   * allocated.
+   *
+   * @param packet The TCPPacket to copy.
+   */
+  public final void copyData(TCPPacket packet) {
+    if(_data_.length < packet._data_.length) {
+      byte[] data = new byte[packet._data_.length];
+      System.arraycopy(_data_, 0, data, 0, getCombinedHeaderByteLength());
+      _data_ = data;
+    }
+    int length = packet.getTCPDataByteLength();
+    System.arraycopy(packet._data_, packet.getCombinedHeaderByteLength(),
+                     _data_, getCombinedHeaderByteLength(), length);
+    setTCPDataByteLength(length);
+  }
+
+  /**
+   * @param mask The bit mask to check.
+   * @return True only if all of the bits in the mask are set.
+   */
+  public boolean isSet(int mask) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+27327403
+ext/vserv-tcpip/src/java/org/savarese/vserv/tcpip/TCPPacket.java 157 183
+ext/vserv-tcpip/src/java/org/savarese/vserv/tcpip/ICMPPacket.java 128 151
+----------------------------------------
+  }
+
+
+  /**
+   * Copies the contents of a TCPPacket.  If the current data array is
+   * of insufficient length to store the contents, a new array is
+   * allocated.
+   *
+   * @param packet The TCPPacket to copy.
+   */
+  public final void copyData(TCPPacket packet) {
+    if(_data_.length < packet._data_.length) {
+      byte[] data = new byte[packet._data_.length];
+      System.arraycopy(_data_, 0, data, 0, getCombinedHeaderByteLength());
+      _data_ = data;
+    }
+    int length = packet.getTCPDataByteLength();
+    System.arraycopy(packet._data_, packet.getCombinedHeaderByteLength(),
+                     _data_, getCombinedHeaderByteLength(), length);
+    setTCPDataByteLength(length);
+  }
+
+  /**
+   * @param mask The bit mask to check.
+   * @return True only if all of the bits in the mask are set.
+   */
+  public boolean isSet(int mask) {
+
+----------------------------------------
+  }
+
+
+  /**
+   * Copies the contents of an ICMPPacket.  If the current data array is
+   * of insufficient length to store the contents, a new array is
+   * allocated.
+   *
+   * @param packet The TCPPacket to copy.
+   */
+  public final void copyData(ICMPPacket packet) {
+    if(_data_.length < packet._data_.length) {
+      byte[] data = new byte[packet._data_.length];
+      System.arraycopy(_data_, 0, data, 0, getCombinedHeaderByteLength());
+      _data_ = data;
+    }
+    int length = packet.getICMPDataByteLength();
+    System.arraycopy(packet._data_, packet.getCombinedHeaderByteLength(),
+                     _data_, getCombinedHeaderByteLength(), length);
+    setICMPDataByteLength(length);
+  }
+
+
+  public void setData(byte[] data) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+28730863
+src/net/azib/ipscan/core/PluginLoader.java 85 107
+src/net/azib/ipscan/core/PluginLoader.java 86 103
+----------------------------------------
+		for (File jar : jars) {
+			try {
+				JarFile jarFile = new JarFile(jar);
+				Manifest manifest = jarFile.getManifest();
+				if (manifest == null) continue;
+				jarFile.close();
+
+				String className = manifest.getMainAttributes().getValue("IPScan-Plugin");
+				if (className != null) {
+					loader.addURL(jar.toURI().toURL());
+					loadPluginClasses(container, loader, className);
+				}
+
+				String classNames = manifest.getMainAttributes().getValue("IPScan-Plugins");
+				if (classNames != null) {
+					loader.addURL(jar.toURI().toURL());
+					loadPluginClasses(container, loader, classNames);
+				}
+			}
+			catch (Exception e) {
+				LOG.warning("Failed to load plugin jar " + jar + ": " + e);
+			}
+		}
+
+----------------------------------------
+			try {
+				JarFile jarFile = new JarFile(jar);
+				Manifest manifest = jarFile.getManifest();
+				if (manifest == null) continue;
+				jarFile.close();
+
+				String className = manifest.getMainAttributes().getValue("IPScan-Plugin");
+				if (className != null) {
+					loader.addURL(jar.toURI().toURL());
+					loadPluginClasses(container, loader, className);
+				}
+
+				String classNames = manifest.getMainAttributes().getValue("IPScan-Plugins");
+				if (classNames != null) {
+					loader.addURL(jar.toURI().toURL());
+					loadPluginClasses(container, loader, classNames);
+				}
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+28730865
+src/net/azib/ipscan/gui/actions/TerminalLauncher.java 41 95
+src/net/azib/ipscan/gui/actions/TerminalLauncher.java 43 80
+----------------------------------------
+	public static void launchInTerminal(String execString, File workingDir) {
+
+		try {
+			if (Platform.WINDOWS) {
+				// generate a command file :-)
+				File batFile = File.createTempFile("launch", ".cmd");
+				batFile.deleteOnExit();
+				FileWriter writer = new FileWriter(batFile);
+				writer.write("@rem This is a temporary file generated by Angry IP Scanner\n" +
+						     "@start cmd /k " + execString);
+				writer.close();
+				
+				Runtime.getRuntime().exec(batFile.getAbsolutePath(), null, workingDir);
+			}
+			else
+			if (Platform.MAC_OS) {
+				Runtime.getRuntime().exec(new String[] {"osascript", "-e", "tell application \"Terminal\" to do script \"" + execString + "\""}, null, workingDir);
+			}
+			else { // assume Linux or other Unix
+				
+				if (workingTerminal == UNKNOWN) {
+					detectWorkingTerminal();
+				}
+				
+				// run detected terminal program
+				switch (workingTerminal) {
+					case GNOME:
+						Runtime.getRuntime().exec(new String[] {"gnome-terminal", "-x", "bash", "-c", execString + ";bash"}, null, workingDir);
+						break;
+					case XFCE:
+						Runtime.getRuntime().exec(new String[] {"xfce4-terminal", "-x", "sh", "-c", execString + ";sh"}, null, workingDir);
+						break;
+					case KDE:
+						Runtime.getRuntime().exec(new String[] {"konsole", "-e", "bash", "-c", execString + ";bash"}, null, workingDir);
+						break;
+					default: // XTERM
+						Runtime.getRuntime().exec(new String[] {"xterm", "-e", "sh", "-c", execString + ";sh"}, null, workingDir);
+				}
+			}
+		}
+		catch (Exception e) {
+			// log and display the error
+			LOG.log(Level.WARNING, "openTerminal.failed", e);
+
+			// if this is the first time, fall back to XTERM
+			if (workingTerminal != XTERM) {
+				workingTerminal = XTERM;
+				launchInTerminal(execString, workingDir);
+			}
+			else {
+				// even XTERM doesn't work...
+				throw new UserErrorException("openTerminal.failed", execString);
+			}
+		}
+	}
+
+----------------------------------------
+		try {
+			if (Platform.WINDOWS) {
+				// generate a command file :-)
+				File batFile = File.createTempFile("launch", ".cmd");
+				batFile.deleteOnExit();
+				FileWriter writer = new FileWriter(batFile);
+				writer.write("@rem This is a temporary file generated by Angry IP Scanner\n" +
+						     "@start cmd /k " + execString);
+				writer.close();
+				
+				Runtime.getRuntime().exec(batFile.getAbsolutePath(), null, workingDir);
+			}
+			else
+			if (Platform.MAC_OS) {
+				Runtime.getRuntime().exec(new String[] {"osascript", "-e", "tell application \"Terminal\" to do script \"" + execString + "\""}, null, workingDir);
+			}
+			else { // assume Linux or other Unix
+				
+				if (workingTerminal == UNKNOWN) {
+					detectWorkingTerminal();
+				}
+				
+				// run detected terminal program
+				switch (workingTerminal) {
+					case GNOME:
+						Runtime.getRuntime().exec(new String[] {"gnome-terminal", "-x", "bash", "-c", execString + ";bash"}, null, workingDir);
+						break;
+					case XFCE:
+						Runtime.getRuntime().exec(new String[] {"xfce4-terminal", "-x", "sh", "-c", execString + ";sh"}, null, workingDir);
+						break;
+					case KDE:
+						Runtime.getRuntime().exec(new String[] {"konsole", "-e", "bash", "-c", execString + ";bash"}, null, workingDir);
+						break;
+					default: // XTERM
+						Runtime.getRuntime().exec(new String[] {"xterm", "-e", "sh", "-c", execString + ";sh"}, null, workingDir);
+				}
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+28730866
+src/net/azib/ipscan/core/ScanningResultList.java 265 272
+src/net/azib/ipscan/fetchers/FetcherRegistry.java 119 128
+----------------------------------------
+	public int getFetcherIndex(String fetcherId) {
+		int index = 0;
+		for (Fetcher fetcher : getFetchers()) {
+			if (fetcherId.equals(fetcher.getId())) return index;
+			index++;
+		}
+		return -1;
+	}
+
+----------------------------------------
+	public int getSelectedFetcherIndex(String id) {
+		int index = 0;
+		for (Fetcher fetcher : selectedFetchers.values()) {
+			if (id.equals(fetcher.getId())) {
+				return index;
+			}
+			index++;
+		}
+		return -1;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+28730867
+src/net/azib/ipscan/core/ScannerDispatcherThread.java 76 144
+src/net/azib/ipscan/core/ScannerDispatcherThread.java 77 139
+----------------------------------------
+	public void run() {
+		try {
+			// register this scan specific listener
+			stateMachine.addTransitionListener(this);
+			long lastNotifyTime = 0; 
+
+			try {
+				ScanningSubject subject = null;
+				while(feeder.hasNext() && stateMachine.inState(SCANNING)) {
+					// make a small delay between thread creation
+					Thread.sleep(config.threadDelay);
+					
+					if ((numActiveThreads.intValue() < config.maxThreads)) {					
+						// retrieve the next IP address to scan
+						subject = feeder.next();
+						
+						// check if this is a likely broadcast address and needs to be skipped
+						if (config.skipBroadcastAddresses && InetAddressUtils.isLikelyBroadcast(subject.getAddress())) {
+							continue;
+						}
+		
+						// prepare results receiver for upcoming results
+						ScanningResult result = scanningResultList.createResult(subject.getAddress());
+						resultsCallback.prepareForResults(result);
+																
+						// scan each IP in parallel, in a separate thread
+						AddressScannerTask scanningTask = new AddressScannerTask(subject, result);
+						threadPool.execute(scanningTask);
+					}
+					
+					// notify listeners of the progress we are doing (limiting the update rate)
+					long now = System.currentTimeMillis();
+					if (now - lastNotifyTime >= UI_UPDATE_INTERVAL_MS && subject != null) {
+						lastNotifyTime = now;
+						progressCallback.updateProgress(subject.getAddress(), numActiveThreads.intValue(), feeder.percentageComplete());
+					}
+				}
+			}
+			catch (InterruptedException e) {
+				// interrupt - end the loop
+			}
+			
+			// inform that no more addresses left
+			stateMachine.stop();
+		
+			// request shutdown of the thread pool
+			// this must be done here and not asynchronously by the state machine
+			threadPool.shutdown();
+
+			try {				
+				// now wait for all threads, which are still running
+				while (!threadPool.awaitTermination(UI_UPDATE_INTERVAL_MS, MILLISECONDS)) {
+					progressCallback.updateProgress(null, numActiveThreads.intValue(), 100);
+				}
+			} 
+			catch (InterruptedException e) {
+				// just end the loop
+			}
+			
+			scanner.cleanup();
+			
+			// finally, the scanning is complete
+			stateMachine.complete();
+		}
+		finally {
+			// unregister specific listener
+			stateMachine.removeTransitionListener(this);
+		}
+	}
+
+----------------------------------------
+		try {
+			// register this scan specific listener
+			stateMachine.addTransitionListener(this);
+			long lastNotifyTime = 0; 
+
+			try {
+				ScanningSubject subject = null;
+				while(feeder.hasNext() && stateMachine.inState(SCANNING)) {
+					// make a small delay between thread creation
+					Thread.sleep(config.threadDelay);
+					
+					if ((numActiveThreads.intValue() < config.maxThreads)) {					
+						// retrieve the next IP address to scan
+						subject = feeder.next();
+						
+						// check if this is a likely broadcast address and needs to be skipped
+						if (config.skipBroadcastAddresses && InetAddressUtils.isLikelyBroadcast(subject.getAddress())) {
+							continue;
+						}
+		
+						// prepare results receiver for upcoming results
+						ScanningResult result = scanningResultList.createResult(subject.getAddress());
+						resultsCallback.prepareForResults(result);
+																
+						// scan each IP in parallel, in a separate thread
+						AddressScannerTask scanningTask = new AddressScannerTask(subject, result);
+						threadPool.execute(scanningTask);
+					}
+					
+					// notify listeners of the progress we are doing (limiting the update rate)
+					long now = System.currentTimeMillis();
+					if (now - lastNotifyTime >= UI_UPDATE_INTERVAL_MS && subject != null) {
+						lastNotifyTime = now;
+						progressCallback.updateProgress(subject.getAddress(), numActiveThreads.intValue(), feeder.percentageComplete());
+					}
+				}
+			}
+			catch (InterruptedException e) {
+				// interrupt - end the loop
+			}
+			
+			// inform that no more addresses left
+			stateMachine.stop();
+		
+			// request shutdown of the thread pool
+			// this must be done here and not asynchronously by the state machine
+			threadPool.shutdown();
+
+			try {				
+				// now wait for all threads, which are still running
+				while (!threadPool.awaitTermination(UI_UPDATE_INTERVAL_MS, MILLISECONDS)) {
+					progressCallback.updateProgress(null, numActiveThreads.intValue(), 100);
+				}
+			} 
+			catch (InterruptedException e) {
+				// just end the loop
+			}
+			
+			scanner.cleanup();
+			
+			// finally, the scanning is complete
+			stateMachine.complete();
+		}
+
+----------------------------------------

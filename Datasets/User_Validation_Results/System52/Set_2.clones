@@ -1,0 +1,1303 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+17718976
+src/jse/org/luaj/vm2/lib/jse/JavaClass.java 81 88
+src/jse/org/luaj/vm2/ast/Str.java 52 58
+----------------------------------------
+				if ( Modifier.isPublic(fi.getModifiers()) ) {
+					m.put(LuaValue.valueOf(fi.getName()), fi);
+					try {
+						if (!fi.isAccessible())
+							fi.setAccessible(true);
+					} catch (SecurityException s) {
+					}
+				}
+
+----------------------------------------
+	public static byte[] iso88591bytes( String s ) {
+		try {
+			return s.getBytes("ISO8859-1");
+		} catch (UnsupportedEncodingException e) {
+			throw new IllegalStateException("ISO8859-1 not supported");
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+17718977
+src/core/org/luaj/vm2/lib/IoLib.java 479 485
+src/jse/org/luaj/vm2/ast/Str.java 52 58
+----------------------------------------
+	private Varargs lines(final File f) {
+		try {
+			return new IoLibV(f,"lnext",LINES_ITER,this);
+		} catch ( Exception e ) {
+			return error("lines: "+e);
+		}
+	}
+
+----------------------------------------
+	public static byte[] iso88591bytes( String s ) {
+		try {
+			return s.getBytes("ISO8859-1");
+		} catch (UnsupportedEncodingException e) {
+			throw new IllegalStateException("ISO8859-1 not supported");
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+17719163
+src/jse/org/luaj/vm2/lib/jse/JavaClass.java 81 88
+src/core/org/luaj/vm2/Globals.java 181 187
+----------------------------------------
+				if ( Modifier.isPublic(fi.getModifiers()) ) {
+					m.put(LuaValue.valueOf(fi.getName()), fi);
+					try {
+						if (!fi.isAccessible())
+							fi.setAccessible(true);
+					} catch (SecurityException s) {
+					}
+				}
+
+----------------------------------------
+	public LuaValue loadfile(String filename) {
+		try {
+			return load(finder.findResource(filename), "@"+filename, "bt", this);
+		} catch (Exception e) {
+			return error("load "+filename+": "+e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+17718972
+src/jse/org/luaj/vm2/ast/Str.java 52 58
+src/core/org/luaj/vm2/Globals.java 181 187
+----------------------------------------
+	public static byte[] iso88591bytes( String s ) {
+		try {
+			return s.getBytes("ISO8859-1");
+		} catch (UnsupportedEncodingException e) {
+			throw new IllegalStateException("ISO8859-1 not supported");
+		}
+	}
+
+----------------------------------------
+	public LuaValue loadfile(String filename) {
+		try {
+			return load(finder.findResource(filename), "@"+filename, "bt", this);
+		} catch (Exception e) {
+			return error("load "+filename+": "+e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+17719164
+src/core/org/luaj/vm2/lib/IoLib.java 479 485
+src/core/org/luaj/vm2/Globals.java 181 187
+----------------------------------------
+	private Varargs lines(final File f) {
+		try {
+			return new IoLibV(f,"lnext",LINES_ITER,this);
+		} catch ( Exception e ) {
+			return error("lines: "+e);
+		}
+	}
+
+----------------------------------------
+	public LuaValue loadfile(String filename) {
+		try {
+			return load(finder.findResource(filename), "@"+filename, "bt", this);
+		} catch (Exception e) {
+			return error("load "+filename+": "+e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+17718973
+src/jse/org/luaj/vm2/luajc/UpvalInfo.java 77 82
+src/jse/org/luaj/vm2/luajc/UpvalInfo.java 100 105
+----------------------------------------
+				for ( int pc=b.pc1-1; pc>=b.pc0; pc-- ) {
+					if ( pi.vars[slot][pc] == prior ) {
+						loopDetected |= includeVarAndPosteriorVars( pi.vars[slot][pc+1] );
+						break;
+					}
+				}
+
+----------------------------------------
+				for ( int pc=b.pc0+1; pc<=b.pc1; pc++ ) {
+					if (  pi.vars[slot][pc] == poster ) {
+						includeVarAndPosteriorVars( pi.vars[slot][pc-1] );
+						break;
+					}
+				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+17718974
+src/core/org/luaj/vm2/lib/MathLib.java 196 201
+src/core/org/luaj/vm2/lib/MathLib.java 205 210
+----------------------------------------
+		public Varargs invoke(Varargs args) {
+			double m = args.checkdouble(1);
+			for ( int i=2,n=args.narg(); i<=n; ++i )
+				m = Math.max(m,args.checkdouble(i));
+			return valueOf(m);
+		}
+
+----------------------------------------
+		public Varargs invoke(Varargs args) {
+			double m = args.checkdouble(1);
+			for ( int i=2,n=args.narg(); i<=n; ++i )
+				m = Math.min(m,args.checkdouble(i));
+			return valueOf(m);
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+17718975
+src/core/org/luaj/vm2/compiler/LexState.java 861 867
+src/core/org/luaj/vm2/compiler/LexState.java 2121 2127
+----------------------------------------
+	boolean testnext(int c) {
+		if (t.token == c) {
+			next();
+			return true;
+		} else
+			return false;
+	}
+
+----------------------------------------
+		while (!block_follow(true)) {
+			if (t.token == TK_RETURN) {
+				statement();
+				return; /* 'return' must be last statement */
+			}
+			statement();
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+17718978
+src/jse/org/luaj/vm2/luajc/JavaBuilder.java 414 422
+src/jse/org/luaj/vm2/luajc/JavaBuilder.java 425 434
+----------------------------------------
+		for ( int i=0; i<numslots; i++ ) {
+			int slot = firstslot + i;
+			boolean isupcreate = pi.isUpvalueCreate(pc, slot);
+			if ( isupcreate ) {
+				int index = findSlotIndex( slot, true );
+				append(factory.createInvoke(classname, "newupn", TYPE_LOCALUPVALUE, ARG_TYPES_NONE, Constants.INVOKESTATIC));
+				append(new ASTORE(index));
+			}
+		}
+
+----------------------------------------
+	public void convertToUpvalue(int pc, int slot) {
+		boolean isupassign = pi.isUpvalueAssign(pc, slot);
+		if ( isupassign ) {
+			int index = findSlotIndex( slot, false );
+			append(new ALOAD(index));
+			append(factory.createInvoke(classname, "newupl", TYPE_LOCALUPVALUE,  ARG_TYPES_LUAVALUE, Constants.INVOKESTATIC));
+			int upindex = findSlotIndex( slot, true );
+			append(new ASTORE(upindex));
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+17718979
+src/jse/org/luaj/vm2/luajc/JavaBuilder.java 440 450
+src/jse/org/luaj/vm2/luajc/JavaBuilder.java 452 464
+----------------------------------------
+	public void loadUpvalue(int upindex) {
+		boolean isrw = pi.isReadWriteUpvalue( pi.upvals[upindex] ); 
+		append(InstructionConstants.THIS);
+		if ( isrw ) {
+			append(factory.createFieldAccess(classname, upvalueName(upindex), TYPE_LOCALUPVALUE, Constants.GETFIELD));
+			append(new PUSH(cp,0));
+			append(InstructionConstants.AALOAD);
+		} else {
+			append(factory.createFieldAccess(classname, upvalueName(upindex), TYPE_LUAVALUE, Constants.GETFIELD));
+		}
+	}
+
+----------------------------------------
+	public void storeUpvalue(int pc, int upindex, int slot) {
+		boolean isrw = pi.isReadWriteUpvalue( pi.upvals[upindex] ); 
+		append(InstructionConstants.THIS);
+		if ( isrw ) {
+			append(factory.createFieldAccess(classname, upvalueName(upindex), TYPE_LOCALUPVALUE, Constants.GETFIELD));
+			append(new PUSH(cp,0));
+			loadLocal(pc, slot);
+			append(InstructionConstants.AASTORE);
+		} else {
+			loadLocal(pc, slot);
+			append(factory.createFieldAccess(classname, upvalueName(upindex), TYPE_LUAVALUE, Constants.PUTFIELD));
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+17718980
+src/core/org/luaj/vm2/Globals.java 387 401
+src/core/org/luaj/vm2/Globals.java 422 438
+----------------------------------------
+		protected int avail() throws IOException {
+			if (i < j) return j - i;
+			int n = r.read(c);
+			if (n < 0)
+				return -1;
+			if (n == 0) {
+				int u = r.read();
+				if (u < 0)
+					return -1;
+				c[0] = (char) u;
+				n = 1;
+			}
+			j = LuaString.encodeToUtf8(c, n, b, i = 0);
+			return j;
+		}
+
+----------------------------------------
+		protected int avail() throws IOException {
+			if (i < j) return j - i;
+			if (j >= b.length) i = j = 0;
+			// leave previous bytes in place to implement mark()/reset().
+			int n = s.read(b, j, b.length - j);
+			if (n < 0)
+				return -1;
+			if (n == 0) {
+				int u = s.read();
+				if (u < 0)
+					return -1;
+				b[j] = (byte) u;
+				n = 1;
+			}
+			j += n;
+			return n;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+17718981
+src/core/org/luaj/vm2/Globals.java 392 398
+src/core/org/luaj/vm2/Globals.java 429 435
+----------------------------------------
+			if (n == 0) {
+				int u = r.read();
+				if (u < 0)
+					return -1;
+				c[0] = (char) u;
+				n = 1;
+			}
+
+----------------------------------------
+			if (n == 0) {
+				int u = s.read();
+				if (u < 0)
+					return -1;
+				b[j] = (byte) u;
+				n = 1;
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+17718982
+src/core/org/luaj/vm2/lib/StringLib.java 365 372
+src/core/org/luaj/vm2/lib/StringLib.java 375 385
+----------------------------------------
+			if ( Character.isDigit( (char)c ) ) {
+				width = c - '0';
+				c = ( (p < n) ? strfrmt.luaByte( p++ ) : 0 );
+				if ( Character.isDigit( (char) c ) ) {
+					width = width * 10 + (c - '0');
+					c = ( (p < n) ? strfrmt.luaByte( p++ ) : 0 );
+				}
+			}
+
+----------------------------------------
+			if ( c == '.' ) {
+				c = ( (p < n) ? strfrmt.luaByte( p++ ) : 0 );
+				if ( Character.isDigit( (char) c ) ) {
+					precision = c - '0';
+					c = ( (p < n) ? strfrmt.luaByte( p++ ) : 0 );
+					if ( Character.isDigit( (char) c ) ) {
+						precision = precision * 10 + (c - '0');
+						c = ( (p < n) ? strfrmt.luaByte( p++ ) : 0 );
+					}
+				}
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+17718984
+src/core/org/luaj/vm2/LuaValue.java 3403 3410
+src/core/org/luaj/vm2/LuaValue.java 3420 3431
+----------------------------------------
+	public static Varargs varargsOf(final LuaValue[] v) {
+		switch ( v.length ) {
+		case 0: return NONE;
+		case 1: return v[0];
+		case 2: return new Varargs.PairVarargs(v[0],v[1]); 
+		default: return new Varargs.ArrayVarargs(v,NONE);
+		}
+	}
+
+----------------------------------------
+	public static Varargs varargsOf(final LuaValue[] v,Varargs r) { 
+		switch ( v.length ) {
+		case 0: return r;
+		case 1: return r.narg()>0? 
+					(Varargs) new Varargs.PairVarargs(v[0],r): 
+					(Varargs) v[0];
+		case 2: return r.narg()>0? 
+					(Varargs) new Varargs.ArrayVarargs(v,r): 
+					(Varargs) new Varargs.PairVarargs(v[0],v[1]);
+		default: return new Varargs.ArrayVarargs(v,r);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+28678280
+src/jse/org/luaj/vm2/luajc/UpvalInfo.java 50 59
+src/jse/org/luaj/vm2/lib/jse/CoerceLuaToJava.java 87 93
+----------------------------------------
+	private boolean isLoopVariable(VarInfo var) {
+		if ( var.pc >= 0 ) {
+			switch ( Lua.GET_OPCODE(pi.prototype.code[var.pc]) ) {
+			case Lua.OP_TFORLOOP:
+			case Lua.OP_FORLOOP:
+				return true;
+			}
+		}
+		return false;
+	}
+
+----------------------------------------
+		public int score( LuaValue value ) {
+			switch ( value.type() ) {
+			case LuaValue.TBOOLEAN:
+				return 0;
+			}
+			return 1;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+17718985
+src/jse/org/luaj/vm2/lib/jse/CoerceLuaToJava.java 87 93
+src/jse/org/luaj/vm2/luajc/UpvalInfo.java 51 57
+----------------------------------------
+		public int score( LuaValue value ) {
+			switch ( value.type() ) {
+			case LuaValue.TBOOLEAN:
+				return 0;
+			}
+			return 1;
+		}
+
+----------------------------------------
+		if ( var.pc >= 0 ) {
+			switch ( Lua.GET_OPCODE(pi.prototype.code[var.pc]) ) {
+			case Lua.OP_TFORLOOP:
+			case Lua.OP_FORLOOP:
+				return true;
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+17718986
+src/core/org/luaj/vm2/WeakTable.java 307 318
+src/jse/org/luaj/vm2/lib/jse/CoerceLuaToJava.java 233 244
+----------------------------------------
+	protected static LuaValue weaken( LuaValue value ) {
+		switch ( value.type() ) {
+			case LuaValue.TFUNCTION:
+			case LuaValue.TTHREAD:
+			case LuaValue.TTABLE:
+				return new WeakValue(value);
+			case LuaValue.TUSERDATA:
+				return new WeakUserdata(value);
+			default:
+				return value;
+		}
+	}
+
+----------------------------------------
+		public int score(LuaValue value) {
+			switch ( value.type() ) {
+			case LuaValue.TTABLE:
+				return value.length()==0? 0: componentCoercion.score( value.get(1) );
+			case LuaValue.TUSERDATA:
+				return inheritanceLevels( componentType, value.touserdata().getClass().getComponentType() );
+			case LuaValue.TNIL:
+				return SCORE_NULL_VALUE;
+			default: 
+				return SCORE_UNCOERCIBLE;
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+17718987
+src/jse/org/luaj/vm2/script/LuaScriptEngine.java 241 251
+src/jse/org/luaj/vm2/lib/jse/CoerceLuaToJava.java 308 323
+----------------------------------------
+	static private Object toJava(LuaValue luajValue) {
+		switch ( luajValue.type() ) {
+		case LuaValue.TNIL: return null;
+		case LuaValue.TSTRING: return luajValue.tojstring();
+		case LuaValue.TUSERDATA: return luajValue.checkuserdata(Object.class);
+		case LuaValue.TNUMBER: return luajValue.isinttype()? 
+				(Object) new Integer(luajValue.toint()): 
+				(Object) new Double(luajValue.todouble());
+		default: return luajValue;
+		}
+	}
+
+----------------------------------------
+		public Object coerce(LuaValue value) {
+			switch ( value.type() ) {
+			case LuaValue.TNUMBER:
+				return value.isint()? (Object)new Integer(value.toint()): (Object)new Double(value.todouble());
+			case LuaValue.TBOOLEAN:
+				return value.toboolean()? Boolean.TRUE: Boolean.FALSE;
+			case LuaValue.TSTRING:
+				return value.tojstring();
+			case LuaValue.TUSERDATA:
+				return value.optuserdata(targetType, null);
+			case LuaValue.TNIL:
+				return null;
+			default:
+				return value;
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+17718988
+src/jse/org/luaj/vm2/lib/jse/CoerceJavaToLua.java 181 186
+src/jse/org/luaj/vm2/luajc/JavaBuilder.java 676 683
+----------------------------------------
+		if ( c == null ) {
+			c = clazz.isArray()? arrayCoercion:
+				o instanceof LuaValue ? luaCoercion:
+					instanceCoercion;
+			COERCIONS.put( clazz, c );
+		}
+
+----------------------------------------
+			if ( name == null ) {
+				name = value.type() == LuaValue.TNUMBER? 
+						value.isinttype()? 
+							createLuaIntegerField(value.checkint()):
+							createLuaDoubleField(value.checkdouble()):
+						createLuaStringField(value.checkstring());
+				constants.put(value, name);
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+17718995
+src/core/org/luaj/vm2/compiler/LexState.java 813 818
+src/core/org/luaj/vm2/Varargs.java 654 659
+----------------------------------------
+		public Labeldesc(LuaString name, int pc, int line, short nactvar) {
+			this.name = name;
+			this.pc = pc;
+			this.line = line;
+			this.nactvar = nactvar;
+		}
+
+----------------------------------------
+		ArrayPartVarargs(LuaValue[] v, int offset, int length) {
+			this.v = v;
+			this.offset = offset;
+			this.length = length;
+			this.more = LuaValue.NONE;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+17718994
+src/jse/org/luaj/vm2/ast/Stat.java 233 239
+src/core/org/luaj/vm2/Varargs.java 654 659
+----------------------------------------
+		public NumericFor(String name, Exp initial, Exp limit, Exp step, Block block) {
+			this.name = new Name(name);
+			this.initial = initial;
+			this.limit = limit;
+			this.step = step;
+			this.block = block;
+		}
+
+----------------------------------------
+		ArrayPartVarargs(LuaValue[] v, int offset, int length) {
+			this.v = v;
+			this.offset = offset;
+			this.length = length;
+			this.more = LuaValue.NONE;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+17718996
+src/jse/org/luaj/vm2/luajc/BasicBlock.java 81 86
+src/core/org/luaj/vm2/Varargs.java 654 659
+----------------------------------------
+				BasicBlock[] blocks) {
+			super(isbeg);
+			this.nnext = nnext;
+			this.nprev = nprev;
+			this.blocks = blocks;
+		}
+
+----------------------------------------
+		ArrayPartVarargs(LuaValue[] v, int offset, int length) {
+			this.v = v;
+			this.offset = offset;
+			this.length = length;
+			this.more = LuaValue.NONE;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+17718989
+src/jse/org/luaj/vm2/ast/Stat.java 266 272
+src/core/org/luaj/vm2/Varargs.java 654 659
+----------------------------------------
+				List<Block> elseifblocks, Block elseblock) {
+			this.ifexp = ifexp;
+			this.ifblock = ifblock;
+			this.elseifexps = elseifexps;
+			this.elseifblocks = elseifblocks;
+			this.elseblock = elseblock;
+		}
+
+----------------------------------------
+		ArrayPartVarargs(LuaValue[] v, int offset, int length) {
+			this.v = v;
+			this.offset = offset;
+			this.length = length;
+			this.more = LuaValue.NONE;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+17718990
+src/core/org/luaj/vm2/LuaString.java 236 241
+src/core/org/luaj/vm2/Varargs.java 654 659
+----------------------------------------
+	private LuaString(byte[] bytes, int offset, int length) {
+		this.m_bytes = bytes;
+		this.m_offset = offset;
+		this.m_length = length;
+		this.m_hashcode = hashCode(bytes, offset, length);
+	}
+
+----------------------------------------
+		ArrayPartVarargs(LuaValue[] v, int offset, int length) {
+			this.v = v;
+			this.offset = offset;
+			this.length = length;
+			this.more = LuaValue.NONE;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+17718991
+src/core/org/luaj/vm2/lib/IoLib.java 274 280
+src/core/org/luaj/vm2/Varargs.java 654 659
+----------------------------------------
+		public IoLibV(File f, String name, int opcode, IoLib iolib) {
+			super();
+			this.f = f;
+			this.name = name;
+			this.opcode = opcode;
+			this.iolib = iolib;
+		}
+
+----------------------------------------
+		ArrayPartVarargs(LuaValue[] v, int offset, int length) {
+			this.v = v;
+			this.offset = offset;
+			this.length = length;
+			this.more = LuaValue.NONE;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+17719002
+src/core/org/luaj/vm2/compiler/LexState.java 813 818
+src/jse/org/luaj/vm2/lib/jse/JseProcess.java 105 110
+----------------------------------------
+		public Labeldesc(LuaString name, int pc, int line, short nactvar) {
+			this.name = name;
+			this.pc = pc;
+			this.line = line;
+			this.nactvar = nactvar;
+		}
+
+----------------------------------------
+				InputStream ownedInput, InputStream input) {
+			this.output = output;
+			this.ownedOutput = ownedOutput;
+			this.ownedInput = ownedInput;
+			this.input = input;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+17719001
+src/jse/org/luaj/vm2/ast/Stat.java 233 239
+src/jse/org/luaj/vm2/lib/jse/JseProcess.java 105 110
+----------------------------------------
+		public NumericFor(String name, Exp initial, Exp limit, Exp step, Block block) {
+			this.name = new Name(name);
+			this.initial = initial;
+			this.limit = limit;
+			this.step = step;
+			this.block = block;
+		}
+
+----------------------------------------
+				InputStream ownedInput, InputStream input) {
+			this.output = output;
+			this.ownedOutput = ownedOutput;
+			this.ownedInput = ownedInput;
+			this.input = input;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+17718997
+src/jse/org/luaj/vm2/ast/Stat.java 266 272
+src/jse/org/luaj/vm2/lib/jse/JseProcess.java 105 110
+----------------------------------------
+				List<Block> elseifblocks, Block elseblock) {
+			this.ifexp = ifexp;
+			this.ifblock = ifblock;
+			this.elseifexps = elseifexps;
+			this.elseifblocks = elseifblocks;
+			this.elseblock = elseblock;
+		}
+
+----------------------------------------
+				InputStream ownedInput, InputStream input) {
+			this.output = output;
+			this.ownedOutput = ownedOutput;
+			this.ownedInput = ownedInput;
+			this.input = input;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+17718998
+src/core/org/luaj/vm2/LuaString.java 236 241
+src/jse/org/luaj/vm2/lib/jse/JseProcess.java 105 110
+----------------------------------------
+	private LuaString(byte[] bytes, int offset, int length) {
+		this.m_bytes = bytes;
+		this.m_offset = offset;
+		this.m_length = length;
+		this.m_hashcode = hashCode(bytes, offset, length);
+	}
+
+----------------------------------------
+				InputStream ownedInput, InputStream input) {
+			this.output = output;
+			this.ownedOutput = ownedOutput;
+			this.ownedInput = ownedInput;
+			this.input = input;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+17718999
+src/core/org/luaj/vm2/lib/IoLib.java 274 280
+src/jse/org/luaj/vm2/lib/jse/JseProcess.java 105 110
+----------------------------------------
+		public IoLibV(File f, String name, int opcode, IoLib iolib) {
+			super();
+			this.f = f;
+			this.name = name;
+			this.opcode = opcode;
+			this.iolib = iolib;
+		}
+
+----------------------------------------
+				InputStream ownedInput, InputStream input) {
+			this.output = output;
+			this.ownedOutput = ownedOutput;
+			this.ownedInput = ownedInput;
+			this.input = input;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+17719383
+src/jse/org/luaj/vm2/luajc/BasicBlock.java 81 86
+src/jse/org/luaj/vm2/lib/jse/JseProcess.java 105 110
+----------------------------------------
+				BasicBlock[] blocks) {
+			super(isbeg);
+			this.nnext = nnext;
+			this.nprev = nprev;
+			this.blocks = blocks;
+		}
+
+----------------------------------------
+				InputStream ownedInput, InputStream input) {
+			this.output = output;
+			this.ownedOutput = ownedOutput;
+			this.ownedInput = ownedInput;
+			this.input = input;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+17718992
+src/core/org/luaj/vm2/Varargs.java 654 659
+src/jse/org/luaj/vm2/lib/jse/JseProcess.java 105 110
+----------------------------------------
+		ArrayPartVarargs(LuaValue[] v, int offset, int length) {
+			this.v = v;
+			this.offset = offset;
+			this.length = length;
+			this.more = LuaValue.NONE;
+		}
+
+----------------------------------------
+				InputStream ownedInput, InputStream input) {
+			this.output = output;
+			this.ownedOutput = ownedOutput;
+			this.ownedInput = ownedInput;
+			this.input = input;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+17719583
+src/core/org/luaj/vm2/lib/IoLib.java 274 280
+src/core/org/luaj/vm2/lib/DebugLib.java 667 673
+----------------------------------------
+		public IoLibV(File f, String name, int opcode, IoLib iolib) {
+			super();
+			this.f = f;
+			this.name = name;
+			this.opcode = opcode;
+			this.iolib = iolib;
+		}
+
+----------------------------------------
+		void instr(int pc, Varargs v, int top) {
+			this.pc = pc;
+			this.v = v;
+			this.top = top;
+			if (TRACE)
+				Print.printState(f.checkclosure(), pc, stack, top, v);
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+17719582
+src/core/org/luaj/vm2/LuaString.java 236 241
+src/core/org/luaj/vm2/lib/DebugLib.java 667 673
+----------------------------------------
+	private LuaString(byte[] bytes, int offset, int length) {
+		this.m_bytes = bytes;
+		this.m_offset = offset;
+		this.m_length = length;
+		this.m_hashcode = hashCode(bytes, offset, length);
+	}
+
+----------------------------------------
+		void instr(int pc, Varargs v, int top) {
+			this.pc = pc;
+			this.v = v;
+			this.top = top;
+			if (TRACE)
+				Print.printState(f.checkclosure(), pc, stack, top, v);
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+17719000
+src/jse/org/luaj/vm2/lib/jse/JseProcess.java 105 110
+src/core/org/luaj/vm2/lib/DebugLib.java 667 673
+----------------------------------------
+				InputStream ownedInput, InputStream input) {
+			this.output = output;
+			this.ownedOutput = ownedOutput;
+			this.ownedInput = ownedInput;
+			this.input = input;
+		}
+
+----------------------------------------
+		void instr(int pc, Varargs v, int top) {
+			this.pc = pc;
+			this.v = v;
+			this.top = top;
+			if (TRACE)
+				Print.printState(f.checkclosure(), pc, stack, top, v);
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+17719584
+src/jse/org/luaj/vm2/ast/Stat.java 233 239
+src/core/org/luaj/vm2/lib/DebugLib.java 667 673
+----------------------------------------
+		public NumericFor(String name, Exp initial, Exp limit, Exp step, Block block) {
+			this.name = new Name(name);
+			this.initial = initial;
+			this.limit = limit;
+			this.step = step;
+			this.block = block;
+		}
+
+----------------------------------------
+		void instr(int pc, Varargs v, int top) {
+			this.pc = pc;
+			this.v = v;
+			this.top = top;
+			if (TRACE)
+				Print.printState(f.checkclosure(), pc, stack, top, v);
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+17718993
+src/core/org/luaj/vm2/Varargs.java 654 659
+src/core/org/luaj/vm2/lib/DebugLib.java 667 673
+----------------------------------------
+		ArrayPartVarargs(LuaValue[] v, int offset, int length) {
+			this.v = v;
+			this.offset = offset;
+			this.length = length;
+			this.more = LuaValue.NONE;
+		}
+
+----------------------------------------
+		void instr(int pc, Varargs v, int top) {
+			this.pc = pc;
+			this.v = v;
+			this.top = top;
+			if (TRACE)
+				Print.printState(f.checkclosure(), pc, stack, top, v);
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+17719586
+src/jse/org/luaj/vm2/luajc/BasicBlock.java 81 86
+src/core/org/luaj/vm2/lib/DebugLib.java 667 673
+----------------------------------------
+				BasicBlock[] blocks) {
+			super(isbeg);
+			this.nnext = nnext;
+			this.nprev = nprev;
+			this.blocks = blocks;
+		}
+
+----------------------------------------
+		void instr(int pc, Varargs v, int top) {
+			this.pc = pc;
+			this.v = v;
+			this.top = top;
+			if (TRACE)
+				Print.printState(f.checkclosure(), pc, stack, top, v);
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+17719581
+src/jse/org/luaj/vm2/ast/Stat.java 266 272
+src/core/org/luaj/vm2/lib/DebugLib.java 667 673
+----------------------------------------
+				List<Block> elseifblocks, Block elseblock) {
+			this.ifexp = ifexp;
+			this.ifblock = ifblock;
+			this.elseifexps = elseifexps;
+			this.elseifblocks = elseifblocks;
+			this.elseblock = elseblock;
+		}
+
+----------------------------------------
+		void instr(int pc, Varargs v, int top) {
+			this.pc = pc;
+			this.v = v;
+			this.top = top;
+			if (TRACE)
+				Print.printState(f.checkclosure(), pc, stack, top, v);
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+17719585
+src/core/org/luaj/vm2/compiler/LexState.java 813 818
+src/core/org/luaj/vm2/lib/DebugLib.java 667 673
+----------------------------------------
+		public Labeldesc(LuaString name, int pc, int line, short nactvar) {
+			this.name = name;
+			this.pc = pc;
+			this.line = line;
+			this.nactvar = nactvar;
+		}
+
+----------------------------------------
+		void instr(int pc, Varargs v, int top) {
+			this.pc = pc;
+			this.v = v;
+			this.top = top;
+			if (TRACE)
+				Print.printState(f.checkclosure(), pc, stack, top, v);
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+17719003
+src/core/org/luaj/vm2/lib/StringLib.java 365 372
+src/core/org/luaj/vm2/lib/StringLib.java 377 384
+----------------------------------------
+			if ( Character.isDigit( (char)c ) ) {
+				width = c - '0';
+				c = ( (p < n) ? strfrmt.luaByte( p++ ) : 0 );
+				if ( Character.isDigit( (char) c ) ) {
+					width = width * 10 + (c - '0');
+					c = ( (p < n) ? strfrmt.luaByte( p++ ) : 0 );
+				}
+			}
+
+----------------------------------------
+				if ( Character.isDigit( (char) c ) ) {
+					precision = c - '0';
+					c = ( (p < n) ? strfrmt.luaByte( p++ ) : 0 );
+					if ( Character.isDigit( (char) c ) ) {
+						precision = precision * 10 + (c - '0');
+						c = ( (p < n) ? strfrmt.luaByte( p++ ) : 0 );
+					}
+				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+17719004
+src/jse/org/luaj/vm2/parser/LuaParser.java 1121 1132
+src/jse/org/luaj/vm2/parser/LuaParser.java 1167 1181
+----------------------------------------
+  private boolean jj_3R_38() {
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3R_41()) {
+    jj_scanpos = xsp;
+    if (jj_3R_42()) {
+    jj_scanpos = xsp;
+    if (jj_3R_43()) return true;
+    }
+    }
+    return false;
+  }
+
+----------------------------------------
+  private boolean jj_3R_10() {
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3R_15()) {
+    jj_scanpos = xsp;
+    if (jj_3R_16()) {
+    jj_scanpos = xsp;
+    if (jj_3R_17()) {
+    jj_scanpos = xsp;
+    if (jj_3R_18()) return true;
+    }
+    }
+    }
+    return false;
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+17719005
+src/jse/org/luaj/vm2/parser/LuaParser.java 1121 1132
+src/jse/org/luaj/vm2/parser/LuaParser.java 1170 1179
+----------------------------------------
+  private boolean jj_3R_38() {
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3R_41()) {
+    jj_scanpos = xsp;
+    if (jj_3R_42()) {
+    jj_scanpos = xsp;
+    if (jj_3R_43()) return true;
+    }
+    }
+    return false;
+  }
+
+----------------------------------------
+    if (jj_3R_15()) {
+    jj_scanpos = xsp;
+    if (jj_3R_16()) {
+    jj_scanpos = xsp;
+    if (jj_3R_17()) {
+    jj_scanpos = xsp;
+    if (jj_3R_18()) return true;
+    }
+    }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+17719006
+src/jse/org/luaj/vm2/parser/LuaParser.java 1170 1179
+src/jse/org/luaj/vm2/parser/LuaParser.java 1124 1130
+----------------------------------------
+    if (jj_3R_15()) {
+    jj_scanpos = xsp;
+    if (jj_3R_16()) {
+    jj_scanpos = xsp;
+    if (jj_3R_17()) {
+    jj_scanpos = xsp;
+    if (jj_3R_18()) return true;
+    }
+    }
+    }
+
+----------------------------------------
+    if (jj_3R_41()) {
+    jj_scanpos = xsp;
+    if (jj_3R_42()) {
+    jj_scanpos = xsp;
+    if (jj_3R_43()) return true;
+    }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+17719007
+src/jse/org/luaj/vm2/parser/LuaParser.java 1124 1130
+src/jse/org/luaj/vm2/parser/LuaParser.java 1172 1178
+----------------------------------------
+    if (jj_3R_41()) {
+    jj_scanpos = xsp;
+    if (jj_3R_42()) {
+    jj_scanpos = xsp;
+    if (jj_3R_43()) return true;
+    }
+    }
+
+----------------------------------------
+    if (jj_3R_16()) {
+    jj_scanpos = xsp;
+    if (jj_3R_17()) {
+    jj_scanpos = xsp;
+    if (jj_3R_18()) return true;
+    }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+17719010
+src/jse/org/luaj/vm2/parser/LuaParser.java 1167 1181
+src/jse/org/luaj/vm2/parser/LuaParser.java 1214 1225
+----------------------------------------
+  private boolean jj_3R_10() {
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3R_15()) {
+    jj_scanpos = xsp;
+    if (jj_3R_16()) {
+    jj_scanpos = xsp;
+    if (jj_3R_17()) {
+    jj_scanpos = xsp;
+    if (jj_3R_18()) return true;
+    }
+    }
+    }
+    return false;
+  }
+
+----------------------------------------
+  private boolean jj_3R_40() {
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3R_53()) {
+    jj_scanpos = xsp;
+    if (jj_3R_54()) {
+    jj_scanpos = xsp;
+    if (jj_3R_55()) return true;
+    }
+    }
+    return false;
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+17719009
+src/jse/org/luaj/vm2/parser/LuaParser.java 1170 1179
+src/jse/org/luaj/vm2/parser/LuaParser.java 1214 1225
+----------------------------------------
+    if (jj_3R_15()) {
+    jj_scanpos = xsp;
+    if (jj_3R_16()) {
+    jj_scanpos = xsp;
+    if (jj_3R_17()) {
+    jj_scanpos = xsp;
+    if (jj_3R_18()) return true;
+    }
+    }
+    }
+
+----------------------------------------
+  private boolean jj_3R_40() {
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3R_53()) {
+    jj_scanpos = xsp;
+    if (jj_3R_54()) {
+    jj_scanpos = xsp;
+    if (jj_3R_55()) return true;
+    }
+    }
+    return false;
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+17719008
+src/jse/org/luaj/vm2/parser/LuaParser.java 1121 1132
+src/jse/org/luaj/vm2/parser/LuaParser.java 1214 1225
+----------------------------------------
+  private boolean jj_3R_38() {
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3R_41()) {
+    jj_scanpos = xsp;
+    if (jj_3R_42()) {
+    jj_scanpos = xsp;
+    if (jj_3R_43()) return true;
+    }
+    }
+    return false;
+  }
+
+----------------------------------------
+  private boolean jj_3R_40() {
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3R_53()) {
+    jj_scanpos = xsp;
+    if (jj_3R_54()) {
+    jj_scanpos = xsp;
+    if (jj_3R_55()) return true;
+    }
+    }
+    return false;
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+17719023
+src/jse/org/luaj/vm2/parser/LuaParser.java 1124 1130
+src/jse/org/luaj/vm2/parser/LuaParser.java 1217 1223
+----------------------------------------
+    if (jj_3R_41()) {
+    jj_scanpos = xsp;
+    if (jj_3R_42()) {
+    jj_scanpos = xsp;
+    if (jj_3R_43()) return true;
+    }
+    }
+
+----------------------------------------
+    if (jj_3R_53()) {
+    jj_scanpos = xsp;
+    if (jj_3R_54()) {
+    jj_scanpos = xsp;
+    if (jj_3R_55()) return true;
+    }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+52
+17719012
+src/jse/org/luaj/vm2/parser/LuaParser.java 1170 1179
+src/jse/org/luaj/vm2/parser/LuaParser.java 1217 1223
+----------------------------------------
+    if (jj_3R_15()) {
+    jj_scanpos = xsp;
+    if (jj_3R_16()) {
+    jj_scanpos = xsp;
+    if (jj_3R_17()) {
+    jj_scanpos = xsp;
+    if (jj_3R_18()) return true;
+    }
+    }
+    }
+
+----------------------------------------
+    if (jj_3R_53()) {
+    jj_scanpos = xsp;
+    if (jj_3R_54()) {
+    jj_scanpos = xsp;
+    if (jj_3R_55()) return true;
+    }
+    }
+
+----------------------------------------

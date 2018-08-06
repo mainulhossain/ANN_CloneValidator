@@ -1,0 +1,1917 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513110
+src/org/jfm/views/list/ListView.java 32 40
+src/org/jfm/main/MainFrame.java 60 68
+----------------------------------------
+  public ListView(String fs) {
+  	super(fs);
+    try {
+      jbInit();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }  	
+  }
+
+----------------------------------------
+  public MainFrame() {
+    enableEvents(AWTEvent.WINDOW_EVENT_MASK);
+    try {
+      jbInit();
+    }
+    catch(Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513102
+src/org/jfm/filesystems/local/JFMLocalFile.java 44 52
+src/org/jfm/main/MainFrame.java 60 68
+----------------------------------------
+	public InputStream getInputStream(){
+		java.io.FileInputStream in=null;
+		try{
+			in=new java.io.FileInputStream(theFile);
+		}catch(IOException exc){
+			exc.printStackTrace();
+		}
+		return in;
+	}
+
+----------------------------------------
+  public MainFrame() {
+    enableEvents(AWTEvent.WINDOW_EVENT_MASK);
+    try {
+      jbInit();
+    }
+    catch(Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513112
+src/org/jfm/views/list/detailview/DetailsTableModel.java 82 90
+src/org/jfm/main/MainFrame.java 60 68
+----------------------------------------
+    public JFMFile getFileAt(int index){
+      JFMFile file=null;
+      try {
+       file=(JFMFile)getValueAt(index, 0);
+      }catch (Exception ex){
+        ex.printStackTrace();
+      }
+      return file;
+    }
+
+----------------------------------------
+  public MainFrame() {
+    enableEvents(AWTEvent.WINDOW_EVENT_MASK);
+    try {
+      jbInit();
+    }
+    catch(Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513106
+src/org/jfm/po/copy/CopyProgressDialog.java 179 188
+src/org/jfm/main/MainFrame.java 60 68
+----------------------------------------
+  public CopyProgressDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+  public MainFrame() {
+    enableEvents(AWTEvent.WINDOW_EVENT_MASK);
+    try {
+      jbInit();
+    }
+    catch(Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513113
+src/org/jfm/views/list/detailview/DetailView.java 54 62
+src/org/jfm/main/MainFrame.java 60 68
+----------------------------------------
+	public DetailView(String fs) {
+		super(fs);
+	    try {
+	      init();
+	    }
+	    catch(Exception ex) {
+	      ex.printStackTrace();
+	    }	    
+	}
+
+----------------------------------------
+  public MainFrame() {
+    enableEvents(AWTEvent.WINDOW_EVENT_MASK);
+    try {
+      jbInit();
+    }
+    catch(Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513111
+src/org/jfm/main/Options.java 99 106
+src/org/jfm/main/MainFrame.java 60 68
+----------------------------------------
+  public static Preferences getPreferences(){
+  	try {
+	  	preferences.sync();	
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+  	return preferences;
+  }
+
+----------------------------------------
+  public MainFrame() {
+    enableEvents(AWTEvent.WINDOW_EVENT_MASK);
+    try {
+      jbInit();
+    }
+    catch(Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513165
+src/org/jfm/filesystems/JFMFileSystem.java 141 150
+src/org/jfm/main/MainFrame.java 60 68
+----------------------------------------
+			if(name.equals(fsClassName)){
+				try {
+					Class fsClass=Class.forName(fsClassName,true,JFMClassLoader.getLoader());
+					fs=(JFMFileSystem)fsClass.newInstance();
+					return fs;
+				} catch (Exception e) {
+					e.printStackTrace();
+					//ignore the exception
+				}
+			}
+
+----------------------------------------
+  public MainFrame() {
+    enableEvents(AWTEvent.WINDOW_EVENT_MASK);
+    try {
+      jbInit();
+    }
+    catch(Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513170
+src/org/jfm/filesystems/JFMFileSystem.java 153 162
+src/org/jfm/main/MainFrame.java 60 68
+----------------------------------------
+		if(fs==null){
+			name=null;
+			try {
+				Class fsClass=Class.forName(DEFAULT_FILESYSTEM);
+				fs=(JFMFileSystem)fsClass.newInstance();
+			} catch (Exception e) {
+				e.printStackTrace();
+				//ignore the exception
+			}
+		}
+
+----------------------------------------
+  public MainFrame() {
+    enableEvents(AWTEvent.WINDOW_EVENT_MASK);
+    try {
+      jbInit();
+    }
+    catch(Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513174
+src/org/jfm/po/copy/CopyConfirmDialog.java 34 43
+src/org/jfm/main/MainFrame.java 60 68
+----------------------------------------
+  public CopyConfirmDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+  public MainFrame() {
+    enableEvents(AWTEvent.WINDOW_EVENT_MASK);
+    try {
+      jbInit();
+    }
+    catch(Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513105
+src/org/jfm/po/CommandOutputViewDialog.java 23 32
+src/org/jfm/main/MainFrame.java 60 68
+----------------------------------------
+  public CommandOutputViewDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+      //pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+  public MainFrame() {
+    enableEvents(AWTEvent.WINDOW_EVENT_MASK);
+    try {
+      jbInit();
+    }
+    catch(Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513173
+src/org/jfm/main/Options.java 108 114
+src/org/jfm/main/MainFrame.java 60 68
+----------------------------------------
+  public static void savePreferences(){
+  	try {
+		getPreferences().flush();
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+  }
+
+----------------------------------------
+  public MainFrame() {
+    enableEvents(AWTEvent.WINDOW_EVENT_MASK);
+    try {
+      jbInit();
+    }
+    catch(Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513166
+src/org/jfm/views/JFMView.java 146 154
+src/org/jfm/main/MainFrame.java 60 68
+----------------------------------------
+          if(view==null){
+                  try {
+                          Class viewClass=Class.forName(DEFAULT_VIEW.getClassName());
+                          view=(JFMView)viewClass.newInstance();
+                  } catch (Exception e) {
+                          e.printStackTrace();
+                          //ignore the exception
+                  }
+          }
+
+----------------------------------------
+  public MainFrame() {
+    enableEvents(AWTEvent.WINDOW_EVENT_MASK);
+    try {
+      jbInit();
+    }
+    catch(Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513171
+src/org/jfm/views/fview/FileViewDialog.java 37 46
+src/org/jfm/main/MainFrame.java 60 68
+----------------------------------------
+  public FileViewDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+    //  pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+  public MainFrame() {
+    enableEvents(AWTEvent.WINDOW_EVENT_MASK);
+    try {
+      jbInit();
+    }
+    catch(Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513172
+src/org/jfm/filesystems/local/JFMLocalFilesystem.java 51 57
+src/org/jfm/main/MainFrame.java 60 68
+----------------------------------------
+		for(int i=0;i<files.length;i++){
+			try{
+				jfmFiles[i]=new JFMLocalFile(files[i].getAbsolutePath());
+			}catch(Exception ignored){
+				ignored.printStackTrace();
+			}
+		}
+
+----------------------------------------
+  public MainFrame() {
+    enableEvents(AWTEvent.WINDOW_EVENT_MASK);
+    try {
+      jbInit();
+    }
+    catch(Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513109
+src/org/jfm/filesystems/JFMFileSystem.java 89 97
+src/org/jfm/main/MainFrame.java 60 68
+----------------------------------------
+		  {
+			  if(!files[i].isFile() || !files[i].getName().endsWith("jar")) continue;
+			  try{
+				  registerFilesystem(files[i]);
+			  }catch(Exception ignored)
+			  {
+				  ignored.printStackTrace();
+			  }
+		  }
+
+----------------------------------------
+  public MainFrame() {
+    enableEvents(AWTEvent.WINDOW_EVENT_MASK);
+    try {
+      jbInit();
+    }
+    catch(Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513108
+src/org/jfm/po/ProgressActionDialog.java 57 66
+src/org/jfm/main/MainFrame.java 60 68
+----------------------------------------
+  public ProgressActionDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+  public MainFrame() {
+    enableEvents(AWTEvent.WINDOW_EVENT_MASK);
+    try {
+      jbInit();
+    }
+    catch(Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513103
+src/org/jfm/main/SearchDialog.java 42 51
+src/org/jfm/main/MainFrame.java 60 68
+----------------------------------------
+  public SearchDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+  public MainFrame() {
+    enableEvents(AWTEvent.WINDOW_EVENT_MASK);
+    try {
+      jbInit();
+    }
+    catch(Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513114
+src/org/jfm/po/FilePropertiesDialog.java 36 45
+src/org/jfm/main/MainFrame.java 60 68
+----------------------------------------
+  public FilePropertiesDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+  public MainFrame() {
+    enableEvents(AWTEvent.WINDOW_EVENT_MASK);
+    try {
+      jbInit();
+    }
+    catch(Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513169
+src/org/jfm/po/copy/CopyProgressDialog.java 154 160
+src/org/jfm/main/MainFrame.java 60 68
+----------------------------------------
+      }finally{
+        try {
+          in.close();
+          out.close();
+        }
+        catch (Exception ignored) {}
+      }
+
+----------------------------------------
+  public MainFrame() {
+    enableEvents(AWTEvent.WINDOW_EVENT_MASK);
+    try {
+      jbInit();
+    }
+    catch(Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513168
+src/org/jfm/filesystems/local/JFMLocalFile.java 75 83
+src/org/jfm/main/MainFrame.java 60 68
+----------------------------------------
+	public OutputStream getOutputStream(){
+		java.io.FileOutputStream out=null;
+		try{
+			out=new java.io.FileOutputStream(theFile);
+		}catch(IOException exc){
+			exc.printStackTrace();
+		}
+		return out;
+	}
+
+----------------------------------------
+  public MainFrame() {
+    enableEvents(AWTEvent.WINDOW_EVENT_MASK);
+    try {
+      jbInit();
+    }
+    catch(Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513104
+src/org/jfm/views/list/briefview/BriefView.java 48 56
+src/org/jfm/main/MainFrame.java 60 68
+----------------------------------------
+	public BriefView(String fs){
+		super(fs);
+	    try {
+	      init();
+	    }
+	    catch(Exception ex) {
+	      ex.printStackTrace();
+	    }	    
+	}
+
+----------------------------------------
+  public MainFrame() {
+    enableEvents(AWTEvent.WINDOW_EVENT_MASK);
+    try {
+      jbInit();
+    }
+    catch(Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+28820996
+src/org/jfm/views/list/detailview/DetailsTableModel.java 82 90
+src/org/jfm/po/CommandOutputViewDialog.java 42 54
+----------------------------------------
+    public JFMFile getFileAt(int index){
+      JFMFile file=null;
+      try {
+       file=(JFMFile)getValueAt(index, 0);
+      }catch (Exception ex){
+        ex.printStackTrace();
+      }
+      return file;
+    }
+
+----------------------------------------
+      public void run(){
+        try{
+        int read=1;
+         byte[] data=new byte[1024];
+          while(read>=0){
+            read  =process.getInputStream().read(data);
+            if(data!=null && data.length>0){
+              text.setText(text.getText()+new String(data,0,read));
+            }
+          }
+        }
+        catch(java.io.IOException e){}
+      }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513115
+src/org/jfm/po/CommandOutputViewDialog.java 58 69
+src/org/jfm/po/CommandOutputViewDialog.java 42 54
+----------------------------------------
+      public void run(){
+        try{
+        int read=1;
+        byte[] data=new byte[1024];
+          while(read>=0){
+             read=process.getErrorStream().read(data);
+             if(data!=null && data.length>0){  
+               text.setText(text.getText()+new String(data,0,read));
+             }
+          }
+        }catch(java.io.IOException e){}
+      }
+
+----------------------------------------
+      public void run(){
+        try{
+        int read=1;
+         byte[] data=new byte[1024];
+          while(read>=0){
+            read  =process.getInputStream().read(data);
+            if(data!=null && data.length>0){
+              text.setText(text.getText()+new String(data,0,read));
+            }
+          }
+        }
+        catch(java.io.IOException e){}
+      }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513117
+src/org/jfm/po/CommandOutputViewDialog.java 42 54
+src/org/jfm/po/CommandOutputViewDialog.java 59 68
+----------------------------------------
+      public void run(){
+        try{
+        int read=1;
+         byte[] data=new byte[1024];
+          while(read>=0){
+            read  =process.getInputStream().read(data);
+            if(data!=null && data.length>0){
+              text.setText(text.getText()+new String(data,0,read));
+            }
+          }
+        }
+        catch(java.io.IOException e){}
+      }
+
+----------------------------------------
+        try{
+        int read=1;
+        byte[] data=new byte[1024];
+          while(read>=0){
+             read=process.getErrorStream().read(data);
+             if(data!=null && data.length>0){  
+               text.setText(text.getText()+new String(data,0,read));
+             }
+          }
+        }catch(java.io.IOException e){}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513116
+src/org/jfm/po/CommandOutputViewDialog.java 43 52
+src/org/jfm/po/CommandOutputViewDialog.java 59 68
+----------------------------------------
+        try{
+        int read=1;
+         byte[] data=new byte[1024];
+          while(read>=0){
+            read  =process.getInputStream().read(data);
+            if(data!=null && data.length>0){
+              text.setText(text.getText()+new String(data,0,read));
+            }
+          }
+        }
+
+----------------------------------------
+        try{
+        int read=1;
+        byte[] data=new byte[1024];
+          while(read>=0){
+             read=process.getErrorStream().read(data);
+             if(data!=null && data.length>0){  
+               text.setText(text.getText()+new String(data,0,read));
+             }
+          }
+        }catch(java.io.IOException e){}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513118
+src/org/jfm/main/MainPanel.java 94 103
+src/org/jfm/main/MainPanel.java 105 114
+----------------------------------------
+  private JFMView createRightView() {
+  	String viewClass=prefs.get(Options.JFM_RIGHTVIEWPANEL_PREF,JFMView.DEFAULT_VIEW.getClassName());
+  	String filesystem=prefs.get(Options.JFM_RIGHTVIEWPANEL_FILESYSTEM_PREF,null);
+    //create the default view
+    JFMView view = JFMView.createView(JFMView.getViewRepresentation(viewClass),filesystem);
+    prefs.put(Options.JFM_RIGHTVIEWPANEL_FILESYSTEM_PREF,view.getFilesystemName());
+    //Options.setActivePanel(view);
+    view.requestFocus();
+    return view;
+  }
+
+----------------------------------------
+  private JFMView createLeftView() {
+  	String viewClass=prefs.get(Options.JFM_LEFTVIEWPANEL_PREF,JFMView.DEFAULT_VIEW.getClassName());
+  	String filesystem=prefs.get(Options.JFM_LEFTVIEWPANEL_FILESYSTEM_PREF,null);
+    //create the default view
+    //JFMView view = JFMView.createView(JFMView.getViewRepresentation(viewClass),"org.jfm.filesystems.baracuda.JFMBaracudaFilesystem");
+  	JFMView view = JFMView.createView(JFMView.getViewRepresentation(viewClass),filesystem);
+  	prefs.put(Options.JFM_LEFTVIEWPANEL_FILESYSTEM_PREF,view.getFilesystemName());
+    //Options.setActivePanel(view);
+    return view;
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513119
+src/org/jfm/views/fview/FView.java 38 45
+src/org/jfm/po/CopyAction.java 124 132
+----------------------------------------
+    for(int i=0;i<files.length;i++){
+        if(files[i].isDirectory()){
+          info.addDir();
+          calculateDirInfo(files[i],info);
+        }else{
+           info.addFile(files[i].length());
+        }
+    }
+
+----------------------------------------
+    for(int i=0;i<f.length;i++){    	      
+      if(f[i].isDirectory()){
+        JFMFile destFile=dest.mkdir(f[i].getName());
+        copyDir(f[i],destFile);
+      }else{
+    	JFMFile destFile=dest.createFile(f[i].getName());
+        copyFile(f[i],destFile);
+      }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513120
+src/org/jfm/po/CopyAction.java 124 132
+src/org/jfm/po/copy/CopyProgressDialog.java 78 86
+----------------------------------------
+    for(int i=0;i<f.length;i++){    	      
+      if(f[i].isDirectory()){
+        JFMFile destFile=dest.mkdir(f[i].getName());
+        copyDir(f[i],destFile);
+      }else{
+    	JFMFile destFile=dest.createFile(f[i].getName());
+        copyFile(f[i],destFile);
+      }
+    }
+
+----------------------------------------
+    for(int i=0;i<f.length;i++){
+      JFMFile destFile=null;//new File(dest.getPath()+(dest.getPath().endsWith(File.separator)?"":File.separator)+f[i].getName());
+      if(f[i].isDirectory()){
+       // destFile.mkdir();
+        copyDir(f[i],destFile);
+      }else{
+        copyFile(f[i],destFile);
+      }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513249
+src/org/jfm/views/fview/FView.java 38 45
+src/org/jfm/po/copy/CopyProgressDialog.java 78 86
+----------------------------------------
+    for(int i=0;i<files.length;i++){
+        if(files[i].isDirectory()){
+          info.addDir();
+          calculateDirInfo(files[i],info);
+        }else{
+           info.addFile(files[i].length());
+        }
+    }
+
+----------------------------------------
+    for(int i=0;i<f.length;i++){
+      JFMFile destFile=null;//new File(dest.getPath()+(dest.getPath().endsWith(File.separator)?"":File.separator)+f[i].getName());
+      if(f[i].isDirectory()){
+       // destFile.mkdir();
+        copyDir(f[i],destFile);
+      }else{
+        copyFile(f[i],destFile);
+      }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513121
+src/org/jfm/po/CopyAction.java 124 132
+src/org/jfm/po/MoveAction.java 131 141
+----------------------------------------
+    for(int i=0;i<f.length;i++){    	      
+      if(f[i].isDirectory()){
+        JFMFile destFile=dest.mkdir(f[i].getName());
+        copyDir(f[i],destFile);
+      }else{
+    	JFMFile destFile=dest.createFile(f[i].getName());
+        copyFile(f[i],destFile);
+      }
+    }
+
+----------------------------------------
+    for(int i=0;i<f.length;i++){    	      
+      if(f[i].isDirectory()){
+        JFMFile destFile=dest.mkdir(f[i].getName());
+        copyDir(f[i],destFile);
+        f[i].delete();
+      }else{
+    	JFMFile destFile=dest.createFile(f[i].getName());
+        copyFile(f[i],destFile);
+        f[i].delete();
+      }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513122
+src/org/jfm/po/copy/CopyProgressDialog.java 89 161
+src/org/jfm/po/CopyAction.java 135 219
+----------------------------------------
+  private void copyFile(JFMFile fin,JFMFile fout) throws CopyCancelledException {
+    if(fout.exists() && !overwriteAll && !skipAll){
+
+      java.text.SimpleDateFormat format=new java.text.SimpleDateFormat("EEE, MMM d, yyyy 'at' hh:mm:ss");
+
+      String message="Target file "+fout.getPath()+"  already exists."+System.getProperty("line.separator")+System.getProperty("line.separator")+
+                     "Source last modified date: "+format.format(new java.util.Date(fin.lastModified()))+System.getProperty("line.separator")+
+                     "Target last modified date: "+format.format(new java.util.Date(fout.lastModified()))+System.getProperty("line.separator")+System.getProperty("line.separator")+
+                     "What should I do?";
+      String[] buttons=new String[]{"Overwrite","Overwrite all","Skip","Skip all","Append"};
+      int result=JOptionPane.showOptionDialog(this,message,"File exists",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE,null,buttons,buttons[2]);
+      switch (result){
+        case 0:
+          break;
+        case 1:
+          overwriteAll=true;
+          break;
+        case 2:
+          totalBytesWritten+=fin.length();
+          int t_percent=(int)((totalBytesWritten*100)/totalFilesSizes);
+          totalCopyProgressBar.setValue(t_percent);
+          return;
+        case 3:
+          skipAll=true;
+          break;
+          case 4:
+            break;
+      }
+    }
+
+    if(fout.exists() && skipAll){
+          totalBytesWritten+=fin.length();
+          int t_percent=(int)((totalBytesWritten*100)/totalFilesSizes);
+          totalCopyProgressBar.setValue(t_percent);
+          fileCopyProgressBar.setValue(100);
+          return;
+    }
+      InputStream in=null;
+      OutputStream out=null;
+      try{
+        in=fin.getInputStream();
+        out=fout.getOutputStream();
+        fileCopyProgressBar.setValue(0);
+        byte[] data=new byte[1024];
+        int read=0;
+        long bytesWrote=0;
+        long f_length=fin.length();
+
+        while((read=in.read(data))>=0){
+          if(cancel){
+            throw new CopyCancelledException();
+          }
+
+          out.write(data,0,read);
+          bytesWrote+=read;
+          totalBytesWritten+=read;
+          int f_percent=(int)((bytesWrote*100)/f_length);
+          int t_percent=(int)((totalBytesWritten*100)/totalFilesSizes);
+          fileCopyProgressBar.setValue(f_percent);
+          totalCopyProgressBar.setValue(t_percent);
+        }
+        fileCopyProgressBar.setValue(100);
+      }catch(Exception ex){
+        if(ex instanceof CopyCancelledException) throw (CopyCancelledException)ex;
+        JOptionPane.showMessageDialog(this,"Error while writing "+fout.getPath(),"Error",JOptionPane.ERROR_MESSAGE);
+      }finally{
+        try {
+          in.close();
+          out.close();
+        }
+        catch (Exception ignored) {}
+      }
+  }
+
+----------------------------------------
+  private void copyFile(JFMFile fin,JFMFile fout) throws ActionCancelledException {
+    if(fout.exists() && !overwriteAll && !skipAll){
+
+      java.text.SimpleDateFormat format=new java.text.SimpleDateFormat("EEE, MMM d, yyyy 'at' hh:mm:ss");
+
+      String message="Target file "+fout.getPath()+"  already exists."+System.getProperty("line.separator")+System.getProperty("line.separator")+
+                     "Source last modified date: "+format.format(new java.util.Date(fin.lastModified()))+System.getProperty("line.separator")+
+                     "Target last modified date: "+format.format(new java.util.Date(fout.lastModified()))+System.getProperty("line.separator")+System.getProperty("line.separator")+
+                     "What should I do?";
+      String[] buttons=new String[]{"Overwrite","Overwrite all","Skip","Skip all","Cancel"};
+
+      int result=JOptionPane.showOptionDialog(progress,message,"File exists",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE,null,buttons,buttons[2]);
+
+      switch (result){
+        case 0:
+          break;
+        case 1:
+          overwriteAll=true;
+          break;
+        case 2:
+          totalBytesWritten+=fin.length();          
+          int t_percent=totalFilesSizes!=0?(int)((totalBytesWritten*100)/totalFilesSizes):0;
+          progress.setTotalProgresssValue(t_percent);
+          return;
+        case 3:
+          skipAll=true;
+          break;
+          case 4:
+            throw new ActionCancelledException();
+      }
+    }
+
+    if(fout.exists() && skipAll){
+          totalBytesWritten+=fin.length();
+          int t_percent=(int)((totalBytesWritten*100)/totalFilesSizes);
+          progress.setTotalProgresssValue(t_percent);
+          progress.setFileProgresssValue(100);
+          return;
+    }
+      java.io.InputStream in=null;
+      java.io.OutputStream out=null;
+      try{
+        in=fin.getInputStream();
+        //WAS new FileOutputStream(fout.getPath(),append);
+        out=fout.getOutputStream();
+        progress.setFileProgresssValue(0);
+        curentlyCopiedFile=fout;
+        byte[] data=new byte[1024];
+        int read=0;
+        long bytesWrote=0;
+        long f_length=fin.length();
+
+        /**@todo Maybe async IO would be nice here**/
+        while((read=in.read(data))>=0){
+          if(cancel){
+            throw new ActionCancelledException();
+          }
+
+          out.write(data,0,read);
+          bytesWrote+=read;
+          totalBytesWritten+=read;
+          int f_percent=(int)((bytesWrote*100)/f_length);
+          int t_percent=(int)((totalBytesWritten*100)/totalFilesSizes);
+          progress.setFileProgresssValue(f_percent);
+          progress.setTotalProgresssValue(t_percent);
+        }
+        progress.setFileProgresssValue(100);
+      }catch(ActionCancelledException ex){
+    	  ex.printStackTrace();
+          curentlyCopiedFile.delete();
+          throw ex;
+      }catch(Exception ex){
+        JOptionPane.showMessageDialog(progress,"Error while writing "+fout.getPath(),"Error",JOptionPane.ERROR_MESSAGE);
+        curentlyCopiedFile.delete();
+      }finally{
+        try {
+          in.close();          
+        }
+        catch (Exception ignored) {}
+        try {
+            out.close();
+        }
+        catch (Exception ignored) {}
+      }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513488
+src/org/jfm/po/copy/CopyProgressDialog.java 89 161
+src/org/jfm/po/MoveAction.java 144 228
+----------------------------------------
+  private void copyFile(JFMFile fin,JFMFile fout) throws CopyCancelledException {
+    if(fout.exists() && !overwriteAll && !skipAll){
+
+      java.text.SimpleDateFormat format=new java.text.SimpleDateFormat("EEE, MMM d, yyyy 'at' hh:mm:ss");
+
+      String message="Target file "+fout.getPath()+"  already exists."+System.getProperty("line.separator")+System.getProperty("line.separator")+
+                     "Source last modified date: "+format.format(new java.util.Date(fin.lastModified()))+System.getProperty("line.separator")+
+                     "Target last modified date: "+format.format(new java.util.Date(fout.lastModified()))+System.getProperty("line.separator")+System.getProperty("line.separator")+
+                     "What should I do?";
+      String[] buttons=new String[]{"Overwrite","Overwrite all","Skip","Skip all","Append"};
+      int result=JOptionPane.showOptionDialog(this,message,"File exists",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE,null,buttons,buttons[2]);
+      switch (result){
+        case 0:
+          break;
+        case 1:
+          overwriteAll=true;
+          break;
+        case 2:
+          totalBytesWritten+=fin.length();
+          int t_percent=(int)((totalBytesWritten*100)/totalFilesSizes);
+          totalCopyProgressBar.setValue(t_percent);
+          return;
+        case 3:
+          skipAll=true;
+          break;
+          case 4:
+            break;
+      }
+    }
+
+    if(fout.exists() && skipAll){
+          totalBytesWritten+=fin.length();
+          int t_percent=(int)((totalBytesWritten*100)/totalFilesSizes);
+          totalCopyProgressBar.setValue(t_percent);
+          fileCopyProgressBar.setValue(100);
+          return;
+    }
+      InputStream in=null;
+      OutputStream out=null;
+      try{
+        in=fin.getInputStream();
+        out=fout.getOutputStream();
+        fileCopyProgressBar.setValue(0);
+        byte[] data=new byte[1024];
+        int read=0;
+        long bytesWrote=0;
+        long f_length=fin.length();
+
+        while((read=in.read(data))>=0){
+          if(cancel){
+            throw new CopyCancelledException();
+          }
+
+          out.write(data,0,read);
+          bytesWrote+=read;
+          totalBytesWritten+=read;
+          int f_percent=(int)((bytesWrote*100)/f_length);
+          int t_percent=(int)((totalBytesWritten*100)/totalFilesSizes);
+          fileCopyProgressBar.setValue(f_percent);
+          totalCopyProgressBar.setValue(t_percent);
+        }
+        fileCopyProgressBar.setValue(100);
+      }catch(Exception ex){
+        if(ex instanceof CopyCancelledException) throw (CopyCancelledException)ex;
+        JOptionPane.showMessageDialog(this,"Error while writing "+fout.getPath(),"Error",JOptionPane.ERROR_MESSAGE);
+      }finally{
+        try {
+          in.close();
+          out.close();
+        }
+        catch (Exception ignored) {}
+      }
+  }
+
+----------------------------------------
+  private void copyFile(JFMFile fin,JFMFile fout) throws ActionCancelledException {
+    if(fout.exists() && !overwriteAll && !skipAll){
+
+      java.text.SimpleDateFormat format=new java.text.SimpleDateFormat("EEE, MMM d, yyyy 'at' hh:mm:ss");
+
+      String message="Target file "+fout.getPath()+"  already exists."+System.getProperty("line.separator")+System.getProperty("line.separator")+
+                     "Source last modified date: "+format.format(new java.util.Date(fin.lastModified()))+System.getProperty("line.separator")+
+                     "Target last modified date: "+format.format(new java.util.Date(fout.lastModified()))+System.getProperty("line.separator")+System.getProperty("line.separator")+
+                     "What should I do?";
+      String[] buttons=new String[]{"Overwrite","Overwrite all","Skip","Skip all","Cancel"};
+
+      int result=JOptionPane.showOptionDialog(progress,message,"File exists",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE,null,buttons,buttons[2]);
+
+      switch (result){
+        case 0:
+          break;
+        case 1:
+          overwriteAll=true;
+          break;
+        case 2:
+          totalBytesWritten+=fin.length();          
+          int t_percent=totalFilesSizes!=0?(int)((totalBytesWritten*100)/totalFilesSizes):0;
+          progress.setTotalProgresssValue(t_percent);
+          return;
+        case 3:
+          skipAll=true;
+          break;
+          case 4:
+            throw new ActionCancelledException();
+      }
+    }
+
+    if(fout.exists() && skipAll){
+          totalBytesWritten+=fin.length();
+          int t_percent=(int)((totalBytesWritten*100)/totalFilesSizes);
+          progress.setTotalProgresssValue(t_percent);
+          progress.setFileProgresssValue(100);
+          return;
+    }
+      java.io.InputStream in=null;
+      java.io.OutputStream out=null;
+      try{
+        in=fin.getInputStream();
+        //WAS new FileOutputStream(fout.getPath(),append);
+        out=fout.getOutputStream();
+        progress.setFileProgresssValue(0);
+        curentlyCopiedFile=fout;
+        byte[] data=new byte[1024];
+        int read=0;
+        long bytesWrote=0;
+        long f_length=fin.length();
+
+        /**@todo Maybe async IO would be nice here**/
+        while((read=in.read(data))>=0){
+          if(cancel){
+            throw new ActionCancelledException();
+          }
+
+          out.write(data,0,read);
+          bytesWrote+=read;
+          totalBytesWritten+=read;
+          int f_percent=(int)((bytesWrote*100)/f_length);
+          int t_percent=(int)((totalBytesWritten*100)/totalFilesSizes);
+          progress.setFileProgresssValue(f_percent);
+          progress.setTotalProgresssValue(t_percent);
+        }
+        progress.setFileProgresssValue(100);
+      }catch(ActionCancelledException ex){
+    	  ex.printStackTrace();
+          curentlyCopiedFile.delete();
+          throw ex;
+      }catch(Exception ex){
+        JOptionPane.showMessageDialog(progress,"Error while writing "+fout.getPath(),"Error",JOptionPane.ERROR_MESSAGE);
+        curentlyCopiedFile.delete();
+      }finally{
+        try {
+          in.close();          
+        }
+        catch (Exception ignored) {}
+        try {
+            out.close();
+        }
+        catch (Exception ignored) {}
+      }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513123
+src/org/jfm/po/CopyAction.java 135 219
+src/org/jfm/po/MoveAction.java 144 228
+----------------------------------------
+  private void copyFile(JFMFile fin,JFMFile fout) throws ActionCancelledException {
+    if(fout.exists() && !overwriteAll && !skipAll){
+
+      java.text.SimpleDateFormat format=new java.text.SimpleDateFormat("EEE, MMM d, yyyy 'at' hh:mm:ss");
+
+      String message="Target file "+fout.getPath()+"  already exists."+System.getProperty("line.separator")+System.getProperty("line.separator")+
+                     "Source last modified date: "+format.format(new java.util.Date(fin.lastModified()))+System.getProperty("line.separator")+
+                     "Target last modified date: "+format.format(new java.util.Date(fout.lastModified()))+System.getProperty("line.separator")+System.getProperty("line.separator")+
+                     "What should I do?";
+      String[] buttons=new String[]{"Overwrite","Overwrite all","Skip","Skip all","Cancel"};
+
+      int result=JOptionPane.showOptionDialog(progress,message,"File exists",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE,null,buttons,buttons[2]);
+
+      switch (result){
+        case 0:
+          break;
+        case 1:
+          overwriteAll=true;
+          break;
+        case 2:
+          totalBytesWritten+=fin.length();          
+          int t_percent=totalFilesSizes!=0?(int)((totalBytesWritten*100)/totalFilesSizes):0;
+          progress.setTotalProgresssValue(t_percent);
+          return;
+        case 3:
+          skipAll=true;
+          break;
+          case 4:
+            throw new ActionCancelledException();
+      }
+    }
+
+    if(fout.exists() && skipAll){
+          totalBytesWritten+=fin.length();
+          int t_percent=(int)((totalBytesWritten*100)/totalFilesSizes);
+          progress.setTotalProgresssValue(t_percent);
+          progress.setFileProgresssValue(100);
+          return;
+    }
+      java.io.InputStream in=null;
+      java.io.OutputStream out=null;
+      try{
+        in=fin.getInputStream();
+        //WAS new FileOutputStream(fout.getPath(),append);
+        out=fout.getOutputStream();
+        progress.setFileProgresssValue(0);
+        curentlyCopiedFile=fout;
+        byte[] data=new byte[1024];
+        int read=0;
+        long bytesWrote=0;
+        long f_length=fin.length();
+
+        /**@todo Maybe async IO would be nice here**/
+        while((read=in.read(data))>=0){
+          if(cancel){
+            throw new ActionCancelledException();
+          }
+
+          out.write(data,0,read);
+          bytesWrote+=read;
+          totalBytesWritten+=read;
+          int f_percent=(int)((bytesWrote*100)/f_length);
+          int t_percent=(int)((totalBytesWritten*100)/totalFilesSizes);
+          progress.setFileProgresssValue(f_percent);
+          progress.setTotalProgresssValue(t_percent);
+        }
+        progress.setFileProgresssValue(100);
+      }catch(ActionCancelledException ex){
+    	  ex.printStackTrace();
+          curentlyCopiedFile.delete();
+          throw ex;
+      }catch(Exception ex){
+        JOptionPane.showMessageDialog(progress,"Error while writing "+fout.getPath(),"Error",JOptionPane.ERROR_MESSAGE);
+        curentlyCopiedFile.delete();
+      }finally{
+        try {
+          in.close();          
+        }
+        catch (Exception ignored) {}
+        try {
+            out.close();
+        }
+        catch (Exception ignored) {}
+      }
+  }
+
+----------------------------------------
+  private void copyFile(JFMFile fin,JFMFile fout) throws ActionCancelledException {
+    if(fout.exists() && !overwriteAll && !skipAll){
+
+      java.text.SimpleDateFormat format=new java.text.SimpleDateFormat("EEE, MMM d, yyyy 'at' hh:mm:ss");
+
+      String message="Target file "+fout.getPath()+"  already exists."+System.getProperty("line.separator")+System.getProperty("line.separator")+
+                     "Source last modified date: "+format.format(new java.util.Date(fin.lastModified()))+System.getProperty("line.separator")+
+                     "Target last modified date: "+format.format(new java.util.Date(fout.lastModified()))+System.getProperty("line.separator")+System.getProperty("line.separator")+
+                     "What should I do?";
+      String[] buttons=new String[]{"Overwrite","Overwrite all","Skip","Skip all","Cancel"};
+
+      int result=JOptionPane.showOptionDialog(progress,message,"File exists",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE,null,buttons,buttons[2]);
+
+      switch (result){
+        case 0:
+          break;
+        case 1:
+          overwriteAll=true;
+          break;
+        case 2:
+          totalBytesWritten+=fin.length();          
+          int t_percent=totalFilesSizes!=0?(int)((totalBytesWritten*100)/totalFilesSizes):0;
+          progress.setTotalProgresssValue(t_percent);
+          return;
+        case 3:
+          skipAll=true;
+          break;
+          case 4:
+            throw new ActionCancelledException();
+      }
+    }
+
+    if(fout.exists() && skipAll){
+          totalBytesWritten+=fin.length();
+          int t_percent=(int)((totalBytesWritten*100)/totalFilesSizes);
+          progress.setTotalProgresssValue(t_percent);
+          progress.setFileProgresssValue(100);
+          return;
+    }
+      java.io.InputStream in=null;
+      java.io.OutputStream out=null;
+      try{
+        in=fin.getInputStream();
+        //WAS new FileOutputStream(fout.getPath(),append);
+        out=fout.getOutputStream();
+        progress.setFileProgresssValue(0);
+        curentlyCopiedFile=fout;
+        byte[] data=new byte[1024];
+        int read=0;
+        long bytesWrote=0;
+        long f_length=fin.length();
+
+        /**@todo Maybe async IO would be nice here**/
+        while((read=in.read(data))>=0){
+          if(cancel){
+            throw new ActionCancelledException();
+          }
+
+          out.write(data,0,read);
+          bytesWrote+=read;
+          totalBytesWritten+=read;
+          int f_percent=(int)((bytesWrote*100)/f_length);
+          int t_percent=(int)((totalBytesWritten*100)/totalFilesSizes);
+          progress.setFileProgresssValue(f_percent);
+          progress.setTotalProgresssValue(t_percent);
+        }
+        progress.setFileProgresssValue(100);
+      }catch(ActionCancelledException ex){
+    	  ex.printStackTrace();
+          curentlyCopiedFile.delete();
+          throw ex;
+      }catch(Exception ex){
+        JOptionPane.showMessageDialog(progress,"Error while writing "+fout.getPath(),"Error",JOptionPane.ERROR_MESSAGE);
+        curentlyCopiedFile.delete();
+      }finally{
+        try {
+          in.close();          
+        }
+        catch (Exception ignored) {}
+        try {
+            out.close();
+        }
+        catch (Exception ignored) {}
+      }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513124
+src/org/jfm/po/MoveAction.java 145 174
+src/org/jfm/po/CopyAction.java 136 165
+----------------------------------------
+    if(fout.exists() && !overwriteAll && !skipAll){
+
+      java.text.SimpleDateFormat format=new java.text.SimpleDateFormat("EEE, MMM d, yyyy 'at' hh:mm:ss");
+
+      String message="Target file "+fout.getPath()+"  already exists."+System.getProperty("line.separator")+System.getProperty("line.separator")+
+                     "Source last modified date: "+format.format(new java.util.Date(fin.lastModified()))+System.getProperty("line.separator")+
+                     "Target last modified date: "+format.format(new java.util.Date(fout.lastModified()))+System.getProperty("line.separator")+System.getProperty("line.separator")+
+                     "What should I do?";
+      String[] buttons=new String[]{"Overwrite","Overwrite all","Skip","Skip all","Cancel"};
+
+      int result=JOptionPane.showOptionDialog(progress,message,"File exists",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE,null,buttons,buttons[2]);
+
+      switch (result){
+        case 0:
+          break;
+        case 1:
+          overwriteAll=true;
+          break;
+        case 2:
+          totalBytesWritten+=fin.length();          
+          int t_percent=totalFilesSizes!=0?(int)((totalBytesWritten*100)/totalFilesSizes):0;
+          progress.setTotalProgresssValue(t_percent);
+          return;
+        case 3:
+          skipAll=true;
+          break;
+          case 4:
+            throw new ActionCancelledException();
+      }
+    }
+
+----------------------------------------
+    if(fout.exists() && !overwriteAll && !skipAll){
+
+      java.text.SimpleDateFormat format=new java.text.SimpleDateFormat("EEE, MMM d, yyyy 'at' hh:mm:ss");
+
+      String message="Target file "+fout.getPath()+"  already exists."+System.getProperty("line.separator")+System.getProperty("line.separator")+
+                     "Source last modified date: "+format.format(new java.util.Date(fin.lastModified()))+System.getProperty("line.separator")+
+                     "Target last modified date: "+format.format(new java.util.Date(fout.lastModified()))+System.getProperty("line.separator")+System.getProperty("line.separator")+
+                     "What should I do?";
+      String[] buttons=new String[]{"Overwrite","Overwrite all","Skip","Skip all","Cancel"};
+
+      int result=JOptionPane.showOptionDialog(progress,message,"File exists",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE,null,buttons,buttons[2]);
+
+      switch (result){
+        case 0:
+          break;
+        case 1:
+          overwriteAll=true;
+          break;
+        case 2:
+          totalBytesWritten+=fin.length();          
+          int t_percent=totalFilesSizes!=0?(int)((totalBytesWritten*100)/totalFilesSizes):0;
+          progress.setTotalProgresssValue(t_percent);
+          return;
+        case 3:
+          skipAll=true;
+          break;
+          case 4:
+            throw new ActionCancelledException();
+      }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513190
+src/org/jfm/filesystems/local/JFMLocalFilesystem.java 51 57
+src/org/jfm/help/HelpBrowser.java 104 113
+----------------------------------------
+		for(int i=0;i<files.length;i++){
+			try{
+				jfmFiles[i]=new JFMLocalFile(files[i].getAbsolutePath());
+			}catch(Exception ignored){
+				ignored.printStackTrace();
+			}
+		}
+
+----------------------------------------
+					{
+						DocPrintJob job=service.createPrintJob();
+						try{						
+							job.print(doc, aset);
+						}catch(Exception exc)
+						{
+							exc.printStackTrace();
+							JOptionPane.showMessageDialog(HelpBrowser.this, "Error printing: "+exc.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+						}
+					}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513155
+src/org/jfm/filesystems/JFMFileSystem.java 89 97
+src/org/jfm/help/HelpBrowser.java 104 113
+----------------------------------------
+		  {
+			  if(!files[i].isFile() || !files[i].getName().endsWith("jar")) continue;
+			  try{
+				  registerFilesystem(files[i]);
+			  }catch(Exception ignored)
+			  {
+				  ignored.printStackTrace();
+			  }
+		  }
+
+----------------------------------------
+					{
+						DocPrintJob job=service.createPrintJob();
+						try{						
+							job.print(doc, aset);
+						}catch(Exception exc)
+						{
+							exc.printStackTrace();
+							JOptionPane.showMessageDialog(HelpBrowser.this, "Error printing: "+exc.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+						}
+					}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513160
+src/org/jfm/filesystems/JFMFileSystem.java 141 150
+src/org/jfm/help/HelpBrowser.java 104 113
+----------------------------------------
+			if(name.equals(fsClassName)){
+				try {
+					Class fsClass=Class.forName(fsClassName,true,JFMClassLoader.getLoader());
+					fs=(JFMFileSystem)fsClass.newInstance();
+					return fs;
+				} catch (Exception e) {
+					e.printStackTrace();
+					//ignore the exception
+				}
+			}
+
+----------------------------------------
+					{
+						DocPrintJob job=service.createPrintJob();
+						try{						
+							job.print(doc, aset);
+						}catch(Exception exc)
+						{
+							exc.printStackTrace();
+							JOptionPane.showMessageDialog(HelpBrowser.this, "Error printing: "+exc.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+						}
+					}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513158
+src/org/jfm/views/list/detailview/DetailsTableModel.java 82 90
+src/org/jfm/help/HelpBrowser.java 104 113
+----------------------------------------
+    public JFMFile getFileAt(int index){
+      JFMFile file=null;
+      try {
+       file=(JFMFile)getValueAt(index, 0);
+      }catch (Exception ex){
+        ex.printStackTrace();
+      }
+      return file;
+    }
+
+----------------------------------------
+					{
+						DocPrintJob job=service.createPrintJob();
+						try{						
+							job.print(doc, aset);
+						}catch(Exception exc)
+						{
+							exc.printStackTrace();
+							JOptionPane.showMessageDialog(HelpBrowser.this, "Error printing: "+exc.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+						}
+					}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513153
+src/org/jfm/po/ProgressActionDialog.java 57 66
+src/org/jfm/help/HelpBrowser.java 104 113
+----------------------------------------
+  public ProgressActionDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+					{
+						DocPrintJob job=service.createPrintJob();
+						try{						
+							job.print(doc, aset);
+						}catch(Exception exc)
+						{
+							exc.printStackTrace();
+							JOptionPane.showMessageDialog(HelpBrowser.this, "Error printing: "+exc.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+						}
+					}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513148
+src/org/jfm/main/SearchDialog.java 42 51
+src/org/jfm/help/HelpBrowser.java 104 113
+----------------------------------------
+  public SearchDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+					{
+						DocPrintJob job=service.createPrintJob();
+						try{						
+							job.print(doc, aset);
+						}catch(Exception exc)
+						{
+							exc.printStackTrace();
+							JOptionPane.showMessageDialog(HelpBrowser.this, "Error printing: "+exc.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+						}
+					}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513164
+src/org/jfm/views/JFMView.java 133 143
+src/org/jfm/help/HelpBrowser.java 104 113
+----------------------------------------
+                  if(representation.equals(viewClassName)){
+                          try {
+                                  Class viewClass=Class.forName(viewClassName.getClassName());
+                                  view=(JFMView)viewClass.getConstructor(new Class[]{String.class}).newInstance(new Object[]{filesystem});
+                                  //viewClass.newInstance();
+                                  return view;
+                          } catch (Exception e) {
+                                  e.printStackTrace();
+                                  //ignore the exception
+                          }
+                  }
+
+----------------------------------------
+					{
+						DocPrintJob job=service.createPrintJob();
+						try{						
+							job.print(doc, aset);
+						}catch(Exception exc)
+						{
+							exc.printStackTrace();
+							JOptionPane.showMessageDialog(HelpBrowser.this, "Error printing: "+exc.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+						}
+					}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513189
+src/org/jfm/views/fview/FileViewDialog.java 37 46
+src/org/jfm/help/HelpBrowser.java 104 113
+----------------------------------------
+  public FileViewDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+    //  pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+					{
+						DocPrintJob job=service.createPrintJob();
+						try{						
+							job.print(doc, aset);
+						}catch(Exception exc)
+						{
+							exc.printStackTrace();
+							JOptionPane.showMessageDialog(HelpBrowser.this, "Error printing: "+exc.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+						}
+					}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513152
+src/org/jfm/po/CommandOutputViewDialog.java 81 91
+src/org/jfm/help/HelpBrowser.java 104 113
+----------------------------------------
+    public void run(){
+      try {
+          //i'm not interested in the return value of the process 
+          //i just want to know when it's over
+          process.waitFor();
+      }
+      catch (InterruptedException ex) {}
+      finally {
+        CommandOutputViewDialog.this.dispose();
+      }
+    }
+
+----------------------------------------
+					{
+						DocPrintJob job=service.createPrintJob();
+						try{						
+							job.print(doc, aset);
+						}catch(Exception exc)
+						{
+							exc.printStackTrace();
+							JOptionPane.showMessageDialog(HelpBrowser.this, "Error printing: "+exc.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+						}
+					}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513150
+src/org/jfm/po/CommandOutputViewDialog.java 23 32
+src/org/jfm/help/HelpBrowser.java 104 113
+----------------------------------------
+  public CommandOutputViewDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+      //pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+					{
+						DocPrintJob job=service.createPrintJob();
+						try{						
+							job.print(doc, aset);
+						}catch(Exception exc)
+						{
+							exc.printStackTrace();
+							JOptionPane.showMessageDialog(HelpBrowser.this, "Error printing: "+exc.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+						}
+					}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513157
+src/org/jfm/main/Options.java 99 106
+src/org/jfm/help/HelpBrowser.java 104 113
+----------------------------------------
+  public static Preferences getPreferences(){
+  	try {
+	  	preferences.sync();	
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+  	return preferences;
+  }
+
+----------------------------------------
+					{
+						DocPrintJob job=service.createPrintJob();
+						try{						
+							job.print(doc, aset);
+						}catch(Exception exc)
+						{
+							exc.printStackTrace();
+							JOptionPane.showMessageDialog(HelpBrowser.this, "Error printing: "+exc.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+						}
+					}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513149
+src/org/jfm/views/list/briefview/BriefView.java 48 56
+src/org/jfm/help/HelpBrowser.java 104 113
+----------------------------------------
+	public BriefView(String fs){
+		super(fs);
+	    try {
+	      init();
+	    }
+	    catch(Exception ex) {
+	      ex.printStackTrace();
+	    }	    
+	}
+
+----------------------------------------
+					{
+						DocPrintJob job=service.createPrintJob();
+						try{						
+							job.print(doc, aset);
+						}catch(Exception exc)
+						{
+							exc.printStackTrace();
+							JOptionPane.showMessageDialog(HelpBrowser.this, "Error printing: "+exc.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+						}
+					}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513192
+src/org/jfm/main/Options.java 108 114
+src/org/jfm/help/HelpBrowser.java 104 113
+----------------------------------------
+  public static void savePreferences(){
+  	try {
+		getPreferences().flush();
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+  }
+
+----------------------------------------
+					{
+						DocPrintJob job=service.createPrintJob();
+						try{						
+							job.print(doc, aset);
+						}catch(Exception exc)
+						{
+							exc.printStackTrace();
+							JOptionPane.showMessageDialog(HelpBrowser.this, "Error printing: "+exc.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+						}
+					}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513154
+src/org/jfm/filesystems/JFMFileSystem.java 69 79
+src/org/jfm/help/HelpBrowser.java 104 113
+----------------------------------------
+		  {
+			  String nextJarFile=tokenizer.nextToken();
+			  //we're only interested in this file if it ends with a .jar and if it exists
+			  try{
+				  java.io.File f=new java.io.File(nextJarFile);
+				  if(!(nextJarFile.endsWith("jar") && f.exists() && f.isFile())) continue;
+				  registerFilesystem(f);
+			  }catch(Exception ignored){
+				  ignored.printStackTrace();
+			  }
+		  }
+
+----------------------------------------
+					{
+						DocPrintJob job=service.createPrintJob();
+						try{						
+							job.print(doc, aset);
+						}catch(Exception exc)
+						{
+							exc.printStackTrace();
+							JOptionPane.showMessageDialog(HelpBrowser.this, "Error printing: "+exc.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+						}
+					}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513187
+src/org/jfm/po/copy/CopyProgressDialog.java 154 160
+src/org/jfm/help/HelpBrowser.java 104 113
+----------------------------------------
+      }finally{
+        try {
+          in.close();
+          out.close();
+        }
+        catch (Exception ignored) {}
+      }
+
+----------------------------------------
+					{
+						DocPrintJob job=service.createPrintJob();
+						try{						
+							job.print(doc, aset);
+						}catch(Exception exc)
+						{
+							exc.printStackTrace();
+							JOptionPane.showMessageDialog(HelpBrowser.this, "Error printing: "+exc.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+						}
+					}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513194
+src/org/jfm/po/copy/CopyConfirmDialog.java 34 43
+src/org/jfm/help/HelpBrowser.java 104 113
+----------------------------------------
+  public CopyConfirmDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+					{
+						DocPrintJob job=service.createPrintJob();
+						try{						
+							job.print(doc, aset);
+						}catch(Exception exc)
+						{
+							exc.printStackTrace();
+							JOptionPane.showMessageDialog(HelpBrowser.this, "Error printing: "+exc.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+						}
+					}
+
+----------------------------------------

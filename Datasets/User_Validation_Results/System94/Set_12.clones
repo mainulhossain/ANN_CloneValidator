@@ -1,0 +1,1533 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+26804853
+source/net/filebot/web/EpisodeFormat.java 75 86
+source/net/filebot/web/EpisodeFormat.java 90 101
+----------------------------------------
+			return formatMultiRangeSxE(((MultiEpisode) episode).getEpisodes());
+		}
+
+		StringBuilder sb = new StringBuilder();
+		if (episode.getSeason() != null || episode.getSpecial() != null) {
+			sb.append(episode.getSpecial() == null ? episode.getSeason() : 0).append('x');
+		}
+		if (episode.getEpisode() != null || episode.getSpecial() != null) {
+			sb.append(String.format("%02d", episode.getSpecial() == null ? episode.getEpisode() : episode.getSpecial()));
+		}
+		return sb.toString();
+	}
+
+----------------------------------------
+			return formatMultiRangeS00E00(((MultiEpisode) episode).getEpisodes());
+		}
+
+		StringBuilder sb = new StringBuilder();
+		if (episode.getSeason() != null || episode.getSpecial() != null) {
+			sb.append(String.format("S%02d", episode.getSpecial() == null ? episode.getSeason() : 0));
+		}
+		if (episode.getEpisode() != null || episode.getSpecial() != null) {
+			sb.append(String.format("E%02d", episode.getSpecial() == null ? episode.getEpisode() : episode.getSpecial()));
+		}
+		return sb.toString();
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+26804854
+source/net/filebot/ui/rename/BindingDialog.java 276 286
+source/net/filebot/ui/filter/MediaInfoTool.java 36 47
+----------------------------------------
+					JTable table = new JTable(new ParameterTableModel(parameters));
+					table.setAutoCreateRowSorter(true);
+					table.setAutoCreateColumnsFromModel(true);
+					table.setFillsViewportHeight(true);
+
+					table.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
+					table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+
+					table.setBackground(Color.white);
+					table.setGridColor(new Color(0xEEEEEE));
+					table.setRowHeight(25);
+
+----------------------------------------
+		super("MediaInfo");
+
+		table.setAutoCreateRowSorter(true);
+		table.setAutoCreateColumnsFromModel(true);
+		table.setFillsViewportHeight(true);
+
+		table.setCellSelectionEnabled(true);
+		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+
+		table.setBackground(Color.white);
+		table.setGridColor(new Color(0xEEEEEE));
+		table.setRowHeight(25);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+26804855
+source/net/filebot/ui/rename/FormatDialog.java 182 189
+source/net/filebot/ui/subtitle/SubtitleViewer.java 70 77
+----------------------------------------
+		title.setFont(title.getFont().deriveFont(BOLD));
+
+		JPanel header = new JPanel(new MigLayout("insets dialog, nogrid, novisualpadding"));
+
+		header.setBackground(Color.white);
+		header.setBorder(new SeparatorBorder(1, new Color(0xB4B4B4), new Color(0xACACAC), GradientStyle.LEFT_TO_RIGHT, Position.BOTTOM));
+
+		header.add(progressIndicator, "pos 1al 0al, hidemode 3");
+
+----------------------------------------
+		titleLabel.setFont(titleLabel.getFont().deriveFont(BOLD));
+
+		JPanel header = new JPanel(new MigLayout("insets dialog, nogrid, novisualpadding, fillx"));
+
+		header.setBackground(Color.white);
+		header.setBorder(new SeparatorBorder(1, new Color(0xB4B4B4), new Color(0xACACAC), GradientStyle.LEFT_TO_RIGHT, Position.BOTTOM));
+
+		header.add(titleLabel, "wrap, h pref!");
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+26804856
+source/net/filebot/web/WebRequest.java 68 82
+source/net/filebot/web/WebRequest.java 129 146
+----------------------------------------
+		try {
+			connection.addRequestProperty("Accept-Encoding", ENCODING_GZIP);
+			connection.addRequestProperty("Accept-Charset", CHARSET_UTF8);
+		} catch (IllegalStateException e) {
+			debug.log(Level.WARNING, e, e::toString);
+		}
+
+		Charset charset = getCharset(connection.getContentType());
+		String encoding = connection.getContentEncoding();
+
+		InputStream inputStream = connection.getInputStream();
+
+		if (ENCODING_GZIP.equalsIgnoreCase(encoding)) {
+			inputStream = new GZIPInputStream(inputStream);
+		}
+
+----------------------------------------
+		try {
+			connection.addRequestProperty("Accept-Encoding", ENCODING_GZIP);
+			connection.addRequestProperty("Accept-Charset", CHARSET_UTF8);
+		} catch (IllegalStateException e) {
+			debug.log(Level.WARNING, e, e::toString);
+		}
+
+		if (requestParameters != null) {
+			requestParameters.forEach(connection::addRequestProperty);
+		}
+
+		int contentLength = connection.getContentLength();
+		String encoding = connection.getContentEncoding();
+
+		InputStream inputStream = connection.getInputStream();
+		if (ENCODING_GZIP.equalsIgnoreCase(encoding)) {
+			inputStream = new GZIPInputStream(inputStream);
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+26804857
+source/net/filebot/web/WebRequest.java 150 165
+source/net/filebot/web/WebRequest.java 209 224
+----------------------------------------
+			responseParameters.accept(connection.getHeaderFields());
+		}
+
+		ByteBufferOutputStream buffer = new ByteBufferOutputStream(contentLength >= 0 ? contentLength : BUFFER_SIZE);
+		try {
+			// read all
+			buffer.transferFully(inputStream);
+		} catch (IOException e) {
+			// if the content length is not known in advance an IOException (Premature EOF)
+			// is always thrown after all the data has been read
+			if (contentLength >= 0) {
+				throw e;
+			}
+		} finally {
+			inputStream.close();
+		}
+
+----------------------------------------
+			inputStream = new GZIPInputStream(inputStream);
+		}
+
+		ByteBufferOutputStream buffer = new ByteBufferOutputStream(contentLength >= 0 ? contentLength : BUFFER_SIZE);
+		try {
+			// read all
+			buffer.transferFully(inputStream);
+		} catch (IOException e) {
+			// if the content length is not known in advance an IOException (Premature EOF)
+			// is always thrown after all the data has been read
+			if (contentLength >= 0) {
+				throw e;
+			}
+		} finally {
+			inputStream.close();
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+26804858
+source/net/filebot/similarity/DateMatcher.java 125 131
+source/net/filebot/similarity/SeasonEpisodeMatcher.java 193 199
+----------------------------------------
+	protected List<String> tokenizeTail(File file) {
+		List<String> tail = new ArrayList<String>(2);
+		for (File f : listPathTail(file, 2, true)) {
+			tail.add(getName(f));
+		}
+		return tail;
+	}
+
+----------------------------------------
+	protected List<String> tokenizeTail(File file) {
+		List<String> tail = new ArrayList<String>(2);
+		for (File f : listPathTail(file, 2, true)) {
+			tail.add(getName(f));
+		}
+		return tail;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+26804859
+source/net/filebot/ui/filter/AttributeTool.java 31 49
+source/net/filebot/ui/filter/MediaInfoTool.java 36 54
+----------------------------------------
+		super("Attributes");
+
+		table.setAutoCreateRowSorter(true);
+		table.setAutoCreateColumnsFromModel(true);
+		table.setFillsViewportHeight(true);
+
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
+		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+
+		table.setBackground(Color.white);
+		table.setGridColor(new Color(0xEEEEEE));
+		table.setRowHeight(25);
+
+		JScrollPane scrollPane = new JScrollPane(table);
+		scrollPane.setBorder(BorderFactory.createEmptyBorder());
+
+		setLayout(new MigLayout("insets 0, fill"));
+		add(new LoadingOverlayPane(scrollPane, this), "grow");
+	}
+
+----------------------------------------
+		super("MediaInfo");
+
+		table.setAutoCreateRowSorter(true);
+		table.setAutoCreateColumnsFromModel(true);
+		table.setFillsViewportHeight(true);
+
+		table.setCellSelectionEnabled(true);
+		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+
+		table.setBackground(Color.white);
+		table.setGridColor(new Color(0xEEEEEE));
+		table.setRowHeight(25);
+
+		JScrollPane scrollPane = new JScrollPane(table);
+		scrollPane.setBorder(BorderFactory.createEmptyBorder());
+
+		setLayout(new MigLayout("insets 0, fill"));
+		add(new LoadingOverlayPane(scrollPane, this), "grow");
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+26804860
+source/net/filebot/util/ui/notification/QueueNotificationLayout.java 57 61
+source/net/filebot/util/ui/notification/SimpleNotificationLayout.java 42 46
+----------------------------------------
+	private Point getLocation(Point anchor, Dimension size) {
+		Point p = new Point();
+
+		p.x = (int) (anchor.x - size.width * growAnchor.ax);
+		p.y = (int) (anchor.y - size.height * growAnchor.ay);
+
+----------------------------------------
+	private Point getLocation(Point anchor, Dimension size) {
+		Point p = new Point();
+
+		p.x = (int) (anchor.x - size.width * alignment.ax);
+		p.y = (int) (anchor.y - size.height * alignment.ay);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+26804862
+source/net/filebot/ui/subtitle/SubtitleDownloadComponent.java 349 384
+source/net/filebot/ui/subtitle/SubtitleDownloadComponent.java 416 452
+----------------------------------------
+	private final MouseListener packageListMouseHandler = new MouseAdapter() {
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			// fetch on double click
+			if (SwingUtilities.isLeftMouseButton(e) && (e.getClickCount() == 2)) {
+				JList list = (JList) e.getSource();
+				fetch(list.getSelectedValuesList().toArray());
+			}
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			maybeShowPopup(e);
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			maybeShowPopup(e);
+		}
+
+		private void maybeShowPopup(MouseEvent e) {
+			if (e.isPopupTrigger()) {
+				JList list = (JList) e.getSource();
+
+				int index = list.locationToIndex(e.getPoint());
+
+				if (index >= 0 && !list.isSelectedIndex(index)) {
+					// auto-select clicked element
+					list.setSelectedIndex(index);
+				}
+
+				final Object[] selection = list.getSelectedValuesList().toArray();
+
+				if (selection.length > 0) {
+					JPopupMenu contextMenu = new JPopupMenu();
+
+----------------------------------------
+	private final MouseListener fileListMouseHandler = new MouseAdapter() {
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			// open on double click
+			if (SwingUtilities.isLeftMouseButton(e) && (e.getClickCount() == 2)) {
+				JList list = (JList) e.getSource();
+
+				// open selection
+				open(list.getSelectedValuesList().toArray());
+			}
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			maybeShowPopup(e);
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			maybeShowPopup(e);
+		}
+
+		private void maybeShowPopup(MouseEvent e) {
+			if (e.isPopupTrigger()) {
+				JList list = (JList) e.getSource();
+
+				int index = list.locationToIndex(e.getPoint());
+
+				if (index >= 0 && !list.isSelectedIndex(index)) {
+					// auto-select clicked element
+					list.setSelectedIndex(index);
+				}
+
+				Object[] selection = list.getSelectedValuesList().toArray();
+				if (selection.length > 0) {
+					JPopupMenu contextMenu = new JPopupMenu();
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+26804863
+source/net/filebot/ui/filter/ExtractTool.java 50 63
+source/net/filebot/ui/filter/AttributeTool.java 31 44
+----------------------------------------
+		super("Archives");
+
+		table.setAutoCreateRowSorter(true);
+		table.setAutoCreateColumnsFromModel(true);
+		table.setFillsViewportHeight(true);
+
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
+		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+
+		table.setBackground(Color.white);
+		table.setGridColor(new Color(0xEEEEEE));
+		table.setRowHeight(25);
+
+		JScrollPane tableScrollPane = new JScrollPane(table);
+
+----------------------------------------
+		super("Attributes");
+
+		table.setAutoCreateRowSorter(true);
+		table.setAutoCreateColumnsFromModel(true);
+		table.setFillsViewportHeight(true);
+
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
+		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+
+		table.setBackground(Color.white);
+		table.setGridColor(new Color(0xEEEEEE));
+		table.setRowHeight(25);
+
+		JScrollPane scrollPane = new JScrollPane(table);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+26804864
+source/net/filebot/hash/SfvFormat.java 34 41
+source/net/filebot/hash/VerificationFormat.java 66 73
+----------------------------------------
+	public Entry<File, String> parseObject(String line) throws ParseException {
+		Matcher matcher = pattern.matcher(line);
+
+		if (!matcher.matches()) {
+			throw new ParseException("Illegal input pattern", 0);
+		}
+
+		return entry(matcher.group(1), matcher.group(2));
+
+----------------------------------------
+	public Entry<File, String> parseObject(String line) throws ParseException {
+		Matcher matcher = pattern.matcher(line);
+
+		if (!matcher.find()) {
+			throw new ParseException("Illegal input pattern", 0);
+		}
+
+		return entry(matcher.group(2), matcher.group(1));
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418335
+source/net/filebot/util/FileSet.java 1 9
+source/net/filebot/web/AnidbClient.java 1 8
+----------------------------------------
+package net.filebot.util;
+
+import static java.nio.charset.StandardCharsets.*;
+import static java.util.Collections.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.Logging.*;
+import static net.filebot.util.FileUtilities.*;
+
+import java.io.File;
+
+----------------------------------------
+package net.filebot.web;
+
+import static java.nio.charset.StandardCharsets.*;
+import static java.util.Collections.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.Logging.*;
+import static net.filebot.util.StringUtilities.*;
+import static net.filebot.util.XPathUtilities.*;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418336
+source/net/filebot/util/FileSet.java 3 9
+source/net/filebot/web/OpenSubtitlesClient.java 3 8
+----------------------------------------
+import static java.nio.charset.StandardCharsets.*;
+import static java.util.Collections.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.Logging.*;
+import static net.filebot.util.FileUtilities.*;
+
+import java.io.File;
+
+----------------------------------------
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.Logging.*;
+import static net.filebot.util.FileUtilities.*;
+import static net.filebot.util.JsonUtilities.*;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418337
+source/net/filebot/util/FileUtilities.java 553 579
+source/net/filebot/media/MediaDetection.java 1077 1093
+----------------------------------------
+			if (key != null) {
+				key = key.toLowerCase();
+			}
+
+			List<File> valueList = map.get(key);
+			if (valueList == null) {
+				valueList = new ArrayList<File>();
+				map.put(key, valueList);
+			}
+
+			valueList.add(file);
+		}
+
+		return map;
+	}
+
+	/**
+	 * Invalid file name characters: \, /, :, *, ?, ", <, >, |, \r, \n and excessive characters
+	 */
+	public static final Pattern ILLEGAL_CHARACTERS = Pattern.compile("[\\\\/:*?\"<>|\\r\\n]|\\p{Cntrl}|\\s+$|(?<=[^.])[.]+$|(?<=.{250})(.+)(?=[.]\\p{Alnum}{3}$)");
+
+	/**
+	 * Strip file name of invalid characters
+	 *
+	 * @param filename
+	 *            original filename
+	 * @return valid file name stripped of invalid characters
+
+----------------------------------------
+			if (key != null) {
+				key = key.toLowerCase();
+			}
+
+			List<File> valueList = map.get(key);
+			if (valueList == null) {
+				valueList = new ArrayList<File>();
+				map.put(key, valueList);
+			}
+
+			valueList.add(file);
+		}
+
+		return map;
+	}
+
+	public static List<List<File>> groupByMediaCharacteristics(Collection<File> files) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418338
+source/net/filebot/util/FileUtilities.java 554 564
+source/net/filebot/media/MediaDetection.java 261 270
+----------------------------------------
+				key = key.toLowerCase();
+			}
+
+			List<File> valueList = map.get(key);
+			if (valueList == null) {
+				valueList = new ArrayList<File>();
+				map.put(key, valueList);
+			}
+
+			valueList.add(file);
+		}
+
+----------------------------------------
+						eid = file; // open new SxE group for each unrecognized file
+					}
+
+					List<File> episodeFiles = filesByEpisode.get(eid);
+					if (episodeFiles == null) {
+						episodeFiles = new ArrayList<File>();
+						filesByEpisode.put(eid, episodeFiles);
+					}
+					episodeFiles.add(file);
+				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418339
+source/net/filebot/media/MediaDetection.java 261 270
+source/net/filebot/util/FileUtilities.java 533 543
+----------------------------------------
+						eid = file; // open new SxE group for each unrecognized file
+					}
+
+					List<File> episodeFiles = filesByEpisode.get(eid);
+					if (episodeFiles == null) {
+						episodeFiles = new ArrayList<File>();
+						filesByEpisode.put(eid, episodeFiles);
+					}
+					episodeFiles.add(file);
+				}
+
+----------------------------------------
+				throw new IllegalArgumentException("Parent is null: " + file);
+			}
+
+			List<File> valueList = map.get(key);
+			if (valueList == null) {
+				valueList = new ArrayList<File>();
+				map.put(key, valueList);
+			}
+
+			valueList.add(file);
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418340
+source/net/filebot/util/StringUtilities.java 15 20
+source/net/filebot/similarity/SeasonEpisodeMatcher.java 17 22
+----------------------------------------
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.regex.MatchResult;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.IntStream;
+
+----------------------------------------
+import java.util.Set;
+import java.util.function.Function;
+import java.util.regex.MatchResult;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.IntStream;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418341
+source/net/filebot/util/TemporaryFolder.java 1 11
+source/net/filebot/ui/filter/TypeTool.java 3 12
+----------------------------------------
+package net.filebot.util;
+
+import static net.filebot.util.FileUtilities.*;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+----------------------------------------
+import static java.util.Collections.*;
+import static net.filebot.util.FileUtilities.*;
+
+import java.io.File;
+import java.io.FileFilter;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418342
+source/net/filebot/util/ui/RoundBorder.java 2 10
+source/net/filebot/util/ui/FancyTreeCellRenderer.java 2 10
+----------------------------------------
+package net.filebot.util.ui;
+
+
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Insets;
+import java.awt.RenderingHints;
+
+----------------------------------------
+package net.filebot.util.ui;
+
+
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.geom.RoundRectangle2D;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418343
+source/net/filebot/util/ui/ShadowBorder.java 84 96
+source/net/filebot/util/ui/notification/SeparatorBorder.java 106 119
+----------------------------------------
+		g2d.setPaint(CornerGradientStyle.BOTTOM_RIGHT.getGradientPaint(bottomRightCorner, a, bg, faded));
+		g2d.fill(bottomRightCorner);
+	}
+
+
+	@Override
+	public Insets getBorderInsets(Component c) {
+		return getBorderInsets(c, new Insets(0, 0, 0, 0));
+	}
+
+
+	@Override
+	public Insets getBorderInsets(Component c, Insets insets) {
+
+----------------------------------------
+			g2d.setPaint(beginColor);
+
+		g2d.fill(shape);
+	}
+
+
+	@Override
+	public Insets getBorderInsets(Component c) {
+		return getBorderInsets(c, new Insets(0, 0, 0, 0));
+	}
+
+
+	@Override
+	public Insets getBorderInsets(Component c, Insets insets) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418344
+source/net/filebot/util/ui/FancyTreeCellRenderer.java 2 10
+source/net/filebot/util/ui/ShadowBorder.java 2 10
+----------------------------------------
+package net.filebot.util.ui;
+
+
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.geom.RoundRectangle2D;
+
+----------------------------------------
+package net.filebot.util.ui;
+
+
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Insets;
+import java.awt.RadialGradientPaint;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418345
+source/net/filebot/util/ui/notification/SimpleNotificationLayout.java 24 49
+source/net/filebot/util/ui/notification/QueueNotificationLayout.java 39 64
+----------------------------------------
+		this.alignment = alignment;
+	}
+
+	private Point getBaseAnchor(Dimension screen, Insets insets) {
+		Point p = new Point();
+
+		screen.height -= insets.top + insets.bottom;
+		screen.width -= insets.left + insets.right;
+
+		p.x = (int) (alignment.ax * screen.width);
+		p.y = (int) (alignment.ay * screen.height);
+
+		p.x += insets.left;
+		p.y += insets.top;
+
+		return p;
+	}
+
+	private Point getLocation(Point anchor, Dimension size) {
+		Point p = new Point();
+
+		p.x = (int) (anchor.x - size.width * alignment.ax);
+		p.y = (int) (anchor.y - size.height * alignment.ay);
+
+		return p;
+	}
+
+----------------------------------------
+		this.growAnchor = growAnchor;
+	}
+
+	private Point getBaseAnchor(Dimension screen, Insets insets) {
+		Point p = new Point();
+
+		screen.height -= insets.top + insets.bottom;
+		screen.width -= insets.left + insets.right;
+
+		p.x = (int) (alignment.ax * screen.width);
+		p.y = (int) (alignment.ay * screen.height);
+
+		p.x += insets.left;
+		p.y += insets.top;
+
+		return p;
+	}
+
+	private Point getLocation(Point anchor, Dimension size) {
+		Point p = new Point();
+
+		p.x = (int) (anchor.x - size.width * growAnchor.ax);
+		p.y = (int) (anchor.y - size.height * growAnchor.ay);
+
+		return p;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418346
+source/net/filebot/util/ui/notification/SimpleNotificationLayout.java 5 12
+source/net/filebot/util/ui/notification/QueueNotificationLayout.java 5 12
+----------------------------------------
+package net.filebot.util.ui.notification;
+
+import static net.filebot.util.ui.notification.Direction.*;
+
+import java.awt.Dimension;
+import java.awt.Insets;
+import java.awt.Point;
+import java.awt.Toolkit;
+
+----------------------------------------
+package net.filebot.util.ui.notification;
+
+import static net.filebot.util.ui.notification.Direction.*;
+
+import java.awt.Dimension;
+import java.awt.GraphicsConfiguration;
+import java.awt.Insets;
+import java.awt.Point;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418347
+source/net/filebot/web/OpenSubtitlesXmlRpc.java 11 20
+source/net/filebot/web/TheTVDBClientV1.java 9 19
+----------------------------------------
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
+----------------------------------------
+import static net.filebot.web.WebRequest.*;
+
+import java.net.URI;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.EnumMap;
+import java.util.EnumSet;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418348
+source/net/filebot/web/ID3Lookup.java 6 16
+source/net/filebot/media/XattrMetaInfoProvider.java 1 11
+----------------------------------------
+import static net.filebot.util.StringUtilities.*;
+
+import java.io.File;
+import java.util.Collection;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+import javax.swing.Icon;
+
+import net.filebot.ResourceManager;
+import net.filebot.mediainfo.MediaInfo;
+
+----------------------------------------
+package net.filebot.media;
+
+import java.io.File;
+import java.util.Collection;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+import javax.swing.Icon;
+
+import net.filebot.ResourceManager;
+import net.filebot.web.Datasource;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418349
+source/net/filebot/web/Episode.java 1 9
+source/net/filebot/similarity/SeasonEpisodeMatcher.java 9 17
+----------------------------------------
+package net.filebot.web;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
+
+----------------------------------------
+import static net.filebot.util.StringUtilities.*;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.IntSummaryStatistics;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418350
+source/net/filebot/web/TheTVDBClientV1.java 329 339
+source/net/filebot/web/TheTVDBClient.java 239 249
+----------------------------------------
+		return getSeriesInfo(lookupByIMDbID(imdbid, locale), locale);
+	}
+
+	@Override
+	public URI getEpisodeListLink(SearchResult searchResult) {
+		return URI.create("http://www.thetvdb.com/?tab=seasonall&id=" + searchResult.getId());
+	}
+
+	@Override
+	public List<Artwork> getArtwork(int id, String category, Locale locale) throws Exception {
+		Document dom = getXmlResource(MirrorType.XML, "series/" + id + "/banners.xml");
+
+----------------------------------------
+		return result.size() > 0 ? result.get(0) : null;
+	}
+
+	@Override
+	public URI getEpisodeListLink(SearchResult searchResult) {
+		return URI.create("http://www.thetvdb.com/?tab=seasonall&id=" + searchResult.getId());
+	}
+
+	@Override
+	public List<Artwork> getArtwork(int id, String category, Locale locale) throws Exception {
+		Object json = requestJson("series/" + id + "/images/query?keyType=" + category, locale, Cache.ONE_MONTH);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418351
+source/net/filebot/web/TheTVDBClientV1.java 195 209
+source/net/filebot/web/TheTVDBClient.java 213 227
+----------------------------------------
+		}
+
+		// episodes my not be ordered by DVD episode number
+		episodes.sort(episodeComparator());
+
+		// add specials at the end
+		episodes.addAll(specials);
+
+		return new SeriesData(seriesInfo, episodes);
+	}
+
+	public SearchResult lookupByID(int id, Locale language) throws Exception {
+		if (id <= 0) {
+			throw new IllegalArgumentException("Illegal TheTVDB ID: " + id);
+		}
+
+----------------------------------------
+		}
+
+		// episodes my not be ordered by DVD episode number
+		episodes.sort(episodeComparator());
+
+		// add specials at the end
+		episodes.addAll(specials);
+
+		return new SeriesData(info, episodes);
+	}
+
+	public SearchResult lookupByID(int id, Locale locale) throws Exception {
+		if (id <= 0) {
+			throw new IllegalArgumentException("Illegal TheTVDB ID: " + id);
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418352
+source/net/filebot/web/AnidbClient.java 3 9
+source/net/filebot/ui/filter/Tool.java 1 9
+----------------------------------------
+import static java.nio.charset.StandardCharsets.*;
+import static java.util.Collections.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.Logging.*;
+import static net.filebot.util.StringUtilities.*;
+import static net.filebot.util.XPathUtilities.*;
+import static net.filebot.web.EpisodeUtilities.*;
+
+----------------------------------------
+package net.filebot.ui.filter;
+
+import static java.util.Collections.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.Logging.*;
+import static net.filebot.util.ExceptionUtilities.*;
+import static net.filebot.util.FileUtilities.*;
+
+import java.io.File;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418353
+source/net/filebot/web/AnidbClient.java 1 7
+source/net/filebot/subtitle/SubtitleUtilities.java 1 7
+----------------------------------------
+package net.filebot.web;
+
+import static java.nio.charset.StandardCharsets.*;
+import static java.util.Collections.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.Logging.*;
+import static net.filebot.util.StringUtilities.*;
+
+----------------------------------------
+package net.filebot.subtitle;
+
+import static java.nio.charset.StandardCharsets.*;
+import static java.util.Collections.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.Logging.*;
+import static net.filebot.MediaTypes.*;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418354
+source/net/filebot/web/OMDbClient.java 1 8
+source/net/filebot/cli/ScriptShellMethods.java 4 11
+----------------------------------------
+package net.filebot.web;
+
+import static java.util.Collections.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.CachedResource.*;
+import static net.filebot.Logging.*;
+import static net.filebot.util.JsonUtilities.*;
+import static net.filebot.util.StringUtilities.*;
+
+----------------------------------------
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.Logging.*;
+import static net.filebot.MediaTypes.*;
+import static net.filebot.util.FileUtilities.*;
+
+import java.io.File;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418355
+source/net/filebot/web/OMDbClient.java 1 7
+source/net/filebot/cli/CmdlineOperations.java 4 9
+----------------------------------------
+package net.filebot.web;
+
+import static java.util.Collections.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.CachedResource.*;
+import static net.filebot.Logging.*;
+import static net.filebot.util.JsonUtilities.*;
+
+----------------------------------------
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.Logging.*;
+import static net.filebot.MediaTypes.*;
+import static net.filebot.Settings.*;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418356
+source/net/filebot/web/OMDbClient.java 1 7
+source/net/filebot/format/MediaBindingBean.java 3 8
+----------------------------------------
+package net.filebot.web;
+
+import static java.util.Collections.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.CachedResource.*;
+import static net.filebot.Logging.*;
+import static net.filebot.util.JsonUtilities.*;
+
+----------------------------------------
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.Logging.*;
+import static net.filebot.MediaTypes.*;
+import static net.filebot.WebServices.*;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418357
+source/net/filebot/web/SeriesInfo.java 179 192
+source/net/filebot/web/EpisodeInfo.java 79 93
+----------------------------------------
+		return id == null ? 0 : id;
+	}
+
+	@Override
+	public boolean equals(Object object) {
+		if (object instanceof SeriesInfo) {
+			SeriesInfo other = (SeriesInfo) object;
+			return Objects.equals(id, other.id) && Objects.equals(database, other.database);
+		}
+		return false;
+	}
+
+	@Override
+	public SeriesInfo clone() {
+
+----------------------------------------
+		return votes;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof EpisodeInfo) {
+			EpisodeInfo other = (EpisodeInfo) obj;
+			return Objects.equals(id, other.id) && Objects.equals(database, other.database);
+		}
+
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418358
+source/net/filebot/web/SeriesInfo.java 1 11
+source/net/filebot/web/EpisodeInfo.java 1 11
+----------------------------------------
+package net.filebot.web;
+
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+
+import java.io.Serializable;
+import java.util.List;
+import java.util.Locale;
+import java.util.Objects;
+
+public class SeriesInfo implements Serializable {
+
+----------------------------------------
+package net.filebot.web;
+
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+
+import java.io.Serializable;
+import java.util.List;
+import java.util.Locale;
+import java.util.Objects;
+
+public class EpisodeInfo implements Crew, Serializable {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418359
+source/net/filebot/web/TMDbClient.java 1 8
+source/net/filebot/cli/CmdlineOperations.java 3 9
+----------------------------------------
+package net.filebot.web;
+
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.CachedResource.*;
+import static net.filebot.Logging.*;
+import static net.filebot.similarity.Normalization.*;
+
+----------------------------------------
+import static java.nio.charset.StandardCharsets.*;
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.Logging.*;
+import static net.filebot.MediaTypes.*;
+import static net.filebot.Settings.*;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418360
+source/net/filebot/web/TMDbClient.java 1 7
+source/net/filebot/cli/ScriptShellBaseClass.java 1 7
+----------------------------------------
+package net.filebot.web;
+
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.CachedResource.*;
+import static net.filebot.Logging.*;
+
+----------------------------------------
+package net.filebot.cli;
+
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.Logging.*;
+import static net.filebot.media.XattrMetaInfo.*;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418361
+source/net/filebot/web/TMDbClient.java 1 7
+source/net/filebot/web/OpenSubtitlesClient.java 1 7
+----------------------------------------
+package net.filebot.web;
+
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.CachedResource.*;
+import static net.filebot.Logging.*;
+
+----------------------------------------
+package net.filebot.web;
+
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.Logging.*;
+import static net.filebot.util.FileUtilities.*;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418362
+source/net/filebot/web/TheTVDBClient.java 1 7
+source/net/filebot/cli/ScriptShellMethods.java 1 7
+----------------------------------------
+package net.filebot.web;
+
+import static java.nio.charset.StandardCharsets.*;
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.CachedResource.fetchIfModified;
+
+----------------------------------------
+package net.filebot.cli;
+
+import static java.nio.charset.StandardCharsets.*;
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.Logging.*;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418363
+source/net/filebot/web/TheTVDBClient.java 1 7
+source/net/filebot/cli/CmdlineOperations.java 1 7
+----------------------------------------
+package net.filebot.web;
+
+import static java.nio.charset.StandardCharsets.*;
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.CachedResource.fetchIfModified;
+
+----------------------------------------
+package net.filebot.cli;
+
+import static java.nio.charset.StandardCharsets.*;
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.Logging.*;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418364
+source/net/filebot/ui/filter/Tool.java 1 9
+source/net/filebot/web/OpenSubtitlesClient.java 3 9
+----------------------------------------
+package net.filebot.ui.filter;
+
+import static java.util.Collections.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.Logging.*;
+import static net.filebot.util.ExceptionUtilities.*;
+import static net.filebot.util.FileUtilities.*;
+
+import java.io.File;
+
+----------------------------------------
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.Logging.*;
+import static net.filebot.util.FileUtilities.*;
+import static net.filebot.util.JsonUtilities.*;
+import static net.filebot.web.OpenSubtitlesHasher.*;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418365
+source/net/filebot/web/OpenSubtitlesClient.java 1 7
+source/net/filebot/format/MediaBindingBean.java 1 7
+----------------------------------------
+package net.filebot.web;
+
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.Logging.*;
+import static net.filebot.util.FileUtilities.*;
+
+----------------------------------------
+package net.filebot.format;
+
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.Logging.*;
+import static net.filebot.MediaTypes.*;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418401
+source/net/filebot/cli/ScriptShellBaseClass.java 1 7
+source/net/filebot/format/MediaBindingBean.java 1 7
+----------------------------------------
+package net.filebot.cli;
+
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.Logging.*;
+import static net.filebot.media.XattrMetaInfo.*;
+
+----------------------------------------
+package net.filebot.format;
+
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.Logging.*;
+import static net.filebot.MediaTypes.*;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418366
+source/net/filebot/web/OpenSubtitlesClient.java 1 7
+source/net/filebot/UserFiles.java 1 7
+----------------------------------------
+package net.filebot.web;
+
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.Logging.*;
+import static net.filebot.util.FileUtilities.*;
+
+----------------------------------------
+package net.filebot;
+
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.Logging.*;
+import static net.filebot.Settings.*;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418379
+source/net/filebot/cli/ScriptShellBaseClass.java 1 7
+source/net/filebot/UserFiles.java 1 7
+----------------------------------------
+package net.filebot.cli;
+
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.Logging.*;
+import static net.filebot.media.XattrMetaInfo.*;
+
+----------------------------------------
+package net.filebot;
+
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.Logging.*;
+import static net.filebot.Settings.*;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418367
+source/net/filebot/web/OpenSubtitlesClient.java 1 7
+source/net/filebot/WebServices.java 1 7
+----------------------------------------
+package net.filebot.web;
+
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.Logging.*;
+import static net.filebot.util.FileUtilities.*;
+
+----------------------------------------
+package net.filebot;
+
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.Logging.*;
+import static net.filebot.Settings.*;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418374
+source/net/filebot/cli/ScriptShellBaseClass.java 1 7
+source/net/filebot/WebServices.java 1 7
+----------------------------------------
+package net.filebot.cli;
+
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.Logging.*;
+import static net.filebot.media.XattrMetaInfo.*;
+
+----------------------------------------
+package net.filebot;
+
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.Logging.*;
+import static net.filebot.Settings.*;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418403
+source/net/filebot/cli/ScriptShellBaseClass.java 1 7
+source/net/filebot/cli/ScriptShellMethods.java 3 8
+----------------------------------------
+package net.filebot.cli;
+
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.Logging.*;
+import static net.filebot.media.XattrMetaInfo.*;
+
+----------------------------------------
+import static java.nio.charset.StandardCharsets.*;
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.Logging.*;
+import static net.filebot.MediaTypes.*;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418368
+source/net/filebot/web/OpenSubtitlesClient.java 1 7
+source/net/filebot/cli/ScriptShellMethods.java 3 8
+----------------------------------------
+package net.filebot.web;
+
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.Logging.*;
+import static net.filebot.util.FileUtilities.*;
+
+----------------------------------------
+import static java.nio.charset.StandardCharsets.*;
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.Logging.*;
+import static net.filebot.MediaTypes.*;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+94
+28418369
+source/net/filebot/web/OpenSubtitlesClient.java 1 7
+source/net/filebot/cli/CmdlineOperations.java 3 8
+----------------------------------------
+package net.filebot.web;
+
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.Logging.*;
+import static net.filebot.util.FileUtilities.*;
+
+----------------------------------------
+import static java.nio.charset.StandardCharsets.*;
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+import static java.util.stream.Collectors.*;
+import static net.filebot.Logging.*;
+import static net.filebot.MediaTypes.*;
+
+----------------------------------------

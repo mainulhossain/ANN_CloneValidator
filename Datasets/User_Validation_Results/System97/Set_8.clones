@@ -1,0 +1,1579 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835135
+src/com/levelonelabs/aimbot/modules/UserInformationModule.java 62 67
+src/com/levelonelabs/aimbot/modules/TicTacToeModule.java 64 69
+----------------------------------------
+	static {
+		services = new ArrayList();
+		services.add("history");
+		services.add("users");
+		services.add("enemies");
+	}
+
+----------------------------------------
+    static {
+        services = new ArrayList();
+        services.add("ttt");
+        services.add("tictactoe");
+        games = new Hashtable();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835136
+src/com/levelonelabs/aimbot/modules/ScheduleModule.java 111 118
+src/com/levelonelabs/aimbot/modules/TicTacToeModule.java 64 69
+----------------------------------------
+    static {
+        services = new ArrayList();
+        services.add("schedule");
+        services.add("cancel");
+        services.add("events");
+        // Create the timer to handle timed reminding events
+        timer = new Timer();
+    }
+
+----------------------------------------
+    static {
+        services = new ArrayList();
+        services.add("ttt");
+        services.add("tictactoe");
+        games = new Hashtable();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835141
+src/com/levelonelabs/aimbot/modules/HeyuModule.java 103 108
+src/com/levelonelabs/aimbot/modules/TelnetModule.java 177 183
+----------------------------------------
+		if (allowHelp) {
+			sb.append("<B>turn</B> (executes Heyu commands)\n");
+			sb.append("\n<b>EXAMPLE: turn office on</b>\n");
+			sb.append("<B>heyu</B> (lists admin supplied module text)\n");
+			helpText = sb.toString();
+		}
+
+----------------------------------------
+				while (bRunSvr == true) {
+					sock = svrSock.accept();
+					logger.info("Accepted connection ");
+					th = new TelnetHandler(sock);
+					th.start();
+					logger.fine("Spun off handler thread");
+				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835222
+src/com/levelonelabs/aimbot/modules/UserAdminModule.java 55 62
+src/com/levelonelabs/aimbot/modules/TicTacToeModule.java 107 114
+----------------------------------------
+    static {
+        services = new ArrayList();
+        services.add("adduser");
+        services.add("rmuser");
+        services.add("denyuser");
+        services.add("permituser");
+        services.add("permitmode");
+    }
+
+----------------------------------------
+    public String help() {
+        StringBuffer sb = new StringBuffer();
+        sb.append("<B>ttt <i>BUDDY</i></B> (starts a game with a buddy, if buddy is left blank, bot will play)\n");
+        sb.append("<B>ttt <i>N</i></B> (tells tic tac toe what your move is, where N is the place to move)\n");
+        sb.append("<B>ttt end</B> (ends a current game)\n");
+        sb.append("<B>ttt show</B> (shows the current game)\n");
+        return sb.toString();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835151
+src/com/levelonelabs/aimbot/modules/SkiReportModule.java 110 118
+src/com/levelonelabs/aimbot/modules/TicTacToeModule.java 107 114
+----------------------------------------
+    public String help() {
+        StringBuffer sb = new StringBuffer();
+        sb
+            .append("<B>mountains <i>STATE ABBREVIATION</i></B> (displays the resort codes for the specified state code)\n");
+        sb.append("<B>ski <i>STATE ABBREVIATION:RESORT CODE</i></B> (displays the ski reports for the given resort)\n");
+        sb
+            .append("* If the preference \"mountain\" is set, you can omit the [STATE ABBREVIATION:RESORT CODE] to use your default.");
+        return sb.toString();
+    }
+
+----------------------------------------
+    public String help() {
+        StringBuffer sb = new StringBuffer();
+        sb.append("<B>ttt <i>BUDDY</i></B> (starts a game with a buddy, if buddy is left blank, bot will play)\n");
+        sb.append("<B>ttt <i>N</i></B> (tells tic tac toe what your move is, where N is the place to move)\n");
+        sb.append("<B>ttt end</B> (ends a current game)\n");
+        sb.append("<B>ttt show</B> (shows the current game)\n");
+        return sb.toString();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835144
+src/com/levelonelabs/aimbot/modules/MessengerModule.java 110 121
+src/com/levelonelabs/aimbot/modules/TicTacToeModule.java 107 114
+----------------------------------------
+	public String help() {
+		StringBuffer sb = new StringBuffer();
+		sb.append("<B>tell <i>BUDDY MESSAGE</i></B> (sends a message to a person in ");
+		sb.append("the system, if they are offline they will recieve the message ");
+		sb.append("next time they log in)\n");
+		sb.append("<B>offline <i>BUDDY MESSAGE</i></B> (will notify the person the next time they log in)\n");
+		sb.append("<B>clear messages</B> (will erase messages in system for user)\n");
+		sb.append("<B>show messages</B> (will display all the messages left for a user)\n");
+		sb.append("* If the preference \"savemessages\" is set to true, need to manually \"clear messages\".\n");
+
+		return sb.toString();
+	}
+
+----------------------------------------
+    public String help() {
+        StringBuffer sb = new StringBuffer();
+        sb.append("<B>ttt <i>BUDDY</i></B> (starts a game with a buddy, if buddy is left blank, bot will play)\n");
+        sb.append("<B>ttt <i>N</i></B> (tells tic tac toe what your move is, where N is the place to move)\n");
+        sb.append("<B>ttt end</B> (ends a current game)\n");
+        sb.append("<B>ttt show</B> (shows the current game)\n");
+        return sb.toString();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835146
+src/com/levelonelabs/aimbot/modules/MoviesModule.java 107 118
+src/com/levelonelabs/aimbot/modules/TicTacToeModule.java 107 114
+----------------------------------------
+    public String help() {
+        StringBuffer sb=new StringBuffer();
+        sb.append("<B>theaters <i>ZIPCODE<i></B> (displays a list of theaters in your area)\n");
+        sb.append(
+            "* If the preference \"zipcode\" is set, you can omit the zipcode to use your default.\n");
+        sb.append(
+            "<B>movies <i>ZIPCODE [Theater Number]</i></B> (displays movie times for the theater closest to your zipcode if a theater number is not provided)\n");
+        sb.append(
+            "* If the preference \"zipcode\" is set, you can omit the zipcode to use your default.\n");
+        sb.append("<B>movieslegend</B> (displays the legend for movie times)");
+        return sb.toString();
+    }
+
+----------------------------------------
+    public String help() {
+        StringBuffer sb = new StringBuffer();
+        sb.append("<B>ttt <i>BUDDY</i></B> (starts a game with a buddy, if buddy is left blank, bot will play)\n");
+        sb.append("<B>ttt <i>N</i></B> (tells tic tac toe what your move is, where N is the place to move)\n");
+        sb.append("<B>ttt end</B> (ends a current game)\n");
+        sb.append("<B>ttt show</B> (shows the current game)\n");
+        return sb.toString();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835143
+src/com/levelonelabs/aimbot/modules/StockModule.java 110 116
+src/com/levelonelabs/aimbot/modules/TicTacToeModule.java 107 114
+----------------------------------------
+    public String help() {
+        StringBuffer sb= new StringBuffer();
+        sb.append("<B>stock <i>SYMBOLS</i></B> (displays stock price and other info for the given space separated symbols)\n");
+        sb.append("* If the preference \"portfolio\" is set, you can omit the symbols to use those listed in the preference.");
+        sb.append("<b>\n\nEXAMPLE: stock ge ibm</b>\n");
+        return sb.toString();
+    }
+
+----------------------------------------
+    public String help() {
+        StringBuffer sb = new StringBuffer();
+        sb.append("<B>ttt <i>BUDDY</i></B> (starts a game with a buddy, if buddy is left blank, bot will play)\n");
+        sb.append("<B>ttt <i>N</i></B> (tells tic tac toe what your move is, where N is the place to move)\n");
+        sb.append("<B>ttt end</B> (ends a current game)\n");
+        sb.append("<B>ttt show</B> (shows the current game)\n");
+        return sb.toString();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835148
+src/com/levelonelabs/aimbot/modules/TVListingsModule.java 116 124
+src/com/levelonelabs/aimbot/modules/TicTacToeModule.java 107 114
+----------------------------------------
+	public String help() {
+		StringBuffer sb = new StringBuffer();
+		sb.append("<B>tvlist <i>ZIPCODE</i></B> (displays the tv providers in the area of the zipcode)\n");
+		sb.append("* If the preference \"zipcode\" is set, you can omit the zipcode to use your default.\n");
+		sb
+			.append("<B>tv <i>SHOW<i></B> (displays the synopsis of the next upcomming episode of the specified show in your area)\n");
+		sb.append("* The preference \"tvprovider\" must be set!");
+		return sb.toString();
+	}
+
+----------------------------------------
+    public String help() {
+        StringBuffer sb = new StringBuffer();
+        sb.append("<B>ttt <i>BUDDY</i></B> (starts a game with a buddy, if buddy is left blank, bot will play)\n");
+        sb.append("<B>ttt <i>N</i></B> (tells tic tac toe what your move is, where N is the place to move)\n");
+        sb.append("<B>ttt end</B> (ends a current game)\n");
+        sb.append("<B>ttt show</B> (shows the current game)\n");
+        return sb.toString();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835153
+src/com/levelonelabs/aimbot/modules/UserInformationModule.java 125 132
+src/com/levelonelabs/aimbot/modules/TicTacToeModule.java 107 114
+----------------------------------------
+	public String help() {
+		StringBuffer sb = new StringBuffer();
+		sb.append("<B>history <i>USER</i></B> (displays user's recent sign on and off history)\n");
+		sb.append("<B>users</B> (displays status of all users)\n");
+		sb.append("A=" + AIMBot.ROLE_ADMINISTRATOR + ", M = messages pending, * = new user, E = Enemy, - = banned\n");
+		sb.append("<B>enemies</B> (displays status of all enemies)\n");
+		return sb.toString();
+	}
+
+----------------------------------------
+    public String help() {
+        StringBuffer sb = new StringBuffer();
+        sb.append("<B>ttt <i>BUDDY</i></B> (starts a game with a buddy, if buddy is left blank, bot will play)\n");
+        sb.append("<B>ttt <i>N</i></B> (tells tic tac toe what your move is, where N is the place to move)\n");
+        sb.append("<B>ttt end</B> (ends a current game)\n");
+        sb.append("<B>ttt show</B> (shows the current game)\n");
+        return sb.toString();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835142
+src/com/levelonelabs/aimbot/modules/BabelModule.java 239 247
+src/com/levelonelabs/aimbot/modules/TicTacToeModule.java 107 114
+----------------------------------------
+    public String help() {
+        StringBuffer sb=new StringBuffer();
+        sb.append(
+            "<B>babel [-n <i>DISTORTION</i>] <i>TEXT</i></B> (creates poetry from <TEXT>, this may take several seconds)\n");
+        sb.append("NOTE: Using -n optionally specifies amount to distort meaning (MAX:"+MAX_TRIALS+
+            ")");
+        sb.append("\n\n<b>EXAMPLE: babel Today is a great day to talk to a robot.</b>");
+        return sb.toString();
+    }
+
+----------------------------------------
+    public String help() {
+        StringBuffer sb = new StringBuffer();
+        sb.append("<B>ttt <i>BUDDY</i></B> (starts a game with a buddy, if buddy is left blank, bot will play)\n");
+        sb.append("<B>ttt <i>N</i></B> (tells tic tac toe what your move is, where N is the place to move)\n");
+        sb.append("<B>ttt end</B> (ends a current game)\n");
+        sb.append("<B>ttt show</B> (shows the current game)\n");
+        return sb.toString();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835147
+src/com/levelonelabs/aimbot/modules/MessengerModule.java 60 66
+src/com/levelonelabs/aimbot/modules/TicTacToeModule.java 107 114
+----------------------------------------
+	static {
+		services = new ArrayList();
+		services.add("tell");
+		services.add("offline");
+		services.add("clear");
+		services.add("show");
+	}
+
+----------------------------------------
+    public String help() {
+        StringBuffer sb = new StringBuffer();
+        sb.append("<B>ttt <i>BUDDY</i></B> (starts a game with a buddy, if buddy is left blank, bot will play)\n");
+        sb.append("<B>ttt <i>N</i></B> (tells tic tac toe what your move is, where N is the place to move)\n");
+        sb.append("<B>ttt end</B> (ends a current game)\n");
+        sb.append("<B>ttt show</B> (shows the current game)\n");
+        return sb.toString();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835152
+src/com/levelonelabs/aimbot/modules/ReminderModule.java 120 129
+src/com/levelonelabs/aimbot/modules/TicTacToeModule.java 107 114
+----------------------------------------
+    public String help() {
+        StringBuffer sb = new StringBuffer();
+        sb.append("<B>remember <i>TEXT</i></B> (stores text in the system for retrieval later)\n");
+        sb.append("<B>forget <i>All or #</i></B> (removes all items or a specific item)\n");
+        sb.append("<B>remind</B> (lists all reminders)\n");
+        sb
+            .append("* If the preference \"reminderatsignon\" is set to true, you will automatically get a list when you login to aim.\n");
+
+        return sb.toString();
+    }
+
+----------------------------------------
+    public String help() {
+        StringBuffer sb = new StringBuffer();
+        sb.append("<B>ttt <i>BUDDY</i></B> (starts a game with a buddy, if buddy is left blank, bot will play)\n");
+        sb.append("<B>ttt <i>N</i></B> (tells tic tac toe what your move is, where N is the place to move)\n");
+        sb.append("<B>ttt end</B> (ends a current game)\n");
+        sb.append("<B>ttt show</B> (shows the current game)\n");
+        return sb.toString();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835157
+src/com/levelonelabs/aimbot/modules/DefaultModule.java 96 103
+src/com/levelonelabs/aimbot/modules/TicTacToeModule.java 107 114
+----------------------------------------
+    public String help() {
+        StringBuffer sb=new StringBuffer();
+        sb.append("Default Module\nThis will output default text if the input \n");
+        sb.append("is not recognized\n");
+        sb.append("<B>addTerm <i>TEXT</i></B> "+
+            "(add possible lines for the module to output) *Admin only*");
+        return sb.toString();
+    }
+
+----------------------------------------
+    public String help() {
+        StringBuffer sb = new StringBuffer();
+        sb.append("<B>ttt <i>BUDDY</i></B> (starts a game with a buddy, if buddy is left blank, bot will play)\n");
+        sb.append("<B>ttt <i>N</i></B> (tells tic tac toe what your move is, where N is the place to move)\n");
+        sb.append("<B>ttt end</B> (ends a current game)\n");
+        sb.append("<B>ttt show</B> (shows the current game)\n");
+        return sb.toString();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835156
+src/com/levelonelabs/aimbot/modules/ScheduleModule.java 156 165
+src/com/levelonelabs/aimbot/modules/TicTacToeModule.java 107 114
+----------------------------------------
+    public String help() {
+        StringBuffer sb = new StringBuffer();
+        sb.append("<B>schedule <i>TEXT</i></B> (stores text in the system for retrieval later)\n");
+        sb.append("<B>cancel <i>All or #</i></B> (removes all items or a specific item)\n");
+        sb.append("<B>events</B> (lists all reminders)\n");
+        sb
+            .append("* If the preference \"reminderatsignon\" is set to true, you will automatically get a list when you login to aim.\n");
+
+        return sb.toString();
+    }
+
+----------------------------------------
+    public String help() {
+        StringBuffer sb = new StringBuffer();
+        sb.append("<B>ttt <i>BUDDY</i></B> (starts a game with a buddy, if buddy is left blank, bot will play)\n");
+        sb.append("<B>ttt <i>N</i></B> (tells tic tac toe what your move is, where N is the place to move)\n");
+        sb.append("<B>ttt end</B> (ends a current game)\n");
+        sb.append("<B>ttt show</B> (shows the current game)\n");
+        return sb.toString();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835149
+src/com/levelonelabs/aimbot/modules/BuddyManagementModule.java 101 107
+src/com/levelonelabs/aimbot/modules/TicTacToeModule.java 107 114
+----------------------------------------
+    public String help() {
+        StringBuffer sb = new StringBuffer();
+        sb.append("<B>makeusers</B> (converts all non-user buddies to users *ADMIN ONLY*)\n");
+        sb.append("<B>prune buddies</B> (removes all non-user buddies *ADMIN ONLY*)\n");
+        sb.append("<B>prune inactive</B> (removes \"inactive\" users *ADMIN ONLY*)\n");
+        return sb.toString();
+    }
+
+----------------------------------------
+    public String help() {
+        StringBuffer sb = new StringBuffer();
+        sb.append("<B>ttt <i>BUDDY</i></B> (starts a game with a buddy, if buddy is left blank, bot will play)\n");
+        sb.append("<B>ttt <i>N</i></B> (tells tic tac toe what your move is, where N is the place to move)\n");
+        sb.append("<B>ttt end</B> (ends a current game)\n");
+        sb.append("<B>ttt show</B> (shows the current game)\n");
+        return sb.toString();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835145
+src/com/levelonelabs/aimbot/modules/WeatherModule.java 104 111
+src/com/levelonelabs/aimbot/modules/TicTacToeModule.java 107 114
+----------------------------------------
+    public String help() {
+        StringBuffer sb=new StringBuffer();
+        sb.append(
+            "<B>weather <i>ZIPCODE</i></B> (displays the 5 day forcast for the specified zipcode)\n");
+        sb.append(
+            "* If the preference \"zipcode\" is set, you can omit the zipcode to use your default.");
+        return sb.toString();
+    }
+
+----------------------------------------
+    public String help() {
+        StringBuffer sb = new StringBuffer();
+        sb.append("<B>ttt <i>BUDDY</i></B> (starts a game with a buddy, if buddy is left blank, bot will play)\n");
+        sb.append("<B>ttt <i>N</i></B> (tells tic tac toe what your move is, where N is the place to move)\n");
+        sb.append("<B>ttt end</B> (ends a current game)\n");
+        sb.append("<B>ttt show</B> (shows the current game)\n");
+        return sb.toString();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835150
+src/com/levelonelabs/aimbot/modules/MegaHalModule.java 158 164
+src/com/levelonelabs/aimbot/modules/TicTacToeModule.java 107 114
+----------------------------------------
+	public String help() {
+		StringBuffer sb = new StringBuffer();
+		sb.append("<B>MEGAHAL</B> commands:\n");
+		sb.append("<b>megahaladmin save</b> (saves the megahal brain *ADMIN ONLY*)\n");
+		sb.append("<b>megahaladmin think <i>N</i></b>  (sets the think time to <N> seconds *ADMIN ONLY*)\n");
+		return sb.toString();
+	}
+
+----------------------------------------
+    public String help() {
+        StringBuffer sb = new StringBuffer();
+        sb.append("<B>ttt <i>BUDDY</i></B> (starts a game with a buddy, if buddy is left blank, bot will play)\n");
+        sb.append("<B>ttt <i>N</i></B> (tells tic tac toe what your move is, where N is the place to move)\n");
+        sb.append("<B>ttt end</B> (ends a current game)\n");
+        sb.append("<B>ttt show</B> (shows the current game)\n");
+        return sb.toString();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835155
+src/com/levelonelabs/aimbot/modules/UserAdminModule.java 100 109
+src/com/levelonelabs/aimbot/modules/TicTacToeModule.java 107 114
+----------------------------------------
+    public String help() {
+        StringBuffer sb = new StringBuffer();
+        sb
+            .append("<B>adduser <i>BUDDY</i> <ADMIN></B> (adds a user to the list, along with allowing for admin perms)\n");
+        sb.append("<B>rmuser <i>BUDDY</i></B> (removes a user from the list)\n");
+        sb.append("<B>denyuser <i>BUDDY</i></B> (deny a user *ADMIN ONLY*)\n");
+        sb.append("<B>permituser <i>BUDDY</i></B> (permit a user *ADMIN ONLY*)\n");
+        sb.append("<B>permitmode <i>[MODE]</i></B> (set or display the permitmode*ADMIN ONLY*)\n");
+        return sb.toString();
+    }
+
+----------------------------------------
+    public String help() {
+        StringBuffer sb = new StringBuffer();
+        sb.append("<B>ttt <i>BUDDY</i></B> (starts a game with a buddy, if buddy is left blank, bot will play)\n");
+        sb.append("<B>ttt <i>N</i></B> (tells tic tac toe what your move is, where N is the place to move)\n");
+        sb.append("<B>ttt end</B> (ends a current game)\n");
+        sb.append("<B>ttt show</B> (shows the current game)\n");
+        return sb.toString();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835154
+src/com/levelonelabs/aimbot/modules/PreferenceModule.java 100 106
+src/com/levelonelabs/aimbot/modules/TicTacToeModule.java 107 114
+----------------------------------------
+    public String help() {
+        StringBuffer sb=new StringBuffer();
+        sb.append("<B>listprefs</B> (displays current preferences)\n");
+        sb.append("<B>setpref <i>PREFERENCE</i> <i>VALUE</i></B> (sets a preference for the user)\n");
+        sb.append("\n<b>EXAMPLE: setpref zipcode 12345</b>\n");
+        return sb.toString();
+    }
+
+----------------------------------------
+    public String help() {
+        StringBuffer sb = new StringBuffer();
+        sb.append("<B>ttt <i>BUDDY</i></B> (starts a game with a buddy, if buddy is left blank, bot will play)\n");
+        sb.append("<B>ttt <i>N</i></B> (tells tic tac toe what your move is, where N is the place to move)\n");
+        sb.append("<B>ttt end</B> (ends a current game)\n");
+        sb.append("<B>ttt show</B> (shows the current game)\n");
+        return sb.toString();
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835159
+src/com/levelonelabs/aim/AIMClient.java 669 677
+src/com/levelonelabs/aimbot/modules/TelnetModule.java 158 168
+----------------------------------------
+                if (currentlist.length() > 1800) {
+                    try {
+                        frameSend(currentlist + " " + group + "\0");
+                        currentlist = "toc2_remove_buddy";
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        logger.severe("ERROR removing buddies.");
+                    }
+                }
+
+----------------------------------------
+		public TelnetServer(AIMBot bot) {
+			try {
+				svrSock = new ServerSocket(1234);
+				//logger.info("Created server socket on 1234");
+				parentBot = bot;
+				bRunSvr = true;
+			} catch (Exception e) {
+				logger.severe("Could not create server socket in Telent Module");
+				bRunSvr = false;
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835163
+src/com/levelonelabs/aimbot/modules/TicTacToeModule.java 208 216
+src/com/levelonelabs/aimbot/AIMBot.java 441 450
+----------------------------------------
+                    } else if (command.equals("no")) {
+                        if ((tttg.state == tttg.REQUESTED) && (tttg.getPlayerNumber(you) == 1)) {
+                            sendMessage(getBuddy(comp), you + " said no to tic tac toe.");
+                            games.remove(comp);
+                            games.remove(you);
+                        } else {
+                            sendMessage(buddy, "Not sure what you are saying no to.");
+                        }
+                    } else {
+
+----------------------------------------
+	private void retaliate(AIMBuddy enemy) {
+		if (!enemy.hasRole(ROLE_ENEMY)) {
+			enemy.addRole(ROLE_ENEMY);
+			aim.sendMessage(enemy,
+				"In the End, we will remember not the words of our enemies, but the silence of our friends");
+		} else {
+			aim.banBuddy(enemy);
+		}
+		aim.sendWarning(enemy);
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835178
+src/com/levelonelabs/aim/example/AIMReceptionist.java 89 101
+src/com/levelonelabs/aimbot/modules/MessengerModule.java 157 174
+----------------------------------------
+				if (buddy.getName().equalsIgnoreCase(newName.getName()) && buddy.hasMessages()) {
+					ArrayList messages = buddy.getMessages();
+					String message = "";
+
+					//collect the messages
+					for (int i = 0; i < messages.size(); i++) {
+						message += (messages.get(i) + "<BR>");
+					}
+
+					//send the list
+					aim.sendMessage(buddy, message);
+					buddy.clearMessages();
+				}
+
+----------------------------------------
+		if (buddy.hasMessages()) {
+			ArrayList messages = buddy.getMessages();
+			String message = "";
+
+			//collect the messages
+			for (int i = 0; i < messages.size(); i++) {
+				message += (messages.get(i) + "<BR>");
+			}
+
+			//send the list
+			super.sendMessage(buddy, message);
+			//check if they should be saved
+			String savePref = buddy.getPreference("savemessages");
+			if ((savePref == null) || savePref.equals("false")) {
+				buddy.clearMessages();
+			}
+			return true;
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835179
+src/com/levelonelabs/aimbot/modules/MessengerModule.java 157 174
+src/com/levelonelabs/aim/example/AIMReceptionist.java 88 102
+----------------------------------------
+		if (buddy.hasMessages()) {
+			ArrayList messages = buddy.getMessages();
+			String message = "";
+
+			//collect the messages
+			for (int i = 0; i < messages.size(); i++) {
+				message += (messages.get(i) + "<BR>");
+			}
+
+			//send the list
+			super.sendMessage(buddy, message);
+			//check if they should be saved
+			String savePref = buddy.getPreference("savemessages");
+			if ((savePref == null) || savePref.equals("false")) {
+				buddy.clearMessages();
+			}
+			return true;
+		}
+
+----------------------------------------
+			public void handleBuddySignOn(AIMBuddy buddy, String info) {
+				if (buddy.getName().equalsIgnoreCase(newName.getName()) && buddy.hasMessages()) {
+					ArrayList messages = buddy.getMessages();
+					String message = "";
+
+					//collect the messages
+					for (int i = 0; i < messages.size(); i++) {
+						message += (messages.get(i) + "<BR>");
+					}
+
+					//send the list
+					aim.sendMessage(buddy, message);
+					buddy.clearMessages();
+				}
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835180
+src/com/levelonelabs/aimbot/modules/TicTacToeModule.java 338 343
+src/com/levelonelabs/aim/AIMGroup.java 110 116
+----------------------------------------
+        public int getPlayerNumber(String p) {
+            if (p.equals(player[0])) {
+                return 0;
+            }
+            return 1;
+        }
+
+----------------------------------------
+    public boolean remove(String buddy) {
+        if(this.buddies.contains(buddy)) {
+            this.buddies.remove(this.buddies.indexOf(buddy));
+            return true;
+        }
+        return false;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835181
+src/com/levelonelabs/aimbot/modules/TicTacToeModule.java 396 403
+src/com/levelonelabs/aimbot/modules/TicTacToeModule.java 408 415
+----------------------------------------
+                } else {
+                    if (board[i][i] != d1) {
+                        d1 = -1;
+                    }
+                    if (board[2 - i][i] != d2) {
+                        d2 = -1;
+                    }
+                }
+
+----------------------------------------
+                    } else {
+                        if (board[i][j] != v) {
+                            v = -1;
+                        }
+                        if (board[j][i] != h) {
+                            h = -1;
+                        }
+                    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835182
+src/com/levelonelabs/aimbot/modules/DefaultModule.java 112 138
+src/com/levelonelabs/aimbot/modules/MessengerModule.java 268 299
+----------------------------------------
+    public void performService(AIMBuddy buddy, String query) {
+        StringTokenizer st=new StringTokenizer(query);
+        String output="";
+
+        //potential future function to add terms for the bot to reply with at random
+        if(query.toLowerCase().startsWith("addTerm")) {
+            if(!buddy.hasRole(AIMBot.ROLE_ADMINISTRATOR)) {
+                super.sendMessage(buddy, "Sorry, only admins can add terms");
+                return;
+            }
+            if(st.countTokens() < 2) {
+                super.sendMessage(buddy, "ERROR:\n"+help());
+                return;
+            }
+
+            String imcommand=st.nextToken();
+            String term=st.nextToken();
+            while(st.hasMoreTokens()) {
+                term=term+" "+st.nextToken();
+            }
+            super.sendMessage(buddy, "Sorry, this feature hasn't been implemented yet");
+            //addTerm(term);
+        } else {
+            output="Sorry, I don't understand that\n type \"help\" to see available commands";
+            super.sendMessage(buddy, output);
+        }
+    }
+
+----------------------------------------
+	private void handleOffline(AIMBuddy buddy, String query) {
+		//handle offline request
+		if (query.toLowerCase().startsWith("offline")) {
+			StringTokenizer st = new StringTokenizer(query, " ");
+
+			//check for proper params
+			if (st.countTokens() < 3) {
+				super.sendMessage(buddy, "ERROR:\n" + help());
+				return;
+			}
+
+			//grab the target
+			String imcommand = st.nextToken();
+			String imcommandTo = st.nextToken();
+			AIMBuddy to = super.getBuddy(imcommandTo);
+			if (to == null) {
+				super.sendMessage(buddy, "User " + imcommandTo
+					+ " does not exist in the system.  Use the ADDUSER command to add them.");
+				return;
+			}
+
+			//grab the message
+			String imcommandText = "";
+			while (st.hasMoreTokens()) {
+				imcommandText = imcommandText + " " + st.nextToken();
+			}
+			if (!imcommandText.equals("")) {
+				sendMessage(buddy, imcommandTo + " will be told next time they signon.");
+				addMessage(to, buddy, imcommandText);
+			}
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835212
+src/com/levelonelabs/aimbot/modules/UserAdminModule.java 119 145
+src/com/levelonelabs/aimbot/modules/UserAdminModule.java 165 185
+----------------------------------------
+        if (query.toLowerCase().startsWith("adduser")) {
+            // add a user
+            StringTokenizer st = new StringTokenizer(query, " ");
+            if (st.countTokens() < 2) {
+                super.sendMessage(buddy, "ERROR:\n" + help());
+                return;
+            }
+
+            // grab the user to add
+            String imcommand = st.nextToken();
+            String imcommandTo = st.nextToken();
+            AIMBuddy to = super.getBuddy(imcommandTo);
+            if (to != null) {
+                super.sendMessage(buddy, "User " + imcommandTo + " already exists in the system.");
+                return;
+            }
+
+            // only admins can add other admins
+            to = new AIMBuddy(imcommandTo);
+            to.addRole(AIMBot.ROLE_USER);
+            if (buddy.hasRole(AIMBot.ROLE_ADMINISTRATOR) && st.hasMoreTokens()
+                && st.nextToken().equalsIgnoreCase("ADMIN")) {
+                to.addRole(AIMBot.ROLE_ADMINISTRATOR);
+            }
+            super.addBuddy(to);
+            super.sendMessage(buddy, "User " + imcommandTo + " added.");
+        } else if (query.toLowerCase().startsWith("rmuser")) {
+
+----------------------------------------
+        } else if (query.toLowerCase().startsWith("denyuser")) {
+            // deny a user
+            StringTokenizer st = new StringTokenizer(query, " ");
+            if (st.countTokens() < 2) {
+                super.sendMessage(buddy, "ERROR:\n" + help());
+                return;
+            }
+
+            // grab the user to deny
+            String imcommand = st.nextToken();
+            String imcommandTo = st.nextToken();
+            AIMBuddy to = super.getBuddy(imcommandTo);
+            if (to == null) {
+                super.sendMessage(buddy, "User " + imcommandTo + " does not exist in the system.");
+            } else if (buddy.hasRole(AIMBot.ROLE_ADMINISTRATOR)) {
+                super.denyBuddy(to);
+                super.sendMessage(buddy, "User " + imcommandTo + " denied.");
+            } else {
+                super.sendMessage(buddy, "Only admins can deny users.");
+            }
+        } else if (query.toLowerCase().startsWith("permituser")) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+27177782
+src/com/levelonelabs/aimbot/modules/UserAdminModule.java 165 185
+src/com/levelonelabs/aimbot/modules/UserAdminModule.java 145 165
+----------------------------------------
+        } else if (query.toLowerCase().startsWith("denyuser")) {
+            // deny a user
+            StringTokenizer st = new StringTokenizer(query, " ");
+            if (st.countTokens() < 2) {
+                super.sendMessage(buddy, "ERROR:\n" + help());
+                return;
+            }
+
+            // grab the user to deny
+            String imcommand = st.nextToken();
+            String imcommandTo = st.nextToken();
+            AIMBuddy to = super.getBuddy(imcommandTo);
+            if (to == null) {
+                super.sendMessage(buddy, "User " + imcommandTo + " does not exist in the system.");
+            } else if (buddy.hasRole(AIMBot.ROLE_ADMINISTRATOR)) {
+                super.denyBuddy(to);
+                super.sendMessage(buddy, "User " + imcommandTo + " denied.");
+            } else {
+                super.sendMessage(buddy, "Only admins can deny users.");
+            }
+        } else if (query.toLowerCase().startsWith("permituser")) {
+
+----------------------------------------
+        } else if (query.toLowerCase().startsWith("rmuser")) {
+            // remove a user
+            StringTokenizer st = new StringTokenizer(query, " ");
+            if (st.countTokens() < 2) {
+                super.sendMessage(buddy, "ERROR:\n" + help());
+                return;
+            }
+
+            // grab the user to remove
+            String imcommand = st.nextToken();
+            String imcommandTo = st.nextToken();
+            AIMBuddy to = super.getBuddy(imcommandTo);
+            if (to == null) {
+                super.sendMessage(buddy, "User " + imcommandTo + " does not exist in the system.");
+            } else if (buddy.hasRole(AIMBot.ROLE_ADMINISTRATOR)) {
+                super.removeBuddy(to);
+                super.sendMessage(buddy, "User " + imcommandTo + " removed.");
+            } else {
+                super.sendMessage(buddy, "Only admins can remove users.");
+            }
+        } else if (query.toLowerCase().startsWith("denyuser")) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835214
+src/com/levelonelabs/aimbot/modules/UserAdminModule.java 119 145
+src/com/levelonelabs/aimbot/modules/UserAdminModule.java 185 205
+----------------------------------------
+        if (query.toLowerCase().startsWith("adduser")) {
+            // add a user
+            StringTokenizer st = new StringTokenizer(query, " ");
+            if (st.countTokens() < 2) {
+                super.sendMessage(buddy, "ERROR:\n" + help());
+                return;
+            }
+
+            // grab the user to add
+            String imcommand = st.nextToken();
+            String imcommandTo = st.nextToken();
+            AIMBuddy to = super.getBuddy(imcommandTo);
+            if (to != null) {
+                super.sendMessage(buddy, "User " + imcommandTo + " already exists in the system.");
+                return;
+            }
+
+            // only admins can add other admins
+            to = new AIMBuddy(imcommandTo);
+            to.addRole(AIMBot.ROLE_USER);
+            if (buddy.hasRole(AIMBot.ROLE_ADMINISTRATOR) && st.hasMoreTokens()
+                && st.nextToken().equalsIgnoreCase("ADMIN")) {
+                to.addRole(AIMBot.ROLE_ADMINISTRATOR);
+            }
+            super.addBuddy(to);
+            super.sendMessage(buddy, "User " + imcommandTo + " added.");
+        } else if (query.toLowerCase().startsWith("rmuser")) {
+
+----------------------------------------
+        } else if (query.toLowerCase().startsWith("permituser")) {
+            // permit a user
+            StringTokenizer st = new StringTokenizer(query, " ");
+            if (st.countTokens() < 2) {
+                super.sendMessage(buddy, "ERROR:\n" + help());
+                return;
+            }
+
+            // grab the user to permit
+            String imcommand = st.nextToken();
+            String imcommandTo = st.nextToken();
+            AIMBuddy to = super.getBuddy(imcommandTo);
+            if (to == null) {
+                super.sendMessage(buddy, "User " + imcommandTo + " does not exist in the system.");
+            } else if (buddy.hasRole(AIMBot.ROLE_ADMINISTRATOR)) {
+                super.permitBuddy(to);
+                super.sendMessage(buddy, "User " + imcommandTo + " permitted.");
+            } else {
+                super.sendMessage(buddy, "Only admins can permit users.");
+            }
+        } else if (query.toLowerCase().startsWith("permitmode")) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+27177783
+src/com/levelonelabs/aimbot/modules/UserAdminModule.java 165 185
+src/com/levelonelabs/aimbot/modules/UserAdminModule.java 185 205
+----------------------------------------
+        } else if (query.toLowerCase().startsWith("denyuser")) {
+            // deny a user
+            StringTokenizer st = new StringTokenizer(query, " ");
+            if (st.countTokens() < 2) {
+                super.sendMessage(buddy, "ERROR:\n" + help());
+                return;
+            }
+
+            // grab the user to deny
+            String imcommand = st.nextToken();
+            String imcommandTo = st.nextToken();
+            AIMBuddy to = super.getBuddy(imcommandTo);
+            if (to == null) {
+                super.sendMessage(buddy, "User " + imcommandTo + " does not exist in the system.");
+            } else if (buddy.hasRole(AIMBot.ROLE_ADMINISTRATOR)) {
+                super.denyBuddy(to);
+                super.sendMessage(buddy, "User " + imcommandTo + " denied.");
+            } else {
+                super.sendMessage(buddy, "Only admins can deny users.");
+            }
+        } else if (query.toLowerCase().startsWith("permituser")) {
+
+----------------------------------------
+        } else if (query.toLowerCase().startsWith("permituser")) {
+            // permit a user
+            StringTokenizer st = new StringTokenizer(query, " ");
+            if (st.countTokens() < 2) {
+                super.sendMessage(buddy, "ERROR:\n" + help());
+                return;
+            }
+
+            // grab the user to permit
+            String imcommand = st.nextToken();
+            String imcommandTo = st.nextToken();
+            AIMBuddy to = super.getBuddy(imcommandTo);
+            if (to == null) {
+                super.sendMessage(buddy, "User " + imcommandTo + " does not exist in the system.");
+            } else if (buddy.hasRole(AIMBot.ROLE_ADMINISTRATOR)) {
+                super.permitBuddy(to);
+                super.sendMessage(buddy, "User " + imcommandTo + " permitted.");
+            } else {
+                super.sendMessage(buddy, "Only admins can permit users.");
+            }
+        } else if (query.toLowerCase().startsWith("permitmode")) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835213
+src/com/levelonelabs/aimbot/modules/UserAdminModule.java 145 165
+src/com/levelonelabs/aimbot/modules/UserAdminModule.java 185 205
+----------------------------------------
+        } else if (query.toLowerCase().startsWith("rmuser")) {
+            // remove a user
+            StringTokenizer st = new StringTokenizer(query, " ");
+            if (st.countTokens() < 2) {
+                super.sendMessage(buddy, "ERROR:\n" + help());
+                return;
+            }
+
+            // grab the user to remove
+            String imcommand = st.nextToken();
+            String imcommandTo = st.nextToken();
+            AIMBuddy to = super.getBuddy(imcommandTo);
+            if (to == null) {
+                super.sendMessage(buddy, "User " + imcommandTo + " does not exist in the system.");
+            } else if (buddy.hasRole(AIMBot.ROLE_ADMINISTRATOR)) {
+                super.removeBuddy(to);
+                super.sendMessage(buddy, "User " + imcommandTo + " removed.");
+            } else {
+                super.sendMessage(buddy, "Only admins can remove users.");
+            }
+        } else if (query.toLowerCase().startsWith("denyuser")) {
+
+----------------------------------------
+        } else if (query.toLowerCase().startsWith("permituser")) {
+            // permit a user
+            StringTokenizer st = new StringTokenizer(query, " ");
+            if (st.countTokens() < 2) {
+                super.sendMessage(buddy, "ERROR:\n" + help());
+                return;
+            }
+
+            // grab the user to permit
+            String imcommand = st.nextToken();
+            String imcommandTo = st.nextToken();
+            AIMBuddy to = super.getBuddy(imcommandTo);
+            if (to == null) {
+                super.sendMessage(buddy, "User " + imcommandTo + " does not exist in the system.");
+            } else if (buddy.hasRole(AIMBot.ROLE_ADMINISTRATOR)) {
+                super.permitBuddy(to);
+                super.sendMessage(buddy, "User " + imcommandTo + " permitted.");
+            } else {
+                super.sendMessage(buddy, "Only admins can permit users.");
+            }
+        } else if (query.toLowerCase().startsWith("permitmode")) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+24079640
+src/com/levelonelabs/aimbot/modules/BuddyManagementModule.java 173 178
+src/com/levelonelabs/aimbot/modules/BuddyManagementModule.java 154 159
+----------------------------------------
+                int numRemoved = 0;
+                Iterator iter = super.getBuddyNames();
+                List toRemoveList = new ArrayList();
+                while (iter.hasNext()) {
+                    String name = (String) iter.next();
+                    AIMBuddy bud = super.getBuddy(name);
+
+----------------------------------------
+                int numRemoved = 0;
+                Iterator iter = super.getBuddyNames();
+                List toRemoveList = new ArrayList();
+                while (iter.hasNext()) {
+                    String name = (String) iter.next();
+                    AIMBuddy bud = super.getBuddy(name);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+24079641
+src/com/levelonelabs/aimbot/modules/UserAdminModule.java 169 177
+src/com/levelonelabs/aimbot/modules/UserAdminModule.java 189 197
+----------------------------------------
+                super.sendMessage(buddy, "ERROR:\n" + help());
+                return;
+            }
+
+            // grab the user to deny
+            String imcommand = st.nextToken();
+            String imcommandTo = st.nextToken();
+            AIMBuddy to = super.getBuddy(imcommandTo);
+            if (to == null) {
+
+----------------------------------------
+                super.sendMessage(buddy, "ERROR:\n" + help());
+                return;
+            }
+
+            // grab the user to permit
+            String imcommand = st.nextToken();
+            String imcommandTo = st.nextToken();
+            AIMBuddy to = super.getBuddy(imcommandTo);
+            if (to == null) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+24079642
+src/com/levelonelabs/aimbot/modules/UserAdminModule.java 169 177
+src/com/levelonelabs/aimbot/modules/MessengerModule.java 275 283
+----------------------------------------
+                super.sendMessage(buddy, "ERROR:\n" + help());
+                return;
+            }
+
+            // grab the user to deny
+            String imcommand = st.nextToken();
+            String imcommandTo = st.nextToken();
+            AIMBuddy to = super.getBuddy(imcommandTo);
+            if (to == null) {
+
+----------------------------------------
+				super.sendMessage(buddy, "ERROR:\n" + help());
+				return;
+			}
+
+			//grab the target
+			String imcommand = st.nextToken();
+			String imcommandTo = st.nextToken();
+			AIMBuddy to = super.getBuddy(imcommandTo);
+			if (to == null) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+24079643
+src/com/levelonelabs/aimbot/modules/UserAdminModule.java 169 177
+src/com/levelonelabs/aimbot/modules/UserAdminModule.java 149 157
+----------------------------------------
+                super.sendMessage(buddy, "ERROR:\n" + help());
+                return;
+            }
+
+            // grab the user to deny
+            String imcommand = st.nextToken();
+            String imcommandTo = st.nextToken();
+            AIMBuddy to = super.getBuddy(imcommandTo);
+            if (to == null) {
+
+----------------------------------------
+                super.sendMessage(buddy, "ERROR:\n" + help());
+                return;
+            }
+
+            // grab the user to remove
+            String imcommand = st.nextToken();
+            String imcommandTo = st.nextToken();
+            AIMBuddy to = super.getBuddy(imcommandTo);
+            if (to == null) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+24079644
+src/com/levelonelabs/aimbot/modules/MoviesModule.java 479 484
+src/com/levelonelabs/aimbot/modules/MoviesModule.java 390 395
+----------------------------------------
+            URLConnection conn=url.openConnection();
+            BufferedReader br=new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            ParserDelegator pd=new ParserDelegator();
+            pd.parse(br, this, true);
+        } catch(Exception e) {
+            e.printStackTrace();
+
+----------------------------------------
+            URLConnection conn=url.openConnection();
+            BufferedReader br=new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            ParserDelegator pd=new ParserDelegator();
+            pd.parse(br, this, true);
+        } catch(Exception e) {
+            e.printStackTrace();
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+24079645
+src/com/levelonelabs/aim/AIMClient.java 981 987
+src/com/levelonelabs/aim/AIMClient.java 1005 1012
+----------------------------------------
+        AIMBuddy aimbud = getBuddy(buddy);
+        if (aimbud == null) {
+            logger.severe("ERROR:  NOTIFICATION ABOUT NON BUDDY(" + buddy + ")");
+            return;
+        }
+        for (int i = 0; i < aimListeners.size(); i++) {
+            try {
+
+----------------------------------------
+        AIMBuddy aimbud = getBuddy(buddy);
+        if (aimbud == null) {
+            logger.severe("ERROR:  NOTIFICATION ABOUT NON BUDDY(" + buddy + ")");
+            return;
+        }
+
+        for (int i = 0; i < aimListeners.size(); i++) {
+            try {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+24079646
+src/com/levelonelabs/aimbot/modules/UserAdminModule.java 121 130
+src/com/levelonelabs/aimbot/modules/UserAdminModule.java 167 176
+----------------------------------------
+            StringTokenizer st = new StringTokenizer(query, " ");
+            if (st.countTokens() < 2) {
+                super.sendMessage(buddy, "ERROR:\n" + help());
+                return;
+            }
+
+            // grab the user to add
+            String imcommand = st.nextToken();
+            String imcommandTo = st.nextToken();
+            AIMBuddy to = super.getBuddy(imcommandTo);
+
+----------------------------------------
+            StringTokenizer st = new StringTokenizer(query, " ");
+            if (st.countTokens() < 2) {
+                super.sendMessage(buddy, "ERROR:\n" + help());
+                return;
+            }
+
+            // grab the user to deny
+            String imcommand = st.nextToken();
+            String imcommandTo = st.nextToken();
+            AIMBuddy to = super.getBuddy(imcommandTo);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+24079647
+src/com/levelonelabs/aimbot/modules/UserAdminModule.java 121 130
+src/com/levelonelabs/aimbot/modules/UserAdminModule.java 187 196
+----------------------------------------
+            StringTokenizer st = new StringTokenizer(query, " ");
+            if (st.countTokens() < 2) {
+                super.sendMessage(buddy, "ERROR:\n" + help());
+                return;
+            }
+
+            // grab the user to add
+            String imcommand = st.nextToken();
+            String imcommandTo = st.nextToken();
+            AIMBuddy to = super.getBuddy(imcommandTo);
+
+----------------------------------------
+            StringTokenizer st = new StringTokenizer(query, " ");
+            if (st.countTokens() < 2) {
+                super.sendMessage(buddy, "ERROR:\n" + help());
+                return;
+            }
+
+            // grab the user to permit
+            String imcommand = st.nextToken();
+            String imcommandTo = st.nextToken();
+            AIMBuddy to = super.getBuddy(imcommandTo);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+24079648
+src/com/levelonelabs/aimbot/modules/UserAdminModule.java 121 130
+src/com/levelonelabs/aimbot/modules/UserAdminModule.java 147 156
+----------------------------------------
+            StringTokenizer st = new StringTokenizer(query, " ");
+            if (st.countTokens() < 2) {
+                super.sendMessage(buddy, "ERROR:\n" + help());
+                return;
+            }
+
+            // grab the user to add
+            String imcommand = st.nextToken();
+            String imcommandTo = st.nextToken();
+            AIMBuddy to = super.getBuddy(imcommandTo);
+
+----------------------------------------
+            StringTokenizer st = new StringTokenizer(query, " ");
+            if (st.countTokens() < 2) {
+                super.sendMessage(buddy, "ERROR:\n" + help());
+                return;
+            }
+
+            // grab the user to remove
+            String imcommand = st.nextToken();
+            String imcommandTo = st.nextToken();
+            AIMBuddy to = super.getBuddy(imcommandTo);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+24079649
+src/com/levelonelabs/aimbot/modules/ScheduleModule.java 389 398
+src/com/levelonelabs/aimbot/modules/ReminderModule.java 205 214
+----------------------------------------
+        StringTokenizer st = new StringTokenizer(query, " ");
+
+        // check for proper params
+        if (st.countTokens() != 2) {
+            sendMessage(buddy, "ERROR:\n" + help());
+            return;
+        }
+        st.nextToken();
+        String tok = st.nextToken();
+        if (tok.equalsIgnoreCase("all")) {
+
+----------------------------------------
+        StringTokenizer st = new StringTokenizer(query, " ");
+
+        // check for proper params
+        if (st.countTokens() != 2) {
+            sendMessage(buddy, "ERROR:\n" + help());
+            return;
+        }
+        st.nextToken();
+        String tok = st.nextToken();
+        if (tok.equalsIgnoreCase("all")) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+24079650
+src/com/levelonelabs/aimbot/modules/UserInformationModule.java 213 220
+src/com/levelonelabs/aimbot/modules/UserInformationModule.java 177 184
+----------------------------------------
+			String result = "";
+			int num = 0;
+
+			for (Iterator iter = getBuddyNames(); iter.hasNext();) {
+				String name = (String) iter.next();
+				AIMBuddy bud = getBuddy(name);
+				if (bud == null) {
+					continue;
+
+----------------------------------------
+			String result = "";
+			int num = 0;
+
+			for (Iterator iter = getBuddyNames(); iter.hasNext();) {
+				String name = (String) iter.next();
+				AIMBuddy bud = getBuddy(name);
+				if (bud == null) {
+					continue;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+24079651
+src/com/levelonelabs/aimbot/modules/MessengerModule.java 224 234
+src/com/levelonelabs/aimbot/modules/UserInformationModule.java 151 161
+----------------------------------------
+				sendMessage(buddy, "ERROR:\n" + help());
+				return;
+			}
+			String imcommandTo = st.nextToken();
+			AIMBuddy to = getBuddy(imcommandTo);
+
+			//verify they are a user of the bot
+			if (to == null) {
+				sendMessage(buddy, "User " + imcommandTo
+					+ " does not exist in the system.\nUse the ADDUSER command to add them.");
+				return;
+
+----------------------------------------
+				sendMessage(buddy, "ERROR:\n" + help());
+				return;
+			}
+			String imcommandTo = st.nextToken();
+			AIMBuddy to = getBuddy(imcommandTo);
+
+			//verify they are a user of the bot
+			if (to == null) {
+				sendMessage(buddy, "User " + imcommandTo
+					+ " does not exist in the system.\nUse the ADDUSER command to add them.");
+				return;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+24079652
+src/com/levelonelabs/aimbot/modules/ListModule.java 314 320
+src/com/levelonelabs/aimbot/modules/ListModule.java 293 299
+----------------------------------------
+        if (!buddy.hasRole(AIMBot.ROLE_ADMINISTRATOR)) {
+            super.sendMessage(buddy, "Sorry. This command is for admins only.");
+        } else {
+            String imcommand = st.nextToken();
+            String list = st.nextToken();
+            AIMGroup group = super.bot.getGroup(list);
+            if (group != null) {
+
+----------------------------------------
+        if (!buddy.hasRole(AIMBot.ROLE_ADMINISTRATOR)) {
+            super.sendMessage(buddy, "Sorry. This command is for admins only.");
+        } else {
+            String imcommand = st.nextToken();
+            String list = st.nextToken();
+            AIMGroup group = super.bot.getGroup(list);
+            if (group != null) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+24079653
+src/com/levelonelabs/aimbot/modules/TVListingsModule.java 306 315
+src/com/levelonelabs/aimbot/modules/SkiReportModule.java 307 316
+----------------------------------------
+			URLConnection conn = url.openConnection();
+			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			ParserDelegator pd = new ParserDelegator();
+			pd.parse(br, this, true);
+			if (codes.size() == names.size()) {
+				for (int i = 0; i < codes.size(); i++) {
+					result.put(codes.get(i), names.get(i));
+				}
+			}
+		} catch (Exception e) {
+
+----------------------------------------
+            URLConnection conn = url.openConnection();
+            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            ParserDelegator pd = new ParserDelegator();
+            pd.parse(br, this, true);
+            if (codes.size() == names.size()) {
+                for (int i = 0; i < codes.size(); i++) {
+                    result.put(codes.get(i), names.get(i));
+                }
+            }
+        } catch (Exception e) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+24079654
+src/com/levelonelabs/aimbot/modules/BabelModule.java 113 124
+src/com/levelonelabs/aimbot/modules/StockModule.java 153 164
+----------------------------------------
+            URLConnection connection=url.openConnection();
+            connection.setDoOutput(true);
+            connection.connect();
+
+            //read the results page
+            BufferedReader br=new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            String line;
+            StringBuffer sb=new StringBuffer();
+            while((line=br.readLine()) != null) {
+                sb.append(line+"\n");
+            }
+            br.close();
+
+----------------------------------------
+                    URLConnection connection= url.openConnection();
+                    connection.setDoOutput(true);
+                    connection.connect();
+
+                    //read the results page
+                    BufferedReader br= new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                    String line;
+                    StringBuffer sb= new StringBuffer();
+                    while ((line= br.readLine()) != null) {
+                        sb.append(line + "\n");
+                    }
+                    br.close();
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+24079655
+src/com/levelonelabs/aimbot/modules/UserAdminModule.java 167 179
+src/com/levelonelabs/aimbot/modules/UserAdminModule.java 187 199
+----------------------------------------
+            StringTokenizer st = new StringTokenizer(query, " ");
+            if (st.countTokens() < 2) {
+                super.sendMessage(buddy, "ERROR:\n" + help());
+                return;
+            }
+
+            // grab the user to deny
+            String imcommand = st.nextToken();
+            String imcommandTo = st.nextToken();
+            AIMBuddy to = super.getBuddy(imcommandTo);
+            if (to == null) {
+                super.sendMessage(buddy, "User " + imcommandTo + " does not exist in the system.");
+            } else if (buddy.hasRole(AIMBot.ROLE_ADMINISTRATOR)) {
+
+----------------------------------------
+            StringTokenizer st = new StringTokenizer(query, " ");
+            if (st.countTokens() < 2) {
+                super.sendMessage(buddy, "ERROR:\n" + help());
+                return;
+            }
+
+            // grab the user to permit
+            String imcommand = st.nextToken();
+            String imcommandTo = st.nextToken();
+            AIMBuddy to = super.getBuddy(imcommandTo);
+            if (to == null) {
+                super.sendMessage(buddy, "User " + imcommandTo + " does not exist in the system.");
+            } else if (buddy.hasRole(AIMBot.ROLE_ADMINISTRATOR)) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+24079656
+src/com/levelonelabs/aimbot/modules/UserAdminModule.java 167 179
+src/com/levelonelabs/aimbot/modules/UserAdminModule.java 147 159
+----------------------------------------
+            StringTokenizer st = new StringTokenizer(query, " ");
+            if (st.countTokens() < 2) {
+                super.sendMessage(buddy, "ERROR:\n" + help());
+                return;
+            }
+
+            // grab the user to deny
+            String imcommand = st.nextToken();
+            String imcommandTo = st.nextToken();
+            AIMBuddy to = super.getBuddy(imcommandTo);
+            if (to == null) {
+                super.sendMessage(buddy, "User " + imcommandTo + " does not exist in the system.");
+            } else if (buddy.hasRole(AIMBot.ROLE_ADMINISTRATOR)) {
+
+----------------------------------------
+            StringTokenizer st = new StringTokenizer(query, " ");
+            if (st.countTokens() < 2) {
+                super.sendMessage(buddy, "ERROR:\n" + help());
+                return;
+            }
+
+            // grab the user to remove
+            String imcommand = st.nextToken();
+            String imcommandTo = st.nextToken();
+            AIMBuddy to = super.getBuddy(imcommandTo);
+            if (to == null) {
+                super.sendMessage(buddy, "User " + imcommandTo + " does not exist in the system.");
+            } else if (buddy.hasRole(AIMBot.ROLE_ADMINISTRATOR)) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+24079657
+src/com/levelonelabs/aimbot/modules/TVListingsModule.java 137 147
+src/com/levelonelabs/aimbot/modules/WeatherModule.java 122 132
+----------------------------------------
+			StringTokenizer st = new StringTokenizer(query, " ");
+			String zipPref = buddy.getPreference("zipcode");
+			if ((zipPref == null) && (st.countTokens() < 2)) {
+				super.sendMessage(buddy, "ERROR:\n" + help());
+			} else {
+				String imcommand = st.nextToken();
+				String zipcode = "";
+				if (st.hasMoreElements()) {
+					zipcode = ((String) st.nextElement()).trim();
+				} else if (zipPref != null) {
+					zipcode = zipPref;
+
+----------------------------------------
+            StringTokenizer st=new StringTokenizer(query, " ");
+            String zipPref=buddy.getPreference("zipcode");
+            if((zipPref == null) && (st.countTokens() < 2)) {
+                super.sendMessage(buddy, "ERROR:\n"+help());
+            } else {
+                String imcommand=st.nextToken();
+                String zipcode="";
+                if(st.hasMoreElements()) {
+                    zipcode=((String) st.nextElement()).trim();
+                } else if(zipPref != null) {
+                    zipcode=zipPref;
+
+----------------------------------------

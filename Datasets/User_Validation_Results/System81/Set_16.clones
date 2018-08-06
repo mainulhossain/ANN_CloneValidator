@@ -1,0 +1,1662 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+24259619
+src/org/jfm/views/list/briefview/BriefViewListComponent.java 209 219
+src/org/jfm/views/list/detailview/DetailsTable.java 200 209
+----------------------------------------
+                  JFMFile el=(JFMFile)BriefViewListComponent.this.getModel().getElementAt(row);
+                  if(el.isFile() || Options.getDirectoriesSelectedOnAsterisk()){
+                  	el.setMarked(!el.isMarked());
+	                  if(el.isMarked()){
+	                	  markedRows.add(new Integer(row));
+	                  }else{
+	                	  markedRows.remove(new Integer(row));
+	                  }
+                  	
+                  }
+          }
+
+----------------------------------------
+                  JFMFile el=model.getFileAt(row);
+                  if(el.isFile() || Options.getDirectoriesSelectedOnAsterisk()){
+                  	el.setMarked(!el.isMarked());
+	                  if(el.isMarked()){
+	                	  markedRows.add(new Integer(row));
+	                  }else{
+	                	  markedRows.remove(new Integer(row));
+	                  }
+                  }
+          }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+24259620
+src/org/jfm/views/list/briefview/BriefViewListComponent.java 236 245
+src/org/jfm/views/list/detailview/DetailsTable.java 227 236
+----------------------------------------
+                  JFMFile el=(JFMFile)BriefViewListComponent.this.getModel().getElementAt(row);
+                  el.setMarked(!el.isMarked());
+                  if(el.isMarked()){
+                	  markedRows.add(new Integer(row));
+                  }else{
+                	  markedRows.remove(new Integer(row));
+                  }
+                  
+          }
+          if(row<(BriefViewListComponent.this.getModel().getSize()-1)){
+
+----------------------------------------
+                  JFMFile el=model.getFileAt(row);
+                  el.setMarked(!el.isMarked());
+                  if(el.isMarked()){
+                	  markedRows.add(new Integer(row));
+                  }else{
+                	  markedRows.remove(new Integer(row));
+                  }
+                	  
+          }
+          if(row<(model.getRowCount()-1)){
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+24259621
+src/org/jfm/main/Options.java 147 158
+src/org/jfm/main/Options.java 173 184
+----------------------------------------
+  	String colorSpecs=getPreferences().get("JFM.backgroundcolor","255,255,255,255");
+  	StringTokenizer tokenizer=new StringTokenizer(colorSpecs,",");
+	try {
+		red=Integer.parseInt(tokenizer.nextToken());
+		green=Integer.parseInt(tokenizer.nextToken());
+		blue=Integer.parseInt(tokenizer.nextToken());
+		alpha=Integer.parseInt(tokenizer.nextToken());
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+  	return new Color(red,green,blue,alpha);
+  }
+
+----------------------------------------
+  	String colorSpecs=getPreferences().get("JFM.foregroundcolor","0,0,0,255");
+  	StringTokenizer tokenizer=new StringTokenizer(colorSpecs,",");
+	try {
+		red=Integer.parseInt(tokenizer.nextToken());
+		green=Integer.parseInt(tokenizer.nextToken());
+		blue=Integer.parseInt(tokenizer.nextToken());
+		alpha=Integer.parseInt(tokenizer.nextToken());
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+  	return new Color(red,green,blue,alpha);
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+24259623
+src/org/jfm/main/Options.java 173 184
+src/org/jfm/main/Options.java 203 214
+----------------------------------------
+  	String colorSpecs=getPreferences().get("JFM.foregroundcolor","0,0,0,255");
+  	StringTokenizer tokenizer=new StringTokenizer(colorSpecs,",");
+	try {
+		red=Integer.parseInt(tokenizer.nextToken());
+		green=Integer.parseInt(tokenizer.nextToken());
+		blue=Integer.parseInt(tokenizer.nextToken());
+		alpha=Integer.parseInt(tokenizer.nextToken());
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+  	return new Color(red,green,blue,alpha);
+  }
+
+----------------------------------------
+  	String colorSpecs=getPreferences().get("JFM.markedcolor","255,0,0,255");
+  	StringTokenizer tokenizer=new StringTokenizer(colorSpecs,",");
+	try {
+		red=Integer.parseInt(tokenizer.nextToken());
+		green=Integer.parseInt(tokenizer.nextToken());
+		blue=Integer.parseInt(tokenizer.nextToken());
+		alpha=Integer.parseInt(tokenizer.nextToken());
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+  	return new Color(red,green,blue,alpha);
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+24259622
+src/org/jfm/main/Options.java 147 158
+src/org/jfm/main/Options.java 203 214
+----------------------------------------
+  	String colorSpecs=getPreferences().get("JFM.backgroundcolor","255,255,255,255");
+  	StringTokenizer tokenizer=new StringTokenizer(colorSpecs,",");
+	try {
+		red=Integer.parseInt(tokenizer.nextToken());
+		green=Integer.parseInt(tokenizer.nextToken());
+		blue=Integer.parseInt(tokenizer.nextToken());
+		alpha=Integer.parseInt(tokenizer.nextToken());
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+  	return new Color(red,green,blue,alpha);
+  }
+
+----------------------------------------
+  	String colorSpecs=getPreferences().get("JFM.markedcolor","255,0,0,255");
+  	StringTokenizer tokenizer=new StringTokenizer(colorSpecs,",");
+	try {
+		red=Integer.parseInt(tokenizer.nextToken());
+		green=Integer.parseInt(tokenizer.nextToken());
+		blue=Integer.parseInt(tokenizer.nextToken());
+		alpha=Integer.parseInt(tokenizer.nextToken());
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+  	return new Color(red,green,blue,alpha);
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+24259624
+src/org/jfm/main/Options.java 169 184
+src/org/jfm/main/Options.java 199 214
+----------------------------------------
+  	int red=0;
+  	int green=0;
+  	int blue=0;
+  	int alpha=255;
+  	String colorSpecs=getPreferences().get("JFM.foregroundcolor","0,0,0,255");
+  	StringTokenizer tokenizer=new StringTokenizer(colorSpecs,",");
+	try {
+		red=Integer.parseInt(tokenizer.nextToken());
+		green=Integer.parseInt(tokenizer.nextToken());
+		blue=Integer.parseInt(tokenizer.nextToken());
+		alpha=Integer.parseInt(tokenizer.nextToken());
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+  	return new Color(red,green,blue,alpha);
+  }
+
+----------------------------------------
+  	int red=255;
+  	int green=0;
+  	int blue=0;
+  	int alpha=255;
+  	String colorSpecs=getPreferences().get("JFM.markedcolor","255,0,0,255");
+  	StringTokenizer tokenizer=new StringTokenizer(colorSpecs,",");
+	try {
+		red=Integer.parseInt(tokenizer.nextToken());
+		green=Integer.parseInt(tokenizer.nextToken());
+		blue=Integer.parseInt(tokenizer.nextToken());
+		alpha=Integer.parseInt(tokenizer.nextToken());
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+  	return new Color(red,green,blue,alpha);
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+24259625
+src/org/jfm/views/fview/FileViewDialog.java 175 205
+src/org/jfm/views/fview/FileViewDialog.java 211 241
+----------------------------------------
+  private boolean findRegularText(String findText,int position,boolean caseSensitive,boolean wholeWord){
+    int foundTextIndex=-1;
+    if(caseSensitive){
+      foundTextIndex=view.getText().indexOf(findText,position);
+    }else{
+      foundTextIndex=view.getText().toLowerCase().indexOf(findText.toLowerCase(),position);
+    }
+
+    if(foundTextIndex<0){
+      return false;
+    }
+
+    if(findText.equals(view.getText())){
+      return true;
+    }
+
+    if(wholeWord){
+      if((foundTextIndex-1)<0 || (foundTextIndex+findText.length()+1)>view.getText().length()){
+        return false; //return false if we don't have at least a character before or after the word
+      }
+      java.util.Arrays.sort(wordSeparatorChars);
+      if(java.util.Arrays.binarySearch(wordSeparatorChars,view.getText().charAt(foundTextIndex-1))<0){
+        return false;
+      }
+      if(java.util.Arrays.binarySearch(wordSeparatorChars,view.getText().charAt(foundTextIndex+findText.length()+1))<0){
+        return false;
+      }
+    }
+
+    view.setCaretPosition(foundTextIndex);
+    view.moveCaretPosition(foundTextIndex+findText.length());
+
+----------------------------------------
+  private boolean replaceRegularText(String findText,String replaceText,int position,boolean caseSensitive,boolean wholeWord){
+      int foundTextIndex=-1;
+      if(caseSensitive){
+        foundTextIndex=view.getText().indexOf(findText,position);
+      }else{
+        foundTextIndex=view.getText().toLowerCase().indexOf(findText.toLowerCase(),position);
+      }
+
+      if(foundTextIndex<0){
+        return false;
+      }
+
+      if(findText.equals(view.getText())){
+        return true;
+      }
+
+      if(wholeWord){
+        if((foundTextIndex-1)<0 || (foundTextIndex+findText.length()+1)>view.getText().length()){
+          return false; //return false if we don't have at least a character before or after the word
+        }
+        java.util.Arrays.sort(wordSeparatorChars);
+        if(java.util.Arrays.binarySearch(wordSeparatorChars,view.getText().charAt(foundTextIndex-1))<0){
+          return false;
+        }
+        if(java.util.Arrays.binarySearch(wordSeparatorChars,view.getText().charAt(foundTextIndex+findText.length()+1))<0){
+          return false;
+        }
+      }
+
+      view.setCaretPosition(foundTextIndex);
+      view.moveCaretPosition(foundTextIndex+findText.length());
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+24259626
+src/org/jfm/po/CopyAction.java 56 105
+src/org/jfm/po/MoveAction.java 57 111
+----------------------------------------
+    if(filesToBeCopied==null || filesToBeCopied.length==0){
+      return;
+    }
+    
+    final JFMFile destinationDir=Options.getInactivePanel().getCurrentWorkingDirectory();
+
+
+    CopyConfirmDialog d=new CopyConfirmDialog(Options.getMainFrame(),"Copy",true);
+    d.setCopyFrom(filesToBeCopied[0].getPath());
+
+    d.setCopyTo(destinationDir.getPath());
+    d.setLocationRelativeTo(Options.getMainFrame());
+    d.setVisible(true);
+    if(d.isCancelled()) return;
+
+//    Vector f=new Vector();
+//    for(int i=indexes[0];i<=indexes[1];i++){
+//      if(i==0) continue;
+//      f.addElement(filesToBeCopied.elementAt(i));
+//    }
+
+    //filesToBeCopied=f;
+
+    progress=new ProgressActionDialog(Options.getMainFrame(),"Copy",true);
+    progress.setLocationRelativeTo(Options.getMainFrame());
+
+    progress.startAction(new ActionExecuter(){
+      public void start(){
+        try {
+          copyFiles(filesToBeCopied,destinationDir);
+        }
+        catch (ActionCancelledException ex) {
+        	ex.printStackTrace();
+          this.cancel();
+        }
+
+        ChangeDirectoryEvent ev=new ChangeDirectoryEvent();
+        ev.setSource(CopyAction.this);
+        ev.setDirectory(destinationDir);
+        Broadcaster.notifyChangeDirectoryListeners(ev);
+      }
+
+      public void cancel(){
+    	//  System.out.println("cancel was called by:");
+//    	  Thread.dumpStack();
+        cancel=true;
+      }
+    });
+
+  }
+
+----------------------------------------
+    if(filesToBeMoved==null || filesToBeMoved.length==0){
+      return;
+    }
+    
+    final JFMFile destinationDir=Options.getInactivePanel().getCurrentWorkingDirectory();
+
+     /*if(Options.getActivePanel()==Options.LEFT_PANEL){
+      filesToBeMoved=Options.getLeftFiles();
+      indexes=Options.getLeftPanelSelections();
+      toDir=(FileElement)Options.getRightFiles().elementAt(0);
+     }else{
+      filesToBeMoved=Options.getRightFiles();
+      indexes=Options.getRightPanelSelections();
+      toDir=(FileElement)Options.getLeftFiles().elementAt(0);
+     }*/
+
+
+ //   String dir=(String)JOptionPane.showInputDialog(Options.getMainFrame(),"Move selected files to:","Move files",JOptionPane.PLAIN_MESSAGE,null,null,toDir.getPath());
+
+//    if(dir==null) return;
+    CopyConfirmDialog d=new CopyConfirmDialog(Options.getMainFrame(),"Move",true);
+    d.setCopyFrom(filesToBeMoved[0].getPath());
+    d.setMoveOperation();
+    d.setCopyTo(destinationDir.getPath());
+    d.setLocationRelativeTo(Options.getMainFrame());
+    d.setVisible(true);
+    if(d.isCancelled()) return;
+
+
+    progress=new ProgressActionDialog(Options.getMainFrame(),"Move",true);
+    progress.setLocationRelativeTo(Options.getMainFrame());
+
+    progress.startAction(new ActionExecuter(){
+      public void start(){
+        try {
+          moveFiles(filesToBeMoved,destinationDir);
+        }
+        catch (ActionCancelledException ex) {
+        	ex.printStackTrace();
+          this.cancel();
+        }
+
+        ChangeDirectoryEvent ev=new ChangeDirectoryEvent();
+        ev.setSource(MoveAction.this);
+        ev.setDirectory(destinationDir);
+        Broadcaster.notifyChangeDirectoryListeners(ev);
+      }
+
+      public void cancel(){
+    	//  System.out.println("cancel was called by:");
+//    	  Thread.dumpStack();
+        cancel=true;
+      }
+    });
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+24259627
+src/org/jfm/po/CopyAction.java 120 127
+src/org/jfm/po/MoveAction.java 127 134
+----------------------------------------
+  private void copyDir(JFMFile dir,JFMFile dest) throws ActionCancelledException{
+    JFMFile[] f=dir.listFiles();
+    if(f==null) return;
+    //File destFile=new File(toDir.getPath()+(toDir.getPath().endsWith(File.separator)?"":File.separator)+el.getName());
+    for(int i=0;i<f.length;i++){    	      
+      if(f[i].isDirectory()){
+        JFMFile destFile=dest.mkdir(f[i].getName());
+        copyDir(f[i],destFile);
+
+----------------------------------------
+  private void copyDir(JFMFile dir,JFMFile dest) throws ActionCancelledException{
+    JFMFile[] f=dir.listFiles();
+    if(f==null) return;
+    //File destFile=new File(toDir.getPath()+(toDir.getPath().endsWith(File.separator)?"":File.separator)+el.getName());
+    for(int i=0;i<f.length;i++){    	      
+      if(f[i].isDirectory()){
+        JFMFile destFile=dest.mkdir(f[i].getName());
+        copyDir(f[i],destFile);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+24259628
+src/org/jfm/po/CopyAction.java 221 229
+src/org/jfm/po/MoveAction.java 230 238
+----------------------------------------
+  private void copyFiles(JFMFile[] filesToBeCopied,JFMFile destinationDir) throws ActionCancelledException{
+    totalFilesSizes=getFilesSize(filesToBeCopied);
+    if(filesToBeCopied.length==0) progress.dispose();
+    for(int i=0;i<filesToBeCopied.length;i++){
+      JFMFile el=(JFMFile)filesToBeCopied[i];      
+      if(el.isDirectory()){
+    	JFMFile destFile=destinationDir.mkdir(el.getName());
+        //if(!destFile.exists()) destFile.mkdirs();
+        copyDir(el,destFile);
+
+----------------------------------------
+  private void moveFiles(JFMFile[] filesToBeCopied,JFMFile destinationDir) throws ActionCancelledException{
+    totalFilesSizes=getFilesSize(filesToBeCopied);
+    if(filesToBeCopied.length==0) progress.dispose();
+    for(int i=0;i<filesToBeCopied.length;i++){
+      JFMFile el=(JFMFile)filesToBeCopied[i];      
+      if(el.isDirectory()){
+    	JFMFile destFile=destinationDir.mkdir(el.getName());
+        //if(!destFile.exists()) destFile.mkdirs();
+        copyDir(el,destFile);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+24259629
+src/org/jfm/main/SearchDialog.java 97 100
+src/org/jfm/po/copy/CopyConfirmDialog.java 78 81
+----------------------------------------
+    topPanel.add(jLabel1,  new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(5, 14, 6, 11), 11, 0));
+    topPanel.add(startFromField,  new GridBagConstraints(1, 0, 1, 1, 1.0, 0.0
+            ,GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, new Insets(5, 12, 0, 0), 257, 2));
+
+----------------------------------------
+    infPanel.add(jLabel1,   new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(10, 7, 0, 8), 25, 8));
+    infPanel.add(copyFromTextField,     new GridBagConstraints(1, 0, 1, 1, 1.0, 0.0
+            ,GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, new Insets(10, 5, 0, 10), 336, 5));
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+24259630
+src/org/jfm/views/list/briefview/BriefView.java 79 94
+src/org/jfm/views/list/detailview/DetailView.java 98 119
+----------------------------------------
+			}
+		});	
+		Broadcaster.addChangeDirectoryListener(new ChangeDirectoryListener(){
+			public void changeDirectory(ChangeDirectoryEvent e){
+				if(e.getSource().equals(list.getModel())){
+					statusLabel.setText(e.getDirectory().getAbsolutePath());
+					return;
+				}
+
+				if((e.getSource() instanceof javax.swing.Action) && isActive){						
+					model.browseDirectory(getCurrentWorkingDirectory());
+					list.getMarkedFiles().clear();
+				}
+				
+				//if we were the target of a Copyaction or Move action, then we're not active, but we still should update ourselves
+				if(((e.getSource() instanceof CopyAction)  || (e.getSource() instanceof MoveAction)) && !isActive){						
+
+----------------------------------------
+			}
+		});
+
+		Broadcaster.addChangeDirectoryListener(new ChangeDirectoryListener(){
+			public void changeDirectory(ChangeDirectoryEvent e){
+				if(e.getSource().equals(model)){
+					statusLabel.setText(e.getDirectory().getAbsolutePath());
+					return;
+				}
+				/*System.out.println("changedir -----");
+				System.out.println(filesystem);
+				System.out.println(e.getSource());
+				System.out.println((e.getSource() instanceof MkdirAction)+" bool1");
+				System.out.println((isActive)+" bool2");*/
+				if((e.getSource() instanceof javax.swing.Action) && isActive){	
+					final DetailsTableModel model=(DetailsTableModel)table.getModel();
+					model.browseDirectory(getCurrentWorkingDirectory());
+					table.getMarkedFiles().clear();
+				}
+				
+				//if we were the target of a Copyaction or Move action, then we're not active, but we still should update ourselves
+				if(((e.getSource() instanceof CopyAction)  || (e.getSource() instanceof MoveAction)) && !isActive){	
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+24259631
+src/org/jfm/views/list/briefview/BriefView.java 99 107
+src/org/jfm/views/list/detailview/DetailView.java 86 95
+----------------------------------------
+			}
+		});	
+		Broadcaster.addColorChangeListener(new ColorChangeListener(){
+			public void colorChanged(ColorChangeEvent event){
+				if(event.getColorType()==ColorChangeEvent.BACKGROUND){
+					scroll.getViewport().setBackground(Options.getBackgroundColor());
+					list.setBackground(Options.getBackgroundColor());
+				}
+				if(event.getColorType()==ColorChangeEvent.FOREGROUND){
+
+----------------------------------------
+			}
+		});	
+		
+		Broadcaster.addColorChangeListener(new ColorChangeListener(){
+			public void colorChanged(ColorChangeEvent event){
+				if(event.getColorType()==ColorChangeEvent.BACKGROUND){
+					scroll.getViewport().setBackground(Options.getBackgroundColor());
+					table.setBackground(Options.getBackgroundColor());
+				}
+				if(event.getColorType()==ColorChangeEvent.FOREGROUND){
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+24259632
+src/org/jfm/views/list/briefview/BriefView.java 125 161
+src/org/jfm/views/list/detailview/DetailView.java 144 183
+----------------------------------------
+				Broadcaster.notifyChangeDirectoryListeners(event);				
+			}			
+			public void focusLost(FocusEvent e){
+				statusLabel.setForeground(UIManager.getColor("Label.disabledForeground"));
+				selectedRow=list.getSelectedIndex();
+			}
+		});		
+		list.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+			public void valueChanged(ListSelectionEvent e){
+				if(e.getValueIsAdjusting()) return;
+				if(list.getSelectionModel().isSelectionEmpty()) return;				
+				int[] selections=new int[2];
+				int firstIndex = list.getSelectionModel().getMinSelectionIndex();
+				int lastIndex = list.getSelectionModel().getMaxSelectionIndex();				
+				selections[0]=firstIndex;
+				selections[1]=lastIndex;
+			}
+		});		
+		list.addMouseListener(new MouseAdapter(){
+			public void mouseClicked(MouseEvent event){
+				if(SwingUtilities.isRightMouseButton(event)){
+					if(list.locationToIndex(event.getPoint())<0){
+						return;
+					}
+					Options.getPopupMenu().show(list,event.getX(),event.getY());
+				}
+			}
+		});
+		list.setPanelChangeRequestListener(new PanelChangeRequestListener(){
+			public void requestPanelChange() {
+				ChangePanelEvent ev=new ChangePanelEvent();
+				ev.setSource(BriefView.this);
+				Broadcaster.notifyChangePanelListeners(ev);		}
+		});
+		
+		changeDirectory(filesystem.getStartDirectory());
+	}
+
+----------------------------------------
+				table.repaint();
+			}			
+			public void focusLost(FocusEvent e){
+				statusLabel.setForeground(UIManager.getColor("Label.disabledForeground"));
+				selectedRow=table.getSelectedRow();
+				table.repaint();
+				// table.getSelectionModel().clearSelection();
+			}
+		});		
+		table.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+			public void valueChanged(ListSelectionEvent e){
+				if(e.getValueIsAdjusting()) return;
+				if(table.getSelectionModel().isSelectionEmpty()) return;				
+				int[] selections=new int[2];
+				int firstIndex = table.getSelectionModel().getMinSelectionIndex();
+				int lastIndex = table.getSelectionModel().getMaxSelectionIndex();				
+				selections[0]=firstIndex;
+				selections[1]=lastIndex;
+			}
+		});		
+		table.addMouseListener(new MouseAdapter(){
+			public void mouseClicked(MouseEvent event){
+				if(SwingUtilities.isRightMouseButton(event)){
+					if(table.rowAtPoint(event.getPoint())<0){
+						return;
+					}
+					Options.getPopupMenu().show(table,event.getX(),event.getY());
+				}
+			}
+		});
+		table.setPanelChangeRequestListener(new PanelChangeRequestListener(){
+			public void requestPanelChange() {
+				ChangePanelEvent ev=new ChangePanelEvent();
+				ev.setSource(DetailView.this);
+				Broadcaster.notifyChangePanelListeners(ev);		
+			}
+		});
+		
+		changeDirectory(filesystem.getStartDirectory());
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+24259633
+src/org/jfm/views/list/briefview/BriefView.java 191 202
+src/org/jfm/views/list/detailview/DetailView.java 198 209
+----------------------------------------
+	    List<Integer> rows=list.getMarkedFiles();
+	    JFMFile[] files=new JFMFile[rows.size()];   
+	    for (int i = 0; i < rows.size(); i++) {
+	      files[i]=(JFMFile)model.getElementAt(rows.get(i).intValue());
+	    }
+	    if(rows.size()==0)
+	    {
+	    	files=new JFMFile[1];
+	    	files[0]=getSelectedFile();
+	    }
+	    return files;				
+	}
+
+----------------------------------------
+    List<Integer> rows=table.getMarkedFiles();
+    JFMFile[] files=new JFMFile[rows.size()];   
+    for (int i = 0; i < rows.size(); i++) {
+      files[i]=model.getFileAt(rows.get(i).intValue());
+    }
+    if(rows.size()==0)
+    {
+    	files=new JFMFile[1];
+    	files[0]=getSelectedFile();
+    }
+    return files;
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+24259634
+src/org/jfm/main/configurationdialog/panels/ColorConfigurationPanel.java 56 58
+src/org/jfm/main/configurationdialog/panels/FontConfigurationPanel.java 53 55
+----------------------------------------
+		panel.add(markedColorPanel,new GridBagConstraints(0,2,1,1,1,0,GridBagConstraints.CENTER,GridBagConstraints.HORIZONTAL,new Insets(5,0,0,0),0,0));
+		panel.add(new JPanel(),new GridBagConstraints(0,3,1,1,1,1,GridBagConstraints.CENTER,GridBagConstraints.BOTH,new Insets(0,0,0,0),0,0));		
+	}
+
+----------------------------------------
+		panel.add(fileListFontPanel,new GridBagConstraints(0,0,1,1,1,0,GridBagConstraints.CENTER,GridBagConstraints.HORIZONTAL,new Insets(10,0,10,0),0,0));
+		panel.add(new JPanel(),new GridBagConstraints(0,1,1,1,1,1,GridBagConstraints.CENTER,GridBagConstraints.BOTH,new Insets(0,0,0,0),0,0));
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+24259635
+src/org/jfm/main/configurationdialog/panels/ColorConfigurationPanel.java 56 58
+src/org/jfm/main/configurationdialog/panels/HelpConfigurationPanel.java 43 45
+----------------------------------------
+		panel.add(markedColorPanel,new GridBagConstraints(0,2,1,1,1,0,GridBagConstraints.CENTER,GridBagConstraints.HORIZONTAL,new Insets(5,0,0,0),0,0));
+		panel.add(new JPanel(),new GridBagConstraints(0,3,1,1,1,1,GridBagConstraints.CENTER,GridBagConstraints.BOTH,new Insets(0,0,0,0),0,0));		
+	}
+
+----------------------------------------
+		panel.add(helpURLPanel,new GridBagConstraints(0,0,1,1,1,0,GridBagConstraints.CENTER,GridBagConstraints.HORIZONTAL,new Insets(10,0,10,0),0,0));
+		panel.add(new JPanel(),new GridBagConstraints(0,1,1,1,1,1,GridBagConstraints.CENTER,GridBagConstraints.BOTH,new Insets(0,0,0,0),0,0));
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+24259636
+src/org/jfm/main/configurationdialog/panels/FontConfigurationPanel.java 53 55
+src/org/jfm/main/configurationdialog/panels/HelpConfigurationPanel.java 43 45
+----------------------------------------
+		panel.add(fileListFontPanel,new GridBagConstraints(0,0,1,1,1,0,GridBagConstraints.CENTER,GridBagConstraints.HORIZONTAL,new Insets(10,0,10,0),0,0));
+		panel.add(new JPanel(),new GridBagConstraints(0,1,1,1,1,1,GridBagConstraints.CENTER,GridBagConstraints.BOTH,new Insets(0,0,0,0),0,0));
+	}
+
+----------------------------------------
+		panel.add(helpURLPanel,new GridBagConstraints(0,0,1,1,1,0,GridBagConstraints.CENTER,GridBagConstraints.HORIZONTAL,new Insets(10,0,10,0),0,0));
+		panel.add(new JPanel(),new GridBagConstraints(0,1,1,1,1,1,GridBagConstraints.CENTER,GridBagConstraints.BOTH,new Insets(0,0,0,0),0,0));
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+24259637
+src/org/jfm/po/copy/CopyConfirmDialog.java 58 69
+src/org/jfm/views/FontDialog.java 79 90
+----------------------------------------
+    okButton.setText("OK");
+    okButton.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        okButton_actionPerformed(e);
+      }
+    });
+    cancelButton.setText("Cancel");
+    cancelButton.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        cancelButton_actionPerformed(e);
+      }
+    });
+
+----------------------------------------
+    sizeField.setValue(new Integer(10));
+    okButton.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        okButton_actionPerformed(e);
+      }
+    });
+    cancelButton.setText("Cancel");
+    cancelButton.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        cancelButton_actionPerformed(e);
+      }
+    });
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+24259638
+src/org/jfm/po/CopyAction.java 135 156
+src/org/jfm/po/MoveAction.java 144 165
+----------------------------------------
+  private void copyFile(JFMFile fin,JFMFile fout) throws ActionCancelledException {
+    if(fout.exists() && !overwriteAll && !skipAll){
+
+      java.text.SimpleDateFormat format=new java.text.SimpleDateFormat("EEE, MMM d, yyyy 'at' hh:mm:ss");
+
+      String message="Target file "+fout.getPath()+"  already exists."+System.getProperty("line.separator")+System.getProperty("line.separator")+
+                     "Source last modified date: "+format.format(new java.util.Date(fin.lastModified()))+System.getProperty("line.separator")+
+                     "Target last modified date: "+format.format(new java.util.Date(fout.lastModified()))+System.getProperty("line.separator")+System.getProperty("line.separator")+
+                     "What should I do?";
+      String[] buttons=new String[]{"Overwrite","Overwrite all","Skip","Skip all","Cancel"};
+
+      int result=JOptionPane.showOptionDialog(progress,message,"File exists",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE,null,buttons,buttons[2]);
+
+      switch (result){
+        case 0:
+          break;
+        case 1:
+          overwriteAll=true;
+          break;
+        case 2:
+          totalBytesWritten+=fin.length();          
+          int t_percent=totalFilesSizes!=0?(int)((totalBytesWritten*100)/totalFilesSizes):0;
+
+----------------------------------------
+  private void copyFile(JFMFile fin,JFMFile fout) throws ActionCancelledException {
+    if(fout.exists() && !overwriteAll && !skipAll){
+
+      java.text.SimpleDateFormat format=new java.text.SimpleDateFormat("EEE, MMM d, yyyy 'at' hh:mm:ss");
+
+      String message="Target file "+fout.getPath()+"  already exists."+System.getProperty("line.separator")+System.getProperty("line.separator")+
+                     "Source last modified date: "+format.format(new java.util.Date(fin.lastModified()))+System.getProperty("line.separator")+
+                     "Target last modified date: "+format.format(new java.util.Date(fout.lastModified()))+System.getProperty("line.separator")+System.getProperty("line.separator")+
+                     "What should I do?";
+      String[] buttons=new String[]{"Overwrite","Overwrite all","Skip","Skip all","Cancel"};
+
+      int result=JOptionPane.showOptionDialog(progress,message,"File exists",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE,null,buttons,buttons[2]);
+
+      switch (result){
+        case 0:
+          break;
+        case 1:
+          overwriteAll=true;
+          break;
+        case 2:
+          totalBytesWritten+=fin.length();          
+          int t_percent=totalFilesSizes!=0?(int)((totalBytesWritten*100)/totalFilesSizes):0;
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+24259640
+src/org/jfm/po/MoveAction.java 144 165
+src/org/jfm/po/copy/CopyProgressDialog.java 89 108
+----------------------------------------
+  private void copyFile(JFMFile fin,JFMFile fout) throws ActionCancelledException {
+    if(fout.exists() && !overwriteAll && !skipAll){
+
+      java.text.SimpleDateFormat format=new java.text.SimpleDateFormat("EEE, MMM d, yyyy 'at' hh:mm:ss");
+
+      String message="Target file "+fout.getPath()+"  already exists."+System.getProperty("line.separator")+System.getProperty("line.separator")+
+                     "Source last modified date: "+format.format(new java.util.Date(fin.lastModified()))+System.getProperty("line.separator")+
+                     "Target last modified date: "+format.format(new java.util.Date(fout.lastModified()))+System.getProperty("line.separator")+System.getProperty("line.separator")+
+                     "What should I do?";
+      String[] buttons=new String[]{"Overwrite","Overwrite all","Skip","Skip all","Cancel"};
+
+      int result=JOptionPane.showOptionDialog(progress,message,"File exists",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE,null,buttons,buttons[2]);
+
+      switch (result){
+        case 0:
+          break;
+        case 1:
+          overwriteAll=true;
+          break;
+        case 2:
+          totalBytesWritten+=fin.length();          
+          int t_percent=totalFilesSizes!=0?(int)((totalBytesWritten*100)/totalFilesSizes):0;
+
+----------------------------------------
+  private void copyFile(JFMFile fin,JFMFile fout) throws CopyCancelledException {
+    if(fout.exists() && !overwriteAll && !skipAll){
+
+      java.text.SimpleDateFormat format=new java.text.SimpleDateFormat("EEE, MMM d, yyyy 'at' hh:mm:ss");
+
+      String message="Target file "+fout.getPath()+"  already exists."+System.getProperty("line.separator")+System.getProperty("line.separator")+
+                     "Source last modified date: "+format.format(new java.util.Date(fin.lastModified()))+System.getProperty("line.separator")+
+                     "Target last modified date: "+format.format(new java.util.Date(fout.lastModified()))+System.getProperty("line.separator")+System.getProperty("line.separator")+
+                     "What should I do?";
+      String[] buttons=new String[]{"Overwrite","Overwrite all","Skip","Skip all","Append"};
+      int result=JOptionPane.showOptionDialog(this,message,"File exists",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE,null,buttons,buttons[2]);
+      switch (result){
+        case 0:
+          break;
+        case 1:
+          overwriteAll=true;
+          break;
+        case 2:
+          totalBytesWritten+=fin.length();
+          int t_percent=(int)((totalBytesWritten*100)/totalFilesSizes);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+24259639
+src/org/jfm/po/CopyAction.java 135 156
+src/org/jfm/po/copy/CopyProgressDialog.java 89 108
+----------------------------------------
+  private void copyFile(JFMFile fin,JFMFile fout) throws ActionCancelledException {
+    if(fout.exists() && !overwriteAll && !skipAll){
+
+      java.text.SimpleDateFormat format=new java.text.SimpleDateFormat("EEE, MMM d, yyyy 'at' hh:mm:ss");
+
+      String message="Target file "+fout.getPath()+"  already exists."+System.getProperty("line.separator")+System.getProperty("line.separator")+
+                     "Source last modified date: "+format.format(new java.util.Date(fin.lastModified()))+System.getProperty("line.separator")+
+                     "Target last modified date: "+format.format(new java.util.Date(fout.lastModified()))+System.getProperty("line.separator")+System.getProperty("line.separator")+
+                     "What should I do?";
+      String[] buttons=new String[]{"Overwrite","Overwrite all","Skip","Skip all","Cancel"};
+
+      int result=JOptionPane.showOptionDialog(progress,message,"File exists",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE,null,buttons,buttons[2]);
+
+      switch (result){
+        case 0:
+          break;
+        case 1:
+          overwriteAll=true;
+          break;
+        case 2:
+          totalBytesWritten+=fin.length();          
+          int t_percent=totalFilesSizes!=0?(int)((totalBytesWritten*100)/totalFilesSizes):0;
+
+----------------------------------------
+  private void copyFile(JFMFile fin,JFMFile fout) throws CopyCancelledException {
+    if(fout.exists() && !overwriteAll && !skipAll){
+
+      java.text.SimpleDateFormat format=new java.text.SimpleDateFormat("EEE, MMM d, yyyy 'at' hh:mm:ss");
+
+      String message="Target file "+fout.getPath()+"  already exists."+System.getProperty("line.separator")+System.getProperty("line.separator")+
+                     "Source last modified date: "+format.format(new java.util.Date(fin.lastModified()))+System.getProperty("line.separator")+
+                     "Target last modified date: "+format.format(new java.util.Date(fout.lastModified()))+System.getProperty("line.separator")+System.getProperty("line.separator")+
+                     "What should I do?";
+      String[] buttons=new String[]{"Overwrite","Overwrite all","Skip","Skip all","Append"};
+      int result=JOptionPane.showOptionDialog(this,message,"File exists",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE,null,buttons,buttons[2]);
+      switch (result){
+        case 0:
+          break;
+        case 1:
+          overwriteAll=true;
+          break;
+        case 2:
+          totalBytesWritten+=fin.length();
+          int t_percent=(int)((totalBytesWritten*100)/totalFilesSizes);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+24259641
+src/org/jfm/po/CopyAction.java 175 197
+src/org/jfm/po/MoveAction.java 184 206
+----------------------------------------
+      java.io.OutputStream out=null;
+      try{
+        in=fin.getInputStream();
+        //WAS new FileOutputStream(fout.getPath(),append);
+        out=fout.getOutputStream();
+        progress.setFileProgresssValue(0);
+        curentlyCopiedFile=fout;
+        byte[] data=new byte[1024];
+        int read=0;
+        long bytesWrote=0;
+        long f_length=fin.length();
+
+        /**@todo Maybe async IO would be nice here**/
+        while((read=in.read(data))>=0){
+          if(cancel){
+            throw new ActionCancelledException();
+          }
+
+          out.write(data,0,read);
+          bytesWrote+=read;
+          totalBytesWritten+=read;
+          int f_percent=(int)((bytesWrote*100)/f_length);
+          int t_percent=(int)((totalBytesWritten*100)/totalFilesSizes);
+
+----------------------------------------
+      java.io.OutputStream out=null;
+      try{
+        in=fin.getInputStream();
+        //WAS new FileOutputStream(fout.getPath(),append);
+        out=fout.getOutputStream();
+        progress.setFileProgresssValue(0);
+        curentlyCopiedFile=fout;
+        byte[] data=new byte[1024];
+        int read=0;
+        long bytesWrote=0;
+        long f_length=fin.length();
+
+        /**@todo Maybe async IO would be nice here**/
+        while((read=in.read(data))>=0){
+          if(cancel){
+            throw new ActionCancelledException();
+          }
+
+          out.write(data,0,read);
+          bytesWrote+=read;
+          totalBytesWritten+=read;
+          int f_percent=(int)((bytesWrote*100)/f_length);
+          int t_percent=(int)((totalBytesWritten*100)/totalFilesSizes);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+24259642
+src/org/jfm/po/CopyAction.java 175 197
+src/org/jfm/po/copy/CopyProgressDialog.java 127 146
+----------------------------------------
+      java.io.OutputStream out=null;
+      try{
+        in=fin.getInputStream();
+        //WAS new FileOutputStream(fout.getPath(),append);
+        out=fout.getOutputStream();
+        progress.setFileProgresssValue(0);
+        curentlyCopiedFile=fout;
+        byte[] data=new byte[1024];
+        int read=0;
+        long bytesWrote=0;
+        long f_length=fin.length();
+
+        /**@todo Maybe async IO would be nice here**/
+        while((read=in.read(data))>=0){
+          if(cancel){
+            throw new ActionCancelledException();
+          }
+
+          out.write(data,0,read);
+          bytesWrote+=read;
+          totalBytesWritten+=read;
+          int f_percent=(int)((bytesWrote*100)/f_length);
+          int t_percent=(int)((totalBytesWritten*100)/totalFilesSizes);
+
+----------------------------------------
+      OutputStream out=null;
+      try{
+        in=fin.getInputStream();
+        out=fout.getOutputStream();
+        fileCopyProgressBar.setValue(0);
+        byte[] data=new byte[1024];
+        int read=0;
+        long bytesWrote=0;
+        long f_length=fin.length();
+
+        while((read=in.read(data))>=0){
+          if(cancel){
+            throw new CopyCancelledException();
+          }
+
+          out.write(data,0,read);
+          bytesWrote+=read;
+          totalBytesWritten+=read;
+          int f_percent=(int)((bytesWrote*100)/f_length);
+          int t_percent=(int)((totalBytesWritten*100)/totalFilesSizes);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+24259643
+src/org/jfm/po/MoveAction.java 184 206
+src/org/jfm/po/copy/CopyProgressDialog.java 127 146
+----------------------------------------
+      java.io.OutputStream out=null;
+      try{
+        in=fin.getInputStream();
+        //WAS new FileOutputStream(fout.getPath(),append);
+        out=fout.getOutputStream();
+        progress.setFileProgresssValue(0);
+        curentlyCopiedFile=fout;
+        byte[] data=new byte[1024];
+        int read=0;
+        long bytesWrote=0;
+        long f_length=fin.length();
+
+        /**@todo Maybe async IO would be nice here**/
+        while((read=in.read(data))>=0){
+          if(cancel){
+            throw new ActionCancelledException();
+          }
+
+          out.write(data,0,read);
+          bytesWrote+=read;
+          totalBytesWritten+=read;
+          int f_percent=(int)((bytesWrote*100)/f_length);
+          int t_percent=(int)((totalBytesWritten*100)/totalFilesSizes);
+
+----------------------------------------
+      OutputStream out=null;
+      try{
+        in=fin.getInputStream();
+        out=fout.getOutputStream();
+        fileCopyProgressBar.setValue(0);
+        byte[] data=new byte[1024];
+        int read=0;
+        long bytesWrote=0;
+        long f_length=fin.length();
+
+        while((read=in.read(data))>=0){
+          if(cancel){
+            throw new CopyCancelledException();
+          }
+
+          out.write(data,0,read);
+          bytesWrote+=read;
+          totalBytesWritten+=read;
+          int f_percent=(int)((bytesWrote*100)/f_length);
+          int t_percent=(int)((totalBytesWritten*100)/totalFilesSizes);
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27145454
+src/org/jfm/po/ButtonsPanel.java 28 36
+src/org/jfm/po/copy/CopyProgressDialog.java 64 68
+----------------------------------------
+  public ButtonsPanel(Vector buttons) {
+    try {
+      jbInit();
+      setButtons(buttons);
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+      public void run(){
+        try{
+          copyFiles();
+        }catch(CopyCancelledException ex){}
+      }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27145445
+src/org/jfm/po/copy/CopyConfirmDialog.java 34 43
+src/org/jfm/po/copy/CopyProgressDialog.java 64 68
+----------------------------------------
+  public CopyConfirmDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+      public void run(){
+        try{
+          copyFiles();
+        }catch(CopyCancelledException ex){}
+      }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27145450
+src/org/jfm/views/list/ListView.java 32 40
+src/org/jfm/po/copy/CopyProgressDialog.java 64 68
+----------------------------------------
+  public ListView(String fs) {
+  	super(fs);
+    try {
+      jbInit();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }  	
+  }
+
+----------------------------------------
+      public void run(){
+        try{
+          copyFiles();
+        }catch(CopyCancelledException ex){}
+      }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27145473
+src/org/jfm/main/MainPanel.java 30 37
+src/org/jfm/po/copy/CopyProgressDialog.java 64 68
+----------------------------------------
+  public MainPanel() {
+    try {
+      jbInit();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+      public void run(){
+        try{
+          copyFiles();
+        }catch(CopyCancelledException ex){}
+      }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27145442
+src/org/jfm/main/SearchDialog.java 42 51
+src/org/jfm/po/copy/CopyProgressDialog.java 64 68
+----------------------------------------
+  public SearchDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+      public void run(){
+        try{
+          copyFiles();
+        }catch(CopyCancelledException ex){}
+      }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27145455
+src/org/jfm/views/fview/FindTextDialog.java 38 47
+src/org/jfm/po/copy/CopyProgressDialog.java 64 68
+----------------------------------------
+  public FindTextDialog(Frame owner, String title, boolean modal) {
+    super(owner, title, modal);
+    try {
+      jbInit();
+      //pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+      public void run(){
+        try{
+          copyFiles();
+        }catch(CopyCancelledException ex){}
+      }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27145447
+src/org/jfm/po/FilePropertiesDialog.java 36 45
+src/org/jfm/po/copy/CopyProgressDialog.java 64 68
+----------------------------------------
+  public FilePropertiesDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+      public void run(){
+        try{
+          copyFiles();
+        }catch(CopyCancelledException ex){}
+      }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27145443
+src/org/jfm/po/copy/CopyProgressDialog.java 179 188
+src/org/jfm/po/copy/CopyProgressDialog.java 64 68
+----------------------------------------
+  public CopyProgressDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+      public void run(){
+        try{
+          copyFiles();
+        }catch(CopyCancelledException ex){}
+      }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27145451
+src/org/jfm/views/FontDialog.java 46 55
+src/org/jfm/po/copy/CopyProgressDialog.java 64 68
+----------------------------------------
+  public FontDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+//      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+      public void run(){
+        try{
+          copyFiles();
+        }catch(CopyCancelledException ex){}
+      }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27145456
+src/org/jfm/views/fview/FileViewDialog.java 37 46
+src/org/jfm/po/copy/CopyProgressDialog.java 64 68
+----------------------------------------
+  public FileViewDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+    //  pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+      public void run(){
+        try{
+          copyFiles();
+        }catch(CopyCancelledException ex){}
+      }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27145464
+src/org/jfm/filesystems/local/JFMLocalFile.java 170 176
+src/org/jfm/po/copy/CopyProgressDialog.java 64 68
+----------------------------------------
+	public String getCanonicalPath() throws FSException {
+		try{
+			return theFile.getCanonicalPath();
+		}catch(IOException ex){
+			throw new FSException(ex.getMessage());
+		}
+	}
+
+----------------------------------------
+      public void run(){
+        try{
+          copyFiles();
+        }catch(CopyCancelledException ex){}
+      }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27145452
+src/org/jfm/views/fview/FileViewPanel.java 76 84
+src/org/jfm/po/copy/CopyProgressDialog.java 64 68
+----------------------------------------
+  public FileViewPanel(String fileSystem) {
+	 super(fileSystem);
+    try {
+      jbInit();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+      public void run(){
+        try{
+          copyFiles();
+        }catch(CopyCancelledException ex){}
+      }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27145457
+src/org/jfm/main/MainFrame.java 60 68
+src/org/jfm/po/copy/CopyProgressDialog.java 64 68
+----------------------------------------
+  public MainFrame() {
+    enableEvents(AWTEvent.WINDOW_EVENT_MASK);
+    try {
+      jbInit();
+    }
+    catch(Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+----------------------------------------
+      public void run(){
+        try{
+          copyFiles();
+        }catch(CopyCancelledException ex){}
+      }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27145470
+src/org/jfm/po/copy/CopyProgressDialog.java 154 160
+src/org/jfm/po/copy/CopyProgressDialog.java 64 68
+----------------------------------------
+      }finally{
+        try {
+          in.close();
+          out.close();
+        }
+        catch (Exception ignored) {}
+      }
+
+----------------------------------------
+      public void run(){
+        try{
+          copyFiles();
+        }catch(CopyCancelledException ex){}
+      }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27145448
+src/org/jfm/views/list/detailview/DetailView.java 54 62
+src/org/jfm/po/copy/CopyProgressDialog.java 64 68
+----------------------------------------
+	public DetailView(String fs) {
+		super(fs);
+	    try {
+	      init();
+	    }
+	    catch(Exception ex) {
+	      ex.printStackTrace();
+	    }	    
+	}
+
+----------------------------------------
+      public void run(){
+        try{
+          copyFiles();
+        }catch(CopyCancelledException ex){}
+      }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27145453
+src/org/jfm/views/list/briefview/BriefView.java 48 56
+src/org/jfm/po/copy/CopyProgressDialog.java 64 68
+----------------------------------------
+	public BriefView(String fs){
+		super(fs);
+	    try {
+	      init();
+	    }
+	    catch(Exception ex) {
+	      ex.printStackTrace();
+	    }	    
+	}
+
+----------------------------------------
+      public void run(){
+        try{
+          copyFiles();
+        }catch(CopyCancelledException ex){}
+      }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27145458
+src/org/jfm/filesystems/local/JFMLocalFilesystem.java 51 57
+src/org/jfm/po/copy/CopyProgressDialog.java 64 68
+----------------------------------------
+		for(int i=0;i<files.length;i++){
+			try{
+				jfmFiles[i]=new JFMLocalFile(files[i].getAbsolutePath());
+			}catch(Exception ignored){
+				ignored.printStackTrace();
+			}
+		}
+
+----------------------------------------
+      public void run(){
+        try{
+          copyFiles();
+        }catch(CopyCancelledException ex){}
+      }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27145461
+src/org/jfm/main/Options.java 108 114
+src/org/jfm/po/copy/CopyProgressDialog.java 64 68
+----------------------------------------
+  public static void savePreferences(){
+  	try {
+		getPreferences().flush();
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+  }
+
+----------------------------------------
+      public void run(){
+        try{
+          copyFiles();
+        }catch(CopyCancelledException ex){}
+      }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27145476
+src/org/jfm/views/list/detailview/DetailView.java 138 143
+src/org/jfm/po/copy/CopyProgressDialog.java 64 68
+----------------------------------------
+				if(selectedRow>=0 && selectedRow<model.getRowCount()){
+					try {
+						table.getSelectionModel().setSelectionInterval(selectedRow,selectedRow);
+					}
+					catch (Exception ignored) { }
+				}
+
+----------------------------------------
+      public void run(){
+        try{
+          copyFiles();
+        }catch(CopyCancelledException ex){}
+      }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27145446
+src/org/jfm/po/ProgressActionDialog.java 57 66
+src/org/jfm/po/copy/CopyProgressDialog.java 64 68
+----------------------------------------
+  public ProgressActionDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+      public void run(){
+        try{
+          copyFiles();
+        }catch(CopyCancelledException ex){}
+      }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27145449
+src/org/jfm/po/CommandOutputViewDialog.java 23 32
+src/org/jfm/po/copy/CopyProgressDialog.java 64 68
+----------------------------------------
+  public CommandOutputViewDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+      //pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+      public void run(){
+        try{
+          copyFiles();
+        }catch(CopyCancelledException ex){}
+      }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27145467
+src/org/jfm/filesystems/local/JFMLocalFile.java 181 187
+src/org/jfm/po/copy/CopyProgressDialog.java 64 68
+----------------------------------------
+	public JFMFile getCanonicalFile() throws FSException {
+		try{
+			return new JFMLocalFile(theFile.getCanonicalPath());
+		}catch(IOException ex){
+			throw new FSException(ex.getMessage());
+		}
+	}
+
+----------------------------------------
+      public void run(){
+        try{
+          copyFiles();
+        }catch(CopyCancelledException ex){}
+      }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+28821011
+src/org/jfm/main/Options.java 99 106
+src/org/jfm/po/copy/CopyProgressDialog.java 64 68
+----------------------------------------
+  public static Preferences getPreferences(){
+  	try {
+	  	preferences.sync();	
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+  	return preferences;
+  }
+
+----------------------------------------
+      public void run(){
+        try{
+          copyFiles();
+        }catch(CopyCancelledException ex){}
+      }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27145444
+src/org/jfm/main/MainPanel.java 56 65
+src/org/jfm/main/MainPanel.java 65 74
+----------------------------------------
+       	 	if(Options.getActivePanel().equals(leftPanel)){
+       	 		if(ev.getViewRep()!=null){
+       	 			Options.getPreferences().put(Options.JFM_LEFTVIEWPANEL_PREF,ev.getViewRep().getClassName());
+       	 		}
+       	 		if(ev.getFilesystemClassName()!=null){
+       	 			Options.getPreferences().put(Options.JFM_LEFTVIEWPANEL_FILESYSTEM_PREF,ev.getFilesystemClassName());
+       	 		}
+       	 		leftPanel=createLeftView();
+       	 		split.setLeftComponent(leftPanel);
+       	 	}else{
+
+----------------------------------------
+       	 	}else{
+       	 		if(ev.getViewRep()!=null){
+       	 			Options.getPreferences().put(Options.JFM_RIGHTVIEWPANEL_PREF,ev.getViewRep().getClassName());
+       	 		}
+       	 		if(ev.getFilesystemClassName()!=null){
+       	 			Options.getPreferences().put(Options.JFM_RIGHTVIEWPANEL_FILESYSTEM_PREF,ev.getFilesystemClassName());
+       	 		}
+       	 		rightPanel=createRightView();
+       	 		split.setRightComponent(rightPanel);
+       	 	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+27145465
+src/org/jfm/filesystems/local/JFMLocalFile.java 170 176
+src/org/jfm/po/CommandOutputViewDialog.java 73 77
+----------------------------------------
+	public String getCanonicalPath() throws FSException {
+		try{
+			return theFile.getCanonicalPath();
+		}catch(IOException ex){
+			throw new FSException(ex.getMessage());
+		}
+	}
+
+----------------------------------------
+     public void keyTyped(KeyEvent e) {
+      try{
+        process.getOutputStream().write(e.getKeyChar());
+      }catch(Exception ex){}
+     }
+
+----------------------------------------

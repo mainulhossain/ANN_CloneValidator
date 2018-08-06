@@ -1,0 +1,1071 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+28730868
+src/net/azib/ipscan/gui/actions/StartStopScanningAction.java 204 213
+src/net/azib/ipscan/core/ScannerDispatcherThread.java 160 171
+----------------------------------------
+		if (guiConfig.displayMethod == DisplayMethod.ALL || state == ScanningState.RESTARTING) {
+			return new ScanningResultCallback() {
+				public void prepareForResults(ScanningResult result) {
+					resultTable.addOrUpdateResultRow(result);
+				}
+				public void consumeResults(ScanningResult result) {
+					resultTable.addOrUpdateResultRow(result);
+				}
+			};
+		}
+
+----------------------------------------
+	public Thread newThread(Runnable r) {
+		// create IP threads in the specified group
+		return new Thread(threadGroup, r) {
+      // IP threads must be daemons, not preventing the JVM to terminate
+      { setDaemon(true); }
+      @Override
+      public void interrupt() {
+        scanner.interrupt(this);
+        super.interrupt();
+      }
+    };
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+28730869
+src/net/azib/ipscan/gui/actions/StartStopScanningAction.java 224 233
+src/net/azib/ipscan/gui/actions/ScanMenuActions.java 183 189
+----------------------------------------
+		if (guiConfig.displayMethod == DisplayMethod.PORTS) {
+			return new ScanningResultCallback() {
+				public void prepareForResults(ScanningResult result) {
+				}
+				public void consumeResults(ScanningResult result) {
+					if (result.getType() == ResultType.WITH_PORTS)
+						resultTable.addOrUpdateResultRow(result);
+				}
+			};
+		}
+
+----------------------------------------
+			if (isSelection) {
+				filter = new ScanningResultFilter() {
+					public boolean apply(int index, ScanningResult result) {
+						return resultTable.isSelected(index);
+					}
+				};
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+28730870
+src/net/azib/ipscan/util/GoogleAnalytics.java 24 48
+src/net/azib/ipscan/util/GoogleAnalytics.java 25 44
+----------------------------------------
+	public void report(String type, String content) {
+		try {
+			Config config = Config.getConfig();
+			URL url = new URL("https://www.google-analytics.com/collect");
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			conn.setRequestMethod("POST");
+			conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+			conn.setDoOutput(true);
+			OutputStream os = conn.getOutputStream();
+			String contentParam = "exception".equals(type) ? "exd" : "cd";
+			String payload = "v=1&t=" + type + "&tid=" + Version.GA_ID + "&cid=" + config.getUUID() + "&an=ipscan&av=" + Version.getVersion() +
+					         "&" + contentParam + "=" + URLEncoder.encode(content, "UTF-8") +
+					         "&ul=" + config.getLocale() +
+							 "&vp=" + config.forGUI().mainWindowSize.x + "x" + config.forGUI().mainWindowSize.y +
+							 "&cd1=" + URLEncoder.encode(System.getProperty("os.name") + " " + System.getProperty("os.version") + " " + System.getProperty("os.arch"), "UTF-8") +
+							 "&cd2=" + URLEncoder.encode("Java " + System.getProperty("java.version"), "UTF-8");
+			os.write(payload.getBytes());
+			os.close();
+			conn.getContent();
+			conn.disconnect();
+		}
+		catch (IOException e) {
+			Logger.getLogger(getClass().getName()).log(WARNING, "Failed to report", e);
+		}
+	}
+
+----------------------------------------
+		try {
+			Config config = Config.getConfig();
+			URL url = new URL("https://www.google-analytics.com/collect");
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			conn.setRequestMethod("POST");
+			conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+			conn.setDoOutput(true);
+			OutputStream os = conn.getOutputStream();
+			String contentParam = "exception".equals(type) ? "exd" : "cd";
+			String payload = "v=1&t=" + type + "&tid=" + Version.GA_ID + "&cid=" + config.getUUID() + "&an=ipscan&av=" + Version.getVersion() +
+					         "&" + contentParam + "=" + URLEncoder.encode(content, "UTF-8") +
+					         "&ul=" + config.getLocale() +
+							 "&vp=" + config.forGUI().mainWindowSize.x + "x" + config.forGUI().mainWindowSize.y +
+							 "&cd1=" + URLEncoder.encode(System.getProperty("os.name") + " " + System.getProperty("os.version") + " " + System.getProperty("os.arch"), "UTF-8") +
+							 "&cd2=" + URLEncoder.encode("Java " + System.getProperty("java.version"), "UTF-8");
+			os.write(payload.getBytes());
+			os.close();
+			conn.getContent();
+			conn.disconnect();
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+28730871
+src/net/azib/ipscan/util/GoogleAnalytics.java 60 66
+src/net/azib/ipscan/gui/actions/ScanMenuActions.java 233 241
+----------------------------------------
+	public void asyncReport(final String screen) {
+		new Thread() {
+			@Override public void run() {
+				report(screen);
+			}
+		}.start();
+	}
+
+----------------------------------------
+		public void handleEvent(Event event) {
+			// start another instance in a new thread
+			// doesn't currently work...
+			new Thread("main") {
+				public void run() {					
+					Main.main();
+				}
+			}.start();
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+28730872
+src/net/azib/ipscan/fetchers/UnixMACFetcher.java 26 50
+src/net/azib/ipscan/gui/actions/ScanMenuActions.java 83 106
+----------------------------------------
+		try {
+			// highly inefficient implementation, there must be a better way (using JNA?)
+			Process process = Runtime.getRuntime().exec(arp + ip);
+			reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+			String line;
+			while ((line = reader.readLine()) != null) {
+				if (line.contains(ip))
+					return extractMAC(line);
+			}
+
+			// see if it is a local address
+			Enumeration<NetworkInterface> ifs = NetworkInterface.getNetworkInterfaces();
+			while (ifs.hasMoreElements()) {
+				NetworkInterface netif = ifs.nextElement();
+				if (netif.isUp() && !netif.isVirtual() && !netif.isLoopback()) {
+					Enumeration<InetAddress> addrs = netif.getInetAddresses();
+					while (addrs.hasMoreElements()) {
+						InetAddress addr = addrs.nextElement();
+						if (addr.equals(address))
+							return bytesToMAC(netif.getHardwareAddress());
+					}
+				}
+			}
+			return null;
+		}
+
+----------------------------------------
+		private void loadResultsFrom(String fileName) {
+			try {
+				feederRegistry.select("feeder.range");
+				scanningResults.initNewScan(feederRegistry.current().createFeeder());
+
+				List<ScanningResult> results = txtExporter.importResults(fileName, feederRegistry.current());
+				resultTable.clearAll();
+				for (ScanningResult result : results) {
+					resultTable.addOrUpdateResultRow(result);
+				}
+
+				if (!results.isEmpty()) {
+					String lastLoadedIP = results.get(results.size()-1).getAddress().getHostAddress();
+					String[] feederIPs = feederRegistry.current().serialize();
+
+					if (resumePreviousScan(lastLoadedIP, feederIPs[1]))
+						stateMachine.continueScanning();
+				}
+
+			}
+			catch (Exception e) {
+				throw new UserErrorException("fileLoad.failed", e);
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+28730873
+src/net/azib/ipscan/core/LibraryLoader.java 29 50
+src/net/azib/ipscan/core/LibraryLoader.java 30 46
+----------------------------------------
+		catch (UnsatisfiedLinkError err2) {
+			try {
+				// try to extract from the jar
+				InputStream is = LibraryLoader.class.getClassLoader().getResourceAsStream(filename);
+				if (is == null) {
+					throw new IOException(filename + " not found in the jar file (classpath)");
+				}
+				byte[] buffer = new byte[4096];
+				OutputStream os = new FileOutputStream(fullFilename);
+				int read;
+				while ((read = is.read(buffer)) != -1) {
+					os.write(buffer, 0, read);
+				}
+				os.close();
+				is.close();
+                new File(fullFilename).setExecutable(true, false);
+				System.load(fullFilename);
+			}
+			catch (IOException ioe) {
+				throw new RuntimeException("Unable to extract native library: " + library, ioe);
+			}
+		}
+
+----------------------------------------
+			try {
+				// try to extract from the jar
+				InputStream is = LibraryLoader.class.getClassLoader().getResourceAsStream(filename);
+				if (is == null) {
+					throw new IOException(filename + " not found in the jar file (classpath)");
+				}
+				byte[] buffer = new byte[4096];
+				OutputStream os = new FileOutputStream(fullFilename);
+				int read;
+				while ((read = is.read(buffer)) != -1) {
+					os.write(buffer, 0, read);
+				}
+				os.close();
+				is.close();
+                new File(fullFilename).setExecutable(true, false);
+				System.load(fullFilename);
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+28730885
+src/net/azib/ipscan/config/CommandLineProcessor.java 93 103
+src/net/azib/ipscan/config/CommandLineProcessor.java 94 102
+----------------------------------------
+			if (arg.startsWith("-")) {
+				for (char option : arg.substring(1).toCharArray()) {
+					switch (option) {
+						case 's': autoStart = true; break;
+						case 'q': autoQuit = true; break;
+						case 'a': appendToFile = true; break;
+						default:
+							throw new IllegalArgumentException("Unknown option: " + option);
+					}
+				}
+			}
+
+----------------------------------------
+				for (char option : arg.substring(1).toCharArray()) {
+					switch (option) {
+						case 's': autoStart = true; break;
+						case 'q': autoQuit = true; break;
+						case 'a': appendToFile = true; break;
+						default:
+							throw new IllegalArgumentException("Unknown option: " + option);
+					}
+				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+28730886
+src/net/azib/ipscan/util/InetAddressUtils.java 102 124
+src/net/azib/ipscan/util/InetAddressUtils.java 103 118
+----------------------------------------
+			boolean isIncrement) {
+		try {
+			byte[] newAddress = address.getAddress();
+			for (int i = newAddress.length-1; i >= 0; i--) {
+				if (isIncrement) {
+					if (++newAddress[i] != 0x00) {
+						break;
+					}
+				} else {
+					if (--newAddress[i] != 0x00) {
+						break;
+					}
+				}
+
+			}
+			return InetAddress.getByAddress(newAddress);
+		}
+		catch (UnknownHostException e) {
+			// this exception is unexpected here
+			assert false : e;
+			return null;
+		}
+	}
+
+----------------------------------------
+		try {
+			byte[] newAddress = address.getAddress();
+			for (int i = newAddress.length-1; i >= 0; i--) {
+				if (isIncrement) {
+					if (++newAddress[i] != 0x00) {
+						break;
+					}
+				} else {
+					if (--newAddress[i] != 0x00) {
+						break;
+					}
+				}
+
+			}
+			return InetAddress.getByAddress(newAddress);
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+28730887
+src/net/azib/ipscan/core/state/StateMachine.java 47 55
+src/net/azib/ipscan/gui/feeders/AbstractFeederGUI.java 76 84
+----------------------------------------
+	public void addTransitionListener(StateTransitionListener listener) {
+		try {
+			listenersLock.writeLock().lock();
+			transitionListeners.add(listener);
+		}
+		finally {
+			listenersLock.writeLock().unlock();
+		}
+	}
+
+----------------------------------------
+					if (localInterface == null) {
+						localInterface = InetAddressUtils.getLocalInterface();
+						try {
+							localName = InetAddress.getLocalHost().getHostName();
+						}
+						catch (UnknownHostException e) {
+							localName = localInterface.getAddress().getHostName();
+						}
+					}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+28730889
+src/net/azib/ipscan/core/state/StateMachine.java 60 68
+src/net/azib/ipscan/gui/feeders/AbstractFeederGUI.java 76 84
+----------------------------------------
+	public void removeTransitionListener(StateTransitionListener listener) {
+		try {
+			listenersLock.writeLock().lock();
+			transitionListeners.remove(listener);
+		}
+		finally {
+			listenersLock.writeLock().unlock();
+		}
+	}
+
+----------------------------------------
+					if (localInterface == null) {
+						localInterface = InetAddressUtils.getLocalInterface();
+						try {
+							localName = InetAddress.getLocalHost().getHostName();
+						}
+						catch (UnknownHostException e) {
+							localName = localInterface.getAddress().getHostName();
+						}
+					}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+28730890
+src/net/azib/ipscan/core/state/StateMachine.java 60 68
+ext/rocksaw/src/java/org/savarese/rocksaw/net/RawSocket.java 80 92
+----------------------------------------
+	public void removeTransitionListener(StateTransitionListener listener) {
+		try {
+			listenersLock.writeLock().lock();
+			transitionListeners.remove(listener);
+		}
+		finally {
+			listenersLock.writeLock().unlock();
+		}
+	}
+
+----------------------------------------
+  static {
+	// modified to load jni libs from jar file
+    LibraryLoader.loadLibrary("rocksaw");
+    
+    if(__RockSawStartup() != 0)
+      throw new UnsatisfiedLinkError(__getErrorMessage());
+
+    Runtime.getRuntime().addShutdownHook(new Thread() {
+        public void run() {
+          __RockSawShutdown();
+        }
+      });
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+28730888
+src/net/azib/ipscan/core/state/StateMachine.java 47 55
+ext/rocksaw/src/java/org/savarese/rocksaw/net/RawSocket.java 80 92
+----------------------------------------
+	public void addTransitionListener(StateTransitionListener listener) {
+		try {
+			listenersLock.writeLock().lock();
+			transitionListeners.add(listener);
+		}
+		finally {
+			listenersLock.writeLock().unlock();
+		}
+	}
+
+----------------------------------------
+  static {
+	// modified to load jni libs from jar file
+    LibraryLoader.loadLibrary("rocksaw");
+    
+    if(__RockSawStartup() != 0)
+      throw new UnsatisfiedLinkError(__getErrorMessage());
+
+    Runtime.getRuntime().addShutdownHook(new Thread() {
+        public void run() {
+          __RockSawShutdown();
+        }
+      });
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+28730891
+src/net/azib/ipscan/core/state/StateMachine.java 81 91
+src/net/azib/ipscan/core/state/StateMachine.java 82 87
+----------------------------------------
+	protected void notifyAboutTransition(Transition transition) {		
+		try {
+			listenersLock.readLock().lock();
+			for (StateTransitionListener listener : transitionListeners) {
+				listener.transitionTo(state, transition);
+			}			
+		}
+		finally {
+			listenersLock.readLock().unlock();
+		}
+	}
+
+----------------------------------------
+		try {
+			listenersLock.readLock().lock();
+			for (StateTransitionListener listener : transitionListeners) {
+				listener.transitionTo(state, transition);
+			}			
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+28730892
+src/net/azib/ipscan/Main.java 152 177
+src/net/azib/ipscan/Main.java 154 169
+----------------------------------------
+	static String getLocalizedMessage(Throwable e) {
+		String localizedMessage;
+		try {
+			// try to load localized message
+			if (e instanceof UserErrorException) {
+				localizedMessage = e.getMessage();
+			}
+			else {
+				String exceptionClassName = e.getClass().getSimpleName();
+				String originalMessage = e.getMessage();
+				localizedMessage = Labels.getLabel("exception." + exceptionClassName + (originalMessage != null ? "." + originalMessage : ""));
+			}
+			// add cause summary, if it exists
+			if (e.getCause() != null) {
+				localizedMessage += "\n\n" + e.getCause().toString();
+			}
+			LOG.log(Level.FINE, "error", e);
+		}
+		catch (Exception e2) {
+			// fallback to default text
+			localizedMessage = e.toString();
+			// output stack trace to the console
+			LOG.log(Level.SEVERE, "unexpected error", e);
+		}
+		return localizedMessage;
+	}	
+
+----------------------------------------
+		try {
+			// try to load localized message
+			if (e instanceof UserErrorException) {
+				localizedMessage = e.getMessage();
+			}
+			else {
+				String exceptionClassName = e.getClass().getSimpleName();
+				String originalMessage = e.getMessage();
+				localizedMessage = Labels.getLabel("exception." + exceptionClassName + (originalMessage != null ? "." + originalMessage : ""));
+			}
+			// add cause summary, if it exists
+			if (e.getCause() != null) {
+				localizedMessage += "\n\n" + e.getCause().toString();
+			}
+			LOG.log(Level.FINE, "error", e);
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+28730893
+src/net/azib/ipscan/core/net/ICMPSharedPinger.java 95 141
+src/net/azib/ipscan/config/Labels.java 53 83
+----------------------------------------
+		try {
+			// send a bunch of packets
+			// note: we send sequence numbers starting from 1 (this is used by the ReceiverThread)
+			for (int i = 1; i <= count  && !Thread.currentThread().isInterrupted(); i++) {
+				packet.setSequenceNumber(i);
+				
+				int offset = packet.getIPHeaderByteLength();
+				timeOffsetInPacket = offset + packet.getICMPHeaderByteLength();
+				int length = packet.getICMPPacketByteLength();
+				
+				OctetConverter.longToOctets(System.currentTimeMillis(), data, timeOffsetInPacket);
+				packet.computeICMPChecksum();
+				
+				if (LOG.isLoggable(FINEST)) {
+					LOG.finest("Pinging " + i + result.address);
+				}
+				synchronized (sendingSocket) {
+					sendingSocket.write(result.address, data, offset, length);	
+				}
+				
+				try {
+					// a small pause between sending the packets
+					Thread.sleep(15);
+				}
+				catch (InterruptedException e) {
+					// leave the interrupted flag
+					Thread.currentThread().interrupt();
+				}
+			}
+				
+			int totalTimeout = timeout * count;
+			while (totalTimeout > 0 && result.getReplyCount() < count) {
+				if (LOG.isLoggable(FINEST)) {
+					LOG.finest("Waiting for response " + address + ": " + totalTimeout);
+				}
+				synchronized (result) {
+					// wait until we have an answer
+					try {
+						result.wait(timeout);
+					}
+					catch (InterruptedException ignore) {}
+				}
+				totalTimeout -= timeout;
+			}
+			
+			return result;
+		}
+
+----------------------------------------
+	public static void initialize(Locale locale) {
+		if (instance != null && locale.equals(instance.locale)) {
+			// do not reload locale, because it was already initialized in the static block
+			return;
+		}
+		// create a new instance
+		instance = new Labels();
+		
+		instance.locale = locale;
+		InputStream labelsStream;
+		try {
+			labelsStream = Labels.class.getClassLoader().getResourceAsStream("messages.properties");
+			if (labelsStream == null) {
+				throw new MissingResourceException("Labels not found!", Labels.class.getName(), "messages");
+			}
+			instance.labelsFallback = new PropertyResourceBundle(new InputStreamReader(labelsStream, "UTF-8"));
+			labelsStream.close();
+		}
+		catch (IOException e) {
+			throw new MissingResourceException(e.toString(), Labels.class.getName(), "messages");
+		}
+		
+		try {
+			labelsStream = Labels.class.getClassLoader().getResourceAsStream("messages_" + locale.getLanguage() + ".properties");
+			instance.labels = new PropertyResourceBundle(new InputStreamReader(labelsStream, "UTF-8"));
+			labelsStream.close();
+		}
+		catch (Exception e) {
+			instance.labels = instance.labelsFallback;
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+28730894
+src/net/azib/ipscan/core/net/ICMPSharedPinger.java 184 234
+src/net/azib/ipscan/gui/actions/FeederActions.java 93 105
+----------------------------------------
+			do {
+				try {
+					receivingSocket.read(tmpAddress, data);
+					
+					if (packet.getType() == ICMPPacket.TYPE_ECHO_REPLY &&
+						packet.getIdentifier() == (ICMPSharedPinger.this.hashCode() & 0xFFFF) &&
+						packet.getSequenceNumber() > 0) {
+						
+						long endTime = System.currentTimeMillis();
+						
+						PingResult result = results.get(packet.getSourceAsInetAddress());
+						if (result == null) {
+							LOG.warning("ICMP packet received from an unknown address: " + packet.getSourceAsInetAddress());
+							continue;
+						}
+						
+						long startTime = OctetConverter.octetsToLong(data, timeOffsetInPacket);
+						long time = endTime - startTime;
+						
+						if (LOG.isLoggable(FINEST)) {
+							LOG.finest("Received " + packet.getSequenceNumber() + packet.getSourceAsInetAddress() + ": " + time);
+						}
+
+						result.addReply(time);
+						// TTL should be the same among all packets
+						result.setTTL(packet.getTTL() & 0xFF);
+						
+						synchronized (result) {
+							// notify the sender that we have an answer :-)
+							result.notifyAll();
+						}
+					}
+					else
+					if (packet.getType() == ICMPPacket.TYPE_HOST_UNREACHABLE) {
+						// TODO: received non-ECHO_REPLY packets may also be useful, saying "destination is unreachable"
+						// packet body in this case is the sent ICMP_REQUEST packet
+					}
+				}
+				catch (InterruptedIOException e) {
+					// socket read timeout
+					LOG.finer("Receive timeout");
+					// TODO: make RawSocket to throw Exceptions without the stack trace (for speed)
+				}
+				catch (UnknownHostException e) {
+					LOG.log(WARNING, "Cannot retrieve the source address of an ICMP packet", e);
+				}
+				catch (IOException e) {
+					LOG.log(WARNING, "Unable to read from the socket", e);
+				}
+			
+			}
+
+----------------------------------------
+				for (Enumeration<NetworkInterface> i = getNetworkInterfaces(); i.hasMoreElements(); ) {
+					NetworkInterface networkInterface = i.nextElement();
+					for (InterfaceAddress ifaddr : networkInterface.getInterfaceAddresses()) {
+						if (ifaddr == null) continue;
+                        InetAddress address = ifaddr.getAddress();
+                        if (address instanceof Inet4Address && !address.isLoopbackAddress()) {
+							MenuItem menuItem = new MenuItem(popupMenu, 0);
+							menuItem.setText(networkInterface.getDisplayName() + ": " + address.getHostAddress());
+							menuItem.setData(address.getHostAddress() + "/" + ifaddr.getNetworkPrefixLength());
+							menuItem.addListener(SWT.Selection, menuItemListener);
+						}
+					}					
+				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+28730895
+src/net/azib/ipscan/gui/actions/OpenerLauncher.java 46 65
+src/net/azib/ipscan/gui/actions/OpenerLauncher.java 48 61
+----------------------------------------
+		else {
+			// run a process here
+			try {
+				if (opener.inTerminal) {
+					TerminalLauncher.launchInTerminal(openerString, opener.workingDir);
+				}
+				else {
+					if (Platform.LINUX) {
+						// let shell interpret quoting and other stuff
+						Runtime.getRuntime().exec(new String[] {"sh", "-c", openerString}, null, opener.workingDir);
+					}
+					else {
+						Runtime.getRuntime().exec(splitCommand(openerString), null, opener.workingDir);
+					}
+				}
+			}
+			catch (Exception e) {
+				throw new UserErrorException("opener.failed", openerString);
+			}
+		}
+
+----------------------------------------
+			try {
+				if (opener.inTerminal) {
+					TerminalLauncher.launchInTerminal(openerString, opener.workingDir);
+				}
+				else {
+					if (Platform.LINUX) {
+						// let shell interpret quoting and other stuff
+						Runtime.getRuntime().exec(new String[] {"sh", "-c", openerString}, null, opener.workingDir);
+					}
+					else {
+						Runtime.getRuntime().exec(splitCommand(openerString), null, opener.workingDir);
+					}
+				}
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+28730896
+src/net/azib/ipscan/config/GUIConfig.java 88 93
+src/net/azib/ipscan/gui/AbstractModalDialog.java 59 79
+----------------------------------------
+	public void setMainWindowSize(Point size, boolean isMaximized) {
+		if (!isMaximized) {
+			mainWindowSize = size;
+		}
+		isMainWindowMaximized = isMaximized;
+	}
+
+----------------------------------------
+	protected final void createShell() {
+		Shell parent = null;
+		try {
+			parent = Display.getCurrent().getShells()[0];
+		}
+		catch (Exception e) {
+			// ignore if unsuccessful
+		}
+		
+		shell = new Shell(parent, getShellStyle());
+		Image icon = null;
+		if (parent != null) {
+			icon = parent.getImage();
+		}
+		if (icon == null) {
+			icon = new Image(shell.getDisplay(), Labels.getInstance().getImageAsStream("icon"));
+		}
+		shell.setImage(icon);
+		
+		populateShell();
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+28730897
+src/net/azib/ipscan/config/Version.java 63 79
+src/net/azib/ipscan/config/Version.java 64 73
+----------------------------------------
+	private static void loadVersionFromJar() {
+		try {
+			String path = Version.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
+			if (path.endsWith(".jar") || path.endsWith(".exe")) {
+				JarFile jarFile = new JarFile(path);
+				Attributes attrs = jarFile.getManifest().getMainAttributes();
+				version = attrs.getValue("Version");
+				buildDate = attrs.getValue("Build-Date");
+				return;
+			}
+		}
+		catch (Exception e) {
+			LoggerFactory.getLogger().log(Level.WARNING, "Cannot obtain version", e);
+		}
+		version = "current";
+		buildDate = "today";
+	}
+
+----------------------------------------
+		try {
+			String path = Version.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
+			if (path.endsWith(".jar") || path.endsWith(".exe")) {
+				JarFile jarFile = new JarFile(path);
+				Attributes attrs = jarFile.getManifest().getMainAttributes();
+				version = attrs.getValue("Version");
+				buildDate = attrs.getValue("Build-Date");
+				return;
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+28730898
+src/net/azib/ipscan/feeders/FileFeeder.java 72 92
+src/net/azib/ipscan/feeders/FileFeeder.java 73 88
+----------------------------------------
+				while (matcher.find()) {
+					try {
+						String address = matcher.group();						
+						ScanningSubject subject = foundHosts.get(address);
+						if (subject == null)
+							subject = new ScanningSubject(InetAddress.getByName(address));
+						
+						if (!matcher.hitEnd() && fileLine.charAt(matcher.end()) == ':') {
+							// see if any valid port is requested
+							Matcher portMatcher = PORT_REGEX.matcher(fileLine.substring(matcher.end()+1));
+							if (portMatcher.lookingAt()) {
+								subject.addRequestedPort(Integer.valueOf(portMatcher.group()));
+							}
+						}
+						
+						foundHosts.put(address, subject);
+					}
+					catch (UnknownHostException e) {
+						LOG.log(WARNING, e.toString());
+					}
+				}
+
+----------------------------------------
+					try {
+						String address = matcher.group();						
+						ScanningSubject subject = foundHosts.get(address);
+						if (subject == null)
+							subject = new ScanningSubject(InetAddress.getByName(address));
+						
+						if (!matcher.hitEnd() && fileLine.charAt(matcher.end()) == ':') {
+							// see if any valid port is requested
+							Matcher portMatcher = PORT_REGEX.matcher(fileLine.substring(matcher.end()+1));
+							if (portMatcher.lookingAt()) {
+								subject.addRequestedPort(Integer.valueOf(portMatcher.group()));
+							}
+						}
+						
+						foundHosts.put(address, subject);
+					}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+28730899
+src/net/azib/ipscan/feeders/RandomFeeder.java 87 95
+src/net/azib/ipscan/core/values/NumericRangeList.java 67 74
+----------------------------------------
+	public String getInfo() {
+		try {
+			return addressCount + ": " + InetAddress.getByAddress(prototypeBytes).getHostAddress() + " / " + InetAddress.getByAddress(maskBytes).getHostAddress();
+		}
+		catch (UnknownHostException e) {
+			assert false : e;
+			return null;
+		}
+	}
+
+----------------------------------------
+			else {
+				if (isRange) {
+					// display short ranges with comma, long ranges with dash
+					sb.append(rangeStartNumber+1 == prevNumber ? ',' : '-').append(prevNumber);
+					isRange = false;
+				}
+				sb.append(',').append(curNumber);
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+28730900
+src/net/azib/ipscan/gui/actions/FeederActions.java 79 126
+src/net/azib/ipscan/gui/actions/FeederActions.java 80 122
+----------------------------------------
+		private void askLocalIPAddress() {
+			try {
+				Menu popupMenu = new Menu(Display.getCurrent().getActiveShell(), SWT.POP_UP);
+				Listener menuItemListener = new Listener() {
+					public void handleEvent(Event event) {
+						MenuItem menuItem = (MenuItem) event.widget;
+						String address = (String) menuItem.getData();
+						ipText.setText(address.substring(0, address.lastIndexOf('/')));
+                        netmaskCombo.setText(address.substring(address.lastIndexOf('/')));
+//                        netmaskCombo.traverse(SWT.TRAVERSE_RETURN);
+						menuItem.getParent().dispose();
+					}
+				};
+
+				for (Enumeration<NetworkInterface> i = getNetworkInterfaces(); i.hasMoreElements(); ) {
+					NetworkInterface networkInterface = i.nextElement();
+					for (InterfaceAddress ifaddr : networkInterface.getInterfaceAddresses()) {
+						if (ifaddr == null) continue;
+                        InetAddress address = ifaddr.getAddress();
+                        if (address instanceof Inet4Address && !address.isLoopbackAddress()) {
+							MenuItem menuItem = new MenuItem(popupMenu, 0);
+							menuItem.setText(networkInterface.getDisplayName() + ": " + address.getHostAddress());
+							menuItem.setData(address.getHostAddress() + "/" + ifaddr.getNetworkPrefixLength());
+							menuItem.addListener(SWT.Selection, menuItemListener);
+						}
+					}					
+				}
+				
+				if (popupMenu.getItemCount() > 1) {
+					popupMenu.setLocation(Display.getCurrent().getCursorLocation());
+					popupMenu.setVisible(true);
+				}
+				else {
+					// emulate click on the single menu item
+					if (popupMenu.getItemCount() == 1) {
+						Event event = new Event();
+						event.widget = popupMenu.getItem(0);
+						menuItemListener.handleEvent(event);
+						popupMenu.dispose();
+					}
+					// otherwise, unable to retrieve any sane local addresses,
+					// leave the field as-is, which probably shows the loopback address already
+				}
+			}
+			catch (SocketException e) {
+				LOG.log(Level.FINE, "Cannot enumerate network interfaces", e);
+			}
+		}
+
+----------------------------------------
+			try {
+				Menu popupMenu = new Menu(Display.getCurrent().getActiveShell(), SWT.POP_UP);
+				Listener menuItemListener = new Listener() {
+					public void handleEvent(Event event) {
+						MenuItem menuItem = (MenuItem) event.widget;
+						String address = (String) menuItem.getData();
+						ipText.setText(address.substring(0, address.lastIndexOf('/')));
+                        netmaskCombo.setText(address.substring(address.lastIndexOf('/')));
+//                        netmaskCombo.traverse(SWT.TRAVERSE_RETURN);
+						menuItem.getParent().dispose();
+					}
+				};
+
+				for (Enumeration<NetworkInterface> i = getNetworkInterfaces(); i.hasMoreElements(); ) {
+					NetworkInterface networkInterface = i.nextElement();
+					for (InterfaceAddress ifaddr : networkInterface.getInterfaceAddresses()) {
+						if (ifaddr == null) continue;
+                        InetAddress address = ifaddr.getAddress();
+                        if (address instanceof Inet4Address && !address.isLoopbackAddress()) {
+							MenuItem menuItem = new MenuItem(popupMenu, 0);
+							menuItem.setText(networkInterface.getDisplayName() + ": " + address.getHostAddress());
+							menuItem.setData(address.getHostAddress() + "/" + ifaddr.getNetworkPrefixLength());
+							menuItem.addListener(SWT.Selection, menuItemListener);
+						}
+					}					
+				}
+				
+				if (popupMenu.getItemCount() > 1) {
+					popupMenu.setLocation(Display.getCurrent().getCursorLocation());
+					popupMenu.setVisible(true);
+				}
+				else {
+					// emulate click on the single menu item
+					if (popupMenu.getItemCount() == 1) {
+						Event event = new Event();
+						event.widget = popupMenu.getItem(0);
+						menuItemListener.handleEvent(event);
+						popupMenu.dispose();
+					}
+					// otherwise, unable to retrieve any sane local addresses,
+					// leave the field as-is, which probably shows the loopback address already
+				}
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+28730901
+src/net/azib/ipscan/gui/feeders/AbstractFeederGUI.java 71 99
+src/net/azib/ipscan/gui/feeders/AbstractFeederGUI.java 75 96
+----------------------------------------
+	protected void asyncFillLocalHostInfo(final Text hostnameText, final Text ipText) {
+		new Thread() {
+			public void run() {
+				// this method is called for multiple Feeders simultaneously
+				synchronized (localResolveLock) {
+					if (localInterface == null) {
+						localInterface = InetAddressUtils.getLocalInterface();
+						try {
+							localName = InetAddress.getLocalHost().getHostName();
+						}
+						catch (UnknownHostException e) {
+							localName = localInterface.getAddress().getHostName();
+						}
+					}
+					Display.getDefault().asyncExec(new Runnable() {
+						public void run() {
+							// fill the IP and hostname fields with local hostname and IP addresses
+							if ("".equals(hostnameText.getText()))
+								hostnameText.setText(localName);
+							if ("".equals(ipText.getText())) {
+								ipText.setText(localInterface.getAddress().getHostAddress());
+								afterLocalHostInfoFilled(localInterface);
+							}
+						}
+					});
+				}
+			}
+		}.start();		
+	}
+
+----------------------------------------
+				synchronized (localResolveLock) {
+					if (localInterface == null) {
+						localInterface = InetAddressUtils.getLocalInterface();
+						try {
+							localName = InetAddress.getLocalHost().getHostName();
+						}
+						catch (UnknownHostException e) {
+							localName = localInterface.getAddress().getHostName();
+						}
+					}
+					Display.getDefault().asyncExec(new Runnable() {
+						public void run() {
+							// fill the IP and hostname fields with local hostname and IP addresses
+							if ("".equals(hostnameText.getText()))
+								hostnameText.setText(localName);
+							if ("".equals(ipText.getText())) {
+								ipText.setText(localInterface.getAddress().getHostAddress());
+								afterLocalHostInfoFilled(localInterface);
+							}
+						}
+					});
+				}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+62
+28730902
+src/net/azib/ipscan/fetchers/HostnameFetcher.java 35 46
+src/net/azib/ipscan/fetchers/HostnameFetcher.java 36 42
+----------------------------------------
+	static {
+		try {
+			Field impl = InetAddress.class.getDeclaredField("impl");
+			impl.setAccessible(true);
+			inetAddressImpl = impl.get(null);
+			getHostByAddr = inetAddressImpl.getClass().getDeclaredMethod("getHostByAddr", byte[].class);
+			getHostByAddr.setAccessible(true);
+		}
+		catch (Exception e) {
+			LOG.log(WARNING, "Could not get InetAddressImpl", e);
+		}
+	}
+
+----------------------------------------
+		try {
+			Field impl = InetAddress.class.getDeclaredField("impl");
+			impl.setAccessible(true);
+			inetAddressImpl = impl.get(null);
+			getHostByAddr = inetAddressImpl.getClass().getDeclaredMethod("getHostByAddr", byte[].class);
+			getHostByAddr.setAccessible(true);
+		}
+
+----------------------------------------

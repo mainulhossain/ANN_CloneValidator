@@ -1,0 +1,1263 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995123
+src/de/joergjahnke/gameboy/core/VideoChip.java 645 653
+src/de/joergjahnke/gameboy/core/VideoChip.java 621 629
+----------------------------------------
+    public final void setBackgroundBlank(final boolean isBGBlank) {
+        if (isBGBlank != this.isBGBlank) {
+            if (DEBUG) {
+                System.out.println("Set background enable to " + !isBGBlank + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.isBGBlank = isBGBlank;
+            invalidateLines();
+        }
+    }
+
+----------------------------------------
+    public final void setSpritesEnabled(final boolean areSpritesEnabled) {
+        if (areSpritesEnabled != this.areSpritesEnabled) {
+            if (DEBUG) {
+                System.out.println("Set sprite enable to " + areSpritesEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            invalidateLines();
+        }
+        this.areSpritesEnabled = areSpritesEnabled;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17994975
+src/de/joergjahnke/gameboy/core/VideoChip.java 729 737
+src/de/joergjahnke/gameboy/core/VideoChip.java 621 629
+----------------------------------------
+    public final void setScrollX(final int scrollX) {
+        if (scrollX != this.scrollX) {
+            if (DEBUG) {
+                System.out.println("Set x-scroll to " + scrollX + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.scrollX = scrollX;
+            invalidateLines();
+        }
+    }
+
+----------------------------------------
+    public final void setSpritesEnabled(final boolean areSpritesEnabled) {
+        if (areSpritesEnabled != this.areSpritesEnabled) {
+            if (DEBUG) {
+                System.out.println("Set sprite enable to " + areSpritesEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            invalidateLines();
+        }
+        this.areSpritesEnabled = areSpritesEnabled;
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995036
+src/de/joergjahnke/gameboy/core/VideoChip.java 621 629
+src/de/joergjahnke/gameboy/core/VideoChip.java 595 604
+----------------------------------------
+    public final void setSpritesEnabled(final boolean areSpritesEnabled) {
+        if (areSpritesEnabled != this.areSpritesEnabled) {
+            if (DEBUG) {
+                System.out.println("Set sprite enable to " + areSpritesEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            invalidateLines();
+        }
+        this.areSpritesEnabled = areSpritesEnabled;
+    }
+
+----------------------------------------
+        if (spriteSize != this.spriteHeight) {
+            if (DEBUG) {
+                System.out.println("Set sprite size to " + spriteSize + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.spriteHeight = spriteSize;
+            // we have to update the sprite tiles
+            for (int i = 0; i < this.sprites.length; ++i) {
+                this.sprites[i].updateTile();
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995000
+src/de/joergjahnke/gameboy/core/VideoChip.java 480 489
+src/de/joergjahnke/gameboy/core/VideoChip.java 595 604
+----------------------------------------
+        if (isWindowEnabled != this.isWindowEnabled) {
+            if (DEBUG) {
+                System.out.println("Set window enable to " + isWindowEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.isWindowEnabled = isWindowEnabled;
+            if (isWindowEnabled && this.windowLine == 0 && this.currentLine > getWindowY()) {
+                this.windowLine = SCREEN_HEIGHT;
+            }
+            invalidateLines();
+        }
+
+----------------------------------------
+        if (spriteSize != this.spriteHeight) {
+            if (DEBUG) {
+                System.out.println("Set sprite size to " + spriteSize + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.spriteHeight = spriteSize;
+            // we have to update the sprite tiles
+            for (int i = 0; i < this.sprites.length; ++i) {
+                this.sprites[i].updateTile();
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+28734556
+src/de/joergjahnke/gameboy/core/VideoChip.java 454 462
+src/de/joergjahnke/gameboy/core/VideoChip.java 595 604
+----------------------------------------
+        if (isLCDEnabled != this.isLCDEnabled) {
+            if (DEBUG) {
+                System.out.println("Set LCD enable to " + isLCDEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.isLCDEnabled = isLCDEnabled;
+            this.currentLine = 0;
+            setSpriteHeight(isLCDEnabled ? VideoChip.TILE_HEIGHT * 2 : VideoChip.TILE_HEIGHT);
+            invalidateLines();
+        }
+
+----------------------------------------
+        if (spriteSize != this.spriteHeight) {
+            if (DEBUG) {
+                System.out.println("Set sprite size to " + spriteSize + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.spriteHeight = spriteSize;
+            // we have to update the sprite tiles
+            for (int i = 0; i < this.sprites.length; ++i) {
+                this.sprites[i].updateTile();
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17994976
+src/de/joergjahnke/gameboy/core/VideoChip.java 729 737
+src/de/joergjahnke/gameboy/core/VideoChip.java 595 604
+----------------------------------------
+    public final void setScrollX(final int scrollX) {
+        if (scrollX != this.scrollX) {
+            if (DEBUG) {
+                System.out.println("Set x-scroll to " + scrollX + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.scrollX = scrollX;
+            invalidateLines();
+        }
+    }
+
+----------------------------------------
+        if (spriteSize != this.spriteHeight) {
+            if (DEBUG) {
+                System.out.println("Set sprite size to " + spriteSize + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.spriteHeight = spriteSize;
+            // we have to update the sprite tiles
+            for (int i = 0; i < this.sprites.length; ++i) {
+                this.sprites[i].updateTile();
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17994999
+src/de/joergjahnke/gameboy/core/VideoChip.java 561 569
+src/de/joergjahnke/gameboy/core/VideoChip.java 595 604
+----------------------------------------
+    public void setGBCVRAMBank(final int vRAMBank) {
+        if (vRAMBank != this.currentVRAMBank) {
+            if (DEBUG) {
+                System.out.println("Set VRAM bank to " + vRAMBank + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.currentVRAMBank = vRAMBank;
+            this.currentVRAMOffset = vRAMBank * GBCVRAM_BANK_SIZE;
+        }
+    }
+
+----------------------------------------
+        if (spriteSize != this.spriteHeight) {
+            if (DEBUG) {
+                System.out.println("Set sprite size to " + spriteSize + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.spriteHeight = spriteSize;
+            // we have to update the sprite tiles
+            for (int i = 0; i < this.sprites.length; ++i) {
+                this.sprites[i].updateTile();
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995011
+src/de/joergjahnke/gameboy/core/VideoChip.java 621 629
+src/de/joergjahnke/gameboy/core/VideoChip.java 730 736
+----------------------------------------
+    public final void setSpritesEnabled(final boolean areSpritesEnabled) {
+        if (areSpritesEnabled != this.areSpritesEnabled) {
+            if (DEBUG) {
+                System.out.println("Set sprite enable to " + areSpritesEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            invalidateLines();
+        }
+        this.areSpritesEnabled = areSpritesEnabled;
+    }
+
+----------------------------------------
+        if (scrollX != this.scrollX) {
+            if (DEBUG) {
+                System.out.println("Set x-scroll to " + scrollX + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.scrollX = scrollX;
+            invalidateLines();
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995012
+src/de/joergjahnke/gameboy/core/VideoChip.java 669 674
+src/de/joergjahnke/gameboy/core/VideoChip.java 730 736
+----------------------------------------
+    public final void setHaveSpritesPriority(final boolean haveSpritesPriority) {
+        if (DEBUG && haveSpritesPriority != this.haveSpritesPriority) {
+            System.out.println("Set sprite priority enable to " + haveSpritesPriority + " at line " + this.currentLine + " of frame " + this.frames);
+        }
+        this.haveSpritesPriority = haveSpritesPriority;
+    }
+
+----------------------------------------
+        if (scrollX != this.scrollX) {
+            if (DEBUG) {
+                System.out.println("Set x-scroll to " + scrollX + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.scrollX = scrollX;
+            invalidateLines();
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17994977
+src/de/joergjahnke/gameboy/core/VideoChip.java 454 462
+src/de/joergjahnke/gameboy/core/VideoChip.java 730 736
+----------------------------------------
+        if (isLCDEnabled != this.isLCDEnabled) {
+            if (DEBUG) {
+                System.out.println("Set LCD enable to " + isLCDEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.isLCDEnabled = isLCDEnabled;
+            this.currentLine = 0;
+            setSpriteHeight(isLCDEnabled ? VideoChip.TILE_HEIGHT * 2 : VideoChip.TILE_HEIGHT);
+            invalidateLines();
+        }
+
+----------------------------------------
+        if (scrollX != this.scrollX) {
+            if (DEBUG) {
+                System.out.println("Set x-scroll to " + scrollX + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.scrollX = scrollX;
+            invalidateLines();
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995013
+src/de/joergjahnke/gameboy/core/VideoChip.java 562 568
+src/de/joergjahnke/gameboy/core/VideoChip.java 730 736
+----------------------------------------
+        if (vRAMBank != this.currentVRAMBank) {
+            if (DEBUG) {
+                System.out.println("Set VRAM bank to " + vRAMBank + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.currentVRAMBank = vRAMBank;
+            this.currentVRAMOffset = vRAMBank * GBCVRAM_BANK_SIZE;
+        }
+
+----------------------------------------
+        if (scrollX != this.scrollX) {
+            if (DEBUG) {
+                System.out.println("Set x-scroll to " + scrollX + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.scrollX = scrollX;
+            invalidateLines();
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17994980
+src/de/joergjahnke/gameboy/core/VideoChip.java 480 489
+src/de/joergjahnke/gameboy/core/VideoChip.java 730 736
+----------------------------------------
+        if (isWindowEnabled != this.isWindowEnabled) {
+            if (DEBUG) {
+                System.out.println("Set window enable to " + isWindowEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.isWindowEnabled = isWindowEnabled;
+            if (isWindowEnabled && this.windowLine == 0 && this.currentLine > getWindowY()) {
+                this.windowLine = SCREEN_HEIGHT;
+            }
+            invalidateLines();
+        }
+
+----------------------------------------
+        if (scrollX != this.scrollX) {
+            if (DEBUG) {
+                System.out.println("Set x-scroll to " + scrollX + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.scrollX = scrollX;
+            invalidateLines();
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+28734566
+src/de/joergjahnke/gameboy/core/VideoChip.java 562 568
+src/de/joergjahnke/gameboy/core/VideoChip.java 522 528
+----------------------------------------
+        if (vRAMBank != this.currentVRAMBank) {
+            if (DEBUG) {
+                System.out.println("Set VRAM bank to " + vRAMBank + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.currentVRAMBank = vRAMBank;
+            this.currentVRAMOffset = vRAMBank * GBCVRAM_BANK_SIZE;
+        }
+
+----------------------------------------
+        if (this.windowTileMapAdr != (windowTileMapAdr & 0x1fff)) {
+            if (DEBUG) {
+                System.out.println("Set window tile area to " + Integer.toHexString(windowTileMapAdr) + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.windowTileMapAdr = windowTileMapAdr & 0x1fff;
+            invalidateLines();
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+28734569
+src/de/joergjahnke/gameboy/core/VideoChip.java 595 604
+src/de/joergjahnke/gameboy/core/VideoChip.java 522 528
+----------------------------------------
+        if (spriteSize != this.spriteHeight) {
+            if (DEBUG) {
+                System.out.println("Set sprite size to " + spriteSize + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.spriteHeight = spriteSize;
+            // we have to update the sprite tiles
+            for (int i = 0; i < this.sprites.length; ++i) {
+                this.sprites[i].updateTile();
+            }
+        }
+
+----------------------------------------
+        if (this.windowTileMapAdr != (windowTileMapAdr & 0x1fff)) {
+            if (DEBUG) {
+                System.out.println("Set window tile area to " + Integer.toHexString(windowTileMapAdr) + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.windowTileMapAdr = windowTileMapAdr & 0x1fff;
+            invalidateLines();
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+28734557
+src/de/joergjahnke/gameboy/core/VideoChip.java 479 490
+src/de/joergjahnke/gameboy/core/VideoChip.java 522 528
+----------------------------------------
+    public final void setWindowEnabled(final boolean isWindowEnabled) {
+        if (isWindowEnabled != this.isWindowEnabled) {
+            if (DEBUG) {
+                System.out.println("Set window enable to " + isWindowEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.isWindowEnabled = isWindowEnabled;
+            if (isWindowEnabled && this.windowLine == 0 && this.currentLine > getWindowY()) {
+                this.windowLine = SCREEN_HEIGHT;
+            }
+            invalidateLines();
+        }
+    }
+
+----------------------------------------
+        if (this.windowTileMapAdr != (windowTileMapAdr & 0x1fff)) {
+            if (DEBUG) {
+                System.out.println("Set window tile area to " + Integer.toHexString(windowTileMapAdr) + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.windowTileMapAdr = windowTileMapAdr & 0x1fff;
+            invalidateLines();
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17994978
+src/de/joergjahnke/gameboy/core/VideoChip.java 730 736
+src/de/joergjahnke/gameboy/core/VideoChip.java 522 528
+----------------------------------------
+        if (scrollX != this.scrollX) {
+            if (DEBUG) {
+                System.out.println("Set x-scroll to " + scrollX + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.scrollX = scrollX;
+            invalidateLines();
+        }
+
+----------------------------------------
+        if (this.windowTileMapAdr != (windowTileMapAdr & 0x1fff)) {
+            if (DEBUG) {
+                System.out.println("Set window tile area to " + Integer.toHexString(windowTileMapAdr) + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.windowTileMapAdr = windowTileMapAdr & 0x1fff;
+            invalidateLines();
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995125
+src/de/joergjahnke/gameboy/core/VideoChip.java 562 568
+src/de/joergjahnke/gameboy/core/VideoChip.java 646 652
+----------------------------------------
+        if (vRAMBank != this.currentVRAMBank) {
+            if (DEBUG) {
+                System.out.println("Set VRAM bank to " + vRAMBank + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.currentVRAMBank = vRAMBank;
+            this.currentVRAMOffset = vRAMBank * GBCVRAM_BANK_SIZE;
+        }
+
+----------------------------------------
+        if (isBGBlank != this.isBGBlank) {
+            if (DEBUG) {
+                System.out.println("Set background enable to " + !isBGBlank + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.isBGBlank = isBGBlank;
+            invalidateLines();
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995124
+src/de/joergjahnke/gameboy/core/VideoChip.java 522 528
+src/de/joergjahnke/gameboy/core/VideoChip.java 646 652
+----------------------------------------
+        if (this.windowTileMapAdr != (windowTileMapAdr & 0x1fff)) {
+            if (DEBUG) {
+                System.out.println("Set window tile area to " + Integer.toHexString(windowTileMapAdr) + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.windowTileMapAdr = windowTileMapAdr & 0x1fff;
+            invalidateLines();
+        }
+
+----------------------------------------
+        if (isBGBlank != this.isBGBlank) {
+            if (DEBUG) {
+                System.out.println("Set background enable to " + !isBGBlank + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.isBGBlank = isBGBlank;
+            invalidateLines();
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17994979
+src/de/joergjahnke/gameboy/core/VideoChip.java 730 736
+src/de/joergjahnke/gameboy/core/VideoChip.java 646 652
+----------------------------------------
+        if (scrollX != this.scrollX) {
+            if (DEBUG) {
+                System.out.println("Set x-scroll to " + scrollX + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.scrollX = scrollX;
+            invalidateLines();
+        }
+
+----------------------------------------
+        if (isBGBlank != this.isBGBlank) {
+            if (DEBUG) {
+                System.out.println("Set background enable to " + !isBGBlank + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.isBGBlank = isBGBlank;
+            invalidateLines();
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17994981
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 918 923
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 925 930
+----------------------------------------
+    private void jMenuItemSizeX1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSizeX1ActionPerformed
+        this.canvas.setScaling(1);
+        this.settings.setProperty(SETTING_WINDOW_SCALING, "1");
+        pack();
+        this.jMenuItemSizeX1.setSelected(true);
+    }//GEN-LAST:event_jMenuItemSizeX1ActionPerformed
+
+----------------------------------------
+    private void jMenuItemSizeX2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSizeX2ActionPerformed
+        this.canvas.setScaling(2);
+        this.settings.setProperty(SETTING_WINDOW_SCALING, "2");
+        pack();
+        this.jMenuItemSizeX2.setSelected(true);
+    }//GEN-LAST:event_jMenuItemSizeX2ActionPerformed
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17994982
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 918 923
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 932 937
+----------------------------------------
+    private void jMenuItemSizeX1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSizeX1ActionPerformed
+        this.canvas.setScaling(1);
+        this.settings.setProperty(SETTING_WINDOW_SCALING, "1");
+        pack();
+        this.jMenuItemSizeX1.setSelected(true);
+    }//GEN-LAST:event_jMenuItemSizeX1ActionPerformed
+
+----------------------------------------
+    private void jMenuItemSizeX3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSizeX3ActionPerformed
+        this.canvas.setScaling(3);
+        this.settings.setProperty(SETTING_WINDOW_SCALING, "3");
+        pack();
+        this.jMenuItemSizeX3.setSelected(true);
+    }//GEN-LAST:event_jMenuItemSizeX3ActionPerformed
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17994983
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 925 930
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 932 937
+----------------------------------------
+    private void jMenuItemSizeX2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSizeX2ActionPerformed
+        this.canvas.setScaling(2);
+        this.settings.setProperty(SETTING_WINDOW_SCALING, "2");
+        pack();
+        this.jMenuItemSizeX2.setSelected(true);
+    }//GEN-LAST:event_jMenuItemSizeX2ActionPerformed
+
+----------------------------------------
+    private void jMenuItemSizeX3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSizeX3ActionPerformed
+        this.canvas.setScaling(3);
+        this.settings.setProperty(SETTING_WINDOW_SCALING, "3");
+        pack();
+        this.jMenuItemSizeX3.setSelected(true);
+    }//GEN-LAST:event_jMenuItemSizeX3ActionPerformed
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17994984
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 489 494
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 984 991
+----------------------------------------
+            } finally {
+                try {
+                    saveStream.close();
+                } catch (Exception e) {
+                }
+            }
+
+----------------------------------------
+                if (evt.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
+                    try {
+                        Desktop.getDesktop().browse(evt.getURL().toURI());
+                    } catch (Throwable t) {
+                        // could not display the web page, what to do now???
+                        System.err.println("Could not browse to page " + evt.getURL());
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17994987
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 296 301
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 984 991
+----------------------------------------
+        } finally {
+            try {
+                out.close();
+            } catch (Exception e) {
+            }
+        }
+
+----------------------------------------
+                if (evt.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
+                    try {
+                        Desktop.getDesktop().browse(evt.getURL().toURI());
+                    } catch (Throwable t) {
+                        // could not display the web page, what to do now???
+                        System.err.println("Could not browse to page " + evt.getURL());
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17994988
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 375 380
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 984 991
+----------------------------------------
+        } finally {
+            try {
+                in.close();
+            } catch (Exception e) {
+            }
+        }
+
+----------------------------------------
+                if (evt.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
+                    try {
+                        Desktop.getDesktop().browse(evt.getURL().toURI());
+                    } catch (Throwable t) {
+                        // could not display the web page, what to do now???
+                        System.err.println("Could not browse to page " + evt.getURL());
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17994985
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 510 515
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 984 991
+----------------------------------------
+        } finally {
+            try {
+                romStream.close();
+            } catch (Exception e) {
+            }
+        }
+
+----------------------------------------
+                if (evt.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
+                    try {
+                        Desktop.getDesktop().browse(evt.getURL().toURI());
+                    } catch (Throwable t) {
+                        // could not display the web page, what to do now???
+                        System.err.println("Could not browse to page " + evt.getURL());
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17994986
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 984 991
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 260 266
+----------------------------------------
+                if (evt.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
+                    try {
+                        Desktop.getDesktop().browse(evt.getURL().toURI());
+                    } catch (Throwable t) {
+                        // could not display the web page, what to do now???
+                        System.err.println("Could not browse to page " + evt.getURL());
+                    }
+                }
+
+----------------------------------------
+    private ImageIcon getMenuIcon(final String filename) {
+        try {
+            return new ImageIcon(new ImageIcon(getClass().getResource("/res/drawable/" + filename)).getImage().getScaledInstance(16, 16, Image.SCALE_SMOOTH));
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995188
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 375 380
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 260 266
+----------------------------------------
+        } finally {
+            try {
+                in.close();
+            } catch (Exception e) {
+            }
+        }
+
+----------------------------------------
+    private ImageIcon getMenuIcon(final String filename) {
+        try {
+            return new ImageIcon(new ImageIcon(getClass().getResource("/res/drawable/" + filename)).getImage().getScaledInstance(16, 16, Image.SCALE_SMOOTH));
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995955
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 489 494
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 260 266
+----------------------------------------
+            } finally {
+                try {
+                    saveStream.close();
+                } catch (Exception e) {
+                }
+            }
+
+----------------------------------------
+    private ImageIcon getMenuIcon(final String filename) {
+        try {
+            return new ImageIcon(new ImageIcon(getClass().getResource("/res/drawable/" + filename)).getImage().getScaledInstance(16, 16, Image.SCALE_SMOOTH));
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995872
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 296 301
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 260 266
+----------------------------------------
+        } finally {
+            try {
+                out.close();
+            } catch (Exception e) {
+            }
+        }
+
+----------------------------------------
+    private ImageIcon getMenuIcon(final String filename) {
+        try {
+            return new ImageIcon(new ImageIcon(getClass().getResource("/res/drawable/" + filename)).getImage().getScaledInstance(16, 16, Image.SCALE_SMOOTH));
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995961
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 510 515
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 260 266
+----------------------------------------
+        } finally {
+            try {
+                romStream.close();
+            } catch (Exception e) {
+            }
+        }
+
+----------------------------------------
+    private ImageIcon getMenuIcon(final String filename) {
+        try {
+            return new ImageIcon(new ImageIcon(getClass().getResource("/res/drawable/" + filename)).getImage().getScaledInstance(16, 16, Image.SCALE_SMOOTH));
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995964
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 510 515
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 241 248
+----------------------------------------
+        } finally {
+            try {
+                romStream.close();
+            } catch (Exception e) {
+            }
+        }
+
+----------------------------------------
+                    public void windowClosing(final WindowEvent evt) {
+                        try {
+                            settings.storeToXML(new FileOutputStream(new File(PROPERTIES_NAME)), "Properties for JSwingBoy");
+                            stopGame();
+                        } catch (Exception e) {
+                            // we can't save the settings, that's a pity, but we'll just use defaults on next startup
+                        }
+                    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995190
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 375 380
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 241 248
+----------------------------------------
+        } finally {
+            try {
+                in.close();
+            } catch (Exception e) {
+            }
+        }
+
+----------------------------------------
+                    public void windowClosing(final WindowEvent evt) {
+                        try {
+                            settings.storeToXML(new FileOutputStream(new File(PROPERTIES_NAME)), "Properties for JSwingBoy");
+                            stopGame();
+                        } catch (Exception e) {
+                            // we can't save the settings, that's a pity, but we'll just use defaults on next startup
+                        }
+                    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995873
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 296 301
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 241 248
+----------------------------------------
+        } finally {
+            try {
+                out.close();
+            } catch (Exception e) {
+            }
+        }
+
+----------------------------------------
+                    public void windowClosing(final WindowEvent evt) {
+                        try {
+                            settings.storeToXML(new FileOutputStream(new File(PROPERTIES_NAME)), "Properties for JSwingBoy");
+                            stopGame();
+                        } catch (Exception e) {
+                            // we can't save the settings, that's a pity, but we'll just use defaults on next startup
+                        }
+                    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995871
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 260 266
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 241 248
+----------------------------------------
+    private ImageIcon getMenuIcon(final String filename) {
+        try {
+            return new ImageIcon(new ImageIcon(getClass().getResource("/res/drawable/" + filename)).getImage().getScaledInstance(16, 16, Image.SCALE_SMOOTH));
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+----------------------------------------
+                    public void windowClosing(final WindowEvent evt) {
+                        try {
+                            settings.storeToXML(new FileOutputStream(new File(PROPERTIES_NAME)), "Properties for JSwingBoy");
+                            stopGame();
+                        } catch (Exception e) {
+                            // we can't save the settings, that's a pity, but we'll just use defaults on next startup
+                        }
+                    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995958
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 489 494
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 241 248
+----------------------------------------
+            } finally {
+                try {
+                    saveStream.close();
+                } catch (Exception e) {
+                }
+            }
+
+----------------------------------------
+                    public void windowClosing(final WindowEvent evt) {
+                        try {
+                            settings.storeToXML(new FileOutputStream(new File(PROPERTIES_NAME)), "Properties for JSwingBoy");
+                            stopGame();
+                        } catch (Exception e) {
+                            // we can't save the settings, that's a pity, but we'll just use defaults on next startup
+                        }
+                    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17994989
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 984 991
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 241 248
+----------------------------------------
+                if (evt.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
+                    try {
+                        Desktop.getDesktop().browse(evt.getURL().toURI());
+                    } catch (Throwable t) {
+                        // could not display the web page, what to do now???
+                        System.err.println("Could not browse to page " + evt.getURL());
+                    }
+                }
+
+----------------------------------------
+                    public void windowClosing(final WindowEvent evt) {
+                        try {
+                            settings.storeToXML(new FileOutputStream(new File(PROPERTIES_NAME)), "Properties for JSwingBoy");
+                            stopGame();
+                        } catch (Exception e) {
+                            // we can't save the settings, that's a pity, but we'll just use defaults on next startup
+                        }
+                    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995104
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 375 380
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 998 1004
+----------------------------------------
+        } finally {
+            try {
+                in.close();
+            } catch (Exception e) {
+            }
+        }
+
+----------------------------------------
+    private void jMenuItemContentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemContentsActionPerformed
+        try {
+            java.awt.Desktop.getDesktop().browse(new URI(URL_ONLINE_HELP));
+        } catch (Throwable t) {
+            JOptionPane.showMessageDialog(this, this.commonResources.getString("CouldNotDisplayOnlineHelp") + " '" + URL_ONLINE_HELP + "'", this.commonResources.getString("CouldNotStartBrowser"), JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jMenuItemContentsActionPerformed
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995103
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 296 301
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 998 1004
+----------------------------------------
+        } finally {
+            try {
+                out.close();
+            } catch (Exception e) {
+            }
+        }
+
+----------------------------------------
+    private void jMenuItemContentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemContentsActionPerformed
+        try {
+            java.awt.Desktop.getDesktop().browse(new URI(URL_ONLINE_HELP));
+        } catch (Throwable t) {
+            JOptionPane.showMessageDialog(this, this.commonResources.getString("CouldNotDisplayOnlineHelp") + " '" + URL_ONLINE_HELP + "'", this.commonResources.getString("CouldNotStartBrowser"), JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jMenuItemContentsActionPerformed
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995106
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 984 991
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 998 1004
+----------------------------------------
+                if (evt.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
+                    try {
+                        Desktop.getDesktop().browse(evt.getURL().toURI());
+                    } catch (Throwable t) {
+                        // could not display the web page, what to do now???
+                        System.err.println("Could not browse to page " + evt.getURL());
+                    }
+                }
+
+----------------------------------------
+    private void jMenuItemContentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemContentsActionPerformed
+        try {
+            java.awt.Desktop.getDesktop().browse(new URI(URL_ONLINE_HELP));
+        } catch (Throwable t) {
+            JOptionPane.showMessageDialog(this, this.commonResources.getString("CouldNotDisplayOnlineHelp") + " '" + URL_ONLINE_HELP + "'", this.commonResources.getString("CouldNotStartBrowser"), JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jMenuItemContentsActionPerformed
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995101
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 510 515
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 998 1004
+----------------------------------------
+        } finally {
+            try {
+                romStream.close();
+            } catch (Exception e) {
+            }
+        }
+
+----------------------------------------
+    private void jMenuItemContentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemContentsActionPerformed
+        try {
+            java.awt.Desktop.getDesktop().browse(new URI(URL_ONLINE_HELP));
+        } catch (Throwable t) {
+            JOptionPane.showMessageDialog(this, this.commonResources.getString("CouldNotDisplayOnlineHelp") + " '" + URL_ONLINE_HELP + "'", this.commonResources.getString("CouldNotStartBrowser"), JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jMenuItemContentsActionPerformed
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995105
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 241 248
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 998 1004
+----------------------------------------
+                    public void windowClosing(final WindowEvent evt) {
+                        try {
+                            settings.storeToXML(new FileOutputStream(new File(PROPERTIES_NAME)), "Properties for JSwingBoy");
+                            stopGame();
+                        } catch (Exception e) {
+                            // we can't save the settings, that's a pity, but we'll just use defaults on next startup
+                        }
+                    }
+
+----------------------------------------
+    private void jMenuItemContentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemContentsActionPerformed
+        try {
+            java.awt.Desktop.getDesktop().browse(new URI(URL_ONLINE_HELP));
+        } catch (Throwable t) {
+            JOptionPane.showMessageDialog(this, this.commonResources.getString("CouldNotDisplayOnlineHelp") + " '" + URL_ONLINE_HELP + "'", this.commonResources.getString("CouldNotStartBrowser"), JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jMenuItemContentsActionPerformed
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17994990
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 489 494
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 998 1004
+----------------------------------------
+            } finally {
+                try {
+                    saveStream.close();
+                } catch (Exception e) {
+                }
+            }
+
+----------------------------------------
+    private void jMenuItemContentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemContentsActionPerformed
+        try {
+            java.awt.Desktop.getDesktop().browse(new URI(URL_ONLINE_HELP));
+        } catch (Throwable t) {
+            JOptionPane.showMessageDialog(this, this.commonResources.getString("CouldNotDisplayOnlineHelp") + " '" + URL_ONLINE_HELP + "'", this.commonResources.getString("CouldNotStartBrowser"), JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jMenuItemContentsActionPerformed
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995102
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 260 266
+src/de/joergjahnke/gameboy/swing/GameboyFrame.java 998 1004
+----------------------------------------
+    private ImageIcon getMenuIcon(final String filename) {
+        try {
+            return new ImageIcon(new ImageIcon(getClass().getResource("/res/drawable/" + filename)).getImage().getScaledInstance(16, 16, Image.SCALE_SMOOTH));
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+----------------------------------------
+    private void jMenuItemContentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemContentsActionPerformed
+        try {
+            java.awt.Desktop.getDesktop().browse(new URI(URL_ONLINE_HELP));
+        } catch (Throwable t) {
+            JOptionPane.showMessageDialog(this, this.commonResources.getString("CouldNotDisplayOnlineHelp") + " '" + URL_ONLINE_HELP + "'", this.commonResources.getString("CouldNotStartBrowser"), JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jMenuItemContentsActionPerformed
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+28734563
+src/de/joergjahnke/gameboy/core/VideoChip.java 621 629
+src/de/joergjahnke/gameboy/core/VideoChip.java 521 529
+----------------------------------------
+    public final void setSpritesEnabled(final boolean areSpritesEnabled) {
+        if (areSpritesEnabled != this.areSpritesEnabled) {
+            if (DEBUG) {
+                System.out.println("Set sprite enable to " + areSpritesEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            invalidateLines();
+        }
+        this.areSpritesEnabled = areSpritesEnabled;
+    }
+
+----------------------------------------
+    public final void setWindowTileArea(final int windowTileMapAdr) {
+        if (this.windowTileMapAdr != (windowTileMapAdr & 0x1fff)) {
+            if (DEBUG) {
+                System.out.println("Set window tile area to " + Integer.toHexString(windowTileMapAdr) + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.windowTileMapAdr = windowTileMapAdr & 0x1fff;
+            invalidateLines();
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+28734564
+src/de/joergjahnke/gameboy/core/VideoChip.java 729 737
+src/de/joergjahnke/gameboy/core/VideoChip.java 521 529
+----------------------------------------
+    public final void setScrollX(final int scrollX) {
+        if (scrollX != this.scrollX) {
+            if (DEBUG) {
+                System.out.println("Set x-scroll to " + scrollX + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.scrollX = scrollX;
+            invalidateLines();
+        }
+    }
+
+----------------------------------------
+    public final void setWindowTileArea(final int windowTileMapAdr) {
+        if (this.windowTileMapAdr != (windowTileMapAdr & 0x1fff)) {
+            if (DEBUG) {
+                System.out.println("Set window tile area to " + Integer.toHexString(windowTileMapAdr) + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.windowTileMapAdr = windowTileMapAdr & 0x1fff;
+            invalidateLines();
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17994992
+src/de/joergjahnke/gameboy/core/VideoChip.java 521 529
+src/de/joergjahnke/gameboy/core/VideoChip.java 545 554
+----------------------------------------
+    public final void setWindowTileArea(final int windowTileMapAdr) {
+        if (this.windowTileMapAdr != (windowTileMapAdr & 0x1fff)) {
+            if (DEBUG) {
+                System.out.println("Set window tile area to " + Integer.toHexString(windowTileMapAdr) + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.windowTileMapAdr = windowTileMapAdr & 0x1fff;
+            invalidateLines();
+        }
+    }
+
+----------------------------------------
+    public final void setTileDataArea(final int tileDataArea) {
+        if (this.tileDataArea != (tileDataArea & 0x1fff)) {
+            if (DEBUG) {
+                System.out.println("Set tile data area to " + Integer.toHexString(tileDataArea & 0x1fff) + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.tileDataArea = tileDataArea & 0x1fff;
+            invalidateTiles();
+            invalidateLines();
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995282
+src/de/joergjahnke/gameboy/core/VideoChip.java 521 529
+src/de/joergjahnke/gameboy/core/VideoChip.java 506 514
+----------------------------------------
+    public final void setWindowTileArea(final int windowTileMapAdr) {
+        if (this.windowTileMapAdr != (windowTileMapAdr & 0x1fff)) {
+            if (DEBUG) {
+                System.out.println("Set window tile area to " + Integer.toHexString(windowTileMapAdr) + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.windowTileMapAdr = windowTileMapAdr & 0x1fff;
+            invalidateLines();
+        }
+    }
+
+----------------------------------------
+    public final void setBackgroundTileArea(final int bgTileMapAdr) {
+        if (this.bgTileMapAdr != (bgTileMapAdr & 0x1fff)) {
+            if (DEBUG) {
+                System.out.println("Set background tile area to " + Integer.toHexString(bgTileMapAdr) + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.bgTileMapAdr = bgTileMapAdr & 0x1fff;
+            invalidateLines();
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+28734560
+src/de/joergjahnke/gameboy/core/VideoChip.java 621 629
+src/de/joergjahnke/gameboy/core/VideoChip.java 506 514
+----------------------------------------
+    public final void setSpritesEnabled(final boolean areSpritesEnabled) {
+        if (areSpritesEnabled != this.areSpritesEnabled) {
+            if (DEBUG) {
+                System.out.println("Set sprite enable to " + areSpritesEnabled + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            invalidateLines();
+        }
+        this.areSpritesEnabled = areSpritesEnabled;
+    }
+
+----------------------------------------
+    public final void setBackgroundTileArea(final int bgTileMapAdr) {
+        if (this.bgTileMapAdr != (bgTileMapAdr & 0x1fff)) {
+            if (DEBUG) {
+                System.out.println("Set background tile area to " + Integer.toHexString(bgTileMapAdr) + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.bgTileMapAdr = bgTileMapAdr & 0x1fff;
+            invalidateLines();
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+67
+17995284
+src/de/joergjahnke/gameboy/core/VideoChip.java 522 528
+src/de/joergjahnke/gameboy/core/VideoChip.java 506 514
+----------------------------------------
+        if (this.windowTileMapAdr != (windowTileMapAdr & 0x1fff)) {
+            if (DEBUG) {
+                System.out.println("Set window tile area to " + Integer.toHexString(windowTileMapAdr) + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.windowTileMapAdr = windowTileMapAdr & 0x1fff;
+            invalidateLines();
+        }
+
+----------------------------------------
+    public final void setBackgroundTileArea(final int bgTileMapAdr) {
+        if (this.bgTileMapAdr != (bgTileMapAdr & 0x1fff)) {
+            if (DEBUG) {
+                System.out.println("Set background tile area to " + Integer.toHexString(bgTileMapAdr) + " at line " + this.currentLine + " of frame " + this.frames);
+            }
+            this.bgTileMapAdr = bgTileMapAdr & 0x1fff;
+            invalidateLines();
+        }
+    }
+
+----------------------------------------

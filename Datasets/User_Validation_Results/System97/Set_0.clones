@@ -1,0 +1,1361 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22834798
+src/com/levelonelabs/aim/AIMClient.java 554 582
+src/com/levelonelabs/aim/AIMClient.java 661 689
+----------------------------------------
+        while (groupIter.hasNext()) {
+            String group = (String) groupIter.next();
+            String currentlist = "toc2_new_buddies {g:" + group + "\n";
+            List groupList = (List) groupMap.get(group);
+            for (int i = 0; i < groupList.size(); i++) {
+                AIMBuddy buddy = (AIMBuddy) groupList.get(i);
+                buddyHash.put(imNormalize(buddy.getName()), buddy);
+                currentlist += "b:" + imNormalize(buddy.getName()) + "\n";
+                if (currentlist.length() > 1800) {
+                    try {
+                        frameSend(currentlist + "}\0");
+                        currentlist = "toc2_new_buddies {g:" + group + "\n";
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        logger.severe("ERROR adding buddies.");
+                    }
+                }
+            }
+            // send the left overs (if any)
+            if (currentlist.length() > ("toc2_new_buddies {g:" + group + "\n").length()) {
+                try {
+                    frameSend(currentlist + "}\0");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    logger.severe("ERROR adding buddies.");
+                }
+            }
+
+        }
+
+----------------------------------------
+        while (groupIter.hasNext()) {
+            String group = (String) groupIter.next();
+            String currentlist = "toc2_remove_buddy";
+            List groupList = (List) groupMap.get(group);
+            for (int i = 0; i < groupList.size(); i++) {
+                AIMBuddy buddy = (AIMBuddy) groupList.get(i);
+                buddyHash.remove(imNormalize(buddy.getName()));
+                currentlist += " " + imNormalize(buddy.getName());
+                if (currentlist.length() > 1800) {
+                    try {
+                        frameSend(currentlist + " " + group + "\0");
+                        currentlist = "toc2_remove_buddy";
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        logger.severe("ERROR removing buddies.");
+                    }
+                }
+            }
+            // remove the left overs (if any)
+            if (currentlist.length() > "toc2_remove_buddy".length()) {
+                try {
+                    frameSend(currentlist + " " + group + "\0");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    logger.severe("ERROR adding buddies.");
+                }
+            }
+
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22834799
+src/com/levelonelabs/aim/AIMClient.java 558 571
+src/com/levelonelabs/aim/AIMClient.java 665 678
+----------------------------------------
+            for (int i = 0; i < groupList.size(); i++) {
+                AIMBuddy buddy = (AIMBuddy) groupList.get(i);
+                buddyHash.put(imNormalize(buddy.getName()), buddy);
+                currentlist += "b:" + imNormalize(buddy.getName()) + "\n";
+                if (currentlist.length() > 1800) {
+                    try {
+                        frameSend(currentlist + "}\0");
+                        currentlist = "toc2_new_buddies {g:" + group + "\n";
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        logger.severe("ERROR adding buddies.");
+                    }
+                }
+            }
+
+----------------------------------------
+            for (int i = 0; i < groupList.size(); i++) {
+                AIMBuddy buddy = (AIMBuddy) groupList.get(i);
+                buddyHash.remove(imNormalize(buddy.getName()));
+                currentlist += " " + imNormalize(buddy.getName());
+                if (currentlist.length() > 1800) {
+                    try {
+                        frameSend(currentlist + " " + group + "\0");
+                        currentlist = "toc2_remove_buddy";
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        logger.severe("ERROR removing buddies.");
+                    }
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22834800
+src/com/levelonelabs/aim/AIMClient.java 562 570
+src/com/levelonelabs/aim/AIMClient.java 669 677
+----------------------------------------
+                if (currentlist.length() > 1800) {
+                    try {
+                        frameSend(currentlist + "}\0");
+                        currentlist = "toc2_new_buddies {g:" + group + "\n";
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        logger.severe("ERROR adding buddies.");
+                    }
+                }
+
+----------------------------------------
+                if (currentlist.length() > 1800) {
+                    try {
+                        frameSend(currentlist + " " + group + "\0");
+                        currentlist = "toc2_remove_buddy";
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        logger.severe("ERROR removing buddies.");
+                    }
+                }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835119
+src/com/levelonelabs/aim/AIMClient.java 562 570
+src/com/levelonelabs/aim/AIMClient.java 318 324
+----------------------------------------
+                if (currentlist.length() > 1800) {
+                    try {
+                        frameSend(currentlist + "}\0");
+                        currentlist = "toc2_new_buddies {g:" + group + "\n";
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        logger.severe("ERROR adding buddies.");
+                    }
+                }
+
+----------------------------------------
+            if (!this.online) {
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            } else {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22834801
+src/com/levelonelabs/aim/AIMClient.java 669 677
+src/com/levelonelabs/aim/AIMClient.java 318 324
+----------------------------------------
+                if (currentlist.length() > 1800) {
+                    try {
+                        frameSend(currentlist + " " + group + "\0");
+                        currentlist = "toc2_remove_buddy";
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        logger.severe("ERROR removing buddies.");
+                    }
+                }
+
+----------------------------------------
+            if (!this.online) {
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            } else {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835122
+src/com/levelonelabs/aim/AIMClient.java 318 324
+src/com/levelonelabs/aim/AIMClient.java 573 580
+----------------------------------------
+            if (!this.online) {
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            } else {
+
+----------------------------------------
+            if (currentlist.length() > ("toc2_new_buddies {g:" + group + "\n").length()) {
+                try {
+                    frameSend(currentlist + "}\0");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    logger.severe("ERROR adding buddies.");
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22834802
+src/com/levelonelabs/aim/AIMClient.java 669 677
+src/com/levelonelabs/aim/AIMClient.java 573 580
+----------------------------------------
+                if (currentlist.length() > 1800) {
+                    try {
+                        frameSend(currentlist + " " + group + "\0");
+                        currentlist = "toc2_remove_buddy";
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        logger.severe("ERROR removing buddies.");
+                    }
+                }
+
+----------------------------------------
+            if (currentlist.length() > ("toc2_new_buddies {g:" + group + "\n").length()) {
+                try {
+                    frameSend(currentlist + "}\0");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    logger.severe("ERROR adding buddies.");
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835121
+src/com/levelonelabs/aim/AIMClient.java 562 570
+src/com/levelonelabs/aim/AIMClient.java 573 580
+----------------------------------------
+                if (currentlist.length() > 1800) {
+                    try {
+                        frameSend(currentlist + "}\0");
+                        currentlist = "toc2_new_buddies {g:" + group + "\n";
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        logger.severe("ERROR adding buddies.");
+                    }
+                }
+
+----------------------------------------
+            if (currentlist.length() > ("toc2_new_buddies {g:" + group + "\n").length()) {
+                try {
+                    frameSend(currentlist + "}\0");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    logger.severe("ERROR adding buddies.");
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22834805
+src/com/levelonelabs/aim/AIMClient.java 318 324
+src/com/levelonelabs/aim/AIMClient.java 680 687
+----------------------------------------
+            if (!this.online) {
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            } else {
+
+----------------------------------------
+            if (currentlist.length() > "toc2_remove_buddy".length()) {
+                try {
+                    frameSend(currentlist + " " + group + "\0");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    logger.severe("ERROR adding buddies.");
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22834806
+src/com/levelonelabs/aim/AIMClient.java 573 580
+src/com/levelonelabs/aim/AIMClient.java 680 687
+----------------------------------------
+            if (currentlist.length() > ("toc2_new_buddies {g:" + group + "\n").length()) {
+                try {
+                    frameSend(currentlist + "}\0");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    logger.severe("ERROR adding buddies.");
+                }
+            }
+
+----------------------------------------
+            if (currentlist.length() > "toc2_remove_buddy".length()) {
+                try {
+                    frameSend(currentlist + " " + group + "\0");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    logger.severe("ERROR adding buddies.");
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22834803
+src/com/levelonelabs/aim/AIMClient.java 562 570
+src/com/levelonelabs/aim/AIMClient.java 680 687
+----------------------------------------
+                if (currentlist.length() > 1800) {
+                    try {
+                        frameSend(currentlist + "}\0");
+                        currentlist = "toc2_new_buddies {g:" + group + "\n";
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        logger.severe("ERROR adding buddies.");
+                    }
+                }
+
+----------------------------------------
+            if (currentlist.length() > "toc2_remove_buddy".length()) {
+                try {
+                    frameSend(currentlist + " " + group + "\0");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    logger.severe("ERROR adding buddies.");
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22834804
+src/com/levelonelabs/aim/AIMClient.java 669 677
+src/com/levelonelabs/aim/AIMClient.java 680 687
+----------------------------------------
+                if (currentlist.length() > 1800) {
+                    try {
+                        frameSend(currentlist + " " + group + "\0");
+                        currentlist = "toc2_remove_buddy";
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        logger.severe("ERROR removing buddies.");
+                    }
+                }
+
+----------------------------------------
+            if (currentlist.length() > "toc2_remove_buddy".length()) {
+                try {
+                    frameSend(currentlist + " " + group + "\0");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    logger.severe("ERROR adding buddies.");
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835120
+src/com/levelonelabs/aim/AIMClient.java 562 570
+src/com/levelonelabs/aim/AIMClient.java 527 535
+----------------------------------------
+                if (currentlist.length() > 1800) {
+                    try {
+                        frameSend(currentlist + "}\0");
+                        currentlist = "toc2_new_buddies {g:" + group + "\n";
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        logger.severe("ERROR adding buddies.");
+                    }
+                }
+
+----------------------------------------
+        if (this.online) {
+            String toBeSent = "toc2_new_buddies {g:" + buddy.getGroup() + "\nb:" + imNormalize(buddy.getName()) + "\n}";
+            try {
+                frameSend(toBeSent + "\0");
+            } catch (IOException e) {
+                logger.severe(e.toString());
+                signoff("Error adding buddy");
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835123
+src/com/levelonelabs/aim/AIMClient.java 573 580
+src/com/levelonelabs/aim/AIMClient.java 527 535
+----------------------------------------
+            if (currentlist.length() > ("toc2_new_buddies {g:" + group + "\n").length()) {
+                try {
+                    frameSend(currentlist + "}\0");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    logger.severe("ERROR adding buddies.");
+                }
+            }
+
+----------------------------------------
+        if (this.online) {
+            String toBeSent = "toc2_new_buddies {g:" + buddy.getGroup() + "\nb:" + imNormalize(buddy.getName()) + "\n}";
+            try {
+                frameSend(toBeSent + "\0");
+            } catch (IOException e) {
+                logger.severe(e.toString());
+                signoff("Error adding buddy");
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22834807
+src/com/levelonelabs/aim/AIMClient.java 527 535
+src/com/levelonelabs/aim/AIMClient.java 762 772
+----------------------------------------
+        if (this.online) {
+            String toBeSent = "toc2_new_buddies {g:" + buddy.getGroup() + "\nb:" + imNormalize(buddy.getName()) + "\n}";
+            try {
+                frameSend(toBeSent + "\0");
+            } catch (IOException e) {
+                logger.severe(e.toString());
+                signoff("Error adding buddy");
+            }
+        }
+
+----------------------------------------
+    private void sendPermit(String buddyname) {
+        logger.fine("Attempting to permit: " + buddyname + ".");
+
+        String toBeSent = "toc2_add_permit";
+        try {
+            frameSend(toBeSent + " " + buddyname + "\0");
+        } catch (IOException e) {
+            logger.severe(e.getMessage());
+            signoff("7.875");
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22834808
+src/com/levelonelabs/aim/AIMClient.java 211 217
+src/com/levelonelabs/aim/AIMClient.java 220 226
+----------------------------------------
+                    for (int j = i + 1; j < sb.length(); j++) {
+                        if (sb.charAt(j) == '>') {
+                            sb = sb.replace(i, j + 1, "");
+                            i--;
+                            break;
+                        }
+                    }
+
+----------------------------------------
+                    for (int j = i + 1; j < sb.length(); j++) {
+                        if ((sb.charAt(j) == '>') && (sb.charAt(j - 1) == '-') && (sb.charAt(j - 2) == '-')) {
+                            sb = sb.replace(i, j + 1, "");
+                            i--;
+                            break;
+                        }
+                    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22834809
+src/com/levelonelabs/aim/AIMClient.java 562 570
+src/com/levelonelabs/aim/AIMClient.java 877 883
+----------------------------------------
+                if (currentlist.length() > 1800) {
+                    try {
+                        frameSend(currentlist + "}\0");
+                        currentlist = "toc2_new_buddies {g:" + group + "\n";
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        logger.severe("ERROR adding buddies.");
+                    }
+                }
+
+----------------------------------------
+        for (int i = 0; i < aimListeners.size(); i++) {
+            try {
+                ((AIMListener) aimListeners.get(i)).handleConnected();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22834811
+src/com/levelonelabs/aim/AIMClient.java 318 324
+src/com/levelonelabs/aim/AIMClient.java 877 883
+----------------------------------------
+            if (!this.online) {
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            } else {
+
+----------------------------------------
+        for (int i = 0; i < aimListeners.size(); i++) {
+            try {
+                ((AIMListener) aimListeners.get(i)).handleConnected();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22834815
+src/com/levelonelabs/aim/AIMClient.java 680 687
+src/com/levelonelabs/aim/AIMClient.java 877 883
+----------------------------------------
+            if (currentlist.length() > "toc2_remove_buddy".length()) {
+                try {
+                    frameSend(currentlist + " " + group + "\0");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    logger.severe("ERROR adding buddies.");
+                }
+            }
+
+----------------------------------------
+        for (int i = 0; i < aimListeners.size(); i++) {
+            try {
+                ((AIMListener) aimListeners.get(i)).handleConnected();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22834813
+src/com/levelonelabs/aim/AIMClient.java 669 677
+src/com/levelonelabs/aim/AIMClient.java 877 883
+----------------------------------------
+                if (currentlist.length() > 1800) {
+                    try {
+                        frameSend(currentlist + " " + group + "\0");
+                        currentlist = "toc2_remove_buddy";
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        logger.severe("ERROR removing buddies.");
+                    }
+                }
+
+----------------------------------------
+        for (int i = 0; i < aimListeners.size(); i++) {
+            try {
+                ((AIMListener) aimListeners.get(i)).handleConnected();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22834812
+src/com/levelonelabs/aim/AIMClient.java 573 580
+src/com/levelonelabs/aim/AIMClient.java 877 883
+----------------------------------------
+            if (currentlist.length() > ("toc2_new_buddies {g:" + group + "\n").length()) {
+                try {
+                    frameSend(currentlist + "}\0");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    logger.severe("ERROR adding buddies.");
+                }
+            }
+
+----------------------------------------
+        for (int i = 0; i < aimListeners.size(); i++) {
+            try {
+                ((AIMListener) aimListeners.get(i)).handleConnected();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22834810
+src/com/levelonelabs/aim/AIMClient.java 877 883
+src/com/levelonelabs/aim/AIMClient.java 499 508
+----------------------------------------
+        for (int i = 0; i < aimListeners.size(); i++) {
+            try {
+                ((AIMListener) aimListeners.get(i)).handleConnected();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+----------------------------------------
+        } else {
+            // for some reason we are sending a message to an offline buddy
+            // this will generate a status request for them (this message will
+            // be lost, but if they are online, we should get an update)
+            try {
+                frameSend("toc_get_status " + imNormalize(buddy.getName()) + "\0");
+            } catch (IOException e) {
+                logger.severe("Error sending status request for offline buddy: " + e.getMessage());
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22835158
+src/com/levelonelabs/aim/AIMClient.java 318 324
+src/com/levelonelabs/aim/AIMClient.java 499 508
+----------------------------------------
+            if (!this.online) {
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            } else {
+
+----------------------------------------
+        } else {
+            // for some reason we are sending a message to an offline buddy
+            // this will generate a status request for them (this message will
+            // be lost, but if they are online, we should get an update)
+            try {
+                frameSend("toc_get_status " + imNormalize(buddy.getName()) + "\0");
+            } catch (IOException e) {
+                logger.severe("Error sending status request for offline buddy: " + e.getMessage());
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22834872
+src/com/levelonelabs/aim/AIMClient.java 318 324
+src/com/levelonelabs/aim/AIMClient.java 843 849
+----------------------------------------
+            if (!this.online) {
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            } else {
+
+----------------------------------------
+            for (int i = 0; i < aimListeners.size(); i++) {
+                try {
+                    ((AIMListener) aimListeners.get(i)).handleMessage(aimbud, request);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22834873
+src/com/levelonelabs/aim/AIMClient.java 573 580
+src/com/levelonelabs/aim/AIMClient.java 843 849
+----------------------------------------
+            if (currentlist.length() > ("toc2_new_buddies {g:" + group + "\n").length()) {
+                try {
+                    frameSend(currentlist + "}\0");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    logger.severe("ERROR adding buddies.");
+                }
+            }
+
+----------------------------------------
+            for (int i = 0; i < aimListeners.size(); i++) {
+                try {
+                    ((AIMListener) aimListeners.get(i)).handleMessage(aimbud, request);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22834871
+src/com/levelonelabs/aim/AIMClient.java 499 508
+src/com/levelonelabs/aim/AIMClient.java 843 849
+----------------------------------------
+        } else {
+            // for some reason we are sending a message to an offline buddy
+            // this will generate a status request for them (this message will
+            // be lost, but if they are online, we should get an update)
+            try {
+                frameSend("toc_get_status " + imNormalize(buddy.getName()) + "\0");
+            } catch (IOException e) {
+                logger.severe("Error sending status request for offline buddy: " + e.getMessage());
+            }
+        }
+
+----------------------------------------
+            for (int i = 0; i < aimListeners.size(); i++) {
+                try {
+                    ((AIMListener) aimListeners.get(i)).handleMessage(aimbud, request);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22834869
+src/com/levelonelabs/aim/AIMClient.java 562 570
+src/com/levelonelabs/aim/AIMClient.java 843 849
+----------------------------------------
+                if (currentlist.length() > 1800) {
+                    try {
+                        frameSend(currentlist + "}\0");
+                        currentlist = "toc2_new_buddies {g:" + group + "\n";
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        logger.severe("ERROR adding buddies.");
+                    }
+                }
+
+----------------------------------------
+            for (int i = 0; i < aimListeners.size(); i++) {
+                try {
+                    ((AIMListener) aimListeners.get(i)).handleMessage(aimbud, request);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22834874
+src/com/levelonelabs/aim/AIMClient.java 680 687
+src/com/levelonelabs/aim/AIMClient.java 843 849
+----------------------------------------
+            if (currentlist.length() > "toc2_remove_buddy".length()) {
+                try {
+                    frameSend(currentlist + " " + group + "\0");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    logger.severe("ERROR adding buddies.");
+                }
+            }
+
+----------------------------------------
+            for (int i = 0; i < aimListeners.size(); i++) {
+                try {
+                    ((AIMListener) aimListeners.get(i)).handleMessage(aimbud, request);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22834814
+src/com/levelonelabs/aim/AIMClient.java 877 883
+src/com/levelonelabs/aim/AIMClient.java 843 849
+----------------------------------------
+        for (int i = 0; i < aimListeners.size(); i++) {
+            try {
+                ((AIMListener) aimListeners.get(i)).handleConnected();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+----------------------------------------
+            for (int i = 0; i < aimListeners.size(); i++) {
+                try {
+                    ((AIMListener) aimListeners.get(i)).handleMessage(aimbud, request);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22834870
+src/com/levelonelabs/aim/AIMClient.java 669 677
+src/com/levelonelabs/aim/AIMClient.java 843 849
+----------------------------------------
+                if (currentlist.length() > 1800) {
+                    try {
+                        frameSend(currentlist + " " + group + "\0");
+                        currentlist = "toc2_remove_buddy";
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        logger.severe("ERROR removing buddies.");
+                    }
+                }
+
+----------------------------------------
+            for (int i = 0; i < aimListeners.size(); i++) {
+                try {
+                    ((AIMListener) aimListeners.get(i)).handleMessage(aimbud, request);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22834877
+src/com/levelonelabs/aim/AIMClient.java 669 677
+src/com/levelonelabs/aim/AIMClient.java 863 869
+----------------------------------------
+                if (currentlist.length() > 1800) {
+                    try {
+                        frameSend(currentlist + " " + group + "\0");
+                        currentlist = "toc2_remove_buddy";
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        logger.severe("ERROR removing buddies.");
+                    }
+                }
+
+----------------------------------------
+        for (int i = 0; i < aimListeners.size(); i++) {
+            try {
+                ((AIMListener) aimListeners.get(i)).handleWarning(aimbud, amount);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22834891
+src/com/levelonelabs/aim/AIMClient.java 318 324
+src/com/levelonelabs/aim/AIMClient.java 863 869
+----------------------------------------
+            if (!this.online) {
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            } else {
+
+----------------------------------------
+        for (int i = 0; i < aimListeners.size(); i++) {
+            try {
+                ((AIMListener) aimListeners.get(i)).handleWarning(aimbud, amount);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22834890
+src/com/levelonelabs/aim/AIMClient.java 499 508
+src/com/levelonelabs/aim/AIMClient.java 863 869
+----------------------------------------
+        } else {
+            // for some reason we are sending a message to an offline buddy
+            // this will generate a status request for them (this message will
+            // be lost, but if they are online, we should get an update)
+            try {
+                frameSend("toc_get_status " + imNormalize(buddy.getName()) + "\0");
+            } catch (IOException e) {
+                logger.severe("Error sending status request for offline buddy: " + e.getMessage());
+            }
+        }
+
+----------------------------------------
+        for (int i = 0; i < aimListeners.size(); i++) {
+            try {
+                ((AIMListener) aimListeners.get(i)).handleWarning(aimbud, amount);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22834816
+src/com/levelonelabs/aim/AIMClient.java 877 883
+src/com/levelonelabs/aim/AIMClient.java 863 869
+----------------------------------------
+        for (int i = 0; i < aimListeners.size(); i++) {
+            try {
+                ((AIMListener) aimListeners.get(i)).handleConnected();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+----------------------------------------
+        for (int i = 0; i < aimListeners.size(); i++) {
+            try {
+                ((AIMListener) aimListeners.get(i)).handleWarning(aimbud, amount);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22834893
+src/com/levelonelabs/aim/AIMClient.java 680 687
+src/com/levelonelabs/aim/AIMClient.java 863 869
+----------------------------------------
+            if (currentlist.length() > "toc2_remove_buddy".length()) {
+                try {
+                    frameSend(currentlist + " " + group + "\0");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    logger.severe("ERROR adding buddies.");
+                }
+            }
+
+----------------------------------------
+        for (int i = 0; i < aimListeners.size(); i++) {
+            try {
+                ((AIMListener) aimListeners.get(i)).handleWarning(aimbud, amount);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22834889
+src/com/levelonelabs/aim/AIMClient.java 843 849
+src/com/levelonelabs/aim/AIMClient.java 863 869
+----------------------------------------
+            for (int i = 0; i < aimListeners.size(); i++) {
+                try {
+                    ((AIMListener) aimListeners.get(i)).handleMessage(aimbud, request);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+----------------------------------------
+        for (int i = 0; i < aimListeners.size(); i++) {
+            try {
+                ((AIMListener) aimListeners.get(i)).handleWarning(aimbud, amount);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22834876
+src/com/levelonelabs/aim/AIMClient.java 562 570
+src/com/levelonelabs/aim/AIMClient.java 863 869
+----------------------------------------
+                if (currentlist.length() > 1800) {
+                    try {
+                        frameSend(currentlist + "}\0");
+                        currentlist = "toc2_new_buddies {g:" + group + "\n";
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        logger.severe("ERROR adding buddies.");
+                    }
+                }
+
+----------------------------------------
+        for (int i = 0; i < aimListeners.size(); i++) {
+            try {
+                ((AIMListener) aimListeners.get(i)).handleWarning(aimbud, amount);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22834892
+src/com/levelonelabs/aim/AIMClient.java 573 580
+src/com/levelonelabs/aim/AIMClient.java 863 869
+----------------------------------------
+            if (currentlist.length() > ("toc2_new_buddies {g:" + group + "\n").length()) {
+                try {
+                    frameSend(currentlist + "}\0");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    logger.severe("ERROR adding buddies.");
+                }
+            }
+
+----------------------------------------
+        for (int i = 0; i < aimListeners.size(); i++) {
+            try {
+                ((AIMListener) aimListeners.get(i)).handleWarning(aimbud, amount);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22834819
+src/com/levelonelabs/aim/AIMClient.java 877 883
+src/com/levelonelabs/aim/AIMClient.java 890 898
+----------------------------------------
+        for (int i = 0; i < aimListeners.size(); i++) {
+            try {
+                ((AIMListener) aimListeners.get(i)).handleConnected();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+----------------------------------------
+    private void generateDisconnected() {
+        for (int i = 0; i < aimListeners.size(); i++) {
+            try {
+                ((AIMListener) aimListeners.get(i)).handleDisconnected();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22834817
+src/com/levelonelabs/aim/AIMClient.java 861 870
+src/com/levelonelabs/aim/AIMClient.java 890 898
+----------------------------------------
+    private void generateWarning(String from, int amount) {
+        AIMBuddy aimbud = getBuddy(from);
+        for (int i = 0; i < aimListeners.size(); i++) {
+            try {
+                ((AIMListener) aimListeners.get(i)).handleWarning(aimbud, amount);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+----------------------------------------
+    private void generateDisconnected() {
+        for (int i = 0; i < aimListeners.size(); i++) {
+            try {
+                ((AIMListener) aimListeners.get(i)).handleDisconnected();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22834875
+src/com/levelonelabs/aim/AIMClient.java 861 870
+src/com/levelonelabs/aim/AIMClient.java 842 850
+----------------------------------------
+    private void generateWarning(String from, int amount) {
+        AIMBuddy aimbud = getBuddy(from);
+        for (int i = 0; i < aimListeners.size(); i++) {
+            try {
+                ((AIMListener) aimListeners.get(i)).handleWarning(aimbud, amount);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+----------------------------------------
+        } else {
+            for (int i = 0; i < aimListeners.size(); i++) {
+                try {
+                    ((AIMListener) aimListeners.get(i)).handleMessage(aimbud, request);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22834818
+src/com/levelonelabs/aim/AIMClient.java 890 898
+src/com/levelonelabs/aim/AIMClient.java 842 850
+----------------------------------------
+    private void generateDisconnected() {
+        for (int i = 0; i < aimListeners.size(); i++) {
+            try {
+                ((AIMListener) aimListeners.get(i)).handleDisconnected();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+----------------------------------------
+        } else {
+            for (int i = 0; i < aimListeners.size(); i++) {
+                try {
+                    ((AIMListener) aimListeners.get(i)).handleMessage(aimbud, request);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22834888
+src/com/levelonelabs/aim/AIMClient.java 863 869
+src/com/levelonelabs/aim/AIMClient.java 842 850
+----------------------------------------
+        for (int i = 0; i < aimListeners.size(); i++) {
+            try {
+                ((AIMListener) aimListeners.get(i)).handleWarning(aimbud, amount);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+----------------------------------------
+        } else {
+            for (int i = 0; i < aimListeners.size(); i++) {
+                try {
+                    ((AIMListener) aimListeners.get(i)).handleMessage(aimbud, request);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22834894
+src/com/levelonelabs/aim/AIMClient.java 861 870
+src/com/levelonelabs/aim/AIMClient.java 876 884
+----------------------------------------
+    private void generateWarning(String from, int amount) {
+        AIMBuddy aimbud = getBuddy(from);
+        for (int i = 0; i < aimListeners.size(); i++) {
+            try {
+                ((AIMListener) aimListeners.get(i)).handleWarning(aimbud, amount);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+----------------------------------------
+    private void generateConnected() {
+        for (int i = 0; i < aimListeners.size(); i++) {
+            try {
+                ((AIMListener) aimListeners.get(i)).handleConnected();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22834895
+src/com/levelonelabs/aim/AIMClient.java 842 850
+src/com/levelonelabs/aim/AIMClient.java 876 884
+----------------------------------------
+        } else {
+            for (int i = 0; i < aimListeners.size(); i++) {
+                try {
+                    ((AIMListener) aimListeners.get(i)).handleMessage(aimbud, request);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+----------------------------------------
+    private void generateConnected() {
+        for (int i = 0; i < aimListeners.size(); i++) {
+            try {
+                ((AIMListener) aimListeners.get(i)).handleConnected();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22834820
+src/com/levelonelabs/aim/AIMClient.java 890 898
+src/com/levelonelabs/aim/AIMClient.java 876 884
+----------------------------------------
+    private void generateDisconnected() {
+        for (int i = 0; i < aimListeners.size(); i++) {
+            try {
+                ((AIMListener) aimListeners.get(i)).handleDisconnected();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+----------------------------------------
+    private void generateConnected() {
+        for (int i = 0; i < aimListeners.size(); i++) {
+            try {
+                ((AIMListener) aimListeners.get(i)).handleConnected();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22834828
+src/com/levelonelabs/aim/AIMClient.java 863 869
+src/com/levelonelabs/aim/AIMClient.java 891 897
+----------------------------------------
+        for (int i = 0; i < aimListeners.size(); i++) {
+            try {
+                ((AIMListener) aimListeners.get(i)).handleWarning(aimbud, amount);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+----------------------------------------
+        for (int i = 0; i < aimListeners.size(); i++) {
+            try {
+                ((AIMListener) aimListeners.get(i)).handleDisconnected();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22834827
+src/com/levelonelabs/aim/AIMClient.java 680 687
+src/com/levelonelabs/aim/AIMClient.java 891 897
+----------------------------------------
+            if (currentlist.length() > "toc2_remove_buddy".length()) {
+                try {
+                    frameSend(currentlist + " " + group + "\0");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    logger.severe("ERROR adding buddies.");
+                }
+            }
+
+----------------------------------------
+        for (int i = 0; i < aimListeners.size(); i++) {
+            try {
+                ((AIMListener) aimListeners.get(i)).handleDisconnected();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22834830
+src/com/levelonelabs/aim/AIMClient.java 876 884
+src/com/levelonelabs/aim/AIMClient.java 891 897
+----------------------------------------
+    private void generateConnected() {
+        for (int i = 0; i < aimListeners.size(); i++) {
+            try {
+                ((AIMListener) aimListeners.get(i)).handleConnected();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+----------------------------------------
+        for (int i = 0; i < aimListeners.size(); i++) {
+            try {
+                ((AIMListener) aimListeners.get(i)).handleDisconnected();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+22834825
+src/com/levelonelabs/aim/AIMClient.java 669 677
+src/com/levelonelabs/aim/AIMClient.java 891 897
+----------------------------------------
+                if (currentlist.length() > 1800) {
+                    try {
+                        frameSend(currentlist + " " + group + "\0");
+                        currentlist = "toc2_remove_buddy";
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        logger.severe("ERROR removing buddies.");
+                    }
+                }
+
+----------------------------------------
+        for (int i = 0; i < aimListeners.size(); i++) {
+            try {
+                ((AIMListener) aimListeners.get(i)).handleDisconnected();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+----------------------------------------

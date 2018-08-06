@@ -1,0 +1,1142 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+99
+26927549
+FacePanel.java 285 291
+FacePanel.java 125 131
+----------------------------------------
+			poses[pose_d] = poses[pose_c];
+			poses[pose_g] = poses[pose_c];
+			poses[pose_k] = poses[pose_c];
+			poses[pose_n] = poses[pose_c];
+			poses[pose_r] = poses[pose_c];
+			poses[pose_s] = poses[pose_c];
+			poses[pose_y] = poses[pose_c];
+
+----------------------------------------
+				poses[pose_c] =Utilities.createImageIcon( "toon/cdgk.gif" );
+				poses[pose_g] = poses[pose_c];
+				poses[pose_k] = poses[pose_c];
+				poses[pose_n] = poses[pose_c];
+				poses[pose_r] = poses[pose_c];
+				poses[pose_s] = poses[pose_c];
+				poses[pose_t] = poses[pose_c];
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+99
+26927550
+FacePanel.java 337 343
+FacePanel.java 125 131
+----------------------------------------
+				poses[pose_e] = poses[pose_c];
+				poses[pose_g] = poses[pose_c];
+				poses[pose_k] = poses[pose_c];
+				poses[pose_n] = poses[pose_c];
+				poses[pose_r] = poses[pose_c];
+				poses[pose_s] = poses[pose_c];
+				poses[pose_t] = poses[pose_c];
+
+----------------------------------------
+				poses[pose_c] =Utilities.createImageIcon( "toon/cdgk.gif" );
+				poses[pose_g] = poses[pose_c];
+				poses[pose_k] = poses[pose_c];
+				poses[pose_n] = poses[pose_c];
+				poses[pose_r] = poses[pose_c];
+				poses[pose_s] = poses[pose_c];
+				poses[pose_t] = poses[pose_c];
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+99
+26927548
+FacePanel.java 71 77
+FacePanel.java 125 131
+----------------------------------------
+			poses[pose_e] = poses[pose_c];
+			poses[pose_g] = poses[pose_c];
+			poses[pose_k] = poses[pose_c];
+			poses[pose_n] = poses[pose_c];
+			poses[pose_r] = poses[pose_c];
+			poses[pose_s] = poses[pose_c];
+			poses[pose_t] = poses[pose_c];
+
+----------------------------------------
+				poses[pose_c] =Utilities.createImageIcon( "toon/cdgk.gif" );
+				poses[pose_g] = poses[pose_c];
+				poses[pose_k] = poses[pose_c];
+				poses[pose_n] = poses[pose_c];
+				poses[pose_r] = poses[pose_c];
+				poses[pose_s] = poses[pose_c];
+				poses[pose_t] = poses[pose_c];
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+99
+26927551
+JLipSync.java 1628 1651
+JLipSync.java 1677 1689
+----------------------------------------
+		button.setToolTipText("Play the selected portion of the waveform");
+		toolbar.add(button);
+		button.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				playFrames(wavePanel.markerStart, wavePanel.markerEnd);
+			}
+		});
+
+		button = new JButton(createImageIcon("images/play_from.gif"));
+		button
+				.setToolTipText("Play the waveform starting from the current selection to the end");
+		toolbar.add(button);
+		button.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				playFrames(wavePanel.markerStart, wavePanel.frameCount);
+			}
+		});
+
+		button = new JButton(createImageIcon("images/play_to.gif"));
+		button
+				.setToolTipText("Play the waveform from the beginning to the end of the current selection");
+		toolbar.add(button);
+		button.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+----------------------------------------
+		button.setToolTipText("Zoom in on the wave");
+		toolbar.add(button);
+		button.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				wavePanel.zoomIn();
+			}
+		});
+
+		button = new JButton(createImageIcon("images/zoom_out.gif"));
+		button.setToolTipText("Zoom out on the wave");
+		toolbar.add(button);
+		button.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+99
+28960361
+WavePanel.java 78 169
+WavePanel.java 578 606
+----------------------------------------
+	public void paintComponent(Graphics g) {
+
+		super.paintComponent(g);
+
+		// get size of drawable
+		int height = getHeight();
+		int width = getWidth();
+
+		// clear the background
+		g.setColor(Color.black);
+		g.fillRect(0, 0, width, height);
+
+		// no waveform?
+		if (byteCount == 0) {
+			return;
+		}
+
+		// number of frames visible
+		int framesShown = (zoomEnd - zoomStart) + 1;
+
+		// number of pixels per frame (both must be float to avoid truncation
+		// error)
+		float pixelsPerFrame = (float) width / (float) framesShown;
+
+		// is an area selected?
+		if (markerStart != 0) {
+			// calculate the pixel positions
+			int markerStartPixel = (int) ((markerStart - zoomStart) * pixelsPerFrame);
+			int markerWidth = (int) (((markerEnd - markerStart) + 1) * pixelsPerFrame);
+			
+			// make sure the marker is visible
+			if (markerWidth < 1) {
+				markerWidth = 2;
+			}
+
+			// change the background for the selected portion of the wave
+			g.setColor(Color.red);
+			g.fillRect(markerStartPixel, 0, markerWidth, height);
+		}
+
+		// draw the waveform
+		g.setColor(Color.cyan);
+
+		// midpoint
+		int mid = (int) Math.floor(height / 2);
+
+		// scale amount
+		double scaleFactor = (double) mid / (double) maxAmplitude;
+
+		// calculate frames to display
+		int zoomStartByte =  ((zoomStart - 1) * bytesPerFrame);
+		int zoomEndByte = (zoomEnd * bytesPerFrame);
+		float stepSize = ((float) (zoomEndByte - zoomStartByte)) / (float) width;
+
+		// draw the wave
+		for (int i = 0; i < width; i++) {
+
+			// calculate the index
+			int iIndex = (int) (i * stepSize) + zoomStartByte;
+
+			// range check
+			if (iIndex >= 0 && iIndex < byteCount) {
+
+				// get the value
+				int value = bytes[iIndex];
+
+				// draw up or down?
+				if (value < 0) {
+					value = maxAmplitude - Math.abs(value);
+					g.drawLine(i, mid, i, mid + value);
+				} else {
+					value = maxAmplitude - value;
+					g.drawLine(i, mid, i, mid - value);
+				}
+			}
+		}
+
+		// draw the midline
+		g.setColor(Color.gray);
+		g.drawLine(0, mid, width, mid);
+
+		// draw the lines marking the frames?
+		if (pixelsPerFrame > 2) {
+			// loop through each displayed frame
+			for (int i = 0; i < framesShown; i++) {
+				// calculate offset from start
+				int x = (int) (i * pixelsPerFrame);
+				// draw line
+				g.drawLine(x, 0, x, height);
+			}
+		}
+	}
+
+----------------------------------------
+	int mouseOnFrame(int x) {
+
+		// get the width of the wave panel
+		int width = getWidth();
+
+		// clip x to the panel
+		if (x < 0) {
+			x = 0;
+		} else if (x > width) {
+			x = width;
+		}
+
+		// get number of displayed frames
+		int framesShown = (zoomEnd - zoomStart) + 1;
+
+		// get the width of a displayed frame
+		float pixelsPerFrame = (float) width / (float) framesShown;
+
+		// how many frames into the panel?
+		int frame = zoomStart + (int) Math.floor(x / pixelsPerFrame);
+		
+		// clip to range
+		if (frame > zoomEnd ) {
+			frame = zoomEnd;
+		}
+		
+		return frame;
+		
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+99
+28960363
+WavePanel.java 481 509
+WavePanel.java 332 362
+----------------------------------------
+	void zoomIn() {
+
+		// already at full zoom?
+		if (zoomStart != zoomEnd) {
+
+			int wide = (int) ((zoomEnd - zoomStart) / 4);
+			zoomStart += wide;
+			zoomEnd -= wide;
+
+			// range check
+			if (zoomStart > zoomEnd) {
+				int middle = wide;
+				if (middle < 0) {
+					middle = 1;
+				} else if (middle > frameCount) {
+					middle = frameCount;
+				}
+				zoomStart = middle;
+				zoomEnd = middle;
+			}
+		}
+
+		// clear selection
+		markerStart = 0;
+		markerEnd = 0;
+
+		// update the wave
+		repaint();
+	}
+
+----------------------------------------
+	public void playFrames(int startFrame, int endFrame) {
+
+		// no start frame
+		if (startFrame == 0) {
+			startFrame = 1;
+		}
+
+		// no end frame or past end
+		if (endFrame == 0 || endFrame > frameCount) {
+			endFrame = frameCount;
+		}
+
+		// calculate start and end bytes
+		int startByte = bytesPerFrame * (startFrame - 1);
+		int endByte = bytesPerFrame * endFrame;
+
+		// range check bytes
+		if (startByte < 1) {
+			startByte = 1;
+		}
+		if (endByte > byteCount) {
+			endByte = byteCount;
+		}
+
+		// play the thread on a background thread
+		try {
+			new PlayThread(startByte, endByte).start();
+		} catch (Exception e) {
+			errMessage("Error playing the wave file: " + e);
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+99
+28960362
+WavePanel.java 332 362
+Utilities.java 72 99
+----------------------------------------
+	public void playFrames(int startFrame, int endFrame) {
+
+		// no start frame
+		if (startFrame == 0) {
+			startFrame = 1;
+		}
+
+		// no end frame or past end
+		if (endFrame == 0 || endFrame > frameCount) {
+			endFrame = frameCount;
+		}
+
+		// calculate start and end bytes
+		int startByte = bytesPerFrame * (startFrame - 1);
+		int endByte = bytesPerFrame * endFrame;
+
+		// range check bytes
+		if (startByte < 1) {
+			startByte = 1;
+		}
+		if (endByte > byteCount) {
+			endByte = byteCount;
+		}
+
+		// play the thread on a background thread
+		try {
+			new PlayThread(startByte, endByte).start();
+		} catch (Exception e) {
+			errMessage("Error playing the wave file: " + e);
+		}
+	}
+
+----------------------------------------
+	final static JFileChooser fileChooser( File file) {
+		
+		JFileChooser fc = new JFileChooser();
+		
+		// look for default directory?
+		String dirName = Utilities.getPreference("defaultDirectory");					
+
+		if (dirName.length() > 0) {
+			try {
+				fc.setCurrentDirectory( new File(dirName) );
+			} catch (Exception e) {
+				// oh, well...
+			}
+		}
+		
+		// was a file specified?
+		if (file != null) {
+			// set as selected file
+			try {
+				fc.setSelectedFile( file );
+			} catch (Exception e) {
+				// ignore
+			}
+		}
+
+		// return the dialog
+		return fc;
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+99
+28960364
+WavePanel.java 401 438
+JLipSync.java 797 843
+----------------------------------------
+			while (!stopPlayingWave) {
+				// check for buffer overflow
+				int currentPosition = startOfBuffer + bufferSize;
+				if ((startOfBuffer + bufferSize) >= endPosition) {
+					bufferSize = (endPosition) - startOfBuffer;
+				}
+
+				// start the line
+				try {
+					sourceDataLine.start();
+				} catch (Exception e) {
+					// oops
+					System.out.println("Unable to start the line");
+				}
+
+				System.out.println("Buffer size is " + bufferSize);
+				// clear semaphore
+				playingWave = true;
+
+				int nBytesWritten = sourceDataLine.write(bytes, startOfBuffer,
+						bufferSize);
+				System.out.println("wrote " + nBytesWritten + " bytes");
+
+				// give the face drawing code a chance to run
+				try {
+					sleep(1);
+				} catch (Exception e) {
+					// oops
+					System.out.println("Exception triggered in sleep()");
+				}
+
+				// point to next starting point in the buffer
+				startOfBuffer += bufferSize;
+				if (startOfBuffer >= endPosition) {
+					break;
+				}
+
+			}
+
+----------------------------------------
+		if (returnVal == JFileChooser.APPROVE_OPTION) {
+			// get the selected file
+            File file = fc.getSelectedFile();
+
+			// make sure it ends with the proper extention
+            String exte = "";
+            if (fileType == 3) exte = ".csv"; else exte = ".txt";
+
+            FileWriter stream;
+
+			try {
+				stream = new FileWriter(file + exte);
+			} catch (Exception e) {
+				Utilities.errMessage("Error writing file " + e);
+				return;
+			}
+
+			// create file contents
+			String contents = new String();
+
+			try {
+				// create the contents
+				switch (fileType) {
+				case FORMAT_MAGPIE:
+					contents = magpieFormat();
+					break;
+				case FORMAT_MOHO:
+					contents = mohoFormat();
+                	break;
+				case FORMAT_GAMESTUDIO:
+					contents = gameStudioFormat();
+					break;
+				case FORMAT_CSV:
+					contents = csvFormat();
+            		break;
+				}
+
+				// write the contents
+				stream.write(contents);
+
+				stream.close();
+
+			} catch (Exception e) {
+				Utilities.errMessage("Error writing file:" + e);
+				return;
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+99
+28960365
+WavePanel.java 467 478
+JLipSync.java 352 359
+----------------------------------------
+	void zoomAll() {
+		// set range
+		zoomStart = 1;
+		zoomEnd = frameCount;
+
+		// clear selection
+		markerStart = 0;
+		markerEnd = 0;
+
+		// redraw the wave
+		repaint();
+	}
+
+----------------------------------------
+			} else {
+				// set to zero
+				trackOffset = 0;
+				timeSheet.hourOffset = 0;
+				timeSheet.minuteOffset = 0;
+				timeSheet.secondOffset = 0;
+                timeSheet.framesOffset = 0;
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+99
+28960366
+Utilities.java 72 99
+About.java 203 208
+----------------------------------------
+	final static JFileChooser fileChooser( File file) {
+		
+		JFileChooser fc = new JFileChooser();
+		
+		// look for default directory?
+		String dirName = Utilities.getPreference("defaultDirectory");					
+
+		if (dirName.length() > 0) {
+			try {
+				fc.setCurrentDirectory( new File(dirName) );
+			} catch (Exception e) {
+				// oh, well...
+			}
+		}
+		
+		// was a file specified?
+		if (file != null) {
+			// set as selected file
+			try {
+				fc.setSelectedFile( file );
+			} catch (Exception e) {
+				// ignore
+			}
+		}
+
+		// return the dialog
+		return fc;
+	}
+
+----------------------------------------
+	public void actionPerformed(ActionEvent actionEvent) {
+		if (actionEvent.getSource() == buttonOK) {
+			setVisible(false);
+			dispose();
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+99
+28960367
+JLipSync.java 179 226
+JLipSync.java 180 223
+----------------------------------------
+		public void run() {
+			try {
+				// wait for wave to start playing
+				double startWait = System.currentTimeMillis();
+				while (!wavePanel.playingWave) {
+					// give the multitasker a chance to run something else
+					sleep(1);
+
+					// timed out?
+					if (System.currentTimeMillis() - startWait > 8000) {
+						break;
+					}
+				}
+				// calculate wait time between frames
+				double startTime = System.currentTimeMillis();
+				double sleepTime = 1000 / wavePanel.framesPerSecond;
+				// time next frame is to appear
+				double nextFrame = startTime;
+				// extend play time for negative track offsets
+				if (trackOffset < 0) {
+					endIndex -= trackOffset;
+				}
+
+				// display the frames
+				for (int i = startIndex; i <= endIndex; i++) {
+					int frameIndex = trackOffset + i - 1;
+
+					// in range?
+					if (frameIndex > -1 && frameIndex < wavePanel.frameCount) {
+
+						// get the mouth
+						String useMouth = timeSheet.mouth[frameIndex];
+
+						// set the mouth
+						facePanel.setFace(useMouth);
+
+						// wait for next frame
+						nextFrame += sleepTime;
+						while (System.currentTimeMillis() <= nextFrame) {
+							// sleep a bit
+							sleep(10);
+						}
+					}
+				}
+			} catch (Exception e) {
+				// oops.
+			}
+		}
+
+----------------------------------------
+			try {
+				// wait for wave to start playing
+				double startWait = System.currentTimeMillis();
+				while (!wavePanel.playingWave) {
+					// give the multitasker a chance to run something else
+					sleep(1);
+
+					// timed out?
+					if (System.currentTimeMillis() - startWait > 8000) {
+						break;
+					}
+				}
+				// calculate wait time between frames
+				double startTime = System.currentTimeMillis();
+				double sleepTime = 1000 / wavePanel.framesPerSecond;
+				// time next frame is to appear
+				double nextFrame = startTime;
+				// extend play time for negative track offsets
+				if (trackOffset < 0) {
+					endIndex -= trackOffset;
+				}
+
+				// display the frames
+				for (int i = startIndex; i <= endIndex; i++) {
+					int frameIndex = trackOffset + i - 1;
+
+					// in range?
+					if (frameIndex > -1 && frameIndex < wavePanel.frameCount) {
+
+						// get the mouth
+						String useMouth = timeSheet.mouth[frameIndex];
+
+						// set the mouth
+						facePanel.setFace(useMouth);
+
+						// wait for next frame
+						nextFrame += sleepTime;
+						while (System.currentTimeMillis() <= nextFrame) {
+							// sleep a bit
+							sleep(10);
+						}
+					}
+				}
+			} catch (Exception e) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+99
+28960368
+JLipSync.java 288 423
+JLipSync.java 290 403
+----------------------------------------
+	void loadTimeSheet(File file) {
+
+		try {
+
+			SimpleXmlReader xml = new SimpleXmlReader(file);
+
+			// xml header
+			String theHeader = xml.getTag("");
+			if (!theHeader.substring(0, 6).equals("<?xml ")) {
+				throw new Exception("Not an XML file");
+			}
+
+			// header
+			xml.getTag("<jlipsync>");
+
+			// version number
+			String version = xml.getString("version");
+            this.setTitle("JLipSync " + version + "  -  " + file.getName());
+
+			// get the wave file name
+			String waveFileName = xml.getString("wavefile");
+
+			// get fps
+			wavePanel.framesPerSecond = (int) xml.getFloat("fps");
+			timeSheet.framesPerSecond = wavePanel.framesPerSecond;
+			if (wavePanel.framesPerSecond == 24) {
+				fps24.setSelected(true);
+			} else if (wavePanel.framesPerSecond == 25) {
+				fps25.setSelected(true);
+			} else if (wavePanel.framesPerSecond == 30) {
+				fps30.setSelected(true);
+			}
+
+			// try loading the wave file
+			File waveFile;
+			try {
+				// open the file
+				waveFile = new File(waveFileName);
+			} catch (Exception ex) {
+				// failed
+				throw new Exception("Can't find file " + waveFileName);
+			}
+
+			if (waveFile != null) {
+				loadWave(waveFile);
+			}
+
+			// get framecount
+			wavePanel.frameCount = (int) xml.getFloat("framecount");
+
+			// create a new timesheet
+			timeSheet.init(wavePanel.frameCount, wavePanel.framesPerSecond);
+
+			// offsets (new to 1.1)
+			if (xml.getCurrentTag().equals("<offset>")) {
+				xml.getTag("<offset>");
+				trackOffset = xml.getInt("track");
+				timeSheet.hourOffset = xml.getInt("hour");
+				timeSheet.minuteOffset = xml.getInt("minute");
+				timeSheet.secondOffset = xml.getInt("second");
+                // to ensure backwards compatibility
+                if (! xml.getCurrentTag().equals("</offset>"))
+                        timeSheet.framesOffset = xml.getInt("frm");
+		        xml.getTag("</offset>");
+			} else {
+				// set to zero
+				trackOffset = 0;
+				timeSheet.hourOffset = 0;
+				timeSheet.minuteOffset = 0;
+				timeSheet.secondOffset = 0;
+                timeSheet.framesOffset = 0;
+			}
+
+            // set the column widths
+			int widths[] = { 10, 220, 20, 40, 100 };
+			for (int i = 0; i < 1; i++) {
+				TableColumn column = timeSheetTable.getColumnModel().getColumn(i);
+				column.setWidth(widths[i]);
+			}
+			
+			// read the frames
+			xml.getTag("<frames>");
+			for (int i = 0; i < wavePanel.frameCount; i++) {
+				// start of frame
+				xml.getTag("<frame>");
+
+				// mouth is optional
+				timeSheet.mouth[i] = xml.getOptionalString("mouth");
+
+				// key is optional
+				timeSheet.key[i] = xml.getOptionalString("key").equals("true");
+
+				// comment is optional
+				timeSheet.comment[i] = xml.getOptionalString("comment");
+
+				// required end tag
+				xml.getTag("</frame>");
+			}
+
+			xml.getTag("</frames>");
+
+            if (xml.getCurrentTag().equals("<pdf>")){
+            xml.getTag("<pdf>");
+/*            timeSheet.pdfSize = xml.getOptionalString("pdfSize");
+            timeSheet.pdfLayout = xml.getOptionalString("pdfLayout"); */
+            timeSheet.pdfLogo = xml.getOptionalString("pdfLogo");
+/*            timeSheet.pdfComp = xml.getOptionalString("pdfComp");
+            timeSheet.pdfLayout = xml.getOptionalString("pdfLayout");
+            if (xml.getOptionalString("pdfTCode").equals("false"))
+                timeSheet.pdfTCode = false; else timeSheet.pdfTCode = true; */
+            xml.getTag("</pdf>");
+            }
+
+			xml.getTag("</jlipsync>");
+
+		} catch (Exception e) {
+
+			// display an error
+			Utilities.errMessage("Error reading file: " + e);
+
+			// clear the timesheet
+			wavePanel.frameCount = 20;
+			wavePanel.framesPerSecond = 24;
+			eraseTimeSheet();
+		}
+        // remove "Closed" and replace with "-"
+		for (int i = 0; i < wavePanel.frameCount; i++) {
+            String s =timeSheet.mouth[i];
+            if (s.equalsIgnoreCase("Closed") || s.isEmpty())
+                timeSheet.mouth[i] = "-";
+        }
+		// update the display
+		wavePanel.repaint();
+		timeSheetTable.repaint();
+
+	}
+
+----------------------------------------
+		try {
+
+			SimpleXmlReader xml = new SimpleXmlReader(file);
+
+			// xml header
+			String theHeader = xml.getTag("");
+			if (!theHeader.substring(0, 6).equals("<?xml ")) {
+				throw new Exception("Not an XML file");
+			}
+
+			// header
+			xml.getTag("<jlipsync>");
+
+			// version number
+			String version = xml.getString("version");
+            this.setTitle("JLipSync " + version + "  -  " + file.getName());
+
+			// get the wave file name
+			String waveFileName = xml.getString("wavefile");
+
+			// get fps
+			wavePanel.framesPerSecond = (int) xml.getFloat("fps");
+			timeSheet.framesPerSecond = wavePanel.framesPerSecond;
+			if (wavePanel.framesPerSecond == 24) {
+				fps24.setSelected(true);
+			} else if (wavePanel.framesPerSecond == 25) {
+				fps25.setSelected(true);
+			} else if (wavePanel.framesPerSecond == 30) {
+				fps30.setSelected(true);
+			}
+
+			// try loading the wave file
+			File waveFile;
+			try {
+				// open the file
+				waveFile = new File(waveFileName);
+			} catch (Exception ex) {
+				// failed
+				throw new Exception("Can't find file " + waveFileName);
+			}
+
+			if (waveFile != null) {
+				loadWave(waveFile);
+			}
+
+			// get framecount
+			wavePanel.frameCount = (int) xml.getFloat("framecount");
+
+			// create a new timesheet
+			timeSheet.init(wavePanel.frameCount, wavePanel.framesPerSecond);
+
+			// offsets (new to 1.1)
+			if (xml.getCurrentTag().equals("<offset>")) {
+				xml.getTag("<offset>");
+				trackOffset = xml.getInt("track");
+				timeSheet.hourOffset = xml.getInt("hour");
+				timeSheet.minuteOffset = xml.getInt("minute");
+				timeSheet.secondOffset = xml.getInt("second");
+                // to ensure backwards compatibility
+                if (! xml.getCurrentTag().equals("</offset>"))
+                        timeSheet.framesOffset = xml.getInt("frm");
+		        xml.getTag("</offset>");
+			} else {
+				// set to zero
+				trackOffset = 0;
+				timeSheet.hourOffset = 0;
+				timeSheet.minuteOffset = 0;
+				timeSheet.secondOffset = 0;
+                timeSheet.framesOffset = 0;
+			}
+
+            // set the column widths
+			int widths[] = { 10, 220, 20, 40, 100 };
+			for (int i = 0; i < 1; i++) {
+				TableColumn column = timeSheetTable.getColumnModel().getColumn(i);
+				column.setWidth(widths[i]);
+			}
+			
+			// read the frames
+			xml.getTag("<frames>");
+			for (int i = 0; i < wavePanel.frameCount; i++) {
+				// start of frame
+				xml.getTag("<frame>");
+
+				// mouth is optional
+				timeSheet.mouth[i] = xml.getOptionalString("mouth");
+
+				// key is optional
+				timeSheet.key[i] = xml.getOptionalString("key").equals("true");
+
+				// comment is optional
+				timeSheet.comment[i] = xml.getOptionalString("comment");
+
+				// required end tag
+				xml.getTag("</frame>");
+			}
+
+			xml.getTag("</frames>");
+
+            if (xml.getCurrentTag().equals("<pdf>")){
+            xml.getTag("<pdf>");
+/*            timeSheet.pdfSize = xml.getOptionalString("pdfSize");
+            timeSheet.pdfLayout = xml.getOptionalString("pdfLayout"); */
+            timeSheet.pdfLogo = xml.getOptionalString("pdfLogo");
+/*            timeSheet.pdfComp = xml.getOptionalString("pdfComp");
+            timeSheet.pdfLayout = xml.getOptionalString("pdfLayout");
+            if (xml.getOptionalString("pdfTCode").equals("false"))
+                timeSheet.pdfTCode = false; else timeSheet.pdfTCode = true; */
+            xml.getTag("</pdf>");
+            }
+
+			xml.getTag("</jlipsync>");
+
+		} catch (Exception e) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+99
+28960369
+JLipSync.java 797 843
+JLipSync.java 794 844
+----------------------------------------
+		if (returnVal == JFileChooser.APPROVE_OPTION) {
+			// get the selected file
+            File file = fc.getSelectedFile();
+
+			// make sure it ends with the proper extention
+            String exte = "";
+            if (fileType == 3) exte = ".csv"; else exte = ".txt";
+
+            FileWriter stream;
+
+			try {
+				stream = new FileWriter(file + exte);
+			} catch (Exception e) {
+				Utilities.errMessage("Error writing file " + e);
+				return;
+			}
+
+			// create file contents
+			String contents = new String();
+
+			try {
+				// create the contents
+				switch (fileType) {
+				case FORMAT_MAGPIE:
+					contents = magpieFormat();
+					break;
+				case FORMAT_MOHO:
+					contents = mohoFormat();
+                	break;
+				case FORMAT_GAMESTUDIO:
+					contents = gameStudioFormat();
+					break;
+				case FORMAT_CSV:
+					contents = csvFormat();
+            		break;
+				}
+
+				// write the contents
+				stream.write(contents);
+
+				stream.close();
+
+			} catch (Exception e) {
+				Utilities.errMessage("Error writing file:" + e);
+				return;
+			}
+		}
+
+----------------------------------------
+	public void exportFile(int fileType) {
+		JFileChooser fc = Utilities.fileChooser(null);
+		int returnVal = Utilities.showSaveDialog(this, fc);
+		if (returnVal == JFileChooser.APPROVE_OPTION) {
+			// get the selected file
+            File file = fc.getSelectedFile();
+
+			// make sure it ends with the proper extention
+            String exte = "";
+            if (fileType == 3) exte = ".csv"; else exte = ".txt";
+
+            FileWriter stream;
+
+			try {
+				stream = new FileWriter(file + exte);
+			} catch (Exception e) {
+				Utilities.errMessage("Error writing file " + e);
+				return;
+			}
+
+			// create file contents
+			String contents = new String();
+
+			try {
+				// create the contents
+				switch (fileType) {
+				case FORMAT_MAGPIE:
+					contents = magpieFormat();
+					break;
+				case FORMAT_MOHO:
+					contents = mohoFormat();
+                	break;
+				case FORMAT_GAMESTUDIO:
+					contents = gameStudioFormat();
+					break;
+				case FORMAT_CSV:
+					contents = csvFormat();
+            		break;
+				}
+
+				// write the contents
+				stream.write(contents);
+
+				stream.close();
+
+			} catch (Exception e) {
+				Utilities.errMessage("Error writing file:" + e);
+				return;
+			}
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+99
+28960370
+JLipSync.java 1400 1432
+JLipSync.java 1401 1427
+----------------------------------------
+				if (s != null) {
+					try {
+						// split on spaces
+						String value[] = s.toString().split(":", 0);
+						int newHour = Integer.parseInt(value[0]);
+						int newMinute = Integer.parseInt(value[1]);
+						int newSecond = Integer.parseInt(value[2]);
+                        int newFrames = Integer.parseInt(value[3]);
+
+						// validate
+						if (newHour > -1 && newHour < 99 
+                                && newMinute > -1 && newMinute < 60
+                                && newSecond > -1 && newSecond < 60
+                                && newFrames > -1 
+                                && newFrames < timeSheet.framesPerSecond) {
+
+							// save offsets
+							timeSheet.hourOffset = newHour;
+							timeSheet.minuteOffset = newMinute;
+							timeSheet.secondOffset = newSecond;
+                            timeSheet.framesOffset = newFrames;
+
+							// repaint the timesheet
+							timeSheetTable.repaint();
+						} else {
+							throw new Exception("Bad time format");
+						}
+					} catch (Exception e1) {
+						Utilities.errMessage("Bad time format '" + s
+								+ "' - use HH:MM:SS:FR" + e1);
+					}
+
+				}
+
+----------------------------------------
+					try {
+						// split on spaces
+						String value[] = s.toString().split(":", 0);
+						int newHour = Integer.parseInt(value[0]);
+						int newMinute = Integer.parseInt(value[1]);
+						int newSecond = Integer.parseInt(value[2]);
+                        int newFrames = Integer.parseInt(value[3]);
+
+						// validate
+						if (newHour > -1 && newHour < 99 
+                                && newMinute > -1 && newMinute < 60
+                                && newSecond > -1 && newSecond < 60
+                                && newFrames > -1 
+                                && newFrames < timeSheet.framesPerSecond) {
+
+							// save offsets
+							timeSheet.hourOffset = newHour;
+							timeSheet.minuteOffset = newMinute;
+							timeSheet.secondOffset = newSecond;
+                            timeSheet.framesOffset = newFrames;
+
+							// repaint the timesheet
+							timeSheetTable.repaint();
+						} else {
+							throw new Exception("Bad time format");
+						}
+					} catch (Exception e1) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+99
+28960371
+JLipSync.java 1944 1960
+JLipSync.java 1963 1979
+----------------------------------------
+				if (c == KeyEvent.VK_INSERT) {
+					// move all rows down one line
+					for (int i = rows - 1; i > selectedRow; i--) {
+						// copy
+						timeSheet.mouth[i] = timeSheet.mouth[i - 1];
+						timeSheet.comment[i] = timeSheet.comment[i - 1];
+						timeSheet.key[i] = timeSheet.key[i - 1];
+					}
+
+					// insert a blank in the current row
+					timeSheet.mouth[selectedRow] = "";
+					timeSheet.comment[selectedRow] = "";
+					timeSheet.key[selectedRow] = false;
+
+					// update
+					timeSheetTable.repaint();
+				}
+
+----------------------------------------
+				if (c == KeyEvent.VK_DELETE) {
+					// move all rows up one
+					for (int i = selectedRow; i < rows - 1; i++) {
+						// copy up
+						timeSheet.mouth[i] = timeSheet.mouth[i + 1];
+						timeSheet.comment[i] = timeSheet.comment[i + 1];
+						timeSheet.key[i] = timeSheet.key[i + 1];
+					}
+
+					// clear the last row
+					timeSheet.mouth[rows - 1] = new String("");
+					timeSheet.comment[rows - 1] = new String("");
+					timeSheet.key[rows - 1] = false;
+
+					// update
+					timeSheetTable.repaint();
+				}
+
+----------------------------------------

@@ -1,0 +1,1417 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513250
+src/org/jfm/main/MainFrame.java 124 138
+src/org/jfm/main/MainFrame.java 143 157
+----------------------------------------
+    for(int i=0;i<views.size();i++){
+    	final JFMViewRepresentation rep=(JFMViewRepresentation)views.get(i);
+    	JRadioButtonMenuItem viewItem=new JRadioButtonMenuItem(rep.getName());
+//    	if(i==0)viewItem.setSelected(true);
+    	viewItem.addActionListener(new ActionListener() {
+  		public void actionPerformed(ActionEvent e) {  				
+   				ChangeViewEvent ev=new ChangeViewEvent();
+   				ev.setSource(MainFrame.this);
+   				ev.setViewRep(rep);
+   				Broadcaster.notifyChangeViewListeners(ev);   				
+    		}
+    	});
+    	jMenuView.add(viewItem);
+    	viewGroup.add(viewItem);
+    }
+
+----------------------------------------
+    {
+    	String name=registeredFilesystemsValues.nextElement();
+    	final String className=registeredFilesystems.get(name);
+    	JRadioButtonMenuItem filesystemItem=new JRadioButtonMenuItem(name);
+    	filesystemItem.addActionListener(new ActionListener(){
+    		public void actionPerformed(ActionEvent e) {
+   				ChangeViewEvent ev=new ChangeViewEvent();
+   				ev.setSource(MainFrame.this);
+   				ev.setFilesystemClassName(className);
+   				Broadcaster.notifyChangeViewListeners(ev);   				    			    		
+    		}
+    	});
+    	jMenuFilesystem.add(filesystemItem);
+    	filesystemGroup.add(filesystemItem);
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513251
+src/org/jfm/main/MainFrame.java 129 134
+src/org/jfm/main/MainFrame.java 148 153
+----------------------------------------
+  		public void actionPerformed(ActionEvent e) {  				
+   				ChangeViewEvent ev=new ChangeViewEvent();
+   				ev.setSource(MainFrame.this);
+   				ev.setViewRep(rep);
+   				Broadcaster.notifyChangeViewListeners(ev);   				
+    		}
+
+----------------------------------------
+    		public void actionPerformed(ActionEvent e) {
+   				ChangeViewEvent ev=new ChangeViewEvent();
+   				ev.setSource(MainFrame.this);
+   				ev.setFilesystemClassName(className);
+   				Broadcaster.notifyChangeViewListeners(ev);   				    			    		
+    		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513252
+src/org/jfm/main/MainFrame.java 148 153
+src/org/jfm/views/tree/TreeViewPanel.java 201 208
+----------------------------------------
+    		public void actionPerformed(ActionEvent e) {
+   				ChangeViewEvent ev=new ChangeViewEvent();
+   				ev.setSource(MainFrame.this);
+   				ev.setFilesystemClassName(className);
+   				Broadcaster.notifyChangeViewListeners(ev);   				    			    		
+    		}
+
+----------------------------------------
+      public void actionPerformed(java.awt.event.ActionEvent e){
+        //System.err.println("ChangePanelAction");
+        ChangePanelEvent ev=new ChangePanelEvent();
+        ev.setSource(TreeViewPanel.this);
+        //ev.setLocation(getPanelLocation());
+        //  System.err.println("FBTable parent:"+FBTable.this.getParent().getParent().getParent().toString());
+        Broadcaster.notifyChangePanelListeners(ev);
+      }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513315
+src/org/jfm/main/MainFrame.java 129 134
+src/org/jfm/views/tree/TreeViewPanel.java 201 208
+----------------------------------------
+  		public void actionPerformed(ActionEvent e) {  				
+   				ChangeViewEvent ev=new ChangeViewEvent();
+   				ev.setSource(MainFrame.this);
+   				ev.setViewRep(rep);
+   				Broadcaster.notifyChangeViewListeners(ev);   				
+    		}
+
+----------------------------------------
+      public void actionPerformed(java.awt.event.ActionEvent e){
+        //System.err.println("ChangePanelAction");
+        ChangePanelEvent ev=new ChangePanelEvent();
+        ev.setSource(TreeViewPanel.this);
+        //ev.setLocation(getPanelLocation());
+        //  System.err.println("FBTable parent:"+FBTable.this.getParent().getParent().getParent().toString());
+        Broadcaster.notifyChangePanelListeners(ev);
+      }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513277
+src/org/jfm/event/Broadcaster.java 66 76
+src/org/jfm/event/Broadcaster.java 168 176
+----------------------------------------
+  {
+
+      Iterator it = getListenerIterator(ChangeDirectoryListener.class);
+      ChangeDirectoryListener listener;
+      while(it.hasNext())
+      { 
+      	      	
+        listener = (ChangeDirectoryListener)it.next();
+        listener.changeDirectory(event);
+      }            
+  }
+
+----------------------------------------
+  {
+    Iterator it = getListenerIterator(ColorChangeListener.class);
+    ColorChangeListener listener;
+    while(it.hasNext())
+    {
+      listener = (ColorChangeListener)it.next();
+      listener.colorChanged(event);
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513279
+src/org/jfm/event/Broadcaster.java 93 102
+src/org/jfm/event/Broadcaster.java 168 176
+----------------------------------------
+  {
+
+      Iterator it = getListenerIterator(ChangePanelListener.class);
+      ChangePanelListener listener;
+      while(it.hasNext())
+      {
+        listener = (ChangePanelListener)it.next();
+        listener.changePanel(event);
+      }            
+  }
+
+----------------------------------------
+  {
+    Iterator it = getListenerIterator(ColorChangeListener.class);
+    ColorChangeListener listener;
+    while(it.hasNext())
+    {
+      listener = (ColorChangeListener)it.next();
+      listener.colorChanged(event);
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513276
+src/org/jfm/event/Broadcaster.java 118 127
+src/org/jfm/event/Broadcaster.java 168 176
+----------------------------------------
+  {
+
+      Iterator it = getListenerIterator(ChangeViewListener.class);
+      ChangeViewListener listener;
+      while(it.hasNext())
+      {
+        listener = (ChangeViewListener)it.next();
+        listener.viewChanged(event);
+      }            
+  }
+
+----------------------------------------
+  {
+    Iterator it = getListenerIterator(ColorChangeListener.class);
+    ColorChangeListener listener;
+    while(it.hasNext())
+    {
+      listener = (ColorChangeListener)it.next();
+      listener.colorChanged(event);
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513278
+src/org/jfm/event/Broadcaster.java 143 152
+src/org/jfm/event/Broadcaster.java 168 176
+----------------------------------------
+  {
+
+      Iterator it = getListenerIterator(FileListSelectionListener.class);
+      FileListSelectionListener listener;
+      while(it.hasNext())
+      {
+        listener = (FileListSelectionListener)it.next();
+        listener.fileListSelectionChanged(event);
+      }            
+  }
+
+----------------------------------------
+  {
+    Iterator it = getListenerIterator(ColorChangeListener.class);
+    ColorChangeListener listener;
+    while(it.hasNext())
+    {
+      listener = (ColorChangeListener)it.next();
+      listener.colorChanged(event);
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513281
+src/org/jfm/event/Broadcaster.java 66 76
+src/org/jfm/event/Broadcaster.java 192 200
+----------------------------------------
+  {
+
+      Iterator it = getListenerIterator(ChangeDirectoryListener.class);
+      ChangeDirectoryListener listener;
+      while(it.hasNext())
+      { 
+      	      	
+        listener = (ChangeDirectoryListener)it.next();
+        listener.changeDirectory(event);
+      }            
+  }
+
+----------------------------------------
+  {
+    Iterator it = getListenerIterator(FontChangeListener.class);
+    FontChangeListener listener;
+    while(it.hasNext())
+    {
+      listener = (FontChangeListener)it.next();
+      listener.fontChanged(event);
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513282
+src/org/jfm/event/Broadcaster.java 143 152
+src/org/jfm/event/Broadcaster.java 192 200
+----------------------------------------
+  {
+
+      Iterator it = getListenerIterator(FileListSelectionListener.class);
+      FileListSelectionListener listener;
+      while(it.hasNext())
+      {
+        listener = (FileListSelectionListener)it.next();
+        listener.fileListSelectionChanged(event);
+      }            
+  }
+
+----------------------------------------
+  {
+    Iterator it = getListenerIterator(FontChangeListener.class);
+    FontChangeListener listener;
+    while(it.hasNext())
+    {
+      listener = (FontChangeListener)it.next();
+      listener.fontChanged(event);
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513280
+src/org/jfm/event/Broadcaster.java 118 127
+src/org/jfm/event/Broadcaster.java 192 200
+----------------------------------------
+  {
+
+      Iterator it = getListenerIterator(ChangeViewListener.class);
+      ChangeViewListener listener;
+      while(it.hasNext())
+      {
+        listener = (ChangeViewListener)it.next();
+        listener.viewChanged(event);
+      }            
+  }
+
+----------------------------------------
+  {
+    Iterator it = getListenerIterator(FontChangeListener.class);
+    FontChangeListener listener;
+    while(it.hasNext())
+    {
+      listener = (FontChangeListener)it.next();
+      listener.fontChanged(event);
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513283
+src/org/jfm/event/Broadcaster.java 93 102
+src/org/jfm/event/Broadcaster.java 192 200
+----------------------------------------
+  {
+
+      Iterator it = getListenerIterator(ChangePanelListener.class);
+      ChangePanelListener listener;
+      while(it.hasNext())
+      {
+        listener = (ChangePanelListener)it.next();
+        listener.changePanel(event);
+      }            
+  }
+
+----------------------------------------
+  {
+    Iterator it = getListenerIterator(FontChangeListener.class);
+    FontChangeListener listener;
+    while(it.hasNext())
+    {
+      listener = (FontChangeListener)it.next();
+      listener.fontChanged(event);
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513284
+src/org/jfm/event/Broadcaster.java 168 176
+src/org/jfm/event/Broadcaster.java 192 200
+----------------------------------------
+  {
+    Iterator it = getListenerIterator(ColorChangeListener.class);
+    ColorChangeListener listener;
+    while(it.hasNext())
+    {
+      listener = (ColorChangeListener)it.next();
+      listener.colorChanged(event);
+    }
+  }
+
+----------------------------------------
+  {
+    Iterator it = getListenerIterator(FontChangeListener.class);
+    FontChangeListener listener;
+    while(it.hasNext())
+    {
+      listener = (FontChangeListener)it.next();
+      listener.fontChanged(event);
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513403
+src/org/jfm/po/CommandOutputViewDialog.java 105 110
+src/org/jfm/main/MainFrame.java 258 263
+----------------------------------------
+  protected void processWindowEvent(WindowEvent e) {
+    super.processWindowEvent(e);
+    if (e.getID() == WindowEvent.WINDOW_CLOSING) {
+      process.destroy();
+    }
+  }
+
+----------------------------------------
+  protected void processWindowEvent(WindowEvent e) {
+    super.processWindowEvent(e);
+    if (e.getID() == WindowEvent.WINDOW_CLOSING) {
+      jMenuFileExit_actionPerformed(null);
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513291
+src/org/jfm/po/CommandOutputViewDialog.java 105 110
+src/org/jfm/main/MainFrame_AboutBox.java 82 87
+----------------------------------------
+  protected void processWindowEvent(WindowEvent e) {
+    super.processWindowEvent(e);
+    if (e.getID() == WindowEvent.WINDOW_CLOSING) {
+      process.destroy();
+    }
+  }
+
+----------------------------------------
+  protected void processWindowEvent(WindowEvent e) {
+    if (e.getID() == WindowEvent.WINDOW_CLOSING) {
+      cancel();
+    }
+    super.processWindowEvent(e);
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513290
+src/org/jfm/main/MainFrame.java 258 263
+src/org/jfm/main/MainFrame_AboutBox.java 82 87
+----------------------------------------
+  protected void processWindowEvent(WindowEvent e) {
+    super.processWindowEvent(e);
+    if (e.getID() == WindowEvent.WINDOW_CLOSING) {
+      jMenuFileExit_actionPerformed(null);
+    }
+  }
+
+----------------------------------------
+  protected void processWindowEvent(WindowEvent e) {
+    if (e.getID() == WindowEvent.WINDOW_CLOSING) {
+      cancel();
+    }
+    super.processWindowEvent(e);
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513293
+src/org/jfm/main/MainFrame.java 196 201
+src/org/jfm/views/tree/TreeViewPanel.java 116 124
+----------------------------------------
+            public void actionPerformed(ActionEvent e){
+              try{
+                UIManager.setLookAndFeel(className);
+                SwingUtilities.updateComponentTreeUI(MainFrame.this);
+              }catch(Exception exception){exception.printStackTrace();}
+            }
+
+----------------------------------------
+      public void focusGained(FocusEvent e){
+        statusLabel.setForeground(UIManager.getColor("Label.foreground"));
+
+        try {
+          tree.getSelectionModel().setSelectionPath(tree.getPathForRow(selectedRow));
+        }
+        catch (Exception ignored) { }
+        Options.setActivePanel(TreeViewPanel.this);
+      }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513294
+src/org/jfm/main/MainFrame.java 196 201
+src/org/jfm/views/fview/FileViewDialog.java 126 135
+----------------------------------------
+            public void actionPerformed(ActionEvent e){
+              try{
+                UIManager.setLookAndFeel(className);
+                SwingUtilities.updateComponentTreeUI(MainFrame.this);
+              }catch(Exception exception){exception.printStackTrace();}
+            }
+
+----------------------------------------
+  private void saveFile(JFMFile f){
+    try{
+      java.io.OutputStream out=f.getOutputStream();
+      byte[] data=view.getText().getBytes();
+      out.write(data);
+      out.close();
+    }catch(Exception ex){
+      JOptionPane.showMessageDialog(this,"Couldn't write the file...","Error",JOptionPane.ERROR_MESSAGE);
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513362
+src/org/jfm/po/copy/CopyProgressDialog.java 154 160
+src/org/jfm/views/FontDialog.java 46 55
+----------------------------------------
+      }finally{
+        try {
+          in.close();
+          out.close();
+        }
+        catch (Exception ignored) {}
+      }
+
+----------------------------------------
+  public FontDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+//      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513343
+src/org/jfm/po/CommandOutputViewDialog.java 23 32
+src/org/jfm/views/FontDialog.java 46 55
+----------------------------------------
+  public CommandOutputViewDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+      //pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+  public FontDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+//      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513348
+src/org/jfm/filesystems/JFMFileSystem.java 89 97
+src/org/jfm/views/FontDialog.java 46 55
+----------------------------------------
+		  {
+			  if(!files[i].isFile() || !files[i].getName().endsWith("jar")) continue;
+			  try{
+				  registerFilesystem(files[i]);
+			  }catch(Exception ignored)
+			  {
+				  ignored.printStackTrace();
+			  }
+		  }
+
+----------------------------------------
+  public FontDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+//      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513353
+src/org/jfm/views/list/detailview/DetailView.java 54 62
+src/org/jfm/views/FontDialog.java 46 55
+----------------------------------------
+	public DetailView(String fs) {
+		super(fs);
+	    try {
+	      init();
+	    }
+	    catch(Exception ex) {
+	      ex.printStackTrace();
+	    }	    
+	}
+
+----------------------------------------
+  public FontDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+//      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513341
+src/org/jfm/main/SearchDialog.java 42 51
+src/org/jfm/views/FontDialog.java 46 55
+----------------------------------------
+  public SearchDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+  public FontDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+//      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513346
+src/org/jfm/po/ProgressActionDialog.java 57 66
+src/org/jfm/views/FontDialog.java 46 55
+----------------------------------------
+  public ProgressActionDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+  public FontDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+//      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513351
+src/org/jfm/views/fview/FileViewPanel.java 76 84
+src/org/jfm/views/FontDialog.java 46 55
+----------------------------------------
+  public FileViewPanel(String fileSystem) {
+	 super(fileSystem);
+    try {
+      jbInit();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+  public FontDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+//      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513356
+src/org/jfm/views/JFMView.java 146 154
+src/org/jfm/views/FontDialog.java 46 55
+----------------------------------------
+          if(view==null){
+                  try {
+                          Class viewClass=Class.forName(DEFAULT_VIEW.getClassName());
+                          view=(JFMView)viewClass.newInstance();
+                  } catch (Exception e) {
+                          e.printStackTrace();
+                          //ignore the exception
+                  }
+          }
+
+----------------------------------------
+  public FontDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+//      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513361
+src/org/jfm/main/MainFrame.java 196 201
+src/org/jfm/views/FontDialog.java 46 55
+----------------------------------------
+            public void actionPerformed(ActionEvent e){
+              try{
+                UIManager.setLookAndFeel(className);
+                SwingUtilities.updateComponentTreeUI(MainFrame.this);
+              }catch(Exception exception){exception.printStackTrace();}
+            }
+
+----------------------------------------
+  public FontDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+//      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513358
+src/org/jfm/views/fview/FindTextDialog.java 38 47
+src/org/jfm/views/FontDialog.java 46 55
+----------------------------------------
+  public FindTextDialog(Frame owner, String title, boolean modal) {
+    super(owner, title, modal);
+    try {
+      jbInit();
+      //pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+  public FontDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+//      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513444
+src/org/jfm/filesystems/local/JFMLocalFilesystem.java 51 57
+src/org/jfm/views/FontDialog.java 46 55
+----------------------------------------
+		for(int i=0;i<files.length;i++){
+			try{
+				jfmFiles[i]=new JFMLocalFile(files[i].getAbsolutePath());
+			}catch(Exception ignored){
+				ignored.printStackTrace();
+			}
+		}
+
+----------------------------------------
+  public FontDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+//      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513363
+src/org/jfm/filesystems/JFMFileSystem.java 153 162
+src/org/jfm/views/FontDialog.java 46 55
+----------------------------------------
+		if(fs==null){
+			name=null;
+			try {
+				Class fsClass=Class.forName(DEFAULT_FILESYSTEM);
+				fs=(JFMFileSystem)fsClass.newInstance();
+			} catch (Exception e) {
+				e.printStackTrace();
+				//ignore the exception
+			}
+		}
+
+----------------------------------------
+  public FontDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+//      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513447
+src/org/jfm/main/MainFrame.java 60 68
+src/org/jfm/views/FontDialog.java 46 55
+----------------------------------------
+  public MainFrame() {
+    enableEvents(AWTEvent.WINDOW_EVENT_MASK);
+    try {
+      jbInit();
+    }
+    catch(Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+----------------------------------------
+  public FontDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+//      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513339
+src/org/jfm/main/MainPanel.java 30 37
+src/org/jfm/views/FontDialog.java 46 55
+----------------------------------------
+  public MainPanel() {
+    try {
+      jbInit();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+  public FontDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+//      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513344
+src/org/jfm/po/copy/CopyProgressDialog.java 179 188
+src/org/jfm/views/FontDialog.java 46 55
+----------------------------------------
+  public CopyProgressDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+  public FontDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+//      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513340
+src/org/jfm/filesystems/local/JFMLocalFile.java 44 52
+src/org/jfm/views/FontDialog.java 46 55
+----------------------------------------
+	public InputStream getInputStream(){
+		java.io.FileInputStream in=null;
+		try{
+			in=new java.io.FileInputStream(theFile);
+		}catch(IOException exc){
+			exc.printStackTrace();
+		}
+		return in;
+	}
+
+----------------------------------------
+  public FontDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+//      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513345
+src/org/jfm/po/CommandOutputViewDialog.java 81 91
+src/org/jfm/views/FontDialog.java 46 55
+----------------------------------------
+    public void run(){
+      try {
+          //i'm not interested in the return value of the process 
+          //i just want to know when it's over
+          process.waitFor();
+      }
+      catch (InterruptedException ex) {}
+      finally {
+        CommandOutputViewDialog.this.dispose();
+      }
+    }
+
+----------------------------------------
+  public FontDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+//      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513350
+src/org/jfm/main/Options.java 99 106
+src/org/jfm/views/FontDialog.java 46 55
+----------------------------------------
+  public static Preferences getPreferences(){
+  	try {
+	  	preferences.sync();	
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+  	return preferences;
+  }
+
+----------------------------------------
+  public FontDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+//      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513355
+src/org/jfm/filesystems/JFMFileSystem.java 141 150
+src/org/jfm/views/FontDialog.java 46 55
+----------------------------------------
+			if(name.equals(fsClassName)){
+				try {
+					Class fsClass=Class.forName(fsClassName,true,JFMClassLoader.getLoader());
+					fs=(JFMFileSystem)fsClass.newInstance();
+					return fs;
+				} catch (Exception e) {
+					e.printStackTrace();
+					//ignore the exception
+				}
+			}
+
+----------------------------------------
+  public FontDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+//      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513360
+src/org/jfm/filesystems/local/JFMLocalFile.java 75 83
+src/org/jfm/views/FontDialog.java 46 55
+----------------------------------------
+	public OutputStream getOutputStream(){
+		java.io.FileOutputStream out=null;
+		try{
+			out=new java.io.FileOutputStream(theFile);
+		}catch(IOException exc){
+			exc.printStackTrace();
+		}
+		return out;
+	}
+
+----------------------------------------
+  public FontDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+//      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513349
+src/org/jfm/views/list/ListView.java 32 40
+src/org/jfm/views/FontDialog.java 46 55
+----------------------------------------
+  public ListView(String fs) {
+  	super(fs);
+    try {
+      jbInit();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }  	
+  }
+
+----------------------------------------
+  public FontDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+//      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513446
+src/org/jfm/main/Options.java 108 114
+src/org/jfm/views/FontDialog.java 46 55
+----------------------------------------
+  public static void savePreferences(){
+  	try {
+		getPreferences().flush();
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+  }
+
+----------------------------------------
+  public FontDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+//      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513448
+src/org/jfm/po/copy/CopyConfirmDialog.java 34 43
+src/org/jfm/views/FontDialog.java 46 55
+----------------------------------------
+  public CopyConfirmDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+  public FontDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+//      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513354
+src/org/jfm/po/FilePropertiesDialog.java 36 45
+src/org/jfm/views/FontDialog.java 46 55
+----------------------------------------
+  public FilePropertiesDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+  public FontDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+//      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513359
+src/org/jfm/views/JFMView.java 133 143
+src/org/jfm/views/FontDialog.java 46 55
+----------------------------------------
+                  if(representation.equals(viewClassName)){
+                          try {
+                                  Class viewClass=Class.forName(viewClassName.getClassName());
+                                  view=(JFMView)viewClass.getConstructor(new Class[]{String.class}).newInstance(new Object[]{filesystem});
+                                  //viewClass.newInstance();
+                                  return view;
+                          } catch (Exception e) {
+                                  e.printStackTrace();
+                                  //ignore the exception
+                          }
+                  }
+
+----------------------------------------
+  public FontDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+//      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513364
+src/org/jfm/views/fview/FileViewDialog.java 37 46
+src/org/jfm/views/FontDialog.java 46 55
+----------------------------------------
+  public FileViewDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+    //  pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+  public FontDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+//      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513445
+src/org/jfm/po/ButtonsPanel.java 28 36
+src/org/jfm/views/FontDialog.java 46 55
+----------------------------------------
+  public ButtonsPanel(Vector buttons) {
+    try {
+      jbInit();
+      setButtons(buttons);
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+  public FontDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+//      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513342
+src/org/jfm/views/list/briefview/BriefView.java 48 56
+src/org/jfm/views/FontDialog.java 46 55
+----------------------------------------
+	public BriefView(String fs){
+		super(fs);
+	    try {
+	      init();
+	    }
+	    catch(Exception ex) {
+	      ex.printStackTrace();
+	    }	    
+	}
+
+----------------------------------------
+  public FontDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+//      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513347
+src/org/jfm/help/HelpBrowser.java 104 113
+src/org/jfm/views/FontDialog.java 46 55
+----------------------------------------
+					{
+						DocPrintJob job=service.createPrintJob();
+						try{						
+							job.print(doc, aset);
+						}catch(Exception exc)
+						{
+							exc.printStackTrace();
+							JOptionPane.showMessageDialog(HelpBrowser.this, "Error printing: "+exc.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+						}
+					}
+
+----------------------------------------
+  public FontDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+//      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513352
+src/org/jfm/views/list/detailview/DetailsTableModel.java 82 90
+src/org/jfm/views/FontDialog.java 46 55
+----------------------------------------
+    public JFMFile getFileAt(int index){
+      JFMFile file=null;
+      try {
+       file=(JFMFile)getValueAt(index, 0);
+      }catch (Exception ex){
+        ex.printStackTrace();
+      }
+      return file;
+    }
+
+----------------------------------------
+  public FontDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+//      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513357
+src/org/jfm/main/MainFrame_AboutBox.java 38 48
+src/org/jfm/views/FontDialog.java 46 55
+----------------------------------------
+  public MainFrame_AboutBox(Frame parent) {
+    super(parent);
+    enableEvents(AWTEvent.WINDOW_EVENT_MASK);
+    try {
+      jbInit();
+    }
+    catch(Exception e) {
+      e.printStackTrace();
+    }
+    pack();
+  }
+
+----------------------------------------
+  public FontDialog(Frame frame, String title, boolean modal) {
+    super(frame, title, modal);
+    try {
+      jbInit();
+//      pack();
+    }
+    catch(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+81
+21513365
+src/org/jfm/main/configurationdialog/panels/HelpConfigurationPanel.java 31 37
+src/org/jfm/main/configurationdialog/panels/ColorConfigurationPanel.java 40 45
+----------------------------------------
+	protected void init(){
+		setLayout(new BorderLayout());
+		setPanel();		
+		
+		add(titleLabel,BorderLayout.NORTH);
+		add(panel,BorderLayout.CENTER);
+	}
+
+----------------------------------------
+	protected void init(){
+		setLayout(new BorderLayout());
+		setPanel();				
+		add(titleLabel,BorderLayout.NORTH);
+		add(panel,BorderLayout.CENTER);
+	}
+
+----------------------------------------

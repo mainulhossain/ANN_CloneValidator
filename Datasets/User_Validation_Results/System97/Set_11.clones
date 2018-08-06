@@ -1,0 +1,2012 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+28918763
+src/com/levelonelabs/aimbot/modules/ListModule.java 316 325
+src/com/levelonelabs/aimbot/modules/MegaHalModule.java 194 207
+----------------------------------------
+        } else {
+            String imcommand = st.nextToken();
+            String list = st.nextToken();
+            AIMGroup group = super.bot.getGroup(list);
+            if (group != null) {
+                super.sendMessage(buddy, "The list, " + list + ", contains: " + group.toString());
+            } else {
+                super.sendMessage(buddy, "The list, " + list + ", does not exist.");
+            }
+        }
+
+----------------------------------------
+			} else if (imcommand.toLowerCase().equals("think") && (st.countTokens() == 1)) {
+				int delay = MegaModel.timeout;
+				String newDelay = st.nextToken();
+				try {
+					delay = Integer.parseInt(newDelay);
+				} catch (Exception e) {
+					super.sendMessage(buddy, "Error! " + newDelay + " did not parse.");
+				}
+				synchronized (model) {
+					MegaModel.timeout = delay;
+				}
+				super.sendMessage(buddy, "Changing thinking time to " + delay + " seconds.");
+				return;
+			} else {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+28918748
+src/com/levelonelabs/aimbot/modules/ListModule.java 215 234
+src/com/levelonelabs/aim/AIMClient.java 1128 1179
+----------------------------------------
+        } else {
+            String imcommand = st.nextToken();
+            String list = st.nextToken();
+            String buddyname = st.nextToken();
+            AIMBuddy ibuddy = getBuddy(buddyname);
+            if (ibuddy == null) {
+                super.sendMessage(buddy, buddyname + " is not a user, please ADDUSER");
+            } else {
+                AIMGroup group = super.bot.getGroup(list);
+                if (group != null) {
+                    if (group.add(ibuddy.getName())) {
+                        super.sendMessage(buddy, buddyname + " was successfully added to list:" + list);
+                    } else {
+                        super.sendMessage(buddy, buddyname + " was already a member of list:" + list);
+                    }
+                } else {
+                    super.sendMessage(buddy, "The list, " + list + ", does not exist.");
+                }
+            }
+        }
+
+----------------------------------------
+            if (command.equals("ERROR")) {
+                String error = inToken.nextToken();
+                logger.severe("*** AIM ERROR: " + error + " ***");
+                if (error.equals("901")) {
+                    generateError(error, "Not currently available");
+                    // logger.fine("Not currently available");
+                    return;
+                }
+
+                if (error.equals("902")) {
+                    generateError(error, "Warning not currently available");
+                    // logger.fine("Warning not currently available");
+                    return;
+                }
+
+                if (error.equals("903")) {
+                    generateError(error, "Message dropped, sending too fast");
+                    // logger.fine("Message dropped, sending too fast");
+                    return;
+                }
+
+                if (error.equals("960")) {
+                    String person = inToken.nextToken();
+                    generateError(error, "Sending messages too fast to " + person);
+                    // logger.fine("Sending messages too fast to " + person);
+                    return;
+                }
+
+                if (error.equals("961")) {
+                    String person = inToken.nextToken();
+                    generateError(error, person + " sent you too big a message");
+                    // logger.fine(person + " sent you too big a message");
+                    return;
+                }
+
+                if (error.equals("962")) {
+                    String person = inToken.nextToken();
+                    generateError(error, person + " sent you a message too fast");
+                    // logger.fine(person + " sent you a message too fast");
+                    return;
+                }
+
+                if (error.equals("Signon err")) {
+                    String text = inToken.nextToken();
+                    generateError(error, "AIM Signon failure: " + text);
+
+                    // logger.fine("AIM Signon failure: " + text);
+                    signoff("5");
+                }
+
+                return;
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+28918746
+src/com/levelonelabs/aim/AIMClient.java 1128 1179
+src/com/levelonelabs/aimbot/modules/ListModule.java 376 389
+----------------------------------------
+            if (command.equals("ERROR")) {
+                String error = inToken.nextToken();
+                logger.severe("*** AIM ERROR: " + error + " ***");
+                if (error.equals("901")) {
+                    generateError(error, "Not currently available");
+                    // logger.fine("Not currently available");
+                    return;
+                }
+
+                if (error.equals("902")) {
+                    generateError(error, "Warning not currently available");
+                    // logger.fine("Warning not currently available");
+                    return;
+                }
+
+                if (error.equals("903")) {
+                    generateError(error, "Message dropped, sending too fast");
+                    // logger.fine("Message dropped, sending too fast");
+                    return;
+                }
+
+                if (error.equals("960")) {
+                    String person = inToken.nextToken();
+                    generateError(error, "Sending messages too fast to " + person);
+                    // logger.fine("Sending messages too fast to " + person);
+                    return;
+                }
+
+                if (error.equals("961")) {
+                    String person = inToken.nextToken();
+                    generateError(error, person + " sent you too big a message");
+                    // logger.fine(person + " sent you too big a message");
+                    return;
+                }
+
+                if (error.equals("962")) {
+                    String person = inToken.nextToken();
+                    generateError(error, person + " sent you a message too fast");
+                    // logger.fine(person + " sent you a message too fast");
+                    return;
+                }
+
+                if (error.equals("Signon err")) {
+                    String text = inToken.nextToken();
+                    generateError(error, "AIM Signon failure: " + text);
+
+                    // logger.fine("AIM Signon failure: " + text);
+                    signoff("5");
+                }
+
+                return;
+            }
+
+----------------------------------------
+    private void sendGroupMessage(AIMGroup group, String message, AIMBuddy from) {
+        int toldNow = 0;
+        for (ListIterator it = group.getList().listIterator(); it.hasNext();) {
+            AIMBuddy next = getBuddy((String) it.next());
+            if (next.isOnline()) {
+                super.sendMessage(next, from.getName() + " posted to the " + group.getName() + " list:" + message);
+                toldNow++;
+            } else {
+                next.addMessage(from.getName() + " posted to the " + group.getName() + " list: \"" + message + "\" at "
+                    + new Date());
+            }
+        }
+        super.sendMessage(from, "Told " + toldNow + " of " + group.size() + " list members.");
+    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+28918785
+src/com/levelonelabs/aimbot/modules/UserAdminModule.java 165 185
+src/com/levelonelabs/aimbot/modules/MessengerModule.java 270 298
+----------------------------------------
+        } else if (query.toLowerCase().startsWith("denyuser")) {
+            // deny a user
+            StringTokenizer st = new StringTokenizer(query, " ");
+            if (st.countTokens() < 2) {
+                super.sendMessage(buddy, "ERROR:\n" + help());
+                return;
+            }
+
+            // grab the user to deny
+            String imcommand = st.nextToken();
+            String imcommandTo = st.nextToken();
+            AIMBuddy to = super.getBuddy(imcommandTo);
+            if (to == null) {
+                super.sendMessage(buddy, "User " + imcommandTo + " does not exist in the system.");
+            } else if (buddy.hasRole(AIMBot.ROLE_ADMINISTRATOR)) {
+                super.denyBuddy(to);
+                super.sendMessage(buddy, "User " + imcommandTo + " denied.");
+            } else {
+                super.sendMessage(buddy, "Only admins can deny users.");
+            }
+        } else if (query.toLowerCase().startsWith("permituser")) {
+
+----------------------------------------
+		if (query.toLowerCase().startsWith("offline")) {
+			StringTokenizer st = new StringTokenizer(query, " ");
+
+			//check for proper params
+			if (st.countTokens() < 3) {
+				super.sendMessage(buddy, "ERROR:\n" + help());
+				return;
+			}
+
+			//grab the target
+			String imcommand = st.nextToken();
+			String imcommandTo = st.nextToken();
+			AIMBuddy to = super.getBuddy(imcommandTo);
+			if (to == null) {
+				super.sendMessage(buddy, "User " + imcommandTo
+					+ " does not exist in the system.  Use the ADDUSER command to add them.");
+				return;
+			}
+
+			//grab the message
+			String imcommandText = "";
+			while (st.hasMoreTokens()) {
+				imcommandText = imcommandText + " " + st.nextToken();
+			}
+			if (!imcommandText.equals("")) {
+				sendMessage(buddy, imcommandTo + " will be told next time they signon.");
+				addMessage(to, buddy, imcommandText);
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+28918784
+src/com/levelonelabs/aimbot/modules/UserAdminModule.java 145 165
+src/com/levelonelabs/aimbot/modules/MessengerModule.java 270 298
+----------------------------------------
+        } else if (query.toLowerCase().startsWith("rmuser")) {
+            // remove a user
+            StringTokenizer st = new StringTokenizer(query, " ");
+            if (st.countTokens() < 2) {
+                super.sendMessage(buddy, "ERROR:\n" + help());
+                return;
+            }
+
+            // grab the user to remove
+            String imcommand = st.nextToken();
+            String imcommandTo = st.nextToken();
+            AIMBuddy to = super.getBuddy(imcommandTo);
+            if (to == null) {
+                super.sendMessage(buddy, "User " + imcommandTo + " does not exist in the system.");
+            } else if (buddy.hasRole(AIMBot.ROLE_ADMINISTRATOR)) {
+                super.removeBuddy(to);
+                super.sendMessage(buddy, "User " + imcommandTo + " removed.");
+            } else {
+                super.sendMessage(buddy, "Only admins can remove users.");
+            }
+        } else if (query.toLowerCase().startsWith("denyuser")) {
+
+----------------------------------------
+		if (query.toLowerCase().startsWith("offline")) {
+			StringTokenizer st = new StringTokenizer(query, " ");
+
+			//check for proper params
+			if (st.countTokens() < 3) {
+				super.sendMessage(buddy, "ERROR:\n" + help());
+				return;
+			}
+
+			//grab the target
+			String imcommand = st.nextToken();
+			String imcommandTo = st.nextToken();
+			AIMBuddy to = super.getBuddy(imcommandTo);
+			if (to == null) {
+				super.sendMessage(buddy, "User " + imcommandTo
+					+ " does not exist in the system.  Use the ADDUSER command to add them.");
+				return;
+			}
+
+			//grab the message
+			String imcommandText = "";
+			while (st.hasMoreTokens()) {
+				imcommandText = imcommandText + " " + st.nextToken();
+			}
+			if (!imcommandText.equals("")) {
+				sendMessage(buddy, imcommandTo + " will be told next time they signon.");
+				addMessage(to, buddy, imcommandText);
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+28918782
+src/com/levelonelabs/aimbot/modules/MessengerModule.java 208 259
+src/com/levelonelabs/aimbot/modules/MessengerModule.java 270 298
+----------------------------------------
+	private void handleTell(AIMBuddy buddy, String query) {
+		String name = "Someone";
+
+		//sendMessage(getBuddy("osterCRD"), "YEP, POOP");
+		if (query.toLowerCase().startsWith("tell")) {
+			StringTokenizer st = new StringTokenizer(query, " ");
+
+			//check for right number of arguments
+			if (st.countTokens() < 3) {
+				sendMessage(buddy, "ERROR:\n" + help());
+				return;
+			}
+
+			//grab the command and target
+			String imcommand = st.nextToken();
+			if (!imcommand.toLowerCase().equals("tell")) {
+				sendMessage(buddy, "ERROR:\n" + help());
+				return;
+			}
+			String imcommandTo = st.nextToken();
+			AIMBuddy to = getBuddy(imcommandTo);
+
+			//verify they are a user of the bot
+			if (to == null) {
+				sendMessage(buddy, "User " + imcommandTo
+					+ " does not exist in the system.\nUse the ADDUSER command to add them.");
+				return;
+			}
+
+			//grab the rest of the message and send it to the target
+			String imcommandText = "";
+			while (st.hasMoreTokens()) {
+				imcommandText = imcommandText + " " + st.nextToken();
+			}
+
+			//only send a message if there is somethign there.
+			if (!imcommandText.equals("")) {
+				//if the target if not online we need to store the message for
+				// when they sign on
+				if (to.isOnline()) {
+					if (buddy != null) {
+						name = buddy.getName();
+					}
+
+					sendMessage(to, name + " said: " + imcommandText);
+				} else {
+					sendMessage(buddy, imcommandTo + " is offline and will be told when they signon.");
+					addMessage(to, buddy, imcommandText);
+				}
+			}
+		}
+	}
+
+----------------------------------------
+		if (query.toLowerCase().startsWith("offline")) {
+			StringTokenizer st = new StringTokenizer(query, " ");
+
+			//check for proper params
+			if (st.countTokens() < 3) {
+				super.sendMessage(buddy, "ERROR:\n" + help());
+				return;
+			}
+
+			//grab the target
+			String imcommand = st.nextToken();
+			String imcommandTo = st.nextToken();
+			AIMBuddy to = super.getBuddy(imcommandTo);
+			if (to == null) {
+				super.sendMessage(buddy, "User " + imcommandTo
+					+ " does not exist in the system.  Use the ADDUSER command to add them.");
+				return;
+			}
+
+			//grab the message
+			String imcommandText = "";
+			while (st.hasMoreTokens()) {
+				imcommandText = imcommandText + " " + st.nextToken();
+			}
+			if (!imcommandText.equals("")) {
+				sendMessage(buddy, imcommandTo + " will be told next time they signon.");
+				addMessage(to, buddy, imcommandText);
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+28918786
+src/com/levelonelabs/aimbot/modules/UserAdminModule.java 185 205
+src/com/levelonelabs/aimbot/modules/MessengerModule.java 270 298
+----------------------------------------
+        } else if (query.toLowerCase().startsWith("permituser")) {
+            // permit a user
+            StringTokenizer st = new StringTokenizer(query, " ");
+            if (st.countTokens() < 2) {
+                super.sendMessage(buddy, "ERROR:\n" + help());
+                return;
+            }
+
+            // grab the user to permit
+            String imcommand = st.nextToken();
+            String imcommandTo = st.nextToken();
+            AIMBuddy to = super.getBuddy(imcommandTo);
+            if (to == null) {
+                super.sendMessage(buddy, "User " + imcommandTo + " does not exist in the system.");
+            } else if (buddy.hasRole(AIMBot.ROLE_ADMINISTRATOR)) {
+                super.permitBuddy(to);
+                super.sendMessage(buddy, "User " + imcommandTo + " permitted.");
+            } else {
+                super.sendMessage(buddy, "Only admins can permit users.");
+            }
+        } else if (query.toLowerCase().startsWith("permitmode")) {
+
+----------------------------------------
+		if (query.toLowerCase().startsWith("offline")) {
+			StringTokenizer st = new StringTokenizer(query, " ");
+
+			//check for proper params
+			if (st.countTokens() < 3) {
+				super.sendMessage(buddy, "ERROR:\n" + help());
+				return;
+			}
+
+			//grab the target
+			String imcommand = st.nextToken();
+			String imcommandTo = st.nextToken();
+			AIMBuddy to = super.getBuddy(imcommandTo);
+			if (to == null) {
+				super.sendMessage(buddy, "User " + imcommandTo
+					+ " does not exist in the system.  Use the ADDUSER command to add them.");
+				return;
+			}
+
+			//grab the message
+			String imcommandText = "";
+			while (st.hasMoreTokens()) {
+				imcommandText = imcommandText + " " + st.nextToken();
+			}
+			if (!imcommandText.equals("")) {
+				sendMessage(buddy, imcommandTo + " will be told next time they signon.");
+				addMessage(to, buddy, imcommandText);
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+28918747
+src/com/levelonelabs/aim/AIMClient.java 1128 1179
+src/com/levelonelabs/aimbot/modules/MessengerModule.java 270 298
+----------------------------------------
+            if (command.equals("ERROR")) {
+                String error = inToken.nextToken();
+                logger.severe("*** AIM ERROR: " + error + " ***");
+                if (error.equals("901")) {
+                    generateError(error, "Not currently available");
+                    // logger.fine("Not currently available");
+                    return;
+                }
+
+                if (error.equals("902")) {
+                    generateError(error, "Warning not currently available");
+                    // logger.fine("Warning not currently available");
+                    return;
+                }
+
+                if (error.equals("903")) {
+                    generateError(error, "Message dropped, sending too fast");
+                    // logger.fine("Message dropped, sending too fast");
+                    return;
+                }
+
+                if (error.equals("960")) {
+                    String person = inToken.nextToken();
+                    generateError(error, "Sending messages too fast to " + person);
+                    // logger.fine("Sending messages too fast to " + person);
+                    return;
+                }
+
+                if (error.equals("961")) {
+                    String person = inToken.nextToken();
+                    generateError(error, person + " sent you too big a message");
+                    // logger.fine(person + " sent you too big a message");
+                    return;
+                }
+
+                if (error.equals("962")) {
+                    String person = inToken.nextToken();
+                    generateError(error, person + " sent you a message too fast");
+                    // logger.fine(person + " sent you a message too fast");
+                    return;
+                }
+
+                if (error.equals("Signon err")) {
+                    String text = inToken.nextToken();
+                    generateError(error, "AIM Signon failure: " + text);
+
+                    // logger.fine("AIM Signon failure: " + text);
+                    signoff("5");
+                }
+
+                return;
+            }
+
+----------------------------------------
+		if (query.toLowerCase().startsWith("offline")) {
+			StringTokenizer st = new StringTokenizer(query, " ");
+
+			//check for proper params
+			if (st.countTokens() < 3) {
+				super.sendMessage(buddy, "ERROR:\n" + help());
+				return;
+			}
+
+			//grab the target
+			String imcommand = st.nextToken();
+			String imcommandTo = st.nextToken();
+			AIMBuddy to = super.getBuddy(imcommandTo);
+			if (to == null) {
+				super.sendMessage(buddy, "User " + imcommandTo
+					+ " does not exist in the system.  Use the ADDUSER command to add them.");
+				return;
+			}
+
+			//grab the message
+			String imcommandText = "";
+			while (st.hasMoreTokens()) {
+				imcommandText = imcommandText + " " + st.nextToken();
+			}
+			if (!imcommandText.equals("")) {
+				sendMessage(buddy, imcommandTo + " will be told next time they signon.");
+				addMessage(to, buddy, imcommandText);
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+28918750
+src/com/levelonelabs/aimbot/modules/TVListingsModule.java 136 172
+src/com/levelonelabs/aimbot/modules/WeatherModule.java 121 151
+----------------------------------------
+		if (query.trim().toLowerCase().startsWith("tvlist")) {
+			StringTokenizer st = new StringTokenizer(query, " ");
+			String zipPref = buddy.getPreference("zipcode");
+			if ((zipPref == null) && (st.countTokens() < 2)) {
+				super.sendMessage(buddy, "ERROR:\n" + help());
+			} else {
+				String imcommand = st.nextToken();
+				String zipcode = "";
+				if (st.hasMoreElements()) {
+					zipcode = ((String) st.nextElement()).trim();
+				} else if (zipPref != null) {
+					zipcode = zipPref;
+				}
+				String result = "Couldn't get provider list.";
+				if (zipcode.length() == 5) {
+					TVProviderScraper scrapper = new TVProviderScraper(zipcode);
+					Map providers = scrapper.getProviders();
+
+					if (providers.size() > 0) {
+						result = "Set the preference <b>tvprovider</b> to your providers code.\n";
+						//seemed to have gotten a decent result, so display it
+						for (Iterator iter = providers.keySet().iterator(); iter.hasNext();) {
+							String key = (String) iter.next();
+							String value = (String) providers.get(key);
+							logger.fine(value + "\t use --> " + key);
+							result += (value + "\t --> <b>" + key + "</b>\n");
+						}
+						if (zipPref == null) {
+							//if the buddy didnt have a zippref set, set this
+							// one for him
+							buddy.setPreference("zipcode", zipcode);
+						}
+					}
+				}
+				super.sendMessage(buddy, result);
+			}
+		} else if (query.trim().toLowerCase().startsWith("tv")) {
+
+----------------------------------------
+        if(query.trim().toLowerCase().startsWith("weather")) {
+            StringTokenizer st=new StringTokenizer(query, " ");
+            String zipPref=buddy.getPreference("zipcode");
+            if((zipPref == null) && (st.countTokens() < 2)) {
+                super.sendMessage(buddy, "ERROR:\n"+help());
+            } else {
+                String imcommand=st.nextToken();
+                String zipcode="";
+                if(st.hasMoreElements()) {
+                    zipcode=((String) st.nextElement()).trim();
+                } else if(zipPref != null) {
+                    zipcode=zipPref;
+                }
+                String result="Couldn't get weather information";
+                if(zipcode.length() == 5) {
+                    WeatherScrapper scrapper=new WeatherScrapper();
+                    String temp=scrapper.getWeather(zipcode);
+                    if(!temp.trim().equals("")) {
+                        //seemed to have gotten a decent result, so display it
+                        String mapURL=WeatherModule.MAP_URL+zipcode;
+                        result="Weather for zipcode <a href=\""+mapURL+"\">"+zipcode+"</a>:\n"+temp;
+
+                        if(zipPref == null) {
+                            //if the buddy didnt have a zippref set, set this one for him
+                            buddy.setPreference("zipcode", zipcode);
+                        }
+                    }
+                }
+                super.sendMessage(buddy, result);
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+28918749
+src/com/levelonelabs/aim/AIMClient.java 1450 1472
+src/com/levelonelabs/aimbot/modules/WeatherModule.java 121 151
+----------------------------------------
+        public void run() {
+            try {
+                if (sender) {
+                    aim.connectionVerified = false;
+                    // only message if we are online (when we get reconnected
+                    // online will be true)
+                    if (aim.online) {
+                        aim.sendMesg(aim.name, AIMClient.PING);
+                    }
+                } else {
+                    // need to see if we got a response
+                    if (!aim.connectionVerified) {
+                        // restart the connection if we didnt see the message
+                        logger.info("*** AIM -- CONNECTION PROBLEM(" + new Date() + "): Connection was not verified!");
+                        logger.info("****** Assuming it was dropped, issuing restart.");
+                        aim.signoff("Connection Dropped!");
+                        new Thread(aim).start();
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+----------------------------------------
+        if(query.trim().toLowerCase().startsWith("weather")) {
+            StringTokenizer st=new StringTokenizer(query, " ");
+            String zipPref=buddy.getPreference("zipcode");
+            if((zipPref == null) && (st.countTokens() < 2)) {
+                super.sendMessage(buddy, "ERROR:\n"+help());
+            } else {
+                String imcommand=st.nextToken();
+                String zipcode="";
+                if(st.hasMoreElements()) {
+                    zipcode=((String) st.nextElement()).trim();
+                } else if(zipPref != null) {
+                    zipcode=zipPref;
+                }
+                String result="Couldn't get weather information";
+                if(zipcode.length() == 5) {
+                    WeatherScrapper scrapper=new WeatherScrapper();
+                    String temp=scrapper.getWeather(zipcode);
+                    if(!temp.trim().equals("")) {
+                        //seemed to have gotten a decent result, so display it
+                        String mapURL=WeatherModule.MAP_URL+zipcode;
+                        result="Weather for zipcode <a href=\""+mapURL+"\">"+zipcode+"</a>:\n"+temp;
+
+                        if(zipPref == null) {
+                            //if the buddy didnt have a zippref set, set this one for him
+                            buddy.setPreference("zipcode", zipcode);
+                        }
+                    }
+                }
+                super.sendMessage(buddy, result);
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+28918751
+src/com/levelonelabs/aimbot/modules/WeatherModule.java 121 151
+src/com/levelonelabs/aimbot/modules/StockModule.java 122 183
+----------------------------------------
+        if(query.trim().toLowerCase().startsWith("weather")) {
+            StringTokenizer st=new StringTokenizer(query, " ");
+            String zipPref=buddy.getPreference("zipcode");
+            if((zipPref == null) && (st.countTokens() < 2)) {
+                super.sendMessage(buddy, "ERROR:\n"+help());
+            } else {
+                String imcommand=st.nextToken();
+                String zipcode="";
+                if(st.hasMoreElements()) {
+                    zipcode=((String) st.nextElement()).trim();
+                } else if(zipPref != null) {
+                    zipcode=zipPref;
+                }
+                String result="Couldn't get weather information";
+                if(zipcode.length() == 5) {
+                    WeatherScrapper scrapper=new WeatherScrapper();
+                    String temp=scrapper.getWeather(zipcode);
+                    if(!temp.trim().equals("")) {
+                        //seemed to have gotten a decent result, so display it
+                        String mapURL=WeatherModule.MAP_URL+zipcode;
+                        result="Weather for zipcode <a href=\""+mapURL+"\">"+zipcode+"</a>:\n"+temp;
+
+                        if(zipPref == null) {
+                            //if the buddy didnt have a zippref set, set this one for him
+                            buddy.setPreference("zipcode", zipcode);
+                        }
+                    }
+                }
+                super.sendMessage(buddy, result);
+            }
+        }
+
+----------------------------------------
+        if (query.trim().toLowerCase().startsWith("stock")) {
+            StringTokenizer st= new StringTokenizer(query, " ");
+            String portfolioPref= buddy.getPreference("portfolio");
+            if (st.countTokens() < 2 && portfolioPref == null) {
+                super.sendMessage(buddy, "ERROR:\n" + help());
+            } else {
+                String imcommand= st.nextToken();
+                String symbol= "";
+                while (st.hasMoreElements()) {
+                    String temp= (String) st.nextElement();
+                    symbol += temp;
+                    if (st.hasMoreElements()) {
+                        symbol += "+";
+                    }
+                }
+
+                //no symbols listed; use the preference
+                if (symbol.equals("")) {
+                    symbol=portfolioPref;
+                }
+                
+                symbol=symbol.replaceAll(" ", "+");
+
+                String quote= "Couldn't get stock information";
+
+                //grab the quote
+                try {
+                    String queryURL= URL + "?" + "f=" + this.options + "&s=" + symbol;
+                    URL url= new URL(queryURL);
+
+                    //setup the connection (do POST)
+                    URLConnection connection= url.openConnection();
+                    connection.setDoOutput(true);
+                    connection.connect();
+
+                    //read the results page
+                    BufferedReader br= new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                    String line;
+                    StringBuffer sb= new StringBuffer();
+                    while ((line= br.readLine()) != null) {
+                        sb.append(line + "\n");
+                    }
+                    br.close();
+
+                    //extract the results
+                    st= new StringTokenizer(sb.toString(), ",");
+                    String results= "";
+                    while (st.hasMoreElements()) {
+                        results += (st.nextElement() + "\t");
+                    }
+                    if (!results.trim().equals("")) {
+                        quote= results;
+                    }
+
+                    //error checking?
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                super.sendMessage(buddy, "\n" + quote);
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+28918752
+src/com/levelonelabs/aimbot/modules/WeatherModule.java 126 150
+src/com/levelonelabs/aimbot/modules/TVListingsModule.java 181 208
+----------------------------------------
+            } else {
+                String imcommand=st.nextToken();
+                String zipcode="";
+                if(st.hasMoreElements()) {
+                    zipcode=((String) st.nextElement()).trim();
+                } else if(zipPref != null) {
+                    zipcode=zipPref;
+                }
+                String result="Couldn't get weather information";
+                if(zipcode.length() == 5) {
+                    WeatherScrapper scrapper=new WeatherScrapper();
+                    String temp=scrapper.getWeather(zipcode);
+                    if(!temp.trim().equals("")) {
+                        //seemed to have gotten a decent result, so display it
+                        String mapURL=WeatherModule.MAP_URL+zipcode;
+                        result="Weather for zipcode <a href=\""+mapURL+"\">"+zipcode+"</a>:\n"+temp;
+
+                        if(zipPref == null) {
+                            //if the buddy didnt have a zippref set, set this one for him
+                            buddy.setPreference("zipcode", zipcode);
+                        }
+                    }
+                }
+                super.sendMessage(buddy, result);
+            }
+
+----------------------------------------
+			} else {
+				String imcommand = st.nextToken();
+				String searchString = "";
+				while (st.hasMoreElements()) {
+					searchString += (((String) st.nextElement()).trim() + " ");
+				}
+
+				TVListingsScraper listings = new TVListingsScraper(searchString, provider);
+				ShowDetail showDetail = listings.getShowDetail();
+
+				String result = "Unable to find show information for " + searchString;
+
+				if ((showDetail != null) && (showDetail.getUrl() != null) && (showDetail.getShow() != null)) {
+					TVResultsScraper scrapper = new TVResultsScraper(showDetail.getUrl(), showDetail.getShow());
+					String summary = scrapper.getSummary();
+					String channelInfo = "";
+					if (showDetail.getChannel() != null) {
+						channelInfo = showDetail.getChannel() + " ";
+					}
+					if (summary.trim().equals("")) {
+						result = "<a href=\"" + showDetail.getUrl() + "\">" + showDetail.getShow() + "</a>";
+					} else {
+						result = showDetail.getShow() + "\n" + channelInfo + summary;
+					}
+				}
+
+				super.sendMessage(buddy, result);
+			}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+28918753
+src/com/levelonelabs/aimbot/modules/WeatherModule.java 135 148
+src/com/levelonelabs/aimbot/modules/SkiReportModule.java 241 252
+----------------------------------------
+                if(zipcode.length() == 5) {
+                    WeatherScrapper scrapper=new WeatherScrapper();
+                    String temp=scrapper.getWeather(zipcode);
+                    if(!temp.trim().equals("")) {
+                        //seemed to have gotten a decent result, so display it
+                        String mapURL=WeatherModule.MAP_URL+zipcode;
+                        result="Weather for zipcode <a href=\""+mapURL+"\">"+zipcode+"</a>:\n"+temp;
+
+                        if(zipPref == null) {
+                            //if the buddy didnt have a zippref set, set this one for him
+                            buddy.setPreference("zipcode", zipcode);
+                        }
+                    }
+                }
+
+----------------------------------------
+            if (ind >= 0) {
+                try {
+                    String temp = urlString.substring(ind + (BASE_URL + this.state + "/").length());
+                    String code = temp.substring(ind, temp.indexOf("/"));
+                    if (!codes.contains(code)) {
+                        codes.add(code);
+                    }
+                    grabURLText = true;
+                } catch (Exception e) {
+                    logger.fine("Parser didn't handle parsing [" + urlString + "] cleanly:" + e.getMessage());
+                }
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+28918754
+src/com/levelonelabs/aimbot/modules/ListModule.java 179 202
+src/com/levelonelabs/aimbot/modules/DefaultModule.java 117 134
+----------------------------------------
+    private void processRemoveListMember(AIMBuddy buddy, StringTokenizer st) {
+        if (!buddy.hasRole(AIMBot.ROLE_ADMINISTRATOR)) {
+            super.sendMessage(buddy, "Sorry. This command is for admins only.");
+        } else if (st.countTokens() < 3) {
+            super.sendMessage(buddy, "Error:\n" + help());
+        } else {
+            String imcommand = st.nextToken();
+            String list = st.nextToken();
+            String buddyname = st.nextToken();
+
+            AIMGroup group = super.bot.getGroup(list);
+
+            if (group != null) {
+                if (group.remove(buddyname)) {
+                    super.sendMessage(buddy, buddyname + " was successfully removed from list:" + list);
+                } else {
+                    super.sendMessage(buddy, buddyname + " was not a member of list:" + list);
+                }
+            } else {
+                super.sendMessage(buddy, "The list, " + list + ", does not exist.");
+            }
+
+        }
+    }
+
+----------------------------------------
+        if(query.toLowerCase().startsWith("addTerm")) {
+            if(!buddy.hasRole(AIMBot.ROLE_ADMINISTRATOR)) {
+                super.sendMessage(buddy, "Sorry, only admins can add terms");
+                return;
+            }
+            if(st.countTokens() < 2) {
+                super.sendMessage(buddy, "ERROR:\n"+help());
+                return;
+            }
+
+            String imcommand=st.nextToken();
+            String term=st.nextToken();
+            while(st.hasMoreTokens()) {
+                term=term+" "+st.nextToken();
+            }
+            super.sendMessage(buddy, "Sorry, this feature hasn't been implemented yet");
+            //addTerm(term);
+        } else {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+28918760
+src/com/levelonelabs/aimbot/modules/ListModule.java 242 258
+src/com/levelonelabs/aimbot/modules/DefaultModule.java 117 134
+----------------------------------------
+    private void processRemoveList(AIMBuddy buddy, StringTokenizer st) {
+        if (!buddy.hasRole(AIMBot.ROLE_ADMINISTRATOR)) {
+            super.sendMessage(buddy, "Sorry. This command is for admins only.");
+        } else if (st.countTokens() < 1) {
+            super.sendMessage(buddy, "Error: \n" + help());
+        } else {
+            String list = st.nextToken();
+            list = st.nextToken();
+            AIMGroup group = super.bot.getGroup(list);
+            if (group != null) {
+                super.bot.removeGroup(group);
+                super.sendMessage(buddy, "The list " + list + " has been removed");
+            } else {
+                super.sendMessage(buddy, "The list " + list + " does not exist");
+            }
+        }
+    }
+
+----------------------------------------
+        if(query.toLowerCase().startsWith("addTerm")) {
+            if(!buddy.hasRole(AIMBot.ROLE_ADMINISTRATOR)) {
+                super.sendMessage(buddy, "Sorry, only admins can add terms");
+                return;
+            }
+            if(st.countTokens() < 2) {
+                super.sendMessage(buddy, "ERROR:\n"+help());
+                return;
+            }
+
+            String imcommand=st.nextToken();
+            String term=st.nextToken();
+            while(st.hasMoreTokens()) {
+                term=term+" "+st.nextToken();
+            }
+            super.sendMessage(buddy, "Sorry, this feature hasn't been implemented yet");
+            //addTerm(term);
+        } else {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+28918759
+src/com/levelonelabs/aimbot/modules/ListModule.java 242 258
+src/com/levelonelabs/aimbot/modules/PreferenceModule.java 127 142
+----------------------------------------
+    private void processRemoveList(AIMBuddy buddy, StringTokenizer st) {
+        if (!buddy.hasRole(AIMBot.ROLE_ADMINISTRATOR)) {
+            super.sendMessage(buddy, "Sorry. This command is for admins only.");
+        } else if (st.countTokens() < 1) {
+            super.sendMessage(buddy, "Error: \n" + help());
+        } else {
+            String list = st.nextToken();
+            list = st.nextToken();
+            AIMGroup group = super.bot.getGroup(list);
+            if (group != null) {
+                super.bot.removeGroup(group);
+                super.sendMessage(buddy, "The list " + list + " has been removed");
+            } else {
+                super.sendMessage(buddy, "The list " + list + " does not exist");
+            }
+        }
+    }
+
+----------------------------------------
+        } else if(query.toLowerCase().startsWith("setpref")) {
+            //store the desired pref
+            StringTokenizer st=new StringTokenizer(query, " ");
+            if(st.countTokens() < 3) {
+                super.sendMessage(buddy, "ERROR:\n"+help());
+            } else {
+                String imcommand=st.nextToken();
+                String preference=st.nextToken();
+                String value=st.nextToken();
+                while(st.hasMoreTokens()) {
+                    value+=(" "+st.nextToken());
+                }
+                buddy.setPreference(preference, value);
+                super.sendMessage(buddy, "Preference ("+preference+" = "+value+") added.");
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+28918776
+src/com/levelonelabs/aimbot/modules/UserAdminModule.java 185 205
+src/com/levelonelabs/aimbot/modules/PreferenceModule.java 127 142
+----------------------------------------
+        } else if (query.toLowerCase().startsWith("permituser")) {
+            // permit a user
+            StringTokenizer st = new StringTokenizer(query, " ");
+            if (st.countTokens() < 2) {
+                super.sendMessage(buddy, "ERROR:\n" + help());
+                return;
+            }
+
+            // grab the user to permit
+            String imcommand = st.nextToken();
+            String imcommandTo = st.nextToken();
+            AIMBuddy to = super.getBuddy(imcommandTo);
+            if (to == null) {
+                super.sendMessage(buddy, "User " + imcommandTo + " does not exist in the system.");
+            } else if (buddy.hasRole(AIMBot.ROLE_ADMINISTRATOR)) {
+                super.permitBuddy(to);
+                super.sendMessage(buddy, "User " + imcommandTo + " permitted.");
+            } else {
+                super.sendMessage(buddy, "Only admins can permit users.");
+            }
+        } else if (query.toLowerCase().startsWith("permitmode")) {
+
+----------------------------------------
+        } else if(query.toLowerCase().startsWith("setpref")) {
+            //store the desired pref
+            StringTokenizer st=new StringTokenizer(query, " ");
+            if(st.countTokens() < 3) {
+                super.sendMessage(buddy, "ERROR:\n"+help());
+            } else {
+                String imcommand=st.nextToken();
+                String preference=st.nextToken();
+                String value=st.nextToken();
+                while(st.hasMoreTokens()) {
+                    value+=(" "+st.nextToken());
+                }
+                buddy.setPreference(preference, value);
+                super.sendMessage(buddy, "Preference ("+preference+" = "+value+") added.");
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+28918777
+src/com/levelonelabs/aimbot/modules/MessengerModule.java 270 298
+src/com/levelonelabs/aimbot/modules/PreferenceModule.java 127 142
+----------------------------------------
+		if (query.toLowerCase().startsWith("offline")) {
+			StringTokenizer st = new StringTokenizer(query, " ");
+
+			//check for proper params
+			if (st.countTokens() < 3) {
+				super.sendMessage(buddy, "ERROR:\n" + help());
+				return;
+			}
+
+			//grab the target
+			String imcommand = st.nextToken();
+			String imcommandTo = st.nextToken();
+			AIMBuddy to = super.getBuddy(imcommandTo);
+			if (to == null) {
+				super.sendMessage(buddy, "User " + imcommandTo
+					+ " does not exist in the system.  Use the ADDUSER command to add them.");
+				return;
+			}
+
+			//grab the message
+			String imcommandText = "";
+			while (st.hasMoreTokens()) {
+				imcommandText = imcommandText + " " + st.nextToken();
+			}
+			if (!imcommandText.equals("")) {
+				sendMessage(buddy, imcommandTo + " will be told next time they signon.");
+				addMessage(to, buddy, imcommandText);
+			}
+		}
+
+----------------------------------------
+        } else if(query.toLowerCase().startsWith("setpref")) {
+            //store the desired pref
+            StringTokenizer st=new StringTokenizer(query, " ");
+            if(st.countTokens() < 3) {
+                super.sendMessage(buddy, "ERROR:\n"+help());
+            } else {
+                String imcommand=st.nextToken();
+                String preference=st.nextToken();
+                String value=st.nextToken();
+                while(st.hasMoreTokens()) {
+                    value+=(" "+st.nextToken());
+                }
+                buddy.setPreference(preference, value);
+                super.sendMessage(buddy, "Preference ("+preference+" = "+value+") added.");
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+28918762
+src/com/levelonelabs/aimbot/modules/ListModule.java 265 285
+src/com/levelonelabs/aimbot/modules/PreferenceModule.java 132 141
+----------------------------------------
+    private void processPost(AIMBuddy buddy, StringTokenizer st) {
+        if (st.countTokens() < 3) {
+            super.sendMessage(buddy, "ERROR:\n" + help());
+        } else {
+            String imcommand = st.nextToken();
+            String list = st.nextToken();
+
+            // grab the rest of the message and send it to the group
+            String message = "";
+            while (st.hasMoreTokens()) {
+                message += (" " + st.nextToken());
+            }
+
+            AIMGroup group = super.bot.getGroup(list);
+            if (group != null) {
+                sendGroupMessage(group, message, buddy);
+            } else {
+                super.sendMessage(buddy, "The list, " + list + ", does not exist.");
+            }
+        }
+    }
+
+----------------------------------------
+            } else {
+                String imcommand=st.nextToken();
+                String preference=st.nextToken();
+                String value=st.nextToken();
+                while(st.hasMoreTokens()) {
+                    value+=(" "+st.nextToken());
+                }
+                buddy.setPreference(preference, value);
+                super.sendMessage(buddy, "Preference ("+preference+" = "+value+") added.");
+            }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+28918764
+src/com/levelonelabs/aimbot/modules/ScheduleModule.java 203 213
+src/com/levelonelabs/aimbot/modules/MessengerModule.java 185 199
+----------------------------------------
+    public void performService(AIMBuddy buddy, String query) {
+        if (query.toLowerCase().startsWith("schedule")) {
+            handleSchedule(buddy, query);
+        } else if (query.toLowerCase().startsWith("cancel")) {
+            handleCancel(buddy, query);
+        } else if (query.toLowerCase().startsWith("events")) {
+            if (!retrieveEvents(buddy)) {
+                sendMessage(buddy, "No events scheduled.");
+            }
+        }
+    }
+
+----------------------------------------
+	public void performService(AIMBuddy buddy, String query) {
+		if (query.toLowerCase().startsWith("tell")) {
+			handleTell(buddy, query);
+		} else if (query.toLowerCase().startsWith("offline")) {
+			handleOffline(buddy, query);
+		} else if (query.toLowerCase().startsWith("clear messages")) {
+			logger.info("Clearing Messages for user:" + buddy + ".");
+			buddy.clearMessages();
+			super.sendMessage(buddy, "Messages Cleared");
+		} else if (query.toLowerCase().startsWith("show messages")) {
+			if (!retrieveMessages(buddy)) {
+				super.sendMessage(buddy, "No Messages");
+			}
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+28918765
+src/com/levelonelabs/aimbot/modules/ScheduleModule.java 525 554
+src/com/levelonelabs/aimbot/modules/ReminderModule.java 291 306
+----------------------------------------
+        while (iter.hasNext()) {
+            String name = (String) iter.next();
+            ArrayList br = (ArrayList) events.get(name);
+            if (br.size() > 0) {
+                Element buddyElem = doc.createElement("buddy");
+                buddyElem.setAttribute("name", name);
+                for (int i = 0; i < br.size(); i++) {
+                    Element remElem = doc.createElement("event");
+                    SchedulerTask st = (SchedulerTask) br.get(i);
+
+                    Element buddy = doc.createElement("buddy");
+                    CDATASection buddy_data = doc.createCDATASection(st.getBuddy().getName());
+                    buddy.appendChild(buddy_data);
+
+                    Element cmd = doc.createElement("command");
+                    CDATASection cmd_data = doc.createCDATASection(st.getCommand());
+                    cmd.appendChild(cmd_data);
+
+                    Element createDate = doc.createElement("createDate");
+                    CDATASection cd_data = doc.createCDATASection(st.getCreateDate());
+                    createDate.appendChild(cd_data);
+
+                    remElem.appendChild(buddy);
+                    remElem.appendChild(cmd);
+                    remElem.appendChild(createDate);
+                    buddyElem.appendChild(remElem);
+                }
+                emptyStateElement.appendChild(buddyElem);
+            }
+        }
+
+----------------------------------------
+        while (iter.hasNext()) {
+            String name = (String) iter.next();
+            ArrayList br = (ArrayList) reminders.get(name);
+            if (br.size() > 0) {
+                Element buddyElem = doc.createElement("buddy");
+                buddyElem.setAttribute("name", name);
+                for (int i = 0; i < br.size(); i++) {
+                    Element remElem = doc.createElement("reminder");
+                    String reminder = (String) br.get(i);
+                    CDATASection data = doc.createCDATASection(reminder);
+                    remElem.appendChild(data);
+                    buddyElem.appendChild(remElem);
+                }
+                emptyStateElement.appendChild(buddyElem);
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+28918766
+src/com/levelonelabs/aimbot/modules/TVListingsModule.java 157 162
+src/com/levelonelabs/aimbot/modules/SkiReportModule.java 187 192
+----------------------------------------
+						for (Iterator iter = providers.keySet().iterator(); iter.hasNext();) {
+							String key = (String) iter.next();
+							String value = (String) providers.get(key);
+							logger.fine(value + "\t use --> " + key);
+							result += (value + "\t --> <b>" + key + "</b>\n");
+						}
+
+----------------------------------------
+                        for (Iterator iter = mntMap.keySet().iterator(); iter.hasNext();) {
+                            String key = (String) iter.next();
+                            String value = (String) mntMap.get(key);
+                            logger.fine(value + "\t use --> " + state + ":" + key);
+                            result += (value + "\t --> <b>" + state + ":" + key + "</b>\n");
+                        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+28918767
+src/com/levelonelabs/aimbot/modules/TVListingsModule.java 181 208
+src/com/levelonelabs/aimbot/modules/MessengerModule.java 212 258
+----------------------------------------
+			} else {
+				String imcommand = st.nextToken();
+				String searchString = "";
+				while (st.hasMoreElements()) {
+					searchString += (((String) st.nextElement()).trim() + " ");
+				}
+
+				TVListingsScraper listings = new TVListingsScraper(searchString, provider);
+				ShowDetail showDetail = listings.getShowDetail();
+
+				String result = "Unable to find show information for " + searchString;
+
+				if ((showDetail != null) && (showDetail.getUrl() != null) && (showDetail.getShow() != null)) {
+					TVResultsScraper scrapper = new TVResultsScraper(showDetail.getUrl(), showDetail.getShow());
+					String summary = scrapper.getSummary();
+					String channelInfo = "";
+					if (showDetail.getChannel() != null) {
+						channelInfo = showDetail.getChannel() + " ";
+					}
+					if (summary.trim().equals("")) {
+						result = "<a href=\"" + showDetail.getUrl() + "\">" + showDetail.getShow() + "</a>";
+					} else {
+						result = showDetail.getShow() + "\n" + channelInfo + summary;
+					}
+				}
+
+				super.sendMessage(buddy, result);
+			}
+
+----------------------------------------
+		if (query.toLowerCase().startsWith("tell")) {
+			StringTokenizer st = new StringTokenizer(query, " ");
+
+			//check for right number of arguments
+			if (st.countTokens() < 3) {
+				sendMessage(buddy, "ERROR:\n" + help());
+				return;
+			}
+
+			//grab the command and target
+			String imcommand = st.nextToken();
+			if (!imcommand.toLowerCase().equals("tell")) {
+				sendMessage(buddy, "ERROR:\n" + help());
+				return;
+			}
+			String imcommandTo = st.nextToken();
+			AIMBuddy to = getBuddy(imcommandTo);
+
+			//verify they are a user of the bot
+			if (to == null) {
+				sendMessage(buddy, "User " + imcommandTo
+					+ " does not exist in the system.\nUse the ADDUSER command to add them.");
+				return;
+			}
+
+			//grab the rest of the message and send it to the target
+			String imcommandText = "";
+			while (st.hasMoreTokens()) {
+				imcommandText = imcommandText + " " + st.nextToken();
+			}
+
+			//only send a message if there is somethign there.
+			if (!imcommandText.equals("")) {
+				//if the target if not online we need to store the message for
+				// when they sign on
+				if (to.isOnline()) {
+					if (buddy != null) {
+						name = buddy.getName();
+					}
+
+					sendMessage(to, name + " said: " + imcommandText);
+				} else {
+					sendMessage(buddy, imcommandTo + " is offline and will be told when they signon.");
+					addMessage(to, buddy, imcommandText);
+				}
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+28918768
+src/com/levelonelabs/aimbot/modules/TVListingsModule.java 282 293
+src/com/levelonelabs/aimbot/modules/TVListingsModule.java 283 292
+----------------------------------------
+	public void handleText(char[] data, int pos) {
+		if (validText) {
+			String line = new String(data).trim();
+
+			//ignore the time zone providers
+			if ((line.indexOf("Time Zone") == -1) && (line.indexOf("None") == -1)) {
+				names.add(line);
+			} else {
+				codes.remove(codes.size() - 1);
+			}
+		}
+	}
+
+----------------------------------------
+		if (validText) {
+			String line = new String(data).trim();
+
+			//ignore the time zone providers
+			if ((line.indexOf("Time Zone") == -1) && (line.indexOf("None") == -1)) {
+				names.add(line);
+			} else {
+				codes.remove(codes.size() - 1);
+			}
+		}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+28918769
+src/com/levelonelabs/aimbot/modules/TVListingsModule.java 414 430
+src/com/levelonelabs/aimbot/modules/SkiReportModule.java 287 293
+----------------------------------------
+	public void handleText(char[] data, int pos) {
+		String line = new String(data).trim();
+		if (!ignore && line.startsWith(this.show)) {
+			if (--showCount < 0) {
+				foundStart = useText = ignore = true;
+			}
+		} else if (line.startsWith("Original Airdate:")) {
+			useText = false;
+			foundEnd = true;
+			result.append(line + " ");
+		} else if (line.startsWith("Future Airings:")) {
+			useText = false;
+			foundEnd = true;
+		} else if (useText && !inLink && !line.equals("")) {
+			result.append(line + " ");
+		}
+	}
+
+----------------------------------------
+        } else {
+            String line = new String(data).trim();
+            // ignore the time zone providers
+            if (line.equals("Resort Name")) {
+                validLink = true;
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+28918770
+src/com/levelonelabs/aimbot/modules/TVListingsModule.java 414 430
+src/com/levelonelabs/aimbot/modules/MoviesModule.java 151 157
+----------------------------------------
+	public void handleText(char[] data, int pos) {
+		String line = new String(data).trim();
+		if (!ignore && line.startsWith(this.show)) {
+			if (--showCount < 0) {
+				foundStart = useText = ignore = true;
+			}
+		} else if (line.startsWith("Original Airdate:")) {
+			useText = false;
+			foundEnd = true;
+			result.append(line + " ");
+		} else if (line.startsWith("Future Airings:")) {
+			useText = false;
+			foundEnd = true;
+		} else if (useText && !inLink && !line.equals("")) {
+			result.append(line + " ");
+		}
+	}
+
+----------------------------------------
+                    if(zipcode.length() == 1) {
+                        theatercode=zipcode;
+                        zipcode=zipMovie;
+                        if((zipcode == null) || (zipcode.length() != 5)) {
+                            zipcode=zipPref;
+                        }
+                    }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+28918771
+src/com/levelonelabs/aimbot/modules/TVListingsModule.java 524 538
+src/com/levelonelabs/aimbot/modules/TVListingsModule.java 525 536
+----------------------------------------
+			if (grabURL) {
+				try {
+					String urlString = a.getAttribute(HTML.Attribute.HREF).toString();
+					StringTokenizer stok = new StringTokenizer(urlString);
+					String resultString = "";
+					while (stok.hasMoreElements()) {
+						resultString += stok.nextElement();
+					}
+
+					URL url = new URL(resultString);
+					result.setUrl(url);
+					foundURL = true;
+				} catch (Exception e) {
+				}
+			}
+
+----------------------------------------
+				try {
+					String urlString = a.getAttribute(HTML.Attribute.HREF).toString();
+					StringTokenizer stok = new StringTokenizer(urlString);
+					String resultString = "";
+					while (stok.hasMoreElements()) {
+						resultString += stok.nextElement();
+					}
+
+					URL url = new URL(resultString);
+					result.setUrl(url);
+					foundURL = true;
+				} catch (Exception e) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+28918772
+src/com/levelonelabs/aimbot/modules/TVListingsModule.java 593 631
+src/com/levelonelabs/aimbot/modules/TVListingsModule.java 594 626
+----------------------------------------
+	public ShowDetail getShowDetail() {
+		try {
+			URL url = new URL(BASE_URL + SEARCH_URL + SHOW_URL + this.show + PROVIDER_URL + this.provider + END_URL);
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			int resCode = conn.getResponseCode();
+			logger.fine("THE URL=" + conn.getURL() + " using code:" + resCode);
+
+			if (logger.isLoggable(Level.FINEST)) {
+				Map headers = conn.getHeaderFields();
+				for (Iterator iter = headers.keySet().iterator(); iter.hasNext();) {
+					String key = (String) iter.next();
+					List values = (List) headers.get(key);
+					for (Iterator iterator = values.iterator(); iterator.hasNext();) {
+						String value = (String) iterator.next();
+						logger.finest("Header:" + key + " = " + value);
+					}
+				}
+			}
+
+			//handle relative redirects
+			if ((resCode > 300) && (resCode < 400)) {
+				String newURL = conn.getHeaderField("Location");
+				if ((newURL != null) && newURL.startsWith("/")) {
+					logger.fine("Redirecting to new URL=" + newURL);
+					url = new URL(BASE_URL + newURL);
+					conn.disconnect();
+					conn = (HttpURLConnection) url.openConnection();
+				}
+			}
+			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+
+			ParserDelegator pd = new ParserDelegator();
+			pd.parse(br, this, true);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+		return result;
+	}
+
+----------------------------------------
+		try {
+			URL url = new URL(BASE_URL + SEARCH_URL + SHOW_URL + this.show + PROVIDER_URL + this.provider + END_URL);
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			int resCode = conn.getResponseCode();
+			logger.fine("THE URL=" + conn.getURL() + " using code:" + resCode);
+
+			if (logger.isLoggable(Level.FINEST)) {
+				Map headers = conn.getHeaderFields();
+				for (Iterator iter = headers.keySet().iterator(); iter.hasNext();) {
+					String key = (String) iter.next();
+					List values = (List) headers.get(key);
+					for (Iterator iterator = values.iterator(); iterator.hasNext();) {
+						String value = (String) iterator.next();
+						logger.finest("Header:" + key + " = " + value);
+					}
+				}
+			}
+
+			//handle relative redirects
+			if ((resCode > 300) && (resCode < 400)) {
+				String newURL = conn.getHeaderField("Location");
+				if ((newURL != null) && newURL.startsWith("/")) {
+					logger.fine("Redirecting to new URL=" + newURL);
+					url = new URL(BASE_URL + newURL);
+					conn.disconnect();
+					conn = (HttpURLConnection) url.openConnection();
+				}
+			}
+			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+
+			ParserDelegator pd = new ParserDelegator();
+			pd.parse(br, this, true);
+		} catch (Exception e) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+28918773
+src/com/levelonelabs/aimbot/modules/SkiReportModule.java 477 505
+src/com/levelonelabs/aimbot/modules/TVListingsModule.java 594 626
+----------------------------------------
+    public SnowReport getSnowReport() {
+        URL url = null;
+        try {
+            url = new URL(BASE_URL + state + "/" + resortCode + "/" + URL_END);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        logger.fine("Looking for Snow report for resort " + resortCode + " in state" + state + " using URL= " + url);
+        SnowReport tempResult;
+        try {
+            URLConnection conn = url.openConnection();
+            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            ParserDelegator pd = new ParserDelegator();
+            pd.parse(br, this, true);
+
+            tempResult = result;
+            if (statesVisited != 6) {
+                tempResult = null;
+            }
+        } catch (Exception e) {
+            // e.printStackTrace();
+            logger.severe(e.toString());
+            return null;
+        }
+
+        return tempResult;
+    }
+
+----------------------------------------
+		try {
+			URL url = new URL(BASE_URL + SEARCH_URL + SHOW_URL + this.show + PROVIDER_URL + this.provider + END_URL);
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			int resCode = conn.getResponseCode();
+			logger.fine("THE URL=" + conn.getURL() + " using code:" + resCode);
+
+			if (logger.isLoggable(Level.FINEST)) {
+				Map headers = conn.getHeaderFields();
+				for (Iterator iter = headers.keySet().iterator(); iter.hasNext();) {
+					String key = (String) iter.next();
+					List values = (List) headers.get(key);
+					for (Iterator iterator = values.iterator(); iterator.hasNext();) {
+						String value = (String) iterator.next();
+						logger.finest("Header:" + key + " = " + value);
+					}
+				}
+			}
+
+			//handle relative redirects
+			if ((resCode > 300) && (resCode < 400)) {
+				String newURL = conn.getHeaderField("Location");
+				if ((newURL != null) && newURL.startsWith("/")) {
+					logger.fine("Redirecting to new URL=" + newURL);
+					url = new URL(BASE_URL + newURL);
+					conn.disconnect();
+					conn = (HttpURLConnection) url.openConnection();
+				}
+			}
+			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+
+			ParserDelegator pd = new ParserDelegator();
+			pd.parse(br, this, true);
+		} catch (Exception e) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+28918775
+src/com/levelonelabs/aimbot/modules/PreferenceModule.java 115 143
+src/com/levelonelabs/aimbot/modules/HeyuModule.java 118 135
+----------------------------------------
+    public void performService(AIMBuddy buddy, String query) {
+        if(query.toLowerCase().startsWith("listprefs")) {
+            // RETURN A LIST OF PREFERENCES
+            HashMap prefs=buddy.getPreferences();
+            Iterator iter=prefs.keySet().iterator();
+            StringBuffer sb=new StringBuffer();
+            sb.append("Preferences:\n");
+            while(iter.hasNext()) {
+                String key=(String) iter.next();
+                sb.append(key).append(" = ").append(prefs.get(key)).append("\n");
+            }
+            super.sendMessage(buddy, sb.toString());
+        } else if(query.toLowerCase().startsWith("setpref")) {
+            //store the desired pref
+            StringTokenizer st=new StringTokenizer(query, " ");
+            if(st.countTokens() < 3) {
+                super.sendMessage(buddy, "ERROR:\n"+help());
+            } else {
+                String imcommand=st.nextToken();
+                String preference=st.nextToken();
+                String value=st.nextToken();
+                while(st.hasMoreTokens()) {
+                    value+=(" "+st.nextToken());
+                }
+                buddy.setPreference(preference, value);
+                super.sendMessage(buddy, "Preference ("+preference+" = "+value+") added.");
+            }
+        }
+    }
+
+----------------------------------------
+	public void performService(AIMBuddy buddy, String query) {
+		if (buddy.hasRole(requiredRole)) {
+			if (query.toLowerCase().startsWith("turn")) {
+				try {
+					Runtime.getRuntime().exec(heyuPath + " " + query.toLowerCase());
+					logger.finest(buddy.getName() + " performed: " + query.toLowerCase());
+					if (successMessage != null && successMessage.trim().length() > 0) {
+						super.sendMessage(buddy, successMessage);
+					}
+				} catch (IOException ioe) {
+					super.sendMessage(buddy, "Error processing command: " + ioe.getMessage());
+					logger.severe("Error processing command: " + ioe.getMessage());
+				}
+			} else if (query.toLowerCase().startsWith("heyu")) {
+				super.sendMessage(buddy, getModules());
+			}
+		}
+	}
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+28918778
+src/com/levelonelabs/aimbot/modules/BabelModule.java 102 162
+src/com/levelonelabs/aimbot/modules/BabelModule.java 103 157
+----------------------------------------
+    private static String runQuery(String passage, String translation) {
+        try {
+            String marker="XXXXX";
+
+            //build the query
+            String base="http://world.altavista.com/babelfish/tr";
+            String query=base+"?"+"doit=done"+"&intl=1"+"&tt=urltext"+"&urltext="+
+                URLEncoder.encode(marker+" "+passage)+"&lp="+translation;
+            URL url=new URL(query);
+
+            //setup the connection (do POST)
+            URLConnection connection=url.openConnection();
+            connection.setDoOutput(true);
+            connection.connect();
+
+            //read the results page
+            BufferedReader br=new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            String line;
+            StringBuffer sb=new StringBuffer();
+            while((line=br.readLine()) != null) {
+                sb.append(line+"\n");
+            }
+            br.close();
+
+            logger.finest("THE HTML IS:\n"+sb);
+            //extract the results
+            String result=sb.toString();
+            if(result.indexOf("BabelFish Error") > -1) {
+                //use a custom exception here instead
+                logger.severe("#####ERROR#####:BabelFish puked\n");
+                logger.fine(result);
+                return "ERROR";
+            }
+
+            int index=result.indexOf(marker);
+            int error=0;
+            if(index >= 0) {
+                result=result.substring(index+marker.length());
+                int end=result.indexOf("</");
+                if(end >= 0) {
+                    result=result.substring(0, end);
+                } else {
+                    error=1;
+                }
+            } else {
+                error=2;
+            }
+
+            if(error != 0) {
+                logger.severe("There was a parsing error("+error+")!");
+                logger.fine("HERE IS THE HTML:\n"+sb);
+                return null;
+            } else {
+                return result.trim();
+            }
+        } catch(Exception e) {
+            logger.severe("Got an error:"+e);
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+----------------------------------------
+        try {
+            String marker="XXXXX";
+
+            //build the query
+            String base="http://world.altavista.com/babelfish/tr";
+            String query=base+"?"+"doit=done"+"&intl=1"+"&tt=urltext"+"&urltext="+
+                URLEncoder.encode(marker+" "+passage)+"&lp="+translation;
+            URL url=new URL(query);
+
+            //setup the connection (do POST)
+            URLConnection connection=url.openConnection();
+            connection.setDoOutput(true);
+            connection.connect();
+
+            //read the results page
+            BufferedReader br=new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            String line;
+            StringBuffer sb=new StringBuffer();
+            while((line=br.readLine()) != null) {
+                sb.append(line+"\n");
+            }
+            br.close();
+
+            logger.finest("THE HTML IS:\n"+sb);
+            //extract the results
+            String result=sb.toString();
+            if(result.indexOf("BabelFish Error") > -1) {
+                //use a custom exception here instead
+                logger.severe("#####ERROR#####:BabelFish puked\n");
+                logger.fine(result);
+                return "ERROR";
+            }
+
+            int index=result.indexOf(marker);
+            int error=0;
+            if(index >= 0) {
+                result=result.substring(index+marker.length());
+                int end=result.indexOf("</");
+                if(end >= 0) {
+                    result=result.substring(0, end);
+                } else {
+                    error=1;
+                }
+            } else {
+                error=2;
+            }
+
+            if(error != 0) {
+                logger.severe("There was a parsing error("+error+")!");
+                logger.fine("HERE IS THE HTML:\n"+sb);
+                return null;
+            } else {
+                return result.trim();
+            }
+        } catch(Exception e) {
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+28918779
+src/com/levelonelabs/aimbot/modules/MessengerModule.java 270 298
+src/com/levelonelabs/aimbot/modules/BabelModule.java 257 309
+----------------------------------------
+		if (query.toLowerCase().startsWith("offline")) {
+			StringTokenizer st = new StringTokenizer(query, " ");
+
+			//check for proper params
+			if (st.countTokens() < 3) {
+				super.sendMessage(buddy, "ERROR:\n" + help());
+				return;
+			}
+
+			//grab the target
+			String imcommand = st.nextToken();
+			String imcommandTo = st.nextToken();
+			AIMBuddy to = super.getBuddy(imcommandTo);
+			if (to == null) {
+				super.sendMessage(buddy, "User " + imcommandTo
+					+ " does not exist in the system.  Use the ADDUSER command to add them.");
+				return;
+			}
+
+			//grab the message
+			String imcommandText = "";
+			while (st.hasMoreTokens()) {
+				imcommandText = imcommandText + " " + st.nextToken();
+			}
+			if (!imcommandText.equals("")) {
+				sendMessage(buddy, imcommandTo + " will be told next time they signon.");
+				addMessage(to, buddy, imcommandText);
+			}
+		}
+
+----------------------------------------
+        if(query.trim().toLowerCase().startsWith("babel")) {
+            StringTokenizer st=new StringTokenizer(query, " ");
+
+            //check for enough args
+            if(st.countTokens() < 2) {
+                super.sendMessage(buddy, "ERROR:\n"+help());
+                return;
+            }
+
+            String imcommand=st.nextToken();
+
+            //check for distortion modifier
+            int distortion=5+(int) (Math.random()*5);
+            String temp="";
+            if(st.hasMoreTokens()) {
+                temp=st.nextToken();
+                //look for -n
+                if(temp.toLowerCase().equals("-n")) {
+                    //if we got -n we need an int next
+                    if(st.hasMoreTokens()) {
+                        temp=st.nextToken();
+                        //set the distortion level (within max) or error out
+                        try {
+                            distortion=Integer.parseInt(temp);
+                            if(distortion > MAX_TRIALS) {
+                                distortion=MAX_TRIALS;
+                            }
+
+                            temp="";
+                        } catch(NumberFormatException nfe) {
+                            super.sendMessage(buddy, "ERROR:\n"+help());
+                            return;
+                        }
+                    } else {
+                        super.sendMessage(buddy, "ERROR:\n"+help());
+                        return;
+                    }
+                }
+            }
+
+            //grab the rest of the message and make poetry with it
+            String imcommandText=temp;
+            while(st.hasMoreTokens()) {
+                imcommandText=imcommandText+" "+st.nextToken();
+            }
+
+            //only send a message if there is somethign there.
+            if(!imcommandText.equals("")) {
+                String result=makePoetry(imcommandText, distortion);
+                super.sendMessage(buddy, result);
+                return;
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+28918781
+src/com/levelonelabs/aimbot/modules/MessengerModule.java 134 146
+src/com/levelonelabs/aimbot/modules/SkiReportModule.java 238 253
+----------------------------------------
+	public void addMessage(AIMBuddy to, AIMBuddy from, String message) {
+		String fromName = "Someone";
+
+		if (to == null) {
+			return;
+		}
+
+		if (from != null) {
+			fromName = from.getName();
+		}
+
+		to.addMessage(fromName + " said \"" + message + "\" at " + new Date());
+	}
+
+----------------------------------------
+        if (t == HTML.Tag.A && validLink) {
+            String urlString = a.getAttribute(HTML.Attribute.HREF).toString();
+            int ind = urlString.indexOf(BASE_URL + this.state);
+            if (ind >= 0) {
+                try {
+                    String temp = urlString.substring(ind + (BASE_URL + this.state + "/").length());
+                    String code = temp.substring(ind, temp.indexOf("/"));
+                    if (!codes.contains(code)) {
+                        codes.add(code);
+                    }
+                    grabURLText = true;
+                } catch (Exception e) {
+                    logger.fine("Parser didn't handle parsing [" + urlString + "] cleanly:" + e.getMessage());
+                }
+            }
+        }
+
+----------------------------------------
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+97
+28918787
+src/com/levelonelabs/aimbot/AIMBot.java 353 362
+src/com/levelonelabs/aimbot/AIMBot.java 354 360
+----------------------------------------
+			if (stok.hasMoreTokens()) {
+				try {
+					int ind = Integer.parseInt(stok.nextToken());
+					BotModule bm = (BotModule) modules.get(ind);
+					sb.append("Help for " + bm.getName() + ":\n" + bm.help());
+					aim.sendMessage(buddy, sb.toString());
+					return;
+				} catch (Exception e) {
+				}
+			}
+
+----------------------------------------
+				try {
+					int ind = Integer.parseInt(stok.nextToken());
+					BotModule bm = (BotModule) modules.get(ind);
+					sb.append("Help for " + bm.getName() + ":\n" + bm.help());
+					aim.sendMessage(buddy, sb.toString());
+					return;
+				} catch (Exception e) {
+
+----------------------------------------
