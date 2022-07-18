@@ -1,0 +1,34 @@
+version: '3.8'
+
+#
+# Common annclonevalidation template for web and Celery services below
+#
+x-common-annclonevalidation:
+  &default-common-annclonevalidation
+  image: annclonevalidation
+  build:
+    context: .
+    dockerfile: Dockerfile
+    args:
+      - "UID=${UID}" 
+  restart: on-failure
+  env_file:
+    - .env
+  volumes:
+    - /home/ppp598/vizsciflow/storage:/home/annclonevalidation/storage
+  # networks:
+  #   - annclonevalidationnetwork
+  # environment:
+  #   - FLASK_CONFIG=development
+
+services:
+  annclonevalidation:
+    <<: *default-common-annclonevalidation
+    command: sh -c "tail -F anything" # debug
+    # command: >
+    #   sh -c "/home/.venv/bin/gunicorn -b :5000 --access-logfile - --error-logfile - manage:app"
+    # depends_on:
+    #   - annclonevalidationdb      
+    # ports:
+    #   - 5000:5000
+    container_name: annclonevalidation

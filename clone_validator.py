@@ -31,7 +31,7 @@ myclones_data = load_training_dataSet('Datasets/new_dataset_with_new_features.cs
 myclones_data = myclones_data.values
 
 
-inputDim = 8;
+inputDim = 8
 
 
 means = [(-1,0),(2,4),(3,1)]
